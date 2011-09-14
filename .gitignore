@@ -1,2 +1,3 @@
 #Ignore .class files
+target/classes/
 *.class
