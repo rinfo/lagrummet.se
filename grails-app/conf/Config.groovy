@@ -1,3 +1,6 @@
+import grails.plugins.springsecurity.SecurityConfigType
+
+
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
@@ -88,3 +91,18 @@ log4j = {
 
     warn   'org.mortbay.log'
 }
+
+//jquery plugin installation
+grails.views.javascript.library="jquery"
+
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'se.lagrummet.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'se.lagrummet.SecUserSecRole'
+grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
+
+grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
+grails.plugins.springsecurity.interceptUrlMap = [
+	'/admin' : ['ROLE_ADMIN', 'ROLE_EDITOR', 'IS_AUTHENTICATED_FULLY'],
+	'/**' : 	['IS_AUTHENTICATED_ANONYMOUSLY']
+	]
