@@ -5,7 +5,7 @@ class Page implements Comparable {
 	String title
 	String h1
 	String permaLink
-	//User author
+//	User author
 	int pageOrder
 	Date dateCreated
 	Date lastUpdated
