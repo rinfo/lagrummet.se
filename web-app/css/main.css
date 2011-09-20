@@ -1,141 +1,87 @@
-html * {
-    margin: 0;
-    /*padding: 0; SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
+/* CSS Reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td {
+  border:0pt none;
+  font-family:inherit;
+  font-size:100%;
+  font-style:inherit;
+  font-weight:inherit;
+  margin:0pt;
+  padding:0pt;
+  vertical-align:baseline;
 }
 
-/* GENERAL */
+/* HTML5 tags */
+header, section, footer, aside, nav, article, figure, legend {
+    display: block;
+}
 
-.spinner {
-    padding: 5px;
-    position: absolute;
-    right: 0;
+/* lagrummet.se */
+html {
+	background-color: #fcfcfc;
+	margin: 0;
+
+	/*background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F4FCFF), to(#f5f5f5));
+	background: -webkit-linear-gradient(top, #F4FCFF, #f5f5f5);
+	background: -moz-linear-gradient(top, #F4FCFF, #f5f5f5);
+	background: -ms-linear-gradient(top, #F4FCFF, #f5f5f5);
+	background: -o-linear-gradient(top, #F4FCFF, #f5f5f5);*/
 }
 
 body {
-    background: #fff;
-    color: #333;
+    width: 100%;
+    padding: 0 1em 0 1em;
+    position: relative;
+    color: #383838;
     font: 11px verdana, arial, helvetica, sans-serif;
-}
-#grailsLogo {
-	padding:20px;
+    font-size: 12px;
 }
 
-a:link, a:visited, a:hover {
-    color: #666;
-    font-weight: bold;
+a {
+    text-decoration: none;
+    color: #006383;
+}
+
+a:visited {
+    color: #006383;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
+    margin: 0.5em 0 0.5em 0;
+    color: #006383;
+    font-family: 'Century Gothic', sans-serif;
+    clear: both;
     text-decoration: none;
 }
 
 h1 {
-    color: #48802c;
-    font-weight: normal;
-    font-size: 16px;
-    margin: .8em 0 .3em 0;
+    font-size: 3.2em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.6em;
 }
 
 ul {
-    padding-left: 15px;
+    margin-left: 0;
+    list-style-type: none;
 }
 
-input, select, textarea {
-    background-color: #fcfcfc;
-    border: 1px solid #ccc;
-    font: 11px verdana, arial, helvetica, sans-serif;
-    margin: 2px 0;
-    padding: 2px 4px;
+ul li {
+    padding: 2px 0;
 }
-select {
-   padding: 2px 2px 2px 0;
-}
-textarea {
-	width: 250px;
-	height: 150px;
-	vertical-align: top;
-}
-
-input:focus, select:focus, textarea:focus {
-    border: 1px solid #b2d1ff;
-}
-
-.body {
-    float: left;
-    margin: 0 15px 10px 15px;
-}
-
-/* NAVIGATION MENU */
-
-.nav {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-style: solid none solid none;
-    margin-top: 5px;
-    padding: 7px 12px;
-}
-
-.menuButton {
-    font-size: 10px;
-    padding: 0 5px;
-}
-.menuButton a {
-    color: #333;
-    padding: 4px 6px;
-}
-.menuButton a.home {
-    background: url(../images/skin/house.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.list {
-    background: url(../images/skin/database_table.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.create {
-    background: url(../images/skin/database_add.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-
-/* MESSAGES AND ERRORS */
-
-.message {
-    background: #f3f8fc url(../images/skin/information.png) 8px 50% no-repeat;
-    border: 1px solid #b2d1ff;
-    color: #006dba;
-    margin: 10px 0 5px 0;
-    padding: 5px 5px 5px 30px
-}
-
-div.errors {
-    background: #fff3f3;
-    border: 1px solid red;
-    color: #cc0000;
-    margin: 10px 0 5px 0;
-    padding: 5px 0 5px 0;
-}
-div.errors ul {
-    list-style: none;
-    padding: 0;
-}
-div.errors li {
-	background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
-    line-height: 16px;
-    padding-left: 30px;
-}
-
-td.errors select {
-    border: 1px solid red;
-}
-td.errors input {
-    border: 1px solid red;
-}
-td.errors textarea {
-    border: 1px solid red;
-}
-
-/* TABLES */
 
 table {
+    margin-top: 10px;
     border: 1px solid #ccc;
     width: 100%
 }
@@ -143,131 +89,192 @@ tr {
     border: 0;
 }
 td, th {
-    font: 11px verdana, arial, helvetica, sans-serif;
     line-height: 12px;
     padding: 5px 6px;
     text-align: left;
     vertical-align: top;
 }
 th {
-    background: #fff url(../images/skin/shadow.jpg);
     color: #666;
-    font-size: 11px;
-    font-weight: bold;
+    background-color: #F8C027;
+    /*font-weight: bold;*/
+    font-style: italic;
+    font-size: 1.2em;
     line-height: 17px;
     padding: 2px 6px;
 }
-th a:link, th a:visited, th a:hover {
-    color: #333;
-    display: block;
-    font-size: 10px;
-    text-decoration: none;
-    width: 100%;
-}
-th.asc a, th.desc a {
-    background-position: right;
-    background-repeat: no-repeat;
-}
-th.asc a {
-    background-image: url(../images/skin/sorted_asc.gif);
-}
-th.desc a {
-    background-image: url(../images/skin/sorted_desc.gif);
-}
 
-.odd {
-    background: #f7f7f7;
-}
-.even {
-    background: #fff;
-}
-
-/* LIST */
-
-.list table {
-    border-collapse: collapse;
-}
-.list th, .list td {
-    border-left: 1px solid #ddd;
-}
-.list th:hover, .list tr:hover {
-    background: #b2d1ff;
-}
-
-/* PAGINATION */
-
-.paginateButtons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-top: 0;
-    color: #666;
-    font-size: 10px;
-    overflow: hidden;
-    padding: 10px 3px;
-}
-.paginateButtons a {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-color: #ccc #aaa #aaa #ccc;
-    color: #666;
-    margin: 0 3px;
-    padding: 2px 6px;
-}
-.paginateButtons span {
-    padding: 2px 3px;
-}
-
-/* DIALOG */
-
-.dialog table {
-    padding: 5px 0;
-}
-
-.prop {
-    padding: 5px;
-}
-.prop .name {
-    text-align: left;
-    width: 15%;
-    white-space: nowrap;
-}
-.prop .value {
-    text-align: left;
-    width: 85%;
-}
-
-/* ACTION BUTTONS */
-
-.buttons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    color: #666;
-    font-size: 10px;
-    margin-top: 5px;
-    overflow: hidden;
+body > * {
+    position: relative;
+    width: 980px;
+    margin: 0 auto 0 auto;
     padding: 0;
 }
 
-.buttons input {
-    background: #fff;
-    border: 0;
-    color: #333;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: bold;
-    margin-left: 3px;
-    overflow: visible;
-    padding: 2px 6px;
+/* =HEADER */
+body > header {
 }
-.buttons input.delete {
-    background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
-    padding-left: 28px;
+
+#logo {
+    position: relative;
+    margin-top: 20px;
+    display: block;
+    color: #222;
+    font: 1.6em 'Century Gothic', sans-serif;
+    /*padding: 55px 10px 45px 10px;*/
 }
-.buttons input.edit {
-    background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
-    padding-left: 28px;
+
+body > header > nav.sitelinks {
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
-.buttons input.save {
-    background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
-    padding-left: 28px;
+
+body > header > nav.sitelinks ul li {
+	float: left;
+	margin: 5px 0 0 5px;
+	padding-left: 10px;
+	border-left: 1px solid #006383;
+}
+
+body header nav.sitelinks ul li:first-child {
+	border-left: none;
+}
+
+body > header > nav.sitelinks a, body > header > nav.sitelinks a:visited {
+    font: 1em 'Century Gothic', sans-serif;
+    color: #006383;
+    margin-right: 10px;
+}
+
+body > header > nav.breadcrumbs {
+	clear: both;
+	width: 100%;
+	margin: 20px 0;
+	font: 1.4em 'Century Gothic', sans-serif;
+}
+
+/* =CONTENT WRAPPER */
+
+/* =PRIMARY NAVIGATION */
+#primaryNavigation {
+	float: left;
+	width: 220px;
+	margin: 0;
+	display: block;
+	min-height: 250px;
+	background-color: #fff;
+	-webkit-box-shadow: 2px 2px 8px #999;
+	-moz-box-shadow: 1px 1px 8px #999;
+	box-shadow: 2px 2px 8px #999;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#primaryNavigation ul li {
+	padding: 5px;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+#primaryNavigation ul li a, #primaryNavigation ul li a:visited {
+	color: #585858;
+}
+
+#primaryNavigation ul li:hover {
+	background-color: #f5f5f5;
+}
+
+#primaryNavigation ul li.heading {
+	font: 1.4em 'Century Gothic', sans-serif;
+	margin-top: 20px;
+}
+
+#primaryNavigation ul.rinfo li.heading {
+	color: #873960;
+	border-bottom: 2px solid #873960;
+}
+
+#primaryNavigation ul.turnHere li.heading {
+	color: #bd9b44;
+	border-bottom: 2px solid #bd9b44;
+}
+
+#primaryNavigation ul.learnMore li.heading {
+	color: #006383;
+	border-bottom: 2px solid #006383;
+}
+
+
+
+
+/* =ARTICLE in content */
+body article {
+    position: relative;
+    width: 720px;
+    margin: 0 0 0 40px;
+    padding: 0;
+    background-color: #fff;
+    float: left;
+    -webkit-box-shadow: 2px 2px 8px #999;
+	-moz-box-shadow: 1px 1px 8px #999;
+	box-shadow: 2px 2px 8px #999;
+}
+
+body article > header {
+    margin: 0 0 20px 0;
+}
+
+/* =FOOTER page footer */
+body > footer {
+    margin-top: 20px;
+    border-top: 1px dotted #ccc;
+    padding-top: 20px;
+    font-size: 0.8em;
+    overflow: auto;
+}
+
+body > footer > div p:first-child {
+    margin-top: 0;
+}
+
+body > footer > div p {
+    margin-top: 0.8em;
+}
+
+body > footer > nav, body > footer > div {
+    width: 33%;
+    display: block;
+    float: left;
+    height: 100%;
+}
+
+/* =ARTICLE-SEARCH for search and search results */
+body > article .content form.search input {
+    font-size: 1.4em;
+    color: #888;
+}
+
+body > article .content form.search span.button input {
+    color: #444;
+}
+
+body > article ul.search-results {
+    list-style-type: none;
+}
+
+body > article ul.search-results li {
+    border-bottom: 1px solid #ccc;
+    overflow: auto;
+    width: 100%;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+body > article ul.search-results li img.tn {
+    float: left;
+}
+
+body > article ul.search-results li p {
+    float: left;
+    margin: 0 5px 0 5px;
 }

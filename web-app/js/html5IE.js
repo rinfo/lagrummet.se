@@ -1,0 +1,1 @@
+document.createElement("header");document.createElement("footer");document.createElement("nav");document.createElement("article");document.createElement("section");document.createElement("figure");document.createElement("legend");document.createElement("time");document.createElement("aside");

@@ -4,7 +4,12 @@
 	<meta name="layout" content="main" />
 </head>
 <body>
-<h1>${page.h1}</h1>
+<article>
+	<header><h1>${page.h1}</h1></header>
+	${page.content}
+	<footer></footer>
+</article>
+
 </body>
 
 </html>

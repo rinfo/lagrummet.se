@@ -5,6 +5,7 @@ class Page implements Comparable {
 	String title
 	String h1
 	String permaLink
+	String content
 //	User author
 	int pageOrder
 	Date dateCreated
@@ -20,6 +21,7 @@ class Page implements Comparable {
 	}
 	
     static constraints = {
+		content(nullable: true)
     }
 	
 	public int compareTo(Object o) {
