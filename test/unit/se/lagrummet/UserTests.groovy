@@ -11,7 +11,30 @@ class UserTests extends GrailsUnitTestCase {
         super.tearDown()
     }
 
-    void testSomething() {
-
+    void testConstraints() {
+		mockForConstraintsTests(User)
+		
+		def user = new User()
+		assertFalse(user.validate())
+		assertEquals("nullable", user.errors["fullName"])
+		assertEquals("nullable", user.errors["username"])
+		assertEquals("nullable", user.errors["password"])
+		
     }
+	
+	void testUniqueUserName() {
+		
+		def user = new User(fullName:"User 1", username: "notunique", password:"password")
+		mockForConstraintsTests(User, [user])
+		
+		def testUser = new User(fullName:"User 2", username: "notunique", password:"password")
+		assertFalse(testUser.validate())
+		
+		assertEquals("unique", testUser.errors["username"])
+	}
+	
+	
+	void testUserIsASecUser() {
+		assertEquals(SecUser, User.getSuperclass())
+	}
 }
