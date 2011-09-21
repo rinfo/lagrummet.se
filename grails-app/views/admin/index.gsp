@@ -1,8 +1,9 @@
 <html>
-	<head>
-	<title>This is Admin!</title>
-	</head>
-	<body>
-	<h1>Välkommen till admin</h1>
-	</body>
+<head>
+<title>This is Admin!</title>
+<meta name="layout" content="adminMain" />
+</head>
+<body>
+	
+</body>
 </html>
