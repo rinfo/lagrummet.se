@@ -103,6 +103,6 @@ grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 grails.plugins.springsecurity.interceptUrlMap = [
-	'/admin' : ['ROLE_ADMIN', 'ROLE_EDITOR', 'IS_AUTHENTICATED_FULLY'],
+	'/admin/**' : ['ROLE_ADMIN', 'ROLE_EDITOR', 'IS_AUTHENTICATED_FULLY'],
 	'/**' : 	['IS_AUTHENTICATED_ANONYMOUSLY']
 	]
