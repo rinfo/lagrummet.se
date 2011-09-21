@@ -1,3 +1,5 @@
 #Ignore .class files
 target/classes/
 *.class
+target/stacktrace.log
+
