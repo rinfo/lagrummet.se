@@ -16,7 +16,7 @@ class PageController {
 		def page = Page.findByPermaLink(params.id)
 		
 		if(page) {
-			return [page: page] 
+			return [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")] 
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND)
 		}
@@ -24,6 +24,7 @@ class PageController {
 	
 	def startPage = {
 		def page = Page.findByPermaLink('startPage')
-		render view: 'viewPage', model: [page: page]
+		def siteProps = SiteProperties.findByTitle("lagrummet.se")
+		render view: 'viewPage', model: [page: page, siteProps: siteProps]
 	}
 }

@@ -11,20 +11,26 @@ class Page implements Comparable {
 	Date dateCreated
 	Date lastUpdated
 	
-	
-	static hasMany = {
+	SortedSet children
+	static hasMany = [
 		children : Page
-	}
+	]
 
-	static belongsTo = {
-		parent : Page	
-	}
+	static belongsTo = [
+		parent : Page
+	]
 	
     static constraints = {
 		content(nullable: true)
+		parent(nullable: true)
     }
 	
 	public int compareTo(Object o) {
 		pageOrder.compareTo(o.pageOrder)
+	}
+	
+	def url = {
+		def response = (parent) ? (parent.permalink + "/") : ""
+		return response + permalink
 	}
 }
