@@ -24,13 +24,24 @@ class UserTests extends GrailsUnitTestCase {
 	
 	void testUniqueUserName() {
 		
-		def user = new User(fullName:"User 1", username: "notunique", password:"password")
+		def user = new User(fullName:"User 1", username: "notunique@email.com", password:"password")
 		mockForConstraintsTests(User, [user])
 		
-		def testUser = new User(fullName:"User 2", username: "notunique", password:"password")
+		def testUser = new User(fullName:"User 2", username: "notunique@email.com", password:"password")
 		assertFalse(testUser.validate())
 		
 		assertEquals("unique", testUser.errors["username"])
+	}
+	
+	void testUsernameIsEmail() {
+		mockForConstraintsTests(User)
+		def correctUser = new User(fullName: "user 1", username: "valid@email.com", password: "password")
+		def failUser = new User(fullName: "user 1", username: "notanemail", password: "password")
+		
+		assertTrue(correctUser.validate())
+		
+		assertFalse(failUser.validate())
+		assertEquals("email", failUser.errors["username"])
 	}
 	
 	

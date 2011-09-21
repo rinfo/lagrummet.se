@@ -11,9 +11,9 @@ class BootStrap {
 		
 		if(Environment.current == Environment.DEVELOPMENT) {
 			
-			def user = new User(fullName: 'Jonas', username: 'jonas', password:'password', enabled: true).save(failOnError:true)
-			def roleAdmin = new SecRole(authority: 'ROLE_ADMIN').save(failOnError:true)
-			def roleEditor = new SecRole(authority: 'ROLE_EDITOR').save(failOnError:true)
+			def user = new User(fullName: 'Test Testsson', username: 'test@testsson.com', password:'password', enabled: true).save(failOnError:true)
+			def roleAdmin = new SecRole(authority: 'ROLE_ADMIN', name: 'Admin').save(failOnError:true)
+			def roleEditor = new SecRole(authority: 'ROLE_EDITOR', name: 'Editor').save(failOnError:true)
 			SecUserSecRole.create(user, roleAdmin, true)
 			
 			new Page(title: 'Kalles sida', permaLink: 'kalle', h1: 'heja kalle!', content: "Första försöket").save()
