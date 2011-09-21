@@ -4,16 +4,21 @@ class Page implements Comparable {
 	
 	String title
 	String h1
-	String permaLink
+	String permalink
 	String content
 //	User author
 	int pageOrder
+	
+	String status = "draft" // draft, pending, published
 	Date dateCreated
 	Date lastUpdated
+	Date publishStart
+	Date publishStop
 	
 	SortedSet children
 	static hasMany = [
-		children : Page
+		children : Page,
+		
 	]
 
 	static belongsTo = [
@@ -23,6 +28,9 @@ class Page implements Comparable {
     static constraints = {
 		content(nullable: true)
 		parent(nullable: true)
+		status(nullable: true)
+		publishStart(nullable: true)
+		publishStop(nullable: true)
     }
 	
 	public int compareTo(Object o) {
