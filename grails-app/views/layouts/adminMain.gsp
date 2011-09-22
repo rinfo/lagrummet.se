@@ -18,7 +18,9 @@
 		<nav class="primaryNav">
 			<ul>
 				<li>Search</li>
-				<li><a href="${createLink(controller:'user', action:'list')}">Users</a></li>
+				<sec:ifAllGranted roles="ROLE_ADMIN">
+					<li><a href="${createLink(controller:'user', action:'list')}">Users</a></li>
+				</sec:ifAllGranted>
 				<li>Something else</li>
 				<li>Page tree</li>
 			</ul>

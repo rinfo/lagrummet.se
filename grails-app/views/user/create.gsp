@@ -10,7 +10,6 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
@@ -67,6 +66,15 @@
                             	</td>
                             </tr>
                         
+                        	<tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="enabled"><g:message code="user.enabled.label" default="Enabled" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'enabled', 'errors')}">
+                                    <g:checkBox name="enabled" value="${userInstance?.enabled}" />
+                                </td>
+                            </tr>
+                            
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="accountExpired"><g:message code="user.accountExpired.label" default="Account Expired" /></label>
@@ -82,15 +90,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'accountLocked', 'errors')}">
                                     <g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="enabled"><g:message code="user.enabled.label" default="Enabled" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'enabled', 'errors')}">
-                                    <g:checkBox name="enabled" value="${userInstance?.enabled}" />
                                 </td>
                             </tr>
                         

@@ -101,8 +101,8 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'se.lagrummet.Use
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'se.lagrummet.SecUserSecRole'
 grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 
-grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
-grails.plugins.springsecurity.interceptUrlMap = [
-	'/admin/**' : ['ROLE_ADMIN', 'ROLE_EDITOR', 'IS_AUTHENTICATED_FULLY'],
-	'/**' : 	['IS_AUTHENTICATED_ANONYMOUSLY']
-	]
+//grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
+//grails.plugins.springsecurity.interceptUrlMap = [
+//	'/admin/**' : ['ROLE_ADMIN', 'ROLE_EDITOR', 'IS_AUTHENTICATED_FULLY'],
+//	'/**' : 	['IS_AUTHENTICATED_ANONYMOUSLY']
+//	]
