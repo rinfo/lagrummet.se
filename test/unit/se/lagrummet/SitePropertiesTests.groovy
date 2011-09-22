@@ -1,4 +1,4 @@
-package lagrummet.se
+package se.lagrummet
 
 import grails.test.*
 

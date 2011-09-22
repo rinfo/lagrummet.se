@@ -8,22 +8,20 @@ class PageController {
 
 	def viewPage = {
 		
-		if(!params?.id) {
+		/*if(!params?.permalink) {
 			response.sendError(404)
 			return
-		}
+		}*/
+
+		def url = (params.permalink) ? params.permalink.tokenize("/") : ["home"]
+		def permalink = url[url.size()-1]
 		
-		def page = Page.findByPermaLink(params.id)
+		def page = Page.findByPermalink(permalink)
 		
 		if(page) {
-			return [page: page] 
+			return [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")] 
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND)
 		}
-	}
-	
-	def startPage = {
-		def page = Page.findByPermaLink('startPage')
-		render view: 'viewPage', model: [page: page]
 	}
 }

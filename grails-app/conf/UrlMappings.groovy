@@ -1,6 +1,8 @@
+import org.apache.jasper.compiler.Node.ParamsAction;
+
 class UrlMappings {
 
-	static excludes = ["/images/*", "/css/*", "/js/*", "/WEB-INF/*"]
+	static excludes = ["/images/*", "/plugins/*", "/css/*", "/js/*", "/WEB-INF/*"]
 	
 	static mappings = {
 		"/$controller/$action?/$id?"{
@@ -8,12 +10,22 @@ class UrlMappings {
 				// apply constraints here
 			}
 		}
+		
+		name page: "/$permalink**" {
+			constraints {
+				permalink(matches:/.+/, blank:false)
+			}
+			controller = "page"
+			action = {
+				params.action = params.a ?: "viewPage"
+			}
+		}
 
 		"/admin/user/$action"(controller: 'user')
 		"/admin/"(controller: 'admin')
-		"/$id**"(controller: 'page', action: 'viewPage')
-		"/"(controller: 'page', action: 'startPage')
 		"500"(view:'/error')
 		"404"(view:'/error')
+		
+		
 	}
 }
