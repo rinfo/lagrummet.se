@@ -1,0 +1,33 @@
+
+body > * {
+	position: relative;
+}
+
+body > header {
+	border-bottom: solid 1pt;
+}
+
+body > header > nav.logout {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.primaryNav {
+	padding: 20px;
+}
+
+#leftCol {
+	border-right: solid 1pt;
+	float: left;
+}
+
+#content {
+	float: left;
+	padding: 20px;
+}
+ul {
+    margin-left: 0;
+    padding: 0pt;
+    list-style-type: none;
+}

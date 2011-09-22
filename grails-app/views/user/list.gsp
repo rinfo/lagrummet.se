@@ -9,7 +9,6 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
@@ -28,6 +27,8 @@
                             
                             <g:sortableColumn property="role" title="${message(code: 'user.role.label', default: 'Role') }" />
                         
+                            <g:sortableColumn property="enabled" title="${message(code: 'user.enabled.label', default: 'Enabled') }" />
+                            
                             <g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}" />
                         
                             <g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}" />
@@ -46,6 +47,8 @@
                             
                             <td>${userInstance.authorities*.name.join(',')}</td>
                         
+                            <td><g:formatBoolean boolean="${userInstance.enabled}" /></td>
+                            
                             <td><g:formatBoolean boolean="${userInstance.accountExpired}" /></td>
                         
                             <td><g:formatBoolean boolean="${userInstance.accountLocked}" /></td>

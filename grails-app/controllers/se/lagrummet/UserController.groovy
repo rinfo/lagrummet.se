@@ -22,8 +22,8 @@ class UserController {
     def save = {
         def userInstance = new User(params)
 		def roleId = params.role
-		def role = SecRole.findById(roleId)
         if (userInstance.save(flush: true)) {
+        	def role = SecRole.findById(roleId)
 			SecUserSecRole.create(userInstance, role, true)
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
             redirect(action: "show", id: userInstance.id)
@@ -57,6 +57,7 @@ class UserController {
 
     def update = {
         def userInstance = User.get(params.id)
+		def roleId = params.role
         if (userInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -69,6 +70,9 @@ class UserController {
             }
             userInstance.properties = params
             if (!userInstance.hasErrors() && userInstance.save(flush: true)) {
+				def role = SecRole.findById(roleId)
+				SecUserSecRole.removeAll(userInstance)
+				SecUserSecRole.create(userInstance, role, true)
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
                 redirect(action: "show", id: userInstance.id)
             }

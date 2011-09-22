@@ -23,7 +23,7 @@ class SecUser {
 	Set<SecRole> getAuthorities() {
 		SecUserSecRole.findAllBySecUser(this).collect { it.secRole } as Set
 	}
-
+	
 	def beforeInsert() {
 		encodePassword()
 	}

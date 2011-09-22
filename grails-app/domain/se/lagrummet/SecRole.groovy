@@ -13,4 +13,5 @@ class SecRole {
 		authority blank: false, unique: true
 		name blank: false, unique: true
 	}
+
 }

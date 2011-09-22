@@ -57,6 +57,28 @@
                                     <g:textField name="password" value="${userInstance?.password}" />
                                 </td>
                             </tr>
+                            
+                             <tr class="prop">
+                            	<td valign="top" class="name">
+                            		<label for="role"><g:message code="user.role.label" default="Role" /></label>
+                            	</td>
+                            	<td valign="top" class="value">
+                            		<g:select name="role" 
+                            					from="${se.lagrummet.SecRole.list() }"
+                            					optionKey="id"
+                            					optionValue="name"
+                            					value="${new ArrayList(userInstance?.authorities).get(0).id }"  />
+                            	</td>
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="enabled"><g:message code="user.enabled.label" default="Enabled" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'enabled', 'errors')}">
+                                    <g:checkBox name="enabled" value="${userInstance?.enabled}" />
+                                </td>
+                            </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
@@ -73,15 +95,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'accountLocked', 'errors')}">
                                     <g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="enabled"><g:message code="user.enabled.label" default="Enabled" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'enabled', 'errors')}">
-                                    <g:checkBox name="enabled" value="${userInstance?.enabled}" />
                                 </td>
                             </tr>
                         
