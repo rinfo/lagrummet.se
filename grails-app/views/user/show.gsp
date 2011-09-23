@@ -64,20 +64,6 @@
                         </tr>
                         
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="user.accountExpired.label" default="Account Expired" /></td>
-                            
-                            <td valign="top" class="value"><g:formatBoolean boolean="${userInstance?.accountExpired}" /></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="user.accountLocked.label" default="Account Locked" /></td>
-                            
-                            <td valign="top" class="value"><g:formatBoolean boolean="${userInstance?.accountLocked}" /></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="user.dateCreated.label" default="Date Created" /></td>
                             
                             <td valign="top" class="value"><g:formatDate date="${userInstance?.dateCreated}" /></td>
@@ -88,13 +74,6 @@
                             <td valign="top" class="name"><g:message code="user.lastUpdated.label" default="Last Updated" /></td>
                             
                             <td valign="top" class="value"><g:formatDate date="${userInstance?.lastUpdated}" /></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="user.passwordExpired.label" default="Password Expired" /></td>
-                            
-                            <td valign="top" class="value"><g:formatBoolean boolean="${userInstance?.passwordExpired}" /></td>
                             
                         </tr>
                     

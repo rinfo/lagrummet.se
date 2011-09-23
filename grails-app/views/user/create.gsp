@@ -75,33 +75,6 @@
                                 </td>
                             </tr>
                             
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="accountExpired"><g:message code="user.accountExpired.label" default="Account Expired" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'accountExpired', 'errors')}">
-                                    <g:checkBox name="accountExpired" value="${userInstance?.accountExpired}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="accountLocked"><g:message code="user.accountLocked.label" default="Account Locked" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'accountLocked', 'errors')}">
-                                    <g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="passwordExpired"><g:message code="user.passwordExpired.label" default="Password Expired" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'passwordExpired', 'errors')}">
-                                    <g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
-                                </td>
-                            </tr>
-                        
                         </tbody>
                     </table>
                 </div>

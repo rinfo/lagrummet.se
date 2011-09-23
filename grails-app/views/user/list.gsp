@@ -25,14 +25,10 @@
                         
                             <g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
                             
-                            <g:sortableColumn property="role" title="${message(code: 'user.role.label', default: 'Role') }" />
+                            <g:sortableColumn property="authorities" title="${message(code: 'user.role.label', default: 'Role') }" />
                         
                             <g:sortableColumn property="enabled" title="${message(code: 'user.enabled.label', default: 'Enabled') }" />
                             
-                            <g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}" />
-                        
-                            <g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}" />
-                        
                             <g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: 'Date Created')}" />
                         
                         </tr>
@@ -49,10 +45,6 @@
                         
                             <td><g:formatBoolean boolean="${userInstance.enabled}" /></td>
                             
-                            <td><g:formatBoolean boolean="${userInstance.accountExpired}" /></td>
-                        
-                            <td><g:formatBoolean boolean="${userInstance.accountLocked}" /></td>
-                        
                             <td><g:formatDate date="${userInstance.dateCreated}" /></td>
                         
                         </tr>
