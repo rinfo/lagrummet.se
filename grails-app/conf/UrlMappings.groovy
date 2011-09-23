@@ -5,11 +5,11 @@ class UrlMappings {
 	static excludes = ["/images/*", "/plugins/*", "/css/*", "/js/*", "/WEB-INF/*"]
 	
 	static mappings = {
-		"/$controller/$action?/$id?"{
+		/*"/$controller/$action?/$id?"{
 			constraints {
 				// apply constraints here
 			}
-		}
+		}*/
 		
 		name page: "/$permalink**" {
 			constraints {
@@ -17,9 +17,10 @@ class UrlMappings {
 			}
 			controller = "page"
 			action = {
-				params.action = params.a ?: "viewPage"
+				params.action = params.a ?: "show"
 			}
 		}
+		"/"(controller: 'page', action: "show")
 
 		"/admin/user/$action"(controller: 'user')
 		"/admin/"(controller: 'admin')

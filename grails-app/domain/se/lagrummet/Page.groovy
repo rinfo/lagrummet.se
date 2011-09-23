@@ -9,7 +9,7 @@ class Page implements Comparable {
 //	User author
 	int pageOrder
 	
-	String status = "draft" // draft, pending, published
+	String status = "draft" // draft, pending, published, autoSave
 	Date dateCreated
 	Date lastUpdated
 	Date publishStart
@@ -32,6 +32,12 @@ class Page implements Comparable {
 		publishStart(nullable: true)
 		publishStop(nullable: true)
     }
+	
+	def beforeUpdate = {
+		def pageBackup = this
+		pageBackup.status = "draft"
+		pageBackup.save()
+	}
 	
 	public int compareTo(Object o) {
 		pageOrder.compareTo(o.pageOrder)
