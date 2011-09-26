@@ -34,9 +34,9 @@ class Page implements Comparable {
     }
 	
 	def beforeUpdate = {
-		def pageBackup = this
-		pageBackup.status = "draft"
-		pageBackup.save()
+//		def pageBackup = this
+////		pageBackup.status = "draft"
+//		pageBackup.save()
 	}
 	
 	public int compareTo(Object o) {

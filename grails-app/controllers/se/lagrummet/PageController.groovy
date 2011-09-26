@@ -1,6 +1,8 @@
 package se.lagrummet
 
-import javax.servlet.http.HttpServletResponse;
+import grails.plugins.springsecurity.Secured
+
+import javax.servlet.http.HttpServletResponse
 
 class PageController {
 
@@ -9,18 +11,22 @@ class PageController {
     /*def index = {
         redirect(action: "show", params: params)
     }*/
-
+	
+	
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [pageInstanceList: Page.list(params), pageInstanceTotal: Page.count()]
     }
 
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def create = {
         def pageInstance = new Page()
         pageInstance.properties = params
         return [pageInstance: pageInstance]
     }
 
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def save = {
         def pageInstance = new Page(params)
         if (pageInstance.save(flush: true)) {
@@ -53,6 +59,7 @@ class PageController {
 		}
     }
 
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def edit = {
         def pageInstance = Page.get(params.id)
         if (!pageInstance) {
@@ -64,11 +71,12 @@ class PageController {
         }
     }
 
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def update = {
         def pageInstance = Page.get(params.id)
         if (pageInstance) {
             if (params.version) {
-                def version = params.version.toLong()
+                def version = Long.valueOf(params.version)
                 if (pageInstance.version > version) {
                     
                     pageInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'page.label', default: 'Page')] as Object[], "Another user has updated this Page while you were editing")
@@ -79,7 +87,7 @@ class PageController {
             pageInstance.properties = params
             if (!pageInstance.hasErrors() && pageInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'page.label', default: 'Page'), pageInstance.id])}"
-                redirect(action: "show", id: pageInstance.id)
+                redirect(action: "list")
             }
             else {
                 render(view: "edit", model: [pageInstance: pageInstance])
@@ -91,6 +99,7 @@ class PageController {
         }
     }
 
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def delete = {
         def pageInstance = Page.get(params.id)
         if (pageInstance) {

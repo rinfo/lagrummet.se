@@ -4,8 +4,8 @@
 	<title>Admin - <g:layoutTitle default="Grails" />
 	</title>
 	<link rel="stylesheet" href="${resource(dir:'css',file:'admin.css')}" />
-	<g:layoutHead />
 	<g:javascript library="jquery" plugin="jquery" />
+	<g:layoutHead />
 </head>
 <body>
 	<header>
@@ -26,7 +26,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div id="content">
+	<div id="bodyContent">
 		<g:layoutBody />
 	</div>
 </body>
