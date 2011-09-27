@@ -83,7 +83,7 @@
                                   <label for="status"><g:message code="page.status.label" default="Status" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
-                                    <g:textField name="status" value="${pageInstance?.status}" />
+                                    <g:select name="status" from="['draft', 'pending', 'published']" value="${pageInstance?.status}" />
                                 </td>
                             </tr>
                         
