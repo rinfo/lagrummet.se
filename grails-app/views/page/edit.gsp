@@ -7,7 +7,6 @@
         <meta name="layout" content="adminMain" />
         <g:set var="entityName" value="${message(code: 'page.label', default: 'Page')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
-        <tinyMce:resources jquery="true" />
     </head>
     <body>
         <div class="nav">

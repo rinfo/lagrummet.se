@@ -16,7 +16,7 @@ class PageController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [pageInstanceList: Page.list(params), pageInstanceTotal: Page.count()]
+        [pageInstanceList: Page.list(params), pageInstanceTotal: Page.count(), pageTreeList: Page.list()]
     }
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])

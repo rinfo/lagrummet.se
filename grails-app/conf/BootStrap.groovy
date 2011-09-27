@@ -16,7 +16,8 @@ class BootStrap {
 			def roleEditor = new SecRole(authority: 'ROLE_EDITOR', name: 'Editor').save(failOnError:true)
 			SecUserSecRole.create(user, roleAdmin, true)
 			
-			new Page(title: 'Kalles sida', permalink: 'kalle', h1: 'heja kalle!', content: "Första försöket", status: "published", publishStart: new Date() - 4).save()
+			def kalles = new Page(title: 'Kalles sida', permalink: 'kalle', h1: 'heja kalle!', content: "Första försöket", status: "published", publishStart: new Date() - 4).save()
+			def kallesUndersida = new Page(title: 'Kalles undersida', parent: kalles, permalink: 'kalle-undersida', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: new Date() - 4).save()
 			new Page(title: 'Lagrummet', permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: new Date() - 4).save()
 			new SiteProperties(title: "lagrummet.se", siteTitle: "lagrummet.se", headerNavigation: '<ul><li><a href="">Lyssna</a></li><li><a href="">Other languages</a></li><li><a href="">Webbkarta</a></li><li><a href="">Om lagrummet.se</a></li></ul>', primaryNavigation: '''
 			<ul class="rinfo">

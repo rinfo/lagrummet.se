@@ -6,8 +6,9 @@
 	<link rel="stylesheet" href="${resource(dir:'css',file:'admin.css')}" />
 	<g:javascript library="jquery" plugin="jquery" />
 	<g:javascript library="jquery.jstree" />
-	<g:javascript library="admin" />
+	<tinyMce:resources jquery="true" />
 	<g:layoutHead />
+	<g:javascript library="admin" />
 </head>
 <body>
 	<header>
@@ -30,14 +31,14 @@
 	            <g:each in="${pageTreeList}" var="pI">
 	                <g:if test="${!pI.parent}">
 	                  <li id="p-${pI.id}">
-	                  <link:page permalink="${pI.url()}" a="edit">${pI.title}</link:page>
+	                  <g:link action="edit" id="${pI.id}">${pI.title}</g:link>
 	                  <g:if test="${pI.children.size()}">
 	                    <ul>
 	                      <g:each in="${pI.children}" var="pIChild">
-	                        <li id="p-${pIChild.id}"><link:page permalink="${pIChild.url()}" a="edit">${pIChild.title}</link:page></li>
+	                        <li id="p-${pIChild.id}"><g:link action="edit" id="${pIChild.id}">${pIChild.title}</g:link></li>
 	                        <g:if test="${pIChild.children.size()}">
 	                        	<g:each in="${pI.children}" var="pIGrandChild">
-	                        		<li id="p-${pIGrandChild.id}"><link:page permalink="${pIGrandChild.url()}" a="edit">${pIGrandChild.title}</link:page></li>
+	                        		<li id="p-${pIGrandChild.id}"><g:link action="edit" id="${pIGrandChild.id}">${pIGrandChild.title}</g:link></li>
 	                        	</g:each>
 	                        </g:if>
 	                      </g:each>
@@ -48,7 +49,6 @@
 	            </g:each>
 	          </ul>
 			</div>
-			
 		</nav>
 	</div>
 	<div id="bodyContent">
