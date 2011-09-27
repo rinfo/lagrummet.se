@@ -106,3 +106,9 @@ grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 //	'/admin/**' : ['ROLE_ADMIN', 'ROLE_EDITOR', 'IS_AUTHENTICATED_FULLY'],
 //	'/**' : 	['IS_AUTHENTICATED_ANONYMOUSLY']
 //	]
+
+// Properties for the Lagrummet.se CMS
+
+lcms {
+	googleAnalytics.webPropertyId = ""
+}

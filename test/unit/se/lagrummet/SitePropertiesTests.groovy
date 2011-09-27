@@ -11,7 +11,15 @@ class SitePropertiesTests extends GrailsUnitTestCase {
         super.tearDown()
     }
 
-    void testSomething() {
-
+    void testConstraints() {
+		mockForConstraintsTests(SiteProperties)
+		
+		def sprops = new SiteProperties()
+		assertFalse(sprops.validate())
+		
+		assertEquals("nullable", sprops.errors["siteTitle"])
+		assertEquals("nullable", sprops.errors["footer"])
+		assertEquals("nullable", sprops.errors["headerNavigation"])
+		assertEquals("nullable", sprops.errors["primaryNavigation"])
     }
 }

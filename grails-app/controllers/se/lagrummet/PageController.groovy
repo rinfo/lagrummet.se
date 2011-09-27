@@ -84,9 +84,18 @@ class PageController {
                     return
                 }
             }
+			
+			def pageBackup = new Page()
+			pageBackup.properties = pageInstance.properties
+			pageBackup.id = null
+			pageBackup.children = null
+			pageBackup.status = "draft"
+			
             pageInstance.properties = params
-            if (!pageInstance.hasErrors() && pageInstance.save(flush: true)) {
+
+            if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'page.label', default: 'Page'), pageInstance.id])}"
+				pageBackup.save()
                 redirect(action: "list")
             }
             else {

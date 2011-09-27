@@ -17,8 +17,7 @@ class Page implements Comparable {
 	
 	SortedSet children
 	static hasMany = [
-		children : Page,
-		
+		children : Page
 	]
 
 	static belongsTo = [
@@ -32,12 +31,6 @@ class Page implements Comparable {
 		publishStart(nullable: true)
 		publishStop(nullable: true)
     }
-	
-	def beforeUpdate = {
-//		def pageBackup = this
-////		pageBackup.status = "draft"
-//		pageBackup.save()
-	}
 	
 	public int compareTo(Object o) {
 		pageOrder.compareTo(o.pageOrder)

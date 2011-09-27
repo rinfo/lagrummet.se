@@ -226,6 +226,15 @@ body article > header {
     margin: 0 0 20px 0;
 }
 
+body article ul {
+    margin: 0 0 1em 0;
+    list-style-type: none;
+}
+
+body article ul li {
+    margin: 0 0 1em 0;
+}
+
 /* =FOOTER page footer */
 body > footer {
     margin-top: 20px;

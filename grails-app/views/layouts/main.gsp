@@ -7,6 +7,7 @@
         <!--[if IE]>
 			<script src="${resource(dir:'js',file:'html5IE.js')}"></script>
 		<![endif]-->
+		<g:googleAnalytics id="${grailsApplication.config.lcms.googleAnalytics.webPropertyId}" />
     </head>
     <body>
     <g:layoutBody />
