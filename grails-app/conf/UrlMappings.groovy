@@ -27,7 +27,11 @@ class UrlMappings {
 		"/"(controller: 'page', action: "show")
 
 		"/admin/user/$action"(controller: 'user')
-		"/admin/page/$action"(controller: 'page')
+		
+		name pageAdmin: "/admin/page/$action?" {
+			controller = 'page'
+		}
+		
 		"/admin/"(controller: 'admin')
 		"500"(view:'/error')
 		"404"(view:'/error')
