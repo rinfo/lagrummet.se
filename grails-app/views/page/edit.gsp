@@ -11,7 +11,6 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
@@ -25,7 +24,7 @@
                 <g:renderErrors bean="${pageInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post" action="update" >
+            <g:form method="post" mapping="pageAdmin">
                 <g:hiddenField name="id" value="${pageInstance?.id}" />
                 <g:hiddenField name="version" value="${pageInstance?.version}" />
                 <div class="dialog">
@@ -82,7 +81,7 @@
                                   <label for="status"><g:message code="page.status.label" default="Status" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
-                                    <g:textField name="status" value="${pageInstance?.status}" />
+                                    <g:select name="status" from="['draft', 'pending', 'published']" value="${pageInstance?.status}" />
                                 </td>
                             </tr>
                         
