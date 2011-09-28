@@ -4,6 +4,7 @@
 	<title>Admin - <g:layoutTitle default="Grails" />
 	</title>
 	<link rel="stylesheet" href="${resource(dir:'css',file:'admin.css')}" />
+	<META name="serverURL" content="${resource()}">
 	<g:javascript library="jquery" plugin="jquery" />
 	<g:javascript library="jquery.jstree" />
 	<tinyMce:resources jquery="true" />

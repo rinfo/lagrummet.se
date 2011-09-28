@@ -1,4 +1,15 @@
 jQuery(function($) {
+	var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
+	var newNodeParentId;
+	
+	function flashMessage(message) {
+		console.log(message);
+	}
+	
+	function errorMessage(message) {
+		console.log(message);
+	}
+
 	tinyMCE.init({
 		theme : "advanced",
 		mode : "exact",
@@ -6,28 +17,38 @@ jQuery(function($) {
 		theme_advanced_toolbar_location : "top"
 	});
 	
+	
+	
 	function jsTreeContextMenu(node) {
 	    // The default set of all items
 	    var items = {
 	        createItem: { // The "create" menu item
 	            label: "Create",
 	            action: function () {
-	            	console.log("create");
+	            	newNodeParentId = null;
+	            	var id = $(node).attr("id").replace("p-", "");
+	            	$("#pageTree").jstree("create", node,"insert", "Sidans titel", function() {
+	            		newNodeParentId = id;
+	            		// The new page is created in during the rename_node event
+	            	});
 	            }
 	        },
 	        deleteItem: { // The "delete" menu item
 	            label: "Delete",
 	            action: function () {
-	            	console.log("delete");
+	            	var id = $(node).attr("id").replace("p-", "");
+	            	$.post(serverUrl+"admin/page/delete"+"?ajax=true", {"id":id}, function(data) {
+	                    if (data.success) {
+	                    	flashMessage(data.success);
+	                    	$("#pageTree").jstree("delete_node",node);
+
+	                    } else {
+	                    	errorMessage(data.error);
+	                    }
+	                }, "json");
 	            }
 	        }
 	    };
-
-	    /*if ($(node).hasClass("folder")) {
-	        // Delete the "delete" menu item
-	        delete items.deleteItem;
-	    }*/
-
 	    return items;
 	}
 	
@@ -49,11 +70,34 @@ jQuery(function($) {
 			"drag_target" : false
 		},
 		"contextmenu": {
+			"select_node": true,
 			"items": jsTreeContextMenu
 		}
 	}).bind("move_node.jstree",function(event, data) {
-        console.log("o : " + data.rslt.o.attr("id"));
-        console.log("r : " + data.rslt.r.attr("id"));
-        console.log("p : " + data.rslt.p);
- });
+        var id = data.rslt.o.attr("id").replace("p-", "");
+        var parentId = data.rslt.r.attr("id").replace("p-", "");
+        
+        $.post(serverUrl+"admin/page/move", {"id": id, "targetId": parentId, "position": data.rslt.p}, function(data) {
+            if (data.success) {
+            	flashMessage(data.success);
+            } else {
+            	errorMessage(data.error);
+            }
+        }, "json");
+	}).bind("rename_node.jstree", function (event, data) {
+		var node = data.args[0];
+		var title = $(node).find("a").text();
+		var permalink = title.replace(" ", "-").toLowerCase();
+		
+		$.post(serverUrl+"admin/page/save"+"?ajax=true", {"title": title, "h1": title, permalink: permalink, parentId: newNodeParentId}, function(data) {
+            if (data.success) {
+            	flashMessage(data.success);
+            	$(node).find("a").attr("href", serverUrl+"admin/page/edit?id="+data.pageInstance.id);
+            	
+            } else {
+            	errorMessage(data.error);
+            	$("#pageTree").jstree("delete_node", node);
+            }
+        }, "json");
+    });
 });
