@@ -27,7 +27,7 @@
             </g:hasErrors>
             <g:form action="save" >
                 <div class="dialog">
-                    <g:render template="pageEditForm"></g:render>
+                    <g:render template="pageEditForm" />
                 </div>
                 <div class="buttons">
                     <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>

@@ -29,7 +29,7 @@
                 <g:hiddenField name="id" value="${pageInstance?.id}" />
                 <g:hiddenField name="version" value="${pageInstance?.version}" />
                 <div class="dialog">
-                   <g:render template="pageEditForm"></g:render>
+                   <g:render template="pageEditForm" />
                 </div>
                 <div class="buttons">
                 	<span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>

@@ -35,7 +35,7 @@
 			</label></td>
 			<td valign="top"
 				class="value ${hasErrors(bean: pageInstance, field: 'content', 'errors')}">
-				<g:textArea name="content" value="${pageInstance?.content}" /></td>
+				<g:textArea name="content" value="${pageInstance?.content}" /> </td>
 		</tr>
 
 		<tr class="prop">
