@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse
 class PageController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+	
     /*def index = {
         redirect(action: "show", params: params)
     }*/
@@ -18,6 +18,22 @@ class PageController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [pageInstanceList: Page.list(params), pageInstanceTotal: Page.count()]
     }
+	
+	@Secured(['IS_AUTHENTICATED_FULLY'])
+	def quickSearch = {
+		def query = params.query
+		def result = []
+		def total = 0
+		def searchResult = []
+		if(query) {
+			params.suggestQuery = true
+			searchResult = Page.search(query, params)
+			result = searchResult.results
+			total = searchResult.total
+		}
+
+		render (view: 'list', model: [pageInstanceList: result, pageInstanceTotal: total, searchResult: searchResult])
+	}
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def create = {

@@ -47,4 +47,8 @@ class Page implements Comparable {
 		def response = (parent) ? (parent.permalink + "/") : ""
 		return response + permalink
 	}
+	
+	static searchable = {
+		spellCheck "include"
+	}
 }

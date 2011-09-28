@@ -25,6 +25,10 @@
 				<li>Page tree</li>
 			</ul>
 		</nav>
+		
+		<g:form name="quickSearch" method="post" mapping="pageAdmin" action="quickSearch"> 
+			<g:textField name="query"/><g:submitButton name="search" value="Find" />
+		</g:form>
 	</div>
 	<div id="bodyContent">
 		<g:layoutBody />
