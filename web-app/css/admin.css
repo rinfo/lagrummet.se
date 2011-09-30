@@ -1,10 +1,28 @@
-
-body > * {
-	position: relative;
+/* FROM main.css */
+html {
+	background-color: #fcfcfc;
+	margin: 0;
 }
 
-body > header {
-	border-bottom: solid 1pt;
+body.admin {
+	width: auto;
+	position: static;
+    color: #383838;
+    font: 11px verdana, arial, helvetica, sans-serif;
+    font-size: 12px;
+}
+
+/* ADMIN SPEFICIC */
+body > * {
+	position: relative;
+	width: auto;
+}
+
+body.admin > header {
+	/*border-bottom: solid 1pt;*/
+	width: 980px;
+	margin: 0 0 20px 0;
+	position: relative;
 }
 
 body > header > nav.logout {
@@ -13,21 +31,46 @@ body > header > nav.logout {
 	right: 0px;
 }
 
-.primaryNav {
-	padding: 20px;
-}
-
-#leftCol {
-	border-right: solid 1pt;
+#primaryNav {
+	padding: 20px 20px 20px 10px;
 	float: left;
+	width: 220px;
+	margin: 0;
 }
 
 #bodyContent {
 	float: left;
 	padding: 20px;
+	background-color: #fff;
+	width: 750px;
+	margin-left: 20px;
+	-webkit-box-shadow: 2px 2px 6px #ccc;
+	-moz-box-shadow: 1px 1px 6px #ccc;
+	box-shadow: 2px 2px 6px #ccc;
 }
+
+
 ul {
     margin-left: 0;
     padding: 0pt;
     list-style-type: none;
 }
+
+/* =PRIMARYNAV */
+#primaryNav h2, #primaryNav h3 {
+	color: #873960;
+}
+
+#pageTree {
+	margin-top: 1em;
+}
+
+#pageTree a { white-space:normal !important; height: auto; padding:1px 2px; } 
+#pageTree li > ins { vertical-align:top; }
+#pageTree .jstree-hovered, #demo4 .jstree-clicked { border:0; }
+
+#quickSearch {
+	margin-top: 20px;
+}
+
+/* =CONTENT */

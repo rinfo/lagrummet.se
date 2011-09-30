@@ -21,7 +21,6 @@ header, section, footer, aside, nav, article, figure, legend {
 html {
 	background-color: #fcfcfc;
 	margin: 0;
-
 	/*background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F4FCFF), to(#f5f5f5));
 	background: -webkit-linear-gradient(top, #F4FCFF, #f5f5f5);
 	background: -moz-linear-gradient(top, #F4FCFF, #f5f5f5);

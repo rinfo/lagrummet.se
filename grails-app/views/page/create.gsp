@@ -12,27 +12,25 @@
 
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-        </div>
-        <div class="body">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${pageInstance}">
-            <div class="errors">
-                <g:renderErrors bean="${pageInstance}" as="list" />
-            </div>
-            </g:hasErrors>
-            <g:form action="save" >
-                <div class="dialog">
-                    <g:render template="pageEditForm" />
-                </div>
-                <div class="buttons">
-                    <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
-                </div>
-            </g:form>
-        </div>
+	    <g:if test="${flash.message}">
+		    <div class="message">${flash.message}</div>
+	    </g:if>
+	    <g:hasErrors bean="${pageInstance}">
+		    <div class="errors">
+		        <g:renderErrors bean="${pageInstance}" as="list" />
+		    </div>
+		</g:hasErrors>   
+		
+		<g:form action="save" >
+		    <div class="content">
+		        <g:render template="pageEditForm" />
+		    </div>
+		    <div class="publish">
+		        <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
+		    </div>
+		    <div class="meta">
+		       
+		    </div>
+		</g:form>
     </body>
 </html>
