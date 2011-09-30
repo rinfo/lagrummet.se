@@ -111,4 +111,5 @@ grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 
 lcms {
 	googleAnalytics.webPropertyId = ""
+	upload.dir = "uploads/"
 }

@@ -73,28 +73,41 @@ class PageController {
 	def move = {
 		def pageInstance = Page.get(params.id)
 		def parentInstance
+		def pageOrder = 1
 		
 		if (params.position == "before" || params.position == "after") { // "before", "after", "inside", "first", "last"
-			// In relation to the sibling, find the parent
+			// In relation to the sibling, find the parent (or no parent for top level)
 			def target = Page.get(params.targetId)
 			parentInstance = target.parent
 			
-		} else if (params.position == "last") {
+			if (params.position == "before") {
+				pageOrder = target.pageOrder - 1
+			} else if (params.position == "after") {
+				pageOrder = target.pageOrder + 1
+			}
+		} else if (params.position) {
 			// In relation to the children of the new parent, the new parent is given
 			parentInstance = Page.get(params.targetId)
+			pageOrder = 0 // place first
 		}
 		
-		def oldParent = pageInstance.parent
-		if (oldParent) {
-			oldParent.removeFromChildren(pageInstance).save(flush:true)
+		if (pageOrder < 0) pageOrder = 0
+		pageInstance.pageOrder = pageOrder
+		pageInstance.parent = parentInstance
+		
+		// remove from old parent
+		if (parentInstance && parentInstance.id != pageInstance.parent.id) {
+			pageInstance.parent.removeFromChildren(pageInstance).save(flush:true)
 		}
 		
+		def instanceToSave
 		if (parentInstance) {
 			parentInstance.addToChildren(pageInstance)
+			instanceToSave = parentInstance
+		} else {
+			pageInstance.parent = null
+			instanceToSave = pageInstance
 		}
-		
-		
-		def instanceToSave = (parentInstance) ? parentInstance : pageInstance
 
 		// Only Ajax response
 		if (instanceToSave.save(flush: true)) {

@@ -2,7 +2,7 @@ import org.apache.jasper.compiler.Node.ParamsAction;
 
 class UrlMappings {
 
-	static excludes = ["/images/*", "/plugins/*", "/css/*", "/js/*", "/WEB-INF/*"]
+	static excludes = ["/images/*", "/plugins/*", "/css/*", "/js/*", "/uploads/*", "/WEB-INF/*"]
 	
 	static mappings = {
 		/*"/$controller/$action?/$id?"{
@@ -27,6 +27,8 @@ class UrlMappings {
 		"/"(controller: 'page', action: "show")
 
 		"/admin/user/$action"(controller: 'user')
+		
+		"/admin/media/$action"(controller: 'media')
 		
 		name pageAdmin: "/admin/page/$action?" {
 			controller = 'page'
