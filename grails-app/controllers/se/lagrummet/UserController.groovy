@@ -13,13 +13,13 @@ class UserController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [userInstanceList: User.list(params), userInstanceTotal: User.count()]
+        [userInstanceList: User.list(params), userInstanceTotal: User.count(), pageTreeList: Page.list()]
     }
 
     def create = {
         def userInstance = new User()
         userInstance.properties = params
-        return [userInstance: userInstance]
+        return [userInstance: userInstance, pageTreeList: Page.list()]
     }
 
     def save = {
@@ -43,7 +43,7 @@ class UserController {
             redirect(action: "list")
         }
         else {
-            [userInstance: userInstance]
+            [userInstance: userInstance, pageTreeList: Page.list()]
         }
     }
 
@@ -54,7 +54,7 @@ class UserController {
             redirect(action: "list")
         }
         else {
-            return [userInstance: userInstance]
+            return [userInstance: userInstance, pageTreeList: Page.list()]
         }
     }
 

@@ -17,7 +17,7 @@ class PageController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [pageInstanceList: Page.list(params), pageInstanceTotal: Page.count(), pageTreeList: Page.list()]
+        [pageInstanceList: Page.list(params), pageInstanceTotal: Page.count(), pageTreeList: Page.findAllByStatusNot("autoSave")]
     }
 	
 	@Secured(['IS_AUTHENTICATED_FULLY'])
@@ -33,14 +33,15 @@ class PageController {
 			total = searchResult.total
 		}
 
-		render (view: 'list', model: [pageInstanceList: result, pageInstanceTotal: total, searchResult: searchResult])
+		render (view: 'list', model: [pageInstanceList: result, pageInstanceTotal: total, searchResult: searchResult], pageTreeList: Page.findAllByStatusNot("autoSave"))
 	}
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def create = {
         def pageInstance = new Page()
         pageInstance.properties = params
-        return [pageInstance: pageInstance]
+		pageInstance.h1 = "Ny sida"
+        return [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
     }
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
@@ -149,7 +150,7 @@ class PageController {
             redirect(action: "list")
         }
         else {
-            return [pageInstance: pageInstance]
+            return [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
         }
     }
 
@@ -170,7 +171,7 @@ class PageController {
 			pageBackup.properties = pageInstance.properties
 			pageBackup.id = null
 			pageBackup.children = null
-			pageBackup.status = "draft"
+			pageBackup.status = "autoSave"
 			
             pageInstance.properties = params
 
@@ -185,7 +186,7 @@ class PageController {
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
-            redirect(action: "list")
+            redirect(action: "edit", id: pageInstance.id)
         }
     }
 
