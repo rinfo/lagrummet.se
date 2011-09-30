@@ -71,6 +71,9 @@ class UserController {
                     return
                 }
             }
+			if(!params.password) {
+				params.password = userInstance.password
+			}
             userInstance.properties = params
             if (!userInstance.hasErrors() && userInstance.save(flush: true)) {
 				def role = SecRole.findById(roleId)

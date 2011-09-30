@@ -43,5 +43,10 @@ class Page {
 	
 	static searchable = {
 		spellCheck "include"
+		title boost: 2.0
+	}
+	
+	public String toString() {
+		return title
 	}
 }

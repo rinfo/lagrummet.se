@@ -28,7 +28,7 @@ class PageController {
 		def searchResult = []
 		if(query) {
 			params.suggestQuery = true
-			searchResult = Page.search(query, params)
+			searchResult = Page.search(query, params, sort: "SCORE")
 			result = searchResult.results
 			total = searchResult.total
 		}
@@ -41,6 +41,7 @@ class PageController {
         def pageInstance = new Page()
         pageInstance.properties = params
 		pageInstance.h1 = "Ny sida"
+		pageInstance.publishStart = new Date()
         return [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
     }
 

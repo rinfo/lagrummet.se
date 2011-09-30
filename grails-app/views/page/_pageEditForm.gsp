@@ -65,7 +65,7 @@
 			</label></td>
 			<td valign="top"
 				class="value ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
-				<g:datePicker name="publishStart" precision="day"
+				<g:datePicker name="publishStart" precision="minute"
 					value="${pageInstance?.publishStart}" default="none"
 					noSelection="['': '']" /></td>
 		</tr>
@@ -76,7 +76,7 @@
 			</label></td>
 			<td valign="top"
 				class="value ${hasErrors(bean: pageInstance, field: 'publishStop', 'errors')}">
-				<g:datePicker name="publishStop" precision="day"
+				<g:datePicker name="publishStop" precision="minute"
 					value="${pageInstance?.publishStop}" default="none"
 					noSelection="['': '']" /></td>
 		</tr>
