@@ -100,4 +100,28 @@ jQuery(function($) {
             }
         }, "json");
     });
+	
+	// Dynamic behaviour for creating and editing pages
+	var firstH1Blur = true;
+	$("#h1").focus().blur(function(e) {
+		if (firstH1Blur) {
+			firstH1Blur = false;
+			$("#title").val($(this).val());
+			$("#bodyContent form .content .permalink input").val($(this).val().replace(" ", "-").toLowerCase()).parent().show();
+		}
+		
+		$(this).hide();
+		$("#bodyContent form .content h1 a").html($(this).val()).click(function(e) {
+			e.preventDefault();
+			$("#h1").show().focus();
+			$(this).parent().hide();
+		}).parent().show();
+		
+	});
+	
+	$("#bodyContent form .content .title a").click(function (e) {
+		e.preventDefault();
+		$(this).hide();
+		$("#bodyContent form .content .title input").show();
+	});
 });

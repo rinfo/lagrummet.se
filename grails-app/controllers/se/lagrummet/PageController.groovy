@@ -33,7 +33,7 @@ class PageController {
 			total = searchResult.total
 		}
 
-		render (view: 'list', model: [pageInstanceList: result, pageInstanceTotal: total, searchResult: searchResult], pageTreeList: Page.findAllByStatusNot("autoSave"))
+		render (view: 'list', model: [pageInstanceList: result, pageInstanceTotal: total, searchResult: searchResult, pageTreeList: Page.findAllByStatusNot("autoSave")])
 	}
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
@@ -57,7 +57,7 @@ class PageController {
 				render response as JSON
 			} else {
 				flash.message = "${message(code: 'default.created.message', args: [message(code: 'page.label', default: 'Page'), pageInstance.id])}"
-				render(view: "edit", model: [pageInstance: pageInstance])
+				render(view: "edit", model: [pageInstance: pageInstance], pageTreeList: Page.findAllByStatusNot("autoSave"))
 			}
         }
         else {
@@ -65,7 +65,7 @@ class PageController {
 				def response = [error: pageInstance.errors]
 				render response as JSON
 			} else {
-            	render(view: "create", model: [pageInstance: pageInstance])
+            	render(view: "create", model: [pageInstance: pageInstance], pageTreeList: Page.findAllByStatusNot("autoSave"))
 			}
         }
     }
