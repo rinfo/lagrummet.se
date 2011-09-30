@@ -41,6 +41,7 @@ class PageController {
         def pageInstance = new Page()
         pageInstance.properties = params
 		pageInstance.h1 = "Ny sida"
+		pageInstance.publishStart = new Date()
         return [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
     }
 
