@@ -13,8 +13,8 @@ class UrlMappings {
 		
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
-		
-		
+
+				
 		name page: "/$permalink**" {
 			constraints {
 				permalink(matches:/.+/, blank:false)
