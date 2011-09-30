@@ -1,13 +1,13 @@
 package se.lagrummet
 
-class Page implements Comparable {
+class Page {
 	
 	String title
 	String h1
 	String permalink
 	String content
 //	User author
-	int pageOrder
+	int pageOrder = 0
 	
 	String status = "draft" // draft, pending, published, autoSave
 	Date dateCreated
@@ -15,7 +15,6 @@ class Page implements Comparable {
 	Date publishStart
 	Date publishStop
 	
-	SortedSet children
 	static hasMany = [
 		children : Page
 	]
@@ -32,8 +31,9 @@ class Page implements Comparable {
 		publishStop(nullable: true)
     }
 	
-	public int compareTo(Object o) {
-		pageOrder.compareTo(o.pageOrder)
+	static mapping = {
+		sort "pageOrder"
+		children sort: "pageOrder"
 	}
 	
 	def url = {
