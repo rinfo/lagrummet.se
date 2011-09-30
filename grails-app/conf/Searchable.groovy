@@ -56,12 +56,12 @@ searchable {
      * Documentation for Compass settings is here: http://www.compass-project.org/docs/2.1.0M2/reference/html/core-settings.html
      */
 //    compassSettings = [:]
-compassSettings = [
-	'compass.engine.analyzer.default.type': 'snowball',
-	'compass.engine.analyzer.default.name': 'Swedish',
-	'compass.engine.analyzer.search.type': 'snowball',
-	'compass.engine.analyzer.search.name': 'Swedish',
-]
+		compassSettings = [
+			'compass.engine.analyzer.default.type': 'snowball',
+			'compass.engine.analyzer.default.name': 'Swedish',
+			'compass.engine.analyzer.search.type': 'snowball',
+			'compass.engine.analyzer.search.name': 'Swedish',
+		]
 
     /**
      * Default mapping property exclusions
