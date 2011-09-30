@@ -43,5 +43,6 @@ class Page implements Comparable {
 	
 	static searchable = {
 		spellCheck "include"
+		title boost: 2.0
 	}
 }

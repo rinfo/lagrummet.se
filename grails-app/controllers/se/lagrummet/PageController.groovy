@@ -28,7 +28,7 @@ class PageController {
 		def searchResult = []
 		if(query) {
 			params.suggestQuery = true
-			searchResult = Page.search(query, params)
+			searchResult = Page.search(query, params, sort: "SCORE")
 			result = searchResult.results
 			total = searchResult.total
 		}
