@@ -20,79 +20,16 @@
             </div>
             </g:hasErrors>
             <g:form action="save" >
-                <div class="dialog">
-                    <table>
-                        <tbody>
-                        
-                        	<tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="fullName"><g:message code="user.fullName.label" default="Full Name" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'fullName', 'errors')}">
-                                    <g:textField name="fullName" value="${userInstance?.fullName}" />
-                                </td>
-                            </tr>
-                        
-                        	<tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="email"><g:message code="user.email.label" default="E-mail" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'email', 'errors')}">
-                                    <g:textField name="email" value="${userInstance?.email}" />
-                                </td>
-                            </tr>
-                       		
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="username"><g:message code="user.username.label" default="Username" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'username', 'errors')}">
-                                    <g:textField name="username" value="${userInstance?.username}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="password"><g:message code="user.password.label" default="Password" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
-                                    <g:textField name="password" value="${userInstance?.password}" />
-                                </td>
-                            </tr>
-
-							<tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="department"><g:message code="user.department.label" default="Department" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'department', 'errors')}">
-                                    <g:textField name="department" value="${userInstance?.department}" />
-                                </td>
-                            </tr>                            
-                            
-                            <tr class="prop">
-                            	<td valign="top" class="name">
-                            		<label for="role"><g:message code="user.role.label" default="Role" /></label>
-                            	</td>
-                            	<td valign="top" class="value">
-                            		<g:select name="role" 
-                            					from="${se.lagrummet.SecRole.list() }"
-                            					optionKey="id"
-                            					optionValue="name" />
-                            	</td>
-                            </tr>
-                            
-                        	<tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="enabled"><g:message code="user.enabled.label" default="Enabled" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'enabled', 'errors')}">
-                                    <g:checkBox name="enabled" value="${userInstance?.enabled}" />
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
+                <g:render template="userEditForm" />
+                
+                <div class="input ${hasErrors(bean: userInstance, field: 'role', 'errors')}">
+					<label for="title"><g:message code="user.role.label" default="Role" /></label>
+					<g:select name="role" 
+	   					from="${se.lagrummet.SecRole.list() }"
+	   					optionKey="id"
+	   					optionValue="name" />
+				</div>
+                
                 <div class="buttons">
                     <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
                 </div>

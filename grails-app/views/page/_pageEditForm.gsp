@@ -1,95 +1,53 @@
-<table>
-	<tbody>
+<div class="content">
+	<g:if test="${pageInstance?.id != null}">
+		<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
+  		<g:textField name="h1" value="${pageInstance?.h1}" />
+	</g:if>
+	<g:else>
+		<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
+  		<g:textField name="h1" value="${message(code: 'page.enterTitle.label', default: 'Enter heading here')}" />
+	</g:else>
+  	
+ 	
+  	<div class="permalink input ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
+		${grailsApplication.config.grails.serverURL}/ <g:textField name="permalink" value="${pageInstance?.permalink}" />
+	</div>
+  	
+  	<div class="title input ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
+		<label for="title"><a href="#"><g:message code="page.title.label" default="Different title? Click here" /></a></label>
+		<g:textField name="title" value="${pageInstance?.title}" />
+	</div>
+  
+    <div class="mceEditor input">
+    	<g:textArea name="content" value="${pageInstance?.content}" />
+    </div> 
+</div>
 
-		<tr class="prop">
-			<td valign="top" class="name"><label for="title"><g:message
-						code="page.title.label" default="Title" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
-				<g:textField name="title" value="${pageInstance?.title}" /></td>
-		</tr>
+<div class="aside publish">
+  	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
+		<label for="status"><g:message code="page.status.label" default="Status" /></label>
+		<g:select name="status" from="['draft', 'pending', 'published']" value="${pageInstance?.status}" />
+	</div>
 
-		<tr class="prop">
-			<td valign="top" class="name"><label for="h1"><g:message
-						code="page.h1.label" default="H1" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'h1', 'errors')}">
-				<g:textField name="h1" value="${pageInstance?.h1}" /></td>
-		</tr>
+	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
+		<label for="publishStart"><g:message code="page.publishStart.label" default="Publish Start" /></label>
+		<g:datePicker name="publishStart" precision="minute" value="${pageInstance?.publishStart}" default="none" noSelection="['': '']" />
+	</div>
 
-		<tr class="prop">
-			<td valign="top" class="name"><label for="permalink"><g:message
-						code="page.permalink.label" default="Permalink" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
-				<g:textField name="permalink" value="${pageInstance?.permalink}" />
-			</td>
-		</tr>
-
-		<tr class="prop">
-			<td valign="top" class="name"><label for="content"><g:message
-						code="page.content.label" default="Content" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'content', 'errors')}">
-				<g:textArea name="content" value="${pageInstance?.content}" /> </td>
-		</tr>
-
-		<tr class="prop">
-			<td valign="top" class="name"><label for="parent"><g:message
-						code="page.parent.label" default="Parent" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'parent', 'errors')}">
-				<g:select name="parent.id" from="${se.lagrummet.Page.list()}"
-					optionKey="id" value="${pageInstance?.parent?.id}"
-					noSelection="['null': '']" /></td>
-		</tr>
-
-		<tr class="prop">
-			<td valign="top" class="name"><label for="status"><g:message
-						code="page.status.label" default="Status" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
-				<g:select name="status" from="['draft', 'pending', 'published']"
-					value="${pageInstance?.status}" /></td>
-		</tr>
-
-		<tr class="prop">
-			<td valign="top" class="name"><label for="publishStart"><g:message
-						code="page.publishStart.label" default="Publish Start" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
-				<g:datePicker name="publishStart" precision="minute"
-					value="${pageInstance?.publishStart}" default="none"
-					noSelection="['': '']" /></td>
-		</tr>
-
-		<tr class="prop">
-			<td valign="top" class="name"><label for="publishStop"><g:message
-						code="page.publishStop.label" default="Publish Stop" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'publishStop', 'errors')}">
-				<g:datePicker name="publishStop" precision="minute"
-					value="${pageInstance?.publishStop}" default="none"
-					noSelection="['': '']" /></td>
-		</tr>
-
-		<tr class="prop">
-			<td valign="top" class="name"><label for="pageOrder"><g:message
-						code="page.pageOrder.label" default="Page Order" />
-			</label></td>
-			<td valign="top"
-				class="value ${hasErrors(bean: pageInstance, field: 'pageOrder', 'errors')}">
-				<g:textField name="pageOrder"
-					value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" /></td>
-		</tr>
-
-	</tbody>
-</table>
+	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStop', 'errors')}">
+		<label for="publishStop"><g:message code="page.publishStop.label" default="Publish Stop" /></label>
+		<g:datePicker name="publishStop" precision="minute" value="${pageInstance?.publishStop}" default="none" noSelection="['': '']" />
+	</div>
+</div>
+  
+<div class="aside meta">
+  	<div class="input ${hasErrors(bean: pageInstance, field: 'parent', 'errors')}">
+		<label for="parent"><g:message code="page.parent.label" default="Parent: " /></label>
+		<g:select name="parent.id" from="${se.lagrummet.Page.list()}" optionKey="id" optionValue="title" value="${pageInstance?.parent?.id}" noSelection="['null': '']" />
+	</div>
+  
+  	<div class="input ${hasErrors(bean: pageInstance, field: 'pageOrder', 'errors')}">
+		<label for="pageOrder"><g:message code="page.pageOrder.label" default="Page order: " /></label>
+		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
+	</div>
+</div>

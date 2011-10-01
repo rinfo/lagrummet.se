@@ -13,13 +13,13 @@ class UserController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [userInstanceList: User.list(params), userInstanceTotal: User.count(), pageTreeList: Page.list()]
+        [userInstanceList: User.list(params), userInstanceTotal: User.count(), pageTreeList: Page.findAllByStatusNot("autoSave")]
     }
 
     def create = {
         def userInstance = new User()
         userInstance.properties = params
-        return [userInstance: userInstance, pageTreeList: Page.list()]
+        return [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
     }
 
     def save = {
@@ -29,7 +29,7 @@ class UserController {
         	def role = SecRole.findById(roleId)
 			SecUserSecRole.create(userInstance, role, true)
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
-            redirect(action: "show", id: userInstance.id)
+            redirect(action: "edit", id: userInstance.id)
         }
         else {
             render(view: "create", model: [userInstance: userInstance])
@@ -43,7 +43,7 @@ class UserController {
             redirect(action: "list")
         }
         else {
-            [userInstance: userInstance, pageTreeList: Page.list()]
+            [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
         }
     }
 
@@ -54,7 +54,7 @@ class UserController {
             redirect(action: "list")
         }
         else {
-            return [userInstance: userInstance, pageTreeList: Page.list()]
+            return [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
         }
     }
 
@@ -67,7 +67,7 @@ class UserController {
                 if (userInstance.version > version) {
                     
                     userInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'user.label', default: 'User')] as Object[], "Another user has updated this User while you were editing")
-                    render(view: "edit", model: [userInstance: userInstance])
+                    render(view: "edit", model: [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
                     return
                 }
             }
@@ -83,7 +83,7 @@ class UserController {
                 redirect(action: "show", id: userInstance.id)
             }
             else {
-                render(view: "edit", model: [userInstance: userInstance])
+                render(view: "edit", model: [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
             }
         }
         else {

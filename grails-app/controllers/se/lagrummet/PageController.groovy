@@ -40,7 +40,6 @@ class PageController {
     def create = {
         def pageInstance = new Page()
         pageInstance.properties = params
-		pageInstance.h1 = "Ny sida"
 		pageInstance.publishStart = new Date()
         return [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
     }
@@ -58,7 +57,7 @@ class PageController {
 				render response as JSON
 			} else {
 				flash.message = "${message(code: 'default.created.message', args: [message(code: 'page.label', default: 'Page'), pageInstance.id])}"
-				render(view: "edit", model: [pageInstance: pageInstance], pageTreeList: Page.findAllByStatusNot("autoSave"))
+				render(view: "edit", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
 			}
         }
         else {
@@ -66,7 +65,7 @@ class PageController {
 				def response = [error: pageInstance.errors]
 				render response as JSON
 			} else {
-            	render(view: "create", model: [pageInstance: pageInstance], pageTreeList: Page.findAllByStatusNot("autoSave"))
+            	render(view: "create", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
 			}
         }
     }
@@ -163,7 +162,7 @@ class PageController {
                 def version = Long.valueOf(params.version)
                 if (pageInstance.version > version) {
                     pageInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'page.label', default: 'Page')] as Object[], "Another user has updated this Page while you were editing")
-                    render(view: "edit", model: [pageInstance: pageInstance])
+                    render(view: "edit", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
                     return
                 }
             }
@@ -179,7 +178,7 @@ class PageController {
             if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'page.label', default: 'Page'), pageInstance.id])}"
 				pageBackup.save()
-                redirect(action: "list")
+                render(view: "edit", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
             }
             else {
                 render(view: "edit", model: [pageInstance: pageInstance])

@@ -28,6 +28,8 @@ class UrlMappings {
 
 		"/admin/user/$action"(controller: 'user')
 		
+		"/admin/site/$action"(controller: 'siteProperties')
+		
 		"/admin/media/$action"(controller: 'media')
 		
 		name pageAdmin: "/admin/page/$action?" {
