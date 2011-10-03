@@ -37,15 +37,15 @@
             <g:each in="${pageTreeList}" var="pI">
                 <g:if test="${!pI.parent}">
                   <li id="p-${pI.id}">
-                  <g:link controller="page" action="edit" id="${pI.id}">${pI.title}</g:link>
+                  <g:link controller="page" action="edit" id="${pI.id}">${pI.h1}</g:link>
                   <g:if test="${pI.children?.size()}">
                     <ul>
                       <g:each in="${pI.children}" var="pIChild">
-                        <li id="p-${pIChild.id}"><g:link controller="page" action="edit" id="${pIChild.id}">${pIChild.title}</g:link></li>
+                        <li id="p-${pIChild.id}"><g:link controller="page" action="edit" id="${pIChild.id}">${pIChild.h1}</g:link></li>
                         <g:if test="${pIChild.children?.size()}">
                         	<ul>
                         	<g:each in="${pIChild.children}" var="pIGrandChild">
-                        		<li id="p-${pIGrandChild.id}"><g:link controller="page" action="edit" id="${pIGrandChild.id}">${pIGrandChild.title}</g:link></li>
+                        		<li id="p-${pIGrandChild.id}"><g:link controller="page" action="edit" id="${pIGrandChild.id}">${pIGrandChild.h1}</g:link></li>
                         	</g:each>
                         	</ul>
                         </g:if>

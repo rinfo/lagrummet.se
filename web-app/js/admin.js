@@ -106,7 +106,7 @@ jQuery(function($) {
 		if (!$("#bodyContent form .content .permalink input").val()) {
 			firstH1Blur = false;
 			$("#title").val($(this).val());
-			$("#bodyContent form .content .permalink input").val($(this).val().replace(" ", "-").toLowerCase()).parent().show();
+			$("#bodyContent form .content .permalink input").val($(this).val().replace(/ /g, "-").toLowerCase()).parent().show();
 		}
 		
 		$(this).hide();

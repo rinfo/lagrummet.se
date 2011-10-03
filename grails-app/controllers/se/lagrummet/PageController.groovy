@@ -49,7 +49,7 @@ class PageController {
 		if (params.ajax) {
 			params.parent = Page.get(params.parentId)
 		}
-		
+
         def pageInstance = new Page(params)
         if (pageInstance.save(flush: true)) {
 			if (params.ajax) {

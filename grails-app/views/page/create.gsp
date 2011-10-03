@@ -7,9 +7,6 @@
         <meta name="layout" content="adminMain" />
         <g:set var="entityName" value="${message(code: 'page.label', default: 'Page')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
-        <tinyMce:resources jquery="true" />
-		<script src="${resource(dir:'js',file:'admin.js')}"></script>
-
     </head>
     <body>
 	    <g:if test="${flash.message}">
@@ -21,11 +18,11 @@
 		    </div>
 		</g:hasErrors>   
 		
-		<g:form action="save" class="create">
+		<g:form mapping="pageAdmin" class="create" method="post">
 		    <g:render template="pageEditForm" />
 		    
 		    <div class="aside buttons">
-		    	<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+		    	<g:actionSubmit name="save" action="save" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 		    </div>
 		</g:form>
     </body>
