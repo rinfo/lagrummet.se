@@ -26,7 +26,7 @@
 <div class="aside publish">
   	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
 		<label for="status"><g:message code="page.status.label" default="Status" /></label>
-		<g:select name="status" from="['draft', 'pending', 'published']" value="${pageInstance?.status}" />
+		<g:select name="status" from="['draft', 'pending', 'published']" value="${pageInstance?.status}" valueMessagePrefix="pageStatus" />
 	</div>
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
