@@ -28,7 +28,7 @@ class UserController {
         if (userInstance.save(flush: true)) {
         	def role = SecRole.findById(roleId)
 			SecUserSecRole.create(userInstance, role, true)
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.fullName])}"
             redirect(action: "edit", id: userInstance.id)
         }
         else {
@@ -79,7 +79,7 @@ class UserController {
 				def role = SecRole.findById(roleId)
 				SecUserSecRole.removeAll(userInstance)
 				SecUserSecRole.create(userInstance, role, true)
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.fullName])}"
                 redirect(action: "show", id: userInstance.id)
             }
             else {

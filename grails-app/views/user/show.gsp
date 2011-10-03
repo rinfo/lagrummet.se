@@ -69,7 +69,7 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="user.enabled.label" default="Enabled" /></td>
                             
-                            <td valign="top" class="value"><g:formatBoolean boolean="${userInstance?.enabled}" /></td>
+                            <td valign="top" class="value"><g:formatBoolean boolean="${userInstance?.enabled}" true="${message(code:'user.active.true', default:'True') }" false="${message(code:'user.active.false', default:'False') }" /></td>
                             
                         </tr>
                         

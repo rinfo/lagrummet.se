@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="body">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+            <h1><g:message code="page.list.label" /></h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -42,7 +42,7 @@
                         	
                             <td>${fieldValue(bean: pageInstance, field: "parent")}</td>
                         
-                            <td>${fieldValue(bean: pageInstance, field: "status")}</td>
+                            <td><g:message code="pageStatus.${pageInstance.status}" default="${pageInstance.status}" /></td>
                         
                             <td><g:formatDate date="${pageInstance.publishStart}" /></td>
                         

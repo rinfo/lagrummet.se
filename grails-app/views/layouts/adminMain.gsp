@@ -58,7 +58,7 @@
           </ul>
 		</div>
 		<g:form name="quickSearch" method="post" mapping="pageAdmin" action="quickSearch"> 
-			<g:textField size="22" name="query"/><g:submitButton name="search" value="Find" />
+			<g:textField size="22" name="query"/><g:submitButton name="search" value="${message(code:'default.button.find.label', default:'Find')}" />
 		</g:form>
 	</nav>
 	<div id="bodyContent">

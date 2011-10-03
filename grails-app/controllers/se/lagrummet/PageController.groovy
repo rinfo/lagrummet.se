@@ -56,7 +56,7 @@ class PageController {
 				def response = [success: "true", pageInstance: pageInstance]
 				render response as JSON
 			} else {
-				flash.message = "${message(code: 'default.created.message', args: [message(code: 'page.label', default: 'Page'), pageInstance.id])}"
+				flash.message = "${message(code: 'page.created.message', args: [pageInstance.title])}"
 				render(view: "edit", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
 			}
         }
@@ -176,7 +176,7 @@ class PageController {
             pageInstance.properties = params
 
             if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'page.label', default: 'Page'), pageInstance.id])}"
+                flash.message = "${message(code: 'page.updated.message', args: [pageInstance.title])}"
 				pageBackup.save()
                 render(view: "edit", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
             }
@@ -200,7 +200,7 @@ class PageController {
 					def response = [success: "${message(code: 'default.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"]
 					render response as JSON
 				} else {
-	                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
+	                flash.message = "${message(code: 'page.deleted.message', args: [params.title])}"
 	                redirect(action: "list")
 				}
             }
