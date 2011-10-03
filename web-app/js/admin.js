@@ -106,7 +106,11 @@ jQuery(function($) {
 		if (!$("#bodyContent form .content .permalink input").val()) {
 			firstH1Blur = false;
 			$("#title").val($(this).val());
-			$("#bodyContent form .content .permalink input").val($(this).val().replace(/ /g, "-").toLowerCase()).parent().show();
+			var value = $(this).val().replace(/ /g, "-").toLowerCase();
+			value = value.replace(/[åä]/g, 'a');
+			value = value.replace(/[ö]/g, 'o');
+			value = value.replace(/[^a-zA-Z 0-9-_]+/g,'');
+			$("#bodyContent form .content .permalink input").val(value).parent().show();
 		}
 		
 		$(this).hide();
