@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse
 
 class PageController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST", move: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST", move: "POST", restore: "POST"]
 
     /*def index = {
         redirect(action: "show", params: params)
@@ -49,7 +49,7 @@ class PageController {
 		if (params.ajax) {
 			params.parent = Page.get(params.parentId)
 		}
-		
+
         def pageInstance = new Page(params)
         if (pageInstance.save(flush: true)) {
 			if (params.ajax) {
@@ -141,6 +141,27 @@ class PageController {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND)
 		}
     }
+	
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
+	def restore = {
+		def pageInstance = Page.get(params.id)
+		def master = pageInstance.masterRevision
+		
+		master.h1 = pageInstance.h1
+		master.title = pageInstance.title
+		master.permalink = pageInstance.permalink
+		master.content = pageInstance.content
+		master.pageOrder = pageInstance.pageOrder
+		
+		pageInstance.backup()
+		
+		if (!pageInstance.hasErrors() && master.save(flush:true)) {
+			flash.message = "${message(code: 'default.updated.message', args: [message(code: 'page.label', default: 'Page'), master.id])}"
+			redirect(action: "edit", id: master.id)
+		} else {
+			redirect(action: "edit", id: pageInstance.id)
+		}
+	}
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def edit = {
@@ -150,7 +171,7 @@ class PageController {
             redirect(action: "list")
         }
         else {
-            return [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
+            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave"), pageTreeList: Page.findAllByStatusNot("autoSave")]
         }
     }
 
@@ -166,19 +187,13 @@ class PageController {
                     return
                 }
             }
-			
-			def pageBackup = new Page()
-			pageBackup.properties = pageInstance.properties
-			pageBackup.id = null
-			pageBackup.children = null
-			pageBackup.status = "autoSave"
-			
+
+			pageInstance.backup()
             pageInstance.properties = params
 
             if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
-                flash.message = "${message(code: 'page.updated.message', args: [pageInstance.title])}"
-				pageBackup.save()
-                render(view: "edit", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
+				flash.message = "${message(code: 'page.updated.message', args: [pageInstance.title])}"
+                redirect(action: "edit", id: pageInstance.id)
             }
             else {
                 render(view: "edit", model: [pageInstance: pageInstance])

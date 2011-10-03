@@ -6,6 +6,6 @@ import grails.plugins.springsecurity.Secured
 class AdminController {
 
     def index = {
-		[pageTreeList: Page.list()]
+		[pageTreeList: Page.findAllByStatusNot("autoSave")]
 	}
 }

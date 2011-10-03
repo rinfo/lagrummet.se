@@ -100,6 +100,14 @@ ul {
 	background-color: #E87C69;
 }
 
+#bodyContent form {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 #bodyContent form .content #h1 {
     width: 100%;
     font-size: 3.2em;
@@ -154,7 +162,7 @@ ul {
 }
 
 #bodyContent form input[type=text] {
-	width: 100%;
+	width: 95%;
 }
 
 #bodyContent form .content .mceEditor.input {
@@ -183,8 +191,8 @@ ul {
 
 #bodyContent .aside.buttons {
 	text-align: right;
-	width: auto;
 	clear: none;
+	width: 220px;
 }
 
 #bodyContent .input {
@@ -195,6 +203,13 @@ ul {
 
 #bodyContent .input:first-child {
 	margin-top: 0;
+}
+
+#bodyContent .revisions {
+	width: 100%;
+	clear: both;
+	float: none;
+	margin-top: 3em;
 }
 
 #bodyContent .aside .input input, #bodyContent .aside .input select {

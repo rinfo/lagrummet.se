@@ -25,10 +25,26 @@
                 <g:render template="pageEditForm" />
 
                 <div class="aside buttons">
-                	<span class="button"><g:actionSubmit  name="update" action="update" class="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
+	                <g:if test="${pageInstance.masterRevision}">
+	                	<span class="button"><g:actionSubmit  name="restore" action="restore" class="restore" value="${message(code: 'default.button.restore.label', default: 'Restore')}" /></span>
+	                </g:if>
+                	<span class="button"><g:actionSubmit name="update" action="update" class="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </div>
             </g:form>
+            <div class="revisions">
+            	<h3>${message(code: 'default.page.revisions.label', default: 'Revisions')}</h3>
+	            <g:if test="${revisions}">
+	            	<ul>
+		            	<g:each in="${revisions}" var="r">
+		            		<li><g:link action="edit" id="${r.id}">${r.dateCreated}</g:link></li>
+		            	</g:each>
+		            </ul>
+	            </g:if>
+            <g:elseif test="${pageInstance.masterRevision}">
+            	${message(code: 'default.page.masterRevision.label', default: 'This is a revision of ')}<g:link action="edit" id="${pageInstance.masterRevision.id}">${pageInstance.masterRevision.title}</g:link>
+            </g:elseif>
+            </div>
         </div>
     </body>
 </html>
