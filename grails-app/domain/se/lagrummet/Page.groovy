@@ -20,7 +20,12 @@ class Page {
 	]
 
 	static belongsTo = [
-		parent : Page
+		parent : Page,
+		masterRevision : Page
+	]
+	
+	static mappedBy = [
+		children : 'parent'
 	]
 	
     static constraints = {
@@ -29,6 +34,7 @@ class Page {
 		status(nullable: true)
 		publishStart(nullable: true)
 		publishStop(nullable: true)
+		masterRevision(nullable: true)
     }
 	
 	static mapping = {
@@ -39,6 +45,16 @@ class Page {
 	def url = {
 		def response = (parent) ? (parent.permalink + "/") : ""
 		return response + permalink
+	}
+	
+	def backup = {
+		def pageBackup = new Page()
+		pageBackup.properties = this.properties
+		pageBackup.id = null
+		pageBackup.children = null
+		pageBackup.status = "autoSave"
+		pageBackup.masterRevision = this
+		pageBackup.save(flush:true)
 	}
 	
 	static searchable = {
