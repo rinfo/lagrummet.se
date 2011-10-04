@@ -48,9 +48,11 @@ class PageController {
     def save = {
 		if (params.ajax) {
 			params.parent = Page.get(params.parentId)
+			params.publishStart = new Date()
 		}
 
         def pageInstance = new Page(params)
+		
         if (pageInstance.save(flush: true)) {
 			if (params.ajax) {
 				def response = [success: "true", pageInstance: pageInstance]
@@ -124,7 +126,7 @@ class PageController {
     def show = {
 		def url = (params.permalink) ? params.permalink.tokenize("/") : ["home"]
 		def permalink = url[url.size()-1]
-		
+
 		def page = Page.withCriteria(uniqueResult:true) {
 			eq("permalink", permalink)
 			eq("status", "published")
@@ -146,14 +148,14 @@ class PageController {
 	def restore = {
 		def pageInstance = Page.get(params.id)
 		def master = pageInstance.masterRevision
+		master.backup()
 		
 		master.h1 = pageInstance.h1
 		master.title = pageInstance.title
 		master.permalink = pageInstance.permalink
 		master.content = pageInstance.content
 		master.pageOrder = pageInstance.pageOrder
-		
-		pageInstance.backup()
+
 		
 		if (!pageInstance.hasErrors() && master.save(flush:true)) {
 			flash.message = "${message(code: 'default.updated.message', args: [message(code: 'page.label', default: 'Page'), master.id])}"

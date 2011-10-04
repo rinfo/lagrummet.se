@@ -20,8 +20,9 @@
     <article>
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
-		<footer></footer>
+		
 	</article>
 </div>
+<footer>${siteProps.footer}</footer>
 </body>
 </html>
