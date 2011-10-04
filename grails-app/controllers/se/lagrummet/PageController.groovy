@@ -194,7 +194,7 @@ class PageController {
             pageInstance.properties = params
 
             if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
-				flash.message = "${message(code: 'page.updated.message', args: [pageInstance.title])}"
+				flash.message = "${message(code: 'page.updated.message', args: [pageInstance.h1])}"
                 redirect(action: "edit", id: pageInstance.id)
             }
             else {

@@ -40,12 +40,7 @@
 	</div>
 </div>
   
-<div class="aside meta">
-  	<div class="input ${hasErrors(bean: pageInstance, field: 'parent', 'errors')}">
-		<label for="parent"><g:message code="page.parent.label" default="Parent: " /></label>
-		<g:select name="parent.id" from="${se.lagrummet.Page.list()}" optionKey="id" optionValue="title" value="${pageInstance?.parent?.id}" noSelection="['null': '']" />
-	</div>
-  
+<div class="aside meta">  
   	<div class="input ${hasErrors(bean: pageInstance, field: 'pageOrder', 'errors')}">
 		<label for="pageOrder"><g:message code="page.pageOrder.label" default="Page order: " /></label>
 		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
