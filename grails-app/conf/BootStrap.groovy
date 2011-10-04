@@ -16,7 +16,7 @@ class BootStrap {
 			def roleEditor = new SecRole(authority: 'ROLE_EDITOR', name: 'Editor').save(failOnError:true)
 			SecUserSecRole.create(user, roleAdmin, true)
 			
-			def kalles = new Page(title: 'Kalles sida', pageOrder: 1, permalink: 'kalle', h1: 'heja kalle!', content: "Första försöket", status: "published", publishStart: new Date() - 4).save()
+			def kalles = new Page(title: 'Kalles sida', pageOrder: 1, permalink: 'kalle', h1: 'heja kalle!', content: "<p>Första försöket</p>", status: "published", publishStart: new Date() - 4).save()
 			def kallesUndersida = new Page(title: 'Kalles undersida', pageOrder: 1, parent: kalles, permalink: 'kalle-undersida', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: new Date() - 4).save()
 			def kallesUndersida2 = new Page(title: 'Kalles undersida 2', pageOrder: 0, parent: kalles, permalink: 'kalle-undersida-2', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: new Date() - 4).save()
 			new Page(title: 'Lagrummet', pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: new Date() - 4).save()

@@ -33,7 +33,8 @@ body {
     padding: 0 1em 0 1em;
     position: relative;
     color: #383838;
-    font: 11px verdana, arial, helvetica, sans-serif;
+    font: 12px verdana, arial, helvetica, sans-serif;
+    line-height: 140%;
     font-size: 12px;
 }
 
@@ -236,9 +237,7 @@ body article ul li {
 
 /* =FOOTER page footer */
 body > footer {
-    margin-top: 20px;
-    border-top: 1px dotted #ccc;
-    padding-top: 20px;
+    padding-top: 3em;
     font-size: 0.8em;
     overflow: auto;
 }

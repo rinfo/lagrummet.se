@@ -14,7 +14,11 @@ jQuery(function($) {
 		theme : "advanced",
 		mode : "exact",
 		elements : "content",
-		theme_advanced_toolbar_location : "top"
+		theme_advanced_toolbar_location : "top",
+		force_p_newlines : true,
+		formats : {
+            p : {selector : 'p', classes : '', styles: ''}
+		}
 	});
 	
 	

@@ -24,9 +24,7 @@
                             
                             <g:sortableColumn property="authorities" title="${message(code: 'user.role.label', default: 'Role') }" />
                         
-                            <g:sortableColumn property="enabled" title="${message(code: 'user.enabled.label', default: 'Enabled') }" />
-                            
-                            <g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: 'Date Created')}" />
+                            <g:sortableColumn property="department" title="${message(code: 'user.department.label', default: 'Department')}" />
                         
                         </tr>
                     </thead>
@@ -40,9 +38,7 @@
                             
                             <td>${userInstance.authorities*.name.join(',')}</td>
                         
-                            <td><g:formatBoolean boolean="${userInstance.enabled}" true="${message(code:'user.active.true', default:'True') }" false="${message(code:'user.active.false', default:'False') }" /></td>
-                            
-                            <td><g:formatDate date="${userInstance.dateCreated}" /></td>
+                            <td>${fieldValue(bean: userInstance, field: "department")}</td>
                         
                         </tr>
                     </g:each>

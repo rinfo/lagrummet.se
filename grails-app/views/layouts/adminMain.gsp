@@ -15,7 +15,7 @@
 <body class="admin">
 	<header>
 		<h1>Lagrummet.se CMS</h1>
-		<a href="${grailsApplication.config.grails.serverURL}">Bes&ouml;k site</a>
+		<a href="${grailsApplication.config.grails.serverURL}">Bes&ouml;k sidan</a>
 		<nav class="logout">
 			<sec:username/> (<g:link controller="logout">Logga ut</g:link>)
 		</nav>
@@ -41,11 +41,11 @@
                   <g:if test="${pI.children?.size()}">
                     <ul>
                       <g:each in="${pI.children}" var="pIChild">
-                        <li id="p-${pIChild.id}"><g:link controller="page" action="edit" id="${pIChild.id}">${pIChild.h1}</g:link></li>
+                        <g:if test="${pIChild.status != 'autoSave'}"><li id="p-${pIChild.id}"><g:link controller="page" action="edit" id="${pIChild.id}">${pIChild.h1}</g:link></li></g:if>
                         <g:if test="${pIChild.children?.size()}">
                         	<ul>
                         	<g:each in="${pIChild.children}" var="pIGrandChild">
-                        		<li id="p-${pIGrandChild.id}"><g:link controller="page" action="edit" id="${pIGrandChild.id}">${pIGrandChild.h1}</g:link></li>
+                        		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li id="p-${pIGrandChild.id}"><g:link controller="page" action="edit" id="${pIGrandChild.id}">${pIGrandChild.h1}</g:link></li></g:if>
                         	</g:each>
                         	</ul>
                         </g:if>

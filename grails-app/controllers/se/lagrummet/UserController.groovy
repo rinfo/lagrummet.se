@@ -4,6 +4,7 @@ import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 class UserController {
+	def springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -48,7 +49,8 @@ class UserController {
     }
 
     def edit = {
-        def userInstance = User.get(params.id)
+//        def userInstance = (params.id) ? User.get(params.id) : User.get(springSecurityService.principal.id)
+		def userInstance = User.get(params.id)
         if (!userInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
             redirect(action: "list")
@@ -80,7 +82,7 @@ class UserController {
 				SecUserSecRole.removeAll(userInstance)
 				SecUserSecRole.create(userInstance, role, true)
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.fullName])}"
-                redirect(action: "show", id: userInstance.id)
+                redirect(action: "edit", id: userInstance.id)
             }
             else {
                 render(view: "edit", model: [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
