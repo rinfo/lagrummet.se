@@ -13,7 +13,8 @@ class User extends SecUser {
 	}
 	
     static constraints = {
+		fullName blank:false
 		email email:true, blank:true, nullable:true
-		department blank:true, nullable:true
+		department blank:false
     }
 }

@@ -18,6 +18,7 @@
             <div class="errors">
                 <g:renderErrors bean="${userInstance}" as="list" />
             </div>
+            <br/>
             </g:hasErrors>
             <g:form action="save" >
                 <g:render template="userEditForm" />

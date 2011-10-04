@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="body">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+            <h1><g:message code="user.label" /></h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -40,7 +40,7 @@
                             
                             <td>${userInstance.authorities*.name.join(',')}</td>
                         
-                            <td><g:formatBoolean boolean="${userInstance.enabled}" /></td>
+                            <td><g:formatBoolean boolean="${userInstance.enabled}" true="${message(code:'user.active.true', default:'True') }" false="${message(code:'user.active.false', default:'False') }" /></td>
                             
                             <td><g:formatDate date="${userInstance.dateCreated}" /></td>
                         
