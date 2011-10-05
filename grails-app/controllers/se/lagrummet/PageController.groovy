@@ -53,7 +53,17 @@ class PageController {
 
         def pageInstance = new Page(params)
 		
-        if (pageInstance.save(flush: true)) {
+		def instanceToSave
+		if (pageInstance.parent) {
+			pageInstance.parent.addToChildren(pageInstance)
+			instanceToSave = pageInstance.parent
+		} else {
+			instanceToSave = pageInstance
+		}
+		
+        if (instanceToSave.save(flush: true)) {
+			
+			
 			if (params.ajax) {
 				def response = [success: "true", pageInstance: pageInstance]
 				render response as JSON
@@ -126,12 +136,27 @@ class PageController {
     def show = {
 		def url = (params.permalink) ? params.permalink.tokenize("/") : ["home"]
 		def permalink = url[url.size()-1]
-
-		def page = Page.withCriteria(uniqueResult:true) {
-			eq("permalink", permalink)
-			eq("status", "published")
-			le('publishStart', new Date())
-			maxResults(1)
+		
+		
+		def page
+		if (url.size() < 2) {
+			page = Page.withCriteria(uniqueResult:true) {
+				eq("permalink", permalink)
+				eq("status", "published")
+				le('publishStart', new Date())
+				maxResults(1)
+			}
+		} else {
+			def parentPermalink = (url[url.size()-2])
+			page = Page.withCriteria(uniqueResult:true) {
+				eq("permalink", permalink)
+				parent {
+					eq("permalink", parentPermalink)
+				}
+				eq("status", "published")
+				le('publishStart', new Date())
+				maxResults(1)
+			}
 		}
 
 		if(page) {

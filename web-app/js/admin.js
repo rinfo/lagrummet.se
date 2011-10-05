@@ -90,7 +90,7 @@ jQuery(function($) {
         }, "json");
 	}).bind("rename_node.jstree", function (event, data) {
 		var node = data.args[0];
-		var title = $(node).find("a").text();
+		var title = $(node).find("a").text().trim();
 		var permalink = title.replace(" ", "-").toLowerCase();
 		
 		$.post(serverUrl+"admin/page/save"+"?ajax=true", {"title": title, "h1": title, permalink: permalink, parentId: newNodeParentId}, function(data) {
