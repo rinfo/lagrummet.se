@@ -17,7 +17,7 @@ class PageController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [pageInstanceList: Page.list(params), pageInstanceTotal: Page.count(), pageTreeList: Page.findAllByStatusNot("autoSave")]
+        [pageInstanceList: Page.list(params), pageInstanceTotal: Page.count()]
     }
 	
 	@Secured(['IS_AUTHENTICATED_FULLY'])
@@ -33,7 +33,7 @@ class PageController {
 			total = searchResult.total
 		}
 
-		render (view: 'list', model: [pageInstanceList: result, pageInstanceTotal: total, searchResult: searchResult, pageTreeList: Page.findAllByStatusNot("autoSave")])
+		render (view: 'list', model: [pageInstanceList: result, pageInstanceTotal: total, searchResult: searchResult])
 	}
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
@@ -41,7 +41,7 @@ class PageController {
         def pageInstance = new Page()
         pageInstance.properties = params
 		pageInstance.publishStart = new Date()
-        return [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
+        return [pageInstance: pageInstance]
     }
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
@@ -59,7 +59,8 @@ class PageController {
 				render response as JSON
 			} else {
 				flash.message = "${message(code: 'page.created.message', args: [pageInstance.title])}"
-				render(view: "edit", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
+//				render(view: "edit", model: [pageInstance: pageInstance])
+				redirect(action: "edit", id: pageInstance.id)
 			}
         }
         else {
@@ -67,7 +68,7 @@ class PageController {
 				def response = [error: pageInstance.errors]
 				render response as JSON
 			} else {
-            	render(view: "create", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
+            	render(view: "create", model: [pageInstance: pageInstance])
 			}
         }
     }
@@ -173,7 +174,7 @@ class PageController {
             redirect(action: "list")
         }
         else {
-            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave"), pageTreeList: Page.findAllByStatusNot("autoSave")]
+            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave")]
         }
     }
 
@@ -185,7 +186,7 @@ class PageController {
                 def version = Long.valueOf(params.version)
                 if (pageInstance.version > version) {
                     pageInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'page.label', default: 'Page')] as Object[], "Another user has updated this Page while you were editing")
-                    render(view: "edit", model: [pageInstance: pageInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
+                    render(view: "edit", model: [pageInstance: pageInstance])
                     return
                 }
             }

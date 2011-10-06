@@ -48,7 +48,7 @@ class SitePropertiesController {
             redirect(controller: "admin")
         }
         else {
-            return [sitePropertiesInstance: sitePropertiesInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
+            return [sitePropertiesInstance: sitePropertiesInstance]
         }
     }
 
@@ -70,7 +70,7 @@ class SitePropertiesController {
                 redirect(action: "edit", id: sitePropertiesInstance.id)
             }
             else {
-                render(view: "edit", model: [sitePropertiesInstance: sitePropertiesInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
+                render(view: "edit", model: [sitePropertiesInstance: sitePropertiesInstance])
             }
         }
         else {

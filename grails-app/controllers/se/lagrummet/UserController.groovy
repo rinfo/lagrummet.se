@@ -14,13 +14,13 @@ class UserController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [userInstanceList: User.list(params), userInstanceTotal: User.count(), pageTreeList: Page.findAllByStatusNot("autoSave")]
+        [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
 
     def create = {
         def userInstance = new User()
         userInstance.properties = params
-        return [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
+        return [userInstance: userInstance]
     }
 
     def save = {
@@ -44,7 +44,7 @@ class UserController {
             redirect(action: "list")
         }
         else {
-            [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
+            [userInstance: userInstance]
         }
     }
 
@@ -56,7 +56,7 @@ class UserController {
             redirect(action: "list")
         }
         else {
-            return [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")]
+            return [userInstance: userInstance]
         }
     }
 
@@ -69,7 +69,7 @@ class UserController {
                 if (userInstance.version > version) {
                     
                     userInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'user.label', default: 'User')] as Object[], "Another user has updated this User while you were editing")
-                    render(view: "edit", model: [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
+                    render(view: "edit", model: [userInstance: userInstance])
                     return
                 }
             }
@@ -85,7 +85,7 @@ class UserController {
                 redirect(action: "edit", id: userInstance.id)
             }
             else {
-                render(view: "edit", model: [userInstance: userInstance, pageTreeList: Page.findAllByStatusNot("autoSave")])
+                render(view: "edit", model: [userInstance: userInstance])
             }
         }
         else {
