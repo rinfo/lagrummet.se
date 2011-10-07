@@ -14,7 +14,11 @@ class UrlMappings {
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
 
-				
+		name rinfo: "/rinfo/$docPath**" {
+			controller = "rinfo"
+			action = "show"
+		}	
+			
 		name page: "/$permalink**" {
 			constraints {
 				permalink(matches:/.+/, blank:false)

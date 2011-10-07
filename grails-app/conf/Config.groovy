@@ -113,3 +113,6 @@ lcms {
 	googleAnalytics.webPropertyId = ""
 	upload.dir = "uploads/"
 }
+
+lagrummet.service.baseurl="http://service.demo.lagrummet.se"
+lagrummet.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
