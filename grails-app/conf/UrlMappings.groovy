@@ -14,7 +14,7 @@ class UrlMappings {
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
 
-		name rinfo: "/rinfo/$docPath**" {
+		name rinfo: "/view/$docPath**" {
 			controller = "rinfo"
 			action = "show"
 		}	
