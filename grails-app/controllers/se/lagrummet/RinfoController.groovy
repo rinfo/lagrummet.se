@@ -18,12 +18,16 @@ class RinfoController {
 		
 		def docEntry = rinfoService.getAtomEntry(docPath)
 		
-		def docContent
-		if(docEntry?.link[1]?.@type == "text/html") {
-			docContent = rinfoService.getHtmlContent(docPath)
+		def docContent = null
+		docEntry.link.each{ link ->
+			if(link?.@type == "text/html") {
+				docContent = rinfoService.getHtmlContent(docPath)
+			}
 		}
-		println docEntry.link.@href
 		
-		render(view:'show', model: [page: page, docPath: params.docPath, docInfo: docInfo, content: docContent, docEntry: docEntry])
+		render(view:'show', model: [page: page, 
+									docInfo: docInfo, 
+									content: docContent, 
+									docEntry: docEntry])
 	}
 }
