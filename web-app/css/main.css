@@ -57,6 +57,7 @@ h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
     font-family: 'Century Gothic', sans-serif;
     clear: both;
     text-decoration: none;
+    line-height: 110%;
 }
 
 h1 {
