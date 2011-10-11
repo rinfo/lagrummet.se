@@ -114,5 +114,6 @@ lcms {
 	upload.dir = "uploads/"
 }
 
-lagrummet.service.baseurl="http://service.demo.lagrummet.se"
-lagrummet.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
+lagrummet.rdl.service.baseurl="http://service.demo.lagrummet.se"
+lagrummet.rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
+lagrummet.local.rinfo.view="${grails.serverURL}/rinfo/"

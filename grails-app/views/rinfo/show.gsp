@@ -25,7 +25,7 @@
 				<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf')}">
 					<g:each in="${docEntry.link}" var="link">
 						<g:if test="${link.@type == 'application/pdf'}">
-							<a href="${grailsApplication.config.lagrummet.rinfo.baseurl + link.@href}">${docInfo.title}</a>
+							<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}">${docInfo.title}</a>
 						</g:if>
 					</g:each>
 				</g:if>
@@ -38,7 +38,7 @@
 			<tr><td>Förarbeten: </td><td>
 				<g:each in="${docInfo.forarbete}" var="forarbete">
 					<g:if test="${forarbete.identifier && forarbete.iri}">
-						<a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.grails.serverURL+'/view/')}">${forarbete.identifier}</a><br/>
+						<a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${forarbete.identifier}</a><br/>
 					</g:if>
 					<g:elseif test="${forarbete.identifier}">
 						${forarbete.identifier}
