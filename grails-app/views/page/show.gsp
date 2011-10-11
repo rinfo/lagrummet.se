@@ -4,25 +4,26 @@
 	<meta name="layout" content="main" />
 </head>
 <body>
-<header>
+<nav id="primaryNavigation">
 	<div id="logo">
-		${siteProps.siteTitle}
+		<a href="${resource()}">${siteProps.siteTitle}</a>
 	</div>
-	<nav class="sitelinks">
+	${siteProps.primaryNavigation}
+</nav>
+<header id="siteHeader">
+	<nav id="sitelinks">
 		${siteProps.headerNavigation}
 	</nav>
-	<nav class="breadcrumbs">
+	<nav id="breadcrumbs">
 		<g:breadcrumbs parent="${page.parent}" />
 	</nav>
 </header>
 <div id="content">
-	<nav id="primaryNavigation">${siteProps.primaryNavigation}</nav>
     <article id="editorial">
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
-		
 	</article>
 </div>
-<footer>${siteProps.footer}</footer>
+<footer id="siteFooter">${siteProps.footer}</footer>
 </body>
 </html>

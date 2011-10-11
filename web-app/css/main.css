@@ -21,11 +21,6 @@ header, section, footer, aside, nav, article, figure, legend {
 html {
 	background-color: #fff;
 	margin: 0;
-	/*background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F4FCFF), to(#f5f5f5));
-	background: -webkit-linear-gradient(top, #F4FCFF, #f5f5f5);
-	background: -moz-linear-gradient(top, #F4FCFF, #f5f5f5);
-	background: -ms-linear-gradient(top, #F4FCFF, #f5f5f5);
-	background: -o-linear-gradient(top, #F4FCFF, #f5f5f5);*/
 }
 
 body {
@@ -35,6 +30,7 @@ body {
     font: 12px verdana, arial, helvetica, sans-serif;
     line-height: 140%;
     font-size: 12px;
+	background-image: url(../images/top_ribbon.png) no-repeat;
 }
 
 a {
@@ -137,6 +133,14 @@ body {
     /*padding: 55px 10px 45px 10px;*/
 }
 
+#logo a, #logo a:visited {
+	color: #873960;
+}
+
+#logo a .hlight, #logo a .hlight {
+    color: #585858;
+}
+
 #sitelinks {
     position: absolute;
     top: 0px;
@@ -162,8 +166,13 @@ body {
 
 #breadcrumbs {
 	clear: both;
-	margin: 20px 0;
+	margin: 2em 0 1em 0;
 	font: 1.4em 'Century Gothic', sans-serif;
+}
+
+#siteFooter {
+    width: 100%;
+    clear: both;
 }
 
 /* =CONTENT WRAPPER */
@@ -185,7 +194,7 @@ body {
 
 #primaryNavigation ul li {
 	margin: 10px;
-	border-bottom: 1px solid #e7e7e7;
+	border-bottom: 2px groove #fff;
 }
 
 #primaryNavigation ul li a, #primaryNavigation ul li a:visited {
@@ -202,6 +211,7 @@ body {
 
 #primaryNavigation ul li.heading {
 	font: 1.4em 'Century Gothic', sans-serif;
+	font-weight: bold;
 	margin: 20px 0 0 0;
 	padding: 10px;
 }
@@ -225,17 +235,13 @@ body {
 /* =ARTICLE in content */
 body article {
     position: relative;
-    width: 700px;
+    width: 720px;
     margin: 0 0 0 40px;
     background-color: #fff;
     float: left;
 	/*-webkit-box-shadow: 2px 2px 6px #ccc;
 	-moz-box-shadow: 1px 1px 6px #ccc;
 	box-shadow: 2px 2px 6px #ccc;*/
-}
-
-body article > header {
-    margin: 0 0 20px 0;
 }
 
 body article ul {
@@ -305,11 +311,25 @@ body > article ul.search-results li p {
 	width: 500px;
 }
 
+#rinfo table {
+	border: none;
+}
+
+#rinfo table td.label {
+	font-weight: bold;
+	padding-left: 0;
+}
+
+#rinfo table ul li {
+	margin: 0;
+}
+
 #rinfoSidebar {
-	width: 180px;
+	width: 190px;
 	position: relative;
 	float: left;
 	margin-left: 20px;
+	padding: 5px;
 	background-color: #fcfcfc;
 }
 

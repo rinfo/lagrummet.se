@@ -6,7 +6,7 @@
 <body>
 <nav id="primaryNavigation">
 	<div id="logo">
-		${siteProps.siteTitle}
+		<a href="${resource()}">${siteProps.siteTitle}</a>
 	</div>
 	${siteProps.primaryNavigation}
 </nav>
@@ -20,14 +20,14 @@
 </header>
 <div id="content">
     <article id="rinfo">
-    	<h1>${docInfo.title}</h1>
+    	<h1>${docInfo.title}</h1>    	
 		<table>
 		<tr>
-			<td colspan="2">Titel: 
+			<td class="label">Titel:</td><td>
 				<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf')}">
 					<g:each in="${docEntry.link}" var="link">
 						<g:if test="${link.@type == 'application/pdf'}">
-							<a href="${grailsApplication.config.lagrummet.rinfo.baseurl + link.@href}">${docInfo.title}</a>
+							<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}">${docInfo.title}</a>
 						</g:if>
 					</g:each>
 				</g:if>
@@ -35,18 +35,22 @@
 					${docInfo.title}
 				</g:else>
 			</td></tr>
-			<tr><td>SFS-nummer:</td><td> ${docInfo.identifier}</td></tr>
-			<tr><td>Ikraft:</td><td> ${docInfo.ikrafttradandedatum}</td></tr>
-			<tr><td>Förarbeten: </td><td>
-				<g:each in="${docInfo.forarbete}" var="forarbete">
-					<g:if test="${forarbete.identifier && forarbete.iri}">
-						<a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.grails.local.rinfo.view')}">${forarbete.identifier}</a><br/>
-					</g:if>
-					<g:elseif test="${forarbete.identifier}">
-						${forarbete.identifier}
-					</g:elseif>
-				</g:each>
-			</td></tr>
+			<tr><td class="label">SFS-nummer:</td><td> ${docInfo.identifier}</td></tr>
+			<tr><td class="label">Ikraft:</td><td> ${docInfo.ikrafttradandedatum}</td></tr>
+			<g:if test="${docInfo.forarbete}">
+				<tr><td class="label">Förarbeten: </td><td>
+					<ul>
+					<g:each in="${docInfo.forarbete}" var="forarbete">
+						<g:if test="${forarbete.identifier && forarbete.iri}">
+							<li><a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${forarbete.identifier}</a></li>
+						</g:if>
+						<g:elseif test="${forarbete.identifier}">
+							${forarbete.identifier}
+						</g:elseif>
+					</g:each>
+					</ul>
+				</td></tr>
+			</g:if>
 		</table>
 		<g:if test="${content}">
 			<hr/>
@@ -63,32 +67,36 @@
 				<li>${item.title}</li>
 				<li class="label">SFS-nummer</li>
 				<li>${item.identifier}</td></tr>
-				<li class="label">I kraft</li>
+				<li class="label">Ikraft</li>
 				<li>${item.ikrafttradandedatum}</li>
 			</li>
 			</g:each>
 		</g:if>
 		
-		<h3>Konsolideringsunderlag för</h3>
-		<g:each in="${docInfo.'@rev'.konsolideringsunderlag}" var="item">
-		<ul>
-			<li class="label">Titel</td><li>${item.title}</li>
-			<li class="label">SFS-nummer</td><li>${item.identifier}</li>
-			<li class="label">Utfärdad</td><li>${item.issued}</li>
-		</ul>
-		</g:each>
+		<g:if test="${docInfo.'@rev'.konsolideringsunderlag}">
+			<h3>Konsolideringsunderlag för</h3>
+			<g:each in="${docInfo.'@rev'.konsolideringsunderlag}" var="item">
+			<ul>
+				<li class="label">Titel</td><li>${item.title}</li>
+				<li class="label">SFS-nummer</td><li>${item.identifier}</li>
+				<li class="label">Utfärdad</td><li>${item.issued}</li>
+			</ul>
+			</g:each>
+		</g:if>
 		
-		<h3>Konsoliderad av</h3>
-		<g:each in="${docInfo.'@rev'.konsoliderar}" var="item">
-		<ul>
-			<li class="label">Titel</td><li>${item.title}</li>
-			<li class="label">SFS-nummer</td><li>${item.identifier}</li>
-			<li class="label">Utfärdad</td><li>${item.issued}</li>
-		</ul>
-		</g:each>
+		<g:if test="${docInfo.'@rev'.konsolideringsunderlag}">
+			<h3>Konsoliderad av</h3>
+			<g:each in="${docInfo.'@rev'.konsoliderar}" var="item">
+			<ul>
+				<li class="label">Titel</td><li>${item.title}</li>
+				<li class="label">SFS-nummer</td><li>${item.identifier}</li>
+				<li class="label">Utfärdad</td><li>${item.issued}</li>
+			</ul>
+			</g:each>
+		</g:if>
 	</aside>
 </div>
-<footer>${siteProps.footer}</footer>
+<footer id="siteFooter">${siteProps.footer}</footer>
 
 </body>
 </html>
