@@ -19,7 +19,7 @@ header, section, footer, aside, nav, article, figure, legend {
 
 /* lagrummet.se */
 html {
-	background-color: #fcfcfc;
+	background-color: #fff;
 	margin: 0;
 	/*background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F4FCFF), to(#f5f5f5));
 	background: -webkit-linear-gradient(top, #F4FCFF, #f5f5f5);
@@ -32,7 +32,6 @@ body {
     width: 100%;
     padding: 0 1em 0 1em;
     position: relative;
-    color: #383838;
     font: 12px verdana, arial, helvetica, sans-serif;
     line-height: 140%;
     font-size: 12px;
@@ -61,15 +60,15 @@ h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
 }
 
 h1 {
-    font-size: 3.2em;
-}
-
-h2 {
     font-size: 2em;
 }
 
-h3 {
+h2 {
     font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.4em;
 }
 
 ul {
@@ -105,52 +104,64 @@ th {
     padding: 2px 6px;
 }
 
-body > * {
+body {
     position: relative;
     width: 980px;
     margin: 0 auto 0 auto;
     padding: 0;
 }
 
+/*body > * {
+    position: relative;
+    width: 980px;
+    margin: 0 auto 0 auto;
+    padding: 0;
+}*/
+
 /* =HEADER */
-body > header {
+#siteHeader {
+	float: left;
+	width: 720px;
+	overflow: auto;
+	position: relative;
+	margin-left: 40px;
 }
 
 #logo {
     position: relative;
     margin-top: 20px;
+    padding: 0 10px;
     display: block;
     color: #222;
     font: 1.6em 'Century Gothic', sans-serif;
     /*padding: 55px 10px 45px 10px;*/
 }
 
-body > header > nav.sitelinks {
+#sitelinks {
     position: absolute;
     top: 0px;
     right: 0px;
 }
 
-body > header > nav.sitelinks ul li {
+#sitelinks ul li {
 	float: left;
 	margin: 5px 0 0 5px;
 	padding-left: 10px;
 	border-left: 1px solid #006383;
 }
 
-body header nav.sitelinks ul li:first-child {
+#sitelinks ul li:first-child {
 	border-left: none;
 }
 
-body > header > nav.sitelinks a, body > header > nav.sitelinks a:visited {
+#sitelinks a, #sitelinks a:visited {
     font: 1em 'Century Gothic', sans-serif;
     color: #006383;
     margin-right: 10px;
 }
 
-body > header > nav.breadcrumbs {
+#breadcrumbs {
 	clear: both;
-	width: 100%;
 	margin: 20px 0;
 	font: 1.4em 'Century Gothic', sans-serif;
 }
@@ -164,16 +175,16 @@ body > header > nav.breadcrumbs {
 	margin: 0;
 	display: block;
 	min-height: 250px;
-	background-color: #fff;
-	-webkit-box-shadow: 2px 2px 6px #ccc;
+	background-color: #fcfcfc;
+	/*-webkit-box-shadow: 2px 2px 6px #ccc;
 	-moz-box-shadow: 1px 1px 6px #ccc;
 	box-shadow: 2px 2px 6px #ccc;
 	-moz-border-radius: 10px;
-	border-radius: 10px;
+	border-radius: 10px;*/
 }
 
 #primaryNavigation ul li {
-	padding: 10px 5px;
+	margin: 10px;
 	border-bottom: 1px solid #e7e7e7;
 }
 
@@ -191,7 +202,8 @@ body > header > nav.breadcrumbs {
 
 #primaryNavigation ul li.heading {
 	font: 1.4em 'Century Gothic', sans-serif;
-	margin-top: 20px;
+	margin: 20px 0 0 0;
+	padding: 10px;
 }
 
 #primaryNavigation ul.rinfo li.heading {
@@ -215,12 +227,11 @@ body article {
     position: relative;
     width: 700px;
     margin: 0 0 0 40px;
-    padding: 10px;
     background-color: #fff;
     float: left;
-	-webkit-box-shadow: 2px 2px 6px #ccc;
+	/*-webkit-box-shadow: 2px 2px 6px #ccc;
 	-moz-box-shadow: 1px 1px 6px #ccc;
-	box-shadow: 2px 2px 6px #ccc;
+	box-shadow: 2px 2px 6px #ccc;*/
 }
 
 body article > header {
@@ -293,8 +304,28 @@ body > article ul.search-results li p {
 #rinfo {
 	width: 500px;
 }
+
 #rinfoSidebar {
-	width: 200px;
+	width: 180px;
 	position: relative;
 	float: left;
+	margin-left: 20px;
+	background-color: #fcfcfc;
+}
+
+#rinfoSidebar ul:first-child {
+	margin-top: 0;
+}
+
+#rinfoSidebar ul {
+	margin-top: 20px;
+}
+
+#rinfoSidebar ul li {
+	padding: 0;
+}
+
+#rinfoSidebar ul li.label{
+	font-weight: bold;
+	padding: 0.5em 0 0 0;
 }

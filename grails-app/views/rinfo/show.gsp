@@ -4,21 +4,23 @@
 	<meta name="layout" content="main" />
 </head>
 <body>
-<header>
+<nav id="primaryNavigation">
 	<div id="logo">
 		${siteProps.siteTitle}
 	</div>
-	<nav class="sitelinks">
+	${siteProps.primaryNavigation}
+</nav>
+<header id="siteHeader">
+	<nav id="sitelinks">
 		${siteProps.headerNavigation}
 	</nav>
-	<nav class="breadcrumbs">
+	<nav id="breadcrumbs">
 		<g:breadcrumbs parent="${page.parent}" />
 	</nav>
 </header>
 <div id="content">
-	<nav id="primaryNavigation">${siteProps.primaryNavigation}</nav>
     <article id="rinfo">
-		
+    	<h1>${docInfo.title}</h1>
 		<table>
 		<tr>
 			<td colspan="2">Titel: 
@@ -38,7 +40,7 @@
 			<tr><td>Förarbeten: </td><td>
 				<g:each in="${docInfo.forarbete}" var="forarbete">
 					<g:if test="${forarbete.identifier && forarbete.iri}">
-						<a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.grails.serverURL+'/view/')}">${forarbete.identifier}</a><br/>
+						<a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.grails.local.rinfo.view')}">${forarbete.identifier}</a><br/>
 					</g:if>
 					<g:elseif test="${forarbete.identifier}">
 						${forarbete.identifier}
@@ -50,39 +52,39 @@
 			<hr/>
 			<div>${content }</div>
 		</g:if>
-		
 	</article>
+	
 	<aside id="rinfoSidebar">
 		<g:if test="${docInfo.'@rev'.andrar}">
-			Ändrar:
+			<h3>Ändrar</h3>
 			<g:each in="${docInfo.'@rev'.andrar}" var="item">
-			<table>
-				<tr><td>Titel:</td><td>${item.title}</td></tr>
-				<tr><td>SFS-nummer:</td><td>${item.identifier}</td></tr>
-				<tr><td>Ikraft:</td><td>${item.ikrafttradandedatum}</td></tr>
-				<tr><td>Förarbeten:</td><td></td></tr>
-			</table>
+			<ul>
+				<li class="label">Titel</li>
+				<li>${item.title}</li>
+				<li class="label">SFS-nummer</li>
+				<li>${item.identifier}</td></tr>
+				<li class="label">I kraft</li>
+				<li>${item.ikrafttradandedatum}</li>
+			</li>
 			</g:each>
 		</g:if>
 		
-		Konsolideringsunderlag för:
+		<h3>Konsolideringsunderlag för</h3>
 		<g:each in="${docInfo.'@rev'.konsolideringsunderlag}" var="item">
-		<table>
-			<tr><td>Titel:</td><td>${item.title}</td></tr>
-			<tr><td>SFS-nummer:</td><td>${item.identifier}</td></tr>
-			<tr><td>Utfärdad:</td><td>${item.issued}</td></tr>
-			<tr><td>Förarbeten:</td><td></td></tr>
-		</table>
+		<ul>
+			<li class="label">Titel</td><li>${item.title}</li>
+			<li class="label">SFS-nummer</td><li>${item.identifier}</li>
+			<li class="label">Utfärdad</td><li>${item.issued}</li>
+		</ul>
 		</g:each>
 		
-		Konsoliderad av:
+		<h3>Konsoliderad av</h3>
 		<g:each in="${docInfo.'@rev'.konsoliderar}" var="item">
-		<table>
-			<tr><td>Titel:</td><td>${item.title}</td></tr>
-			<tr><td>SFS-nummer:</td><td>${item.identifier}</td></tr>
-			<tr><td>Utfärdad:</td><td>${item.issued}</td></tr>
-			<tr><td>Förarbeten:</td><td></td></tr>
-		</table>
+		<ul>
+			<li class="label">Titel</td><li>${item.title}</li>
+			<li class="label">SFS-nummer</td><li>${item.identifier}</li>
+			<li class="label">Utfärdad</td><li>${item.issued}</li>
+		</ul>
 		</g:each>
 	</aside>
 </div>

@@ -17,7 +17,7 @@
 </header>
 <div id="content">
 	<nav id="primaryNavigation">${siteProps.primaryNavigation}</nav>
-    <article>
+    <article id="editorial">
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
 		
