@@ -288,3 +288,13 @@ body > article ul.search-results li p {
     float: left;
     margin: 0 5px 0 5px;
 }
+
+/* ARTICLE in rinfo */
+#rinfo {
+	width: 500px;
+}
+#rinfoSidebar {
+	width: 200px;
+	position: relative;
+	float: left;
+}
