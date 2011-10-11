@@ -4,6 +4,7 @@ import grails.converters.XML
 import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
+import groovyx.net.http.ParserRegistry
 import net.sf.json.JSONObject
 
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
@@ -45,10 +46,9 @@ class RinfoService {
 		httpDocContent.request(Method.GET, "text/html") {
 			uri.path = docPath
 			response.success = {resp, reader ->
-				docContent = reader.text
-//				println ParserRegistry.getCharset(resp)
-//				println ParserRegistry.getContentType(resp)
-////				println html.text
+				def original = reader.text
+				byte[] utf8bytes = original.getBytes(ParserRegistry.getCharset(resp))
+				docContent = new String(utf8bytes, "UTF-8")
 			}
 		}
 		return docContent
