@@ -12,11 +12,12 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 class RinfoService {
 
     static transactional = false
+	
+	def http = new HTTPBuilder()
 
     public JSONObject getDocumentMetaData(String docPath) {
-		def httpDocInfo = new HTTPBuilder(ConfigurationHolder.config.lagrummet.rdl.service.baseurl)
 		def docInfo = ""
-		httpDocInfo.request(Method.GET, ContentType.JSON) {
+		http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
 			uri.path = docPath + "/data"
 			response.success = {resp, json ->
 				docInfo = json
@@ -26,10 +27,9 @@ class RinfoService {
 	}
 	
 	public getAtomEntry(String docPath) {
-		def http = new HTTPBuilder(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl)
 		def atomEntry
 		http.parser.'application/atom+xml' = http.parser.'text/plain'
-		http.request(Method.GET, "application/atom+xml"  ) {
+		http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "application/atom+xml"  ) {
 			uri.path = docPath + "/entry"
 			response.success = {resp, reader ->
 				atomEntry = XML.parse(reader.text)
@@ -40,10 +40,8 @@ class RinfoService {
 	
 	public String getHtmlContent(String docPath) {
 		def docContent = ""
-		
-		def httpDocContent = new HTTPBuilder(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl)
-		httpDocContent.parser.'text/html' = httpDocContent.parser.'text/plain'
-		httpDocContent.request(Method.GET, "text/html") {
+		http.parser.'text/html' = http.parser.'text/plain'
+		http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "text/html") {
 			uri.path = docPath
 			response.success = {resp, reader ->
 				def original = reader.text
