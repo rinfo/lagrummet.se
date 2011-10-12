@@ -24,13 +24,15 @@ html {
 }
 
 body {
-    width: 100%;
-    padding: 0 1em 0 1em;
+    position: relative;
+    width: 980px;
+    margin: 0 auto 0 auto;
+    padding: 5px 0 0 0;
     position: relative;
     font: 12px verdana, arial, helvetica, sans-serif;
     line-height: 140%;
     font-size: 12px;
-	background-image: url(../images/top_ribbon.png) no-repeat;
+	background: url(../images/top_ribbon.png) no-repeat;
 }
 
 a {
@@ -47,7 +49,7 @@ a:hover {
 }
 
 h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
-    margin: 0.5em 0 0.5em 0;
+    margin: 0.75em 0 0.25em 0;
     color: #006383;
     font-family: 'Century Gothic', sans-serif;
     clear: both;
@@ -56,15 +58,15 @@ h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
 }
 
 h1 {
-    font-size: 2em;
-}
-
-h2 {
     font-size: 1.6em;
 }
 
-h3 {
+h2 {
     font-size: 1.4em;
+}
+
+h3 {
+    font-size: 1.2em;
 }
 
 ul {
@@ -98,13 +100,6 @@ th {
     font-size: 1.2em;
     line-height: 17px;
     padding: 2px 6px;
-}
-
-body {
-    position: relative;
-    width: 980px;
-    margin: 0 auto 0 auto;
-    padding: 0;
 }
 
 /*body > * {
@@ -331,14 +326,15 @@ body > article ul.search-results li p {
 	margin-left: 20px;
 	padding: 5px;
 	background-color: #fcfcfc;
-}
-
-#rinfoSidebar ul:first-child {
-	margin-top: 0;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f2), to(#fff));
+	background-image: -webkit-linear-gradient(top, #f2f2f2, #fff);
+	background-image:    -moz-linear-gradient(top, #f2f2f2, #fff);
+	background-image:     -ms-linear-gradient(top, #f2f2f2, #fff);
+	background-image:      -o-linear-gradient(top, #f2f2f2, #fff);
 }
 
 #rinfoSidebar ul {
-	margin-top: 20px;
+	margin-bottom: 2em;
 }
 
 #rinfoSidebar ul li {
