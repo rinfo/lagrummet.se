@@ -15,7 +15,7 @@ class RinfoController {
 		def docPath = "/" + params.docPath
 
 		def docInfo = rinfoService.getDocumentMetaData(docPath)
-		
+
 		def docEntry = rinfoService.getAtomEntry(docPath)
 		
 		def docContent = null
