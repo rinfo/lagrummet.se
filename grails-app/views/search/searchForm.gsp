@@ -33,11 +33,26 @@
 		<g:if test="${searchResult?.totalResults}">
 			Total results: ${searchResult.totalResults}
 			
-			<li>
-			<g:each in="${searchResult.items}" var="item">
-				<ul><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></ul>
+			Rättsfall:<br/>
+			<g:each in="${searchResult.items['Rattsfall']}" var="item">
+				item: ${item }
 			</g:each>
-			</li>
+			<br/>
+			Propositioner:<br/>
+			<g:each in="${searchResult.items['Propositioner']}" var="item">
+				item: ${item }
+			</g:each>
+			<br/>
+			Lagar:<br/>
+			<g:each in="${searchResult.items['Lagar']}" var="item">
+				item: ${item }
+			</g:each>
+
+			<br/>okänd:<br/>
+			<g:each in="${searchResult.items['Okand']}" var="item">
+				item: ${item }
+			</g:each>
+			
 		</g:if>
 	</article>
 </div>

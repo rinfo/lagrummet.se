@@ -7,21 +7,15 @@ import groovyx.net.http.Method
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class SearchController {
+	
+	def rinfoService
 
     def index = {
 		
 		def searchResult = null
 		
 		if(params.query) {
-			def http = new HTTPBuilder()
-			
-			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
-				uri.path = "/-/publ"
-				uri.query = [q: params.query] 	
-				response.success = {resp, json ->
-					searchResult = json
-				}
-			}
+			searchResult = rinfoService.plainTextSearch(params.query)
 		}
 		render(view: 'searchForm', model: [query: params.query, searchResult: searchResult])
 	}

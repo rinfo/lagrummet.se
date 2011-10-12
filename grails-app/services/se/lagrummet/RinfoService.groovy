@@ -51,4 +51,42 @@ class RinfoService {
 		}
 		return docContent
 	}
+	
+	public JSONObject plainTextSearch(String query) {
+		def searchResult
+		http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
+			uri.path = "/-/publ"
+			uri.query = [q: query]
+			response.success = {resp, json ->
+				searchResult = json
+			}
+		}
+		orderSearchResultByType(searchResult)
+		return searchResult
+	}
+	
+	public void orderSearchResultByType(JSONObject searchResult) {
+		//Lagar, Rattsfall, Propositioner, Utredningar, Ovrigt
+		def typeMap = [:]
+		searchResult.items.each{ item ->
+			def type = item.type
+			def category = getCategoryForType(type)
+			if(!typeMap[(category)]) {
+				typeMap[(category)] = []
+			}
+			typeMap[(category)].add(item)
+		}
+		searchResult.remove('items')
+		searchResult.put('items', typeMap)
+	}
+	
+	public String getCategoryForType(String type) {
+		def typeToCategory = [	'Rattsfallsreferat' : 'Rattsfall',
+								'KonsolideradGrundforfattning' : 'Lagar', 
+								'Proposition' : 'Propositioner', 
+								'Utredningsbetankande' : 'Utredningar']
+		def unknown = 'Okand'
+		return typeToCategory[(type)] ?: unknown
+		
+	}
 }
