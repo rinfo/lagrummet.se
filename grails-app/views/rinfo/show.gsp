@@ -17,24 +17,26 @@
 	<nav id="breadcrumbs">
 		<g:breadcrumbs parent="${page.parent}" />
 	</nav>
+	<g:form mapping="search" method="GET" name="search">
+		<div class="input">Vad vill du söka?</div>
+		<div class="input"><g:textField name="query"/></div>
+		<g:submitButton name="searchSubmit" value="Sök"/>
+	</g:form>
 </header>
 <div id="content">
     <article id="rinfo">
     	<h1>${docInfo.title}</h1>    	
 		<table>
-		<tr>
-			<td class="label">Titel:</td><td>
-				<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf')}">
-					<g:each in="${docEntry.link}" var="link">
-						<g:if test="${link.@type == 'application/pdf'}">
-							<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}"><img src="${resource() }/images/pdficon_small.gif" /> ${docInfo.title}</a>
-						</g:if>
-					</g:each>
-				</g:if>
-				<g:else>
-					${docInfo.title}
-				</g:else>
-			</td></tr>
+		<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf')}">
+			<tr>
+				<td class="label">Lagtext:</td><td>
+						<g:each in="${docEntry.link}" var="link">
+							<g:if test="${link.@type == 'application/pdf'}">
+								<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}"><img src="${resource() }/images/pdficon_small.gif" /> ${docInfo.title}</a>
+							</g:if>
+						</g:each>
+				</td></tr>
+			</g:if>
 			<tr><td class="label">SFS-nummer:</td><td> ${docInfo.identifier}</td></tr>
 			<tr><td class="label">Ikraft:</td><td> ${docInfo.ikrafttradandedatum}</td></tr>
 			<g:if test="${docInfo.forarbete}">
@@ -69,7 +71,7 @@
 				<li>${item.identifier}</td></tr>
 				<li class="label">Ikraft</li>
 				<li>${item.ikrafttradandedatum}</li>
-			</li>
+			</ul>
 			</g:each>
 		</g:if>
 		

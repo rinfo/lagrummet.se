@@ -12,5 +12,6 @@
     <body>
     <g:layoutBody />
     <g:javascript library="jquery" plugin="jquery" />
+    <g:javascript library="application" />
     </body>
 </html>
