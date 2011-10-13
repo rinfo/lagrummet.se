@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Sök</title>
+	<title>SÃ¶k</title>
 	<meta name="layout" content="main"/>
 </head>
 <body>
@@ -19,11 +19,11 @@
 	</nav>
 </header>
 <div id="content">
-    <article id="editorial">
+    <article id="searchResults">
 		<header><h1>Soek</h1></header>
 		<g:form mapping="search" method="GET">
 			<g:textField name="query"/>
-			<g:submitButton name="submit" value="Sök"/>
+			<g:submitButton name="submit" value="Sï¿½k"/>
 		</g:form>
 		
 		<g:if test="${query}">
@@ -33,26 +33,22 @@
 		<g:if test="${searchResult?.totalResults}">
 			Total results: ${searchResult.totalResults}
 			
-			Rättsfall:<br/>
-			<g:each in="${searchResult.items['Rattsfall']}" var="item">
-				item: ${item }
-			</g:each>
-			<br/>
-			Propositioner:<br/>
-			<g:each in="${searchResult.items['Propositioner']}" var="item">
-				item: ${item }
-			</g:each>
-			<br/>
-			Lagar:<br/>
-			<g:each in="${searchResult.items['Lagar']}" var="item">
-				item: ${item }
-			</g:each>
 
-			<br/>okänd:<br/>
-			<g:each in="${searchResult.items['Okand']}" var="item">
-				item: ${item }
+			<p><strong>Information frÃ¥n lagrummet.se</strong> <span class="count">(${searchResult.totalResults})</span></p>
+			<ul id="redaktionellt">
+			<g:each in="${searchResult.items}" var="item">
+				<li>
+					<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></p>
+					<g:if test="${item.matches.title.size() > 0}">
+						<p>${item.matches.title[0]} ...</p>
+					</g:if>
+					<g:elseif test="${item.matches.content.size() > 0}">
+						<p>${item.matches.content[0]} ...</p>
+					</g:elseif>
+					<p class="type">${item.identifier}</p></li>
 			</g:each>
-			
+			<li class="showAll"><a href="#">Visa alla trÃ¤ffar (${searchResult?.totalResults})</a></li>
+			</ul>
 		</g:if>
 	</article>
 </div>

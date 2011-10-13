@@ -54,14 +54,15 @@ class RinfoService {
 	
 	public JSONObject plainTextSearch(String query) {
 		def searchResult
-		http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
+		def http1 = new HTTPBuilder()
+		http1.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
 			uri.path = "/-/publ"
 			uri.query = [q: query]
 			response.success = {resp, json ->
 				searchResult = json
 			}
 		}
-		orderSearchResultByType(searchResult)
+//		orderSearchResultByType(searchResult)
 		return searchResult
 	}
 	

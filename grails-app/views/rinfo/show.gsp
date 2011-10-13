@@ -17,28 +17,30 @@
 	<nav id="breadcrumbs">
 		<g:breadcrumbs parent="${page.parent}" />
 	</nav>
+	<g:form mapping="search" method="GET" name="search">
+		<div class="input">Vad vill du sÃ¶ka?</div>
+		<div class="input"><g:textField name="query"/></div>
+		<g:submitButton name="searchSubmit" value="SÃ¶k"/>
+	</g:form>
 </header>
 <div id="content">
     <article id="rinfo">
     	<h1>${docInfo.title}</h1>    	
 		<table>
-		<tr>
-			<td class="label">Titel:</td><td>
-				<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf')}">
-					<g:each in="${docEntry.link}" var="link">
-						<g:if test="${link.@type == 'application/pdf'}">
-							<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}">${docInfo.title}</a>
-						</g:if>
-					</g:each>
-				</g:if>
-				<g:else>
-					${docInfo.title}
-				</g:else>
-			</td></tr>
+		<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf')}">
+			<tr>
+				<td class="label">Lagtext:</td><td>
+						<g:each in="${docEntry.link}" var="link">
+							<g:if test="${link.@type == 'application/pdf'}">
+								<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}"><img src="${resource() }/images/pdficon_small.gif" /> ${docInfo.title}</a>
+							</g:if>
+						</g:each>
+				</td></tr>
+			</g:if>
 			<tr><td class="label">SFS-nummer:</td><td> ${docInfo.identifier}</td></tr>
 			<tr><td class="label">Ikraft:</td><td> ${docInfo.ikrafttradandedatum}</td></tr>
 			<g:if test="${docInfo.forarbete}">
-				<tr><td class="label">Förarbeten: </td><td>
+				<tr><td class="label">FÃ¶rarbeten: </td><td>
 					<ul>
 					<g:each in="${docInfo.forarbete}" var="forarbete">
 						<g:if test="${forarbete.identifier && forarbete.iri}">
@@ -60,7 +62,7 @@
 	
 	<aside id="rinfoSidebar">
 		<g:if test="${docInfo.'@rev'.andrar}">
-			<h3>Ändrar</h3>
+			<h3>Ã„ndrar</h3>
 			<g:each in="${docInfo.'@rev'.andrar}" var="item">
 			<ul>
 				<li class="label">Titel</li>
@@ -69,17 +71,17 @@
 				<li>${item.identifier}</td></tr>
 				<li class="label">Ikraft</li>
 				<li>${item.ikrafttradandedatum}</li>
-			</li>
+			</ul>
 			</g:each>
 		</g:if>
 		
 		<g:if test="${docInfo.'@rev'.konsolideringsunderlag}">
-			<h3>Konsolideringsunderlag för</h3>
+			<h3>Konsolideringsunderlag fÃ¶r</h3>
 			<g:each in="${docInfo.'@rev'.konsolideringsunderlag}" var="item">
 			<ul>
 				<li class="label">Titel</td><li>${item.title}</li>
 				<li class="label">SFS-nummer</td><li>${item.identifier}</li>
-				<li class="label">Utfärdad</td><li>${item.issued}</li>
+				<li class="label">UtfÃ¤rdad</td><li>${item.issued}</li>
 			</ul>
 			</g:each>
 		</g:if>
@@ -90,7 +92,7 @@
 			<ul>
 				<li class="label">Titel</td><li>${item.title}</li>
 				<li class="label">SFS-nummer</td><li>${item.identifier}</li>
-				<li class="label">Utfärdad</td><li>${item.issued}</li>
+				<li class="label">UtfÃ¤rdad</td><li>${item.issued}</li>
 			</ul>
 			</g:each>
 		</g:if>
