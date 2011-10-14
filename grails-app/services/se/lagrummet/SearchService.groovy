@@ -21,12 +21,25 @@ class SearchService {
 				searchResult = json
 			}
 		}
-//		orderSearchResultByType(searchResult)
+		searchResult.items.each { item ->
+			setBestMatch(item)	
+		}
+		orderSearchResultByType(searchResult)
 		return searchResult
 	}
 	
+	public void setBestMatch(JSONObject item) {
+		def bestMatch = ""
+		item.matches?.each{ matchKey, matchesList ->
+				if(!bestMatch) {
+					bestMatch = matchesList.get(0)
+				}
+		}
+		item.remove('matches')
+		item.put('matches', bestMatch)
+	}
+	
 	public void orderSearchResultByType(JSONObject searchResult) {
-		//Lagar, Rattsfall, Propositioner, Utredningar, Ovrigt
 		def typeMap = [:]
 		searchResult.items.each{ item ->
 			def type = item.type
@@ -41,6 +54,7 @@ class SearchService {
 	}
 	
 	public String getCategoryForType(String type) {
+		//Lagar, Rattsfall, Propositioner, Utredningar, Ovrigt
 		def typeToCategory = [	'Rattsfallsreferat' : 'Rattsfall',
 								'KonsolideradGrundforfattning' : 'Lagar', 
 								'Proposition' : 'Propositioner', 
