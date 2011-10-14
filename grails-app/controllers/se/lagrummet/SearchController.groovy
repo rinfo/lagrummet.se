@@ -14,7 +14,6 @@ class SearchController {
     def index = {
 		
 		def searchResult = null
-		def page = new Page()
 
 		if(params.query) {
 			searchResult = searchService.plainTextSearch(params.query)
@@ -23,7 +22,7 @@ class SearchController {
 			def response = [query: params.query, searchResult: searchResult]
 			render response as JSON
 		} else {
-			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: page])
+			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page()])
 		}
 		
 	}
