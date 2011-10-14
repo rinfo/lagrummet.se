@@ -9,14 +9,14 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class SearchController {
 	
-	def rinfoService
+	def searchService
 
     def index = {
 		
 		def searchResult = null
 
 		if(params.query) {
-			searchResult = rinfoService.plainTextSearch(params.query)
+			searchResult = searchService.plainTextSearch(params.query)
 		}
 		if (params.ajax) {
 			def response = [query: params.query, searchResult: searchResult]
