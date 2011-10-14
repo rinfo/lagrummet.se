@@ -22,9 +22,20 @@ class RinfoService {
 			uri.path = docPath + "/data"
 			response.success = {resp, json ->
 				docInfo = json
+				fixForarbeteList(docInfo)
 			}
 		}
 		return docInfo
+	}
+	
+	private void fixForarbeteList(JSONObject docInfo) {
+		if(docInfo.forarbete && !docInfo.forarbete.isArray()) {
+			def arr = new JSONArray()
+			arr.add(docInfo.forarbete)
+			
+			docInfo.remove('forarbete')
+			docInfo.put('forarbete', arr)
+		}
 	}
 	
 	public getAtomEntry(String docPath) {
