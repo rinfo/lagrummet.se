@@ -4,20 +4,6 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
-<nav id="primaryNavigation">
-	<div id="logo">
-		<a href="${resource()}">${siteProps.siteTitle}</a>
-	</div>
-	${siteProps.primaryNavigation}
-</nav>
-<header id="siteHeader">
-	<nav id="sitelinks">
-		${siteProps.headerNavigation}
-	</nav>
-	<nav id="breadcrumbs">
-		<g:breadcrumbs parent="${page?.parent}" />
-	</nav>
-</header>
 <div id="content">
     <article id="searchResults">
 		<header><h1>Soek</h1></header>
@@ -38,12 +24,9 @@
 			<g:each in="${searchResult.items}" var="item">
 				<li>
 					<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></p>
-					<g:if test="${item.matches.title.size() > 0}">
-						<p>${item.matches.title[0]} ...</p>
+					<g:if test="${item.matches}">
+						<p>${item.matches} ...</p>
 					</g:if>
-					<g:elseif test="${item.matches.content.size() > 0}">
-						<p>${item.matches.content[0]} ...</p>
-					</g:elseif>
 					<p class="type">${item.identifier}</p></li>
 			</g:each>
 			<li class="showAll"><a href="#">Visa alla träffar (${searchResult?.totalResults})</a></li>
@@ -51,6 +34,5 @@
 		</g:if>
 	</article>
 </div>
-<footer id="siteFooter">${siteProps.footer}</footer>
 </body>
 </html>

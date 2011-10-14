@@ -12,6 +12,7 @@ class SearchController {
     def index = {
 		
 		def searchResult = null
+		def page = new Page()
 
 		if(params.query) {
 			def http = new HTTPBuilder()
@@ -28,7 +29,7 @@ class SearchController {
 			def response = [query: params.query, searchResult: searchResult]
 			render response as JSON
 		} else {
-			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult])
+			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: page])
 		}
 		
 	}

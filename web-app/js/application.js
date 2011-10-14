@@ -2,26 +2,20 @@ function search() {
 	var form = $("#search");
 	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
         if (data) {
-		    console.log(data.searchResult);
 		    if (!$("#searchResults").length) {
 		    	$("#content > *").addClass("searchHidden");
 	        	$("#content").prepend('<article id="searchResults" />');
 		    }
-//        	console.log(data.searchResult.totalResults);
+
         	if (data.searchResult.totalResults > 0) {
         		$("#searchResults").html('<ul id="redaktionellt" />');        		
         		$("#redaktionellt").before('<p><strong>Information från lagrummet.se</strong> <span class="count">('+ data.searchResult.totalResults +')</span></p>');
         		$.each(data.searchResult.items, function(i, item) {
-        			$("#searchResults ul").append('<li><p><a href="#">' + item.title + "</a></li>");
-        			
-        			var excerpt;
-        			if (item.matches.title.length > 0) {
-        				excerpt = item.matches.title[0];
-        			} else if (item.matches.content.length > 0) {
-        				excerpt = item.matches.content[0];
-        			}
-        			if (excerpt) {
-        				$("#searchResults ul li").filter(":last").append("<p>" + excerpt + " ...</p>");
+        			var title = (item.title) ? item.title : item.identifier;
+        			$("#searchResults ul").append('<li><p><a href="#">' + title + "</a></li>");
+        			if (item.matches) {
+            				$("#searchResults ul li").filter(":last").append("<p>" + item.matches + " ...</p>");
+            			}
         			}
         			
         			$("#searchResults ul li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');

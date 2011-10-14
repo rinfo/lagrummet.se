@@ -10,8 +10,28 @@
 		<g:googleAnalytics id="${grailsApplication.config.lcms.googleAnalytics.webPropertyId}" />
     </head>
     <body>
-    <g:layoutBody />
-    <g:javascript library="jquery" plugin="jquery" />
-    <g:javascript library="application" />
+	    <nav id="primaryNavigation">
+			<div id="logo">
+				<a href="${resource()}">${siteProps.siteTitle}</a>
+			</div>
+			${siteProps.primaryNavigation}
+		</nav>
+		<header id="siteHeader">
+			<nav id="sitelinks">
+				${siteProps.headerNavigation}
+			</nav>
+			<nav id="breadcrumbs">
+				<g:breadcrumbs parent="${page.parent}" />
+			</nav>
+			<g:form mapping="search" method="GET" name="search">
+				<div class="input">Vad vill du söka?</div>
+				<div class="input"><g:textField name="query"/></div>
+				<g:submitButton name="searchSubmit" value="Sök"/>
+			</g:form>
+		</header>
+	    <g:layoutBody />
+	    <footer id="siteFooter">${siteProps.footer}</footer>
+	    <g:javascript library="jquery" plugin="jquery" />
+	    <g:javascript library="application" />
     </body>
 </html>

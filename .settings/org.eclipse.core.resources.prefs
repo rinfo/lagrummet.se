@@ -1,6 +1,7 @@
-#Wed Oct 12 15:18:31 CEST 2011
+#Fri Oct 14 10:13:28 CEST 2011
 eclipse.preferences.version=1
 encoding//grails-app/i18n/messages.properties=UTF-8
+encoding//grails-app/views/layouts/main.gsp=UTF-8
 encoding//grails-app/views/rinfo/show.gsp=UTF-8
 encoding//grails-app/views/search/searchForm.gsp=UTF-8
 encoding/<project>=UTF-8
