@@ -14,12 +14,12 @@ function search() {
         			var title = (item.title) ? item.title : item.identifier;
         			$("#searchResults ul").append('<li><p><a href="#">' + title + "</a></li>");
         			if (item.matches) {
-            				$("#searchResults ul li").filter(":last").append("<p>" + item.matches + " ...</p>");
-            			}
+        				$("#searchResults ul li").filter(":last").append("<p>" + item.matches + " ...</p>");
         			}
-        			
         			$("#searchResults ul li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
-        		});
+        		}
+        		
+        	});
         		$("#redaktionellt").append('<li class="showAll"><a href="#">Visa alla träffar '+ data.searchResult.totalResults +')</a></li>');
         	} else {
         		$("#searchResults").html("<h1>Inga sökresultat</h1>");

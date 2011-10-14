@@ -19,6 +19,7 @@
 		<g:if test="${searchResult?.totalResults}">
 			Total results: ${searchResult.totalResults}
 			
+
 			<p><strong>Information från lagrummet.se</strong> <span class="count">(${searchResult.totalResults})</span></p>
 			<ul id="redaktionellt">
 			<g:each in="${searchResult.items}" var="item">

@@ -8,6 +8,8 @@ import grails.converters.*
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class SearchController {
+	
+	def searchService
 
     def index = {
 		
@@ -15,15 +17,7 @@ class SearchController {
 		def page = new Page()
 
 		if(params.query) {
-			def http = new HTTPBuilder()
-			
-			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
-				uri.path = "/-/publ"
-				uri.query = [q: params.query] 	
-				response.success = {resp, json ->
-					searchResult = json
-				}
-			}
+			searchResult = searchService.plainTextSearch(params.query)
 		}
 		if (params.ajax) {
 			def response = [query: params.query, searchResult: searchResult]
