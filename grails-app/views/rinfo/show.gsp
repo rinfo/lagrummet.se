@@ -4,25 +4,6 @@
 	<meta name="layout" content="main" />
 </head>
 <body>
-<nav id="primaryNavigation">
-	<div id="logo">
-		<a href="${resource()}">${siteProps.siteTitle}</a>
-	</div>
-	${siteProps.primaryNavigation}
-</nav>
-<header id="siteHeader">
-	<nav id="sitelinks">
-		${siteProps.headerNavigation}
-	</nav>
-	<nav id="breadcrumbs">
-		<g:breadcrumbs parent="${page.parent}" />
-	</nav>
-	<g:form mapping="search" method="GET" name="search">
-		<div class="input">Vad vill du söka?</div>
-		<div class="input"><g:textField name="query"/></div>
-		<g:submitButton name="searchSubmit" value="Sök"/>
-	</g:form>
-</header>
 <div id="content">
     <article id="rinfo">
     	<h1>${docInfo.title}</h1>    	
@@ -68,7 +49,7 @@
 				<li class="label">Titel</li>
 				<li>${item.title}</li>
 				<li class="label">SFS-nummer</li>
-				<li>${item.identifier}</td></tr>
+				<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></td></tr>
 				<li class="label">Ikraft</li>
 				<li>${item.ikrafttradandedatum}</li>
 			</ul>
@@ -79,26 +60,13 @@
 			<h3>Konsolideringsunderlag för</h3>
 			<g:each in="${docInfo.'@rev'.konsolideringsunderlag}" var="item">
 			<ul>
-				<li class="label">Titel</td><li>${item.title}</li>
-				<li class="label">SFS-nummer</td><li>${item.identifier}</li>
-				<li class="label">Utfärdad</td><li>${item.issued}</li>
-			</ul>
-			</g:each>
-		</g:if>
-		
-		<g:if test="${docInfo.'@rev'.konsolideringsunderlag}">
-			<h3>Konsoliderad av</h3>
-			<g:each in="${docInfo.'@rev'.konsoliderar}" var="item">
-			<ul>
-				<li class="label">Titel</td><li>${item.title}</li>
-				<li class="label">SFS-nummer</td><li>${item.identifier}</li>
-				<li class="label">Utfärdad</td><li>${item.issued}</li>
+				<li class="label">Titel</li><li>${item.title}</li>
+				<li class="label">SFS-nummer</li><li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></li>
+				<li class="label">Utfärdad</li><li>${item.issued}</li>
 			</ul>
 			</g:each>
 		</g:if>
 	</aside>
 </div>
-<footer id="siteFooter">${siteProps.footer}</footer>
-
 </body>
 </html>

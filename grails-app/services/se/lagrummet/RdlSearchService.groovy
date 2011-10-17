@@ -16,7 +16,7 @@ class RdlSearchService {
 		def http = new HTTPBuilder()
 		http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
 			uri.path = "/-/publ"
-			uri.query = [q: query]
+			uri.query = [q: query.encodeAsURL()]
 			response.success = {resp, json ->
 				searchResult.itemsPerPage = json.itemsPerPage
 				searchResult.startIndex = json.startIndex

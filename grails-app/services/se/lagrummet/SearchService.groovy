@@ -14,7 +14,6 @@ class SearchService {
 	def rdlSearchService
 	def localSearchService
 	
-	
     public SearchResult plainTextSearch(String query) {
 		
 		def remoteResult = rdlSearchService.plainTextSearch(query)
