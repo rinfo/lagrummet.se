@@ -35,16 +35,41 @@
 			
 
 			<p><strong>Information från lagrummet.se</strong> <span class="count">(${searchResult.totalResults})</span></p>
+			
+			<h2>Rättsfall</h2>
 			<ul id="redaktionellt">
-			<g:each in="${searchResult.items}" var="item">
+			<g:each in="${searchResult.items['Rattsfall']}" var="item">
 				<li>
-					<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></p>
-					<g:if test="${item.matches.title.size() > 0}">
-						<p>${item.matches.title[0]} ...</p>
+					<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+					<g:if test="${item.matches}">
+						<p>${item.matches} ...</p>
 					</g:if>
-					<g:elseif test="${item.matches.content.size() > 0}">
-						<p>${item.matches.content[0]} ...</p>
-					</g:elseif>
+					<p class="type">${item.identifier}</p></li>
+			</g:each>
+			<li class="showAll"><a href="#">Visa alla träffar (${searchResult?.totalResults})</a></li>
+			</ul>
+			
+			<h2>Lagar och Förordningar</h2>
+			<ul id="redaktionellt">
+			<g:each in="${searchResult.items['Lagar']}" var="item">
+				<li>
+					<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+					<g:if test="${item.matches}">
+						<p>${item.matches} ...</p>
+					</g:if>
+					<p class="type">${item.identifier}</p></li>
+			</g:each>
+			<li class="showAll"><a href="#">Visa alla träffar (${searchResult?.totalResults})</a></li>
+			</ul>
+			
+			<h2>Övrigt</h2>
+			<ul id="redaktionellt">
+			<g:each in="${searchResult.items['Ovrigt']}" var="item">
+				<li>
+					<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+					<g:if test="${item.matches}">
+						<p>${item.matches} ...</p>
+					</g:if>
 					<p class="type">${item.identifier}</p></li>
 			</g:each>
 			<li class="showAll"><a href="#">Visa alla träffar (${searchResult?.totalResults})</a></li>
