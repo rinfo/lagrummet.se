@@ -344,7 +344,18 @@ body > footer > nav, body > footer > div {
 }
 
 #searchResults p {
-	margin-top: 2em;
+	margin-bottom: 1em;
+}
+
+#searchResults .column {
+	width: 50%;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#searchResults .column p {
+	margin: 1em 0 0 0;
 }
 
 #searchResults .count {
@@ -356,7 +367,7 @@ body > footer > nav, body > footer > div {
 }
 
 #searchResults ul {
-	width: 340px;
+	width: auto;
 	margin-bottom: 2em;
 }
 
