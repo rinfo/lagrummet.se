@@ -21,7 +21,7 @@
 				${siteProps.headerNavigation}
 			</nav>
 			<nav id="breadcrumbs">
-				<g:breadcrumbs parent="${page.parent}" />
+				<g:breadcrumbs parent="${page?.parent}" />
 			</nav>
 			<g:form mapping="search" method="GET" name="search">
 				<div class="input">Vad vill du söka?</div>
