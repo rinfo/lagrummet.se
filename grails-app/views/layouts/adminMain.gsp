@@ -15,7 +15,7 @@
 <body class="admin">
 	<header>
 		<h1>Lagrummet.se CMS</h1>
-		<a href="${grailsApplication.config.grails.serverURL}">Bes&ouml;k sidan</a>
+		<a href="${grailsApplication.config.grails.serverURL}">Besök sidan</a>
 		<nav class="logout">
 			<sec:username/> (<g:link controller="logout">Logga ut</g:link>)
 		</nav>
@@ -23,12 +23,15 @@
 	<nav id="primaryNav">
 		<ul>
 			<sec:ifAllGranted roles="ROLE_ADMIN">
-				<li><h3>Anv&auml;ndare</h3></li>
-				<li><a href="${createLink(controller:'user', action:'create')}">Ny anv&auml;ndare</a></li>
-				<li><a href="${createLink(controller:'user', action:'list')}">Hantera anv&auml;ndare</a></li>
-				<li><h3>Inst&auml;llningar</h3></li>
-				<li><a href="${createLink(controller:'siteProperties', action:'edit')}">&Auml;ndra siteinst&auml;llningar</a></li>
+				<li><h3>Användare</h3></li>
+				<li><a href="${createLink(controller:'user', action:'create')}">Ny användare</a></li>
+				<li><a href="${createLink(controller:'user', action:'list')}">Hantera användare</a></li>
+				<li><h3>Inställningar</h3></li>
+				<li><a href="${createLink(controller:'siteProperties', action:'edit')}">Ändra siteinställningar</a></li>
 			</sec:ifAllGranted>
+			<li><h3>Media</h3></li>
+			<li><a href="${createLink(controller:'media', action:'create')}">Ny bild eller fil</a></li>
+			<li><a href="${createLink(controller:'media', action:'list')}">Hantera media</a></li>
 		</ul>
 		<h3>Sidor</h3>
 		<a href="${createLink(controller:'page', action:'create')}">Ny sida</a>

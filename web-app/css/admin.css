@@ -77,6 +77,8 @@ ul {
 
 #quickSearch #search {
 	margin-left: 0.5em;
+	width: auto;
+	padding: 2px;
 }
 
 /* =BODYCONTENT */
@@ -162,7 +164,7 @@ ul {
 }
 
 #bodyContent form input[type=text] {
-	width: 95%;
+	width: 30em;
 }
 
 #bodyContent form .content .mceEditor.input {

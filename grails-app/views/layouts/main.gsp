@@ -13,16 +13,16 @@
     <body>
 	    <nav id="primaryNavigation">
 			<div id="logo">
-				<a href="${resource()}">${siteProps.siteTitle}</a>
+				<a href="${resource()}">${siteProps?.siteTitle}</a>
 			</div>
-			${siteProps.primaryNavigation}
+			${siteProps?.primaryNavigation}
 		</nav>
 		<header id="siteHeader">
 			<nav id="sitelinks">
-				${siteProps.headerNavigation}
+				${siteProps?.headerNavigation}
 			</nav>
 			<nav id="breadcrumbs">
-				<g:breadcrumbs parent="${page.parent}" />
+				<g:breadcrumbs parent="${page?.parent}" />
 			</nav>
 			<g:form mapping="search" method="GET" name="search">
 				<div class="input">Vad vill du söka?</div>
@@ -31,7 +31,7 @@
 			</g:form>
 		</header>
 	    <g:layoutBody />
-	    <footer id="siteFooter">${siteProps.footer}</footer>
+	    <footer id="siteFooter">${siteProps?.footer}</footer>
 	    <g:javascript library="jquery" plugin="jquery" />
 	    <g:javascript library="application" />
     </body>
