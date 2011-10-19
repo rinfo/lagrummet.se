@@ -5,9 +5,10 @@ class SearchResult {
 	Long itemsPerPage = 50
 	Long startIndex = 0
 	Long totalResults = 0
+	def totalResultsPerCategory = [:]
+	Long maxItemsPerCategory = 5
 	
 	def items = [:]
-	def originalItems
 	
 	public void addItemByType(SearchResultItem item) {
 		def type = item.type
@@ -15,12 +16,18 @@ class SearchResult {
 		if(!items[(category)]) {
 			items[(category)] = []
 		}
-		items[(category)].add(item)
+		if(items[(category)].size() < maxItemsPerCategory) {
+			items[(category)].add(item)
+		}
+		if(!totalResultsPerCategory[(category)]) {
+			totalResultsPerCategory[(category)] = 0
+		}
+		totalResultsPerCategory[(category)] += 1
 	}
 	
 	private String getCategoryForType(String type) {
 		//Lagar, Rattsfall, Propositioner, Utredningar, Ovrigt
-		return typeToCategory[(type)] ?: unknown
+		return typeToCategory[(type)] ?: Category.OKAND
 		
 	}
 	
@@ -37,34 +44,49 @@ class SearchResult {
 			items[(category)].addAll(otherItems)
 		}
 		
+		other.totalResultsPerCategory.each { category, otherCount ->
+			if(!totalResultsPerCategory[(category)]) {
+				totalResultsPerCategory[(category)] = 0
+			}
+			totalResultsPerCategory[(category)] += otherCount
+		}
+		
 		return this
 	}
 	
+	public static enum Category {
+		RATTSFALL("Rattsfall"), LAGAR("Lagar"), PROPOSITIONER("Propositioner"), UTREDNINGAR("Utredningar"), OVRIGT("Ovrigt"), OKAND("Okand")
+		private final String title
+		Category(String title) { this.title = title }
+		public String toString() { return title }
+	}
+	
 	static typeToCategory = [
-		'Rattsfallsnotis' : 'Rattsfall',
-		'Rattsfallspublikation' : 'Rattsfall',
-		'Rattsfallsrapport' : 'Rattsfall',
-		'Rattsfallsreferat' : 'Rattsfall',
-		'VagledandeAvgorande' : 'Rattsfall',
-		'VagledandeDomstolsavgorande' : 'Rattsfall',
-		'VagledandeMyndighetsavgorande' : 'Rattsfall',
+		'Rattsfallsnotis' : Category.RATTSFALL,
+		'Rattsfallspublikation' : Category.RATTSFALL,
+		'Rattsfallsrapport' : Category.RATTSFALL,
+		'Rattsfallsreferat' : Category.RATTSFALL,
+		'VagledandeAvgorande' : Category.RATTSFALL,
+		'VagledandeDomstolsavgorande' : Category.RATTSFALL,
+		'VagledandeMyndighetsavgorande' : Category.RATTSFALL,
 		
-		'Forfattning' : 'Lagar',
-		'Forfattningsreferens' : 'Lagar',
-		'Forfattningssamling' : 'Lagar',
-		'FSDokument' : 'Lagar',
-		'Forordning' : 'Lagar',
-		'Grundlag' : 'Lagar',
-		'KonsolideradGrundforfattning' : 'Lagar',
-		'Paragraf' : 'Lagar',
-		'Lag' : 'Lagar',
-		'Myndighetsforeskrift' : 'Lagar',
+		'Forfattning' : Category.LAGAR,
+		'Forfattningsreferens' : Category.LAGAR,
+		'Forfattningssamling' : Category.LAGAR,
+		'FSDokument' : Category.LAGAR,
+		'Forordning' : Category.LAGAR,
+		'Grundlag' : Category.LAGAR,
+		'KonsolideradGrundforfattning' : Category.LAGAR,
+		'Paragraf' : Category.LAGAR,
+		'Lag' : Category.LAGAR,
+		'Myndighetsforeskrift' : Category.LAGAR,
 		
-		'Proposition' : 'Propositioner',
+		'Proposition' : Category.PROPOSITIONER,
 		
-		'Kommittedirektiv' : 'Utredningar',
-		'Utredningsbetankande' : 'Utredningar',
-		'Utredningsserie' : 'Utredningar'
+		'Kommittedirektiv' : Category.UTREDNINGAR,
+		'Utredningsbetankande' : Category.UTREDNINGAR,
+		'Utredningsserie' : Category.UTREDNINGAR,
+		
+		'Lagrummet.Artikel' : Category.OVRIGT
 		]
-	static def unknown = 'Okand'
 }

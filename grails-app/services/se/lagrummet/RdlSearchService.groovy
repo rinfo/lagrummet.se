@@ -23,15 +23,15 @@ class RdlSearchService {
 				searchResult.totalResults = json.totalResults
 				
 				json.items.each { item ->
-					def searchResultItem = new SearchResultItem()
-					
-					searchResultItem.title = item.title
-					searchResultItem.iri = item.iri
-					searchResultItem.issued = item.issued
-					searchResultItem.describedBy = item.describedby
-					searchResultItem.identifier = item.identifier
-					searchResultItem.matches = getBestMatch(item)
-					searchResultItem.type = item.type 
+					def searchResultItem = new SearchResultItem(
+													title: item.title,
+													iri: item.iri,
+													issued: item.issued,
+													describedBy: item.describedby,
+													identifier: item.identifier,
+													matches: getBestMatch(item),
+													type: item.type
+													) 
 					
 					searchResult.addItemByType(searchResultItem)
 				}

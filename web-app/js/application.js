@@ -9,13 +9,13 @@ function search() {
 	
 	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
         if (data) {
-//        	console.log(data);
+        	console.log(data);
         	if (data.searchResult.totalResults > 0) {      		
         		$("#dynamicSearchResults").html('<header><h1>Sökresultat</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column" id="c-1" /><div class="column" id="c-2" />');
         		
         		// Redaktionella resultat
         		if (data.searchResult.items['Ovrigt'] && data.searchResult.items['Ovrigt'].length > 0) {
-        			$("#c-1").append('<p><strong>Information från lagrummet.se</strong> <span class="count">('+ data.searchResult.items['Ovrigt'].length +')</span></p>');
+        			$("#c-1").append('<p><strong>Information från lagrummet.se</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></p>');
         			$("#c-1").append('<ul id="ovrigt" />');
         			
         			$.each(data.searchResult.items['Ovrigt'], function(i, item) {
@@ -31,7 +31,7 @@ function search() {
         		
         		// Propositioner
         		if (data.searchResult.items['Propositioner'] && data.searchResult.items['Propositioner'].length > 0) {
-        			$("#c-1").append('<p><strong>Propositioner och skrivelser</strong> <span class="count">('+ data.searchResult.items['Propositioner'].length +')</span></p>');
+        			$("#c-1").append('<p><strong>Propositioner och skrivelser</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
         			$("#c-1").append('<ul id="propositioner" />');
         			
         			$.each(data.searchResult.items['Propositioner'], function(i, item) {
@@ -50,7 +50,7 @@ function search() {
         		
         		// Rättsfall
         		if (data.searchResult.items['Rattsfall'] && data.searchResult.items['Rattsfall'].length > 0) {
-        			$("#c-1").append('<p><strong>Rättsfall</strong> <span class="count">('+ data.searchResult.items['Rattsfall'].length +')</span></p>');
+        			$("#c-1").append('<p><strong>Rättsfall</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Rattsfall'] +')</span></p>');
         			$("#c-1").append('<ul id="rattsfall" />');
         			
         			$.each(data.searchResult.items['Rattsfall'], function(i, item) {
@@ -69,7 +69,7 @@ function search() {
         		
         		// Lagar
         		if (data.searchResult.items['Lagar'] && data.searchResult.items['Lagar'].length > 0) {
-        			$("#c-2").append('<p><strong>Lagar och förordningar</strong> <span class="count">('+ data.searchResult.items['Lagar'].length +')</span></p>');
+        			$("#c-2").append('<p><strong>Lagar och förordningar</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Lagar'] +')</span></p>');
         			$("#c-2").append('<ul id="lagar" />');
         			
         			$.each(data.searchResult.items['Lagar'], function(i, item) {
@@ -88,7 +88,7 @@ function search() {
         		
         		// Utredningar
         		if (data.searchResult.items['Utredningar'] && data.searchResult.items['Utredningar'].length > 0) {
-        			$("#c-2").append('<p><strong>Utredningar</strong> <span class="count">('+ data.searchResult.items['Utredningar'].length +')</span></p>');
+        			$("#c-2").append('<p><strong>Utredningar</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></p>');
         			$("#c-2").append('<ul id="utredningar" />');
         			
         			$.each(data.searchResult.items['Utredningar'], function(i, item) {

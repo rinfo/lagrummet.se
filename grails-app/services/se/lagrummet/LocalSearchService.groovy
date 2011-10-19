@@ -22,16 +22,15 @@ class LocalSearchService {
 			searchResult.totalResults = result.total
 			searchResult.itemsPerPage = result.max
 			searchResult.startIndex = result.offset
-			searchResult.originalItems = result.results
 			
-			searchResult.items['Ovrigt'] = []
 			result.results.each{ item ->
-				def searchResultItem = new SearchResultItem()
-				searchResultItem.title = item.title
-				searchResultItem.iri = item.url()
-				searchResultItem.issued = item.lastUpdated
-				
-				searchResult.items['Ovrigt'].add(searchResultItem)
+				def searchResultItem = new SearchResultItem(
+												title: item.title,
+												iri: item.url(),
+												issued: item.lastUpdated,
+												type: 'Lagrummet.Artikel'
+												)
+				searchResult.addItemByType(searchResultItem)
 			}
 		}
 		return searchResult
