@@ -343,50 +343,65 @@ body > footer > nav, body > footer > div {
 	display: none;
 }
 
-#searchResults p {
-	margin-top: 2em;
+.searchResults p {
+	margin-bottom: 1em;
 }
 
-#searchResults .count {
+.searchResults .column {
+	width: 350px;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.searchResults .column:first-of-type {
+	margin-right: 20px;
+}
+
+.searchResults .column p {
+	margin: 1em 0 0 0;
+}
+
+.searchResults .count {
 	color: #888;
 }
 
-#searchResults strong {
+.searchResults strong {
 	color: #333;
 }
 
-#searchResults ul {
-	width: 340px;
+.searchResults ul {
+	width: auto;
 	margin-bottom: 2em;
 }
 
-#searchResults ul li {
+.searchResults ul li {
 	padding: 5px;
 }
 
-#searchResults ul li p {
+.searchResults ul li p {
 	margin: 0 0 0.5em 0;
 	color: #333;
 }
 
-#searchResults ul li p.type {
+.searchResults ul li p.type {
 	color: #888;
 }
 
-#searchResults ul li p em {
+.searchResults ul li p em {
 	font-style: italic;
 }
 
-/*#searchResults ul li:nth-child(even) {
+/*.searchResults ul li:nth-child(even) {
 	background-color: #fcfcfc;
 }*/
 
-#searchResults ul li:nth-child(odd) {
+.searchResults ul li:nth-child(odd) {
 	background-color: #fcfcfc;
 	border-top: 1px solid #eee;
 }
 
-#searchResults ul li.showAll {
+.searchResults ul li.showAll {
 	background-color: #fff;
 	margin-top: 0.5em;
 	border-top: 1px solid #eee;
