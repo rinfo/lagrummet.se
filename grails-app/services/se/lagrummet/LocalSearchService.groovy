@@ -23,7 +23,6 @@ class LocalSearchService {
 			searchResult.itemsPerPage = result.max
 			searchResult.startIndex = result.offset
 			searchResult.originalItems = result.results
-			searchResult.scores = result.scores
 			
 			searchResult.items['Ovrigt'] = []
 			result.results.each{ item ->
