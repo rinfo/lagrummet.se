@@ -3,7 +3,7 @@ package se.lagrummet
 class SitePropertiesFilters {
 
     def filters = {
-        all(controller:'(rinfo|search)', action:'*') {
+        all(controller:'(rinfo|search|login)', action:'*') {
             before = {
                 
             }
