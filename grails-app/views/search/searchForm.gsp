@@ -5,7 +5,7 @@
 </head>
 <body>
 <div id="content">
-    <article id="searchResults">
+    <article id="searchResults" class="searchResults">
 		<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
 		
 		<g:if test="${searchResult?.totalResults}">
@@ -21,14 +21,24 @@
 						<g:if test="${item.matches}">
 							<p>${item.matches} ...</p>
 						</g:if>
-						<p class="type">${item.identifier}</p></li>
 				</g:each>
 				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.items['Ovrigt'].size() + 1})</a></li>
 				</ul>
 			</g:if>
 			
 			<g:if test="${searchResult?.items['Propositioner']}">
-				<p><strong>Propositioner och skrivelser</strong> <span class="count">()</span></p>
+				<p><strong>Propositioner och skrivelser</strong> <span class="count">(${searchResult.items['Propositioner'].size() + 1})</span></p>
+				<ul>
+				<g:each in="${searchResult.items['Propositioner']}" var="item">
+					<li>
+						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+						<g:if test="${item.matches}">
+							<p>${item.matches} ...</p>
+						</g:if>
+						<p class="type">${item.identifier}</p></li>
+				</g:each>
+				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.items['Rattsfall'].size() + 1})</a></li>
+				</ul>
 			</g:if>
 		
 			<g:if test="${searchResult?.items['Rattsfall']}">
@@ -43,7 +53,7 @@
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
 				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.items['Rattsfall'].size() + 1})</a></li>
-			</ul>
+				</ul>
 			</g:if>
 		</div>
 		
@@ -64,7 +74,18 @@
 			</g:if>
 			
 			<g:if test="${searchResult?.items['Utredningar']}">
-				<p><strong>Utredningar</strong> <span class="count">()</span></p>
+				<p><strong>Utredningar</strong> <span class="count">(${searchResult.items['Utredningar'].size() + 1})</span></p>
+				<ul>
+				<g:each in="${searchResult.items['Utredningar']}" var="item">
+					<li>
+						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+						<g:if test="${item.matches}">
+							<p>${item.matches} ...</p>
+						</g:if>
+						<p class="type">${item.identifier}</p></li>
+				</g:each>
+				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.items['Utredningar'].size() + 1})</a></li>
+				</ul>
 			</g:if>
 		</div>
 		</g:if>

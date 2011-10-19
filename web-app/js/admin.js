@@ -1,6 +1,6 @@
 jQuery(function($) {
-	var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
 	var newNodeParentId;
+	var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
 	
 	function flashMessage(message) {
 		console.log(message);
