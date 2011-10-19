@@ -1,5 +1,7 @@
 package se.lagrummet
 
+import org.compass.core.CompassQuery;
+
 class LocalSearchService {
 
     static transactional = true
@@ -7,11 +9,21 @@ class LocalSearchService {
     public  plainTextSearch(String query) {
 		def searchResult = new SearchResult()
 		if(query) {
-			def result = Page.search(query, sort: "SCORE")
+			def result = Page.search  {
+				must(queryString(query))
+				must(term("status", "published"))
+				must(le("publishStart", new Date()))
+				must{
+					ge("publishStop", new Date())
+					term("publishStop", "NULL")
+				}
+				sort(CompassQuery.SortImplicitType.SCORE, CompassQuery.SortDirection.AUTO)
+			}
 			searchResult.totalResults = result.total
 			searchResult.itemsPerPage = result.max
 			searchResult.startIndex = result.offset
 			searchResult.originalItems = result.results
+			searchResult.scores = result.scores
 			
 			searchResult.items['Ovrigt'] = []
 			result.results.each{ item ->
