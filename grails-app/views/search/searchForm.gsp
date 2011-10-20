@@ -37,7 +37,7 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Rattsfall']})</a></li>
+				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Propositioner']})</a></li>
 				</ul>
 			</g:if>
 		
