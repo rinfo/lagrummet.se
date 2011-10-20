@@ -3,6 +3,7 @@ package se.lagrummet
 import grails.plugins.springsecurity.Secured
 import org.apache.commons.io.IOUtils
 import javax.imageio.*
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 class MediaController {
 
@@ -29,12 +30,16 @@ class MediaController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def save = {
         def mediaInstance = new Media(params)
-		println params
-		def is = request.getInputStream()
-//		def parentDir = mediaInstance.parent?.permalink ?: ""
-		def parentDir = "images"
+		
+		def CommonsMultipartFile uploadedFile = params.mediaFile
+		def contentType = uploadedFile.contentType
+		def filename = uploadedFile.originalFilename
+		def size = uploadedFile.size
+		
+		def is = uploadedFile.getInputStream()
+		def parentDir = (contentType == "image/jpeg" || contentType == "image/gif" || contentType == "image/png") ? "images" : "files"
 		def today = new Date()
-		def filename = params.title.toLowerCase().replaceAll(/\s/,"-") + ".jpg"
+		// def filename = (contentType == "image/jpeg") ? params.title.toLowerCase().replaceAll(/\s/,"-") + ".jpg" : uploadedFile.originalFilename
 		
 		// Create a directory
 //		String.format('%tF', new Date())
@@ -47,7 +52,7 @@ class MediaController {
 		
         if (mediaInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'media.label', default: 'Media'), mediaInstance.id])}"
-            redirect(action: "show", id: mediaInstance.id)
+            redirect(action: "edit", id: mediaInstance.id)
         }
         else {
             render(view: "create", model: [mediaInstance: mediaInstance])

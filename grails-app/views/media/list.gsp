@@ -30,9 +30,9 @@
                     <g:each in="${mediaInstanceList}" status="i" var="mediaInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "id")}</g:link></td>
+                            <td><g:link action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean: mediaInstance, field: "filename")}</td>
+                            <td><g:link action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "filename")}</g:link></td>
                         
                             <td>${fieldValue(bean: mediaInstance, field: "title")}</td>
                         
