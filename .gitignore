@@ -3,4 +3,5 @@ target/classes/
 *.class
 target/stacktrace.log
 web-app/WEB-INF/classes/
+uploads/
 

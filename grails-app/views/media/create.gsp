@@ -12,9 +12,9 @@
     	<g:if test="${flash.message}">
 		    <div class="message">${flash.message}</div>
 	    </g:if>
-	    <g:hasErrors bean="${pageInstance}">
+	    <g:hasErrors bean="${mediaInstance}">
 		    <div class="errors">
-		        <g:renderErrors bean="${pageInstance}" as="list" />
+		        <g:renderErrors bean="${mediaInstance}" as="list" />
 		    </div>
 		</g:hasErrors>
 		
