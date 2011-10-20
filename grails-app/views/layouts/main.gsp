@@ -31,7 +31,9 @@
 			</g:form>
 		</header>
 	    <g:layoutBody />
-	    <footer id="siteFooter">${siteProps?.footer}</footer>
+	    <footer id="siteFooter">${siteProps?.footer}
+	    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
+	    </footer>
 	    <g:javascript library="jquery" plugin="jquery" />
 	    <g:javascript library="application" />
     </body>
