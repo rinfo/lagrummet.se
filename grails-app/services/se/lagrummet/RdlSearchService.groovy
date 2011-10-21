@@ -10,32 +10,46 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 class RdlSearchService {
 
     static transactional = true
+	
+	def messageSource
 
     public SearchResult plainTextSearch(String query) {
 		def searchResult = new SearchResult()
 		def http = new HTTPBuilder()
-		http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
-			uri.path = "/-/publ"
-			uri.query = [q: query.encodeAsURL()]
-			response.success = {resp, json ->
-				searchResult.itemsPerPage = json.itemsPerPage
-				searchResult.startIndex = json.startIndex
-				searchResult.totalResults = json.totalResults
+		try {
+			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
+				uri.path = "/-/publ"
+				uri.query = [q: query.encodeAsURL()]
 				
-				json.items.each { item ->
-					def searchResultItem = new SearchResultItem(
-													title: item.title,
-													iri: item.iri,
-													issued: item.issued,
-													describedBy: item.describedby,
-													identifier: item.identifier,
-													matches: getBestMatch(item),
-													type: item.type
-													) 
+				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
+				req.getParams().setParameter("http.socket.timeout", new Integer(5000));
+				
+				response.success = {resp, json ->
+					searchResult.itemsPerPage = json.itemsPerPage
+					searchResult.startIndex = json.startIndex
+					searchResult.totalResults = json.totalResults
 					
-					searchResult.addItemByType(searchResultItem)
+					json.items.each { item ->
+						def searchResultItem = new SearchResultItem(
+														title: item.title,
+														iri: item.iri,
+														issued: item.issued,
+														describedBy: item.describedby,
+														identifier: item.identifier,
+														matches: getBestMatch(item),
+														type: item.type
+														) 
+						
+						searchResult.addItemByType(searchResultItem)
+					}
+				}
+				
+				response.failure = { resp ->
+					searchResult.errorMessages.add("Detta gick inte bra")
 				}
 			}
+		} catch (SocketTimeoutException) {
+			searchResult.errorMessages.add("Detta gick inte bra")
 		}
 		return searchResult
 	}
