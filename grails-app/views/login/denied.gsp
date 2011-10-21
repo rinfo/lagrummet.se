@@ -1,5 +1,5 @@
 <head>
-<meta name='layout' content='adminMain' />
+<meta name='layout' content='main' />
 <title><g:message code="springSecurity.denied.title" /></title>
 </head>
 
