@@ -7,6 +7,7 @@ class SearchResult {
 	Long totalResults = 0
 	def totalResultsPerCategory = [:]
 	Long maxItemsPerCategory = 5
+	def errorMessages = []
 	
 	def items = [:]
 	
@@ -50,6 +51,8 @@ class SearchResult {
 			}
 			totalResultsPerCategory[(category)] += otherCount
 		}
+		
+		errorMessages.addAll(other.errorMessages)
 		
 		return this
 	}
