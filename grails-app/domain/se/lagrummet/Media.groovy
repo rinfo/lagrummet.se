@@ -1,5 +1,7 @@
 package se.lagrummet
 
+import java.util.Date;
+
 class Media {
 
     static constraints = {
@@ -8,5 +10,11 @@ class Media {
 	
 	String title
 	String filename
-	Page parent
+	
+	static belongsTo = [
+		parent: Page
+	]
+	
+	Date dateCreated
+	Date lastUpdated
 }

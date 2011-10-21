@@ -3,5 +3,6 @@ target/classes/
 *.class
 target/stacktrace.log
 web-app/WEB-INF/classes/
-uploads/
+web-app/uploads/images/
+web-app/uploads/files/
 
