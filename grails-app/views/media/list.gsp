@@ -18,11 +18,11 @@
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'media.id.label', default: 'Id')}" />
+                        	<g:sortableColumn property="title" title="${message(code: 'media.title.label', default: 'Titel')}" />
                         
-                            <g:sortableColumn property="filename" title="${message(code: 'media.filename.label', default: 'Filename')}" />
+                            <g:sortableColumn property="filename" title="${message(code: 'media.filename.label', default: 'Filnamn')}" />
                         
-                            <g:sortableColumn property="title" title="${message(code: 'media.title.label', default: 'Title')}" />
+                            <g:sortableColumn property="dateCreated" title="${message(code: 'media.dateCreated.label', default: 'Skapad')}" />
                         
                         </tr>
                     </thead>
@@ -30,11 +30,11 @@
                     <g:each in="${mediaInstanceList}" status="i" var="mediaInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "id")}</g:link></td>
+                        	<td><g:link action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "title")}</g:link></td>
                         
-                            <td><g:link action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "filename")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: mediaInstance, field: "title")}</td>
+                            <td><a href="${resource() + "/" + mediaInstance?.filename}">${mediaInstance?.filename}</a></td>
+                            
+                            <td>${fieldValue(bean: mediaInstance, field: "dateCreated")}</td>
                         
                         </tr>
                     </g:each>

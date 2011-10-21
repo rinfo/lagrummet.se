@@ -17,7 +17,29 @@ class MediaController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [mediaInstanceList: Media.list(params), mediaInstanceTotal: Media.count()]
+		def mediaInstances = Media.list(params)
+		def mediaInstancesCount =  mediaInstances.size()
+		
+		if (params.ajax) {
+//			var tinyMCEImageList = new Array(
+//			        // Name, URL
+//			        ["Logo 1", "logo.jpg"],
+//			        ["Logo 2 Over", "logo_over.jpg"]
+//			);
+			render "var tinyMCEImageList = new Array("
+			
+			mediaInstances.eachWithIndex() { mI, i ->
+				render '["' + mI.title + '", "' + grailsApplication.getConfig().grails.serverURL + '/' + mI.filename + '"]'
+				if ((i+1) != mediaInstancesCount) {
+					render ","
+				}
+			}
+			
+			render ");"
+		} else {
+			[mediaInstanceList: mediaInstances, mediaInstanceTotal: Media.count()]
+		}
+        
     }
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
@@ -39,12 +61,11 @@ class MediaController {
 		def is = uploadedFile.getInputStream()
 		def parentDir = (contentType == "image/jpeg" || contentType == "image/gif" || contentType == "image/png") ? "images" : "files"
 		def today = new Date()
-		// def filename = (contentType == "image/jpeg") ? params.title.toLowerCase().replaceAll(/\s/,"-") + ".jpg" : uploadedFile.originalFilename
 		
 		// Create a directory
 //		String.format('%tF', new Date())
 		
-		mediaInstance.filename = grailsApplication.config.lcms.upload.dir + "media/" + parentDir+ "/" + filename
+		mediaInstance.filename = grailsApplication.config.lcms.upload.dir + parentDir+ "/" + filename
 		def fos = new FileOutputStream(new File("web-app/" + mediaInstance.filename));
 		IOUtils.copy(is, fos);
 		fos.close();
@@ -89,7 +110,6 @@ class MediaController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (mediaInstance.version > version) {
-                    
                     mediaInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'media.label', default: 'Media')] as Object[], "Another user has updated this Media while you were editing")
                     render(view: "edit", model: [mediaInstance: mediaInstance])
                     return
@@ -115,6 +135,8 @@ class MediaController {
         def mediaInstance = Media.get(params.id)
         if (mediaInstance) {
             try {
+				def file = new File("web-app/" + mediaInstance.filename);
+				file.delete();
                 mediaInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'media.label', default: 'Media'), params.id])}"
                 redirect(action: "list")
