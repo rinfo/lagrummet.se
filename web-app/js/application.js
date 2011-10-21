@@ -107,6 +107,13 @@ function search() {
         	} else {
         		$("#dynamicSearchResults").html("<h1>Inga sökresultat</h1>");
         	}
+        	
+        	if(data.searchResult.errorMessages.length > 0) {
+        		$("#dynamicSearchResults").prepend('<div class="message"><ul id="errors" /></div>');
+        		$.each(data.searchResult.errorMessages, function(i, item) {
+        			$("#errors").append('<li>' + item + '</li>');
+        		});
+        	}
         } else {
         	$("#dynamicSearchResults").html("<h1>Det blev tyvärr fel, försök igen</h1>");
         }

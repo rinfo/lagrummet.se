@@ -6,6 +6,15 @@
 <body>
 <div id="content">
     <article id="searchResults" class="searchResults">
+    	<g:if test="${searchResult?.errorMessages.size > 0}">
+    		<div class="message">
+    			<ul>
+    				<g:each in="${searchResult.errorMessages}" var="message">
+    					<li>${message}</li>
+    				</g:each>
+    			</ul>
+    		</div>
+    	</g:if>
 		<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
 		
 		<g:if test="${searchResult?.totalResults}">

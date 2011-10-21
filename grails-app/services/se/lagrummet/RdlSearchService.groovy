@@ -11,8 +11,6 @@ class RdlSearchService {
 
     static transactional = true
 	
-	def messageSource
-
     public SearchResult plainTextSearch(String query) {
 		def searchResult = new SearchResult()
 		def http = new HTTPBuilder()
@@ -45,11 +43,11 @@ class RdlSearchService {
 				}
 				
 				response.failure = { resp ->
-					searchResult.errorMessages.add("Detta gick inte bra")
+					searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
 				}
 			}
 		} catch (SocketTimeoutException) {
-			searchResult.errorMessages.add("Detta gick inte bra")
+			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
 		}
 		return searchResult
 	}
