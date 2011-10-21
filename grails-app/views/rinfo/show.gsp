@@ -18,8 +18,10 @@
 						</g:each>
 				</td></tr>
 			</g:if>
-			<tr><td class="label">SFS-nummer:</td><td> ${docInfo.identifier}</td></tr>
-			<tr><td class="label">Ikraft:</td><td> ${docInfo.ikrafttradandedatum}</td></tr>
+			<tr><td class="label">Beteckning:</td><td> ${docInfo.identifier}</td></tr>
+			<g:if test="${docInfo.ikrafttradandedatum}">
+				<tr><td class="label">Ikraft:</td><td> ${docInfo.ikrafttradandedatum}</td></tr>
+			</g:if>
 			<g:if test="${docInfo.forarbete}">
 				<tr><td class="label">Förarbeten: </td><td>
 					<ul>
@@ -48,7 +50,7 @@
 			<ul>
 				<li class="label">Titel</li>
 				<li>${item.title}</li>
-				<li class="label">SFS-nummer</li>
+				<li class="label">Beteckning</li>
 				<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></td></tr>
 				<li class="label">Ikraft</li>
 				<li>${item.ikrafttradandedatum}</li>
@@ -61,7 +63,7 @@
 			<g:each in="${docInfo.'@rev'.konsolideringsunderlag}" var="item">
 			<ul>
 				<li class="label">Titel</li><li>${item.title}</li>
-				<li class="label">SFS-nummer</li><li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></li>
+				<li class="label">Beteckning</li><li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></li>
 				<li class="label">Utfärdad</li><li>${item.issued}</li>
 			</ul>
 			</g:each>
