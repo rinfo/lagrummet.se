@@ -121,6 +121,29 @@ th {
     padding: 0;
 }*/
 
+/* =FORMS */
+form label {
+	width: 100%;
+	font-style: italic;
+	display: block;
+}
+
+form .buttons {
+	width: 100%;
+	clear: both;
+	margin-top: 1.5em;
+}
+
+form .input {
+	clear: both;
+	display: block;
+	margin-top: 1.5em;
+}
+
+form .input:first-child {
+	margin-top: 0;
+}
+
 /* =HEADER */
 #siteHeader {
 	float: left;
@@ -309,6 +332,11 @@ body > footer > nav, body > footer > div {
 	border-radius: 5px;
 }
 
+#search .input {
+	clear: none;
+	margin-top: 0;
+}
+
 #search > *:first-child {
 	margin-left: 0;
 }
@@ -452,4 +480,11 @@ body > footer > nav, body > footer > div {
 #rinfoSidebar ul li.label{
 	font-weight: bold;
 	padding: 0.5em 0 0 0;
+}
+
+/* =Log in special */
+#remember_me_holder label {
+	clear: none;
+	display: inline;
+	width: auto;
 }

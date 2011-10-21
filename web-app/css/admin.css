@@ -171,7 +171,14 @@ ul {
     margin-top: 20px;
 }
 
-#bodyContent .aside {
+#bodyContent form .revisions {
+	width: 100%;
+	clear: both;
+	float: none;
+	margin-top: 3em;
+}
+
+#bodyContent form .aside {
 	float: left;
 	width: 220px;
 	margin: 1.5em 0 10px 10px;
@@ -179,43 +186,10 @@ ul {
 	border-left: 1px dotted #ccc;
 }
 
-#bodyContent label {
-	width: 100%;
-	font-style: italic;
-	display: block;
-}
-
-#bodyContent .buttons {
-	width: 100%;
-	clear: both;
-	margin-top: 1.5em;
-}
-
-#bodyContent .aside.buttons {
+#bodyContent form .aside.buttons {
 	text-align: right;
 	clear: none;
 	width: 220px;
-}
-
-#bodyContent .input {
-	clear: both;
-	display: block;
-	margin-top: 1.5em;
-}
-
-#bodyContent .input:first-child {
-	margin-top: 0;
-}
-
-#bodyContent .revisions {
-	width: 100%;
-	clear: both;
-	float: none;
-	margin-top: 3em;
-}
-
-#bodyContent .aside .input input, #bodyContent .aside .input select {
-	/*float: right;*/
 }
 
 /* ACTION BUTTONS */
