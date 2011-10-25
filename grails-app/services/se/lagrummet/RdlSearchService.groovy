@@ -17,7 +17,7 @@ class RdlSearchService {
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
 				uri.path = "/-/publ"
-				uri.query = [q: query.encodeAsURL()]
+				uri.query = [q: query]
 				
 				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
 				req.getParams().setParameter("http.socket.timeout", new Integer(5000));
