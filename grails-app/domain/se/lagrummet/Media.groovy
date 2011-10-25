@@ -17,6 +17,10 @@ class Media {
 		parent: Page
 	]
 	
+	static mapping = {
+		sort "title"
+	}
+	
 	Date dateCreated
 	Date lastUpdated
 	
