@@ -4,9 +4,9 @@ class SiteProperties {
 
     static constraints = {
 		siteTitle(nullable: true)
-		footer(nullable: true)
-		headerNavigation(nullable: true)
-		primaryNavigation(nullable: true)
+		footer(nullable: true, maxSize: 2147483647)
+		headerNavigation(nullable: true, maxSize: 2147483647)
+		primaryNavigation(nullable: true, maxSize:2147483647)
     }
 	
 	String title
