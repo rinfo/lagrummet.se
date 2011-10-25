@@ -66,23 +66,20 @@ class SearchResult {
 	
 	static typeToCategory = [
 		'Rattsfallsnotis' : Category.RATTSFALL,
-		'Rattsfallspublikation' : Category.RATTSFALL,
-		'Rattsfallsrapport' : Category.RATTSFALL,
 		'Rattsfallsreferat' : Category.RATTSFALL,
-		'VagledandeAvgorande' : Category.RATTSFALL,
 		'VagledandeDomstolsavgorande' : Category.RATTSFALL,
 		'VagledandeMyndighetsavgorande' : Category.RATTSFALL,
 		
-		'Forfattning' : Category.LAGAR,
-		'Forfattningsreferens' : Category.LAGAR,
-		'Forfattningssamling' : Category.LAGAR,
-		'FSDokument' : Category.LAGAR,
 		'Forordning' : Category.LAGAR,
 		'Grundlag' : Category.LAGAR,
 		'KonsolideradGrundforfattning' : Category.LAGAR,
-		'Paragraf' : Category.LAGAR,
 		'Lag' : Category.LAGAR,
 		'Myndighetsforeskrift' : Category.LAGAR,
+		'Tillkannagivande' : Category.LAGAR,
+		'Rattelseblad' : Category.LAGAR,
+		'Brev' : Category.LAGAR,
+		'Cirkular' : Category.LAGAR,
+		'AllmannaRad' : Category.LAGAR,
 		
 		'Proposition' : Category.PROPOSITIONER,
 		

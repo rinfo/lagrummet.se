@@ -30,7 +30,7 @@ class Page {
 	]
 	
     static constraints = {
-		content(nullable: true)
+		content(nullable: true, maxSize: 2147483647)
 		parent(nullable: true)
 		status(nullable: true)
 		publishStart(nullable: true)
