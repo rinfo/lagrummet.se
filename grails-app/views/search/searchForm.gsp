@@ -6,7 +6,7 @@
 <body>
 <div id="content">
     <article id="searchResults" class="searchResults">
-    	<g:if test="${searchResult?.errorMessages.size > 0}">
+    	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
     				<g:each in="${searchResult.errorMessages}" var="message">
@@ -21,7 +21,6 @@
 			<p>Totalt antal resultat: ${searchResult.totalResults}</p>
 			
 		<div class="column">
-			<g:if test="${searchResult?.items['Ovrigt']}">
 				<p><strong>Information från lagrummet.se</strong> <span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})</span></p>
 				<ul>
 				<g:each in="${searchResult.items['Ovrigt']}" var="item">
@@ -33,7 +32,6 @@
 				</g:each>
 				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Ovrigt']})</a></li>
 				</ul>
-			</g:if>
 			
 			<p><strong>Propositioner och skrivelser</strong> <span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})</span></p>
 			<ul>
@@ -48,7 +46,6 @@
 			<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Propositioner']})</a></li>
 			</ul>
 		
-			<g:if test="${searchResult?.items['Rattsfall']}">
 				<p><strong>Rättsfall</strong> <span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})</span></p>
 				<ul>
 				<g:each in="${searchResult.items['Rattsfall']}" var="item">
@@ -61,11 +58,9 @@
 				</g:each>
 				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Rattsfall']})</a></li>
 				</ul>
-			</g:if>
 		</div>
 		
 		<div class="column">
-			<g:if test="${searchResult?.items['Lagar']}">
 				<p><strong>Lagar och Förordningar</strong> <span class="count">(${searchResult.totalResultsPerCategory['Lagar']})</span></p>
 				<ul>
 				<g:each in="${searchResult.items['Lagar']}" var="item">
@@ -78,9 +73,7 @@
 				</g:each>
 				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Lagar']})</a></li>
 				</ul>
-			</g:if>
 			
-			<g:if test="${searchResult?.items['Utredningar']}">
 				<p><strong>Utredningar</strong> <span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})</span></p>
 				<ul>
 				<g:each in="${searchResult.items['Utredningar']}" var="item">
@@ -93,7 +86,6 @@
 				</g:each>
 				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Utredningar']})</a></li>
 				</ul>
-			</g:if>
 		</div>
 		</g:if>
 	</article>

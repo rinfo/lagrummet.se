@@ -11,18 +11,21 @@ class SearchResult {
 	
 	def items = [:]
 	
+	public SearchResult() {
+		for(SearchResult.Category cat : SearchResult.Category.values()) {
+			items[(cat.toString())] = []
+			totalResultsPerCategory[(cat.toString())] = 0
+		}
+	}
+	
 	public void addItemByType(SearchResultItem item) {
 		def type = item.type
 		def category = getCategoryForType(type)
-		if(!items[(category)]) {
-			items[(category)] = []
-		}
+		
 		if(items[(category)].size() < maxItemsPerCategory) {
 			items[(category)].add(item)
 		}
-		if(!totalResultsPerCategory[(category)]) {
-			totalResultsPerCategory[(category)] = 0
-		}
+		
 		totalResultsPerCategory[(category)] += 1
 	}
 	
@@ -39,16 +42,10 @@ class SearchResult {
 		this.totalResults += other.totalResults
 		
 		other.items.each { category, otherItems ->
-			if(!items[(category)]) {
-				items[(category)] = []
-			}
 			items[(category)].addAll(otherItems)
 		}
 		
 		other.totalResultsPerCategory.each { category, otherCount ->
-			if(!totalResultsPerCategory[(category)]) {
-				totalResultsPerCategory[(category)] = 0
-			}
 			totalResultsPerCategory[(category)] += otherCount
 		}
 		
