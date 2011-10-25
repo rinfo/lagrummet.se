@@ -22,6 +22,8 @@
                         
                             <g:sortableColumn property="filename" title="${message(code: 'media.filename.label', default: 'Filnamn')}" />
                         
+                        	<g:sortableColumn property="parent" title="${message(code: 'media.parent.label', default: 'Tillhör')}" />
+                        
                             <g:sortableColumn property="dateCreated" title="${message(code: 'media.dateCreated.label', default: 'Skapad')}" />
                         
                         </tr>
@@ -33,6 +35,8 @@
                         	<td><g:link action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "title")}</g:link></td>
                         
                             <td><a href="${resource() + "/" + mediaInstance?.filename}">${mediaInstance?.filename}</a></td>
+                            
+                            <td><g:link controller="page" action="edit" id="${mediaInstance.parent?.id}">${mediaInstance.parent?.title}</g:link></td>
                             
                             <td>${fieldValue(bean: mediaInstance, field: "dateCreated")}</td>
                         

@@ -10,6 +10,7 @@ jQuery(function($) {
 		console.log(message);
 	}
 
+	var pageId = ($("#id")) ? $("#id").attr("value") : "";
 	tinyMCE.init({
 		theme : "advanced",
 		mode : "exact",
@@ -17,7 +18,7 @@ jQuery(function($) {
 		theme_advanced_toolbar_location : "top",
 		force_p_newlines : true,
 		relative_urls : false,
-		external_image_list_url : serverUrl + "admin/media/list?ajax=true",
+		external_image_list_url : serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
 		theme_advanced_resizing : true,
 		theme_advanced_resizing_min_height : 480,
 		plugins : "advimage",

@@ -11,10 +11,17 @@ class Media {
 	String title
 	String filename
 	
+//	Page parent
+	
 	static belongsTo = [
 		parent: Page
 	]
 	
 	Date dateCreated
 	Date lastUpdated
+	
+	def beforeDelete() {
+		def file = new File("web-app/" + filename);
+		file.delete();
+	}
 }

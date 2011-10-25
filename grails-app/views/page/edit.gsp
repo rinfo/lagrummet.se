@@ -32,6 +32,28 @@
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </div>
             </g:form>
+            
+            <div class="media">
+            	<h3>${message(code: 'default.page.media.label', default: 'Ladda upp media')}</h3>
+	            <g:form action="save" controller="media" method="post" enctype="multipart/form-data">
+	            	<g:hiddenField name="parentId" value="${pageInstance?.id}" />
+					<div class="input ${hasErrors(bean: mediaInstance, field: 'imageFile', 'errors')}">
+						<label for="mediaFile"><g:message code="user.file.label" default="Fil" /></label>
+						<input type="file" name="mediaFile" />
+					</div>
+					
+					<div class="input ${hasErrors(bean: mediaInstance, field: 'title', 'errors')}">
+						<label for="title"><g:message code="media.title.label" default="Titel" /></label>
+						<g:textField name="title" value="${mediaInstance?.title}" />
+					</div>
+						
+				    <div class="buttons">
+				    	<g:actionSubmit name="save" action="save" class="save" value="${message(code: 'default.button.upload.label', default: 'Ladda upp')}" />
+				    	<p><em>Kom ihåg att spara sidan innan en bild laddas upp</em>
+				    </div>
+				</g:form>
+            </div>
+            
             <div class="revisions">
             	<h3>${message(code: 'default.page.revisions.label', default: 'Revisions')}</h3>
 	            <g:if test="${revisions}">

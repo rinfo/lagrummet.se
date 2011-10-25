@@ -17,15 +17,12 @@ class MediaController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-		def mediaInstances = Media.list(params)
+		
+		def mediaInstances = (params.parentId) ? Page.get(params.parentId).media : Media.list(params)
+		 
 		def mediaInstancesCount =  mediaInstances.size()
 		
 		if (params.ajax) {
-//			var tinyMCEImageList = new Array(
-//			        // Name, URL
-//			        ["Logo 1", "logo.jpg"],
-//			        ["Logo 2 Over", "logo_over.jpg"]
-//			);
 			render "var tinyMCEImageList = new Array("
 			
 			mediaInstances.eachWithIndex() { mI, i ->
@@ -45,12 +42,13 @@ class MediaController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def create = {
         def mediaInstance = new Media()
-        mediaInstance.properties = params
         return [mediaInstance: mediaInstance]
     }
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def save = {
+		params.parent = Page.get(params.parentId)
+		
         def mediaInstance = new Media(params)
 		
 		def CommonsMultipartFile uploadedFile = params.mediaFile
@@ -73,7 +71,11 @@ class MediaController {
 		
         if (mediaInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'media.label', default: 'Media'), mediaInstance.id])}"
-            redirect(action: "edit", id: mediaInstance.id)
+            if (mediaInstance.parent) {
+				redirect(controller: "page", action: "edit", id: mediaInstance.parent.id)
+			} else {
+				redirect(action: "edit", id: mediaInstance.id)
+			}
         }
         else {
             render(view: "create", model: [mediaInstance: mediaInstance])
@@ -135,8 +137,6 @@ class MediaController {
         def mediaInstance = Media.get(params.id)
         if (mediaInstance) {
             try {
-				def file = new File("web-app/" + mediaInstance.filename);
-				file.delete();
                 mediaInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'media.label', default: 'Media'), params.id])}"
                 redirect(action: "list")

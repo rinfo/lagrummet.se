@@ -19,15 +19,15 @@
 		</g:hasErrors>
 		
 		<g:form action="save" method="post" enctype="multipart/form-data">
-				<div class="input ${hasErrors(bean: mediaInstance, field: 'imageFile', 'errors')}">
-					<label for="mediaFile"><g:message code="user.file.label" default="Fil" /></label>
-					<input type="file" name="mediaFile" />
-				</div>
-				
-				<div class="input ${hasErrors(bean: mediaInstance, field: 'title', 'errors')}">
-					<label for="title"><g:message code="media.title.label" default="Titel" /></label>
-					<g:textField name="title" value="${mediaInstance?.title}" />
-				</div>
+			<div class="input ${hasErrors(bean: mediaInstance, field: 'imageFile', 'errors')}">
+				<label for="mediaFile"><g:message code="user.file.label" default="Fil" /></label>
+				<input type="file" name="mediaFile" />
+			</div>
+			
+			<div class="input ${hasErrors(bean: mediaInstance, field: 'title', 'errors')}">
+				<label for="title"><g:message code="media.title.label" default="Titel" /></label>
+				<g:textField name="title" value="${mediaInstance?.title}" />
+			</div>
 				
 		    <div class="buttons">
 		    	<g:actionSubmit name="save" action="save" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
