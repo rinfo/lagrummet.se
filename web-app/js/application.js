@@ -30,10 +30,11 @@ function search() {
         		}
         		
         		// Propositioner
-        		if (data.searchResult.items['Propositioner'] && data.searchResult.items['Propositioner'].length > 0) {
-        			$("#c-1").append('<p><strong>Propositioner och skrivelser</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
-        			$("#c-1").append('<ul id="propositioner" />');
+        		
+    			$("#c-1").append('<p><strong>Propositioner och skrivelser</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
+    			$("#c-1").append('<ul id="propositioner" />');
         			
+        		if (data.searchResult.items['Propositioner'] && data.searchResult.items['Propositioner'].length > 0) {
         			$.each(data.searchResult.items['Propositioner'], function(i, item) {
             			var title = (item.title) ? item.title : item.identifier;
             			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");

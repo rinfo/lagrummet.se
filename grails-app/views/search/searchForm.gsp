@@ -35,20 +35,18 @@
 				</ul>
 			</g:if>
 			
-			<g:if test="${searchResult?.items['Propositioner']}">
-				<p><strong>Propositioner och skrivelser</strong> <span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})</span></p>
-				<ul>
-				<g:each in="${searchResult.items['Propositioner']}" var="item">
-					<li>
-						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
-						<g:if test="${item.matches}">
-							<p>${item.matches} ...</p>
-						</g:if>
-						<p class="type">${item.identifier}</p></li>
-				</g:each>
-				<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Propositioner']})</a></li>
-				</ul>
-			</g:if>
+			<p><strong>Propositioner och skrivelser</strong> <span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})</span></p>
+			<ul>
+			<g:each in="${searchResult.items['Propositioner']}" var="item">
+				<li>
+					<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+					<g:if test="${item.matches}">
+						<p>${item.matches} ...</p>
+					</g:if>
+					<p class="type">${item.identifier}</p></li>
+			</g:each>
+			<li class="showAll"><a href="#">Visa alla träffar (${searchResult.totalResultsPerCategory['Propositioner']})</a></li>
+			</ul>
 		
 			<g:if test="${searchResult?.items['Rattsfall']}">
 				<p><strong>Rättsfall</strong> <span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})</span></p>

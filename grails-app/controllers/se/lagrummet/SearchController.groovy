@@ -13,6 +13,11 @@ class SearchController {
 		if(params.query) {
 			searchResult = searchService.plainTextSearch(params.query)
 		}
+		
+		if (!searchResult.totalResultsPerCategory['Propositioner']) {
+			searchResult.totalResultsPerCategory['Propositioner'] = 0
+		}
+
 		if (params.ajax) {
 			def response = [query: params.query, searchResult: searchResult]
 			render response as JSON
