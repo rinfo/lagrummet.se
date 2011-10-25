@@ -11,7 +11,7 @@ class BootStrap {
 		
 		if(Environment.current == Environment.DEVELOPMENT) {
 			
-			def user = new User(fullName: 'Test Testsson', username: 'test@testsson.com', password:'password', enabled: true, department:"Domstolsverket").save(failOnError:true)
+			def user = new User(fullName: 'Test Testsson', username: 'testadmin', password:'testadmin', enabled: true, department:"Domstolsverket").save(failOnError:true)
 			def roleAdmin = new SecRole(authority: 'ROLE_ADMIN', name: 'Admin').save(failOnError:true)
 			def roleEditor = new SecRole(authority: 'ROLE_EDITOR', name: 'Editor').save(failOnError:true)
 			SecUserSecRole.create(user, roleAdmin, true)

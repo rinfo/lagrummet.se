@@ -16,7 +16,8 @@ class Page {
 	Date publishStop
 	
 	static hasMany = [
-		children : Page
+		children : Page,
+		media : Media
 	]
 
 	static belongsTo = [
@@ -52,6 +53,7 @@ class Page {
 		pageBackup.properties = this.properties
 		pageBackup.id = null
 		pageBackup.children = null
+		pageBackup.media = null
 		pageBackup.status = "autoSave"
 		pageBackup.masterRevision = this
 		pageBackup.save(flush:true)

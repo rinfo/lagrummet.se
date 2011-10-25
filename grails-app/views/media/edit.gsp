@@ -20,11 +20,14 @@
 		</g:hasErrors>
 	
 	         <g:form method="post" >
-	             <g:hiddenField name="id" value="${mediaInstance?.id}" />
-	             <g:hiddenField name="version" value="${mediaInstance?.version}" />
+	            <g:hiddenField name="id" value="${mediaInstance?.id}" />
+	            <g:hiddenField name="version" value="${mediaInstance?.version}" />
 	             
-	             <div class="input ${hasErrors(bean: mediaInstance, field: 'imageFile', 'errors')}">
-					<g:message code="user.filename.label" default="Filnamn" />: <a href="${resource() + "/" + mediaInstance?.filename}">${mediaInstance?.filename}</a>
+	            <div class="input ${hasErrors(bean: mediaInstance, field: 'imageFile', 'errors')}">
+					<g:message code="media.filename.label" default="Filnamn" />: <a href="${resource() + "/" + mediaInstance?.filename}">${mediaInstance?.filename}</a>
+				</div>
+				<div class="input ${hasErrors(bean: mediaInstance, field: 'imageFile', 'errors')}">
+					<g:message code="media.parent.label" default="Tillhör" />: ${mediaInstance.parent?.title}
 				</div>
 				
 				<div class="input ${hasErrors(bean: mediaInstance, field: 'title', 'errors')}">
