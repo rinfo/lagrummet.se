@@ -61,6 +61,11 @@ searchable {
 			'compass.engine.analyzer.default.name': 'Swedish',
 			'compass.engine.analyzer.search.type': 'snowball',
 			'compass.engine.analyzer.search.name': 'Swedish',
+			
+			'compass.engine.highlighter.default.formatter.simple.pre' : '<em class="match">',
+			'compass.engine.highlighter.default.formatter.simple.post' : '</em>',
+			
+			'compass.converter.customHtmlConverter.type': 'se.lagrummet.HtmlConverter',
 		]
 
     /**

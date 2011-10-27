@@ -63,6 +63,7 @@ class Page {
 		spellCheck "include"
 		title boost: 2.0
 		publishStop nullValue: "NULL"
+		content converter: "customHtmlConverter"
 	}
 	
 	public String toString() {

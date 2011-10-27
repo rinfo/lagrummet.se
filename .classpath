@@ -123,5 +123,6 @@
 			<attribute name="com.springsource.sts.grails.core.SOURCE_FOLDER" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/jericho-html-3.2.jar"/>
 	<classpathentry kind="output" path="web-app/WEB-INF/classes"/>
 </classpath>
