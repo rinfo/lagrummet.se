@@ -12,7 +12,7 @@ class SearchResult {
 	def items = [:]
 	
 	public SearchResult() {
-		for(SearchResult.Category cat : SearchResult.Category.values()) {
+		for(Category cat : Category.values()) {
 			items[(cat.toString())] = []
 			totalResultsPerCategory[(cat.toString())] = 0
 		}
@@ -20,7 +20,7 @@ class SearchResult {
 	
 	public void addItemByType(SearchResultItem item) {
 		def type = item.type
-		def category = getCategoryForType(type)
+		def category = Category.getCategoryForType(type)
 		
 		if(items[(category)].size() < maxItemsPerCategory) {
 			items[(category)].add(item)
@@ -29,11 +29,7 @@ class SearchResult {
 		totalResultsPerCategory[(category)] += 1
 	}
 	
-	private String getCategoryForType(String type) {
-		//Lagar, Rattsfall, Propositioner, Utredningar, Ovrigt
-		return typeToCategory[(type)] ?: Category.OKAND
-		
-	}
+	
 	
 	public SearchResult mergeWith(SearchResult other) {
 		if(!other) {
@@ -54,36 +50,4 @@ class SearchResult {
 		return this
 	}
 	
-	public static enum Category {
-		RATTSFALL("Rattsfall"), LAGAR("Lagar"), PROPOSITIONER("Propositioner"), UTREDNINGAR("Utredningar"), OVRIGT("Ovrigt"), OKAND("Okand")
-		private final String title
-		Category(String title) { this.title = title }
-		public String toString() { return title }
-	}
-	
-	static typeToCategory = [
-		'Rattsfallsnotis' : Category.RATTSFALL,
-		'Rattsfallsreferat' : Category.RATTSFALL,
-		'VagledandeDomstolsavgorande' : Category.RATTSFALL,
-		'VagledandeMyndighetsavgorande' : Category.RATTSFALL,
-		
-		'Forordning' : Category.LAGAR,
-		'Grundlag' : Category.LAGAR,
-		'KonsolideradGrundforfattning' : Category.LAGAR,
-		'Lag' : Category.LAGAR,
-		'Myndighetsforeskrift' : Category.LAGAR,
-		'Tillkannagivande' : Category.LAGAR,
-		'Rattelseblad' : Category.LAGAR,
-		'Brev' : Category.LAGAR,
-		'Cirkular' : Category.LAGAR,
-		'AllmannaRad' : Category.LAGAR,
-		
-		'Proposition' : Category.PROPOSITIONER,
-		
-		'Kommittedirektiv' : Category.UTREDNINGAR,
-		'Utredningsbetankande' : Category.UTREDNINGAR,
-		'Utredningsserie' : Category.UTREDNINGAR,
-		
-		'Lagrummet.Artikel' : Category.OVRIGT
-		]
 }
