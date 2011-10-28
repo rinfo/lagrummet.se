@@ -15,7 +15,9 @@
     			</ul>
     		</div>
     	</g:if>
+    	<g:if test="${query}">
 		<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
+		</g:if>
 		
 		<g:if test="${searchResult?.totalResults}">
 			<p>Totalt antal resultat: ${searchResult.totalResults}</p>
