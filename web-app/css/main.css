@@ -398,17 +398,20 @@ body > footer > nav, body > footer > div {
 	color: #888;
 }
 
-.searchResults strong {
+/*.searchResults strong {
 	color: #333;
-}
+}*/
 
 .searchResults ul {
 	width: auto;
 	margin-bottom: 2em;
+	background-color: #fafafa;
+	border-top: 2px solid #ddd;
 }
 
 .searchResults ul li {
 	padding: 5px;
+	border-top: 1px solid #eee;
 }
 
 .searchResults ul li p {
@@ -424,14 +427,10 @@ body > footer > nav, body > footer > div {
 	font-style: italic;
 }
 
-/*.searchResults ul li:nth-child(even) {
-	background-color: #fcfcfc;
-}*/
-
-.searchResults ul li:nth-child(odd) {
+/*.searchResults ul li:nth-child(odd) {
 	background-color: #fcfcfc;
 	border-top: 1px solid #eee;
-}
+}*/
 
 .searchResults ul li.showAll {
 	background-color: #fff;
