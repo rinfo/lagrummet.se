@@ -52,6 +52,14 @@
 				    	<p><em>Kom ihåg att spara sidan innan en bild laddas upp</em>
 				    </div>
 				</g:form>
+				
+				<h3>${message(code: 'default.page.mediaList.label', default: 'Media tillhörande denna sida')}</h3>
+				<ul>
+					<g:each in="${pageInstance.media}" status="i" var="mediaInstance">
+                        <li><g:link action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "title")}</g:link> (<a href="${resource() + "/" + mediaInstance?.filename}">${mediaInstance?.filename}</a>)</li>
+                    </g:each>
+				</ul>
+				
             </div>
             
             <div class="revisions">
