@@ -14,10 +14,10 @@ class SearchService {
 	def rdlSearchService
 	def localSearchService
 	
-    public SearchResult plainTextSearch(String query) {
+    public SearchResult plainTextSearch(String query, Category cat) {
 		
-		def remoteResult = rdlSearchService.plainTextSearch(query)
-		def localResult = localSearchService.plainTextSearch(query)
+		def remoteResult = rdlSearchService.plainTextSearch(query, cat)
+		def localResult = localSearchService.plainTextSearch(query, cat)
 		
 		return remoteResult.mergeWith(localResult)
 	}

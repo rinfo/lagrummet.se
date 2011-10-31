@@ -11,7 +11,7 @@ class SearchController {
 		def searchResult = null
 
 		if(params.query) {
-			searchResult = searchService.plainTextSearch(params.query)
+			searchResult = searchService.plainTextSearch(params.query, Category.getFromString(params.cat))
 		}
 
 		if (params.ajax) {
