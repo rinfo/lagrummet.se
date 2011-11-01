@@ -12,6 +12,26 @@ public enum Category {
 		
 	}
 	
+	public static Category getFromString(String cat) {
+		for(c in Category.values()) {
+			if(c.toString().equals(cat)) {
+				return c
+			}
+		}
+		return null
+	}
+	
+	public List getTypes() {
+		def types = []
+		typeToCategory.each { type, category ->
+			if(this.equals(category)){
+				types.add(type)
+			}
+		}
+		
+		return types
+	}
+	
 	static typeToCategory = [
 		'Rattsfallsnotis' : Category.RATTSFALL,
 		'Rattsfallsreferat' : Category.RATTSFALL,

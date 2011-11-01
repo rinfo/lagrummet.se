@@ -96,27 +96,32 @@ ul li {
 }
 
 table {
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    width: 100%
+	width: auto;
+	margin-bottom: 2em;
+	background-color: #fff;
+	border-spacing: 0;
 }
+
 tr {
     border: 0;
 }
-td, th {
-    line-height: 12px;
-    padding: 5px 6px;
-    text-align: left;
-    vertical-align: top;
+
+tr:nth-child(even) {
+	background-color: #fafafa;
+	border-top: 1px solid #eee;
 }
+
+td, th {
+	padding: 5px;
+}
+
+td {
+    border-top: 1px solid #eee;
+}
+
 th {
-    color: #585858;
-    background-color: #D29400;
-    /*font-weight: bold;*/
-    font-style: italic;
-    font-size: 1.2em;
-    line-height: 17px;
-    padding: 2px 6px;
+    font-weight: bold;
+    text-align: left;
 }
 
 /*body > * {
@@ -376,6 +381,16 @@ body > footer > nav, body > footer > div {
 	display: none;
 }
 
+.searchResults {
+	padding-top: 1em;
+	border-top: 1px solid #eee;
+}
+
+.searchResults .query {
+	font-weight: bold;
+	color: #873960;
+}
+
 .searchResults p {
 	margin-bottom: 1em;
 }
@@ -403,6 +418,10 @@ body > footer > nav, body > footer > div {
 	color: #333;
 }*/
 
+.searchResults table td, .searchResults table th {
+	min-width: 12em;
+}
+
 .searchResults ul {
 	width: auto;
 	margin-bottom: 2em;
@@ -420,12 +439,8 @@ body > footer > nav, body > footer > div {
 	color: #333;
 }
 
-.searchResults ul li p.type {
+.searchResults ul li p.type, table .type {
 	color: #888;
-}
-
-.searchResults ul li p em {
-	font-style: italic;
 }
 
 /*.searchResults ul li:nth-child(odd) {

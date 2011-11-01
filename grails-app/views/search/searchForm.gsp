@@ -23,9 +23,9 @@
 			<p>Totalt antal resultat: ${searchResult.totalResults}</p>
 			
 		<div class="column">
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Information från lagrummet.se</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})</span></p>
+			<p><a href="${createLink(mapping:'search', params:[query:query, cat:'Ovrigt']) }"><strong>Information från lagrummet.se</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})</span></p>
 			<g:if test="${searchResult.items['Ovrigt']}">
-				<ul>
+			<ul>
 				<g:each in="${searchResult.items['Ovrigt']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
@@ -33,13 +33,14 @@
 							<p>${item.matches} ...</p>
 						</g:if>
 				</g:each>
-				<li class="showAll"><a href="#">Visa fler träffar</a></li>
-				</ul>
+				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Ovrigt']) }">Visa fler träffar</a></li>
+			</ul>
 			</g:if>
 			
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Propositioner och skrivelser</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})</span></p>
+		
+			<p><a href="${createLink(mapping:'search', params:[query:query, cat:'Propositioner']) }"><strong>Propositioner och skrivelser</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})</span></p>
 			<g:if test="${searchResult.items['Propositioner']}">
-				<ul>
+			<ul>
 				<g:each in="${searchResult.items['Propositioner']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
@@ -48,13 +49,13 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="#">Visa fler träffar</a></li>
-				</ul>
+				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Propositioner']) }">Visa fler träffar</a></li>
+			</ul>
 			</g:if>
-		
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Rättsfall</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})</span></p>
+
+			<p><a href="${createLink(mapping:'search', params:[query:query, cat:'Rattsfall']) }"><strong>Rättsfall</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})</span></p>
 			<g:if test="${searchResult.items['Rattsfall']}">
-				<ul>
+			<ul>
 				<g:each in="${searchResult.items['Rattsfall']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
@@ -63,15 +64,15 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="#">Visa fler träffar</a></li>
-				</ul>
+				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Rattsfall']) }">Visa fler träffar</a></li>
+			</ul>
 			</g:if>
 		</div>
 		
 		<div class="column">
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Lagar och Förordningar</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Lagar']})</span></p>
+			<p><a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }"><strong>Lagar och Förordningar</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Lagar']})</span></p>
 			<g:if test="${searchResult.items['Lagar']}">
-				<ul>
+			<ul>
 				<g:each in="${searchResult.items['Lagar']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
@@ -80,13 +81,13 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="#">Visa fler träffar</a></li>
-				</ul>
+				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }">Visa fler träffar</a></li>
+			</ul>
 			</g:if>
-		
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Utredningar</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})</span></p>
+			
+			<p><a href="${createLink(mapping:'search', params:[query:query, cat:'Utredningar']) }"><strong>Utredningar</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})</span></p>
 			<g:if test="${searchResult.items['Utredningar']}">
-				<ul>
+			<ul>
 				<g:each in="${searchResult.items['Utredningar']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
@@ -95,8 +96,8 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="#">Visa fler träffar</a></li>
-				</ul>
+				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Utredningar']) }">Visa fler träffar</a></li>
+			</ul>
 			</g:if>
 		</div>
 		</g:if>

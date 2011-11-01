@@ -6,8 +6,12 @@ class LocalSearchService {
 
     static transactional = true
 
-    public  plainTextSearch(String query) {
+    public  plainTextSearch(String query, Category cat) {
 		def searchResult = new SearchResult()
+		
+		if(cat != null && !cat.equals(Category.OVRIGT)){
+			return searchResult
+		}
 		
 		def pageHighlighter = { highlighter, index, sr ->
 			if(!sr.highlights) {

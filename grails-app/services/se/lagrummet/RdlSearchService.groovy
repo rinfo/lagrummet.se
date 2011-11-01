@@ -11,14 +11,24 @@ class RdlSearchService {
 
     static transactional = true
 	
-    public SearchResult plainTextSearch(String query) {
+	def availableCategories = [Category.RATTSFALL, Category.LAGAR, Category.PROPOSITIONER, Category.UTREDNINGAR]
+	
+    public SearchResult plainTextSearch(String query, Category cat) {
 		def searchResult = new SearchResult()
 		def http = new HTTPBuilder()
+		
+		def queryParams = [q:query]
+		
+		if(cat && availableCategories.contains(cat)){
+			queryParams['type'] = cat.getTypes()
+		} else if (cat) {
+			return searchResult
+		}
+		
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
 				uri.path = "/-/publ"
-				uri.query = [q: query]
-				
+				uri.query = queryParams
 				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
 				req.getParams().setParameter("http.socket.timeout", new Integer(5000));
 				
