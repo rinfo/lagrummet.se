@@ -2,8 +2,6 @@ package se.lagrummet
 
 class SearchResult {
 
-	Long itemsPerPage = 50
-	Long startIndex = 0
 	Long totalResults = 0
 	def totalResultsPerCategory = [:]
 	Long maxItemsPerCategory = 5

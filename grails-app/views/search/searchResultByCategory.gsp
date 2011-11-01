@@ -17,7 +17,7 @@
     	</g:if>
 
 		<g:if test="${searchResult?.totalResults}">
-			<p>Visar 1-10 av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> i <strong>Lagar och förordningar</strong></p>
+			<p>Visar 1-10 av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> i <strong><g:message code="category.${cat}"/></strong></p>
 			
 			<table>
 				<tr>
@@ -37,6 +37,7 @@
 					</tr>
 				</g:each>
 			</table>
+			<g:paginate total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat]}"/>
 		</g:if>
 	</article>
 </div>
