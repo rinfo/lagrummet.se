@@ -5,7 +5,7 @@ import se.lagrummet.Page
 class MainSiteTagLib {
 	
 	def breadcrumbs = { attrs, body ->
-		out << '<a href="' << resource() << '"><img src="' << resource() << '/images/home.png" /></a>'
+		out << '<a href="' << resource() << '">Hem</a>'
 		if (attrs.parent) {
 			out << " > " << '<a href="' << resource() << "/" << attrs.parent.url() << '">' << attrs.parent.title  << '</a>'
 		}

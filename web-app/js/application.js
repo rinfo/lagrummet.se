@@ -9,7 +9,7 @@ function search() {
 	
 	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
         if (data) {
-        	console.log(data);
+//        	console.log(data);
         	if (data.searchResult.totalResults > 0) {      		
         		$("#dynamicSearchResults").html('<header><h1>Sökresultat</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column" id="c-1" /><div class="column" id="c-2" />');
         		
