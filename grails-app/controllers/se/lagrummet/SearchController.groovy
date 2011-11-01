@@ -9,9 +9,9 @@ class SearchController {
     def index = {
 		
 		def searchResult = null
-
+		def offset
 		if(params.query && params.cat)  {
-			def offset = parseInt(params.offset, 0)
+			offset = parseInt(params.offset, 0)
 			def itemsPerPage = parseInt(params.max, 20)
 			searchResult = searchService.plainTextSearchPaged(params.query, Category.getFromString(params.cat), offset, itemsPerPage)
 			
@@ -23,7 +23,7 @@ class SearchController {
 			def response = [query: params.query, searchResult: searchResult]
 			render response as JSON
 		} else if(params.cat) {
-			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page()])
+			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page(), offset:offset])
 		} else {
 			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page()])
 		}

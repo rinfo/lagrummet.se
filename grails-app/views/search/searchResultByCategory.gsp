@@ -17,7 +17,7 @@
     	</g:if>
 
 		<g:if test="${searchResult?.totalResults}">
-			<p>Visar 1-10 av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> i <strong><g:message code="category.${cat}"/></strong></p>
+			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.items[(cat)].size()} av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> i <strong><g:message code="category.${cat}"/></strong></p>
 			
 			<table>
 				<tr>

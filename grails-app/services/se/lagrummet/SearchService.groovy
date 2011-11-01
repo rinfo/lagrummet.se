@@ -24,8 +24,8 @@ class SearchService {
 	
 	public SearchResult plainTextSearchPaged(String query, Category cat, Integer offset, Integer itemsPerPage) {
 		def remoteResult = rdlSearchService.plainTextSearchPaged(query, cat, offset, itemsPerPage)
-		
-		return remoteResult
+		def localResult = localSearchService.plainTextSearchPaged(query, cat, offset, itemsPerPage)
+		return remoteResult.mergeWith(localResult)
 	}
 	
 }

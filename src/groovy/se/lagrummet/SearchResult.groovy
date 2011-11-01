@@ -4,9 +4,8 @@ class SearchResult {
 
 	Long totalResults = 0
 	def totalResultsPerCategory = [:]
-	Long maxItemsPerCategory = 5
+	Long maxItemsPerCategory = 4
 	def errorMessages = []
-	
 	def items = [:]
 	
 	public SearchResult() {
