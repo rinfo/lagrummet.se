@@ -17,7 +17,7 @@
     	</g:if>
     	
     	<div>
-    	Visar 1-10 av 10 träffar för "${query.encodeAsHTML()}" i Lagar och förordningar
+    	Visar 1-10 av 10 träffar för "${query.encodeAsHTML()}" i <g:message code="category.${cat}"/>
     	</div>
 		
 		<g:if test="${searchResult?.totalResults}">
@@ -34,10 +34,9 @@
 							<p>${item.matches} ...</p>
 						</g:if>
 				</g:each>
-				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat: cat]) }">Visa fler tr�ffar</a></li>
 				</ul>
 			</g:if>
-			
+			<g:paginate total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat]}"/>
 		</div>
 		</g:if>
 	</article>

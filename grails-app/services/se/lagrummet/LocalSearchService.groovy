@@ -34,8 +34,6 @@ class LocalSearchService {
 				sort(CompassQuery.SortImplicitType.SCORE, CompassQuery.SortDirection.AUTO)
 			}
 			searchResult.totalResults = result.total
-			searchResult.itemsPerPage = result.max
-			searchResult.startIndex = result.offset
 			
 			def i = 0
 			result.results.each{ item ->
