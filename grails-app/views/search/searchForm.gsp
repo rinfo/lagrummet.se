@@ -23,7 +23,7 @@
 			<p>Totalt antal resultat: ${searchResult.totalResults}</p>
 			
 		<div class="column">
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Information från lagrummet.se</strong> <span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})</span></a></p>
+			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Information från lagrummet.se</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})</span></p>
 			<g:if test="${searchResult.items['Ovrigt']}">
 				<ul>
 				<g:each in="${searchResult.items['Ovrigt']}" var="item">
@@ -37,7 +37,7 @@
 				</ul>
 			</g:if>
 			
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Propositioner och skrivelser</strong> <span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})</span></a></p>
+			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Propositioner och skrivelser</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})</span></p>
 			<g:if test="${searchResult.items['Propositioner']}">
 				<ul>
 				<g:each in="${searchResult.items['Propositioner']}" var="item">
@@ -52,7 +52,7 @@
 				</ul>
 			</g:if>
 		
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Rättsfall</strong> <span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})</span></a></p>
+			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Rättsfall</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})</span></p>
 			<g:if test="${searchResult.items['Rattsfall']}">
 				<ul>
 				<g:each in="${searchResult.items['Rattsfall']}" var="item">
@@ -69,7 +69,7 @@
 		</div>
 		
 		<div class="column">
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Lagar och Förordningar</strong> <span class="count">(${searchResult.totalResultsPerCategory['Lagar']})</span></a></p>
+			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Lagar och Förordningar</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Lagar']})</span></p>
 			<g:if test="${searchResult.items['Lagar']}">
 				<ul>
 				<g:each in="${searchResult.items['Lagar']}" var="item">
@@ -84,7 +84,7 @@
 				</ul>
 			</g:if>
 		
-			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Utredningar</strong> <span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})</span></a></p>
+			<p><a href="${resource()}/search?query=${query.encodeAsURL()}"><strong>Utredningar</strong></a> <span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})</span></p>
 			<g:if test="${searchResult.items['Utredningar']}">
 				<ul>
 				<g:each in="${searchResult.items['Utredningar']}" var="item">
