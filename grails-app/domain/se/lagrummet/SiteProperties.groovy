@@ -7,6 +7,7 @@ class SiteProperties {
 		footer(nullable: true, maxSize: 2147483647)
 		headerNavigation(nullable: true, maxSize: 2147483647)
 		primaryNavigation(nullable: true, maxSize:2147483647)
+		searchCats(nullable: true)
     }
 	
 	String title
@@ -14,4 +15,5 @@ class SiteProperties {
 	String footer
 	String headerNavigation
 	String primaryNavigation
+	String[] searchCats
 }

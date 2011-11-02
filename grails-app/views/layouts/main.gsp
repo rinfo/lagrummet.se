@@ -26,7 +26,20 @@
 				<g:breadcrumbs parent="${page?.parent}" />
 			</nav>
 			<g:form mapping="search" method="GET" name="search">
-				<div class="input">Vad vill du söka?</div>
+				<div class="input">
+					<p>Vad vill du söka?</p>
+					<label for="cat">Avgränsa din sökning</label>
+					<select id="cat" name="cat">
+					<g:each in="${siteProps?.searchCats}">
+						<g:if test="${params.cat == it}">
+							<option value="${it}" selected="selected" rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
+						</g:if>
+						<g:else>
+							<option value="${it}" rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
+						</g:else>
+					</g:each>
+					</select>
+				</div>
 				<div class="input"><g:textField name="query"/></div>
 				<g:submitButton name="searchSubmit" value="Sök"/>
 			</g:form>

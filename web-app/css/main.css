@@ -166,7 +166,6 @@ a.step, .currentStep {
 #siteHeader {
 	float: left;
 	width: 720px;
-	overflow: auto;
 	position: relative;
 	margin-left: 40px;
 }
@@ -328,9 +327,9 @@ body > footer > nav, body > footer > div {
 	width: 100%;
 	margin: 1em 0;
 	padding: 0;
-	overflow: auto;
 	font-weight: bold;
 	color: #585858;
+	height: 40px;
 }
 
 #search > *{
@@ -341,6 +340,7 @@ body > footer > nav, body > footer > div {
 	border: 1px solid #ddd;
 	display: block;
 	float: left;
+	background-color: #eee;
 	/*background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f2), to(#fff));*/
 	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
 	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
@@ -353,6 +353,67 @@ body > footer > nav, body > footer > div {
 #search .input {
 	clear: none;
 	margin-top: 0;
+	position: relative;
+}
+
+#search .input label {
+	font-size: 0.9em;
+	font-weight: normal;
+	font-style: normal;
+}
+
+#search .input select {
+	clear: none;
+	margin-top: 0;
+	display: inline;
+	float: right;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 16em;
+	font-size: 0.9em;
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+
+#searchCurrentCategory {
+	position: absolute;
+	right: 0;
+	bottom: 4px;
+	padding-right: 20px;
+	font-size: 0.8em;
+	cursor: pointer;
+}
+
+#searchCategories {
+	position: absolute;
+	left: 0;
+	top: 41px;
+	z-index: 10;
+	background-color: #f7f7f7;
+	padding: 0.5em 1em;
+	font-weight: normal;
+	border: 1px solid #ddd;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 3px 3px 14px #ddd;
+	-moz-box-shadow: 3px 3px 14px #ddd;
+	box-shadow: 3px 3px 14px #ddd;
+	display: none;
+}
+
+#searchCategories li {
+	padding: 0.5em 0;
+	border-top: 1px solid #ddd;
+	cursor: pointer;
+}
+
+#searchCategories li:first-child {
+	padding-top: 0;
+	border-top: none;
 }
 
 #search > *:first-child {
@@ -375,6 +436,7 @@ body > footer > nav, body > footer > div {
 	height: 42px;
 	font-weight: bold;
 	color: #585858;
+	background-color: #eee;
 	padding: 0;
 }
 

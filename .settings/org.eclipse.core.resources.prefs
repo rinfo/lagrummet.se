@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-#Tue Nov 01 11:23:10 CET 2011
-=======
-#Mon Oct 31 17:00:42 CET 2011
->>>>>>> 431980e4f532b20d6f23ff71fe8a8f83c27e078a
+#Wed Nov 02 11:14:49 CET 2011
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=431980e4f532b20d6f23ff71fe8a8f83c27e078a
 eclipse.preferences.version=1
+encoding//grails-app/conf/BootStrap.groovy=UTF-8
 encoding//grails-app/i18n/messages.properties=UTF-8
 encoding//grails-app/views/layouts/adminMain.gsp=UTF-8
 encoding//grails-app/views/layouts/main.gsp=UTF-8

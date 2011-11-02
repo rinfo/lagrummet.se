@@ -33,7 +33,8 @@ class BootStrap {
 			<ul class="learnMore">
 				<li class="heading">L&auml;r dig mer</li>
 				<li><a href="">Om r&auml;ttsinformation</a></li>
-			</ul>''', footer: "").save()
+			</ul>''', searchCats: ["Alla", "Lagar", "Rattsfall", "Propositioner", "Utredningar", "Ovrigt"],
+			footer: "").save()
 		} else {
 			def sProps = SiteProperties.findByTitle('lagrummet.se') ?: new SiteProperties(
 				title: "lagrummet.se"

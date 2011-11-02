@@ -10,7 +10,7 @@ class SearchController {
 		
 		def searchResult = null
 		def offset
-		if(params.query && params.cat)  {
+		if(params.query && params.cat && params.cat != "Alla")  {
 			offset = parseInt(params.offset, 0)
 			def itemsPerPage = parseInt(params.max, 20)
 			searchResult = searchService.plainTextSearch(params.query, Category.getFromString(params.cat), offset, itemsPerPage)
@@ -22,7 +22,7 @@ class SearchController {
 		if (params.ajax) {
 			def response = [query: params.query, searchResult: searchResult]
 			render response as JSON
-		} else if(params.cat) {
+		} else if(params.cat && params.cat != "Alla") {
 			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page(), offset:offset])
 		} else {
 			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page()])
