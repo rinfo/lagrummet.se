@@ -6,19 +6,18 @@ class LocalSearchService {
 
     static transactional = true
 
-    public SearchResult plainTextSearch(String query, Category cat, Map options = [:]) {
-		
+    public SearchResult plainTextSearch(String query, Category cat, Integer offset, Integer itemsPerPage) {
+		def options = [:]
 		if(cat && !cat.equals(Category.OVRIGT)){
 			return new SearchResult()
 		}
+		
+		if(offset != null && itemsPerPage) {
+			options['offset'] = offset
+			options['max'] = itemsPerPage
+		}
 		return queryWithOptions(query, options)
 	}
-	
-	public SearchResult plainTextSearchPaged(String query, Category cat, Integer offset, Integer itemsPerPage) {
-		def options = [offset: offset, max: itemsPerPage]
-		return plainTextSearch(query, cat, options)
-	}
-	
 	
 	private SearchResult queryWithOptions(String query, Map options) {
 		def searchResult = new SearchResult()

@@ -13,10 +13,10 @@ class SearchController {
 		if(params.query && params.cat)  {
 			offset = parseInt(params.offset, 0)
 			def itemsPerPage = parseInt(params.max, 20)
-			searchResult = searchService.plainTextSearchPaged(params.query, Category.getFromString(params.cat), offset, itemsPerPage)
+			searchResult = searchService.plainTextSearch(params.query, Category.getFromString(params.cat), offset, itemsPerPage)
 			
 		} else if(params.query) {
-			searchResult = searchService.plainTextSearch(params.query, Category.getFromString(params.cat))
+			searchResult = searchService.plainTextSearch(params.query, Category.getFromString(params.cat), null, null)
 		}
 
 		if (params.ajax) {

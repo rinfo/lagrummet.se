@@ -14,18 +14,14 @@ class SearchService {
 	def rdlSearchService
 	def localSearchService
 	
-    public SearchResult plainTextSearch(String query, Category cat) {
+    public SearchResult plainTextSearch(String query, Category cat, Integer offset, Integer itemsPerPage) {
 		
-		def remoteResult = rdlSearchService.plainTextSearch(query, cat)
-		def localResult = localSearchService.plainTextSearch(query, cat)
+		def remoteResult = rdlSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
+		def localResult = localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
 		
 		return remoteResult.mergeWith(localResult)
 	}
 	
-	public SearchResult plainTextSearchPaged(String query, Category cat, Integer offset, Integer itemsPerPage) {
-		def remoteResult = rdlSearchService.plainTextSearchPaged(query, cat, offset, itemsPerPage)
-		def localResult = localSearchService.plainTextSearchPaged(query, cat, offset, itemsPerPage)
-		return remoteResult.mergeWith(localResult)
-	}
+	
 	
 }

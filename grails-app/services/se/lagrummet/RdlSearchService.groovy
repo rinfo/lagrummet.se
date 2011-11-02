@@ -13,7 +13,8 @@ class RdlSearchService {
 	
 	def availableCategories = [Category.RATTSFALL, Category.LAGAR, Category.PROPOSITIONER, Category.UTREDNINGAR]
 	
-    public SearchResult plainTextSearch(String query, Category cat, Map queryParams = [:]) {
+    public SearchResult plainTextSearch(String query, Category cat, Integer offset, Integer itemsPerPage) {
+		def queryParams = [:]
 		queryParams['q'] = query
 		
 		if(cat && availableCategories.contains(cat)){
@@ -22,21 +23,19 @@ class RdlSearchService {
 			return new SearchResult()
 		}
 		
+		if(offset != null && itemsPerPage) {
+			queryParams['_page'] = offset / itemsPerPage
+			queryParams['_pageSize'] = itemsPerPage
+		}
+		
 		return searchWithQuery(queryParams)
 	}
 	
-	public SearchResult plainTextSearchPaged(String query, Category cat, Integer offset, Integer itemsPerPage) {
-		def queryParams = [:]
-		queryParams['_page'] = offset / itemsPerPage
-		queryParams['_pageSize'] = itemsPerPage
-		
-		return plainTextSearch(query, cat, queryParams)
-	}
 	
 	private SearchResult searchWithQuery(queryParams) {
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
-		
+
 		def http = new HTTPBuilder()
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
