@@ -3,6 +3,7 @@
     <head>
         <title><g:layoutTitle default="Grails" /></title>
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
+        <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}">
         <g:layoutHead />
         <!--[if IE]>
