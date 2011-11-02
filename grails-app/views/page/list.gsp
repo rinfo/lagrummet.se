@@ -15,7 +15,6 @@
             </g:if>
             <div class="list">
                 <table>
-                    <thead>
                         <tr>
                         
                             <g:sortableColumn property="id" title="${message(code: 'page.id.label', default: 'Id')}" />
@@ -31,7 +30,6 @@
                             <g:sortableColumn property="publishStop" title="${message(code: 'page.publishStop.label', default: 'Publish Stop')}" />
                         
                         </tr>
-                    </thead>
                     <tbody>
                     <g:each in="${pageInstanceList}" status="i" var="pageInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">

@@ -154,6 +154,14 @@ form .input:first-child {
 	margin-top: 0;
 }
 
+a.nextLink {
+	margin-left: 0.25em;
+}
+
+a.step, .currentStep {
+	margin-left: 0.25em;
+}
+
 /* =HEADER */
 #siteHeader {
 	float: left;
@@ -414,9 +422,10 @@ body > footer > nav, body > footer > div {
 	color: #888;
 }
 
-/*.searchResults strong {
-	color: #333;
-}*/
+.searchResults a.catTitle {
+	color: #006383;
+	font-weight: bold;
+}
 
 .searchResults table td, .searchResults table th {
 	min-width: 12em;
