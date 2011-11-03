@@ -7,7 +7,6 @@ class SearchController {
 	def searchService
 
     def index = {
-		
 		def searchResult = null
 		def offset
 		if(params.query && params.cat && params.cat != "Alla")  {
