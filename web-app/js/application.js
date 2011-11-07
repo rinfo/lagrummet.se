@@ -1,5 +1,31 @@
 var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
 
+//Make the search category drop-down more dynamic
+$("#cat").hide().after('<div id="searchCurrentCategory" /><ul id="searchCategoryList" />');
+if ($("#cat option[selected=selected]").size() < 1) {
+	$("#cat option").eq(0).attr("selected", "selected");
+	$("#cat").change();
+}
+$("html").click(function() {
+	$("#searchCategoryList").hide();
+});
+$("#searchCurrentCategory").html($("#cat option[selected=selected]").html());
+$("#searchCategory, #searchCategory label").click(function(e) {
+	e.stopPropagation();
+	$("#searchCategoryList").toggle();
+});
+
+$("#cat option").each(function() {
+	$("#searchCategoryList").append('<li rel="'+$(this).val()+'"><p><strong rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("rel")+'</p></li>');
+});
+$("#searchCategoryList li").click(function(e) {
+	e.stopPropagation();
+	$("#cat").val($(this).attr("rel"));
+	$("#searchCurrentCategory").html($(this).find("[rel=title]").html());
+	$("#searchCategoryList").hide();
+});
+
+// Instant search
 function search() {
 	var form = $("#search");
 	if (!$("#dynamicSearchResults").length) {
@@ -142,23 +168,6 @@ function search() {
 		} else if ($(this).attr("value").length > 2) {
 			t=setTimeout("search()", 300);	
 		}
-	});
-	
-	// Make the search category drop-down more dynamic
-	$("#cat").hide().after('<div id="searchCurrentCategory" /><ul id="searchCategories" />');
-	if ($("#cat option[selected=selected]").size() < 1) {
-		$("#cat option").eq(0).attr("selected", "selected");
-		$("#cat").change();
-	}
-	$("#searchCurrentCategory").html($("#cat option[selected=selected]").html()).click(function() {$("#searchCategories").toggle();});
-	
-	$("#cat option").each(function() {
-		$("#searchCategories").append('<li rel="'+$(this).val()+'"><p><strong rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("rel")+'</p></li>');
-	});
-	$("#searchCategories li").click(function() {
-		$("#cat").val($(this).attr("rel"));
-		$("#searchCurrentCategory").html($(this).find("[rel=title]").html());
-		$("#searchCategories").hide();
 	});
 })(jQuery);
 

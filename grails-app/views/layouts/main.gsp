@@ -26,7 +26,7 @@
 				<g:breadcrumbs parent="${page?.parent}" />
 			</nav>
 			<g:form mapping="search" method="GET" name="search">
-				<div class="input">
+				<div class="input" id="searchCategory">
 					<p>Vad vill du söka?</p>
 					<label for="cat">Avgränsa din sökning</label>
 					<select id="cat" name="cat">

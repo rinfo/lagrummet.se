@@ -214,7 +214,7 @@ a.step, .currentStep {
 #breadcrumbs {
 	clear: both;
 	margin: 2em 0 1em 0;
-	font: 1.4em 'Century Gothic', sans-serif;
+	font: 1.2em 'Century Gothic', sans-serif;
 }
 
 #siteFooter {
@@ -379,6 +379,10 @@ body > footer > nav, body > footer > div {
 	font-family: verdana, arial, helvetica, sans-serif;
 }
 
+#searchCategory {
+	cursor: pointer;
+}
+
 #searchCurrentCategory {
 	position: absolute;
 	right: 0;
@@ -388,13 +392,13 @@ body > footer > nav, body > footer > div {
 	cursor: pointer;
 }
 
-#searchCategories {
+#searchCategoryList {
 	position: absolute;
 	left: 0;
 	top: 41px;
 	z-index: 10;
 	background-color: #f7f7f7;
-	padding: 0.5em 1em;
+	padding: 0;
 	font-weight: normal;
 	border: 1px solid #ddd;
 	-moz-border-radius: 5px;
@@ -405,15 +409,18 @@ body > footer > nav, body > footer > div {
 	display: none;
 }
 
-#searchCategories li {
-	padding: 0.5em 0;
+#searchCategoryList li {
+	padding: 1em;
 	border-top: 1px solid #ddd;
 	cursor: pointer;
 }
 
-#searchCategories li:first-child {
-	padding-top: 0;
+#searchCategoryList li:first-child {
 	border-top: none;
+}
+
+#searchCategoryList li:hover {
+	background-color: #FFF9EB;
 }
 
 #search > *:first-child {
