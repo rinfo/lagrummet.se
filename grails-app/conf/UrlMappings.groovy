@@ -14,10 +14,17 @@ class UrlMappings {
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
 
+		name advancedSearch: "/search/adv/" {
+			controller = "search"
+			action = "adv"
+		}
+		
 		name search: "/search/" {
 			controller = "search"
 			action = "index"
 		}
+		
+		
 		
 		name rinfo: "/rinfo/$docPath**" {
 			controller = "rinfo"

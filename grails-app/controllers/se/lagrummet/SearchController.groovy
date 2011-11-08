@@ -1,10 +1,12 @@
 package se.lagrummet
 
 import grails.converters.*
+import se.lagrummet.Page
 
 class SearchController {
 	
 	def searchService
+	def rdlSearchService
 
     def index = {
 		def searchResult = null
@@ -27,6 +29,17 @@ class SearchController {
 			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page()])
 		}
 		
+	}
+	
+	def adv = {
+		def offset = parseInt(params.offset, 0)
+		def itemsPerPage = parseInt(params.max, 20)
+
+		def queryBuilder = new QueryBuilder(params)
+		queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
+		
+		def searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
+		render(view: 'searchResultByCategory', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: Category.getCategoryForType(params.typ), searchResult: searchResult, page: new Page()])
 	}
 	
 	private Integer parseInt(String input, Integer defaultValue = 0) {

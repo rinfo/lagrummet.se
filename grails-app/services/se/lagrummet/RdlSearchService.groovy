@@ -24,7 +24,7 @@ class RdlSearchService {
 		}
 		
 		if(offset != null && itemsPerPage) {
-			queryParams['_page'] = offset / itemsPerPage
+			queryParams['_page'] = (int)(offset / itemsPerPage)
 			queryParams['_pageSize'] = itemsPerPage
 		}
 		
@@ -32,10 +32,10 @@ class RdlSearchService {
 	}
 	
 	
-	private SearchResult searchWithQuery(queryParams) {
+	public SearchResult searchWithQuery(Map queryParams) {
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
-
+System.out.println(queryParams)
 		def http = new HTTPBuilder()
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
