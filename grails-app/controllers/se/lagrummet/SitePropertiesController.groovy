@@ -64,6 +64,7 @@ class SitePropertiesController {
                     return
                 }
             }
+			
             sitePropertiesInstance.properties = params
             if (!sitePropertiesInstance.hasErrors() && sitePropertiesInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'siteProperties.label', default: 'SiteProperties'), sitePropertiesInstance.id])}"

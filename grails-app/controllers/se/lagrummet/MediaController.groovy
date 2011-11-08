@@ -79,7 +79,7 @@ class MediaController {
 		// Create a directory
 //		String.format('%tF', new Date())
 		
-		mediaInstance.filename = grailsApplication.config.lcms.upload.dir + parentDir+ "/" + filename
+		mediaInstance.filename = grailsApplication.config.lagrummet.upload.dir + parentDir+ "/" + filename
 		def fos = new FileOutputStream(new File("web-app/" + mediaInstance.filename));
 		IOUtils.copy(is, fos);
 		fos.close();

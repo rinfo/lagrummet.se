@@ -109,11 +109,12 @@ grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 
 // Properties for the Lagrummet.se CMS
 
-lcms {
+lagrummet {
 	googleAnalytics.webPropertyId = ""
 	upload.dir = "uploads/"
+	rdl.service.baseurl="http://service.demo.lagrummet.se"
+	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
+	local.rinfo.view="${grails.serverURL}/rinfo/"
+	search.availableCategories=["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Ovrigt"]
 }
 
-lagrummet.rdl.service.baseurl="http://service.demo.lagrummet.se"
-lagrummet.rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
-lagrummet.local.rinfo.view="${grails.serverURL}/rinfo/"

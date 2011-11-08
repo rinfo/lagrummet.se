@@ -43,6 +43,22 @@
 					<label for="title"><g:message code="siteProperties.primaryNavigation.label" default="primaryNavigation" /></label>
 					<g:textArea name="primaryNavigation" id="primNav" value="${sitePropertiesInstance?.primaryNavigation}" />
 				</div>
+				
+				<div class="input ${hasErrors(bean: sitePropertiesInstance, field: 'searchCats', 'errors')}">
+					<label for="title"><g:message code="siteProperties.searchCats.label" default="searchCats" /></label>
+					<g:select name="searchCats"
+				          from="${grailsApplication.config.lagrummet.search.availableCategories}"
+				          valueMessagePrefix="category"
+				          multiple="true" />
+				    <script>
+				    jQuery(document).ready(function($) {
+					    var sel = $('#searchCats');
+					    <g:each in="${sitePropertiesInstance?.searchCats}" var="s">
+					    	sel.find('option[value="${s}"]').attr('selected', 'selected');
+					    </g:each>
+				    });
+				    </script>
+				</div>
 
                 <div class="buttons">
                 	<span class="button"><g:actionSubmit  name="update" action="update" class="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
