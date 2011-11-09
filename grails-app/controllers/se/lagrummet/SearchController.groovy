@@ -31,7 +31,7 @@ class SearchController {
 		
 	}
 	
-	def adv = {
+	def extended = {
 		def offset = parseInt(params.offset, 0)
 		def itemsPerPage = parseInt(params.max, 20)
 
