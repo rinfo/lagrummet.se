@@ -1,4 +1,4 @@
-#Wed Nov 02 11:14:49 CET 2011
+#Wed Nov 09 16:06:54 CET 2011
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=431980e4f532b20d6f23ff71fe8a8f83c27e078a
@@ -6,11 +6,13 @@ eclipse.preferences.version=1
 encoding//grails-app/conf/BootStrap.groovy=UTF-8
 encoding//grails-app/i18n/messages.properties=UTF-8
 encoding//grails-app/views/layouts/adminMain.gsp=UTF-8
+encoding//grails-app/views/layouts/extendedSearchMain.gsp=UTF-8
 encoding//grails-app/views/layouts/main.gsp=UTF-8
 encoding//grails-app/views/media/edit.gsp=UTF-8
 encoding//grails-app/views/media/list.gsp=UTF-8
 encoding//grails-app/views/page/edit.gsp=UTF-8
 encoding//grails-app/views/rinfo/show.gsp=UTF-8
+encoding//grails-app/views/search/extendedSearch.gsp=UTF-8
 encoding//grails-app/views/search/searchForm.gsp=UTF-8
 encoding//grails-app/views/search/searchResultByCategory.gsp=UTF-8
 encoding/<project>=UTF-8
