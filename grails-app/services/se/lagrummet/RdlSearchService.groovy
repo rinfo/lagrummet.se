@@ -14,21 +14,20 @@ class RdlSearchService {
 	def availableCategories = [Category.RATTSFALL, Category.LAGAR, Category.PROPOSITIONER, Category.UTREDNINGAR]
 	
     public SearchResult plainTextSearch(String query, Category cat, Integer offset, Integer itemsPerPage) {
-		def queryParams = [:]
-		queryParams['q'] = query
+		def queryBuilder = new QueryBuilder()
+		queryBuilder.setQuery(query)
 		
 		if(cat && availableCategories.contains(cat)){
-			queryParams['type'] = cat.getTypes()
+			queryBuilder.setType(cat.getTypes())
 		} else if (cat) {
 			return new SearchResult()
 		}
 		
 		if(offset != null && itemsPerPage) {
-			queryParams['_page'] = (int)(offset / itemsPerPage)
-			queryParams['_pageSize'] = itemsPerPage
+			queryBuilder.setPageAndPageSize((int)(offset / itemsPerPage), itemsPerPage)
 		}
 		
-		return searchWithQuery(queryParams)
+		return searchWithQuery(queryBuilder.getQueryParams())
 	}
 	
 	
