@@ -138,7 +138,6 @@ th {
 /* =FORMS */
 form label {
 	width: 100%;
-	font-style: italic;
 	display: block;
 }
 
@@ -172,6 +171,11 @@ a.step, .currentStep {
 	width: 720px;
 	position: relative;
 	margin-left: 40px;
+}
+
+#siteHeader > p.extendedSearch {
+	float: right;
+	margin-bottom: 1em;
 }
 
 #logo {
@@ -289,10 +293,14 @@ body article {
     width: 720px;
     margin: 0 0 0 40px;
     background-color: #fff;
-    float: left;
+    float: right;
 	/*-webkit-box-shadow: 2px 2px 6px #ccc;
 	-moz-box-shadow: 1px 1px 6px #ccc;
 	box-shadow: 2px 2px 6px #ccc;*/
+}
+
+body article:first-child {
+    float: left;
 }
 
 body article ul {
@@ -392,8 +400,14 @@ body > footer > nav, body > footer > div {
 	right: 0;
 	bottom: 4px;
 	padding-right: 20px;
+	margin-right: 1em;
 	font-size: 0.8em;
 	cursor: pointer;
+	background: transparent url(../images/arrow-down.png) no-repeat right center;
+}
+
+#searchCurrentCategory.active {
+	background: transparent url(../images/arrow-up.png) no-repeat right center;
 }
 
 #searchCategoryList {
@@ -536,6 +550,66 @@ body > footer > nav, body > footer > div {
 	border-top: 1px solid #eee;
 }
 
+/* =Extended Search */
+#extendedSearch {
+	padding-bottom: 1em;
+    border-top: 1px solid #eee;
+}
+
+#extendedSearch fieldset {
+	background-color: #f7f7f7;
+	border: 1px solid #eee;
+	padding: 1em;
+}
+
+#extendedSearch .legend {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0 1em 1em 1em;
+}
+
+#extendedSearch .rGroup {
+	float: left;
+	margin-left: 1em;
+}
+
+#extendedSearch .rGroup input {
+	width: auto;
+	display: block;
+	float: left;
+}
+
+#extendedSearch .rGroup label {
+	display: block;
+	margin-left: 2em;
+	width: 190px;
+}
+
+#extendedSearch > label {
+	margin-top: 1em;
+}
+
+#extendedSearch .buttons {
+	text-align: right;
+	width: 100%;
+}
+
+#extendedSearchSubmit {
+	display: block;
+	margin-top: 1em;
+	padding: 0.75em 1.5em;
+	background-color: #eee;
+	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	font-weight: bold;
+	float: right;
+	width: auto;
+}
 
 /* ARTICLE in rinfo */
 #rinfo {

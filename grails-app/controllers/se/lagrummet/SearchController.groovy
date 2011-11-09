@@ -39,7 +39,10 @@ class SearchController {
 		queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
 		
 		def searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
-		render(view: 'searchResultByCategory', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: Category.getCategoryForType(params.typ), searchResult: searchResult, page: new Page()])
+		
+		def cat = (params.kategori) ? params.kategori : Category.getCategoryForType(params.typ)
+		
+		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page()])
 	}
 	
 	private Integer parseInt(String input, Integer defaultValue = 0) {

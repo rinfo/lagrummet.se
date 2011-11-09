@@ -15,7 +15,7 @@ function search() {
         		$("#dynamicSearchResults").html('<header><h1>Sökresultat</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column" id="c-1" /><div class="column" id="c-2" />');
         		
         		// Redaktionella resultat
-        			$("#c-1").append('<p><a href="'+serverUrl+'search?query='+$("#query")+'"><strong>Information från lagrummet.se</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></a></p>');
+        			$("#c-1").append('<p><a href="'+serverUrl+'search?query='+$("#query").attr("value")+'"><strong>Information från lagrummet.se</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></a></p>');
         			if (data.searchResult.items['Ovrigt'] && data.searchResult.items['Ovrigt'].length > 0) {
         				$("#c-1").append('<ul id="ovrigt" />');
             			
@@ -34,7 +34,7 @@ function search() {
         		
         		// Propositioner
         		
-    			$("#c-1").append('<p><a href="'+serverUrl+'search?query='+$("#query")+'"><strong>Propositioner och skrivelser</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></a></p>');
+    			$("#c-1").append('<p><a href="'+serverUrl+'search?query='+$("#query").attr("value")+'"><strong>Propositioner och skrivelser</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></a></p>');
         			
         		if (data.searchResult.items['Propositioner'] && data.searchResult.items['Propositioner'].length > 0) {
         			$("#c-1").append('<ul id="propositioner" />');
@@ -54,7 +54,7 @@ function search() {
         		}
         		
         		// Rättsfall
-        			$("#c-1").append('<p><a href="'+serverUrl+'search?query='+$("#query")+'"><strong>Rättsfall</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Rattsfall'] +')</span></a></p>');
+        			$("#c-1").append('<p><a href="'+serverUrl+'search?query='+$("#query").attr("value")+'"><strong>Rättsfall</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Rattsfall'] +')</span></a></p>');
         			if (data.searchResult.items['Rattsfall'] && data.searchResult.items['Rattsfall'].length > 0) {
         				$("#c-1").append('<ul id="rattsfall" />');
             			
@@ -75,7 +75,7 @@ function search() {
         			
         		
         		// Lagar
-        			$("#c-2").append('<p><a href="'+serverUrl+'search?query='+$("#query")+'"><strong>Lagar och förordningar</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Lagar'] +')</span></a></p>');
+        			$("#c-2").append('<p><a href="'+serverUrl+'search?query='+$("#query").attr("value")+'"><strong>Lagar och förordningar</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Lagar'] +')</span></a></p>');
         			if (data.searchResult.items['Lagar'] && data.searchResult.items['Lagar'].length > 0) {
         				$("#c-2").append('<ul id="lagar" />');
             			
@@ -96,7 +96,7 @@ function search() {
         			
         		
         		// Utredningar
-        			$("#c-2").append('<p><a href="'+serverUrl+'search?query='+$("#query")+'"><strong>Utredningar</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></a></p>');
+        			$("#c-2").append('<p><a href="'+serverUrl+'search?query='+$("#query").attr("value")+'"><strong>Utredningar</strong> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></a></p>');
         			if (data.searchResult.items['Utredningar'] && data.searchResult.items['Utredningar'].length > 0) {
         				$("#c-2").append('<ul id="utredningar" />');
             			
@@ -142,12 +142,14 @@ jQuery(document).ready(function($) {
 	}
 	$("html").click(function() {
 		$("#searchCategoryList").hide();
+		$("#searchCurrentCategory").removeClass("active");
 	});
 	$("#searchCurrentCategory").html($("#cat option[selected=selected]").html());
 	$("#searchCategory").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
 		$("#searchCategoryList").toggle();
+		$("#searchCurrentCategory").toggleClass("active");
 	});
 
 	$("#cat option").each(function() {
@@ -156,7 +158,7 @@ jQuery(document).ready(function($) {
 	$("#searchCategoryList li").click(function(e) {
 		e.stopPropagation();
 		$("#cat").val($(this).attr("rel"));
-		$("#searchCurrentCategory").html($(this).find("[rel=title]").html());
+		$("#searchCurrentCategory").html($(this).find("[rel=title]").html()).removeClass("active");
 		$("#searchCategoryList").hide();
 	});
 	
