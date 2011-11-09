@@ -7,8 +7,13 @@ class QueryBuilder {
 	
 	private queryParams = [:]
 	
+	public QueryBuilder() {
+		
+	}
+	
 	public QueryBuilder(Map params) {
 		
+		setQuery(params.query)
 		setBeslutsdatum(params.beslutsdatum)
 		setBeslutsdatumFrom(params.beslutsdatumMin)
 		setBeslutsdatumTo(params.beslutsdatumMax)
@@ -33,9 +38,14 @@ class QueryBuilder {
 	}
 	
 	private void setParam(String key, Integer value) {
-		if(value) {
+		if(value != null) {
 			queryParams[(key)] = value
 		}
+	}
+	
+	public QueryBuilder setQuery(String query) {
+		setParam('q', query)
+		return this
 	}
 	
 	public QueryBuilder setBeslutsdatum(String beslutsdatum){
