@@ -34,7 +34,7 @@ class RdlSearchService {
 	public SearchResult searchWithQuery(Map queryParams) {
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
-System.out.println(queryParams)
+
 		def http = new HTTPBuilder()
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
