@@ -14,9 +14,8 @@ class UrlMappings {
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
 
-		name advancedSearch: "/search/ext/" {
+		name advancedSearch: "/search/$action/" {
 			controller = "search"
-			action = "extended"
 		}
 		
 		name search: "/search/" {

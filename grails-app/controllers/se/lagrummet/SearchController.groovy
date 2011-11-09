@@ -31,7 +31,7 @@ class SearchController {
 		
 	}
 	
-	def extended = {
+	def ext = {
 		def offset = parseInt(params.offset, 0)
 		def itemsPerPage = parseInt(params.max, 20)
 
@@ -40,6 +40,14 @@ class SearchController {
 		
 		def searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
 		render(view: 'searchResultByCategory', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: Category.getCategoryForType(params.typ), searchResult: searchResult, page: new Page()])
+	}
+	
+	def findAvailablePublishers = {
+		
+		def publishers = rdlSearchService.getAvailablePublishers(params.q)
+		
+		def response = ['publishers' : publishers]
+		render response as JSON
 	}
 	
 	private Integer parseInt(String input, Integer defaultValue = 0) {

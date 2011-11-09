@@ -171,5 +171,15 @@ jQuery(document).ready(function($) {
 			t=setTimeout("search()", 300);	
 		}
 	});
+	
+	$("#publisher").keyup(function(e) {
+		var query = $(this).attr("value");
+		$.get('search/findAvailablePublishers', {q: query}, function(data) {
+			if(data) {
+				$.each(data.publishers, function(i, item){
+				});
+			}
+		}, "json");
+	});
 });
 

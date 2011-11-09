@@ -71,6 +71,39 @@ class RdlSearchService {
 		return searchResult
 	}
 	
+	public List<String> getAvailablePublishers(String match) {
+		
+		def publishers = []
+		def http = new HTTPBuilder()
+		try {
+			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
+				uri.path = "/-/stats"
+				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
+				req.getParams().setParameter("http.socket.timeout", new Integer(5000));
+				
+				response.success = { resp, json ->
+					json.slices.each {  
+						if(it.dimension == 'publisher') {
+							it.observations.each {  obs ->
+								def tokens = obs.ref.tokenize('/')
+								def publisher = tokens.get(tokens.size() -1)
+								if(match && publisher.toLowerCase().contains(match.toLowerCase())) {
+									publishers.add(publisher)
+								} else if(!match) {
+									publishers.add(publisher)
+								}
+							}
+						}
+					}
+				}
+				
+			}
+		} catch(SocketTimeoutException) {
+		
+		}
+		return publishers
+	}
+	
 	public String getBestMatch(JSONObject item) {
 		def bestMatch = ""
 		item.matches?.each{ matchKey, matchesList ->
@@ -80,4 +113,5 @@ class RdlSearchService {
 		}
 		return bestMatch
 	}
+	
 }
