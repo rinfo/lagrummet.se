@@ -17,6 +17,9 @@ class QueryBuilder {
 		setBeslutsdatum(params.beslutsdatum)
 		setBeslutsdatumFrom(params.beslutsdatumMin)
 		setBeslutsdatumTo(params.beslutsdatumMax)
+		setUtfardandedatum(params.utfardandedatum)
+		setUtfardandedatumFrom(params.utfardandedatumMin)
+		setUtfardandedatumTo(params.utfardandedatumMax)
 		setIkraft(params.ikraftDatum)
 		setIkraftFrom(params.ikraftDatumMin)
 		setIkraftTo(params.ikraftDatumMax)
@@ -58,6 +61,19 @@ class QueryBuilder {
 	}
 	public QueryBuilder setBeslutsdatumTo(String beslutsdatum) {
 		setParam('max-beslutsdatum', beslutsdatum)
+		return this
+	}
+	
+	public QueryBuilder setUtfardandedatum(String utfardandedatum) {
+		setParam('utfardandedatum', utfardandedatum)
+		return this
+	}
+	public QueryBuilder setUtfardandedatumFrom(String utfardandedatum) {
+		setParam('min-utfardandedatum', utfardandedatum)
+		return this
+	}
+	public QueryBuilder setUtfardandedatumTo(String utfardandedatum) {
+		setParam('max-utfardandedatum', utfardandedatum)
 		return this
 	}
 	
