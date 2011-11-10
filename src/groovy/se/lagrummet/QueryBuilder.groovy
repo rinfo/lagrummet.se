@@ -30,6 +30,7 @@ class QueryBuilder {
 		setPublisher(params.utgivare)
 		setCreator(params.skapare)
 		setReferatrubrik(params.referatrubrik)
+		setParagrafnummer(params.paragrafnummer)
 		setPageAndPageSize(params.page, params.itemsPerPage)
 		
 	}
@@ -139,6 +140,11 @@ class QueryBuilder {
 		setParam('referatrubrik', referatrubrik)
 		return this
 	}
+	
+	public QueryBuilder setParagrafnummer(String paragrafnummer) {
+		setParam("lagrum.paragrafnummer", paragrafnummer)
+		return this
+	}
 
 	public QueryBuilder setPageAndPageSize(Integer page, Integer pageSize) {
 		setParam('_page', page)
@@ -152,5 +158,9 @@ class QueryBuilder {
 	
 	public String toString() {
 		return queryParams.toString()
+	}
+	
+	public boolean isEmpty() {
+		return queryParams.size() == 0
 	}
 }
