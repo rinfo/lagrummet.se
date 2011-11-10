@@ -32,17 +32,19 @@ class SearchController {
 	}
 	
 	def ext = {
+		def searchResult
 		def offset = parseInt(params.offset, 0)
 		def itemsPerPage = parseInt(params.max, 20)
 
 		def queryBuilder = new QueryBuilder(params)
-		queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
-		
-		def searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
-		
-		def cat = (params.kategori) ? params.kategori : Category.getCategoryForType(params.typ)
-		
-		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page()])
+		def docTypes = params.typ ? Category.extendedSearchTypes[params.typ] : Category.getFromString(params.kategori)?.getTypes()
+		queryBuilder.setType(docTypes);
+		if(!queryBuilder.isEmpty()) {
+			queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
+			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
+		}
+		def cat = params.kategori ?: Category.LAGAR.toString()
+		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(), offset: offset])
 	}
 	
 	def findAvailablePublishers = {
