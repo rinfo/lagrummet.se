@@ -57,4 +57,10 @@ public enum Category {
 		
 		'Lagrummet.Artikel' : Category.OVRIGT
 		]
+	
+	static extendedSearchTypes = [
+		'Lagar' : ['Lag', 'Grundlag'],
+		'Myndigheters föreskrifter' : ['Myndighetsforeskrift'],
+		'Förordningar' : ['Forordning'],
+	]
 }
