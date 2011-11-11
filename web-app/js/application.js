@@ -183,5 +183,18 @@ jQuery(document).ready(function($) {
 			}
 		}, "json");
 	});
+	
+	// Interactive form on the extended search page
+	$("#extSearchCats input").change(function() {
+		$(".extendedSearch").addClass("hidden");
+		$("#"+$(this).attr("value")).removeClass("hidden");
+	});
+	
+	$.datepicker.setDefaults( $.datepicker.regional[ "sv" ] );
+	$( "#extendedSearch input[type=date]" ).datepicker({ dateFormat: 'yy-mm-dd' }).each(function() {
+		if (!$(this).attr("value")) {
+			$(this).attr("value", "åååå-mm-dd");
+		}
+	});
 });
 

@@ -3,6 +3,7 @@
     <head>
         <title><g:layoutTitle default="Grails" /></title>
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
+        <link rel="stylesheet" href="${resource(dir:'css/ui-lightness/',file:'jquery-ui-1.8.16.custom.css')}" />
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}">
         <g:layoutHead />
@@ -31,6 +32,7 @@
 	    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
 	    </footer>
 	    <g:javascript library="jquery" plugin="jquery" />
+	    <g:javascript library="jquery-ui-1.8.16.custom.min" />
 	    <g:javascript library="application" />
     </body>
 </html>

@@ -90,6 +90,14 @@ em {
 	cursor: pointer;
 }
 
+.hidden {
+	display: none;
+}
+
+.break {
+	clear: both;
+}
+
 ul {
     margin-left: 0;
     list-style-type: none;
@@ -155,6 +163,12 @@ form .input {
 
 form .input:first-child {
 	margin-top: 0;
+}
+
+fieldset .legend {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0 1em 1em 1em;
 }
 
 a.nextLink {
@@ -551,47 +565,61 @@ body > footer > nav, body > footer > div {
 }
 
 /* =Extended Search */
-#extendedSearch {
-	padding-bottom: 1em;
-    border-top: 1px solid #eee;
-}
-
-#extendedSearch fieldset {
+#extSearchCats {
 	background-color: #f7f7f7;
 	border: 1px solid #eee;
 	padding: 1em;
 }
 
-#extendedSearch .legend {
-	font-size: 1.2em;
-	font-weight: bold;
-	margin: 0 1em 1em 1em;
-}
-
-#extendedSearch .rGroup {
+fieldset .inputGroup {
 	float: left;
-	margin-left: 1em;
+	margin: 0 0 1em 1em;
 }
 
-#extendedSearch .rGroup input {
+fieldset .inputGroup input {
 	width: auto;
 	display: block;
 	float: left;
 }
 
-#extendedSearch .rGroup label {
+fieldset .inputGroup label {
 	display: block;
 	margin-left: 2em;
 	width: 190px;
 }
 
-#extendedSearch > label {
+.extendedSearch {
+	padding: 1em 0;
+    border-top: 1px solid #eee;
+}
+
+.extendedSearch fieldset {
+	border: none;
+	border-top: 1px solid #eee;
+	padding: 1em;
 	margin-top: 1em;
 }
 
-#extendedSearch .buttons {
+.extendedSearch fieldset input {
+	float: left;
+}
+
+.extendedSearch fieldset input[type=date] {
+    position: relative;
+}
+
+.extendedSearch fieldset label {
+	clear: right;
+}
+
+.extendedSearch > label {
+	margin-top: 1em;
+}
+
+.extendedSearch .buttons {
 	text-align: right;
 	width: 100%;
+	overflow: auto;
 }
 
 #extendedSearchSubmit {
