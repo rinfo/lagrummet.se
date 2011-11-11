@@ -23,6 +23,9 @@ class QueryBuilder {
 		setIkraft(params.ikraftDatum)
 		setIkraftFrom(params.ikraftDatumMin)
 		setIkraftTo(params.ikraftDatumMax)
+		setUtkomFranTryck(params.utkomfrantryck)
+		setUtkomFranTryckFrom(params.utkomfrantryckMin)
+		setUtkomFranTryckTo(params.utkomfrantryckMax)
 		setIdentifier(params.beteckning)
 		setTitle(params.titel)
 		setMalnummer(params.malnummer)
@@ -88,6 +91,19 @@ class QueryBuilder {
 	}
 	public QueryBuilder setIkraftTo(String ikraft) {
 		setParam('max-ikrafttradandedatum', ikraft)
+		return this
+	}
+	
+	public QueryBuilder setUtkomFranTryck(String utkomfrantryck) {
+		setParam('utkomFranTryck', utkomfrantryck)
+		return this
+	}
+	public QueryBuilder setUtkomFranTryckFrom(String utkomfrantryck) {
+		setParam('min-utkomFranTryck', utkomfrantryck)
+		return this
+	}
+	public QueryBuilder setUtkomFranTryckTo(String utkomfrantryck) {
+		setParam('max-utkomFranTryck', utkomfrantryck)
 		return this
 	}
 	
