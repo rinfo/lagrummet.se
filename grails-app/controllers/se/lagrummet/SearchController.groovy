@@ -1,7 +1,8 @@
 package se.lagrummet
 
 import grails.converters.*
-import se.lagrummet.Page
+
+import java.text.SimpleDateFormat
 
 class SearchController {
 	
@@ -39,6 +40,36 @@ class SearchController {
 		def queryBuilder = new QueryBuilder(params)
 		def docTypes = params.typ ? Category.extendedSearchTypes[params.typ] : Category.getFromString(params.kategori)?.getTypes()
 		queryBuilder.setType(docTypes);
+		
+		def dateFrom = params.datumMin
+		def dateTo = params.datumMax
+		
+		def dateType = params.datum
+				
+		if(params.fromDate && validDate(params.fromDate)){
+			if(dateType == 'ikraft') {
+				queryBuilder.setIkraftFrom(params.fromDate)
+			} else if(dateType == 'utfardande') {
+				queryBuilder.setUtfardandedatumFrom(params.fromDate)
+			} else if(dateType == 'avgorande') {
+				//todo
+			} else if(dateType == 'utgivande') {
+				queryBuilder.setUtkomFranTryckFrom(params.fromDate)
+			}
+		}
+		
+		if(params.toDate && validDate(params.toDate)){
+			if(dateType == 'ikraft') {
+				queryBuilder.setIkraftTo(params.toDate)
+			} else if(dateType == 'utfardande') {
+				queryBuilder.setUtfardandedatumTo(params.toDate)
+			} else if(dateType == 'avgorande') {
+				//todo
+			} else if(dateType == 'utgivande') {
+			queryBuilder.setUtkomFranTryckTo(params.toDate)
+			}
+		}
+		
 		if(!queryBuilder.isEmpty()) {
 			queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
 			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
@@ -53,6 +84,28 @@ class SearchController {
 		
 		def response = ['publishers' : publishers]
 		render response as JSON
+	}
+	
+	private boolean validDate(String date) {
+		def sdf = new SimpleDateFormat("yyyy-MM-dd")
+		
+		Date testDate = null
+		
+		try {
+			testDate = sdf.parse(date)
+		} catch(Exception e) {
+		System.out.println(e.getMessage());
+		
+		System.out.println("The date format is invalid: " + date);
+			return false
+		}
+		
+		if(!sdf.format(testDate).equals(date)) {
+			System.out.println("The date is not a valid date");
+			return false
+		}
+		
+		return true
 	}
 	
 	private Integer parseInt(String input, Integer defaultValue = 0) {
