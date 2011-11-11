@@ -62,5 +62,9 @@ public enum Category {
 		'Lagar' : ['Lag', 'Grundlag'],
 		'Myndigheters föreskrifter' : ['Myndighetsforeskrift'],
 		'Förordningar' : ['Forordning'],
+		
+		'Alla förarbeten' : ['Proposition', 'Utredningsbetankande', 'Kommittedirektiv'],
+		'Propositioner' : ['Proposition'],
+		'Utredningar' : ['Utredningsbetankande', 'Kommittedirektiv']
 	]
 }
