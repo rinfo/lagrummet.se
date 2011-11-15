@@ -17,7 +17,7 @@
 		</fieldset>
 		
 		<g:if test="${cat == 'Lagar'}"><g:set var="hidden" value="" /></g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
-		<g:form mapping="extendedSearch" method="GET" class="extendedSearch ${hidden}" name="Lagar">
+		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Lagar">
 			<input type="hidden" name="kategori" value="Lagar" />
 			
 			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ" /></label>
@@ -70,7 +70,7 @@
 		</g:form>
 		
 		<g:if test="${cat == 'Rattsfall'}"><g:set var="hidden" value="" /></g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
-		<g:form mapping="extendedSearch" method="GET" class="extendedSearch ${hidden}" name="Rattsfall">
+		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Rattsfall">
 			<input type="hidden" name="kategori" value="Rattsfall" />
 			
 			<label for="referatrubrik"><g:message code="extendedSearch.referatrubrik.label" default="Rubrik" /></label>
@@ -109,7 +109,7 @@
 		</g:form>
 		
 		<g:if test="${cat == 'Forarbeten'}"><g:set var="hidden" value="" /></g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
-		<g:form mapping="extendedSearch" method="GET" class="extendedSearch ${hidden}" name="Forarbeten">
+		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Forarbeten">
 			<input type="hidden" name="kategori" value="Forarbeten" />
 			
 			<label for="typ"><g:message code="extendedSearch.Forarbeten.typ.label" default="Välj typ av förarbete" /></label>
@@ -151,6 +151,7 @@
 	</article>
 
     <article id="searchResults" class="searchResults">
+    	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Print</a></p>
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>

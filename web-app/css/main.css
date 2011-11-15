@@ -244,6 +244,10 @@ a.step, .currentStep {
     clear: both;
 }
 
+a.print:visited {
+	color: #006383;
+}
+
 /* =CONTENT WRAPPER */
 
 /* =PRIMARY NAVIGATION */
@@ -498,6 +502,13 @@ body > footer > nav, body > footer > div {
 .searchResults .showAllLabel {
 	font-size: 0.8em;
 	margin: 0 0 1em 0;
+}
+
+.searchResults .printLabel {
+	font-size: 0.8em;
+	margin: 0;
+	float: right;
+	display: block;
 }
 
 .searchResults .query {
