@@ -31,10 +31,10 @@ class RdlSearchService {
 	}
 	
 	
-	public SearchResult searchWithQuery(Map queryParams) {
+	public SearchResult searchWithQuery(Map queryParams, String resultListType = 'category') {
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
-
+//System.out.println(queryParams)
 		def http = new HTTPBuilder()
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
@@ -56,8 +56,11 @@ class RdlSearchService {
 														matches: getBestMatch(item),
 														type: item.type
 														)
-						
-						searchResult.addItemByType(searchResultItem)
+						if("category".equals(resultListType)) {
+							searchResult.addItemByType(searchResultItem)
+						} else if("list".equals(resultListType)) {
+							searchResult.addItem(searchResultItem)
+						}
 					}
 				}
 				

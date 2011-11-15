@@ -7,6 +7,7 @@ class SearchResult {
 	Long maxItemsPerCategory = 4
 	def errorMessages = []
 	def items = [:]
+	def itemsList = []
 	
 	public SearchResult() {
 		for(Category cat : Category.values()) {
@@ -24,6 +25,10 @@ class SearchResult {
 		}
 		
 		totalResultsPerCategory[(category)] += 1
+	}
+	
+	public void addItem(SearchResultItem item) {
+		itemsList.add(item)
 	}
 	
 	

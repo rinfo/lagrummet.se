@@ -1,7 +1,8 @@
 package se.lagrummet
 
 import grails.converters.*
-import se.lagrummet.Page
+
+import java.text.SimpleDateFormat
 
 class SearchController {
 	
@@ -31,7 +32,7 @@ class SearchController {
 		
 	}
 	
-	def ext = {
+	def ext = { ExtendedSearchCommand esc ->
 		def searchResult
 		def offset = parseInt(params.offset, 0)
 		def itemsPerPage = parseInt(params.max, 20)
@@ -39,12 +40,39 @@ class SearchController {
 		def queryBuilder = new QueryBuilder(params)
 		def docTypes = params.typ ? Category.extendedSearchTypes[params.typ] : Category.getFromString(params.kategori)?.getTypes()
 		queryBuilder.setType(docTypes);
-		if(!queryBuilder.isEmpty()) {
+		
+		def dateType = params.datum
+		
+		if(params.fromDate && !esc.hasErrors()){
+			if(dateType == 'ikraft') {
+				queryBuilder.setIkraftFrom(params.fromDate)
+			} else if(dateType == 'utfardande') {
+				queryBuilder.setUtfardandedatumFrom(params.fromDate)
+			} else if(dateType == 'avgorande') {
+				//todo
+			} else if(dateType == 'utgivande') {
+				queryBuilder.setUtkomFranTryckFrom(params.fromDate)
+			}
+		}
+		
+		if(params.toDate && !esc.hasErrors()){
+			if(dateType == 'ikraft') {
+				queryBuilder.setIkraftTo(params.toDate)
+			} else if(dateType == 'utfardande') {
+				queryBuilder.setUtfardandedatumTo(params.toDate)
+			} else if(dateType == 'avgorande') {
+				//todo
+			} else if(dateType == 'utgivande') {
+				queryBuilder.setUtkomFranTryckTo(params.toDate)
+			}
+		} 
+		
+		if(!esc.hasErrors() && !queryBuilder.isEmpty()) {
 			queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
-			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
+			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams(), "list")
 		}
 		def cat = params.kategori ?: Category.LAGAR.toString()
-		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(), offset: offset])
+		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(), offset: offset, extendedSearchCommand: esc])
 	}
 	
 	def findAvailablePublishers = {
@@ -61,5 +89,43 @@ class SearchController {
 		} catch (Exception e) {
 			return defaultValue
 		}
+	}
+}
+
+class ExtendedSearchCommand {
+	String toDate
+	String fromDate
+	
+	static constraints = {
+		fromDate(
+			validator : { date ->
+				return validDate(date)	
+			})
+		
+		toDate(
+			validator : { date ->
+				return validDate(date)
+		})
+			
+	}
+	
+	private static boolean validDate(String date) {
+		if(date == null || "".equals(date)) {
+			return true
+		}
+		def sdf = new SimpleDateFormat("yyyy-MM-dd")
+		Date testDate = null
+		
+		try {
+			testDate = sdf.parse(date)
+		} catch(Exception e) {
+			return false
+		}
+		
+		if(!sdf.format(testDate).equals(date)) {
+			return false
+		}
+		
+		return true
 	}
 }

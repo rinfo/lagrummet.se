@@ -211,13 +211,13 @@ jQuery(document).ready(function($) {
 		$(".extendedSearch").addClass("hidden");
 		$("#"+$(this).attr("value")).removeClass("hidden");
 	});
-	
+
 	if ($.datepicker) {
 		$.datepicker.setDefaults( $.datepicker.regional[ "sv" ] );
-		$( "#extendedSearch input[type=date]" ).datepicker({ dateFormat: 'yy-mm-dd' }).each(function() {
-			if (!$(this).attr("value")) {
-				$(this).attr("value", "åååå-mm-dd");
-			}
+		$( "#extendedSearch input[type=date]" ).datepicker({ dateFormat: 'yy-mm-dd', showOn: "button", buttonImage:"../images/cal.png", buttonImageOnly:true }).each(function() {
+	//		if (!$(this).attr("value")) {
+	//			$(this).attr("value", "åååå-mm-dd");
+	//		}
 		});
 	}
 });
