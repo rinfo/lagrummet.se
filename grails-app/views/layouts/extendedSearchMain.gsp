@@ -33,6 +33,7 @@
 	    </footer>
 	    <g:javascript library="jquery" plugin="jquery" />
 	    <g:javascript library="jquery-ui-1.8.16.custom.min" />
+	    <g:javascript library="jquery.ui.datepicker-sv" />
 	    <g:javascript library="application" />
     </body>
 </html>
