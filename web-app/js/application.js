@@ -41,9 +41,10 @@ function search() {
     			$("#c-1").append('<p class="Propositioner"><a href="'+serverUrl+'search?query='+query+'&cat=Propositioner"><strong>Propositioner och skrivelser</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
         			
         		if (data.searchResult.items['Propositioner'] && data.searchResult.items['Propositioner'].length > 0) {
+        			if (data.searchResult.totalResultsPerCategory['Propositioner'] > 4) $("#c-1 p.Propositioner span.count").append(" Visar de första 4");
         			$("#c-1").append('<ul id="propositioner" />');
+        			
         			$.each(data.searchResult.items['Propositioner'], function(i, item) {
-        				if (data.searchResult.totalResultsPerCategory['Propositioner'] > 4) $("#c-1 p.Propositioner span.count").append(" Visar de första 4");
             			var title = (item.title) ? item.title : item.identifier;
             			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
             			
@@ -184,7 +185,7 @@ jQuery(document).ready(function($) {
 		$("#searchCategoryList").hide();
 	});
 	
-	$("#query").keyup(function(e) {
+	$("header #search #query").keyup(function(e) {
 		var form = $("#search");
 		clearTimeout(t);
 		
