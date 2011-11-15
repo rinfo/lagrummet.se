@@ -43,7 +43,7 @@
 				<div class="input"><g:textField name="query"/></div>
 				<g:submitButton name="searchSubmit" value="Sök"/>
 			</g:form>
-			<p class="extendedSearch"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
+			<p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
 		</header>
 	    <g:layoutBody />
 	    <footer id="siteFooter">${siteProps?.footer}

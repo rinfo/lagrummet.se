@@ -187,7 +187,7 @@ a.step, .currentStep {
 	margin-left: 40px;
 }
 
-#siteHeader > p.extendedSearch {
+#siteHeader > p.extSearchLabel {
 	float: right;
 	margin-bottom: 1em;
 }
@@ -491,13 +491,22 @@ body > footer > nav, body > footer > div {
 }
 
 .searchResults {
-	padding-top: 1em;
+	padding-top: 0;
 	border-top: 1px solid #eee;
+}
+
+.searchResults .showAllLabel {
+	font-size: 0.8em;
+	margin: 0 0 1em 0;
 }
 
 .searchResults .query {
 	font-weight: bold;
 	color: #873960;
+}
+
+.searchResults > p {
+	margin: 1em 0;
 }
 
 .searchResults p {
