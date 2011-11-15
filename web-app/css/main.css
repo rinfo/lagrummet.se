@@ -52,7 +52,7 @@ a:hover {
 h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
     margin: 0.75em 0 0.25em 0;
     color: #873960;
-    font-family: 'Century Gothic', sans-serif;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
     clear: both;
     text-decoration: none;
     line-height: 110%;
@@ -615,10 +615,16 @@ fieldset .inputGroup label {
 
 .extendedSearch fieldset input[type=date] {
     position: relative;
+    clear: none;
 }
 
 .extendedSearch fieldset label {
-	clear: right;
+}
+
+.extendedSearch fieldset label.date {
+	float: left;
+	width: auto;
+	padding: 4px 1em;
 }
 
 .extendedSearch > label {
