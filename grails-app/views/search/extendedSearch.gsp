@@ -45,22 +45,22 @@
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
 				
 				
-				<div class="inputGroup"><g:radio checked="${params?.datum == null || params?.datum =='ikraft'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="cat${it}"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label></div>
+				<div class="inputGroup"><g:radio checked="${params?.datum == null || params?.datum =='ikraft'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label></div>
 				<div class="inputGroup"><g:radio checked="${params?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades/beslutades"/></p></label></div>
 				
 				<div class="inputGroup break ">
 					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
-					<input type="date" name="fromDate" size="10" value="${params?.fromDate}"/>
+					<input type="text" name="fromDate" size="10" value="${params?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
-						<g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
 					</g:hasErrors>
 				</div>
 				
 				<div class="inputGroup">
 					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
-					<input type="date" name="toDate" size="10" value="${params?.toDate}"/>
+					<input type="text" name="toDate" size="10" value="${params?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
-						<g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
 					</g:hasErrors>
 				</div>
 			</fieldset>
@@ -116,17 +116,17 @@
 				<input type="hidden" name="datum" id="avgorandeDatum" value="avgorande" />
 				<div class="inputGroup">
 					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
-					<input type="date" name="fromDate" size="10" value="${params?.fromDate}"/>
+					<input type="text" name="fromDate" size="10" value="${params?.fromDate}"  placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
-						<g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
 					</g:hasErrors>
 				</div>
 				
 				<div class="inputGroup">
 					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
-					<input type="date" name="toDate" size="10" value="${params?.toDate}"/>
+					<input type="text" name="toDate" size="10" value="${params?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
-						<g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
 					</g:hasErrors>
 				</div>
 			</fieldset>
@@ -157,17 +157,17 @@
 				<input type="hidden" name="datum" id="utgivandeDatum" value="utgivande" />
 				<div class="inputGroup" class="date">
 					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
-					<input type="date" name="fromDate" size="10" value="${params?.fromDate}"/>
+					<input type="text" name="fromDate" size="10" value="${params?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
-						<g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
 					</g:hasErrors>
 				</div>
 				
 				<div class="inputGroup">
 					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
-					<input type="date" name="toDate" size="10" value="${params?.toDate}"/>
+					<input type="text" name="toDate" size="10" value="${params?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
-						<g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
 					</g:hasErrors>
 				</div>
 			</fieldset>

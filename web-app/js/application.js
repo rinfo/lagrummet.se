@@ -214,11 +214,42 @@ jQuery(document).ready(function($) {
 
 	if ($.datepicker) {
 		$.datepicker.setDefaults( $.datepicker.regional[ "sv" ] );
-		$( "#extendedSearch input[type=date]" ).datepicker({ dateFormat: 'yy-mm-dd', showOn: "button", buttonImage:"../images/cal.png", buttonImageOnly:true }).each(function() {
-	//		if (!$(this).attr("value")) {
-	//			$(this).attr("value", "åååå-mm-dd");
-	//		}
+		$( "#extendedSearch .dateinput" ).datepicker({ dateFormat: 'yy-mm-dd', showOn: "button", buttonImage:"../images/cal.png", buttonImageOnly:true }).each(function() {
+			if (!$(this).attr("value")) {
+				$(this).attr("value", "åååå-mm-dd");
+			}
 		});
 	}
+	
+	$('#Lagar').submit(function() {
+		var fromDate = $("#Lagar input:text[name=fromDate]").attr("value");
+		if(fromDate == "åååå-mm-dd") {
+			$("#Lagar input:text[name=fromDate]").attr("value", "");
+		}
+		var toDate = $("#Lagar input:text[name=toDate]").attr("value");
+		if(toDate == "åååå-mm-dd") {
+			$("#Lagar input:text[name=toDate]").attr("value", "");
+		}
+	});
+	$('#Rattsfall').submit(function() {
+		var fromDate = $("#Rattsfall input:text[name=fromDate]").attr("value");
+		if(fromDate == "åååå-mm-dd") {
+			$("#Rattsfall input:text[name=fromDate]").attr("value", "");
+		}
+		var toDate = $("#Rattsfall input:text[name=toDate]").attr("value");
+		if(toDate == "åååå-mm-dd") {
+			$("#Rattsfall input:text[name=toDate]").attr("value", "");
+		}
+	});
+	$('#Utredningar').submit(function() {
+		var fromDate = $("#Utredningar input:text[name=fromDate]").attr("value");
+		if(fromDate == "åååå-mm-dd") {
+			$("#Utredningar input:text[name=fromDate]").attr("value", "");
+		}
+		var toDate = $("#Utredningar input:text[name=toDate]").attr("value");
+		if(toDate == "åååå-mm-dd") {
+			$("#Utredningar input:text[name=toDate]").attr("value", "");
+		}
+	});
 });
 
