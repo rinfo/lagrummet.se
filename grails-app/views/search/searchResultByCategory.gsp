@@ -6,7 +6,7 @@
 <body>
 <div id="content">
     <article id="searchResults" class="searchResults">
-    	<p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult.totalResults, offset: 0]) }">Visa alla ${searchResult.totalResults} träffar</a></p>
+    	<p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult?.totalResults, offset: 0]) }">Visa alla ${searchResult?.totalResults} träffar</a></p>
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
