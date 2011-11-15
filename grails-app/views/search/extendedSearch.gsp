@@ -77,7 +77,7 @@
 			<g:textField name="referatrubrik" size="26" value="${params?.referatrubrik}" />
 			
 			<label for="beteckning"><g:message code="extendedSearch.beteckning.label" default="Beteckning" /></label>
-			<g:textField name="beteckning" size="26" value="${params?.referatrubrik}" />
+			<g:textField name="beteckning" size="26" value="${params?.beteckning}" />
 			
 			<label for="malnummer"><g:message code="extendedSearch.malnummer.label" default="Målnummer" /></label>
 			<g:textField name="malnummer" size="12" value="${params?.malnummer}" />
