@@ -31,11 +31,15 @@
 			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="SFS" /></label>
 			<g:textField name="beteckning" size="12" value="${params?.beteckning}" />
 			
-			<label for="skapare"><g:message code="extendedSearch.departement.label" default="Departement" /></label>
+			<label for="skapare"><g:message code="extendedSearch.skapare.label" default="Skapad av" /></label>
 			<g:textField name="skapare" size="26" value="${params?.skapare}" />
 			
+			<label for="skapare"><g:message code="extendedSearch.utgivare.label" default="Utgiven av" /></label>
+			<g:textField name="utgivare" size="26" value="${params?.utgivare}" />
+			
+			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
-			<g:textField name="query" size="26" value="${params?.query}" />
+			<g:textField name="fritext" size="26" value="${params?.fritext}" />
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
@@ -85,7 +89,7 @@
 			<g:textField name="malnummer" size="12" value="${params?.malnummer}" />
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
-			<g:textField name="query" size="26" value="${params?.query}" />
+			<g:textField name="fritext" size="26" value="${params?.fritext}" />
 			
 			<fieldset>
 				<legend>Lagrum</legend>
@@ -146,7 +150,7 @@
 			<g:textField name="titel" size="26" value="${params?.titel}" />
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
-			<g:textField name="query" size="26" value="${params?.query}" />
+			<g:textField name="fritext" size="26" value="${params?.fritext}" />
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.utgivandeDatum.label" default="Utgivandedatum" /></div>
@@ -186,7 +190,7 @@
 		<g:if test="${searchResult?.totalResults}">
 			<h2 id="sokresultat">Sökresultat</h2>
 		
-			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.items[(cat)].size()} av ${searchResult.totalResults} träffar för <span class="query">"${params.query.encodeAsHTML()}"</span> i <strong><g:message code="category.${cat}"/></strong></p>
+			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar i <strong><g:message code="category.${cat}"/></strong></p>
 			
 			<table>
 				<tr>

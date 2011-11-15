@@ -13,7 +13,7 @@ class QueryBuilder {
 	
 	public QueryBuilder(Map params) {
 		
-		setQuery(params.query)
+		setQuery(params.fritext)
 		setBeslutsdatum(params.beslutsdatum)
 		setBeslutsdatumFrom(params.beslutsdatumMin)
 		setBeslutsdatumTo(params.beslutsdatumMax)
