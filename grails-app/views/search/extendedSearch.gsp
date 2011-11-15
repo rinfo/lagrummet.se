@@ -10,7 +10,7 @@
 		<h1><g:message code="extendedSearch.label" default="Utökad sökning" /></h1>
 		<fieldset class="category" id="extSearchCats">
 			<div class="legend"><g:message code="extendedSearch.chooseCategory.label" default="Välj en kategori" /></div>
-			<g:each in="['Lagar', 'Rattsfall', 'Utredningar']">
+			<g:each in="['Lagar', 'Rattsfall', 'Forarbeten']">
 				<g:if test="${cat == it}"><div class="inputGroup"><input type="radio" checked="checked" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.${it}"/></strong></p><p><g:message code="category.description.${it}"/></p></label></div></g:if>
 				<g:else><div class="inputGroup"><input type="radio" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.${it}"/></strong></p><p><g:message code="category.description.${it}"/></p></label></div></g:else>
 			</g:each>
@@ -134,11 +134,11 @@
 			<div class="buttons"><g:submitButton name="extendedSearchSubmit" value="Sök"/></div>
 		</g:form>
 		
-		<g:if test="${cat == 'Utredningar'}"><g:set var="hidden" value="" /></g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
-		<g:form mapping="extendedSearch" method="GET" class="extendedSearch ${hidden}" name="Utredningar">
-			<input type="hidden" name="kategori" value="Utredningar" />
+		<g:if test="${cat == 'Forarbeten'}"><g:set var="hidden" value="" /></g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
+		<g:form mapping="extendedSearch" method="GET" class="extendedSearch ${hidden}" name="Forarbeten">
+			<input type="hidden" name="kategori" value="Forarbeten" />
 			
-			<label for="typ"><g:message code="extendedSearch.Utredningar.typ.label" default="Välj typ av förarbete" /></label>
+			<label for="typ"><g:message code="extendedSearch.Forarbeten.typ.label" default="Välj typ av förarbete" /></label>
 			<g:select name="typ" from="${['Alla förarbeten', 'Propositioner', 'Utredningar'] }" 
 									keys="${['Alla förarbeten', 'Propositioner', 'Utredningar'] }"
 									value="${params?.typ}"/>

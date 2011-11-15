@@ -54,7 +54,7 @@ class RdlSearchService {
 														describedBy: item.describedby,
 														identifier: item.identifier,
 														matches: getBestMatch(item),
-														type: item.type
+														type: item.type,
 														)
 						if("category".equals(resultListType)) {
 							searchResult.addItemByType(searchResultItem)

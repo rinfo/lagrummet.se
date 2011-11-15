@@ -104,7 +104,8 @@
 						<g:if test="${item.matches}">
 							<p>${item.matches} ...</p>
 						</g:if>
-						<p class="type">${item.identifier}</p></li>
+						<p class="type">${item.identifier}</p>
+						</li>
 				</g:each>
 				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }">Visa fler träffar</a></li>
 			</ul>

@@ -241,14 +241,14 @@ jQuery(document).ready(function($) {
 			$("#Rattsfall input:text[name=toDate]").attr("value", "");
 		}
 	});
-	$('#Utredningar').submit(function() {
-		var fromDate = $("#Utredningar input:text[name=fromDate]").attr("value");
+	$('#Forarbeten').submit(function() {
+		var fromDate = $("#Forarbeten input:text[name=fromDate]").attr("value");
 		if(fromDate == "åååå-mm-dd") {
-			$("#Utredningar input:text[name=fromDate]").attr("value", "");
+			$("#Forarbeten input:text[name=fromDate]").attr("value", "");
 		}
-		var toDate = $("#Utredningar input:text[name=toDate]").attr("value");
+		var toDate = $("#Forarbeten input:text[name=toDate]").attr("value");
 		if(toDate == "åååå-mm-dd") {
-			$("#Utredningar input:text[name=toDate]").attr("value", "");
+			$("#Forarbeten input:text[name=toDate]").attr("value", "");
 		}
 	});
 });
