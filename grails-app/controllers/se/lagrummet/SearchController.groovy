@@ -69,7 +69,7 @@ class SearchController {
 		
 		if(!esc.hasErrors() && !queryBuilder.isEmpty()) {
 			queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
-			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
+			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams(), "list")
 		}
 		def cat = params.kategori ?: Category.LAGAR.toString()
 		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(), offset: offset, extendedSearchCommand: esc])
