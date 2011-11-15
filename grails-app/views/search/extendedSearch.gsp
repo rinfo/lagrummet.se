@@ -45,7 +45,7 @@
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
 				
 				
-				<div class="inputGroup"><g:radio checked="${params?.datum == null || params?.datum =='ikraft'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label></div>
+				<div class="inputGroup"><g:radio checked="${params?.datum == null || params?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label></div>
 				<div class="inputGroup"><g:radio checked="${params?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades/beslutades"/></p></label></div>
 				
 				<div class="inputGroup break ">
@@ -73,43 +73,17 @@
 		<g:form mapping="extendedSearch" method="GET" class="extendedSearch ${hidden}" name="Rattsfall">
 			<input type="hidden" name="kategori" value="Rattsfall" />
 			
-			<label for="typ"><g:message code="extendedSearch.Rattsfall.typ.label" default="Domstol/myndighet" /></label>
-			<g:select name="" from="${['Allmänna domstolar'] }" />
-			
 			<label for="referatrubrik"><g:message code="extendedSearch.referatrubrik.label" default="Rubrik" /></label>
 			<g:textField name="referatrubrik" size="26" value="${params?.referatrubrik}" />
 			
 			<label for="beteckning"><g:message code="extendedSearch.beteckning.label" default="Beteckning" /></label>
 			<g:textField name="beteckning" size="26" value="${params?.referatrubrik}" />
 			
-			<label for="sokord"><g:message code="extendedSearch.sokord.label" default="Sökord" /></label>
-			<g:textField name="sokord" size="26" value="${params?.sokord}" />
-			
 			<label for="malnummer"><g:message code="extendedSearch.malnummer.label" default="Målnummer" /></label>
 			<g:textField name="malnummer" size="12" value="${params?.malnummer}" />
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${params?.fritext}" />
-			
-			<fieldset>
-				<legend>Lagrum</legend>
-				
-				
-				<div class="inputGroup">
-					<label for="sfs"><g:message code="extendedSearch.sfs.label" default="SFS" /></label>
-					<g:textField name="sfs" size="26" value="${params?.sfs}" />
-				</div>
-				
-				<div class="inputGroup">
-					<label for="paragrafnummer"><g:message code="extendedSearch.paragrafnummer.label" default="Paragrafnummer" /></label>
-					<g:textField name="paragrafnummer" size="26" value="${params?.paragrafnummer}" />
-				</div>
-				
-				<div class="inputGroup">
-					<label for="kapitelnummer"><g:message code="extendedSearch.kapitelnummer.label" default="Kapitelnummer" /></label>
-					<g:textField name="kapitelnummer" size="26" value="${params?.kapitelnummer}" />
-				</div>
-			</fieldset>
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.avgorandeDatum.label" default="Avgörandedatum" /></div>
