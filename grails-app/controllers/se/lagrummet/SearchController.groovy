@@ -32,7 +32,7 @@ class SearchController {
 		
 	}
 	
-	def ext = {
+	def ext = { ExtendedSearchCommand esc ->
 		def searchResult
 		def offset = parseInt(params.offset, 0)
 		def itemsPerPage = parseInt(params.max, 20)
@@ -41,12 +41,9 @@ class SearchController {
 		def docTypes = params.typ ? Category.extendedSearchTypes[params.typ] : Category.getFromString(params.kategori)?.getTypes()
 		queryBuilder.setType(docTypes);
 		
-		def dateFrom = params.datumMin
-		def dateTo = params.datumMax
-		
 		def dateType = params.datum
-				
-		if(params.fromDate && validDate(params.fromDate)){
+		
+		if(params.fromDate && !esc.hasErrors()){
 			if(dateType == 'ikraft') {
 				queryBuilder.setIkraftFrom(params.fromDate)
 			} else if(dateType == 'utfardande') {
@@ -58,7 +55,7 @@ class SearchController {
 			}
 		}
 		
-		if(params.toDate && validDate(params.toDate)){
+		if(params.toDate && !esc.hasErrors()){
 			if(dateType == 'ikraft') {
 				queryBuilder.setIkraftTo(params.toDate)
 			} else if(dateType == 'utfardande') {
@@ -66,16 +63,16 @@ class SearchController {
 			} else if(dateType == 'avgorande') {
 				//todo
 			} else if(dateType == 'utgivande') {
-			queryBuilder.setUtkomFranTryckTo(params.toDate)
+				queryBuilder.setUtkomFranTryckTo(params.toDate)
 			}
-		}
+		} 
 		
-		if(!queryBuilder.isEmpty()) {
+		if(!esc.hasErrors() && !queryBuilder.isEmpty()) {
 			queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
 			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams())
 		}
 		def cat = params.kategori ?: Category.LAGAR.toString()
-		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(), offset: offset])
+		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(), offset: offset, extendedSearchCommand: esc])
 	}
 	
 	def findAvailablePublishers = {
@@ -86,33 +83,49 @@ class SearchController {
 		render response as JSON
 	}
 	
-	private boolean validDate(String date) {
-		def sdf = new SimpleDateFormat("yyyy-MM-dd")
-		
-		Date testDate = null
-		
-		try {
-			testDate = sdf.parse(date)
-		} catch(Exception e) {
-		System.out.println(e.getMessage());
-		
-		System.out.println("The date format is invalid: " + date);
-			return false
-		}
-		
-		if(!sdf.format(testDate).equals(date)) {
-			System.out.println("The date is not a valid date");
-			return false
-		}
-		
-		return true
-	}
-	
 	private Integer parseInt(String input, Integer defaultValue = 0) {
 		try {
 			return input.toInteger()
 		} catch (Exception e) {
 			return defaultValue
 		}
+	}
+}
+
+class ExtendedSearchCommand {
+	String toDate
+	String fromDate
+	
+	static constraints = {
+		fromDate(
+			validator : { date ->
+				return validDate(date)	
+			})
+		
+		toDate(
+			validator : { date ->
+				return validDate(date)
+		})
+			
+	}
+	
+	private static boolean validDate(String date) {
+		if(date == null || "".equals(date)) {
+			return true
+		}
+		def sdf = new SimpleDateFormat("yyyy-MM-dd")
+		Date testDate = null
+		
+		try {
+			testDate = sdf.parse(date)
+		} catch(Exception e) {
+			return false
+		}
+		
+		if(!sdf.format(testDate).equals(date)) {
+			return false
+		}
+		
+		return true
 	}
 }
