@@ -151,7 +151,7 @@
 	</article>
 
     <article id="searchResults" class="searchResults">
-    	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Print</a></p>
+    	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
