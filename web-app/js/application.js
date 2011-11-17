@@ -229,36 +229,27 @@ jQuery(document).ready(function($) {
 		});
 	}
 	
+	$('[placeholder]').focus(function() {
+		  var input = $(this);
+		  if (input.val() == input.attr('placeholder')) {
+		    input.val('');
+		    input.removeClass('placeholder');
+		  }
+		}).blur(function() {
+		  var input = $(this);
+		  if (input.val() == '' || input.val() == input.attr('placeholder')) {
+		    input.addClass('placeholder');
+		    input.val(input.attr('placeholder'));
+		  }
+		}).blur();
 	
-	$('#Lagar').submit(function() {
-		var fromDate = $("#Lagar input:text[name=fromDate]").attr("value");
-		if(fromDate == "åååå-mm-dd") {
-			$("#Lagar input:text[name=fromDate]").attr("value", "");
-		}
-		var toDate = $("#Lagar input:text[name=toDate]").attr("value");
-		if(toDate == "åååå-mm-dd") {
-			$("#Lagar input:text[name=toDate]").attr("value", "");
-		}
-	});
-	$('#Rattsfall').submit(function() {
-		var fromDate = $("#Rattsfall input:text[name=fromDate]").attr("value");
-		if(fromDate == "åååå-mm-dd") {
-			$("#Rattsfall input:text[name=fromDate]").attr("value", "");
-		}
-		var toDate = $("#Rattsfall input:text[name=toDate]").attr("value");
-		if(toDate == "åååå-mm-dd") {
-			$("#Rattsfall input:text[name=toDate]").attr("value", "");
-		}
-	});
-	$('#Forarbeten').submit(function() {
-		var fromDate = $("#Forarbeten input:text[name=fromDate]").attr("value");
-		if(fromDate == "åååå-mm-dd") {
-			$("#Forarbeten input:text[name=fromDate]").attr("value", "");
-		}
-		var toDate = $("#Forarbeten input:text[name=toDate]").attr("value");
-		if(toDate == "åååå-mm-dd") {
-			$("#Forarbeten input:text[name=toDate]").attr("value", "");
-		}
-	});
+	$('[placeholder]').parents('form').submit(function() {
+		  $(this).find('[placeholder]').each(function() {
+		    var input = $(this);
+		    if (input.val() == input.attr('placeholder')) {
+		      input.val('');
+		    }
+		  })
+		});
 });
 
