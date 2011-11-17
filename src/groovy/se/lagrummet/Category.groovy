@@ -59,6 +59,7 @@ public enum Category {
 		]
 	
 	static extendedSearchTypes = [
+		'Författningar' : LAGAR.getTypes(),
 		'Lagar' : ['Lag', 'Grundlag'],
 		'Myndigheters föreskrifter' : ['Myndighetsforeskrift'],
 		'Förordningar' : ['Forordning'],
