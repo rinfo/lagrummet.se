@@ -14,11 +14,8 @@
 </head>
 <body class="admin">
 	<header>
-		<h1>Lagrummet.se CMS</h1>
-		<a href="${grailsApplication.config.grails.serverURL}">Besök sidan</a>
-		<nav class="logout">
-			<sec:username/> (<g:link controller="logout">Logga ut</g:link>)
-		</nav>
+		<h1><a href="${grailsApplication.config.grails.serverURL}">Lagrummet.se CMS</a></h1>
+		<sec:username/> (<g:link controller="logout">Logga ut</g:link>)
 	</header>
 	<nav id="primaryNav">
 		<ul>

@@ -151,7 +151,6 @@
 	</article>
 
     <article id="searchResults" class="searchResults">
-    	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
@@ -163,6 +162,9 @@
     	</g:if>
 
 		<g:if test="${searchResult?.totalResults}">
+			<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
+	    	<p class="showAllLabel"><a href="${createLink(mapping:'extendedSearch', fragment: "searchResults", params:params + [max: searchResult?.totalResults, offset: 0])}">Visa alla ${searchResult?.totalResults} träffar</a></p>
+	    	
 			<h2 id="sokresultat">Sökresultat</h2>
 		
 			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar i <strong><g:message code="category.${cat}"/></strong></p>
