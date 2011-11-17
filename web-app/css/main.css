@@ -172,11 +172,11 @@ fieldset .legend {
 }
 
 a.nextLink {
-	margin-left: 0.25em;
+	margin-left: 0.75em;
 }
 
 a.step, .currentStep {
-	margin-left: 0.25em;
+	margin-left: 0.5em;
 }
 
 /* =HEADER */

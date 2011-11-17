@@ -8,10 +8,11 @@ html {
 
 body.admin {
 	width: auto;
-	position: static;
+	position: relative;
     color: #383838;
     font: 11px verdana, arial, helvetica, sans-serif;
     font-size: 12px;
+    background: none;
 }
 
 /* ADMIN SPEFICIC */
@@ -23,7 +24,7 @@ body > * {
 body.admin > header {
 	/*border-bottom: solid 1pt;*/
 	width: 980px;
-	margin: 0 0 20px 0;
+	margin: 0 0 20px 10px;
 	position: relative;
 }
 
@@ -35,17 +36,23 @@ body > header > nav.logout {
 
 #primaryNav {
 	padding: 20px 20px 20px 10px;
-	float: left;
+	/*float: left;
+	margin: 0;*/
 	width: 200px;
-	margin: 0;
+	top: 80px;
+	left: 0px;
+	position: absolute;
 }
 
 #bodyContent {
-	float: left;
+	/*float: left;
+	margin-left: 20px;*/
+	position: absolute;
+	left: 220px;
+	top: 0px;
 	padding: 20px;
 	background-color: #fff;
 	width: 770px;
-	margin-left: 20px;
 	-webkit-box-shadow: 2px 2px 6px #ccc;
 	-moz-box-shadow: 1px 1px 6px #ccc;
 	box-shadow: 2px 2px 6px #ccc;
@@ -78,6 +85,7 @@ ul {
 #quickSearch #search {
 	margin-left: 0.5em;
 	width: auto;
+	height: auto;
 	padding: 2px;
 }
 
