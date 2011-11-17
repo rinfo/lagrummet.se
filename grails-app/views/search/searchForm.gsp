@@ -105,6 +105,9 @@
 							<p>${item.matches} ...</p>
 						</g:if>
 						<p class="type">${item.identifier}</p>
+						<g:if test="${item.ikrafttradandedatum}">
+							<p class="type">Ikraft: ${item.ikrafttradandedatum}</p>
+						</g:if>
 						</li>
 				</g:each>
 				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }">Visa fler träffar</a></li>

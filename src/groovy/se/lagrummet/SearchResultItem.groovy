@@ -9,5 +9,6 @@ class SearchResultItem {
 	String matches
 	String title
 	String type
+	String ikrafttradandedatum
 
 }

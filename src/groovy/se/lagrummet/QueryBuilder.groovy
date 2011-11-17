@@ -93,6 +93,9 @@ class QueryBuilder {
 		setParam('max-ikrafttradandedatum', ikraft)
 		return this
 	}
+	public QueryBuilder setIkraftIfExists(String ikraft) {
+		setParam('ifExists-ikrafttradandedatum', ikraft)
+	}
 	
 	public QueryBuilder setUtkomFranTryck(String utkomfrantryck) {
 		setParam('utkomFranTryck', utkomfrantryck)

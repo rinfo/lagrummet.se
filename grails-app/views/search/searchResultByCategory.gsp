@@ -35,6 +35,9 @@
 							<g:if test="${item.matches}">
 								<p>${item.matches} ...</p>
 							</g:if>
+							<g:if test="${item.ikrafttradandedatum}">
+								<p class="type">Ikraft: ${item.ikrafttradandedatum}</p>
+							</g:if>
 						</td>
 						<g:if test="${cat != 'Ovrigt' }"><td>${item.identifier}</td></g:if>
 					</tr>

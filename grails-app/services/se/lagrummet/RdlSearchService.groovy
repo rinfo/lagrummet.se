@@ -26,7 +26,8 @@ class RdlSearchService {
 		if(offset != null && itemsPerPage) {
 			queryBuilder.setPageAndPageSize((int)(offset / itemsPerPage), itemsPerPage)
 		}
-		
+		//force the ikraftdatum to be returned in the search result if the document has one
+		queryBuilder.setIkraftIfExists(".")
 		return searchWithQuery(queryBuilder.getQueryParams())
 	}
 	
@@ -34,7 +35,7 @@ class RdlSearchService {
 	public SearchResult searchWithQuery(Map queryParams, String resultListType = 'category') {
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
-//System.out.println(queryParams)
+System.out.println(queryParams)
 		def http = new HTTPBuilder()
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
@@ -55,6 +56,7 @@ class RdlSearchService {
 														identifier: item.identifier,
 														matches: getBestMatch(item),
 														type: item.type,
+														ikrafttradandedatum: item.ikrafttradandedatum
 														)
 						if("category".equals(resultListType)) {
 							searchResult.addItemByType(searchResultItem)

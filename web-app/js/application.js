@@ -97,6 +97,10 @@ function search() {
                 			}
                 		
                 			$("#lagar li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
+                			
+                			if(item.ikrafttradandedatum) {
+                				$("#lagar li").filter(":last").append('<p class="type">Ikraft: '+item.ikrafttradandedatum+'</p></li>');
+                			}
                 		
                 		});
             			$("#lagar").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Lagar">Visa fler träffar</a></li>');
@@ -132,8 +136,10 @@ function search() {
         			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
         			var excerpt = (item.matches) ? "<p>"+item.matches+"</p>" : "";
         			var identifier = item.identifier;
+        			var ikraft = (item.ikrafttradandedatum) ? '<p class="type">Ikraft: '+item.ikrafttradandedatum+'</p>' : "";
         			
-					$("#dynamicSearchResults table").append('<tr><td><p><a href="'+serverUrl+href+'">' + title + "</a></p>" + excerpt +"</td><td>"+identifier+"</td></tr>");
+					$("#dynamicSearchResults table").append('<tr><td><p><a href="'+serverUrl+href+'">' + title + "</a></p>" + excerpt + ikraft + "</td><td>"+identifier+"</td></tr>");
+					
 				});
 
 				$("#dynamicSearchResults").append('<p class="showAll"><a href="'+serverUrl+'search?'+form.serialize()+'">Visa fler träffar</a></p>');
@@ -219,8 +225,10 @@ jQuery(document).ready(function($) {
 			if (!$(this).attr("value")) {
 				$(this).attr("value", "åååå-mm-dd");
 			}
+			
 		});
 	}
+	
 	
 	$('#Lagar').submit(function() {
 		var fromDate = $("#Lagar input:text[name=fromDate]").attr("value");
