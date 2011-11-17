@@ -15,42 +15,46 @@
 				<g:else><div class="inputGroup"><input type="radio" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.${it}"/></strong></p><p><g:message code="category.description.${it}"/></p></label></div></g:else>
 			</g:each>
 		</fieldset>
-		
-		<g:if test="${cat == 'Lagar'}"><g:set var="hidden" value="" /></g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
+
+		<g:if test="${cat == 'Lagar'}">
+			<g:set var="hidden" value="" />
+			<g:set var="lagParams" value="${params}" />
+		</g:if>
+		<g:else><g:set var="hidden" value="hidden" /></g:else>
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Lagar">
 			<input type="hidden" name="kategori" value="Lagar" />
 			
 			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ" /></label>
 			<g:select name="typ" from="${['Alla typer', 'Lagar', 'Myndigheters föreskrifter', 'Förordningar']}"
 									keys="${['', 'Lagar', 'Myndigheters föreskrifter', 'Förordningar'] }" 
-									value="${params?.typ}" />
+									value="${lagParams?.typ}" />
 			
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
-			<g:textField name="titel" size="26" value="${params?.titel}" />
+			<g:textField name="titel" size="26" value="${lagParams?.titel}" />
 			
 			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="SFS" /></label>
-			<g:textField name="beteckning" size="12" value="${params?.beteckning}" />
+			<g:textField name="beteckning" size="12" value="${lagParams?.beteckning}" />
 			
 			<label for="skapare"><g:message code="extendedSearch.skapare.label" default="Skapad av" /></label>
-			<g:textField name="skapare" size="26" value="${params?.skapare}" />
+			<g:textField name="skapare" size="26" value="${lagParams?.skapare}" />
 			
 			<label for="skapare"><g:message code="extendedSearch.utgivare.label" default="Utgiven av" /></label>
-			<g:textField name="utgivare" size="26" value="${params?.utgivare}" />
+			<g:textField name="utgivare" size="26" value="${lagParams?.utgivare}" />
 			
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
-			<g:textField name="fritext" size="26" value="${params?.fritext}" />
+			<g:textField name="fritext" size="26" value="${lagParams?.fritext}" />
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
 				
 				
-				<div class="inputGroup"><g:radio checked="${params?.datum == null || params?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label></div>
-				<div class="inputGroup"><g:radio checked="${params?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades/beslutades"/></p></label></div>
+				<div class="inputGroup"><g:radio checked="${lagParams?.datum == null || lagParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label></div>
+				<div class="inputGroup"><g:radio checked="${lagParams?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades/beslutades"/></p></label></div>
 				
 				<div class="inputGroup break ">
 					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
-					<input type="text" name="fromDate" size="10" value="${params?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
+					<input type="text" name="fromDate" size="10" value="${lagParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
 						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
 					</g:hasErrors>
@@ -58,7 +62,7 @@
 				
 				<div class="inputGroup">
 					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
-					<input type="text" name="toDate" size="10" value="${params?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
+					<input type="text" name="toDate" size="10" value="${lagParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
 						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
 					</g:hasErrors>
@@ -69,28 +73,31 @@
 			<div class="buttons"><g:submitButton name="extendedSearchSubmit" value="Sök"/></div>
 		</g:form>
 		
-		<g:if test="${cat == 'Rattsfall'}"><g:set var="hidden" value="" /></g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
+		<g:if test="${cat == 'Rattsfall'}">
+			<g:set var="hidden" value="" />
+			<g:set var="rattsfallParams" value="${params}" />
+		</g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Rattsfall">
 			<input type="hidden" name="kategori" value="Rattsfall" />
 			
 			<label for="referatrubrik"><g:message code="extendedSearch.referatrubrik.label" default="Rubrik" /></label>
-			<g:textField name="referatrubrik" size="26" value="${params?.referatrubrik}" />
+			<g:textField name="referatrubrik" size="26" value="${rattsfallParams?.referatrubrik}" />
 			
 			<label for="beteckning"><g:message code="extendedSearch.beteckning.label" default="Beteckning" /></label>
-			<g:textField name="beteckning" size="26" value="${params?.beteckning}" />
+			<g:textField name="beteckning" size="26" value="${rattsfallParams?.beteckning}" />
 			
 			<label for="malnummer"><g:message code="extendedSearch.malnummer.label" default="Målnummer" /></label>
-			<g:textField name="malnummer" size="12" value="${params?.malnummer}" />
+			<g:textField name="malnummer" size="12" value="${rattsfallParams?.malnummer}" />
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
-			<g:textField name="fritext" size="26" value="${params?.fritext}" />
+			<g:textField name="fritext" size="26" value="${rattsfallParams?.fritext}" />
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.avgorandeDatum.label" default="Avgörandedatum" /></div>
 				<input type="hidden" name="datum" id="avgorandeDatum" value="avgorande" />
 				<div class="inputGroup">
 					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
-					<input type="text" name="fromDate" size="10" value="${params?.fromDate}"  placeholder="åååå-mm-dd" class="dateinput"/>
+					<input type="text" name="fromDate" size="10" value="${rattsfallParams?.fromDate}"  placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
 						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
 					</g:hasErrors>
@@ -98,7 +105,7 @@
 				
 				<div class="inputGroup">
 					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
-					<input type="text" name="toDate" size="10" value="${params?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
+					<input type="text" name="toDate" size="10" value="${rattsfallParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
 						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
 					</g:hasErrors>
@@ -108,30 +115,33 @@
 			<div class="buttons"><g:submitButton name="extendedSearchSubmit" value="Sök"/></div>
 		</g:form>
 		
-		<g:if test="${cat == 'Forarbeten'}"><g:set var="hidden" value="" /></g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
+		<g:if test="${cat == 'Forarbeten'}">
+			<g:set var="hidden" value="" />
+			<g:set var="forarbeteParams" value="${params}" />
+		</g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Forarbeten">
 			<input type="hidden" name="kategori" value="Forarbeten" />
 			
 			<label for="typ"><g:message code="extendedSearch.Forarbeten.typ.label" default="Välj typ av förarbete" /></label>
 			<g:select name="typ" from="${['Alla förarbeten', 'Propositioner', 'Utredningar'] }" 
 									keys="${['Alla förarbeten', 'Propositioner', 'Utredningar'] }"
-									value="${params?.typ}"/>
+									value="${forarbeteParams?.typ}"/>
 			
 			<label for="beteckning"><g:message code="extendedSearch.beteckning.label" default="Beteckning" /></label>
-			<g:textField name="beteckning" size="26" value="${params?.beteckning}" />
+			<g:textField name="beteckning" size="26" value="${forarbeteParams?.beteckning}" />
 			
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
-			<g:textField name="titel" size="26" value="${params?.titel}" />
+			<g:textField name="titel" size="26" value="${forarbeteParams?.titel}" />
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
-			<g:textField name="fritext" size="26" value="${params?.fritext}" />
+			<g:textField name="fritext" size="26" value="${forarbeteParams?.fritext}" />
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.utgivandeDatum.label" default="Utgivandedatum" /></div>
 				<input type="hidden" name="datum" id="utgivandeDatum" value="utgivande" />
 				<div class="inputGroup" class="date">
 					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
-					<input type="text" name="fromDate" size="10" value="${params?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
+					<input type="text" name="fromDate" size="10" value="${forarbeteParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
 						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
 					</g:hasErrors>
@@ -139,7 +149,7 @@
 				
 				<div class="inputGroup">
 					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
-					<input type="text" name="toDate" size="10" value="${params?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
+					<input type="text" name="toDate" size="10" value="${forarbeteParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
 						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
 					</g:hasErrors>
