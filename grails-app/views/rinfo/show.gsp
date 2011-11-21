@@ -44,7 +44,7 @@
 	</article>
 	
 	<aside id="rinfoSidebar">
-		<g:if test="${docInfo.'@rev'.andrar}">
+		<g:if test="${docInfo.'@rev'?.andrar}">
 			<h3>Ändrar</h3>
 			<g:each in="${docInfo.'@rev'.andrar}" var="item">
 			<ul>
@@ -58,7 +58,7 @@
 			</g:each>
 		</g:if>
 		
-		<g:if test="${docInfo.'@rev'.konsolideringsunderlag}">
+		<g:if test="${docInfo.'@rev'?.konsolideringsunderlag}">
 			<h3>Konsolideringsunderlag för</h3>
 			<g:each in="${docInfo.'@rev'.konsolideringsunderlag}" var="item">
 			<ul>
