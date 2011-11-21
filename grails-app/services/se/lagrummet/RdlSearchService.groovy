@@ -27,7 +27,7 @@ class RdlSearchService {
 			queryBuilder.setPageAndPageSize((int)(offset / itemsPerPage), itemsPerPage)
 		}
 		//force the ikraftdatum to be returned in the search result if the document has one
-		queryBuilder.setIkraftIfExists(".")
+		queryBuilder.setIkraftIfExists("")
 		return searchWithQuery(queryBuilder.getQueryParams())
 	}
 	

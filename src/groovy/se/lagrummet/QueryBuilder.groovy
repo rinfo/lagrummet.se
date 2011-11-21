@@ -44,6 +44,10 @@ class QueryBuilder {
 		}
 	}
 	
+	private void setBlankParam(String key, String value) {
+		queryParams[(key)] = value
+	}
+	
 	private void setParam(String key, Integer value) {
 		if(value != null) {
 			queryParams[(key)] = value
@@ -94,7 +98,7 @@ class QueryBuilder {
 		return this
 	}
 	public QueryBuilder setIkraftIfExists(String ikraft) {
-		setParam('ifExists-ikrafttradandedatum', ikraft)
+		setBlankParam('ifExists-ikrafttradandedatum', ikraft)
 	}
 	
 	public QueryBuilder setUtkomFranTryck(String utkomfrantryck) {
