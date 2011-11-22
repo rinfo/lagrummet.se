@@ -27,7 +27,7 @@
 		<g:if test="${searchResult?.totalResults}">
 			<p>Totalt antal resultat: ${searchResult.totalResults}</p>
 			
-		<div class="column">
+		<div class="column first">
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Ovrigt']) }" class="catTitle">Information från lagrummet.se</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})

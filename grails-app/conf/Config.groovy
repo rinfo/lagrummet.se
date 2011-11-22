@@ -116,5 +116,6 @@ lagrummet {
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
 	local.rinfo.view="${grails.serverURL}/rinfo/"
 	search.availableCategories=["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Ovrigt"]
+	search.availableDepartement=["Justitiedepartementet","Utrikesdepartementet","Försvarsdepartementet","Socialdepartementet","Finansdepartementet","Utbildningsdepartementet","Landsbygdsdepartementet","Miljödepartementet","Näringsdepartementet","Kulturdepartementet","Arbetsmarknadsdepartementet"]
+	search.availableBeslutandeMyndigheter=[]
 }
-

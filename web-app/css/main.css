@@ -531,7 +531,7 @@ body > footer > nav, body > footer > div {
 	padding: 0;
 }
 
-.searchResults .column:first-of-type {
+.searchResults .column:first-of-type, .searchResults .column.first {
 	margin-right: 20px;
 }
 

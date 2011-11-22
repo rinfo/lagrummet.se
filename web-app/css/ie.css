@@ -1,0 +1,11 @@
+#query {padding: 0;}
+#search .input {
+	height: 30px;
+	width: 310px;
+	margin-left: 5px;
+	padding: 5px 0 5px 0;
+	border: 1px solid #ddd;
+	display: block;
+	float: left;
+	background-color: #eee;
+}
