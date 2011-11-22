@@ -44,6 +44,9 @@
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${forfattningarParams?.fritext}" />
 			
+			<label for="forfattningssamling"><g:message code="extendedSearch.forfattnintssamling.label" default="Författningssamling" /></label>
+			<g:textField name="forfattningssamling" size="26" value="${forfattningarParams?.forfattningssamling}" />
+			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
 				
@@ -79,6 +82,10 @@
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Rattsfall">
 			<input type="hidden" name="kategori" value="Rattsfall" />
 			
+			<label for="utgivare"><g:message code="extendedSearch.domstol.label" default="Domstol"/></label>
+			<g:select name="utgivare" from="['Alla domstolar','Högsta domstolen', 'Regeringsrätten']"
+										keys="['', 'hoegsta_domstolen', 'regeringsraetten' ]" value="${rattsfallParams?.utgivare}" />
+			
 			<label for="referatrubrik"><g:message code="extendedSearch.referatrubrik.label" default="Rubrik" /></label>
 			<g:textField name="referatrubrik" size="26" value="${rattsfallParams?.referatrubrik}" />
 			
@@ -90,6 +97,9 @@
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${rattsfallParams?.fritext}" />
+			
+			<label for="sokord"><g:message code="extendedSearch.sokord.label" default="Sökord" /></label>
+			<g:textField name="sokord" size="26" value="${rattsfallParams?.sokord}" />
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.avgorandeDatum.label" default="Avgörandedatum" /></div>

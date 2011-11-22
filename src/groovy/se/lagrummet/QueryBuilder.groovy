@@ -35,6 +35,8 @@ class QueryBuilder {
 		setReferatrubrik(params.referatrubrik)
 		setParagrafnummer(params.paragrafnummer)
 		setPageAndPageSize(params.page, params.itemsPerPage)
+		setSubject(params.sokord)
+		setForfattningssamling(params.forfattningssamling)
 		
 	}
 	
@@ -172,6 +174,16 @@ class QueryBuilder {
 	public QueryBuilder setPageAndPageSize(Integer page, Integer pageSize) {
 		setParam('_page', page)
 		setParam('_pageSize', pageSize)
+		return this
+	}
+	
+	public QueryBuilder setSubject(String subject) {
+		setParam('subject', subject)
+		return this
+	}
+	
+	public QueryBuilder setForfattningssamling(String forfattningssamling) {
+		setParam('forfattningssamling.prefLabel', forfattningssamling)
 		return this
 	}
 	
