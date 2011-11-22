@@ -116,5 +116,31 @@ lagrummet {
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
 	local.rinfo.view="${grails.serverURL}/rinfo/"
 	search.availableCategories=["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Ovrigt"]
+	
+	extendedSearch.courtList = [
+		[value:'', title: 'Alla domstolar'],
+		[value: '', title: '', disabled: true],
+		[value:'', title: '--Allm&auml;nna domstolar--', disabled: true],
+		[value: 'hoegsta_domstolen', title : 'H&ouml;gsta domstolen'],
+		[value: 'svea_hovraett', title: 'Svea hovr&auml;tt'],
+		[value: '', title: 'G&ouml;ta hovr&auml;tt'],
+		[value: '', title: 'Hovr&auml;tten &ouml;ver Sk&aring;ne och Blekinge'],
+		[value: '', title: 'Hovr&auml;tten f&ouml;r Nedre norrland'],
+		[value: '', title: 'Hovr&auml;tten f&ouml;r &ouml;vre norrland'],
+		[value: '', title: '', disabled: true],
+		[value: '', title: '--Allm&auml;na f&ouml;rvaltningsdomstolar--', disabled: true],
+		[value: '', title: 'H&ouml;gsta f&ouml;rvaltningsdomstolen'],
+		[value: '', title: 'Kammarr&auml;tten i Stockholm'],
+		[value: '', title: 'Kammarr&auml;tten i G&ouml;teborg'],
+		[value: '', title: 'Kammarr&auml;tten i Sundsvall'],
+		[value: '', title: 'Kammarr&auml;tten i J&ouml;nk&ouml;ping'],
+		[value: '', title: '', disabled: true],
+		[value: '', title: '--Specialdomstolar--', disabled: true],
+		[value: '', title: 'Arbetsdomstolen'],
+		[value: '', title: 'Marknadsdomstolen'],
+		[value: '', title: 'Migrations&ouml;verdomstolen'],
+		[value: '', title: 'Milj&ouml;&ouml;verdomstolen'],
+		[value: '', title: 'Patentbesv&auml;rsrätten'],
+	]
 }
 

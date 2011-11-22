@@ -83,9 +83,17 @@
 			<input type="hidden" name="kategori" value="Rattsfall" />
 			
 			<label for="utgivare"><g:message code="extendedSearch.domstol.label" default="Domstol"/></label>
-			<g:select name="utgivare" from="['Alla domstolar','Högsta domstolen', 'Regeringsrätten']"
-										keys="['', 'hoegsta_domstolen', 'regeringsraetten' ]" value="${rattsfallParams?.utgivare}" />
-			
+			<select name="utgivare">
+				<g:each in="${grailsApplication.config.lagrummet.extendedSearch.courtList}">
+					<option value="${it.value}"
+						<g:if test="${it.disabled}">disabled="disabled"</g:if>
+						<g:if test="${it.value == rattsfallParams?.utgivare}">selected="selected"</g:if>
+					>
+					${it.title}
+					</option>
+				</g:each>
+			</select>
+										
 			<label for="referatrubrik"><g:message code="extendedSearch.referatrubrik.label" default="Rubrik" /></label>
 			<g:textField name="referatrubrik" size="26" value="${rattsfallParams?.referatrubrik}" />
 			
