@@ -8,6 +8,7 @@
         <g:layoutHead />
         <!--[if IE]>
 			<script src="${resource(dir:'js',file:'html5IE.js')}"></script>
+			<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
 		<![endif]-->
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>

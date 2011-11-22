@@ -116,8 +116,9 @@ lagrummet {
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
 	local.rinfo.view="${grails.serverURL}/rinfo/"
 	search.availableCategories=["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Ovrigt"]
-	
-	extendedSearch.courtList = [
+	search.availableDepartement=["Justitiedepartementet","Utrikesdepartementet","Försvarsdepartementet","Socialdepartementet","Finansdepartementet","Utbildningsdepartementet","Landsbygdsdepartementet","Miljödepartementet","Näringsdepartementet","Kulturdepartementet","Arbetsmarknadsdepartementet"]
+	search.availableBeslutandeMyndigheter=[]
+	search.courtList = [
 		[value:'', title: 'Alla domstolar'],
 		[value: '', title: '', disabled: true],
 		[value:'', title: '--Allm&auml;nna domstolar--', disabled: true],

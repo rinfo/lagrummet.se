@@ -25,7 +25,7 @@
 			<input type="hidden" name="kategori" value="Forfattningar" />
 			
 			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ" /></label>
-			<g:select name="typ" from="${['Författningar', 'Lagar', 'Förordningar', 'Myndigheters föreskrifter']}"
+			<g:select name="typ" from="${['Alla författningar', 'Lagar', 'Förordningar', 'Myndigheters föreskrifter']}"
 									value="${forfattningarParams?.typ}" />
 			
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
@@ -34,12 +34,11 @@
 			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="SFS" /></label>
 			<g:textField name="beteckning" size="12" value="${forfattningarParams?.beteckning}" />
 			
-			<label for="skapare"><g:message code="extendedSearch.skapare.label" default="Skapad av" /></label>
-			<g:textField name="skapare" size="26" value="${forfattningarParams?.skapare}" />
+			<label for="beslutandeMyndighet"><g:message code="extendedSearch.beslutandeMyndighet.label" default="Beslutande myndighet" /></label>
+			<g:textField name="beslutandeMyndighet" size="26" value="${forfattningarParams?.beslutandeMyndighet}" />
 			
-			<label for="skapare"><g:message code="extendedSearch.utgivare.label" default="Utgiven av" /></label>
-			<g:textField name="utgivare" size="26" value="${forfattningarParams?.utgivare}" />
-			
+			<label for="departement"><g:message code="extendedSearch.departement.label" default="Departement" /></label>
+			<g:textField name="departement" size="26" value="${forfattningarParams?.departement}" />			
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${forfattningarParams?.fritext}" />
@@ -84,7 +83,7 @@
 			
 			<label for="utgivare"><g:message code="extendedSearch.domstol.label" default="Domstol"/></label>
 			<select name="utgivare">
-				<g:each in="${grailsApplication.config.lagrummet.extendedSearch.courtList}">
+				<g:each in="${grailsApplication.config.lagrummet.search.courtList}">
 					<option value="${it.value}"
 						<g:if test="${it.disabled}">disabled="disabled"</g:if>
 						<g:if test="${it.value == rattsfallParams?.utgivare}">selected="selected"</g:if>

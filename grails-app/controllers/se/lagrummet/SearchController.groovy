@@ -75,12 +75,21 @@ class SearchController {
 		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(), offset: offset, extendedSearchCommand: esc])
 	}
 	
-	def findAvailablePublishers = {
-		
-		def publishers = rdlSearchService.getAvailablePublishers(params.q)
-		
-		def response = ['publishers' : publishers]
-		render response as JSON
+	def findCreatorsOrPublishers = {
+		if (params.type) {
+			if (params.type == "departement") {
+				def response = ['publishers' : grailsApplication.config.lagrummet.search.availableDepartement]
+				render response as JSON
+			} else if (params.type == "beslutandeMyndighet") {
+				def response = ['publishers' : grailsApplication.config.lagrummet.search.availableBeslutandeMyndigheter]
+				render response as JSON
+			}
+		} else {
+			def publishers = rdlSearchService.getAvailablePublishers(params.q)
+			
+			def response = ['publishers' : publishers]
+			render response as JSON
+		}
 	}
 	
 	private Integer parseInt(String input, Integer defaultValue = 0) {
