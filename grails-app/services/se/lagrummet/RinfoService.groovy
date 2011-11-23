@@ -14,10 +14,9 @@ class RinfoService {
 
     static transactional = false
 	
-	def http = new HTTPBuilder()
-
     public JSONObject getDocumentMetaData(String docPath) {
 		def docInfo = ""
+		def http = new HTTPBuilder()
 		http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
 			uri.path = docPath + "/data"
 			response.success = {resp, json ->
@@ -40,6 +39,7 @@ class RinfoService {
 	
 	public getAtomEntry(String docPath) {
 		def atomEntry
+		def http = new HTTPBuilder()
 		http.parser.'application/atom+xml' = http.parser.'text/plain'
 		http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "application/atom+xml"  ) {
 			uri.path = docPath + "/entry"
@@ -52,6 +52,7 @@ class RinfoService {
 	
 	public String getHtmlContent(String docPath) {
 		def docContent = ""
+		def http = new HTTPBuilder()
 		http.parser.'text/html' = http.parser.'text/plain'
 		http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "text/html") {
 			uri.path = docPath
