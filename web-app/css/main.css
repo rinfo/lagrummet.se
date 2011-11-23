@@ -411,6 +411,7 @@ body > footer > nav, body > footer > div {
 
 #searchCategory {
 	cursor: pointer;
+	margin-left: 0;
 }
 
 #searchCurrentCategory {
@@ -457,10 +458,6 @@ body > footer > nav, body > footer > div {
 
 #searchCategoryList li:hover {
 	background-color: #FFF9EB;
-}
-
-#search > *:first-child {
-	margin-left: 0;
 }
 
 #search #query {
@@ -531,7 +528,7 @@ body > footer > nav, body > footer > div {
 	padding: 0;
 }
 
-.searchResults .column:first-of-type, .searchResults .column.first {
+.searchResults .column.first {
 	margin-right: 20px;
 }
 
@@ -629,13 +626,15 @@ fieldset .inputGroup label {
     clear: none;
 }
 
-.extendedSearch fieldset label {
+.extendedSearch fieldset > label {
+	min-height: 4em;
 }
 
 .extendedSearch fieldset label.date {
 	float: left;
 	width: auto;
-	padding: 4px 1em;
+	padding: 4px 1em 4px 0;
+	margin-left: 1em;
 }
 
 .extendedSearch > label {
@@ -646,11 +645,11 @@ fieldset .inputGroup label {
 	text-align: right;
 	width: 100%;
 	overflow: auto;
+	margin-top: 0;
 }
 
 #extendedSearchSubmit {
 	display: block;
-	margin-top: 1em;
 	padding: 0.75em 1.5em;
 	background-color: #eee;
 	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
@@ -716,4 +715,100 @@ fieldset .inputGroup label {
 	clear: none;
 	display: inline;
 	width: auto;
+}
+
+/* =MEDIA-QUERIES */
+/* For all narrow devices and screens */
+@media all and (max-width: 480px) {
+	body {
+	    position: relative;
+	    width: 100%;
+	    margin: 0;
+	    padding: 2% 0 0 0;
+	    font-size: 17px;
+	}
+
+	#siteHeader {
+		float: none;
+		width: 100%;
+		margin: 0;
+	}
+	
+	#sitelinks {
+	    position: relative;
+	    width: auto;
+	    margin: 1em 5%;
+	}
+	
+	#sitelinks ul li {
+		float: none;
+		margin: 0;
+		padding-left: 0;
+		border-left: none;
+	}
+	
+	#breadcrumbs {
+		margin: 1em 5%;
+	}
+		
+	#primaryNavigation {
+		float: none;
+		width: auto;
+		margin: 1em 5%;
+		min-height: auto;
+	}
+	
+	#searchCategory {
+		width: auto;
+		margin: 0 5% 0.5em 5%;
+		float: none;
+		height: 4em;
+	}
+	
+	#searchQuery {
+		width: 70%;
+		text-align: center;
+	}
+	
+	#search #query {
+		width: 95%;
+		margin: 0;
+		padding: 0;
+	}
+	
+	#search #searchSubmit {
+		float: right;
+		margin: 0 5% 0 2%;
+		width: 15%;
+	}
+	
+	#search > *{
+		margin-left: 5%;
+	}
+	
+	#siteHeader > p.extSearchLabel {
+		clear: both;
+		margin: 1em 5% 0 0;
+	}
+	
+	body article {
+		width: auto;
+		float: none;
+		margin: 1em 5%;
+		clear: both;
+	}
+	
+	body article:first-child {
+		float: none;
+	}
+	
+	#siteFooter {
+		width: auto;
+		margin: 1em 5%;
+	}
+	
+	.searchResults table td, .searchResults table th {
+		min-width: 0;
+		max-width: 50%;
+	}
 }
