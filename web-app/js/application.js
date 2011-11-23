@@ -229,25 +229,24 @@ jQuery(document).ready(function($) {
 		});
 	}
 	
-	function selectPartOfInput(input, startPos, endPos) {
-        if (typeof input.selectionStart != "undefined") {
-            input.selectionStart = startPos;
-            input.selectionEnd = endPos;
+	function selectPartOfInput(el, startPos, endPos) {
+        if (typeof el.selectionStart != "undefined") {
+        	// W3C compliant browsers -> Selection object
+        	el.selectionStart = startPos;
+        	el.selectionEnd = endPos;
         } else if (document.selection && document.selection.createRange) {
-            // IE branch
-            input.focus();
-            input.select();
+            // Internet Explorer -> Microsoft Text Range
+        	el.focus();
+        	el.select();
             var range = document.selection.createRange();
             range.collapse(true);
             range.moveEnd("character", endPos);
             range.moveStart("character", startPos);
             range.select();
         }
-
     }
 
 	var qLength = 0;
-	var availableDepartement = ["Finansdepartementet", "Försvarsdepartementet", "Justitiedepartementet", "Miljödepartementet"];
 	var publishers = [];
 	
 	$("#beslutandeMyndighet, #departement").each(function(i) {

@@ -81,11 +81,11 @@ class SearchController {
 				def response = ['publishers' : grailsApplication.config.lagrummet.search.availableDepartement]
 				render response as JSON
 			} else if (params.type == "beslutandeMyndighet") {
-				def response = ['publishers' : grailsApplication.config.lagrummet.search.availableBeslutandeMyndigheter]
+				def response = ['publishers' : rdlSearchService.getAvailablePublishers()]
 				render response as JSON
 			}
 		} else {
-			def publishers = rdlSearchService.getAvailablePublishers(params.q)
+			def publishers = rdlSearchService.getExistingPublishers(params.q)
 			
 			def response = ['publishers' : publishers]
 			render response as JSON

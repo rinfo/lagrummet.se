@@ -76,13 +76,41 @@ System.out.println(queryParams)
 		return searchResult
 	}
 	
-	public List<String> getAvailablePublishers(String match) {
+	public List<String> getAvailablePublishers() {
 		
 		def publishers = []
 		def http = new HTTPBuilder()
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
-				uri.path = "/-/stats"
+				uri.path = "/var/common.json"
+				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
+				req.getParams().setParameter("http.socket.timeout", new Integer(5000));
+				
+				response.success = { resp, json ->
+					json.topic.each { topic ->
+						if (topic.type == "Organization") {
+//							def tokens = topic.iri.ref.tokenize('/')
+//							def iri = tokens.get(tokens.size() -1)
+//							publishers.add(["iri" : iri, "name" : topic.name])
+							publishers.add(topic.name)
+						}
+					}
+				}
+				
+			}
+		} catch(SocketTimeoutException) {
+		
+		}
+		return publishers
+	}
+	
+	public List<String> getExistingPublishers(String match) {
+		
+		def publishers = []
+		def http = new HTTPBuilder()
+		try {
+			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
+				uri.path = "/-/publ;stats"
 				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
 				req.getParams().setParameter("http.socket.timeout", new Integer(5000));
 				

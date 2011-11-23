@@ -31,14 +31,14 @@
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
 			<g:textField name="titel" size="26" value="${forfattningarParams?.titel}" />
 			
-			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="SFS" /></label>
+			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="SFS/Beteckning" /></label>
 			<g:textField name="beteckning" size="12" value="${forfattningarParams?.beteckning}" />
 			
 			<label for="beslutandeMyndighet"><g:message code="extendedSearch.beslutandeMyndighet.label" default="Beslutande myndighet" /></label>
-			<g:textField name="beslutandeMyndighet" size="26" value="${forfattningarParams?.beslutandeMyndighet}" />
+			<g:textField name="utgivare" id="beslutandeMyndighet" size="26" value="${forfattningarParams?.utgivare}" />
 			
 			<label for="departement"><g:message code="extendedSearch.departement.label" default="Departement" /></label>
-			<g:textField name="departement" size="26" value="${forfattningarParams?.departement}" />			
+			<g:textField name="skapare" id="departement" size="26" value="${forfattningarParams?.skapare}" />			
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${forfattningarParams?.fritext}" />
