@@ -24,10 +24,16 @@
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Forfattningar">
 			<input type="hidden" name="kategori" value="Forfattningar" />
 			
+
+			<fieldset>
+			<div class="inputGroup">
 			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ" /></label>
 			<g:select name="typ" from="${['Alla författningar', 'Lagar', 'Förordningar', 'Myndigheters föreskrifter']}"
 									value="${forfattningarParams?.typ}" />
-			
+			</div>
+			<div class="inputGroup"><g:radio checked="${forfattningarParams?.lagtyp == null || forfattningarParams?.lagtyp != 'upphavda'}" value="gallande" name="lagtyp" id="gallande" /><label for="gallande"><p><strong><g:message code="extendedSearch.gallandeLagar.label" default="Gällande lagar"/></strong></p><p><g:message code="extendedSearch.description.gallandeLagar.label" default="Sök på gällande lagar" /></p></label></div>
+			<div class="inputGroup"><g:radio checked="${forfattningarParams?.lagtyp == 'upphavda'}" value="upphavda" name="lagtyp" id="upphavda" /><label for="upphavda"><p><strong><g:message code="extendedSearch.upphavdaLagar.label" default="Upphävda lagar"/></strong></p><p><g:message code="extendedSearch.description.upphavdaLagar.label" default="Sök på lagar som har upphört" /></p></label></div>
+			</fieldset>
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
 			<g:textField name="titel" size="26" value="${forfattningarParams?.titel}" />
 			
@@ -42,9 +48,6 @@
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${forfattningarParams?.fritext}" />
-			
-			<label for="forfattningssamling"><g:message code="extendedSearch.forfattnintssamling.label" default="Författningssamling" /></label>
-			<g:textField name="forfattningssamling" size="26" value="${forfattningarParams?.forfattningssamling}" />
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
@@ -86,7 +89,7 @@
 				<g:each in="${grailsApplication.config.lagrummet.search.courtList}">
 					<option value="${it.value}"
 						<g:if test="${it.disabled}">disabled="disabled"</g:if>
-						<g:if test="${it.value == rattsfallParams?.utgivare}">selected="selected"</g:if>
+						<g:if test="${it.value && it.value == rattsfallParams?.utgivare}">selected="selected"</g:if>
 					>
 					${it.title}
 					</option>

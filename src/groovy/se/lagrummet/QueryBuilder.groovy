@@ -187,6 +187,18 @@ class QueryBuilder {
 		return this
 	}
 	
+	public QueryBuilder setLagUpphavdAt(String date){
+//		max-ikrafttradandedatum=2011-11-23&maxEx-rev.upphaver.ikrafttradandedatum=2011-11-23
+		setIkraftTo(date)
+		setParam('maxEx-rev.upphaver.ikrafttradandedatum', date)
+	}
+	public QueryBuilder setLagGallandeAt(String date) {
+//		max-ikrafttradandedatum=2011-11-23&ifExists-max-rev.upphaver.ikrafttradandedatum=2011-11-23
+		setIkraftTo(date)
+		setParam('ifExists-max-rev.upphaver.ikrafttradandedatum', date)
+		return this
+	}
+	
 	public Map getQueryParams() {
 		return queryParams
 	}

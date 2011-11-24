@@ -67,6 +67,14 @@ class SearchController {
 			}
 		} 
 		
+		def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+		def today = dateFormat.format(new Date())
+		if(params.lagtyp == "gallande") {
+			queryBuilder.setLagGallandeAt(today)
+		} else if(params.lagtyp == "upphavda") {
+			queryBuilder.setLagUpphavdAt(today)
+		}
+		
 		if(!esc.hasErrors() && !queryBuilder.isEmpty()) {
 			queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
 			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams(), "list")
