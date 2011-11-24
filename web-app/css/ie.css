@@ -1,11 +1,15 @@
-#query {padding: 0;}
 #search .input {
 	height: 30px;
-	width: 310px;
-	margin-left: 5px;
+	width: 312px;
 	padding: 5px 0 5px 0;
 	border: 1px solid #ddd;
 	display: block;
 	float: left;
 	background-color: #eee;
 }
+
+#search #query {padding: 0; margin: 2px 5px; width:290px;}
+#search #searchCategory {z-index: 11; position: relative; padding: 5px 5px 5px 10px;}
+#search {z-index: 12; position: relative;}
+#siteHeader {z-index: 13; position: relative;}
+body {z-index: 14; position: relative;}

@@ -37,14 +37,14 @@
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
 			<g:textField name="titel" size="26" value="${forfattningarParams?.titel}" />
 			
-			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="SFS" /></label>
+			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="SFS/Beteckning" /></label>
 			<g:textField name="beteckning" size="12" value="${forfattningarParams?.beteckning}" />
 			
 			<label for="beslutandeMyndighet"><g:message code="extendedSearch.beslutandeMyndighet.label" default="Beslutande myndighet" /></label>
-			<g:textField name="beslutandeMyndighet" size="26" value="${forfattningarParams?.beslutandeMyndighet}" />
+			<g:textField name="utgivare" id="beslutandeMyndighet" size="26" value="${forfattningarParams?.utgivare}" />
 			
 			<label for="departement"><g:message code="extendedSearch.departement.label" default="Departement" /></label>
-			<g:textField name="departement" size="26" value="${forfattningarParams?.departement}" />			
+			<g:textField name="skapare" id="departement" size="26" value="${forfattningarParams?.skapare}" />			
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${forfattningarParams?.fritext}" />
@@ -52,24 +52,25 @@
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
 				
-				
-				<div class="inputGroup"><g:radio checked="${forfattningarParams?.datum == null || forfattningarParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label></div>
-				<div class="inputGroup"><g:radio checked="${forfattningarParams?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades/beslutades"/></p></label></div>
-				
-				<div class="inputGroup break ">
-					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
-					<input type="text" name="fromDate" size="10" value="${forfattningarParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
-					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
-						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
-					</g:hasErrors>
-				</div>
-				
 				<div class="inputGroup">
-					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
-					<input type="text" name="toDate" size="10" value="${forfattningarParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
-					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
-						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
-					</g:hasErrors>
+					<g:radio checked="${forfattningarParams?.datum == null || forfattningarParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label>
+					<div class="inputGroup">
+						<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
+						<input type="text" name="fromDate" size="10" value="${forfattningarParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
+						<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
+							<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+						</g:hasErrors>
+					</div>
+				</div>
+				<div class="inputGroup">
+					<g:radio checked="${forfattningarParams?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades/beslutades"/></p></label>
+					<div class="inputGroup">
+						<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
+						<input type="text" name="toDate" size="10" value="${forfattningarParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
+						<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
+							<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+						</g:hasErrors>
+					</div>
 				</div>
 			</fieldset>
 			

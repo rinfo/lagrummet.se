@@ -8,14 +8,14 @@ function search() {
 	
 	if (!$("#dynamicSearchResults").length) {
     	$("#content > *").addClass("searchHidden");
-    	$("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></div>');
+    	$("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></article>');
     }
 	
 	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
         if (data) {
 //        	console.log(data);
         	if (data.searchResult.totalResults > 0 && $("#cat").attr("value") == "Alla") {      		
-        		$("#dynamicSearchResults").html('<header><h1>Sökresultat</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column" id="c-1" /><div class="column" id="c-2" />');
+        		$("#dynamicSearchResults").html('<header><h1>Sökresultat</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column first" id="c-1" /><div class="column" id="c-2" />');
         		
         		// Redaktionella resultat
         			$("#c-1").append('<p class="Ovrigt"><a href="'+serverUrl+'search?query='+query+'&cat=Ovrigt"><strong>Information från lagrummet.se</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></p>');
@@ -229,25 +229,24 @@ jQuery(document).ready(function($) {
 		});
 	}
 	
-	function selectPartOfInput(input, startPos, endPos) {
-        if (typeof input.selectionStart != "undefined") {
-            input.selectionStart = startPos;
-            input.selectionEnd = endPos;
+	function selectPartOfInput(el, startPos, endPos) {
+        if (typeof el.selectionStart != "undefined") {
+        	// W3C compliant browsers -> Selection object
+        	el.selectionStart = startPos;
+        	el.selectionEnd = endPos;
         } else if (document.selection && document.selection.createRange) {
-            // IE branch
-            input.focus();
-            input.select();
+            // Internet Explorer -> Microsoft Text Range
+        	el.focus();
+        	el.select();
             var range = document.selection.createRange();
             range.collapse(true);
             range.moveEnd("character", endPos);
             range.moveStart("character", startPos);
             range.select();
         }
-
     }
 
 	var qLength = 0;
-	var availableDepartement = ["Finansdepartementet", "Försvarsdepartementet", "Justitiedepartementet", "Miljödepartementet"];
 	var publishers = [];
 	
 	$("#beslutandeMyndighet, #departement").each(function(i) {

@@ -6,9 +6,9 @@
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}">
         <g:layoutHead />
-        <!--[if IE]>
-			<script src="${resource(dir:'js',file:'html5IE.js')}"></script>
+		<!--[if lt IE 9]>
 			<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
@@ -41,7 +41,7 @@
 					</g:each>
 					</select>
 				</div>
-				<div class="input"><g:textField name="query"/></div>
+				<div class="input" id="searchQuery"><g:textField name="query"/></div>
 				<g:submitButton name="searchSubmit" value="Sök"/>
 			</g:form>
 			<p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
@@ -50,7 +50,7 @@
 	    <footer id="siteFooter">${siteProps?.footer}
 	    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
 	    </footer>
-	    <g:javascript library="jquery" plugin="jquery" />
+	    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js?ver=1.7.0'></script>
 	    <g:javascript library="application" />
     </body>
 </html>
