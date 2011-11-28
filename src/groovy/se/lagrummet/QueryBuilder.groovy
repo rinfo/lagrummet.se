@@ -176,8 +176,7 @@ class QueryBuilder {
 	public QueryBuilder setPublisher(publisher) {
 		if(publisher) {
 			def key = "publisher.iri"
-			def prefix = "*/"
-			def publisherList = [publisher].flatten().collect { prefix + it }
+			def publisherList = [publisher].flatten().collect { getIriSearchString(it) }
 			queryParams[(key)] = publisherList
 		}
 		return this
@@ -186,11 +185,21 @@ class QueryBuilder {
 	public QueryBuilder setCreator(creator) {
 		if(creator) {
 			def key = "creator.iri"
-			def prefix = "*/"
-			def creatorList = [creator].flatten().collect { prefix + it }
+			def creatorList = [creator].flatten().collect { getIriSearchString(it) }
 			queryParams[(key)] = creatorList
 		}
 		return this
+	}
+	
+	private String getIriSearchString(String searchParam) {
+		String iri = searchParam.toLowerCase()
+		iri = iri.replace('å', 'aa')
+		iri = iri.replace('ä', 'ae')
+		iri = iri.replace('ö', 'oe')
+		iri = iri.replace(' ', '_')
+		
+		iri = "*/" + iri
+		return iri
 	}
 	
 	
