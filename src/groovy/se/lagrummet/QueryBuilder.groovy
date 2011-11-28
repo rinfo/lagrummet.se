@@ -69,8 +69,16 @@ class QueryBuilder {
 		setParam('min-beslutsdatum',beslutsdatum)
 		return this
 	}
+	public QueryBuilder setOrBeslutsdatumFrom(String beslutsdatum) {
+		setParam('or-min-beslutsdatum',beslutsdatum)
+		return this
+	}
 	public QueryBuilder setBeslutsdatumTo(String beslutsdatum) {
 		setParam('max-beslutsdatum', beslutsdatum)
+		return this
+	}
+	public QueryBuilder setOrBeslutsdatumTo(String beslutsdatum) {
+		setParam('or-max-beslutsdatum', beslutsdatum)
 		return this
 	}
 	
@@ -82,8 +90,16 @@ class QueryBuilder {
 		setParam('min-utfardandedatum', utfardandedatum)
 		return this
 	}
+	public QueryBuilder setOrUtfardandedatumFrom(String utfardandedatum) {
+		setParam('or-min-utfardandedatum', utfardandedatum)
+		return this
+	}
 	public QueryBuilder setUtfardandedatumTo(String utfardandedatum) {
 		setParam('max-utfardandedatum', utfardandedatum)
+		return this
+	}
+	public QueryBuilder setOrUtfardandedatumTo(String utfardandedatum) {
+		setParam('or-max-utfardandedatum', utfardandedatum)
 		return this
 	}
 	
@@ -188,12 +204,10 @@ class QueryBuilder {
 	}
 	
 	public QueryBuilder setLagUpphavdAt(String date){
-//		max-ikrafttradandedatum=2011-11-23&maxEx-rev.upphaver.ikrafttradandedatum=2011-11-23
 		setIkraftTo(date)
 		setParam('maxEx-rev.upphaver.ikrafttradandedatum', date)
 	}
 	public QueryBuilder setLagGallandeAt(String date) {
-//		max-ikrafttradandedatum=2011-11-23&ifExists-max-rev.upphaver.ikrafttradandedatum=2011-11-23
 		setIkraftTo(date)
 		setParam('ifExists-max-rev.upphaver.ikrafttradandedatum', date)
 		return this

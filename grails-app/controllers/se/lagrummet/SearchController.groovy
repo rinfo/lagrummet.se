@@ -47,7 +47,8 @@ class SearchController {
 			if(dateType == 'ikraft') {
 				queryBuilder.setIkraftFrom(params.fromDate)
 			} else if(dateType == 'utfardande') {
-				queryBuilder.setUtfardandedatumFrom(params.fromDate)
+				queryBuilder.setOrUtfardandedatumFrom(params.fromDate)
+				queryBuilder.setOrBeslutsdatumFrom(params.fromDate)
 			} else if(dateType == 'avgorande') {
 				//todo
 			} else if(dateType == 'utgivande') {
@@ -59,7 +60,8 @@ class SearchController {
 			if(dateType == 'ikraft') {
 				queryBuilder.setIkraftTo(params.toDate)
 			} else if(dateType == 'utfardande') {
-				queryBuilder.setUtfardandedatumTo(params.toDate)
+				queryBuilder.setOrUtfardandedatumTo(params.toDate)
+				queryBuilder.setOrBeslutsdatumTo(params.toDate)
 			} else if(dateType == 'avgorande') {
 				//todo
 			} else if(dateType == 'utgivande') {
@@ -67,13 +69,13 @@ class SearchController {
 			}
 		} 
 		
-		def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
-		def today = dateFormat.format(new Date())
-		if(params.lagtyp == "gallande") {
-			queryBuilder.setLagGallandeAt(today)
-		} else if(params.lagtyp == "upphavda") {
-			queryBuilder.setLagUpphavdAt(today)
-		}
+//		def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+//		def today = dateFormat.format(new Date())
+//		if(params.lagtyp == "gallande") {
+//			queryBuilder.setLagGallandeAt(today)
+//		} else if(params.lagtyp == "upphavda") {
+//			queryBuilder.setLagUpphavdAt(today)
+//		}
 		
 		if(!esc.hasErrors() && !queryBuilder.isEmpty()) {
 			queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
