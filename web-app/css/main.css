@@ -605,6 +605,12 @@ fieldset .inputGroup label {
 	width: 190px;
 }
 
+fieldset .inputGroup label.text {
+	display: block;
+	margin-left: 0em;
+	width: 190px;
+}
+
 .extendedSearch {
 	padding: 1em 0;
     border-top: 1px solid #eee;

@@ -40,6 +40,7 @@ class QueryBuilder {
 		setPageAndPageSize(params.page, params.itemsPerPage)
 		setSubject(params.sokord)
 		setForfattningssamling(params.forfattningssamling)
+		setLagrum(params.sfs, params.kapitel, params.paragraf)
 		
 	}
 	
@@ -237,6 +238,35 @@ class QueryBuilder {
 		setIkraftTo(date)
 		setParam('ifExists-max-rev.upphaver.ikrafttradandedatum', date)
 		return this
+	}
+	
+	public QueryBuilder setLagrum(String sfs, String chapter, String section) {
+//		http://rinfo.lagrummet.se/publ/sfs/1972:207#k_5-p_7
+		String lagrum 
+		
+		if(sfs) {
+			lagrum = "*/" + sfs
+		}
+		
+		if(chapter){
+			chapter = "k_" + chapter.replace(' ', '_')
+		}
+		if(section) {
+			section = "p_" + section
+		}
+		
+		if(lagrum && (chapter || section)) {
+			lagrum += "#"
+			lagrum += chapter
+			if(chapter && section) {
+				lagrum += "-"
+			}
+			lagrum += section
+		}
+		
+		setParam('lagrum.iri', lagrum)
+		return this
+		
 	}
 	
 	public Map getQueryParams() {

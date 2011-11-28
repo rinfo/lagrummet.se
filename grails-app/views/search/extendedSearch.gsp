@@ -113,6 +113,22 @@
 			<g:textField name="sokord" size="26" value="${rattsfallParams?.sokord}" />
 			
 			<fieldset>
+				<div class="legend"><g:message code="extendedSearch.lagrum.label" default="Lagrum" /></div>
+				<div class="inputGroup">
+					<label for="sfs" class="text"><g:message code="extendedSearch.sfs.label" default="SFS"/></label>
+					<g:textField name="sfs" value="${rattsfallParams?.sfs}" />
+				</div>
+				<div class="inputGroup">
+					<label for="kapitel" class="text"><g:message code="extendedSearch.kapitel.label" default="Kapitelnummer" /></label>
+					<g:textField name="kapitel" value="${rattsfallParams?.kapitel}" /> 
+				</div>
+				<div class="inputGroup">
+					<label for="paragraf" class="text"><g:message code="extendedSearch.paragraf.label" default="Paragrafnummer" /></label>
+					<g:textField name="paragraf" value="${rattsfallParams?.paragraf}" />
+				</div>
+			</fieldset>
+			
+			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.avgorandeDatum.label" default="Avgörandedatum" /></div>
 				<input type="hidden" name="datum" id="avgorandeDatum" value="avgorande" />
 				<div class="inputGroup">
