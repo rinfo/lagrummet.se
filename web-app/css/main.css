@@ -193,9 +193,10 @@ a.step, .currentStep {
 }
 
 #logo {
-    position: relative;
+    width: 220px;
+    float: left;
     margin-top: 20px;
-    padding: 0 10px;
+    padding: 0;
     display: block;
     color: #222;
     font: 1.6em 'Century Gothic', sans-serif;
@@ -208,6 +209,10 @@ a.step, .currentStep {
 
 #logo a .hlight, #logo a .hlight {
     color: #585858;
+}
+
+#mobileNavLink {
+	display: none;	
 }
 
 #sitelinks {
@@ -242,6 +247,7 @@ a.step, .currentStep {
 #siteFooter {
     width: 100%;
     clear: both;
+    text-align: right;
 }
 
 a.print:visited {
@@ -249,10 +255,16 @@ a.print:visited {
 }
 
 /* =CONTENT WRAPPER */
+#content {
+	position: relative;
+	left: 220px;
+}
 
 /* =PRIMARY NAVIGATION */
 #primaryNavigation {
-	float: left;
+	position: absolute;
+	left: 0;
+	top: 60px;
 	width: 220px;
 	margin: 0;
 	display: block;
@@ -740,25 +752,48 @@ fieldset .inputGroup label.text {
 		margin: 0;
 	}
 	
+	#logo {
+	    margin: 0;
+	    clear: both;
+	    margin: 0 5%;
+	    padding: 2% 0 0 0;
+	    float: none;
+	}
+	
+	#mobileNavLink {
+		display: block;
+		position: absolute;
+		top: 1em;
+		right: 5%;
+	}
+	
 	#sitelinks {
+		display: none;
+		clear: both;
 	    position: relative;
-	    width: auto;
+	    width: 90%;
 	    margin: 1em 5%;
+	    overflow: auto;
 	}
 	
 	#sitelinks ul li {
-		float: none;
+		float: left;
 		margin: 0;
-		padding-left: 0;
 		border-left: none;
+		padding-left: 0;
 	}
 	
 	#breadcrumbs {
 		margin: 1em 5%;
 	}
+	
+	#content {
+		left: 0;
+	}
 		
 	#primaryNavigation {
 		float: none;
+		position: static;
 		width: auto;
 		margin: 1em 5%;
 		min-height: auto;

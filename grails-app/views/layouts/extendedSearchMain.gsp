@@ -13,12 +13,9 @@
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
-	    <nav id="primaryNavigation">
-			<div id="logo">
-				<a href="${resource()}">${siteProps?.siteTitle}</a>
-			</div>
-			${siteProps?.primaryNavigation}
-		</nav>
+    	<div id="logo">
+			<a href="${resource()}">${siteProps?.siteTitle}</a>
+		</div>
 		<header id="siteHeader">
 			<nav id="sitelinks">
 				${siteProps?.headerNavigation}
@@ -28,6 +25,9 @@
 			</nav>
 		</header>
 	    <g:layoutBody />
+	    <nav id="primaryNavigation">
+			${siteProps?.primaryNavigation}
+		</nav>
 	    <footer id="siteFooter">${siteProps?.footer}
 	    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
 	    </footer>
