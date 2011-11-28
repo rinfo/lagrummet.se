@@ -26,6 +26,9 @@ class QueryBuilder {
 		setUtkomFranTryck(params.utkomfrantryck)
 		setUtkomFranTryckFrom(params.utkomfrantryckMin)
 		setUtkomFranTryckTo(params.utkomfrantryckMax)
+		setAvgorandedatum(params.avgorandeDatum)
+		setAvgorandedatumFrom(params.avgorandedatumMin)
+		setAvgorandedatumTo(params.avgorandedatumMax)
 		setIdentifier(params.beteckning)
 		setTitle(params.titel)
 		setMalnummer(params.malnummer)
@@ -129,6 +132,20 @@ class QueryBuilder {
 	}
 	public QueryBuilder setUtkomFranTryckTo(String utkomfrantryck) {
 		setParam('max-utkomFranTryck', utkomfrantryck)
+		return this
+	}
+	
+	
+	public QueryBuilder setAvgorandedatum(String avgorandedatum) {
+		setParam('avgorandedatum', avgorandedatum)
+		return this
+	}
+	public QueryBuilder setAvgorandedatumFrom(String avgorandedatum) {
+		setParam('min-avgorandedatum', avgorandedatum)
+		return this
+	}
+	public QueryBuilder setAvgorandedatumTo(String avgorandedatum) {
+		setParam('max-avgorandedatum', avgorandedatum)
 		return this
 	}
 	

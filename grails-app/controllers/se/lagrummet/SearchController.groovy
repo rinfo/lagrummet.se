@@ -50,7 +50,7 @@ class SearchController {
 				queryBuilder.setOrUtfardandedatumFrom(params.fromDate)
 				queryBuilder.setOrBeslutsdatumFrom(params.fromDate)
 			} else if(dateType == 'avgorande') {
-				//todo
+				queryBuilder.setAvgorandedatumFrom(params.fromDate)
 			} else if(dateType == 'utgivande') {
 				queryBuilder.setUtkomFranTryckFrom(params.fromDate)
 			}
@@ -63,7 +63,7 @@ class SearchController {
 				queryBuilder.setOrUtfardandedatumTo(params.toDate)
 				queryBuilder.setOrBeslutsdatumTo(params.toDate)
 			} else if(dateType == 'avgorande') {
-				//todo
+				queryBuilder.setAvgorandedatumTo(params.toDate)
 			} else if(dateType == 'utgivande') {
 				queryBuilder.setUtkomFranTryckTo(params.toDate)
 			}
