@@ -11,10 +11,13 @@
 	</article>
 	<aside class="puffs">
 		<g:each in="${[]}" var="puff" >
-			<a href="${puff.link}"><img src="${puff.img.filename}" /></a>
-			<strong>${puff.title}</strong>
-			<p>${puff.desc}</p>
-			<a href="${puff.link}">Läs mer</a>
+			<div class="puff">
+				<a href="${puff.link}"><img src="${puff.img.filename}" /></a>
+				<strong>${puff.title}</strong>
+				<p>${puff.desc}</p>
+				<a href="${puff.link}">Läs mer</a>
+			</div>
+		
 		</g:each>
 	</aside>
 </div>

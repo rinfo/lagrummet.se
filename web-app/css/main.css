@@ -323,11 +323,15 @@ a.print:visited {
 
 /* =ARTICLE in content */
 body article {
-	float: left;
     position: relative;
-    width: 471px;
+    width: 720px;
     margin: 0;
     background-color: #fff;
+}
+
+body article.editorial {
+	float: left;
+    width: 471px;
 }
 
 body article.frontpage {
@@ -354,6 +358,12 @@ aside.puffs {
 body article.frontpage .puffs {
     clear: both;
     margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.puffs .puff {
+	margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid #ddd;
 }
