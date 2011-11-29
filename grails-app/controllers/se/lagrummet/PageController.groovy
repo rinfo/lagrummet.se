@@ -164,7 +164,12 @@ class PageController {
 			if(page.publishStop && page.publishStop.before(new Date())) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND)
 			}
-			return [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")] 
+			def model = [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")]
+			if (page.pageTemplate && page.pageTemplate != "default" ) {
+				render(view: page.pageTemplate, model: model)
+			} else {
+				return model
+			}
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND)
 		}

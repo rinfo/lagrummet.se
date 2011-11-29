@@ -45,4 +45,9 @@
 		<label for="pageOrder"><g:message code="page.pageOrder.label" default="Page order: " /></label>
 		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
 	</div>
+	
+	<div class="input ${hasErrors(bean: pageInstance, field: 'pageTemplate', 'errors')}">
+		<label for="pageTemplate"><g:message code="page.pageTemplate.label" default="Page template: " /></label>
+		<g:dropdown options="${grailsApplication.config.lagrummet.page.templates}" value="${fieldValue(bean: pageInstance, field: 'pageTemplate')}" name="pageTemplate"></g:dropdown>
+	</div>
 </div>

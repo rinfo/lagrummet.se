@@ -16,6 +16,7 @@
     	<div id="logo">
 			<a href="${resource()}">${siteProps?.siteTitle}</a>
 		</div>
+		<a href="#primaryNavigation" id="mobileNavLink">Navigering</a>
 		<header id="siteHeader">
 			<nav id="sitelinks">
 				${siteProps?.headerNavigation}

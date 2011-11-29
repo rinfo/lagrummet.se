@@ -8,6 +8,7 @@ class Page {
 	String content
 //	User author
 	int pageOrder = 0
+	String pageTemplate = "default" // See config.groovy -> lagrummet.page.templates for possible values
 	
 	String status = "draft" // draft, pending, published, autoSave
 	Date dateCreated

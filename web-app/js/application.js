@@ -238,11 +238,10 @@ jQuery(document).ready(function($) {
             // Internet Explorer -> Microsoft Text Range
         	el.focus();
         	el.select();
-            var range = document.selection.createRange();
-            range.collapse(true);
-            range.moveEnd("character", endPos);
-            range.moveStart("character", startPos);
-            range.select();
+            var r = document.selection.createRange();
+            r.moveEnd("character", endPos);
+            r.moveStart("character", startPos);
+            r.select();
         }
     }
 
@@ -251,7 +250,7 @@ jQuery(document).ready(function($) {
 	
 	$("#beslutandeMyndighet, #departement").each(function(i) {
 		 $.get(serverUrl + "search/findCreatorsOrPublishers?type="+ $(this).attr("id"), function(data) {
-			 publishers[i] = data.publishers;
+			 publishers[i] = "," + data.publishers.toString();
 		}, "json");
 		
 		$(this).keyup(function(e) {
@@ -260,13 +259,12 @@ jQuery(document).ready(function($) {
 			} else {
 				qLength++;
 				var re = new RegExp("," + $(this).attr("value"),"ig");
-				var arr2str = "," + publishers[i].toString();
-				var pos = arr2str.search(re);
+				var pos = publishers[i].search(re);
 
 				if (pos != -1) {
 					/*var start = 1 + arr2str.slice(0, pos).lastIndexOf(",", pos);
 					var match = arr2str.slice(start, arr2str.indexOf(",",start));*/
-					var match = arr2str.slice(pos + 1, arr2str.indexOf(",",pos + 1));
+					var match = publishers[i].slice(pos + 1, publishers[i].indexOf(",",pos + 1));
 					$(this).attr("value", match).select();
 					selectPartOfInput(this, qLength, match.length);
 				}

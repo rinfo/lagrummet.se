@@ -63,6 +63,7 @@ h1 a, h2 a, h3 a, h4 a, h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited {
 }
 
 h1 {
+	margin: 0 0 1em 0;
     font-size: 1.6em;
 }
 
@@ -181,10 +182,10 @@ a.step, .currentStep {
 
 /* =HEADER */
 #siteHeader {
-	float: left;
 	width: 720px;
 	position: relative;
 	margin-left: 40px;
+	left: 220px;
 }
 
 #siteHeader > p.extSearchLabel {
@@ -258,6 +259,9 @@ a.print:visited {
 #content {
 	position: relative;
 	left: 220px;
+	margin-left: 40px;
+	width: 720px;
+	clear: both;
 }
 
 /* =PRIMARY NAVIGATION */
@@ -319,18 +323,15 @@ a.print:visited {
 
 /* =ARTICLE in content */
 body article {
+	float: left;
     position: relative;
-    width: 720px;
-    margin: 0 0 0 40px;
+    width: 471px;
+    margin: 0;
     background-color: #fff;
-    float: right;
-	/*-webkit-box-shadow: 2px 2px 6px #ccc;
-	-moz-box-shadow: 1px 1px 6px #ccc;
-	box-shadow: 2px 2px 6px #ccc;*/
 }
 
-body article:first-child {
-    float: left;
+body article.frontpage {
+    width: 720px;
 }
 
 body article ul {
@@ -340,6 +341,21 @@ body article ul {
 
 body article ul li {
     margin: 0 0 1em 0;
+}
+
+aside.puffs {
+	float: right;
+	width: 228px;
+	margin: 0 0 1em 10px;
+	padding-left: 10px;
+	border-left: 1px solid #ddd;
+}
+
+body article.frontpage .puffs {
+    clear: both;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
 }
 
 /* =FOOTER page footer */
@@ -750,6 +766,7 @@ fieldset .inputGroup label.text {
 		float: none;
 		width: 100%;
 		margin: 0;
+		left: 0;
 	}
 	
 	#logo {
@@ -789,6 +806,8 @@ fieldset .inputGroup label.text {
 	
 	#content {
 		left: 0;
+		width: auto;
+		margin: 0;
 	}
 		
 	#primaryNavigation {
@@ -851,5 +870,10 @@ fieldset .inputGroup label.text {
 	.searchResults table td, .searchResults table th {
 		min-width: 0;
 		max-width: 50%;
+	}
+	
+	fieldset .inputGroup label {
+		overflow: hidden;
+		width: auto;
 	}
 }

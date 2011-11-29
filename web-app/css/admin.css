@@ -194,6 +194,10 @@ ul {
 	border-left: 1px dotted #ccc;
 }
 
+#bodyContent form .aside input[type=text] {
+	width: auto;
+}
+
 #bodyContent form .aside.buttons {
 	text-align: right;
 	clear: none;
