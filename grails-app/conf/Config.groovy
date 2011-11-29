@@ -145,3 +145,15 @@ lagrummet {
 	]
 }
 
+environments {
+	production {
+		lagrummet.app.basedir = ""
+	}
+	development {
+		lagrummet.app.basedir = "web-app/"
+	}
+	test {
+		lagrummet.app.basedir = "web-app/"
+	}
+
+}
