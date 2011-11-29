@@ -80,7 +80,8 @@ class MediaController {
 //		String.format('%tF', new Date())
 		
 		mediaInstance.filename = grailsApplication.config.lagrummet.upload.dir + parentDir+ "/" + filename
-		def fos = new FileOutputStream(new File("web-app/" + mediaInstance.filename));
+		new File(grailsApplication.config.lagrummet.app.basedir + grailsApplication.config.lagrummet.upload.dir + parentDir).mkdirs()
+		def fos = new FileOutputStream(new File(grailsApplication.config.lagrummet.app.basedir + mediaInstance.filename));
 		IOUtils.copy(is, fos);
 		fos.close();
 		is.close();
