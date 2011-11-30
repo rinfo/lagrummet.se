@@ -79,6 +79,10 @@ h4 {
     font-size: 1em;
 }
 
+p {
+	margin-top: 1em;
+}
+
 strong {
 	font-weight: bold;
 }
@@ -347,6 +351,20 @@ body article ul li {
     margin: 0 0 1em 0;
 }
 
+body article img {
+	margin: 1em;
+}
+
+body article img.alignleft {
+	float: left;
+	margin: 1em 1em 1em 0;
+}
+
+body article img.alignright {
+	float: left;
+	margin: 1em 0 1em 1em;
+}
+
 aside.puffs {
 	float: right;
 	width: 228px;
@@ -360,12 +378,30 @@ body article.frontpage .puffs {
     margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid #ddd;
+    width: 100%;
+    overflow: auto;
 }
 
 .puffs .puff {
 	margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid #ddd;
+}
+
+body article.frontpage .puffs .puff {
+    float: left;
+    clear: none;
+    border-left: 1px solid #ddd;
+    border-top: none;
+    margin: 0 0 0 8px;
+    padding: 0 0 0 8px;
+    width: 228px;
+}
+
+body article.frontpage .puffs .puff:first-child {
+    border-left: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* =FOOTER page footer */
@@ -430,7 +466,7 @@ body > footer > nav, body > footer > div {
 	font-style: normal;
 }
 
-#search .input select {
+#cat {
 	clear: none;
 	margin-top: 0;
 	display: inline;
@@ -498,7 +534,7 @@ body > footer > nav, body > footer > div {
 	background-color: #FFF9EB;
 }
 
-#search #query {
+#query {
 	width: 295px;
 	padding-left: 15px;
 	height: 25px;
@@ -509,7 +545,7 @@ body > footer > nav, body > footer > div {
 	border-radius: 15px;
 }
 
-#search #searchSubmit {
+#searchSubmit {
 	width: 65px;
 	height: 42px;
 	font-weight: bold;
@@ -518,7 +554,7 @@ body > footer > nav, body > footer > div {
 	padding: 0;
 }
 
-#search #searchSubmit:active {
+#searchSubmit:active {
 	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
 	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
 	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);

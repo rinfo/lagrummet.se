@@ -8,7 +8,7 @@ class Page {
 	String content
 //	User author
 	int pageOrder = 0
-	String pageTemplate = "default" // See config.groovy -> lagrummet.page.templates for possible values
+	String template = "default" // See config.groovy -> lagrummet.page.templates for possible values
 	
 	String status = "draft" // draft, pending, published, autoSave
 	Date dateCreated
@@ -18,7 +18,8 @@ class Page {
 	
 	static hasMany = [
 		children : Page,
-		media : Media
+		media : Media,
+		puffs : Puff
 	]
 
 	static belongsTo = [
@@ -42,6 +43,7 @@ class Page {
 	static mapping = {
 		sort "pageOrder"
 		children sort: "pageOrder"
+		puffs sort: "dateCreated", order: "asc"
 	}
 	
 	def url = {
@@ -55,6 +57,7 @@ class Page {
 		pageBackup.id = null
 		pageBackup.children = null
 		pageBackup.media = null
+		pageBackup.puffs = null
 		pageBackup.status = "autoSave"
 		pageBackup.masterRevision = this
 		pageBackup.save(flush:true)

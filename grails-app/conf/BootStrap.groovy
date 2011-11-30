@@ -1,5 +1,6 @@
 import grails.util.Environment
 import se.lagrummet.Page
+import se.lagrummet.Puff
 import se.lagrummet.SecRole
 import se.lagrummet.SecUserSecRole
 import se.lagrummet.User
@@ -19,7 +20,12 @@ class BootStrap {
 			def kalles = new Page(title: 'Kalles sida', pageOrder: 1, permalink: 'kalle', h1: 'heja kalle!', content: "<p>Första försöket</p>", status: "published", publishStart: new Date() - 4).save()
 			def kallesUndersida = new Page(title: 'Kalles undersida', pageOrder: 1, parent: kalles, permalink: 'kalle-undersida', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: new Date() - 4).save()
 			def kallesUndersida2 = new Page(title: 'Kalles undersida 2', pageOrder: 0, parent: kalles, permalink: 'kalle-undersida-2', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: new Date() - 4).save()
-			new Page(title: 'Lagrummet', pageTemplate: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: new Date() - 4).save()
+			
+			def home = new Page(title: 'Lagrummet', template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: new Date() - 4).save()
+			home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
+			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
+			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
+			
 			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>', headerNavigation: '<ul><li><a href="">Lyssna</a></li><li><a href="">Other languages</a></li><li><a href="">Webbkarta</a></li><li><a href="">Om lagrummet.se</a></li></ul>', primaryNavigation: '''
 			<ul class="rinfo">
 				<li class="heading">R&auml;ttsinformation</li>
