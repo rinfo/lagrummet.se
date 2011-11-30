@@ -717,11 +717,14 @@ fieldset .inputGroup label.text {
 	margin-left: 1em;
 }
 
-#lagstatus {
+.extendedSearch #lagstatus {
 	border: none;
 	border-top: none;
 	float: right;
 	width: 250px;
+}
+.extendedSearch #lagstatus p {
+	margin-top: 0em;
 }
 
 .extendedSearch > label {
