@@ -164,12 +164,14 @@ class PageController {
 			if(page.publishStop && page.publishStop.before(new Date())) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND)
 			}
+
 			def model = [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")]
-			if (page.pageTemplate && page.pageTemplate != "default" ) {
-				render(view: page.pageTemplate, model: model)
+			if (page.template && page.template != "default") {
+				render(view: page.template, model: model)
 			} else {
 				return model
 			}
+			
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND)
 		}
@@ -220,6 +222,13 @@ class PageController {
                     return
                 }
             }
+			
+			params.puffs.each {
+				if (it.value.getClass() != String) {
+					def puff = Puff.get(it.value.id)
+					puff.properties = it.value
+				}
+			}
 
 			pageInstance.backup()
             pageInstance.properties = params

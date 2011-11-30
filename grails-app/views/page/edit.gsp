@@ -31,10 +31,10 @@
                 	<span class="button"><g:actionSubmit name="update" action="update" class="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </div>
-            </g:form>
+            </g:form>    
             
             <div class="media">
-            	<h3>${message(code: 'default.page.media.label', default: 'Ladda upp media')}</h3>
+            	<h2>${message(code: 'default.page.media.label', default: 'Ladda upp media')}</h2>
 	            <g:form action="save" controller="media" method="post" enctype="multipart/form-data">
 	            	<g:hiddenField name="parentId" value="${pageInstance?.id}" />
 					<div class="input ${hasErrors(bean: mediaInstance, field: 'imageFile', 'errors')}">

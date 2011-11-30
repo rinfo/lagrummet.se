@@ -166,13 +166,9 @@ ul {
     display: none;
 }
 
-#bodyContent form .content textarea {
+#bodyContent form .content #content {
     width: 100%;
     height: 400px;
-}
-
-#bodyContent form input[type=text] {
-	width: 30em;
 }
 
 #bodyContent form .content .mceEditor.input {
@@ -202,6 +198,32 @@ ul {
 	text-align: right;
 	clear: none;
 	width: 220px;
+}
+
+#puffs {
+	width: 100%;
+}
+
+#puffs input, #puffs select, #puffs textarea {
+	width: auto;
+}
+
+#puffs textarea {
+	width: 30em;
+}
+
+#puffs tr {
+	padding: 1em;
+	background-color: #fff;
+}
+
+#puffs td[colspan] {
+	border: none;
+}
+
+#puffs tr:nth-child(4n+2), #puffs tr:nth-child(4n+3) {
+	background-color: #fafafa;
+	border-top: 1px solid #eee;
 }
 
 /* ACTION BUTTONS */
@@ -252,8 +274,8 @@ select {
    padding: 2px 2px 2px 0;
 }
 textarea {
-	width: 100%;
-	height: 200px;
+	width: 30em;
+	height: 6em;
 	vertical-align: top;
 }
 
