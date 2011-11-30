@@ -44,10 +44,11 @@ class QueryBuilder {
 		
 	}
 	
-	private void setParam(String key, String value) {
+	public QueryBuilder setParam(String key, String value) {
 		if(value) {
 			queryParams[(key)] = value
 		}
+		return this
 	}
 	
 	private void setBlankParam(String key, String value) {
@@ -107,16 +108,17 @@ class QueryBuilder {
 		return this
 	}
 	
-	public QueryBuilder setIkraft(String ikraft) {
-		setParam('ikrafttradandedatum', ikraft)
+	public QueryBuilder setIkraft(String ikraft, String... operators) {
+		def op = operators ? operators.join('-') + "-" : ""
+		setParam(op + 'ikrafttradandedatum', ikraft)
 		return this
 	}
 	public QueryBuilder setIkraftFrom(String ikraft) {
-		setParam('min-ikrafttradandedatum', ikraft)
+		setIkraft(ikraft, 'min')
 		return this
 	}
 	public QueryBuilder setIkraftTo(String ikraft) {
-		setParam('max-ikrafttradandedatum', ikraft)
+		setIkraft(ikraft, 'max')
 		return this
 	}
 	public QueryBuilder setIkraftIfExists(String ikraft) {
@@ -236,7 +238,11 @@ class QueryBuilder {
 	}
 	public QueryBuilder setLagGallandeAt(String date) {
 		setIkraftTo(date)
-		setParam('ifExists-max-rev.upphaver.ikrafttradandedatum', date)
+		setParam('ifExists-minEx-rev.upphaver.ikrafttradandedatum', date)
+		return this
+	}
+	public QueryBuilder setLagKommandeAt(String date) {
+		setIkraftFrom(date)
 		return this
 	}
 	

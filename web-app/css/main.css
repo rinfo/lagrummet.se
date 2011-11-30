@@ -681,6 +681,13 @@ fieldset .inputGroup label.text {
 	margin-left: 1em;
 }
 
+#lagstatus {
+	border: none;
+	border-top: none;
+	float: right;
+	width: 250px;
+}
+
 .extendedSearch > label {
 	margin-top: 1em;
 }

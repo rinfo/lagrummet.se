@@ -69,13 +69,42 @@ class SearchController {
 			}
 		} 
 		
-//		def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
-//		def today = dateFormat.format(new Date())
-//		if(params.lagtyp == "gallande") {
-//			queryBuilder.setLagGallandeAt(today)
-//		} else if(params.lagtyp == "upphavda") {
-//			queryBuilder.setLagUpphavdAt(today)
-//		}
+		def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+		def today = dateFormat.format(new Date())
+		if(params.gallande && params.upphavda && params.kommande) {
+			//all documents
+		} else if(params.gallande && params.upphavda) {
+//			max-ikraft = today
+			def ikraftDate
+			if(dateType == 'ikraft' && params.toDate && params.toDate < today) {
+				ikraftDate = params.toDate
+			} else {
+				ikraftDate = today
+			}
+			queryBuilder.setIkraftTo(ikraftDate)
+		} else if(params.gallande && params.kommande) {
+			queryBuilder.setParam('ifExists-minEx-rev.upphaver.ikrafttradandedatum', today)
+		} else if(params.upphavda && params.kommande) {
+			queryBuilder.setParam('or-max-rev.upphaver.ikrafttradandedatum', today)
+			queryBuilder.setIkraft(today, 'or', 'minEx')
+		} else if(params.gallande) {
+//			max-ikraft = today
+			def ikraftDate
+			if(dateType == 'ikraft' && params.toDate && params.toDate < today) {
+				ikraftDate = params.toDate
+			} else {
+				ikraftDate = today
+			}
+			queryBuilder.setIkraftTo(ikraftDate)
+			queryBuilder.setParam('ifExists-minEx-rev.upphaver.ikrafttradandedatum', today)
+		} else if(params.upphavda) {
+		
+			queryBuilder.setParam('max-rev.upphaver.ikrafttradandedatum', today)
+		} else if(params.kommande) {
+			queryBuilder.setParam('minEx-ikrafttradandedatum', today)
+		} else {
+			//all documents
+		}
 		
 		if(!esc.hasErrors() && !queryBuilder.isEmpty()) {
 			queryBuilder.setPageAndPageSize((int)(offset/itemsPerPage), itemsPerPage)
