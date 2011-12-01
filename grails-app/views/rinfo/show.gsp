@@ -13,7 +13,7 @@
 				<td class="label">Lagtext:</td><td>
 						<g:each in="${docEntry.link}" var="link">
 							<g:if test="${link.@type == 'application/pdf'}">
-								<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}"><img src="${resource() }/images/pdficon_small.gif" /> ${docInfo.title}</a>
+								<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}"><img src="${resource() }/images/PDF.png" class="pdfIcon" /> ${docInfo.title}</a>
 							</g:if>
 						</g:each>
 				</td></tr>
