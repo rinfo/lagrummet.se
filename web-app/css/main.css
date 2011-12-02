@@ -404,6 +404,13 @@ body article.frontpage .puffs .puff:first-child {
     padding: 0;
 }
 
+body article.frontpage .puffs .puff img {
+   	height: auto; 
+	width: 100%;
+	margin: 0;
+}
+
+
 /* =FOOTER page footer */
 body > footer {
     padding-top: 3em;
@@ -488,6 +495,13 @@ body > footer > nav, body > footer > div {
 	margin-left: 0;
 }
 
+#searchCategory:hover, #searchSubmit:hover {
+	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+}
+
 #searchCurrentCategory {
 	position: absolute;
 	right: 0;
@@ -524,6 +538,10 @@ body > footer > nav, body > footer > div {
 	padding: 1em;
 	border-top: 1px solid #ddd;
 	cursor: pointer;
+}
+
+#searchCategoryList li p {
+	margin: 0;
 }
 
 #searchCategoryList li:first-child {

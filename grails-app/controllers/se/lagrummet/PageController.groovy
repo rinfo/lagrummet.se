@@ -206,7 +206,11 @@ class PageController {
             redirect(action: "list")
         }
         else {
-            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave")]
+			def images = ["":"Ingen bild"]
+			Media.findAllByParent(pageInstance).each {
+				images[it.id] = it.title
+			}
+            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave"), images: images]
         }
     }
 

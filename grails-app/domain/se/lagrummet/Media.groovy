@@ -6,12 +6,11 @@ class Media {
 
     static constraints = {
 		parent(nullable: true)
+		title(blank: false)
     }
 	
 	String title
 	String filename
-	
-//	Page parent
 	
 	static belongsTo = [
 		parent: Page
