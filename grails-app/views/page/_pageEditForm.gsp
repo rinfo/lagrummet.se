@@ -27,7 +27,12 @@
 	    <tr><th><g:message code="puff.link.label" default="Länk" /></th><th><g:message code="puff.title.label" default="Titel" /></th><th><g:message code="puff.image.label" default="Bild" /></th></tr>
 	    <g:each in="${pageInstance.puffs}" var="puffInstance">
 	    	<g:hiddenField name="puffs.${puffInstance.id}.id" value="${puffInstance?.id}" />
-		    <tr><td class="${hasErrors(bean: puffInstance, field: 'link', 'errors')}"><g:textField name="puffs.${puffInstance.id}.link" value="${puffInstance?.link}" /></td><td class="${hasErrors(bean: puffInstance, field: 'title', 'errors')}"><g:textField name="puffs.${puffInstance.id}.title" value="${puffInstance?.title}" /></td><td class="${hasErrors(bean: puffInstance, field: 'image', 'errors')}"><select></select></td></tr>
+		    <tr>
+		    	<td class="${hasErrors(bean: puffInstance, field: 'link', 'errors')}"><g:textField name="puffs.${puffInstance.id}.link" value="${puffInstance?.link}" /></td>
+		    	<td class="${hasErrors(bean: puffInstance, field: 'title', 'errors')}"><g:textField name="puffs.${puffInstance.id}.title" value="${puffInstance?.title}" /></td>
+		    	<td class="${hasErrors(bean: puffInstance, field: 'image', 'errors')}">
+		    		<g:dropdown options="${images}" value="${fieldValue(bean: pageInstance, field: 'template')}" value="${puffInstance.image?.id}" name="puffs.${puffInstance.id}.image.id"></g:dropdown>
+		    	</td></tr>
 		    <tr><td colspan="3"><g:textArea name="puffs.${puffInstance.id}.description" value="${puffInstance?.description}" /></td></tr>
 		</g:each>
 	</table>
@@ -56,8 +61,11 @@
 		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
 	</div>
 	
+	<g:if test="${pageInstance.template != 'frontpage'}">
 	<div class="input ${hasErrors(bean: pageInstance, field: 'template', 'errors')}">
 		<label for="template"><g:message code="page.template.label" default="Page template: " /></label>
 		<g:dropdown options="${grailsApplication.config.lagrummet.page.templates}" value="${fieldValue(bean: pageInstance, field: 'template')}" name="template"></g:dropdown>
 	</div>
+	</g:if>
+	
 </div>
