@@ -32,7 +32,12 @@ class UrlMappings {
 			controller = "rinfo"
 			action = "show"
 		}	
-			
+
+		"/files/$filename**" {
+			controller = "media"
+			action = "viewMediaContent"
+		}
+		
 		name page: "/$permalink**" {
 			constraints {
 				permalink(matches:/.+/, blank:false)
@@ -42,6 +47,7 @@ class UrlMappings {
 				params.action = params.a ?: "show"
 			}
 		}
+		
 		"/"(controller: 'page', action: "show")
 
 		"/admin/user/$action"(controller: 'user')
