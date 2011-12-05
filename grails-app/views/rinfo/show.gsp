@@ -44,9 +44,9 @@
 	</article>
 	
 	<aside id="rinfoSidebar">
-		<g:if test="${docInfo.'@rev'?.andrar}">
+		<g:if test="${docInfo.rev?.andrar}">
 			<h3>Ändrar</h3>
-			<g:each in="${docInfo.'@rev'.andrar}" var="item">
+			<g:each in="${docInfo.rev.andrar}" var="item">
 			<ul>
 				<li class="label">Titel</li>
 				<li>${item.title}</li>
@@ -58,9 +58,9 @@
 			</g:each>
 		</g:if>
 		
-		<g:if test="${docInfo.'@rev'?.konsolideringsunderlag}">
+		<g:if test="${docInfo.rev?.konsolideringsunderlag}">
 			<h3>Konsolideringsunderlag för</h3>
-			<g:each in="${docInfo.'@rev'.konsolideringsunderlag}" var="item">
+			<g:each in="${docInfo.rev.konsolideringsunderlag}" var="item">
 			<ul>
 				<li class="label">Titel</li><li>${item.title}</li>
 				<li class="label">Beteckning</li><li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></li>
