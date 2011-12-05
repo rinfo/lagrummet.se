@@ -29,7 +29,7 @@
 									value="${forfattningarParams?.typ}" />
 
 			<fieldset id="lagstatus">
-				<g:checkBox name="gallande" checked="${forfattningarParams?.gallande == 'on' }" />
+				<g:checkBox name="gallande" checked="${forfattningarParams?.gallande == 'on' || !params.containsKey('_gallande') }" />
 				<label for="gallande"><p><strong><g:message code="extendedSearch.gallande.label" default="Gällande lagar" /></strong></p><p><g:message code="extendedSearch.description.gallande.label" default="Sök på gällande lagar" /></p></label>
 				
 				<g:checkBox name="upphavda" checked="${forfattningarParams?.upphavda == 'on' }"/>
@@ -206,7 +206,7 @@
     		<div class="message">
     			<ul>
     				<g:each in="${searchResult.errorMessages}" var="message">
-    					<li>${message}</li>
+    					<li><g:message code="${message}" /></li>
     				</g:each>
     			</ul>
     		</div>
