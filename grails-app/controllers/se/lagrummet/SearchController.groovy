@@ -4,6 +4,8 @@ import grails.converters.*
 
 import java.text.SimpleDateFormat
 
+import static se.lagrummet.QueryBuilder.Operators.*
+
 class SearchController {
 	
 	def searchService
@@ -74,7 +76,6 @@ class SearchController {
 		if(params.gallande && params.upphavda && params.kommande) {
 			//all documents
 		} else if(params.gallande && params.upphavda) {
-//			max-ikraft = today
 			def ikraftDate
 			if(dateType == 'ikraft' && params.toDate && params.toDate < today) {
 				ikraftDate = params.toDate
@@ -86,7 +87,7 @@ class SearchController {
 			queryBuilder.setParam('ifExists-minEx-rev.upphaver.ikrafttradandedatum', today)
 		} else if(params.upphavda && params.kommande) {
 			queryBuilder.setParam('or-max-rev.upphaver.ikrafttradandedatum', today)
-			queryBuilder.setIkraft(today, 'or', 'minEx')
+			queryBuilder.setIkraft(today, OR, MIN_EX)
 		} else if(params.gallande) {
 //			max-ikraft = today
 			def ikraftDate
@@ -101,7 +102,7 @@ class SearchController {
 		
 			queryBuilder.setParam('max-rev.upphaver.ikrafttradandedatum', today)
 		} else if(params.kommande) {
-			queryBuilder.setParam('minEx-ikrafttradandedatum', today)
+			queryBuilder.setIkraft(today, MIN_EX)
 		} else {
 			//all documents
 		}
