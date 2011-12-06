@@ -44,13 +44,17 @@
 			</g:form>
 			<p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
 		</header>
-	    <g:layoutBody />
-	    <nav id="primaryNavigation">
+		
+		<div id="content">
+	    	<g:layoutBody />
+	    	<footer id="siteFooter">${siteProps?.footer}
+		    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
+		    </footer>
+	    </div>
+	    
+	   <nav id="primaryNavigation">
 			${siteProps?.primaryNavigation}
 		</nav>
-	    <footer id="siteFooter">${siteProps?.footer}
-	    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
-	    </footer>
 	    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js?ver=1.7.0'></script>
 	    <g:javascript library="application" />
     </body>

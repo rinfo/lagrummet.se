@@ -4,7 +4,6 @@
 	<meta name="layout" content="main" />
 </head>
 <body>
-<div id="content">
     <article class="editorial">
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
@@ -20,6 +19,5 @@
 		
 		</g:each>
 	</aside>
-</div>
 </body>
 </html>

@@ -3,14 +3,15 @@
 }
 
 body {
-    font: 12pt arial, helvetica, sans-serif;
+    font: 10pt arial, helvetica, sans-serif;
     /*line-height: 140%;*/
-    font-size: 12pt;
+    width: auto;
 }
 
 #content {
 	width: auto;
-	left: 0;
+	position: static;
+	margin: 0;
 }
 
 a, .searchResults a.catTitle {

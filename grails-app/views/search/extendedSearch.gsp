@@ -5,7 +5,6 @@
 	<meta name="layout" content="extendedSearchMain"/>
 </head>
 <body>
-<div id="content">
 	<article id="extendedSearch">
 		<h1><g:message code="extendedSearch.label" default="Utökad sökning" /></h1>
 		<fieldset class="category" id="extSearchCats">
@@ -29,14 +28,20 @@
 									value="${forfattningarParams?.typ}" />
 
 			<fieldset id="lagstatus">
-				<g:checkBox name="gallande" checked="${forfattningarParams?.gallande == 'on' || !params.containsKey('_gallande') }" />
-				<label for="gallande"><p><strong><g:message code="extendedSearch.gallande.label" default="Gällande lagar" /></strong></p><p><g:message code="extendedSearch.description.gallande.label" default="Sök på gällande lagar" /></p></label>
+				<div class="inputGroup">
+					<g:checkBox name="gallande" checked="${forfattningarParams?.gallande == 'on' || !params.containsKey('_gallande') }" />
+					<label for="gallande"><p><strong><g:message code="extendedSearch.gallande.label" default="Gällande lagar" /></strong></p><p><g:message code="extendedSearch.description.gallande.label" default="Sök på gällande lagar" /></p></label>
+				</div>
 				
-				<g:checkBox name="upphavda" checked="${forfattningarParams?.upphavda == 'on' }"/>
-				<label for="upphavda"><p><strong><g:message code="extendedSearch.upphavda.label" default="Upphävda lagar" /></strong></p><p><g:message code="extendedSearch.description.upphavda.label" default="Sök på upphävda lagar"/></p></label>
+				<div class="inputGroup">
+					<g:checkBox name="upphavda" checked="${forfattningarParams?.upphavda == 'on' }"/>
+					<label for="upphavda"><p><strong><g:message code="extendedSearch.upphavda.label" default="Upphävda lagar" /></strong></p><p><g:message code="extendedSearch.description.upphavda.label" default="Sök på upphävda lagar"/></p></label>
+				</div>
 				
-				<g:checkBox name="kommande" checked="${forfattningarParams?.kommande == 'on' }" />
-				<label for="kommande"><p><strong><g:message code="extendedSearch.kommande.label" default="Kommande lagar" /></strong></p><p><g:message code="extendedSearch.description.kommande.label" default="Sök på kommande lagar"/></p></label>
+				<div class="inputGroup">
+					<g:checkBox name="kommande" checked="${forfattningarParams?.kommande == 'on' }" />
+					<label for="kommande"><p><strong><g:message code="extendedSearch.kommande.label" default="Kommande lagar" /></strong></p><p><g:message code="extendedSearch.description.kommande.label" default="Sök på kommande lagar"/></p></label>
+				</div>
 			</fieldset>
 					
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
@@ -58,7 +63,7 @@
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
 				
 				<div class="inputGroup">
-					<g:radio checked="${forfattningarParams?.datum == null || forfattningarParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/></p></label>
+					<g:radio checked="${forfattningarParams?.datum == null || forfattningarParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/><br /><br /></p></label>
 					<div class="inputGroup">
 						<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
 						<input type="text" name="fromDate" size="10" value="${forfattningarParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
@@ -241,6 +246,5 @@
 			<g:paginate total="${searchResult.totalResults}" max="20" params="${params}"/>
 		</g:if>
 	</article>
-</div>
 </body>
 </html>

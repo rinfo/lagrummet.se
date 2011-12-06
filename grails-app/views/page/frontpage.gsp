@@ -4,8 +4,7 @@
 	<meta name="layout" content="main" />
 </head>
 <body>
-<div id="content">
-    <article class="frontpage">
+    <article class="frontpage editorial">
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
 		<div class="puffs">
@@ -19,6 +18,5 @@
 		</g:each>
 		</div>
 	</article>
-</div>
 </body>
 </html>
