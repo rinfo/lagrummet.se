@@ -4,7 +4,6 @@
 	<meta name="layout" content="main" />
 </head>
 <body>
-<div id="content">
     <article id="rinfo">
     	<h1>${docInfo.title}</h1>    	
 		<table>
@@ -41,34 +40,71 @@
 			<hr/>
 			<div>${content }</div>
 		</g:if>
+		
+		
+		<aside id="rinfoSidebar">
+	
+			<g:if test="${docInfo.rev?.konsoliderar}">
+				<h3>Senaste konsoliderade versionen</h3>
+				<g:latestConsolidated in="${docInfo.rev.konsoliderar}" var="item">
+					<ul>
+						<li class="label">Titel:</li>
+						<li>${item.title}</li>
+						<li class="label">Beteckning:</li>
+						<li>${item.identifier}</li>
+					</ul>
+				
+				</g:latestConsolidated>
+			
+			</g:if>
+			
+			<g:if test="${docInfo.rev?.upphaver}">
+				<h3>Upphävande författning</h3>
+				<span>Författning som upphäver:<br/></span>
+				<span class="subtitle">${docInfo.title}</span>
+				<g:each in="${docInfo.rev.upphaver}" var="item">
+				<ul>
+					<li class="label">Titel:</li>
+					<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
+					<li class="label">SFS-nummer:</li>
+					<li>${item.identifier}</li>
+					<li class="label">Ikraft:</li>
+					<li>${item.ikrafttradandedatum}</li>
+				</ul>
+				</g:each>
+			</g:if>
+			
+			
+			<g:if test="${docInfo.rev?.andrar}">
+				<h3>Ändringsförfattningar (${docInfo.rev.andrar.size()})</h3>
+				<span>Författning som ändrar:<br/></span>
+				<span class="subtitle">${docInfo.title}</span>
+				<g:each in="${docInfo.rev.andrar.sort{ it.ikrafttradandedatum }}" var="item">
+					<ul>
+						<li class="label">Titel:</li>
+						<li>${item.title}</li>
+						<li class="label">SFS-nummer:</li>
+						<li>${item.identifier}</li>
+						<li class="label">Ikraft:</li>
+						<li>${item.ikrafttradandedatum}</li>
+						<li class="label">Förarbeten:</li>
+					</ul>
+				</g:each>
+			</g:if>
+			
+			<g:if test="${docInfo.rev?.konsolideringsunderlag}">
+				<h3>Konsolideringsunderlag för</h3>
+				<g:each in="${docInfo.rev.konsolideringsunderlag}" var="item">
+				<ul>
+					<li class="label">Titel</li><li>${item.title}</li>
+					<li class="label">Beteckning</li><li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></li>
+					<li class="label">Utfärdad</li><li>${item.issued}</li>
+				</ul>
+				</g:each>
+			</g:if>
+		</aside>
 	</article>
 	
-	<aside id="rinfoSidebar">
-		<g:if test="${docInfo.rev?.andrar}">
-			<h3>Ändrar</h3>
-			<g:each in="${docInfo.rev.andrar}" var="item">
-			<ul>
-				<li class="label">Titel</li>
-				<li>${item.title}</li>
-				<li class="label">Beteckning</li>
-				<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></td></tr>
-				<li class="label">Ikraft</li>
-				<li>${item.ikrafttradandedatum}</li>
-			</ul>
-			</g:each>
-		</g:if>
-		
-		<g:if test="${docInfo.rev?.konsolideringsunderlag}">
-			<h3>Konsolideringsunderlag för</h3>
-			<g:each in="${docInfo.rev.konsolideringsunderlag}" var="item">
-			<ul>
-				<li class="label">Titel</li><li>${item.title}</li>
-				<li class="label">Beteckning</li><li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier}</a></li>
-				<li class="label">Utfärdad</li><li>${item.issued}</li>
-			</ul>
-			</g:each>
-		</g:if>
-	</aside>
-</div>
+	
 </body>
 </html>
