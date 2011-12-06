@@ -333,12 +333,12 @@ body article {
     background-color: #fff;
 }
 
-body article.editorial {
+article.editorial {
 	float: left;
     width: 471px;
 }
 
-body article.frontpage {
+article.frontpage {
     width: 720px;
 }
 
@@ -373,7 +373,7 @@ aside.puffs {
 	border-left: 1px solid #ddd;
 }
 
-body article.frontpage .puffs {
+article.frontpage .puffs {
     clear: both;
     margin-top: 10px;
     padding-top: 10px;
@@ -388,7 +388,7 @@ body article.frontpage .puffs {
     border-top: 1px solid #ddd;
 }
 
-body article.frontpage .puffs .puff {
+article.frontpage .puffs .puff {
     float: left;
     clear: none;
     border-left: 1px solid #ddd;
@@ -398,13 +398,13 @@ body article.frontpage .puffs .puff {
     width: 228px;
 }
 
-body article.frontpage .puffs .puff:first-child {
+article.frontpage .puffs .puff:first-child {
     border-left: none;
     margin: 0;
     padding: 0;
 }
 
-body article.frontpage .puffs .puff img {
+article.frontpage .puffs .puff img {
    	height: auto; 
 	width: 100%;
 	margin: 0;
@@ -496,11 +496,19 @@ body > footer > nav, body > footer > div {
 }
 
 #searchCategory:hover, #searchSubmit:hover {
-	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
 }
+
+#searchCategory:active, #searchSubmit:active {
+	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
+}
+
 
 #searchCurrentCategory {
 	position: absolute;
@@ -939,5 +947,24 @@ fieldset .inputGroup label.text {
 	fieldset .inputGroup label {
 		overflow: hidden;
 		width: auto;
+	}
+	
+	article.frontpage {
+	    width: auto;
+	}
+	
+	article.frontpage .puffs {
+		border-top: none;
+		width: 100%;
+	}
+	
+	article.frontpage .puffs .puff {
+	    float: none;
+	    clear: both;
+	    border-left: none;
+	    border-top: 1px solid #ddd;
+	    margin: 0.5em 0;
+	    padding: 0.5em 0;
+	    width: auto;
 	}
 }

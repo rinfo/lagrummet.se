@@ -1,11 +1,16 @@
-#primaryNavigation, #siteHeader, #siteFooter {
+#primaryNavigation, #siteHeader, #siteFooter, #logo {
 	display: none;
 }
 
 body {
-    font: 12px arial, helvetica, sans-serif;
+    font: 12pt arial, helvetica, sans-serif;
     /*line-height: 140%;*/
-    font-size: 10px;
+    font-size: 12pt;
+}
+
+#content {
+	width: auto;
+	left: 0;
 }
 
 a, .searchResults a.catTitle {
