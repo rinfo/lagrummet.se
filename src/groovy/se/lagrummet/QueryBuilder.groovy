@@ -2,8 +2,20 @@ package se.lagrummet
 
 import java.text.Format;
 
+import static se.lagrummet.QueryBuilder.Operators.*
+
+
 
 class QueryBuilder {
+	
+	public static class Operators {
+		public static final String MAX = "max"
+		public static final String MAX_EX = "maxEx"
+		public static final String MIN = "min"
+		public static final String MIN_EX = "minEx"
+		public static final String IF_EXISTS = "ifExists"
+		public static final String OR = "or"
+	}
 	
 	private queryParams = [:]
 	
@@ -44,19 +56,25 @@ class QueryBuilder {
 		
 	}
 	
-	private void setParam(String key, String value) {
+	private void put(String key, Object value, String... operators) {
+		def op = operators ? operators.join('-') + "-" : ""
+		queryParams[(op + key)] = value
+	}
+	
+	public QueryBuilder setParam(String key, String value, String... operators) {
 		if(value) {
-			queryParams[(key)] = value
+			put(key, value, operators)
 		}
+		return this
 	}
 	
-	private void setBlankParam(String key, String value) {
-		queryParams[(key)] = value
+	private void setBlankParam(String key, String value, String... operators) {
+		put(key, value, operators)
 	}
 	
-	private void setParam(String key, Integer value) {
+	private void setParam(String key, Integer value, String... operators) {
 		if(value != null) {
-			queryParams[(key)] = value
+			put(key, value, operators)
 		}
 	}
 	
@@ -65,8 +83,8 @@ class QueryBuilder {
 		return this
 	}
 	
-	public QueryBuilder setBeslutsdatum(String beslutsdatum){
-		setParam('beslutsdatum', beslutsdatum)	
+	public QueryBuilder setBeslutsdatum(String beslutsdatum, String... operators){
+		setParam('beslutsdatum', beslutsdatum, operators)	
 		return this
 	}
 	public QueryBuilder setBeslutsdatumFrom(String beslutsdatum) {
@@ -86,8 +104,8 @@ class QueryBuilder {
 		return this
 	}
 	
-	public QueryBuilder setUtfardandedatum(String utfardandedatum) {
-		setParam('utfardandedatum', utfardandedatum)
+	public QueryBuilder setUtfardandedatum(String utfardandedatum, String... operators) {
+		setParam('utfardandedatum', utfardandedatum, operators)
 		return this
 	}
 	public QueryBuilder setUtfardandedatumFrom(String utfardandedatum) {
@@ -107,24 +125,24 @@ class QueryBuilder {
 		return this
 	}
 	
-	public QueryBuilder setIkraft(String ikraft) {
-		setParam('ikrafttradandedatum', ikraft)
+	public QueryBuilder setIkraft(String ikraft, String... operators) {
+		setParam('ikrafttradandedatum', ikraft, operators)
 		return this
 	}
 	public QueryBuilder setIkraftFrom(String ikraft) {
-		setParam('min-ikrafttradandedatum', ikraft)
+		setIkraft(ikraft, MIN)
 		return this
 	}
 	public QueryBuilder setIkraftTo(String ikraft) {
-		setParam('max-ikrafttradandedatum', ikraft)
+		setIkraft(ikraft, MAX)
 		return this
 	}
 	public QueryBuilder setIkraftIfExists(String ikraft) {
 		setBlankParam('ifExists-ikrafttradandedatum', ikraft)
 	}
 	
-	public QueryBuilder setUtkomFranTryck(String utkomfrantryck) {
-		setParam('utkomFranTryck', utkomfrantryck)
+	public QueryBuilder setUtkomFranTryck(String utkomfrantryck, String... operators) {
+		setParam('utkomFranTryck', utkomfrantryck, operators)
 		return this
 	}
 	public QueryBuilder setUtkomFranTryckFrom(String utkomfrantryck) {
@@ -137,8 +155,8 @@ class QueryBuilder {
 	}
 	
 	
-	public QueryBuilder setAvgorandedatum(String avgorandedatum) {
-		setParam('avgorandedatum', avgorandedatum)
+	public QueryBuilder setAvgorandedatum(String avgorandedatum, String... operators) {
+		setParam('avgorandedatum', avgorandedatum, operators)
 		return this
 	}
 	public QueryBuilder setAvgorandedatumFrom(String avgorandedatum) {
@@ -169,7 +187,7 @@ class QueryBuilder {
 		if(type) {
 			def key = 'type'
 			def typeList = [type].flatten()
-			queryParams[(key)] = typeList
+			put(key, typeList)
 		}
 		return this
 	}
@@ -178,7 +196,7 @@ class QueryBuilder {
 		if(publisher) {
 			def key = "publisher.iri"
 			def publisherList = [publisher].flatten().collect { getIriSearchString(it) }
-			queryParams[(key)] = publisherList
+			put(key, publisherList)
 		}
 		return this
 	}
@@ -187,7 +205,7 @@ class QueryBuilder {
 		if(creator) {
 			def key = "creator.iri"
 			def creatorList = [creator].flatten().collect { getIriSearchString(it) }
-			queryParams[(key)] = creatorList
+			put(key, creatorList)
 		}
 		return this
 	}
@@ -231,12 +249,16 @@ class QueryBuilder {
 	}
 	
 	public QueryBuilder setLagUpphavdAt(String date){
-		setIkraftTo(date)
+		setIkraft(date, Operators.MAX)
 		setParam('maxEx-rev.upphaver.ikrafttradandedatum', date)
 	}
 	public QueryBuilder setLagGallandeAt(String date) {
-		setIkraftTo(date)
-		setParam('ifExists-max-rev.upphaver.ikrafttradandedatum', date)
+		setIkraft(date, Operators.MAX)
+		setParam('ifExists-minEx-rev.upphaver.ikrafttradandedatum', date)
+		return this
+	}
+	public QueryBuilder setLagKommandeAt(String date) {
+		setIkraft(date, Operators.MIN)
 		return this
 	}
 	

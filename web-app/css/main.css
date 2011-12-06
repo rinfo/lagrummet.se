@@ -365,6 +365,10 @@ body article img.alignright {
 	margin: 1em 0 1em 1em;
 }
 
+body article img.pdfIcon {
+	margin: 0 3px 0 0;
+}
+
 aside.puffs {
 	float: right;
 	width: 228px;
@@ -741,6 +745,16 @@ fieldset .inputGroup label.text {
 	width: auto;
 	padding: 4px 1em 4px 0;
 	margin-left: 1em;
+}
+
+.extendedSearch #lagstatus {
+	border: none;
+	border-top: none;
+	float: right;
+	width: 250px;
+}
+.extendedSearch #lagstatus p {
+	margin-top: 0em;
 }
 
 .extendedSearch > label {

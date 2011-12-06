@@ -111,7 +111,7 @@ grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 
 lagrummet {
 	googleAnalytics.webPropertyId = ""
-	upload.dir = "uploads/"
+	upload.dir = "files/"
 	rdl.service.baseurl="http://service.demo.lagrummet.se"
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
 	local.rinfo.view="${grails.serverURL}/rinfo/"

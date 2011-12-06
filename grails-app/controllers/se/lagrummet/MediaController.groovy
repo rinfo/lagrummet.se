@@ -67,25 +67,18 @@ class MediaController {
 		
         def mediaInstance = new Media(params)
 		
-		def CommonsMultipartFile uploadedFile = params.mediaFile
+		def uploadedFile = request.getFile('mediaFile')
 		def contentType = uploadedFile.contentType
 		def filename = uploadedFile.originalFilename
-		def size = uploadedFile.size
 		
-		def is = uploadedFile.getInputStream()
 		def parentDir = (contentType == "image/jpeg" || contentType == "image/gif" || contentType == "image/png") ? "images" : "files"
 		def today = new Date()
 		
-		// Create a directory
-//		String.format('%tF', new Date())
+		mediaInstance.filename = mediaInstance.filename = grailsApplication.config.lagrummet.upload.dir + parentDir+ "/" + filename
+		def mediaContent = new MediaContent(content: uploadedFile.getBytes())
+		mediaInstance.content = mediaContent
 		
-		mediaInstance.filename = grailsApplication.config.lagrummet.upload.dir + parentDir+ "/" + filename
-		new File(grailsApplication.config.lagrummet.app.basedir + grailsApplication.config.lagrummet.upload.dir + parentDir).mkdirs()
-		def fos = new FileOutputStream(new File(grailsApplication.config.lagrummet.app.basedir + mediaInstance.filename));
-		IOUtils.copy(is, fos);
-		fos.close();
-		is.close();
-		
+				
         if (mediaInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'media.label', default: 'Media'), mediaInstance.id])}"
             if (mediaInstance.parent) {
@@ -137,7 +130,7 @@ class MediaController {
             mediaInstance.properties = params
             if (!mediaInstance.hasErrors() && mediaInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'media.label', default: 'Media'), mediaInstance.id])}"
-                redirect(action: "show", id: mediaInstance.id)
+                redirect(action: "edit", id: mediaInstance.id)
             }
             else {
                 render(view: "edit", model: [mediaInstance: mediaInstance])
@@ -168,4 +161,15 @@ class MediaController {
             redirect(action: "list")
         }
     }
+	
+	def viewMediaContent = {
+		def fileName = grailsApplication.config.lagrummet.upload.dir + params.filename
+		def media = Media.findByFilename(fileName)
+		if(media?.content) {
+			response.setContentLength(media.content.content.length)
+			response.outputStream.write(media.content.content)
+		} else {
+			response.sendError(404)
+		}
+	}
 }

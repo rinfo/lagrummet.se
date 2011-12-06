@@ -40,8 +40,8 @@ class RdlSearchService {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
 				uri.path = "/-/publ"
 				uri.query = queryParams
-				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
-				req.getParams().setParameter("http.socket.timeout", new Integer(5000));
+				req.getParams().setParameter("http.connection.timeout", new Integer(10000));
+				req.getParams().setParameter("http.socket.timeout", new Integer(10000));
 				
 				response.success = {resp, json ->
 					searchResult.totalResults = json.totalResults
@@ -66,11 +66,13 @@ class RdlSearchService {
 				}
 				
 				response.failure = { resp ->
-					searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
+					log.error(resp.statusLine)
+					searchResult.errorMessages.add("extendedSearch.error.generalError")
 				}
 			}
-		} catch (SocketTimeoutException) {
-			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
+		} catch (SocketTimeoutException ex) {
+			log.error(ex)
+			searchResult.errorMessages.add("extendedSearch.error.generalError")
 		}
 		return searchResult
 	}

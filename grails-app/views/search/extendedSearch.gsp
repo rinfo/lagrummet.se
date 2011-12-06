@@ -23,17 +23,22 @@
 		<g:else><g:set var="hidden" value="hidden" /></g:else>
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Forfattningar">
 			<input type="hidden" name="kategori" value="Forfattningar" />
-			
 
-			<fieldset>
-			<div class="inputGroup">
 			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ" /></label>
 			<g:select name="typ" from="${['Alla författningar', 'Lagar', 'Förordningar', 'Myndigheters föreskrifter']}"
 									value="${forfattningarParams?.typ}" />
-			</div>
-			<div class="inputGroup"><g:radio checked="${forfattningarParams?.lagtyp == null || forfattningarParams?.lagtyp != 'upphavda'}" value="gallande" name="lagtyp" id="gallande" /><label for="gallande"><p><strong><g:message code="extendedSearch.gallandeLagar.label" default="Gällande lagar"/></strong></p><p><g:message code="extendedSearch.description.gallandeLagar.label" default="Sök på gällande lagar" /></p></label></div>
-			<div class="inputGroup"><g:radio checked="${forfattningarParams?.lagtyp == 'upphavda'}" value="upphavda" name="lagtyp" id="upphavda" /><label for="upphavda"><p><strong><g:message code="extendedSearch.upphavdaLagar.label" default="Upphävda lagar"/></strong></p><p><g:message code="extendedSearch.description.upphavdaLagar.label" default="Sök på lagar som har upphört" /></p></label></div>
+
+			<fieldset id="lagstatus">
+				<g:checkBox name="gallande" checked="${forfattningarParams?.gallande == 'on' || !params.containsKey('_gallande') }" />
+				<label for="gallande"><p><strong><g:message code="extendedSearch.gallande.label" default="Gällande lagar" /></strong></p><p><g:message code="extendedSearch.description.gallande.label" default="Sök på gällande lagar" /></p></label>
+				
+				<g:checkBox name="upphavda" checked="${forfattningarParams?.upphavda == 'on' }"/>
+				<label for="upphavda"><p><strong><g:message code="extendedSearch.upphavda.label" default="Upphävda lagar" /></strong></p><p><g:message code="extendedSearch.description.upphavda.label" default="Sök på upphävda lagar"/></p></label>
+				
+				<g:checkBox name="kommande" checked="${forfattningarParams?.kommande == 'on' }" />
+				<label for="kommande"><p><strong><g:message code="extendedSearch.kommande.label" default="Kommande lagar" /></strong></p><p><g:message code="extendedSearch.description.kommande.label" default="Sök på kommande lagar"/></p></label>
 			</fieldset>
+					
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
 			<g:textField name="titel" size="26" value="${forfattningarParams?.titel}" />
 			
@@ -201,7 +206,7 @@
     		<div class="message">
     			<ul>
     				<g:each in="${searchResult.errorMessages}" var="message">
-    					<li>${message}</li>
+    					<li><g:message code="${message}" /></li>
     				</g:each>
     			</ul>
     		</div>
