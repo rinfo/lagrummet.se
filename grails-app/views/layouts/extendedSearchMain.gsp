@@ -25,13 +25,17 @@
 				<g:breadcrumbs parent="${page?.parent}" />
 			</nav>
 		</header>
-	    <g:layoutBody />
+		
+		<div id="content">
+			<g:layoutBody />
+			<footer id="siteFooter">${siteProps?.footer}
+		    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
+		    </footer>
+		</div>
+	    
 	    <nav id="primaryNavigation">
 			${siteProps?.primaryNavigation}
 		</nav>
-	    <footer id="siteFooter">${siteProps?.footer}
-	    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
-	    </footer>
 	    <g:javascript library="jquery" plugin="jquery" />
 	    <g:javascript library="jquery-ui-1.8.16.custom.min" />
 	    <g:javascript library="jquery.ui.datepicker-sv" />

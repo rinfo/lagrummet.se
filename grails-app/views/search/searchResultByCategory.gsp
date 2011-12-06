@@ -4,7 +4,6 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
-<div id="content">
     <article id="searchResults" class="searchResults">
     	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
     	<p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult?.totalResults, offset: 0]) }">Visa alla ${searchResult?.totalResults} träffar</a></p>
@@ -46,6 +45,5 @@
 			<g:paginate total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat]}"/>
 		</g:if>
 	</article>
-</div>
 </body>
 </html>

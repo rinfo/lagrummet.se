@@ -22,6 +22,7 @@
     	<g:textArea name="content" value="${pageInstance?.content}" />
     </div>
     
+    <g:if test="${pageInstance.puffs.size() > 0}">
     <h3>Puffar</h3>
     <table id="puffs">
 	    <tr><th><g:message code="puff.link.label" default="Länk" /></th><th><g:message code="puff.title.label" default="Titel" /></th><th><g:message code="puff.image.label" default="Bild" /></th></tr>
@@ -36,6 +37,7 @@
 		    <tr><td colspan="3"><g:textArea name="puffs.${puffInstance.id}.description" value="${puffInstance?.description}" /></td></tr>
 		</g:each>
 	</table>
+	</g:if>
 </div>
 
 <div class="aside publish">

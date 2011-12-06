@@ -9,7 +9,6 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
-<div id="content">
     <article id="searchResults" class="searchResults">
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
@@ -136,6 +135,5 @@
 		</div>
 		</g:if>
 	</article>
-</div>
 </body>
 </html>

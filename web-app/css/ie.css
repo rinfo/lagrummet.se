@@ -1,15 +1,18 @@
-#search .input {
-	height: 30px;
-	width: 312px;
-	padding: 5px 0 5px 0;
-	border: 1px solid #ddd;
-	display: block;
-	float: left;
-	background-color: #eee;
-}
+#search .input {height: 30px;width: 312px;padding: 5px 0 5px 0;border: 1px solid #ddd;display: block;float: left;background-color: #eee;}
 
+#search {z-index: 12;
+	*top: 5em;
+	*position: relative;
+}
+#siteHeader {z-index: 13;
+	*left: 40px;
+}
 #search #query {padding: 0; margin: 2px 5px; width:290px;}
 #search #searchCategory {z-index: 11; position: relative; padding: 5px 5px 5px 10px;}
-#search {z-index: 12; position: relative;}
-#siteHeader {z-index: 13; position: relative;}
+#siteHeader > p.extSearchLabel {
+	*position: relative;
+	*top: 5em;
+}
+
+#content {*top: 4em;}
 body {z-index: 14; position: relative;}

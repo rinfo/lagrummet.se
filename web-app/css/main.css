@@ -21,6 +21,7 @@ header, section, footer, aside, nav, article, figure, legend {
 html {
 	background-color: #fff;
 	margin: 0;
+	height: 100%
 }
 
 body {
@@ -80,7 +81,7 @@ h4 {
 }
 
 p {
-	margin-top: 1em;
+	margin-bottom: 1.1em;
 }
 
 strong {
@@ -200,20 +201,22 @@ a.step, .currentStep {
 #logo {
     width: 220px;
     float: left;
-    margin-top: 20px;
-    padding: 0;
+    margin: 0;
+    padding: 20px 0 20px 0;
     display: block;
     color: #222;
-    font: 1.6em 'Century Gothic', sans-serif;
+    font: 1.6em helvetica, arial, sans-serif;
+    background-color: #fcfcfc;
     /*padding: 55px 10px 45px 10px;*/
 }
 
 #logo a, #logo a:visited {
 	color: #873960;
+	margin-left: 10px;
 }
 
 #logo a .hlight, #logo a .hlight {
-    color: #585858;
+    color: #888;
 }
 
 #mobileNavLink {
@@ -244,15 +247,18 @@ a.step, .currentStep {
 }
 
 #breadcrumbs {
-	clear: both;
-	margin: 2em 0 1em 0;
+	width: auto;
+	top: 2em;
+	position: absolute;
 	font: 1.2em 'Century Gothic', sans-serif;
 }
 
 #siteFooter {
-    width: 100%;
-    clear: both;
+	clear: both;
+    font-size: 0.8em;
     text-align: right;
+    vertical-align: bottom;
+    margin: 1em 0;
 }
 
 a.print:visited {
@@ -266,6 +272,8 @@ a.print:visited {
 	margin-left: 40px;
 	width: 720px;
 	clear: both;
+	overflow: auto;
+	display: block;
 }
 
 /* =PRIMARY NAVIGATION */
@@ -274,10 +282,12 @@ a.print:visited {
 	left: 0;
 	top: 60px;
 	width: 220px;
+	height: 100%;
 	margin: 0;
 	display: block;
 	min-height: 250px;
 	background-color: #fcfcfc;
+	padding-bottom: 1em;
 	/*-webkit-box-shadow: 2px 2px 6px #ccc;
 	-moz-box-shadow: 1px 1px 6px #ccc;
 	box-shadow: 2px 2px 6px #ccc;
@@ -326,47 +336,54 @@ a.print:visited {
 
 
 /* =ARTICLE in content */
-body article {
+article {
     position: relative;
     width: 720px;
     margin: 0;
     background-color: #fff;
 }
 
-body article.editorial {
+article.editorial {
 	float: left;
     width: 471px;
 }
 
-body article.frontpage {
+article.frontpage {
     width: 720px;
 }
 
-body article ul {
-    margin: 0 0 1em 0;
-    list-style-type: none;
+article.editorial ul, article.editorial ol {
+    margin: 0 0 1em 1em;
 }
 
-body article ul li {
-    margin: 0 0 1em 0;
+article.editorial ul {
+    list-style-type: disc;
 }
 
-body article img {
+article.editorial ul li, article.editorial ol li {
+    margin: 0 0 0.5em 1em;
+}
+
+article.editorial img {
 	margin: 1em;
 }
 
-body article img.alignleft {
+article.editorial img.alignleft {
 	float: left;
 	margin: 1em 1em 1em 0;
 }
 
-body article img.alignright {
+article.editorial img.alignright {
 	float: left;
 	margin: 1em 0 1em 1em;
 }
 
-body article img.pdfIcon {
+article.editorial img.pdfIcon {
 	margin: 0 3px 0 0;
+}
+
+.puff h3 {
+	margin: 0 0 1em 0;
 }
 
 aside.puffs {
@@ -377,7 +394,7 @@ aside.puffs {
 	border-left: 1px solid #ddd;
 }
 
-body article.frontpage .puffs {
+article.frontpage .puffs {
     clear: both;
     margin-top: 10px;
     padding-top: 10px;
@@ -392,7 +409,7 @@ body article.frontpage .puffs {
     border-top: 1px solid #ddd;
 }
 
-body article.frontpage .puffs .puff {
+article.frontpage .puffs .puff {
     float: left;
     clear: none;
     border-left: 1px solid #ddd;
@@ -402,13 +419,13 @@ body article.frontpage .puffs .puff {
     width: 228px;
 }
 
-body article.frontpage .puffs .puff:first-child {
+article.frontpage .puffs .puff:first-child {
     border-left: none;
     margin: 0;
     padding: 0;
 }
 
-body article.frontpage .puffs .puff img {
+article.frontpage .puffs .puff img {
    	height: auto; 
 	width: 100%;
 	margin: 0;
@@ -416,7 +433,7 @@ body article.frontpage .puffs .puff img {
 
 
 /* =FOOTER page footer */
-body > footer {
+/*body > footer {
     padding-top: 3em;
     font-size: 0.8em;
     overflow: auto;
@@ -436,7 +453,7 @@ body > footer > nav, body > footer > div {
     float: left;
     height: 100%;
 }
-
+*/
 /* =SEARCH for search and search results */
 #search {
 	width: 100%;
@@ -445,6 +462,7 @@ body > footer > nav, body > footer > div {
 	font-weight: bold;
 	color: #585858;
 	height: 40px;
+	clear: both;
 }
 
 #search > *{
@@ -500,11 +518,19 @@ body > footer > nav, body > footer > div {
 }
 
 #searchCategory:hover, #searchSubmit:hover {
-	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
 }
+
+#searchCategory:active, #searchSubmit:active {
+	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
+}
+
 
 #searchCurrentCategory {
 	position: absolute;
@@ -707,6 +733,10 @@ fieldset .inputGroup label.text {
 	width: 190px;
 }
 
+fieldset .inputGroup p {
+	margin-bottom: 0.5em;
+}
+
 .extendedSearch {
 	padding: 1em 0;
     border-top: 1px solid #eee;
@@ -852,7 +882,9 @@ fieldset .inputGroup label.text {
 	    clear: both;
 	    margin: 0 5%;
 	    padding: 2% 0 0 0;
+	    width: auto;
 	    float: none;
+	    background-color: transparent;
 	}
 	
 	#mobileNavLink {
@@ -879,7 +911,7 @@ fieldset .inputGroup label.text {
 	}
 	
 	#breadcrumbs {
-		margin: 1em 5%;
+		display: none;
 	}
 	
 	#content {
@@ -892,8 +924,10 @@ fieldset .inputGroup label.text {
 		float: none;
 		position: static;
 		width: auto;
+		height: auto;
 		margin: 1em 5%;
-		min-height: auto;
+		min-height: 0;
+		padding-bottom: 1em;
 	}
 	
 	#searchCategory {
@@ -926,7 +960,7 @@ fieldset .inputGroup label.text {
 	
 	#siteHeader > p.extSearchLabel {
 		clear: both;
-		margin: 1em 5% 0 0;
+		margin: 1em 5% 1em 0;
 	}
 	
 	body article {
@@ -945,13 +979,47 @@ fieldset .inputGroup label.text {
 		margin: 1em 5%;
 	}
 	
+	.searchResults table, .searchResults table td, .searchResults table th, .searchResults table tr {
+		display: block;
+	}
+	
 	.searchResults table td, .searchResults table th {
-		min-width: 0;
-		max-width: 50%;
+		width: auto;
+		clear: both;
 	}
 	
 	fieldset .inputGroup label {
 		overflow: hidden;
 		width: auto;
+	}
+	
+	.extendedSearch #lagstatus {
+		float: none;
+		width: auto;
+	}
+	
+	article.frontpage {
+	    width: auto;
+	}
+	
+	article.frontpage .puffs {
+		border-top: none;
+		width: 100%;
+	}
+	
+	article.frontpage .puffs .puff {
+	    float: none;
+	    clear: both;
+	    border-left: none;
+	    border-top: 1px solid #ddd;
+	    margin: 0.5em 0;
+	    padding: 0.5em 0;
+	    width: auto;
+	    min-width: 228px;
+	}
+	
+	article.frontpage .puffs .puff:first-child {
+	    margin: 0.5em 0;
+	    padding: 0.5em 0;
 	}
 }
