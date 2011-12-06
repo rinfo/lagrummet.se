@@ -67,12 +67,12 @@ class RdlSearchService {
 				
 				response.failure = { resp ->
 					log.error(resp.statusLine)
-					searchResult.errorMessages.add("extendedSearch.error.generalError")
+					searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
 				}
 			}
 		} catch (SocketTimeoutException ex) {
 			log.error(ex)
-			searchResult.errorMessages.add("extendedSearch.error.generalError")
+			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
 		}
 		return searchResult
 	}
