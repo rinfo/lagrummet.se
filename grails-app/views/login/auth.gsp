@@ -5,7 +5,6 @@
 </head>
 
 <body>
-<div id="content">
 	<article>
 		<h1><g:message code="springSecurity.login.header"/></h1>
 
@@ -41,6 +40,5 @@
 	})();
 	// -->
 </script>
-</div>
 </body>
 </html>
