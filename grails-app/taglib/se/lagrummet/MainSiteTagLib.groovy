@@ -4,6 +4,12 @@ import se.lagrummet.Page
 
 class MainSiteTagLib {
 	
+	def mobileDeviceWidth = { attrs, body ->
+		if (request.getHeader('user-agent') =~ /(?i)(iphone|android)/) {
+			out << '<meta name="viewport" content="width=device-width,initial-scale=1" />'
+		  }
+	}
+	
 	def breadcrumbs = { attrs, body ->
 		out << '<a href="' << resource() << '">Hem</a>'
 		if (attrs.parent) {
