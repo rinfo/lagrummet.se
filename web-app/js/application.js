@@ -294,5 +294,11 @@ jQuery(document).ready(function($) {
 	    }
 	  })
 	});
+	
+	$(".toggleLink").click(function () {
+		var toggleId = "." + $(this).attr('id')
+		$(toggleId).toggleClass("hidden");
+		$(this).children("span").toggleClass("hidden");
+	});
 });
 

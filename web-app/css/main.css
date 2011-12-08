@@ -815,6 +815,7 @@ fieldset .inputGroup p {
 #rinfo table {
 	border: none;
 	float: left;
+	width: 490px;
 }
 
 #rinfo table td.label {
@@ -862,6 +863,7 @@ fieldset .inputGroup p {
 	color: #000000;
 	padding: 0.5em 0 0 0;
 }
+
 
 /* =Log in special */
 #remember_me_holder label {

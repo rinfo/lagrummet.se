@@ -53,19 +53,17 @@
 						<li class="label">Beteckning:</li>
 						<li>${item.identifier}</li>
 					</ul>
-				
 				</g:latestConsolidated>
-			
 			</g:if>
 			
 			<g:if test="${docInfo.rev?.upphaver}">
 				<h3>Upphävande författning</h3>
 				<span>Författning som upphäver:<br/></span>
 				<span class="subtitle">${docInfo.title}</span>
-				<g:each in="${docInfo.rev.upphaver}" var="item">
+				<g:each in="${docInfo.rev.upphaver}" var="item" status="i">
 				<ul>
 					<li class="label">Titel:</li>
-					<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
+					<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.rdl.rinfo.baseurl + '/')}">${item.title}</a></li>
 					<li class="label">SFS-nummer:</li>
 					<li>${item.identifier}</li>
 					<li class="label">Ikraft:</li>
@@ -74,15 +72,19 @@
 				</g:each>
 			</g:if>
 			
-			
 			<g:if test="${docInfo.rev?.andrar}">
 				<h3>Ändringsförfattningar (${docInfo.rev.andrar.size()})</h3>
 				<span>Författning som ändrar:<br/></span>
 				<span class="subtitle">${docInfo.title}</span>
-				<g:each in="${docInfo.rev.andrar.sort{ it.ikrafttradandedatum }}" var="item">
+				<g:each in="${docInfo.rev.andrar.sort{ it.ikrafttradandedatum }}" var="item" status="i">
+					<g:if test="${i >= 5}">
+					<ul class="toggleAndrar hidden">
+					</g:if>
+					<g:else>
 					<ul>
+					</g:else>
 						<li class="label">Titel:</li>
-						<li>${item.title}</li>
+						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.rdl.rinfo.baseurl + '/')}">${item.title}</a></li>
 						<li class="label">SFS-nummer:</li>
 						<li>${item.identifier}</li>
 						<li class="label">Ikraft:</li>
@@ -90,6 +92,9 @@
 						<li class="label">Förarbeten:</li>
 					</ul>
 				</g:each>
+				<g:if test="${docInfo.rev.andrar.size() > 5}">
+				<a class="toggleLink" id="toggleAndrar"><span>Visa alla ${docInfo.rev.andrar.size()} ändringsförfattningar &#x25BC;</span><span class="hidden">Dölj ändringsförfattningar &#x25b2;</span></a>
+				</g:if>
 			</g:if>
 			
 			<g:if test="${docInfo.rev?.konsolideringsunderlag}">
