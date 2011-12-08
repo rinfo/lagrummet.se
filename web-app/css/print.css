@@ -12,6 +12,11 @@ body {
 	width: auto;
 	position: static;
 	margin: 0;
+	padding: 0;
+}
+
+article {
+	width: auto;
 }
 
 a, .searchResults a.catTitle {

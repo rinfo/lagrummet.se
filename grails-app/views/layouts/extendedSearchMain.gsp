@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="${resource(dir:'css/ui-lightness/',file:'jquery-ui-1.8.16.custom.css')}" />
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}">
+        <g:mobileDeviceWidth />
         <g:layoutHead />
         <!--[if IE]>
 			<script src="${resource(dir:'js',file:'html5IE.js')}"></script>

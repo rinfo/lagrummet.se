@@ -254,7 +254,7 @@ jQuery(document).ready(function($) {
 		}, "json");
 		
 		$(this).keyup(function(e) {
-			if (e.keyCode == 8 || e.keyCode == 46) {
+			if (e.keyCode == 8 || e.keyCode == 46 || e.keyCode == 9) {
 				qLength = $(this).attr("value").length;
 			} else {
 				qLength++;
