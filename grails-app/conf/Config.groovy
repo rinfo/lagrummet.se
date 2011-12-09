@@ -127,8 +127,9 @@ lagrummet {
 		[value: 'svea_hovraett', title: 'Svea hovr&auml;tt'],
 		[value: 'goeta_hovraett', title: 'G&ouml;ta hovr&auml;tt'],
 		[value: 'hovraetten_oever_skaane_och_blekinge', title: 'Hovr&auml;tten &ouml;ver Sk&aring;ne och Blekinge'],
-		[value: 'hovraetten_foer_nedre_norrland', title: 'Hovr&auml;tten f&ouml;r Nedre norrland'],
-		[value: 'hovraetten_foer_oevre_norrland', title: 'Hovr&auml;tten f&ouml;r &ouml;vre norrland'],
+		[value: 'hovraetten_oever_vaestra_sverige', title: 'Hovr&auml;tten &ouml;ver V&auml;stra Sverige'],
+		[value: 'hovraetten_foer_nedre_norrland', title: 'Hovr&auml;tten f&ouml;r Nedre Norrland'],
+		[value: 'hovraetten_foer_oevre_norrland', title: 'Hovr&auml;tten f&ouml;r &Ouml;vre Norrland'],
 		[value: '', title: '', disabled: true],
 		[value: '', title: '--Allm&auml;na f&ouml;rvaltningsdomstolar--', disabled: true],
 		[value: 'hoegsta_foervaltningsdomstolen', title: 'H&ouml;gsta f&ouml;rvaltningsdomstolen'],
@@ -141,7 +142,7 @@ lagrummet {
 		[value: 'arbetsdomstolen', title: 'Arbetsdomstolen'],
 		[value: 'marknadsdomstolen', title: 'Marknadsdomstolen'],
 		[value: 'migrationsoeverdomstolen', title: 'Migrations&ouml;verdomstolen'],
-		[value: 'miljoeoeverdomstolen', title: 'Milj&ouml;&ouml;verdomstolen'],
+		[value: 'miljoeoeverdomstolen', title: 'Mark- och Milj&ouml;&ouml;verdomstolen'],
 		[value: 'patentbesvaersraetten', title: 'Patentbesv&auml;rsr&auml;tten'],
 	]
 }
