@@ -26,6 +26,11 @@ class RinfoController {
 					docContent = rinfoService.getHtmlContent(docPath)
 				}
 			}
+			docEntry.content?.each { content -> 
+				if(content?.@type == "text/html") {
+					docContent = rinfoService.getHtmlContent(docPath)
+				}
+			}
 			
 			render(view:'show', model: [page: page, 
 										docInfo: docInfo, 
