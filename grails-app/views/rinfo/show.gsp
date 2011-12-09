@@ -7,12 +7,17 @@
     <article id="rinfo">
     	<h1>${docInfo.title}</h1>    	
 		<table>
-		<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf')}">
+		<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf') || docEntry*.content*.@type.join('|').contains('application/pdf')}">
 			<tr>
 				<td class="label">Lagtext:</td><td>
 						<g:each in="${docEntry.link}" var="link">
 							<g:if test="${link.@type == 'application/pdf'}">
 								<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}"><img src="${resource() }/images/PDF.png" class="pdfIcon" /> ${docInfo.title}</a>
+							</g:if>
+						</g:each>
+						<g:each in="${docEntry.content}" var="content">
+							<g:if test="${content.@type == 'application/pdf'}">
+								<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + content.@src}"><img src="${resource() }/images/PDF.png" class="pdfIcon" /> ${docInfo.title}</a>
 							</g:if>
 						</g:each>
 				</td></tr>
