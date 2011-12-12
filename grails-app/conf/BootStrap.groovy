@@ -39,7 +39,7 @@ class BootStrap {
 			<ul class="learnMore">
 				<li class="heading">L&auml;r dig mer</li>
 				<li><a href="">Om r&auml;ttsinformation</a></li>
-			</ul>''', searchCats: ["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Ovrigt"],
+			</ul>''', searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"],
 			footer: "").save()
 		} else {
 			def sProps = SiteProperties.findByTitle('lagrummet.se') ?: new SiteProperties(

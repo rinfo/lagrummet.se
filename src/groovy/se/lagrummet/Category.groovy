@@ -1,7 +1,7 @@
 package se.lagrummet
 
 public enum Category {
-	RATTSFALL("Rattsfall"), LAGAR("Lagar"), PROPOSITIONER("Propositioner"), UTREDNINGAR("Utredningar"), OVRIGT("Ovrigt"), OKAND("Okand")
+	RATTSFALL("Rattsfall"), LAGAR("Lagar"), MYNDIGHETERS_FORESKRIFTER("Foreskrifter"), PROPOSITIONER("Propositioner"), UTREDNINGAR("Utredningar"), OVRIGT("Ovrigt"), OKAND("Okand")
 	private final String title
 	Category(String title) { this.title = title }
 	public String toString() { return title }
@@ -42,13 +42,14 @@ public enum Category {
 		'Grundlag' : Category.LAGAR,
 		'KonsolideradGrundforfattning' : Category.LAGAR,
 		'Lag' : Category.LAGAR,
-		'Myndighetsforeskrift' : Category.LAGAR,
 		'Tillkannagivande' : Category.LAGAR,
 		'Rattelseblad' : Category.LAGAR,
 		'Brev' : Category.LAGAR,
 		'Cirkular' : Category.LAGAR,
 		'AllmannaRad' : Category.LAGAR,
 		
+		'Myndighetsforeskrift' : Category.MYNDIGHETERS_FORESKRIFTER,
+
 		'Proposition' : Category.PROPOSITIONER,
 		
 		'Kommittedirektiv' : Category.UTREDNINGAR,
@@ -59,7 +60,7 @@ public enum Category {
 		]
 	
 	static extendedSearchTypes = [
-		'Alla författningar' : LAGAR.getTypes(),
+		'Alla författningar' : [LAGAR.getTypes(), MYNDIGHETERS_FORESKRIFTER.getTypes()],
 		'Lagar' : ['Lag', 'Grundlag'],
 		'Myndigheters föreskrifter' : ['Myndighetsforeskrift'],
 		'Förordningar' : ['Forordning'],
