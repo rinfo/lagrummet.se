@@ -20,7 +20,10 @@
 		<a href="#primaryNavigation" id="mobileNavLink">Navigering</a>
 		<header id="siteHeader">
 			<nav id="sitelinks">
-				${siteProps?.headerNavigation}
+				<ul>
+					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;&amp;url=${resource(absolute: true).encodeAsURL()}" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a></li>
+					${siteProps?.headerNavigation}
+				</ul>			
 			</nav>
 			<nav id="breadcrumbs">
 				<g:breadcrumbs parent="${page?.parent}" />
