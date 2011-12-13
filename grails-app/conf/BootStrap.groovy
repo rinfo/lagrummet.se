@@ -26,7 +26,7 @@ class BootStrap {
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
 			
-			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>', headerNavigation: '<ul><li><a href="">Lyssna</a></li><li><a href="">Other languages</a></li><li><a href="">Webbkarta</a></li><li><a href="">Om lagrummet.se</a></li></ul>', primaryNavigation: '''
+			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>', headerNavigation: '<li><a href="">Other languages</a></li><li><a href="">Webbkarta</a></li><li><a href="">Om lagrummet.se</a></li>', primaryNavigation: '''
 			<ul class="rinfo">
 				<li class="heading">R&auml;ttsinformation</li>
 				<li><a href="">Lagar och f&ouml;rordningar</a></li>
