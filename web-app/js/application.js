@@ -81,28 +81,6 @@ function search() {
                 		});
             			$("#rattsfall").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Rattsfall">Visa fler träffar</a></li>');
         			}
-        			
-        		// Myndigheters föreskrifter
-        			$("#c-1").append('<p class="Foreskrifter"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter"><strong>Myndigheters föreskrifter</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Foreskrifter'] +')</span></p>');
-        			if (data.searchResult.items['Foreskrifter'] && data.searchResult.items['Foreskrifter'].length > 0) {
-        				if (data.searchResult.totalResultsPerCategory['Foreskrifter'] > 4) $("#c-1 p.Foreskrifter span.count").append(" Visar de första 4");
-        				$("#c-1").append('<ul id="foreskrifter" />');
-            			
-            			$.each(data.searchResult.items['Foreskrifter'], function(i, item) {
-                			var title = (item.title) ? item.title : item.identifier;
-                			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-                			
-                			$("#foreskrifter").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
-                			if (item.matches) {
-                				$("#foreskrifter li").filter(":last").append("<p>" + item.matches + " ...</p>");
-                			}
-                		
-                			$("#foreskrifter li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
-                		
-                		});
-            			$("#foreskrifter").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter">Visa fler träffar</a></li>');
-        			}
-        			
         		
         		// Lagar
         			$("#c-2").append('<p class="Lagar"><a href="'+serverUrl+'search?query='+query+'&cat=Lagar"><strong>Lagar och förordningar</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Lagar'] +')</span></p>');
@@ -129,8 +107,32 @@ function search() {
             			$("#lagar").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Lagar">Visa fler träffar</a></li>');
         			}
         			
-        		
-        		// Utredningar
+        		// Myndigheters föreskrifter
+        			$("#c-2").append('<p class="Foreskrifter"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter"><strong>Myndigheters föreskrifter</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Foreskrifter'] +')</span></p>');
+        			if (data.searchResult.items['Foreskrifter'] && data.searchResult.items['Foreskrifter'].length > 0) {
+        				if (data.searchResult.totalResultsPerCategory['Foreskrifter'] > 4) $("#c-2 p.Foreskrifter span.count").append(" Visar de första 4");
+        				$("#c-2").append('<ul id="foreskrifter" />');
+            			
+            			$.each(data.searchResult.items['Foreskrifter'], function(i, item) {
+                			var title = (item.title) ? item.title : item.identifier;
+                			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
+                			
+                			$("#foreskrifter").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
+                			if (item.matches) {
+                				$("#foreskrifter li").filter(":last").append("<p>" + item.matches + " ...</p>");
+                			}
+                		
+                			$("#foreskrifter li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
+                			
+                			if(item.ikrafttradandedatum) {
+                				$("#foreskrifter li").filter(":last").append('<p class="type">Ikraft: '+item.ikrafttradandedatum+'</p></li>');
+                			}
+                		
+                		});
+            			$("#foreskrifter").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter">Visa fler träffar</a></li>');
+        			}
+        			
+            	// Utredningar
         			$("#c-2").append('<p class="Utredningar"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar"><strong>Utredningar</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></p>');
         			if (data.searchResult.items['Utredningar'] && data.searchResult.items['Utredningar'].length > 0) {
         				if (data.searchResult.totalResultsPerCategory['Utredningar'] > 4) $("#c-2 p.Utredningar span.count").append(" Visar de första 4");
@@ -150,6 +152,8 @@ function search() {
                 		});
             			$("#utredningar").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar">Visa fler träffar</a></li>');
         			}
+        		
+        		
         	} else if ($("#cat").attr("value") != "Alla") {
 				$("#dynamicSearchResults").html('<h1>Sökresultat</h1><p>Visar '+ data.searchResult.items[cat].length  +' av totalt '+ data.searchResult.totalResults +' antal resultat </p>');
 				$("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Identifierare</th></tr></table>");

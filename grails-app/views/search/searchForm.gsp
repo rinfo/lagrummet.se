@@ -87,30 +87,11 @@
 			</ul>
 			</g:if>
 			
-			<p>
-				<a href="${createLink(mapping:'search', params:[query:query, cat:'Foreskrifter']) }" class="catTitle">Myndigheters föreskrifter</a> 
-				<span class="count">(${searchResult.totalResultsPerCategory['Foreskrifter']})
-				<g:if test="${searchResult.totalResultsPerCategory['Foreskrifter'] > 4}"> Visar de första 4</g:if>
-				</span>
-			</p>
-			<g:if test="${searchResult.items['Foreskrifter']}">
-			<ul>
-				<g:each in="${searchResult.items['Foreskrifter']}" var="item">
-					<li>
-						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
-						<g:if test="${item.matches}">
-							<p>${item.matches} ...</p>
-						</g:if>
-						<p class="type">${item.identifier}</p></li>
-				</g:each>
-				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Foreskrifter']) }">Visa fler träffar</a></li>
-			</ul>
-			</g:if>
 		</div>
 		
 		<div class="column">
 			<p>
-				<a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }" class="catTitle">Lagar och Förordningar</a> 
+				<a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }" class="catTitle">Lagar och förordningar</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Lagar']})
 				<g:if test="${searchResult.totalResultsPerCategory['Lagar'] > 4}"> Visar de första 4</g:if>
 				</span>
@@ -134,6 +115,30 @@
 			</g:if>
 			
 			<p>
+				<a href="${createLink(mapping:'search', params:[query:query, cat:'Foreskrifter']) }" class="catTitle">Myndigheters föreskrifter</a> 
+				<span class="count">(${searchResult.totalResultsPerCategory['Foreskrifter']})
+				<g:if test="${searchResult.totalResultsPerCategory['Foreskrifter'] > 4}"> Visar de första 4</g:if>
+				</span>
+			</p>
+			<g:if test="${searchResult.items['Foreskrifter']}">
+			<ul>
+				<g:each in="${searchResult.items['Foreskrifter']}" var="item">
+					<li>
+						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+						<g:if test="${item.matches}">
+							<p>${item.matches} ...</p>
+						</g:if>
+						<p class="type">${item.identifier}</p>
+						<g:if test="${item.ikrafttradandedatum}">
+							<p class="type">Ikraft: ${item.ikrafttradandedatum}</p>
+						</g:if>					
+					</li>
+				</g:each>
+				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Foreskrifter']) }">Visa fler träffar</a></li>
+			</ul>
+			</g:if>
+
+			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Utredningar']) }" class="catTitle">Utredningar</a>
 				<span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})
 				<g:if test="${searchResult.totalResultsPerCategory['Utredningar'] > 4}"> Visar de första 4</g:if>
@@ -152,6 +157,7 @@
 				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Utredningar']) }">Visa fler träffar</a></li>
 			</ul>
 			</g:if>
+			
 		</div>
 		</g:if>
 	</article>
