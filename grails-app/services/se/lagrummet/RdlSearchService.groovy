@@ -11,7 +11,7 @@ class RdlSearchService {
 
     static transactional = true
 	
-	def availableCategories = [Category.RATTSFALL, Category.LAGAR, Category.PROPOSITIONER, Category.UTREDNINGAR]
+	def availableCategories = [Category.RATTSFALL, Category.LAGAR, Category.MYNDIGHETERS_FORESKRIFTER, Category.PROPOSITIONER, Category.UTREDNINGAR]
 	
     public SearchResult plainTextSearch(String query, Category cat, Integer offset, Integer itemsPerPage) {
 		def queryBuilder = new QueryBuilder()

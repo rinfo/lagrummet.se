@@ -74,10 +74,33 @@ function search() {
                 				$("#rattsfall li").filter(":last").append("<p>" + item.matches + " ...</p>");
                 			}
                 		
-                			$("#rattsfall li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
+                			if(item.identifier) {
+                				$("#rattsfall li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
+                			}
                 		
                 		});
             			$("#rattsfall").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Rattsfall">Visa fler träffar</a></li>');
+        			}
+        			
+        		// Myndigheters föreskrifter
+        			$("#c-1").append('<p class="Foreskrifter"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter"><strong>Myndigheters föreskrifter</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Foreskrifter'] +')</span></p>');
+        			if (data.searchResult.items['Foreskrifter'] && data.searchResult.items['Foreskrifter'].length > 0) {
+        				if (data.searchResult.totalResultsPerCategory['Foreskrifter'] > 4) $("#c-1 p.Foreskrifter span.count").append(" Visar de första 4");
+        				$("#c-1").append('<ul id="foreskrifter" />');
+            			
+            			$.each(data.searchResult.items['Foreskrifter'], function(i, item) {
+                			var title = (item.title) ? item.title : item.identifier;
+                			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
+                			
+                			$("#foreskrifter").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
+                			if (item.matches) {
+                				$("#foreskrifter li").filter(":last").append("<p>" + item.matches + " ...</p>");
+                			}
+                		
+                			$("#foreskrifter li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
+                		
+                		});
+            			$("#foreskrifter").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter">Visa fler träffar</a></li>');
         			}
         			
         		
