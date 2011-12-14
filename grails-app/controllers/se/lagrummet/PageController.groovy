@@ -2,6 +2,7 @@ package se.lagrummet
 
 import grails.plugins.springsecurity.Secured
 import grails.converters.*
+import groovy.xml.MarkupBuilder
 
 import javax.servlet.http.HttpServletResponse
 
@@ -137,8 +138,7 @@ class PageController {
     def show = {
 		def url = (params.permalink) ? params.permalink.tokenize("/") : ["home"]
 		def permalink = url[url.size()-1]
-		
-		
+
 		def page
 		if (url.size() < 2) {
 			page = Page.withCriteria(uniqueResult:true) {
@@ -166,16 +166,49 @@ class PageController {
 			}
 
 			def model = [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")]
-			if (page.template && page.template != "default") {
-				render(view: page.template, model: model)
-			} else {
+			if (!page.template || page.template == "default") {
 				return model
+			} else if (page.template == "sitemap") {
+				model.pageTreeList = Page.findAllByStatusNotAndTemplateNot("autoSave","sitemap")
+				render(view: "sitemap", model: model)
+			} else {
+				render(view: page.template, model: model)
 			}
 			
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND)
 		}
     }
+	
+	def xmlSitemap = {
+		def pages = Page.findAllByStatusNot("autoSave")		
+		
+		if (request.format == "xml") {
+			def xml = new groovy.xml.StreamingMarkupBuilder()
+			xml.encoding = "UTF-8"
+			
+			render xml.bind {
+				mkp.xmlDeclaration()
+				urlset(xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9') {
+					url {
+						loc resource(absolute: true)+"/"
+						lastmod new Date().format('yyyy-MM-dd')
+					}
+					pages.each {item ->
+						url {
+							loc grailsApplication.config.grails.serverURL+"/"+item.url()
+							lastmod item.lastUpdated.format('yyyy-MM-dd')
+						}
+					}
+				}
+			}.toString()
+		} else if (request.format == "json") {
+			def response = [pages: pages]
+			render response as JSON
+		} else {
+			forward(action: "show", params: [permalink: "webbkarta"])
+		}
+	}
 	
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 	def restore = {
@@ -210,7 +243,7 @@ class PageController {
 			Media.findAllByParent(pageInstance).each {
 				images[it.id] = it.title
 			}
-            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave"), images: images]
+            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave", [sort:"dateCreated", order:"desc"]), images: images]
         }
     }
 

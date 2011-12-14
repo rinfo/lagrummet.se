@@ -25,8 +25,9 @@ class BootStrap {
 			home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
+			def sitemap = new Page(title: 'Webbkarta', template: "sitemap", pageOrder: 1, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: new Date() - 4).save()
 			
-			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>', headerNavigation: '<li><a href="">Other languages</a></li><li><a href="">Webbkarta</a></li><li><a href="">Om lagrummet.se</a></li>', primaryNavigation: '''
+			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>', headerNavigation: '<li><a href="">Other languages</a></li><li><a href="/webbkarta">Webbkarta</a></li><li><a href="">Om lagrummet.se</a></li>', primaryNavigation: '''
 			<ul class="rinfo">
 				<li class="heading">R&auml;ttsinformation</li>
 				<li><a href="">Lagar och f&ouml;rordningar</a></li>

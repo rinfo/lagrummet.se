@@ -26,11 +26,11 @@ class MediaController {
 			
 			def pageMediaInstances = Page.get(params.parentId).media
 			def pageMediaInstancesCount =  pageMediaInstances.size()
-			
+
 			if (pageMediaInstancesCount > 0) {
 				render '["- Page-specific media", ""],'
 				pageMediaInstances.eachWithIndex() { mI, i ->
-					render '["' + mI.title + '", "' + grailsApplication.getConfig().grails.serverURL + '/' + mI.filename + '"]'
+					render '["' + mI.title + '", "' + resource(absolute: true) + "/" + mI.filename + '"]'
 					if ((i+1) != pageMediaInstancesCount || mediaInstances.size() > 0) {
 						render ","
 					}

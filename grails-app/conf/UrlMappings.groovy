@@ -5,14 +5,9 @@ class UrlMappings {
 	static excludes = ["/images/*", "/plugins/*", "/css/*", "/js/*", "/uploads/*", "/WEB-INF/*"]
 	
 	static mappings = {
-		/*"/$controller/$action?/$id?"{
-			constraints {
-				// apply constraints here
-			}
-		}*/
-		
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
+		"/sitemap"(controller: 'page', action: "xmlSitemap")
 
 		name extendedSearch: "/search/ext/" {
 			controller = "search"
@@ -25,8 +20,6 @@ class UrlMappings {
 		}
 		
 		"/search/$action"(controller:'search')
-		
-		
 		
 		name rinfo: "/rinfo/$docPath**" {
 			controller = "rinfo"
@@ -61,6 +54,7 @@ class UrlMappings {
 		}
 		
 		"/admin/"(controller: 'admin')
+		
 		"500"(view:'/error')
 		"404"(view:'/error')
 		
