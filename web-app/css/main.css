@@ -650,6 +650,8 @@ article.frontpage .puffs .puff img {
 	margin: 0;
 	float: right;
 	display: block;
+	padding-left: 20px;
+	background: url(../images/Printer_Icon.png) center left no-repeat;
 }
 
 .searchResults .query {
