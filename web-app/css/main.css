@@ -253,14 +253,6 @@ a.step, .currentStep {
 	font: 1.2em 'Century Gothic', sans-serif;
 }
 
-#siteFooter {
-	clear: both;
-    font-size: 0.8em;
-    text-align: right;
-    vertical-align: bottom;
-    margin: 1em 0;
-}
-
 a.print:visited {
 	color: #006383;
 }
@@ -433,21 +425,50 @@ article.frontpage .puffs .puff img {
 
 
 /* =FOOTER page footer */
-/*body > footer {
-    padding-top: 3em;
-    font-size: 0.8em;
+#siteFooter {
+    padding-top: 1em;
     overflow: auto;
+    border-top: 2px solid #BD9B44;
+    clear: both;
+    margin: 1em 0;
 }
 
-body > footer > div p:first-child {
+#siteFooter ul {
+	width: 25%;
+	float: left;
+}
+
+#siteFooter ul.contact {
+	float: right;
+}
+
+#siteFooter ul li {
+	margin: 0 10px;
+}
+
+#siteFooter ul:first-child li {
+	margin-left: 0;
+}
+
+#siteFooter ul li.heading {
+	font-weight: bold;
+}
+
+#siteFooter #version {
+	clear: both;
+	text-align: right;
+}
+
+/*
+#siteFooter > div p:first-child {
     margin-top: 0;
 }
 
-body > footer > div p {
+#siteFooter > div p {
     margin-top: 0.8em;
 }
 
-body > footer > nav, body > footer > div {
+#siteFooter > nav,#siteFooter > div {
     width: 33%;
     display: block;
     float: left;
@@ -616,6 +637,7 @@ body > footer > nav, body > footer > div {
 .searchResults {
 	padding-top: 0;
 	border-top: 1px solid #eee;
+	overflow: auto;
 }
 
 .searchResults .showAllLabel {
@@ -701,6 +723,12 @@ body > footer > nav, body > footer > div {
 	background-color: #fff;
 	margin-top: 0.5em;
 	border-top: 1px solid #eee;
+}
+
+#searchHelpPuff {
+	margin-top: 1em;
+	clear: both;
+	width: 100%;
 }
 
 /* =Extended Search */
@@ -930,6 +958,20 @@ fieldset .inputGroup p {
 	#content {
 		left: 0;
 		width: auto;
+		margin: 0;
+	}
+	
+	#siteFooter ul, #siteFooter ul.contact {
+		width: 100%;
+		float: none;
+		clear: both;
+	}
+	
+	#siteFooter ul.contact {
+		margin-top: 1em;
+	}
+	
+	#siteFooter ul li {
 		margin: 0;
 	}
 		

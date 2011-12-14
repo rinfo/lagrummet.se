@@ -1,5 +1,7 @@
 #search .input {height: 30px;width: 312px;padding: 5px 0 5px 0;border: 1px solid #ddd;display: block;float: left;background-color: #eee;}
-
+#query {
+	*padding-left: 1em; 
+}
 #search {z-index: 12;
 	*top: 5em;
 	*position: relative;
@@ -13,6 +15,11 @@
 	*position: relative;
 	*top: 5em;
 }
-
+#siteFooter ul {
+	*width: 25%;	
+}
+#siteFooter ul li {
+	*margin: 0;
+}
 #content {*top: 4em;}
 body {z-index: 14; position: relative;}

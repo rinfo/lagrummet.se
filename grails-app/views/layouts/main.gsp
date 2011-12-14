@@ -21,8 +21,8 @@
 		<header id="siteHeader">
 			<nav id="sitelinks">
 				<ul>
-					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;&amp;url=${resource(absolute: true).encodeAsURL()}" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a></li>
 					${siteProps?.headerNavigation}
+					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;&amp;url=${resource(absolute: true).encodeAsURL()}" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a></li>
 				</ul>			
 			</nav>
 			<nav id="breadcrumbs">
@@ -52,7 +52,7 @@
 		<div id="content">
 	    	<g:layoutBody />
 	    	<footer id="siteFooter">${siteProps?.footer}
-		    	${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})
+		    	<div id="version">${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})</div>
 		    </footer>
 	    </div>
 	    

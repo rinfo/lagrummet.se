@@ -43,8 +43,59 @@ class BootStrap {
 			</ul>''', searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"],
 			footer: "").save()
 		} else {
+			def user = User.findByUsername("admin") ?: new User(
+				fullName: 'System Admin',
+				username: 'admin',
+				password:'funnitssedan1975',
+				enabled: true,
+				department:"Domstolsverket"
+				).save(failOnError:true)
+			
+			def roleAdmin = SecRole.findByName("Admin") ?: new SecRole(authority: 'ROLE_ADMIN', name: 'Admin').save(failOnError:true)
+			def roleEditor = SecRole.findByName("Editor") ?: new SecRole(authority: 'ROLE_EDITOR', name: 'Editor').save(failOnError:true)
+			SecUserSecRole.create(user, roleAdmin, true)
+		
 			def sProps = SiteProperties.findByTitle('lagrummet.se') ?: new SiteProperties(
-				title: "lagrummet.se"
+				title: "lagrummet.se",
+				siteTitle: 'lagrummet<span class="hlight">.se</span>',
+				searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"],
+				primaryNavigation: '''
+				<ul class="rinfo">
+					<li class="heading">Rättsinformation</li>
+				</ul>
+				<ul class="turnHere">
+					<li class="heading">Hit vänder du dig</li>
+				</ul>
+				<ul class="learnMore">
+					<li class="heading">Lär dig mer</li>
+				</ul>
+				''').save()
+				
+			def home = Page.findByPermalink('home') ?: new Page(
+				title: 'Lagrummet',
+				template: "frontpage",
+				pageOrder: 0,
+				permalink: 'home',
+				h1: 'Välkommen till lagrummet.se',
+				content: "Första försöket",
+				status: "published", publishStart: new Date() - 4
+				).save()
+			if (home.puffs?.size() < 3) {
+				home.addToPuffs(new Puff(title: "Puff 1", description: "", link: "home", parent: home))
+				.addToPuffs(new Puff(title: "Puff 2", description: "", link: "home", parent: home))
+				.addToPuffs(new Puff(title: "Puff 3", description: "", link: "home", parent: home))
+			}
+			
+				
+			def sitemap = Page.findByPermalink('webbkarta') ?: new Page(
+				title: 'Webbkarta',
+				template: "sitemap",
+				pageOrder: 1,
+				permalink: 'webbkarta',
+				h1: 'Webbkarta över lagrummet.se',
+				content: "",
+				status: "published",
+				publishStart: new Date() - 4
 				).save()
 		}
     }

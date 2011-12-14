@@ -5,9 +5,10 @@ function search() {
 	var form = $("#search");
 	var query = $("#query").attr("value");
 	var cat = $("#cat").attr("value");
+	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
 	
 	if (!$("#dynamicSearchResults").length) {
-    	$("#content > *").addClass("searchHidden");
+    	$("#content > *:not(#siteFooter)").addClass("searchHidden");
     	$("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></article>');
     }
 	
@@ -153,7 +154,7 @@ function search() {
             			$("#utredningar").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar">Visa fler träffar</a></li>');
         			}
         		
-        		
+        			$("#dynamicSearchResults").append(sokhjalp);
         	} else if ($("#cat").attr("value") != "Alla") {
 				$("#dynamicSearchResults").html('<h1>Sökresultat</h1><p>Visar '+ data.searchResult.items[cat].length  +' av totalt '+ data.searchResult.totalResults +' antal resultat </p>');
 				$("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Identifierare</th></tr></table>");
@@ -169,9 +170,9 @@ function search() {
 					
 				});
 
-				$("#dynamicSearchResults").append('<p class="showAll"><a href="'+serverUrl+'search?'+form.serialize()+'">Visa fler träffar</a></p>');
+				$("#dynamicSearchResults").append('<p class="showAll"><a href="'+serverUrl+'search?'+form.serialize()+'">Visa fler träffar</a></p>' + sokhjalp);
         	} else {
-        		$("#dynamicSearchResults").html("<h1>Inga sökresultat</h1>");
+        		$("#dynamicSearchResults").html('<h1>Inga sökresultat</h1>' + sokhjalp);
         	}
         	
         	if(data.searchResult.errorMessages.length > 0) {
