@@ -50,9 +50,7 @@
 		<aside id="rinfoSidebar">
 		
 			<g:if test="${docInfo.andrar}">
-				<h3>Grundförfattning</h3>
-				<span>Författning som ändras av:</span><br/>
-				<span class="subtitle">${docInfo.title}</span>
+				<h3>Grundförfattning som ändras</h3>
 				<g:each in="${docInfo.andrar}" var="item">
 					<ul>
 						<li class="label">Titel:</li>
@@ -73,6 +71,8 @@
 						<li>${item.title}</li>
 						<li class="label">Beteckning:</li>
 						<li>${item.identifier}</li>
+						<li class="label">Ikraft:</li>
+						<li>${item.ikrafttradandedatum}</li>
 					</ul>
 				</g:latestConsolidated>
 			</g:if>
@@ -98,7 +98,7 @@
 				<span>Författning som ändrar:</span><br/>
 				<span class="subtitle">${docInfo.title}</span>
 				<g:each in="${docInfo.rev.andrar.sort{ it.ikrafttradandedatum }}" var="item" status="i">
-					<g:if test="${i >= 5}">
+					<g:if test="${i >= 4}">
 					<ul class="toggleAndrar hidden">
 					</g:if>
 					<g:else>
@@ -113,7 +113,7 @@
 						<li class="label">Förarbeten:</li>
 					</ul>
 				</g:each>
-				<g:if test="${docInfo.rev.andrar.size() > 5}">
+				<g:if test="${docInfo.rev.andrar.size() > 4}">
 				<a class="toggleLink" id="toggleAndrar"><span>Visa alla ${docInfo.rev.andrar.size()} ändringsförfattningar &#x25BC;</span><span class="hidden">Dölj ändringsförfattningar &#x25b2;</span></a>
 				</g:if>
 			</g:if>
