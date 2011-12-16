@@ -22,7 +22,7 @@
 			<nav id="sitelinks">
 				<ul>
 					${siteProps?.headerNavigation}
-					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;&amp;url=${resource(absolute: true).encodeAsURL()}" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a></li>
+					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;readid=content&amp;url=${resource(absolute: true).encodeAsURL()}" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a> </li>
 				</ul>			
 			</nav>
 			<nav id="breadcrumbs">
@@ -47,6 +47,7 @@
 				<g:submitButton name="searchSubmit" value="Sök"/>
 			</g:form>
 			<p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
+	    	<div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>
 		</header>
 		
 		<div id="content">
@@ -56,9 +57,10 @@
 		    </footer>
 	    </div>
 	    
-	   <nav id="primaryNavigation">
+	    <nav id="primaryNavigation">
 			${siteProps?.primaryNavigation}
-		</nav>
+	    </nav>
+	   
 	    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js?ver=1.7.0'></script>
 	    <g:javascript library="application" />
     </body>
