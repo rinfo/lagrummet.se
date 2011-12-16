@@ -25,8 +25,13 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:hsqldb:file:prodDb;shutdown=true"
+			pooled = true
+			dbCreate = "update"
+			driverClassName = "com.mysql.jdbc.Driver"
+			url = "jdbc:mysql://localhost:3306/lagrummet"
+			username = ""	//override in external config file
+			password = ""	//override in external config file
+			
         }
     }
 }

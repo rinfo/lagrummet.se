@@ -12,6 +12,25 @@ import grails.plugins.springsecurity.SecurityConfigType
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
+def ENV_NAME = "LAGRUMMET_SE_CONFIG"
+if(!grails.config.locations || !(grails.config.locations instanceof List)) {
+	grails.config.locations = []
+} 
+if(System.getProperty(ENV_NAME)) {
+	println "Including configuration file specified on command line: " + System.getProperty(ENV_NAME);
+	grails.config.locations << "file:" + System.getProperty(ENV_NAME)
+ 
+} else if(System.getenv(ENV_NAME)) {
+	println "Including configuration file specified in environment: " + System.getenv(ENV_NAME);
+	grails.config.locations << "file:" + System.getenv(ENV_NAME)
+ 
+} else if(new File("C:\\lagrummet.se\\config\\lagrummet.se-config.properties").exists()) {
+	println "Using default location: C:\\lagrummet.se\\config\\lagrummet.se-config.properties"
+	grails.config.locations << "file:C:\\lagrummet.se\\config\\lagrummet.se-config.properties"
+
+} else {
+	println "No external configuration file defined."
+}
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
