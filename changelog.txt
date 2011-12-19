@@ -1,0 +1,16 @@
+v0.5.1
+	Fix:
+		71 Readspeak 
+	Improvements:
+		* Möjligt att använda en extern config-fil
+
+v0.5.0
+
+	Nytt:
+		74 Sidfot
+		74 Sitemap
+		73 Relaterad information för ändringsförfattningar
+		91 ReadSpeak integration
+		88 Myndigheters föreskrifter, ny kategori i fritextsökning
+	Fix:
+		* I dokumentvyn visas nu html-innehåll eller länk till pdf för fler dokument
