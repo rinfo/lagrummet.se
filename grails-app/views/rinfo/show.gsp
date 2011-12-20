@@ -140,7 +140,6 @@
 						<li>${item.identifier}</li>
 						<li class="label">Ikraft:</li>
 						<li>${item.ikrafttradandedatum}</li>
-						<li class="label">Förarbeten:</li>
 					</ul>
 				</g:each>
 				<g:if test="${docInfo.rev.andrar.size() > 4}">
