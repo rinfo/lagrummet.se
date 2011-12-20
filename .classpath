@@ -124,5 +124,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/jericho-html-3.2.jar"/>
-	<classpathentry kind="output" path="web-app/WEB-INF/classes"/>
+	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>

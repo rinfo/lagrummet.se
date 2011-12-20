@@ -220,6 +220,7 @@ class PageController {
 		master.title = pageInstance.title
 		master.permalink = pageInstance.permalink
 		master.content = pageInstance.content
+		master.template = pageInstance.template
 		master.pageOrder = pageInstance.pageOrder
 
 		

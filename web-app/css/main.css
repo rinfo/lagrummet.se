@@ -423,6 +423,18 @@ article.frontpage .puffs .puff img {
 	margin: 0;
 }
 
+article.editorial #pageTree ul {
+	color: #006383;
+}
+
+article.editorial #pageTree ul ul {
+	list-style-type: circle;
+}
+
+article.editorial #pageTree ul ul li {
+	margin-bottom: 0;
+}
+
 
 /* =FOOTER page footer */
 #siteFooter {

@@ -27,7 +27,31 @@ class BootStrap {
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
 			def sitemap = new Page(title: 'Webbkarta', template: "sitemap", pageOrder: 1, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: new Date() - 4).save()
 			
-			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>', headerNavigation: '<li><a href="">Other languages</a></li><li><a href="/webbkarta">Webbkarta</a></li><li><a href="">Om lagrummet.se</a></li>', primaryNavigation: '''
+			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>',
+				headerNavigation: '''
+				<li><a href="">Other languages</a></li>
+				<li><a href="/om-lagrummet-se">Om lagrummet.se</a></li>
+				<li><a href="/om-webbplatsen">Om webbplatsen</a></li>
+				<li><a href="/webbkarta">Webbkarta</a></li>
+				''', siteFooter: '''
+			<ul>
+			    <li class="heading">Om lagrummet.se</li>
+			    <li><a href="">Juridisk information</a></li>
+			    <li><a href="">Rättsinformationsprojektet</a></li>
+			    <li><a href="">Domstolsverket</a></li>
+			</ul>
+			<ul>
+			    <li class="heading">Om webbplatsen</li>
+			    <li><a href="">Användningstips</a></li>
+			    <li><a href="">Länkar du hittar på lagrummet.se</a></li>
+			    <li><a href="">Teknisk information</a></li>
+			    <li><a href="">Om kakor (cookies)</a></li>
+			</ul>
+			<ul class="contact">
+			    <li class="heading">Kontakta</li>
+			    <li><a href="">Kontakta oss</a></li>
+			    <li><a href="">Så svarar vi på e-post</a></li>
+			</ul>''', primaryNavigation: '''
 			<ul class="rinfo">
 				<li class="heading">R&auml;ttsinformation</li>
 				<li><a href="">Lagar och f&ouml;rordningar</a></li>
@@ -59,6 +83,31 @@ class BootStrap {
 				title: "lagrummet.se",
 				siteTitle: 'lagrummet<span class="hlight">.se</span>',
 				searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"],
+				headerNavigation: '''
+				<li><a href="">Other languages</a></li>
+				<li><a href="/om-lagrummet-se">Om lagrummet.se</a></li>
+				<li><a href="/om-webbplatsen">Om webbplatsen</a></li>
+				<li><a href="/webbkarta">Webbkarta</a></li>
+				''',
+				siteFooter: '''
+				<ul>
+					<li class="heading">Om lagrummet.se</li>
+					<li><a href="">Juridisk information</a></li>
+					<li><a href="">Rättsinformationsprojektet</a></li>
+					<li><a href="">Domstolsverket</a></li>
+				</ul>
+				<ul>
+					<li class="heading">Om webbplatsen</li>
+					<li><a href="">Användningstips</a></li>
+					<li><a href="">Länkar du hittar på lagrummet.se</a></li>
+					<li><a href="">Teknisk information</a></li>
+					<li><a href="">Om kakor (cookies)</a></li>
+				</ul>
+				<ul class="contact">
+					<li class="heading">Kontakta</li>
+					<li><a href="">Kontakta oss</a></li>
+					<li><a href="">Så svarar vi på e-post</a></li>
+				</ul>''',
 				primaryNavigation: '''
 				<ul class="rinfo">
 					<li class="heading">Rättsinformation</li>
