@@ -91,7 +91,7 @@
 				<ul>
 					<li class="label">Titel:</li>
 					<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.rdl.rinfo.baseurl + '/')}">${item.title}</a></li>
-					<li class="label">SFS-nummer:</li>
+					<li class="label">Beteckning:</li>
 					<li>${item.identifier}</li>
 					<li class="label">Ikraft:</li>
 					<li>${item.ikrafttradandedatum}</li>
@@ -136,7 +136,7 @@
 					</g:else>
 						<li class="label">Titel:</li>
 						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.rdl.rinfo.baseurl + '/')}">${item.title}</a></li>
-						<li class="label">SFS-nummer:</li>
+						<li class="label">Beteckning:</li>
 						<li>${item.identifier}</li>
 						<li class="label">Ikraft:</li>
 						<li>${item.ikrafttradandedatum}</li>
