@@ -23,9 +23,15 @@
 				</td></tr>
 			</g:if>
 			<tr><td class="label">Beteckning:</td><td> ${docInfo.identifier}</td></tr>
-			<g:if test="${docInfo.ikrafttradandedatum}">
-				<tr><td class="label">Ikraft:</td><td> ${docInfo.ikrafttradandedatum}</td></tr>
-			</g:if>
+
+			<tmpl:labelRow label="Ikraft" value="${docInfo.ikrafttradandedatum}" />
+			
+			<tmpl:labelRow label="Målnummer" value="${docInfo.referatAvDomstolsavgorande?.malnummer}" />			
+			<tmpl:labelRow label="Målnummer" value="${docInfo.malnummer}" />	
+			
+			<tmpl:labelRow label="Avgörandedatum" value="${docInfo.referatAvDomstolsavgorande?.avgorandedatum}" />		
+			<tmpl:labelRow label="Avgörandedatum" value="${docInfo.avgorandedatum}" />		
+			
 			<g:if test="${docInfo.forarbete}">
 				<tr><td class="label">Förarbeten: </td><td>
 					<ul>
@@ -91,6 +97,30 @@
 					<li>${item.ikrafttradandedatum}</li>
 				</ul>
 				</g:each>
+			</g:if>
+			
+			<g:if test="${docInfo.rev?.rattsfallshanvisning}">
+				<h3>Hänvisande rättsfall (${docInfo.rev.rattsfallshanvisning.size()})</h3>
+				<span>Rättsfall som hänvisar till:</span><br/>
+				<span class="subtitle">${docInfo.identifier}</span>
+				<g:each in="${docInfo.rev.rattsfallshanvisning}" var="item" status="i">
+					<g:if test="${i >= 4}">
+					<ul class="toggleHanvisning hidden">
+					</g:if>
+					<g:else>
+					<ul>
+					</g:else>
+						<li class="label">Titel:</li>
+						<li>${item.rev.referatAvDomstolsavgorande.identifier}</li>
+						<li class="label">Målnummer:</li>
+						<li>${item.malnummer}</li>
+						<li class="label">Avgörandedatum:</li>
+						<li>${item.avgorandedatum}</li>
+					</ul>
+				</g:each>
+				<g:if test="${docInfo.rev.rattsfallshanvisning.size() > 4}">
+				<a class="toggleLink" id="toggleHanvisning"><span>Visa alla ${docInfo.rev.rattsfallshanvisning.size()} hänvisande rättsfall &#x25BC;</span><span class="hidden">Dölj hänvisande rättsfall &#x25b2;</span></a>
+				</g:if>
 			</g:if>
 			
 			<g:if test="${docInfo.rev?.andrar}">
