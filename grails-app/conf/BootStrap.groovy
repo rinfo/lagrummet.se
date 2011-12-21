@@ -33,7 +33,7 @@ class BootStrap {
 				<li><a href="/om-lagrummet-se">Om lagrummet.se</a></li>
 				<li><a href="/om-webbplatsen">Om webbplatsen</a></li>
 				<li><a href="/webbkarta">Webbkarta</a></li>
-				''', siteFooter: '''
+				''', footer: '''
 			<ul>
 			    <li class="heading">Om lagrummet.se</li>
 			    <li><a href="">Juridisk information</a></li>
@@ -64,8 +64,7 @@ class BootStrap {
 			<ul class="learnMore">
 				<li class="heading">L&auml;r dig mer</li>
 				<li><a href="">Om r&auml;ttsinformation</a></li>
-			</ul>''', searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"],
-			footer: "").save()
+			</ul>''', searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"]).save()
 		} else {
 			def user = User.findByUsername("admin") ?: new User(
 				fullName: 'System Admin',
@@ -89,7 +88,7 @@ class BootStrap {
 				<li><a href="/om-webbplatsen">Om webbplatsen</a></li>
 				<li><a href="/webbkarta">Webbkarta</a></li>
 				''',
-				siteFooter: '''
+				footer: '''
 				<ul>
 					<li class="heading">Om lagrummet.se</li>
 					<li><a href="">Juridisk information</a></li>
