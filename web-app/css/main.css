@@ -215,7 +215,7 @@ a.step, .currentStep {
     padding: 20px 0 20px 0;
     display: block;
     color: #222;
-    font: 1.6em helvetica, arial, sans-serif;
+    font: 1.6em 'Trebuchet MS', Helvetica, sans-serif;
     background-color: #fcfcfc;
     /*padding: 55px 10px 45px 10px;*/
 }
@@ -251,7 +251,6 @@ a.step, .currentStep {
 }
 
 #sitelinks a, #sitelinks a:visited {
-    font: 1em 'Century Gothic', sans-serif;
     color: #006383;
     margin-right: 10px;
 }
@@ -864,6 +863,7 @@ fieldset .inputGroup p {
 	float: right;
 	width: 250px;
 }
+
 .extendedSearch #lagstatus p {
 	margin-top: 0em;
 }

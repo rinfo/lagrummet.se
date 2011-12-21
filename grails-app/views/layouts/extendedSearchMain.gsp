@@ -9,7 +9,8 @@
         <g:mobileDeviceWidth />
         <g:layoutHead />
         <!--[if IE]>
-			<script src="${resource(dir:'js',file:'html5IE.js')}"></script>
+			<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
@@ -22,12 +23,13 @@
 			<nav id="sitelinks">
 				<ul>
 					${siteProps?.headerNavigation}
-					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;&amp;url=${resource(absolute: true).encodeAsURL()}" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a></li>
+					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;readid=content&amp;url=${resource(absolute: true).encodeAsURL()}%2F" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a> </li>
 				</ul>
 			</nav>
 			<nav id="breadcrumbs">
 				<g:breadcrumbs parent="${page?.parent}" />
 			</nav>
+			<div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>
 		</header>
 		
 		<div id="content">
