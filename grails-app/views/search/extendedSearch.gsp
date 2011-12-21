@@ -68,7 +68,9 @@
 						<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
 						<input type="text" name="fromDate" size="10" value="${forfattningarParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 						<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
-							<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+							<div class="error">
+								<g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+							</div>
 						</g:hasErrors>
 					</div>
 				</div>
@@ -78,7 +80,9 @@
 						<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
 						<input type="text" name="toDate" size="10" value="${forfattningarParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 						<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
-							<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+							<div class="error">
+								<g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+							</div>
 						</g:hasErrors>
 					</div>
 				</div>
@@ -145,7 +149,9 @@
 					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
 					<input type="text" name="fromDate" size="10" value="${rattsfallParams?.fromDate}"  placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
-						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+						<div class="error">
+							<g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+						</div>
 					</g:hasErrors>
 				</div>
 				
@@ -153,7 +159,9 @@
 					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
 					<input type="text" name="toDate" size="10" value="${rattsfallParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
-						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+						<div class="error">
+							<g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+						</div>
 					</g:hasErrors>
 				</div>
 			</fieldset>
@@ -189,7 +197,9 @@
 					<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
 					<input type="text" name="fromDate" size="10" value="${forarbeteParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
-						<br/><g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+						<div class="error">
+							<g:renderErrors bean="${extendedSearchCommand}" field="fromDate" />
+						</div>
 					</g:hasErrors>
 				</div>
 				
@@ -197,7 +207,9 @@
 					<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
 					<input type="text" name="toDate" size="10" value="${forarbeteParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 					<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
-						<br/><g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+						<div class="error">
+							<g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
+						</div>
 					</g:hasErrors>
 				</div>
 			</fieldset>

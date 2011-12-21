@@ -848,6 +848,11 @@ fieldset .inputGroup p {
 	width: auto;
 }
 
+.error {
+	color: red;
+	clear: both;
+}
+
 /* ARTICLE in rinfo */
 #rinfo {
 	/*width: 500px;*/
