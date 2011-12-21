@@ -50,6 +50,16 @@ a:hover {
     color: #006383;
 }
 
+a.external, a[href^="http"] {
+    padding-right: 12px;
+    background: url(../images/external_link.gif) top right no-repeat;
+}
+
+a[href*="lagrummet.se"] {
+    padding-right: 0;
+    background: none;
+}
+
 h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
     margin: 0.75em 0 0.25em 0;
     color: #873960;
@@ -73,7 +83,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 h4 {
@@ -435,6 +445,35 @@ article.editorial #pageTree ul ul li {
 	margin-bottom: 0;
 }
 
+/* =FAQ template */
+article.faq {
+    width: 720px;
+}
+
+article.faq .row {
+	clear: both;
+}
+
+article.faq .row nav {
+	float: left;
+	width: 40%;
+	margin-left: 10%;
+}
+
+article.faq .row nav:first-child {
+	margin-left: 0;
+}
+
+article.faq .answer {
+	width: 50em;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 1em;
+	overflow: auto;
+}
+
+article.faq .answer a.returnToTop {
+	float: right;
+}
 
 /* =FOOTER page footer */
 #siteFooter {
@@ -443,6 +482,14 @@ article.editorial #pageTree ul ul li {
     border-top: 2px solid #BD9B44;
     clear: both;
     margin: 1em 0;
+}
+
+#siteFooter a {
+	color: #585858;
+}
+
+#siteFooter a:visited {
+	color: #888;
 }
 
 #siteFooter ul {
@@ -1067,7 +1114,7 @@ fieldset .inputGroup p {
 		width: auto;
 	}
 	
-	article.frontpage {
+	article.frontpage, article.faq {
 	    width: auto;
 	}
 	
@@ -1090,5 +1137,16 @@ fieldset .inputGroup p {
 	article.frontpage .puffs .puff:first-child {
 	    margin: 0.5em 0;
 	    padding: 0.5em 0;
+	}
+	
+	article.faq .row nav {
+		float: none;
+		clear: both;
+		width: auto;
+		margin-left: 0;
+	}
+	
+	article.faq .answer {
+		width: auto;
 	}
 }

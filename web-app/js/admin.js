@@ -3,11 +3,11 @@ jQuery(function($) {
 	var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
 	
 	function flashMessage(message) {
-		console.log(message);
+//		console.log(message);
 	}
 	
 	function errorMessage(message) {
-		console.log(message);
+//		console.log(message);
 	}
 
 	var pageId = ($("#id")) ? $("#id").attr("value") : "";
@@ -22,6 +22,8 @@ jQuery(function($) {
 		theme_advanced_resizing : true,
 		theme_advanced_resizing_min_height : 480,
 		plugins : "advimage",
+		extended_valid_elements : "nav[class]",
+		entity_encoding : "raw",
 		formats : {
             p : {selector : 'p', classes : '', styles: ''}
 		}

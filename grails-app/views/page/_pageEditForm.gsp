@@ -22,7 +22,7 @@
     	<g:textArea name="content" value="${pageInstance?.content}" />
     </div>
     
-    <g:if test="${pageInstance.puffs.size() > 0}">
+    <g:if test="${pageInstance.puffs?.size() > 0}">
     <h3>Puffar</h3>
     <table id="puffs">
 	    <tr><th><g:message code="puff.link.label" default="Länk" /></th><th><g:message code="puff.title.label" default="Titel" /></th><th><g:message code="puff.image.label" default="Bild" /></th></tr>
@@ -63,7 +63,7 @@
 		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
 	</div>
 	
-	<g:if test="${!Arrays.asList('frontpage', 'sitemap').indexOf(pageInstance.template)}">
+	<g:if test="${Arrays.asList('frontpage', 'sitemap').indexOf(pageInstance.template) == -1}">
 	<div class="input ${hasErrors(bean: pageInstance, field: 'template', 'errors')}">
 		<label for="template"><g:message code="page.template.label" default="Page template: " /></label>
 		<g:dropdown options="${grailsApplication.config.lagrummet.page.templates}" value="${fieldValue(bean: pageInstance, field: 'template')}" name="template"></g:dropdown>
