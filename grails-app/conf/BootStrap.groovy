@@ -63,7 +63,7 @@ class BootStrap {
 			<ul class="learnMore">
 				<li class="heading">L&auml;r dig mer</li>
 				<li><a href="">Om r&auml;ttsinformation</a></li>
-			</ul>''', searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"]).save()
+			</ul>''', searchCats: ["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Foreskrifter","Ovrigt"]).save()
 		} else {
 			def user = User.findByUsername("admin") ?: new User(
 				fullName: 'System Admin',
@@ -80,7 +80,7 @@ class BootStrap {
 			def sProps = SiteProperties.findByTitle('lagrummet.se') ?: new SiteProperties(
 				title: "lagrummet.se",
 				siteTitle: 'lagrummet<span class="hlight">.se</span>',
-				searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"],
+				searchCats: ["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Foreskrifter","Ovrigt"],
 				headerNavigation: '''
 				<li><a href="">Other languages</a></li>
 				<li><a href="/webbkarta">Webbkarta</a></li>

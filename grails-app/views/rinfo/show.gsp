@@ -60,7 +60,7 @@
 				<g:each in="${docInfo.andrar}" var="item">
 					<ul>
 						<li class="label">Titel:</li>
-						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.rdl.rinfo.baseurl + '/')}">${item.title}</a></li>
+						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
 						<li class="label">Beteckning:</li>
 						<li>${item.identifier}</li>
 						<li class="label">Ikraft:</li>
@@ -74,7 +74,7 @@
 				<g:latestConsolidated in="${docInfo.rev.konsoliderar}" var="item">
 					<ul>
 						<li class="label">Titel:</li>
-						<li>${item.title}</li>
+						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
 						<li class="label">Beteckning:</li>
 						<li>${item.identifier}</li>
 						<li class="label">Ikraft:</li>
@@ -90,7 +90,7 @@
 				<g:each in="${docInfo.rev.upphaver}" var="item" status="i">
 				<ul>
 					<li class="label">Titel:</li>
-					<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.rdl.rinfo.baseurl + '/')}">${item.title}</a></li>
+					<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
 					<li class="label">Beteckning:</li>
 					<li>${item.identifier}</li>
 					<li class="label">Ikraft:</li>
@@ -111,7 +111,9 @@
 					<ul>
 					</g:else>
 						<li class="label">Titel:</li>
-						<li>${item.rev.referatAvDomstolsavgorande.identifier}</li>
+						<g:each in="${item.rev?.referatAvDomstolsavgorande}" var="referat">
+							<li><a href="${referat.iri?.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${referat.identifier}</a></li>
+						</g:each>
 						<li class="label">Målnummer:</li>
 						<li>${item.malnummer}</li>
 						<li class="label">Avgörandedatum:</li>
@@ -135,7 +137,7 @@
 					<ul>
 					</g:else>
 						<li class="label">Titel:</li>
-						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.rdl.rinfo.baseurl + '/')}">${item.title}</a></li>
+						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
 						<li class="label">Beteckning:</li>
 						<li>${item.identifier}</li>
 						<li class="label">Ikraft:</li>
