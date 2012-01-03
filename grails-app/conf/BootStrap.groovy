@@ -30,8 +30,6 @@ class BootStrap {
 			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>',
 				headerNavigation: '''
 				<li><a href="">Other languages</a></li>
-				<li><a href="/om-lagrummet-se">Om lagrummet.se</a></li>
-				<li><a href="/om-webbplatsen">Om webbplatsen</a></li>
 				<li><a href="/webbkarta">Webbkarta</a></li>
 				''', footer: '''
 			<ul>
@@ -42,6 +40,7 @@ class BootStrap {
 			</ul>
 			<ul>
 			    <li class="heading">Om webbplatsen</li>
+			    <li><a href="/om-webbplatsen">Om webbplatsen</a></li>
 			    <li><a href="">Användningstips</a></li>
 			    <li><a href="">Länkar du hittar på lagrummet.se</a></li>
 			    <li><a href="">Teknisk information</a></li>
@@ -84,8 +83,6 @@ class BootStrap {
 				searchCats: ["Alla","Lagar","Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"],
 				headerNavigation: '''
 				<li><a href="">Other languages</a></li>
-				<li><a href="/om-lagrummet-se">Om lagrummet.se</a></li>
-				<li><a href="/om-webbplatsen">Om webbplatsen</a></li>
 				<li><a href="/webbkarta">Webbkarta</a></li>
 				''',
 				footer: '''
@@ -97,6 +94,7 @@ class BootStrap {
 				</ul>
 				<ul>
 					<li class="heading">Om webbplatsen</li>
+					<li><a href="/om-webbplatsen">Om webbplatsen</a></li>
 					<li><a href="">Användningstips</a></li>
 					<li><a href="">Länkar du hittar på lagrummet.se</a></li>
 					<li><a href="">Teknisk information</a></li>
