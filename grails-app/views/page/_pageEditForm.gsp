@@ -48,12 +48,12 @@
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
 		<label for="publishStart"><g:message code="page.publishStart.label" default="Publish Start" /></label>
-		<g:datePicker name="publishStart" precision="minute" value="${pageInstance?.publishStart}" default="none" noSelection="['': '']" />
+		<g:datePicker name="publishStart" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStart}" default="none" noSelection="['': '']" />
 	</div>
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStop', 'errors')}">
 		<label for="publishStop"><g:message code="page.publishStop.label" default="Publish Stop" /></label>
-		<g:datePicker name="publishStop" precision="minute" value="${pageInstance?.publishStop}" default="none" noSelection="['': '']" />
+		<g:datePicker name="publishStop" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStop}" default="none" noSelection="['': '']" />
 	</div>
 </div>
   
