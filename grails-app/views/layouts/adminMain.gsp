@@ -29,6 +29,9 @@
 			<li><h3>Media</h3></li>
 			<li><a href="${createLink(controller:'media', action:'create')}">Ny bild eller fil</a></li>
 			<li><a href="${createLink(controller:'media', action:'list')}">Hantera media</a></li>
+			<li><h3>Rättskällor</h3></li>
+			<li><a href="${createLink(controller:'legalSource', action:'create')}">Ny rättskälla</a></li>
+			<li><a href="${createLink(controller:'legalSource', action:'list')}">Hantera rättskällor</a></li>
 		</ul>
 		<h3>Sidor</h3>
 		<a href="${createLink(controller:'page', action:'create')}">Ny sida</a>

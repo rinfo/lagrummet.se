@@ -49,6 +49,8 @@ class UrlMappings {
 		
 		"/admin/media/$action"(controller: 'media')
 		
+		"/admin/legalSource/$action"(controller: 'legalSource')
+		
 		name pageAdmin: "/admin/page/$action?" {
 			controller = 'page'
 		}
