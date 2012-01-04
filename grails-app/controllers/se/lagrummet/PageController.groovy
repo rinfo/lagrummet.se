@@ -305,7 +305,7 @@ class PageController {
 					render response as JSON
 				} else {
 	                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
-	                render(view: "edit", model: [pageInstance: pageInstance])
+					redirect(action: "edit", id: pageInstance.id)
 				}
             }
         }

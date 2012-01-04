@@ -19,7 +19,8 @@ class Page {
 	static hasMany = [
 		children : Page,
 		media : Media,
-		puffs : Puff
+		puffs : Puff,
+		autoSaves : Page
 	]
 
 	static belongsTo = [
@@ -28,7 +29,8 @@ class Page {
 	]
 	
 	static mappedBy = [
-		children : 'parent'
+		children : 'parent',
+		autoSaves : 'masterRevision'
 	]
 	
     static constraints = {
@@ -58,9 +60,9 @@ class Page {
 		pageBackup.children = null
 		pageBackup.media = null
 		pageBackup.puffs = null
+		pageBackup.autoSaves = null
 		pageBackup.status = "autoSave"
-		pageBackup.masterRevision = this
-		pageBackup.save(flush:true)
+		this.addToAutoSaves(pageBackup).save()
 	}
 	
 	static searchable = {
