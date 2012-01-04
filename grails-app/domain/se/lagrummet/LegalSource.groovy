@@ -7,7 +7,7 @@ class LegalSource {
 	String grouping
 	
     static constraints = {
-		url(url: true, nullable: false)
+		url(url: true, blank: false)
 		name(nullable:false, blank:false)
 		grouping(nullable:false, blank:false)
     }
