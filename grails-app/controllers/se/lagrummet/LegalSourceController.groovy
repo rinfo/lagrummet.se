@@ -14,6 +14,7 @@ class LegalSourceController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		params.sort = params.sort ?: 'grouping'
         [legalSourceInstanceList: LegalSource.list(params), legalSourceInstanceTotal: LegalSource.count()]
     }
 
@@ -28,23 +29,11 @@ class LegalSourceController {
     def save = {
         def legalSourceInstance = new LegalSource(params)
         if (legalSourceInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), legalSourceInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), legalSourceInstance.name])}"
             redirect(action: "edit", id: legalSourceInstance.id)
         }
         else {
             render(view: "create", model: [legalSourceInstance: legalSourceInstance])
-        }
-    }
-
-	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
-    def show = {
-        def legalSourceInstance = LegalSource.get(params.id)
-        if (!legalSourceInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            [legalSourceInstance: legalSourceInstance]
         }
     }
 
@@ -75,7 +64,7 @@ class LegalSourceController {
             }
             legalSourceInstance.properties = params
             if (!legalSourceInstance.hasErrors() && legalSourceInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), legalSourceInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), legalSourceInstance.name])}"
                 redirect(action: "edit", id: legalSourceInstance.id)
             }
             else {
