@@ -1,3 +1,13 @@
+v0.5.3
+	Nytt:
+		75 FAQ
+	Fix:
+		#40 IE7
+		#41 Information i Avgränsningsmenyn
+		#44 Borttagning av sidor
+		#45 Hänvisningar grundförfattning
+		#46 Admingränssnittet, ta bort knappen
+
 v0.5.2
 	Nytt:
 		47 Ip-begränsning på Admingränssnittet
