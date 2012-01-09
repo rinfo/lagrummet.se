@@ -29,7 +29,7 @@
 	                	<span class="button"><g:actionSubmit  name="restore" action="restore" class="restore" value="${message(code: 'default.button.restore.label', default: 'Restore')}" /></span>
 	                </g:if>
                 	<span class="button"><g:actionSubmit name="update" action="update" class="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" /></span>
                 </div>
             </g:form>    
             
