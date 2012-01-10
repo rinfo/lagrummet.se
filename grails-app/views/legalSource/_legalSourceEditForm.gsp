@@ -8,7 +8,10 @@
     <g:textField name="name" value="${legalSourceInstance?.name}" />
 </div>
         
-<div class="input ${hasErrors(bean: legalSourceInstance, field: 'grouping', 'errors')}">
-    <label for="grouping"><g:message code="legalSource.grouping.label" default="Grouping" /></label>
-    <g:textField name="grouping" value="${legalSourceInstance?.grouping}" />
+<div class="input ${hasErrors(bean: legalSourceInstance, field: 'category', 'errors')}">
+    <label for="category"><g:message code="legalSource.category.label" default="Category" /></label>
+    <g:select name="category" 
+    			from="${grailsApplication.config.lagrummet.legalSource.categories}"
+    			value="${legalSourceInstance?.category}"
+    			valueMessagePrefix="legalSource.category" />
 </div>

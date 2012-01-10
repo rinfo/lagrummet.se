@@ -4,11 +4,17 @@ class LegalSource {
 
 	String url
 	String name
-	String grouping
+	String category
+	String subCategory
+	String description
+	String rdlName
 	
     static constraints = {
 		url(url: true, blank: false)
-		name(nullable:false, blank:false)
-		grouping(nullable:false, blank:false)
+		name(blank:false)
+		category(blank:false)
+		subCategory(nullable:true, blank:true)
+		description(nullable:true, blank:true)
+		rdlName(nullable:true, blank:true)
     }
 }

@@ -22,7 +22,7 @@
 
                             <g:sortableColumn property="url" title="${message(code: 'legalSource.url.label', default: 'Url')}" />
                         
-                            <g:sortableColumn property="grouping" title="${message(code: 'legalSource.grouping.label', default: 'Grupp')}" />
+                            <g:sortableColumn property="grouping" title="${message(code: 'legalSource.category.label', default: 'Grupp')}" />
                         
                         </tr>
                     </thead>
@@ -34,7 +34,7 @@
                         
                             <td>${fieldValue(bean: legalSourceInstance, field: "url")}</td>
                         
-                            <td>${fieldValue(bean: legalSourceInstance, field: "grouping")}</td>
+                            <td>${fieldValue(bean: legalSourceInstance, field: "category")}</td>
                         
                         </tr>
                     </g:each>
