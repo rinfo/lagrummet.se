@@ -170,7 +170,12 @@ class PageController {
 				model.pageTreeList = Page.findAllByStatusNotAndTemplateNot("autoSave","sitemap")
 				render(view: "sitemap", model: model)
 			} else if (page.template == "legalSources") {
-				model.legalSourceInstanceList = LegalSource.list(params)
+//				model.legalSourceInstanceList = LegalSource.list(params)
+				
+				model.legalSourceGroupingList = [:]
+				grailsApplication.config.lagrummet.legalSource.categories.each {
+					model.legalSourceGroupingList[it] = LegalSource.findAllByCategory(it)
+				}
 				render(view: "legalSources", model: model)
 			} else {
 				render(view: page.template, model: model)

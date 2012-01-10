@@ -366,7 +366,7 @@ article.editorial ul {
 }
 
 article.editorial ul li, article.editorial ol li {
-    margin: 0 0 0.5em 1em;
+    margin: 0 0 0 1em;
 }
 
 article.editorial img {
