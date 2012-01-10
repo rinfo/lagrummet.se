@@ -14,7 +14,7 @@ class LegalSource {
 		name(blank:false)
 		category(blank:false)
 		subCategory(nullable:true, blank:true)
-		description(nullable:true, blank:true)
+		description(nullable:true, blank:true, maxSize:1000)
 		rdlName(nullable:true, blank:true)
     }
 }

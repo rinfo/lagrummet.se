@@ -22,7 +22,11 @@
 
                             <g:sortableColumn property="url" title="${message(code: 'legalSource.url.label', default: 'Url')}" />
                         
-                            <g:sortableColumn property="grouping" title="${message(code: 'legalSource.category.label', default: 'Grupp')}" />
+                            <g:sortableColumn property="category" title="${message(code: 'legalSource.category.label', default: 'Rubrik')}" />
+                            
+                            <g:sortableColumn property="subCategory" title="${message(code: 'legalSource.subCategory.label', default: 'Grupp')}" />
+                            
+                            <g:sortableColumn property="description" title="${message(code: 'legalSource.description.label', default: 'Description')}" />
                         
                         </tr>
                     </thead>
@@ -34,7 +38,11 @@
                         
                             <td>${fieldValue(bean: legalSourceInstance, field: "url")}</td>
                         
-                            <td>${fieldValue(bean: legalSourceInstance, field: "category")}</td>
+                            <td><g:message code="legalSource.category.${legalSourceInstance.category}" default="${legalSourceInstance.category}" /></td>
+                            
+                            <td><g:message code="legalSource.subCategory.${legalSourceInstance.subCategory}" default="${legalSourceInstance.subCategory}" /></td>
+                            
+                            <td>${fieldValue(bean: legalSourceInstance, field: "description") }</td>
                         
                         </tr>
                     </g:each>
