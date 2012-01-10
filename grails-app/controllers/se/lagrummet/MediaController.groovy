@@ -20,7 +20,6 @@ class MediaController {
 		
 		def mediaInstances = (params.parentId) ? Media.findAllByParentIsNull() : Media.list(params)
 		def mediaInstancesCount =  mediaInstances.size()
-		
 		if (params.ajax) {
 			render "var tinyMCEImageList = new Array("
 			

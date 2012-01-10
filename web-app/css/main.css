@@ -379,7 +379,7 @@ article.editorial img.alignleft {
 }
 
 article.editorial img.alignright {
-	float: left;
+	float: right;
 	margin: 1em 0 1em 1em;
 }
 

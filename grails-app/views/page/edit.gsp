@@ -18,8 +18,7 @@
                 <g:renderErrors bean="${pageInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post" mapping="pageAdmin">
-                <g:hiddenField name="id" value="${pageInstance?.id}" />
+            <g:form method="post" mapping="pageAdmin" params="[action: 'edit', id: pageInstance.id]">
                 <g:hiddenField name="version" value="${pageInstance?.version}" />
                 
                 <g:render template="pageEditForm" />
@@ -56,10 +55,9 @@
 				<h3>${message(code: 'default.page.mediaList.label', default: 'Media tillhörande denna sida')}</h3>
 				<ul>
 					<g:each in="${pageInstance.media}" status="i" var="mediaInstance">
-                        <li><g:link action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "title")}</g:link> (<a href="${resource() + "/" + mediaInstance?.filename}">${mediaInstance?.filename}</a>)</li>
+                        <li><g:link controller="media" action="edit" id="${mediaInstance.id}">${fieldValue(bean: mediaInstance, field: "title")}</g:link> (<a href="${resource() + "/" + mediaInstance?.filename}">${mediaInstance?.filename}</a>)</li>
                     </g:each>
 				</ul>
-				
             </div>
             
             <div class="revisions">
