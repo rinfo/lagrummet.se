@@ -10,7 +10,7 @@ jQuery(function($) {
 //		console.log(message);
 	}
 
-	var pageId = ($("#id")) ? $("#id").attr("value") : "";
+	var pageId = ($("#parentId")) ? $("#parentId").attr("value") : "";
 	tinyMCE.init({
 		theme : "advanced",
 		mode : "exact",

@@ -26,6 +26,7 @@ class BootStrap {
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
 			def sitemap = new Page(title: 'Webbkarta', template: "sitemap", pageOrder: 1, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: new Date() - 4).save()
+			def legalSources = new Page(title: 'Alla rättskällor', template: "legalSources", pageOrder: 1, permalink: 'samtliga-rattskallor', h1: 'Samtliga rättskällor', content: "", status: "published", publishStart: new Date() - 4).save()
 			
 			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>',
 				headerNavigation: '''
@@ -142,6 +143,17 @@ class BootStrap {
 				content: "",
 				status: "published",
 				publishStart: new Date() - 4
+				).save()
+				
+				def legalSources = Page.findByPermalink('samtliga-rattskallor') ?: new Page(
+					title: 'Alla rättskällor',
+					template: "legalSources",
+					pageOrder: 1,
+					permalink: 'samtliga-rattskallor',
+					h1: 'Samtliga rättskällor',
+					content: "",
+					status: "published",
+					publishStart: new Date() - 4
 				).save()
 		}
     }

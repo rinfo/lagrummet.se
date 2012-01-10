@@ -63,8 +63,6 @@ class PageController {
 		}
 		
         if (instanceToSave.save(flush: true)) {
-			
-			
 			if (params.ajax) {
 				def response = [success: "true", pageInstance: pageInstance]
 				render response as JSON
@@ -171,6 +169,9 @@ class PageController {
 			} else if (page.template == "sitemap") {
 				model.pageTreeList = Page.findAllByStatusNotAndTemplateNot("autoSave","sitemap")
 				render(view: "sitemap", model: model)
+			} else if (page.template == "legalSources") {
+				model.legalSourceInstanceList = LegalSource.list(params)
+				render(view: "legalSources", model: model)
 			} else {
 				render(view: page.template, model: model)
 			}

@@ -63,7 +63,7 @@
 		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
 	</div>
 	
-	<g:if test="${Arrays.asList('frontpage', 'sitemap').indexOf(pageInstance.template) == -1}">
+	<g:if test="${Arrays.asList('frontpage', 'sitemap', 'legalSources').indexOf(pageInstance.template) == -1}">
 	<div class="input ${hasErrors(bean: pageInstance, field: 'template', 'errors')}">
 		<label for="template"><g:message code="page.template.label" default="Page template: " /></label>
 		<g:dropdown options="${grailsApplication.config.lagrummet.page.templates}" value="${fieldValue(bean: pageInstance, field: 'template')}" name="template"></g:dropdown>
