@@ -1,4 +1,4 @@
-#Tue Dec 20 15:36:11 CET 2011
+#Wed Jan 11 10:04:53 CET 2012
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=431980e4f532b20d6f23ff71fe8a8f83c27e078a
@@ -14,6 +14,7 @@ encoding//grails-app/views/page/_pageEditForm.gsp=UTF-8
 encoding//grails-app/views/page/create.gsp=UTF-8
 encoding//grails-app/views/page/edit.gsp=UTF-8
 encoding//grails-app/views/page/frontpage.gsp=UTF-8
+encoding//grails-app/views/page/legalSources.gsp=UTF-8
 encoding//grails-app/views/rinfo/show.gsp=UTF-8
 encoding//grails-app/views/search/extendedSearch.gsp=UTF-8
 encoding//grails-app/views/search/searchForm.gsp=UTF-8

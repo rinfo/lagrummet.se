@@ -5,6 +5,7 @@ import se.lagrummet.SecRole
 import se.lagrummet.SecUserSecRole
 import se.lagrummet.User
 import se.lagrummet.SiteProperties
+import se.lagrummet.LegalSource
 
 class BootStrap {
 
@@ -27,6 +28,27 @@ class BootStrap {
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
 			def sitemap = new Page(title: 'Webbkarta', template: "sitemap", pageOrder: 1, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: new Date() - 4).save()
 			def legalSources = new Page(title: 'Alla rättskällor', template: "legalSources", pageOrder: 1, permalink: 'samtliga-rattskallor', h1: 'Samtliga rättskällor', content: "", status: "published", publishStart: new Date() - 4).save()
+			
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html", name: "Kommittédirektiv", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/2", name: "Kommittédirektiv 2", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/3", name: "Kommittédirektiv 3", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/4", name: "Kommittédirektiv 4", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/5", name: "Kommittédirektiv 5", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/6", name: "Kommittédirektiv 6", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/7", name: "Kommittédirektiv 7", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/8", name: "Kommittédirektiv 8", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/9", name: "Kommittédirektiv 9", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/10", name: "Kommittédirektiv 10", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/11", name: "Kommittédirektiv 11", category: "Forarbeten", subCategory: "Regeringen").save()
+			new LegalSource(url: "http://www.riksdagen.se/webbnav/index.aspx?nid=400", name: "Motioner", category: "Forarbeten", subCategory: "Riksdagen").save()
+			new LegalSource(url: "http://www.riksdagen.se/webbnav/index.aspx?nid=400&2", name: "Motioner 2", category: "Forarbeten", subCategory: "Riksdagen").save()
+			new LegalSource(url: "http://www.riksdagen.se/webbnav/index.aspx?nid=400&3", name: "Motioner 3", category: "Forarbeten", subCategory: "Riksdagen").save()
+			new LegalSource(url: "http://www.riksdagen.se/webbnav/index.aspx?nid=400&4", name: "Motioner 4", category: "Forarbeten", subCategory: "Riksdagen").save()
+			new LegalSource(url: "http://www.riksdagen.se/webbnav/index.aspx?nid=400&5", name: "Motioner 5", category: "Forarbeten", subCategory: "Riksdagen").save()
+			new LegalSource(url: "http://62.95.69.15/sfs/sfsr_form2.html", name: "Register över Svensk författningssamling (SFS)", category: "Lagar", subCategory: "").save()
+			new LegalSource(url: "http://62.95.69.15/sfs/sfsr_form2.html/2", name: "Register över Svensk författningssamling (SFS) 2", category: "Lagar", subCategory: "").save()
+			new LegalSource(url: "http://62.95.69.15/sfs/sfsr_form2.html/3", name: "Register över Svensk författningssamling (SFS) 3", category: "Lagar", subCategory: "").save()
+			
 			
 			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>',
 				headerNavigation: '''
@@ -145,16 +167,16 @@ class BootStrap {
 				publishStart: new Date() - 4
 				).save()
 				
-				def legalSources = Page.findByPermalink('samtliga-rattskallor') ?: new Page(
-					title: 'Alla rättskällor',
-					template: "legalSources",
-					pageOrder: 1,
-					permalink: 'samtliga-rattskallor',
-					h1: 'Samtliga rättskällor',
-					content: "",
-					status: "published",
-					publishStart: new Date() - 4
-				).save()
+			def legalSources = Page.findByPermalink('samtliga-rattskallor') ?: new Page(
+				title: 'Alla rättskällor',
+				template: "legalSources",
+				pageOrder: 1,
+				permalink: 'samtliga-rattskallor',
+				h1: 'Samtliga rättskällor',
+				content: "",
+				status: "published",
+				publishStart: new Date() - 4
+			).save()
 		}
     }
 	
