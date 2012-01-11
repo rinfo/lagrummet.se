@@ -34,6 +34,7 @@ body {
     line-height: 140%;
     font-size: 12px;
 	background: url(../images/top_ribbon.png) no-repeat;
+	color: #111;
 }
 
 a {
@@ -84,6 +85,7 @@ h1 {
 
 h2 {
     font-size: 1.4em;
+    color: #222;
 }
 
 h3 {
@@ -91,7 +93,9 @@ h3 {
 }
 
 h4 {
-    font-size: 1em;
+    font-size: 1.2em;
+    font-style: italic;
+    color: #222;
 }
 
 p {
@@ -478,6 +482,22 @@ article.faq .answer a.returnToTop {
 	float: right;
 }
 
+article.legalSources {
+	width: 720px;;
+}
+
+article.legalSources section {
+	width: 48%;
+}
+
+article.legalSources section.Foreskrifter {
+	float: right;
+	margin-left: 2%;
+	position: absolute;
+	top: 27px;
+	right: 0;
+}
+
 /* =FOOTER page footer */
 #siteFooter {
     padding-top: 1em;
@@ -488,11 +508,11 @@ article.faq .answer a.returnToTop {
 }
 
 #siteFooter a {
-	color: #585858;
+	color: #333;
 }
 
 #siteFooter a:visited {
-	color: #888;
+	color: #585858;
 }
 
 #siteFooter ul {

@@ -169,12 +169,18 @@ class PageController {
 			} else if (page.template == "sitemap") {
 				model.pageTreeList = Page.findAllByStatusNotAndTemplateNot("autoSave","sitemap")
 				render(view: "sitemap", model: model)
-			} else if (page.template == "legalSources") {
-//				model.legalSourceInstanceList = LegalSource.list(params)
-				
-				model.legalSourceGroupingList = [:]
-				grailsApplication.config.lagrummet.legalSource.categories.each {
-					model.legalSourceGroupingList[it] = LegalSource.findAllByCategory(it)
+			} else if (page.template == "legalSources") {	
+				model.legalSourceGroups = [:]
+				grailsApplication.config.lagrummet.legalSource.categories.each { category ->
+					def categoryList = ["sokbar": [:], "inteSokbar": [:]]
+					LegalSource.findAllByCategory(category).each {
+						def rdlName = (it.rdlName) ? "sokbar" : "inteSokbar" 
+						if (!categoryList[rdlName][it.subCategory]) {
+							categoryList[rdlName][it.subCategory] = []
+						}
+						categoryList[rdlName][it.subCategory].add(it)
+					}
+					model.legalSourceGroups[category] = categoryList
 				}
 				render(view: "legalSources", model: model)
 			} else {
