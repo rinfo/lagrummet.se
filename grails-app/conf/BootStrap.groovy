@@ -1,10 +1,11 @@
 import grails.util.Environment
+import se.lagrummet.LegalSource
 import se.lagrummet.Page
 import se.lagrummet.Puff
 import se.lagrummet.SecRole
 import se.lagrummet.SecUserSecRole
-import se.lagrummet.User
 import se.lagrummet.SiteProperties
+import se.lagrummet.User
 
 class BootStrap {
 
@@ -65,6 +66,11 @@ class BootStrap {
 				<li class="heading">L&auml;r dig mer</li>
 				<li><a href="">Om r&auml;ttsinformation</a></li>
 			</ul>''', searchCats: ["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Foreskrifter","Ovrigt"]).save()
+			
+			new LegalSource(url:"http://www.lagrummet.se", name:"Lagrummet", category:"Lagar").save()
+			new LegalSource(url:"http://www.domstolsverket.se", name:"Domstolsverket", category:"Lagar").save()
+			new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", name:"Försvarets författningssamling", category:"Foreskrifter").save()
+			new LegalSource(url:"http://www.domstol.se/Ladda-ner--bestall/Vagledande-avgoranden/", name:"Domstolar", category:"Rattspraxis").save()
 		} else {
 			def user = User.findByUsername("admin") ?: new User(
 				fullName: 'System Admin',

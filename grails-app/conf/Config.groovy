@@ -144,7 +144,7 @@ lagrummet {
 	rdl.service.baseurl="http://service.demo.lagrummet.se"
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
 	local.rinfo.view="${grails.serverURL}/rinfo/"
-	page.templates = ["default":"Standardmall", "faq":"Vanliga frågor"] // "frontpage":"Startsida"
+	page.templates = ["default":"Standardmall", "faq":"Vanliga frågor", "legalSource/lagar":"Rättskällor:Lagar", "legalSource/forarbeten":"Rättskällor:Förarbeten", "legalSource/internationellt":"Rättskällor:Internationellt", "legalSource/rattspraxis":"Rättskällor:Rättspraxis", "legalSource/foreskrifter":"Rättskällor:Föreskrifter"] // "frontpage":"Startsida"
 	search.availableCategories=["Alla","Lagar", "Foreskrifter","Rattsfall","Propositioner","Utredningar","Ovrigt"]
 	search.availableDepartement=["Justitiedepartementet","Utrikesdepartementet","Försvarsdepartementet","Socialdepartementet","Finansdepartementet","Utbildningsdepartementet","Landsbygdsdepartementet","Miljödepartementet","Näringsdepartementet","Kulturdepartementet","Arbetsmarknadsdepartementet"]
 	search.availableBeslutandeMyndigheter=[]
