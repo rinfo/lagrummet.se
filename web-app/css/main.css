@@ -486,6 +486,10 @@ article.legalSources {
 	width: 720px;;
 }
 
+.legalSourceContainer {
+	position: relative;
+}
+
 article.legalSources section {
 	width: 48%;
 }
@@ -494,8 +498,12 @@ article.legalSources section.Foreskrifter {
 	float: right;
 	margin-left: 2%;
 	position: absolute;
-	top: 27px;
+	top: 0;
 	right: 0;
+}
+
+article.legalSources section.Foreskrifter h2 {
+	margin-top: 0;
 }
 
 /* =FOOTER page footer */

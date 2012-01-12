@@ -28,6 +28,10 @@ class BootStrap {
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
 			def sitemap = new Page(title: 'Webbkarta', template: "sitemap", pageOrder: 1, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: new Date() - 4).save()
 			def legalSources = new Page(title: 'Alla rättskällor', template: "legalSources", pageOrder: 1, permalink: 'samtliga-rattskallor', h1: 'Samtliga rättskällor', content: "", status: "published", publishStart: new Date() - 4).save()
+			def forarbeten = new Page(title: 'Förarbeten', template: "legalSource/forarbeten", pageOrder: 1, permalink: 'forarbeten', h1: 'Förarbeten', content: "", status: "published", publishStart: new Date() - 4).save()
+			def foreskrifter = new Page(title: 'Myndigheters föreskrifter', template: "legalSource/foreskrifter", pageOrder: 1, permalink: 'myndigheters-foreskrifter', h1: 'Myndigheters döreskrifter', content: "", status: "published", publishStart: new Date() - 4).save()
+			def lagar = new Page(title: 'Lagar och förordningar', template: "legalSource/lagar", pageOrder: 1, permalink: 'lagar-och-forordningar', h1: 'Lagar och förordningar', content: "", status: "published", publishStart: new Date() - 4).save()
+			
 			
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html", name: "Kommittédirektiv", category: "Forarbeten", subCategory: "Regeringen").save()
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/2", name: "Kommittédirektiv 2", category: "Forarbeten", subCategory: "Regeringen").save()
@@ -80,8 +84,10 @@ class BootStrap {
 			</ul>''', primaryNavigation: '''
 			<ul class="rinfo">
 				<li class="heading">R&auml;ttsinformation</li>
-				<li><a href="">Lagar och f&ouml;rordningar</a></li>
-				<li><a href="">Myndigheters F&ouml;reskrifter</a></li>
+				<li><a href="lagar-och-forordningar">Lagar och f&ouml;rordningar</a></li>
+				<li><a href="myndigheters-foreskrifter">Myndigheters F&ouml;reskrifter</a></li>
+				<li><a href="forarbeten">Förarbeten</a></li>
+				<li><a href="samtliga-rattskallor">Alla rättskällor</a></li>
 			</ul>
 			<ul class="turnHere">
 				<li class="heading">Hit v&auml;nder du dig</li>

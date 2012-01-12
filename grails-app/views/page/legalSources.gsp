@@ -7,6 +7,7 @@
     <article class="editorial legalSources">
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
+		<div class="legalSourceContainer">
             <g:each in="${legalSourceGroups}" var="category">
             <g:if test="${category.value['sokbar'] || category.value['inteSokbar']}">
             	<section class="${category.key}">
@@ -37,6 +38,7 @@
 	            </section>
 	        </g:if>
 		    </g:each>
+		    </div>
 	</article>
 </body>
 </html>
