@@ -7,6 +7,11 @@
     <label for="name"><g:message code="legalSource.name.label" default="Name" /></label>
     <g:textField name="name" value="${legalSourceInstance?.name}" />
 </div>
+
+<div class="input ${hasErrors(bean: legalSourceInstance, field: 'rdlName', 'errors')}">
+    <label for="rdlName"><g:message code="legalSource.rdlName.label" default="Name in RDL" /></label>
+    <g:textField name="rdlName" value="${legalSourceInstance?.rdlName}" />
+</div>
         
 <div class="input ${hasErrors(bean: legalSourceInstance, field: 'category', 'errors')}">
     <label for="category"><g:message code="legalSource.category.label" default="Category" /></label>
