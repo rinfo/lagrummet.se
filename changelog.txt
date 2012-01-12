@@ -1,3 +1,9 @@
+v0.5.4
+	Nytt:
+		78 Rättskällor
+	Fix:
+		#43 Bättre meddelanden på "Ta bort"-knappar i admin
+
 v0.5.3
 	Nytt:
 		75 FAQ
