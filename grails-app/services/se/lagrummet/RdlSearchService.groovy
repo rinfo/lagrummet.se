@@ -28,6 +28,7 @@ class RdlSearchService {
 		}
 		//force the ikraftdatum to be returned in the search result if the document has one
 		queryBuilder.setIkraftIfExists("")
+		queryBuilder.setParam("_stats", "on")
 		return searchWithQuery(queryBuilder.getQueryParams())
 	}
 	
@@ -63,6 +64,11 @@ class RdlSearchService {
 							searchResult.addItem(searchResultItem)
 						}
 					}
+					
+					if(json.statistics) {
+						searchResult.addStats(json.statistics.slices)
+					}
+	
 				}
 				
 				response.failure = { resp ->

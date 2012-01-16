@@ -30,7 +30,7 @@
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Ovrigt']) }" class="catTitle">Information från lagrummet.se</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})
-				<g:if test="${searchResult.totalResultsPerCategory['Ovrigt'] > 4}"> Visar de första 4</g:if>
+				<g:if test="${searchResult.items['Ovrigt'].size() > 0 && searchResult.totalResultsPerCategory['Ovrigt'] > searchResult.items['Ovrigt'].size()}"> Visar de första ${searchResult.items['Ovrigt'].size()}</g:if>
 				</span>
 			</p>
 			<g:if test="${searchResult.items['Ovrigt']}">
@@ -50,7 +50,8 @@
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Propositioner']) }" class="catTitle">Propositioner och skrivelser</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})
-				<g:if test="${searchResult.totalResultsPerCategory['Propositioner'] > 4}"> Visar de första 4</g:if>
+				<g:if test="${searchResult.items['Propositioner'].size() > 0 && searchResult.totalResultsPerCategory['Propositioner'] > searchResult.items['Propositioner'].size()}"> Visar de första ${searchResult.items['Propositioner'].size()}</g:if>
+				
 				</span>
 			</p>
 			<g:if test="${searchResult.items['Propositioner']}">
@@ -70,7 +71,7 @@
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Rattsfall']) }" class="catTitle">Rättsfall</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})
-				<g:if test="${searchResult.totalResultsPerCategory['Rattsfall'] > 4}"> Visar de första 4</g:if>
+				<g:if test="${searchResult.items['Rattsfall'].size() > 0 && searchResult.totalResultsPerCategory['Rattsfall'] > searchResult.items['Rattsfall'].size()}"> Visar de första ${searchResult.items['Rattsfall'].size()}</g:if>
 				</span>
 			</p>
 			<g:if test="${searchResult.items['Rattsfall']}">
@@ -93,7 +94,7 @@
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }" class="catTitle">Lagar och förordningar</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Lagar']})
-				<g:if test="${searchResult.totalResultsPerCategory['Lagar'] > 4}"> Visar de första 4</g:if>
+				<g:if test="${searchResult.items['Lagar'].size() > 0 && searchResult.totalResultsPerCategory['Lagar'] > searchResult.items['Lagar'].size()}"> Visar de första ${searchResult.items['Lagar'].size()}</g:if>
 				</span>
 			</p>
 			<g:if test="${searchResult.items['Lagar']}">
@@ -117,7 +118,7 @@
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Foreskrifter']) }" class="catTitle">Myndigheters föreskrifter</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Foreskrifter']})
-				<g:if test="${searchResult.totalResultsPerCategory['Foreskrifter'] > 4}"> Visar de första 4</g:if>
+				<g:if test="${searchResult.items['Foreskrifter'].size() > 0 && searchResult.totalResultsPerCategory['Foreskrifter'] > searchResult.items['Foreskrifter'].size()}"> Visar de första ${searchResult.items['Foreskrifter'].size()}</g:if>
 				</span>
 			</p>
 			<g:if test="${searchResult.items['Foreskrifter']}">
@@ -141,7 +142,7 @@
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Utredningar']) }" class="catTitle">Utredningar</a>
 				<span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})
-				<g:if test="${searchResult.totalResultsPerCategory['Utredningar'] > 4}"> Visar de första 4</g:if>
+				<g:if test="${searchResult.items['Utredningar'].size() > 0 && searchResult.totalResultsPerCategory['Utredningar'] > searchResult.items['Utredningar'].size()}"> Visar de första ${searchResult.items['Utredningar'].size()}</g:if>
 				</span>
 			</p>
 			<g:if test="${searchResult.items['Utredningar']}">

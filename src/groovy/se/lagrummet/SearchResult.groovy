@@ -52,4 +52,19 @@ class SearchResult {
 		return this
 	}
 	
+	public void addStats(List stats) {
+		for(Category cat : Category.values()) {
+			totalResultsPerCategory[(cat.toString())] = 0
+		}
+
+		stats.each {
+			if(it.dimension == "type") {
+				it.observations.each { type ->
+					def category = Category.getCategoryForType(type.term)
+					totalResultsPerCategory[(category)] += type.count
+				}
+			}
+		}
+	}
+	
 }
