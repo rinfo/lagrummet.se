@@ -25,12 +25,12 @@
 			            	<g:if test="${i<=9}">
 				            <li><a href="${lI.url}">${lI.name}</a></li>
 				            </g:if><g:else>
-				            <li class="${subCategory.key} hidden"><a href="${lI.url}">${lI.name}</a></li>
+				            <li class="${category.key}_${it.key}_${subCategory.key ?: category.key} hidden"><a href="${lI.url}">${lI.name}</a></li>
 				            </g:else>
 				            </g:each>
 				        </ul>
 			            <g:if test="${subCategory.value.size() >= 10}">
-			        	<a href="#" class="toggleLink" id="${subCategory.key}"><span>Visa alla ${subCategory.value.size()} rättskällor &#x25BC;</span><span class="hidden">Dölj rättskällor &#x25b2;</span></a>
+			        	<a href="#" class="toggleLink" id="${category.key}_${it.key}_${subCategory.key ?: category.key}"><span>Visa alla ${subCategory.value.size()} rättskällor &#x25BC;</span><span class="hidden">Dölj rättskällor &#x25b2;</span></a>
 			        	</g:if>
 		            	</g:each>
 		            </g:if>
