@@ -84,10 +84,10 @@ class BootStrap {
 			</ul>''', primaryNavigation: '''
 			<ul class="rinfo">
 				<li class="heading">R&auml;ttsinformation</li>
-				<li><a href="lagar-och-forordningar">Lagar och f&ouml;rordningar</a></li>
-				<li><a href="myndigheters-foreskrifter">Myndigheters F&ouml;reskrifter</a></li>
-				<li><a href="forarbeten">Förarbeten</a></li>
-				<li><a href="samtliga-rattskallor">Alla rättskällor</a></li>
+				<li><a href="/lagrummet.se/lagar-och-forordningar">Lagar och f&ouml;rordningar</a></li>
+				<li><a href="/lagrummet.se/myndigheters-foreskrifter">Myndigheters F&ouml;reskrifter</a></li>
+				<li><a href="/lagrummet.se/forarbeten">Förarbeten</a></li>
+				<li><a href="/lagrummet.se/samtliga-rattskallor">Alla rättskällor</a></li>
 			</ul>
 			<ul class="turnHere">
 				<li class="heading">Hit v&auml;nder du dig</li>
