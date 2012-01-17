@@ -169,6 +169,8 @@ class PageController {
 			} else if (page.template == "sitemap") {
 				model.pageTreeList = Page.findAllByStatusNotAndTemplateNot("autoSave","sitemap")
 				render(view: "sitemap", model: model)
+			} else if (page.template == "english") {
+				render(view: "showEnglish", model: model)
 			} else if (page.template == "legalSources") {	
 				model.legalSourceGroups = [:]
 				grailsApplication.config.lagrummet.legalSource.categories.each { category ->

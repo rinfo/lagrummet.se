@@ -63,6 +63,7 @@ a[href*="lagrummet.se"] {
 
 a.toggleLink {
 	cursor: pointer;
+	font-size: 0.9em;
 }
 
 h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
@@ -153,6 +154,10 @@ td, th {
 
 td {
     border-top: 1px solid #eee;
+}
+
+tr:first-child td {
+    border-top: none;
 }
 
 th {
@@ -628,14 +633,14 @@ article.legalSources section.Foreskrifter h2 {
 	margin-left: 0;
 }
 
-#searchCategory:hover, #searchSubmit:hover {
+#searchCategory:hover, #searchSubmit:hover, #extendedSearchSubmit:hover {
 	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
 	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
 	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
 	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
 }
 
-#searchCategory:active, #searchSubmit:active {
+#searchCategory:active, #searchSubmit:active, #extendedSearchSubmit:active {
 	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
 	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
 	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
@@ -959,7 +964,7 @@ fieldset .inputGroup p {
 	float: right;
 	padding: 5px;
 	background-color: #fcfcfc;
-	font-size: 11px;
+	/*font-size: 11px;*/
 	color: #585858;
 }
 
@@ -968,6 +973,12 @@ fieldset .inputGroup p {
 	font-weight: bold;
 	padding: 0.5em 0em 0.5em 0em;
 	border-top: 1px solid #ddd;
+}
+
+#rinfoSidebar h3:first-child {
+	padding-top: 0;
+	border-top: none;
+	margin-top: 0;
 }
 
 #rinfoSidebar .subtitle {
@@ -985,7 +996,6 @@ fieldset .inputGroup p {
 }
 
 #rinfoSidebar ul li.label{
-	font-weight: bold;
 	color: #000000;
 	padding: 0.5em 0 0 0;
 }

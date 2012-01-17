@@ -22,7 +22,7 @@
 			<nav id="sitelinks">
 				<ul>
 					${siteProps?.headerNavigation}
-					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;readid=content&amp;url=${resource(absolute: true).encodeAsURL()}%2F" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a> </li>
+					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=en_en&amp;readid=content&amp;url=${resource(absolute: true).encodeAsURL()}%2F" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Listen</a> </li>
 				</ul>			
 			</nav>
 			<nav id="breadcrumbs">
@@ -34,7 +34,7 @@
 					<label for="cat">Avgränsa din sökning</label>
 					<select id="cat" name="cat">
 					<g:each in="${siteProps?.searchCats}">
-						<g:if test="${session?.cat == it}">
+						<g:if test="${params.cat == it}">
 							<option value="${it}" selected="selected" rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
 						</g:if>
 						<g:else>

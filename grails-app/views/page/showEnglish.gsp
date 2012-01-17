@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>${page.title}</title>
-	<meta name="layout" content="main" />
+	<meta name="layout" content="mainEnglish" />
 </head>
 <body>
     <article class="editorial">

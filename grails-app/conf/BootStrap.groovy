@@ -84,10 +84,10 @@ class BootStrap {
 			</ul>''', primaryNavigation: '''
 			<ul class="rinfo">
 				<li class="heading">R&auml;ttsinformation</li>
-				<li><a href="lagar-och-forordningar">Lagar och f&ouml;rordningar</a></li>
-				<li><a href="myndigheters-foreskrifter">Myndigheters F&ouml;reskrifter</a></li>
-				<li><a href="forarbeten">Förarbeten</a></li>
-				<li><a href="samtliga-rattskallor">Alla rättskällor</a></li>
+				<li><a href="/lagrummet.se/lagar-och-forordningar">Lagar och f&ouml;rordningar</a></li>
+				<li><a href="/lagrummet.se/myndigheters-foreskrifter">Myndigheters F&ouml;reskrifter</a></li>
+				<li><a href="/lagrummet.se/forarbeten">Förarbeten</a></li>
+				<li><a href="/lagrummet.se/samtliga-rattskallor">Alla rättskällor</a></li>
 			</ul>
 			<ul class="turnHere">
 				<li class="heading">Hit v&auml;nder du dig</li>
@@ -117,7 +117,7 @@ class BootStrap {
 				siteTitle: 'lagrummet<span class="hlight">.se</span>',
 				searchCats: ["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Foreskrifter","Ovrigt"],
 				headerNavigation: '''
-				<li><a href="">Other languages</a></li>
+				<li><a href="/english">English</a></li>
 				<li><a href="/webbkarta">Webbkarta</a></li>
 				''',
 				footer: '''
@@ -179,10 +179,21 @@ class BootStrap {
 				publishStart: new Date() - 4
 				).save()
 				
+			def english = Page.findByPermalink('english') ?: new Page(
+				title: 'English',
+				template: "english",
+				pageOrder: 2,
+				permalink: 'english',
+				h1: 'Information in English',
+				content: "",
+				status: "published",
+				publishStart: new Date() - 4
+				).save()
+				
 			def legalSources = Page.findByPermalink('samtliga-rattskallor') ?: new Page(
 				title: 'Alla rättskällor',
 				template: "legalSources",
-				pageOrder: 1,
+				pageOrder: 3,
 				permalink: 'samtliga-rattskallor',
 				h1: 'Samtliga rättskällor',
 				content: "",
