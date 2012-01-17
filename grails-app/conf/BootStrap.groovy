@@ -117,7 +117,7 @@ class BootStrap {
 				siteTitle: 'lagrummet<span class="hlight">.se</span>',
 				searchCats: ["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Foreskrifter","Ovrigt"],
 				headerNavigation: '''
-				<li><a href="">Other languages</a></li>
+				<li><a href="/english">English</a></li>
 				<li><a href="/webbkarta">Webbkarta</a></li>
 				''',
 				footer: '''
@@ -179,10 +179,21 @@ class BootStrap {
 				publishStart: new Date() - 4
 				).save()
 				
+			def english = Page.findByPermalink('english') ?: new Page(
+				title: 'English',
+				template: "english",
+				pageOrder: 2,
+				permalink: 'english',
+				h1: 'Information in English',
+				content: "",
+				status: "published",
+				publishStart: new Date() - 4
+				).save()
+				
 			def legalSources = Page.findByPermalink('samtliga-rattskallor') ?: new Page(
 				title: 'Alla rättskällor',
 				template: "legalSources",
-				pageOrder: 1,
+				pageOrder: 3,
 				permalink: 'samtliga-rattskallor',
 				h1: 'Samtliga rättskällor',
 				content: "",

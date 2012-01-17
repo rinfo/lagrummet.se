@@ -14,7 +14,6 @@
 				<a href="${puff.link}"><img src="${puff.img.filename}" alt="${puff.img.title}" /></a>
 				<strong>${puff.title}</strong>
 				<p>${puff.desc}</p>
-				<a href="${puff.link}">Läs mer</a>
 			</div>
 		</g:each>
 	</aside>
