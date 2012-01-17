@@ -14,6 +14,7 @@ class SearchController {
     def index = {
 		def searchResult = null
 		def offset
+		if (params.cat) session.cat = params.cat
 		if(params.query && params.cat && params.cat != "Alla")  {
 			offset = parseInt(params.offset, 0)
 			def itemsPerPage = parseInt(params.max, 20)
