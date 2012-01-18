@@ -122,7 +122,7 @@ grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 
 grails.plugins.springsecurity.ipRestrictions = [
 	'/admin/**': [
-		'159.190.240.1', '159.190.240.2', '159.190.240.3', '159.190.240.254',		//DV Jönköping
+		'159.190.240.1', '159.190.240.2', '159.190.240.3', '159.190.240.254', '159.190.251.57',		//DV Jönköping
 		'159.190.240.66', '159.190.251.56',											//DV Stockholm
 		'159.190.240.150', '159.190.240.151',										//DV Malmö
 		'159.190.240.168', '159.190.240.169', '159.190.240.170', '159.190.240.171',	//DV Göteborg
