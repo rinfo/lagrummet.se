@@ -1,3 +1,12 @@
+v0.5.5
+	Fix:
+		#12 Filtreringen i snabbsöket följer med till dokumentsidor
+		#28 Antalet sökträffar i varje kategori visas korrekt
+		#39 Sökknappen i Utökad sökning
+		Javascript på Samtliga Rättskällor
+		Länkar i webbkartan
+		Readspeaker på engelska
+		
 v0.5.4
 	Nytt:
 		78 Rättskällor
