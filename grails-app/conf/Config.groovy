@@ -174,7 +174,7 @@ lagrummet {
 		[value: 'miljoeoeverdomstolen', title: 'Mark- och Milj&ouml;&ouml;verdomstolen'],
 		[value: 'patentbesvaersraetten', title: 'Patentbesv&auml;rsr&auml;tten'],
 	]
-	legalSource.categories = ["Lagar","Forarbeten","Rattspraxis","Internationellt","Foreskrifter"]
+	legalSource.categories = ["Foreskrifter","Lagar","Forarbeten","Rattspraxis","Internationellt"]
 	legalSource.subCategories = ["", "Regeringen", "Riksdagen", "Lagradet", "Domstolars_Vagledande_Avgoranden", "Myndigheters_Vagledande_Avgoranden", "Domstolars_Beslut"]
 }
 

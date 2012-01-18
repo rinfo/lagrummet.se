@@ -1210,4 +1210,20 @@ fieldset .inputGroup p {
 	article.faq .answer {
 		width: auto;
 	}
+	
+	article.legalSources {
+		width: auto;
+	}
+	
+	article.legalSources section {
+		width: 100%;
+		float: none;
+		clear: both;
+	}
+	
+	article.legalSources section.Foreskrifter {
+		float: none;
+		margin-left: 0;
+		clear: both;
+	}
 }
