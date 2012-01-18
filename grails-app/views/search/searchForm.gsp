@@ -10,6 +10,7 @@
 </head>
 <body>
     <article id="searchResults" class="searchResults">
+    	<p class="showAllLabel">Totalt ${searchResult?.totalResults} träffar</p>
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
@@ -24,8 +25,7 @@
 		</g:if>
 		
 		<g:if test="${searchResult?.totalResults}">
-			<p>Totalt antal resultat: ${searchResult.totalResults}</p>
-			
+		<p>Visar sökresultat för <span class="query">"${query.encodeAsHTML()}"</span> i <strong>alla rättskällor</strong> på lagrummet.se</p>	
 		<div class="column first">
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Ovrigt']) }" class="catTitle">Information från lagrummet.se</a> 
