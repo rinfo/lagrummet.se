@@ -34,31 +34,39 @@ class LocalSearchService {
 		
 		options['withHighlighter'] = pageHighlighter
 		if(query) {
-			def result = Page.search (  {
-					must(queryString(query))
-					must(term("status", "published"))
-					must(le("publishStart", new Date()))
-					must{
-						ge("publishStop", new Date())
-						term("publishStop", "NULL")
-					}
-					sort(CompassQuery.SortImplicitType.SCORE, CompassQuery.SortDirection.AUTO)
-				},
-				options )
-			searchResult.totalResults = result.total
-			
-			def i = 0
-			result.results.each{ item ->
-				def searchResultItem = new SearchResultItem(
-												title: item.title,
-												iri: item.url(),
-												issued: item.lastUpdated,
-												type: 'Lagrummet.Artikel',
-												matches: result.highlights[i].content
-												)
-				searchResult.addItemByType(searchResultItem)
-				i++
+			try {
+				def result = Page.search (  {
+						must(queryString(query))
+						must(term("status", "published"))
+						must(le("publishStart", new Date()))
+						must{
+							ge("publishStop", new Date())
+							term("publishStop", "NULL")
+						}
+						sort(CompassQuery.SortImplicitType.SCORE, CompassQuery.SortDirection.AUTO)
+					},
+					options )
+				searchResult.totalResults = result.total
+				
+				def i = 0
+				result.results.each{ item ->
+					def searchResultItem = new SearchResultItem(
+													title: item.title,
+													iri: item.url(),
+													issued: item.lastUpdated,
+													type: 'Lagrummet.Artikel',
+													matches: result.highlights[i].content
+													)
+					searchResult.addItemByType(searchResultItem)
+					i++
+				}
 			}
+			catch(e) {
+				if (e in org.compass.core.engine.SearchEngineQueryParseException) {
+					searchResult.errorMessages.add("error.ParseException")
+				}
+			}
+			
 		}
 		return searchResult
 	}
