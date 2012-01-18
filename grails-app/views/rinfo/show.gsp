@@ -100,12 +100,14 @@
 			</g:if>
 			
 			<g:if test="${docInfo.rev?.rattsfallshanvisning}">
+				<g:set var="toggleId" value="toggleHanvisning" />
+				<g:set var="isExpanded" value="${params[(toggleId)]}" />
 				<h3>Hänvisande rättsfall (${docInfo.rev.rattsfallshanvisning.size()})</h3>
 				<span>Rättsfall som hänvisar till:</span><br/>
 				<span class="subtitle">${docInfo.identifier}</span>
 				<g:each in="${docInfo.rev.rattsfallshanvisning}" var="item" status="i">
 					<g:if test="${i >= 4}">
-					<ul class="toggleHanvisning hidden">
+					<ul class="${toggleId} ${isExpanded ? '' : 'hidden' }">
 					</g:if>
 					<g:else>
 					<ul>
@@ -121,17 +123,22 @@
 					</ul>
 				</g:each>
 				<g:if test="${docInfo.rev.rattsfallshanvisning.size() > 4}">
-				<a class="toggleLink" id="toggleHanvisning"><span>Visa alla ${docInfo.rev.rattsfallshanvisning.size()} hänvisande rättsfall &#x25BC;</span><span class="hidden">Dölj hänvisande rättsfall &#x25b2;</span></a>
+				<g:toggleLink toggleId="${toggleId}" mapping="rinfo">
+						<span>Visa alla ${docInfo.rev.rattsfallshanvisning.size()} hänvisande rättsfall &#x25BC;</span>
+						<span class="hidden">Dölj hänvisande rättsfall &#x25b2;</span>
+				</g:toggleLink>
 				</g:if>
 			</g:if>
 			
 			<g:if test="${docInfo.rev?.andrar}">
+				<g:set var="toggleId" value="toggleAndrar" />
+				<g:set var="isExpanded" value="${params[(toggleId)]}" />
 				<h3>Ändringsförfattningar (${docInfo.rev.andrar.size()})</h3>
 				<span>Författning som ändrar:</span><br/>
 				<span class="subtitle">${docInfo.title}</span>
 				<g:each in="${docInfo.rev.andrar.sort{ it.ikrafttradandedatum }}" var="item" status="i">
 					<g:if test="${i >= 4}">
-					<ul class="toggleAndrar hidden">
+					<ul class="${toggleId} ${isExpanded ? '' : 'hidden' }">
 					</g:if>
 					<g:else>
 					<ul>
@@ -145,7 +152,10 @@
 					</ul>
 				</g:each>
 				<g:if test="${docInfo.rev.andrar.size() > 4}">
-				<a class="toggleLink" id="toggleAndrar"><span>Visa alla ${docInfo.rev.andrar.size()} ändringsförfattningar &#x25BC;</span><span class="hidden">Dölj ändringsförfattningar &#x25b2;</span></a>
+				<g:toggleLink toggleId="${toggleId}" mapping="rinfo">
+						<span class="${isExpanded ? 'hidden' : '' }">Visa alla ${docInfo.rev.andrar.size()} ändringsförfattningar &#x25BC;</span>
+						<span class="${!isExpanded ? 'hidden' : '' }">Dölj ändringsförfattningar &#x25b2;</span>
+				</g:toggleLink>
 				</g:if>
 			</g:if>
 			

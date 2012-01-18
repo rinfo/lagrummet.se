@@ -20,17 +20,23 @@
 			            <h4><g:message code="legalSource.subCategory.${subCategory.key}" /></h4>
 			            </g:if>
 			            
+				        <g:set var="toggleId" value="${category.key.toLowerCase()}_${it.key.toLowerCase()}_${subCategory.key?.toLowerCase() ?: category.key.toLowerCase()}" />
+				        <g:set var="isExpanded" value="${params[(toggleId)]}" />
 			            <ul>
 			            	<g:each in="${subCategory.value}" var="lI" status="i">
 			            	<g:if test="${i<=9}">
 				            <li><a href="${lI.url}">${lI.name}</a></li>
 				            </g:if><g:else>
-				            <li class="${category.key}_${it.key}_${subCategory.key ?: category.key} hidden"><a href="${lI.url}">${lI.name}</a></li>
+				            <li class="${toggleId} ${isExpanded ? '' : 'hidden' }"><a href="${lI.url}">${lI.name}</a></li>
 				            </g:else>
 				            </g:each>
 				        </ul>
 			            <g:if test="${subCategory.value.size() >= 10}">
-			        	<a href="#" class="toggleLink" id="${category.key}_${it.key}_${subCategory.key ?: category.key}"><span>Visa alla ${subCategory.value.size()} rättskällor &#x25BC;</span><span class="hidden">Dölj rättskällor &#x25b2;</span></a>
+						<g:toggleLink toggleId="${toggleId}" mapping='page'>
+								<span class="${isExpanded ? 'hidden' : '' }">Visa alla ${subCategory.value.size()} rättskällor &#x25BC;</span>
+								<span class="${!isExpanded ? 'hidden' : '' }">Dölj rättskällor &#x25b2;</span>
+						</g:toggleLink>
+								
 			        	</g:if>
 		            	</g:each>
 		            </g:if>
