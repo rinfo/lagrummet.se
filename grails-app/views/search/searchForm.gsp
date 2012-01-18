@@ -13,8 +13,8 @@
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
-    				<g:each in="${searchResult.errorMessages}" var="message">
-    					<li>${message}</li>
+    				<g:each in="${searchResult.errorMessages}" var="error">
+    					<li><g:message code="${error}" /></li>
     				</g:each>
     			</ul>
     		</div>

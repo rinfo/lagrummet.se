@@ -132,6 +132,20 @@ ul li {
     padding: 2px 0;
 }
 
+.message {
+	border: 1px solid #F0C000;
+	padding: 1em;
+	background-color: #FFFFCE;
+	margin-bottom: 1em;
+}
+
+.message ul, .message ul li {
+	border-top: none;
+	margin: 0;
+	margin-bottom: 0;
+	background-color: none;
+}
+
 table {
 	width: auto;
 	margin-bottom: 2em;
@@ -790,24 +804,24 @@ article.legalSources section.Foreskrifter h2 {
 	min-width: 12em;
 }
 
-.searchResults ul {
+.searchResults .column ul {
 	width: auto;
 	margin-bottom: 2em;
 	background-color: #fafafa;
 	border-top: 2px solid #ddd;
 }
 
-.searchResults ul li {
+.searchResults .column ul li {
 	padding: 5px;
 	border-top: 1px solid #eee;
 }
 
-.searchResults ul li p {
+.searchResults .column ul li p {
 	margin: 0 0 0.5em 0;
 	color: #333;
 }
 
-.searchResults ul li p.type, table .type {
+.searchResults .column ul li p.type, table .type {
 	color: #888;
 }
 
