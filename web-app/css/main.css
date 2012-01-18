@@ -511,14 +511,14 @@ article.legalSources {
 
 article.legalSources section {
 	width: 48%;
+	float: left;
+	clear: left;
 }
 
 article.legalSources section.Foreskrifter {
 	float: right;
 	margin-left: 2%;
-	position: absolute;
-	top: 0;
-	right: 0;
+	clear: none;
 }
 
 article.legalSources section.Foreskrifter h2 {
@@ -1209,5 +1209,21 @@ fieldset .inputGroup p {
 	
 	article.faq .answer {
 		width: auto;
+	}
+	
+	article.legalSources {
+		width: auto;
+	}
+	
+	article.legalSources section {
+		width: 100%;
+		float: none;
+		clear: both;
+	}
+	
+	article.legalSources section.Foreskrifter {
+		float: none;
+		margin-left: 0;
+		clear: both;
 	}
 }
