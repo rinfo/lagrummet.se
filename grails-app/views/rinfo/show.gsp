@@ -35,7 +35,7 @@
 			<g:if test="${docInfo.forarbete}">
 				<tr><td class="label">Förarbeten: </td><td>
 					<ul>
-					<g:each in="${docInfo.forarbete}" var="forarbete">
+					<g:each in="${docInfo.forarbete.sort{ it.identifier } }" var="forarbete">
 						<g:if test="${forarbete.identifier && forarbete.iri}">
 							<li><a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${forarbete.identifier}</a></li>
 						</g:if>
