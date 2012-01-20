@@ -216,7 +216,8 @@ jQuery(document).ready(function($) {
 	});
 
 	$("#cat option").each(function() {
-		$("#searchCategoryList").append('<li rel="'+$(this).val()+'"><p><strong rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("rel")+'</p></li>');
+		var selected = ($(this).attr("selected")) ? ' class="' + $(this).attr("selected") + '"' : "";
+		$("#searchCategoryList").append('<li rel="'+$(this).val()+'"'+selected+'><p><strong rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("rel")+'</p></li>');
 	});
 	$("#searchCategoryList li").click(function(e) {
 		e.stopPropagation();

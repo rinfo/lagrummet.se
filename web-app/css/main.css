@@ -712,6 +712,11 @@ article.legalSources section.Foreskrifter h2 {
 	background-color: #FFF9EB;
 }
 
+#searchCategoryList li.selected {
+	background-color: #FFF9EB;
+	cursor: default;
+}
+
 #query {
 	width: 295px;
 	padding-left: 15px;
