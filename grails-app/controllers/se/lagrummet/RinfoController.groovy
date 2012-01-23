@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse
 class RinfoController {
 	
 	def rinfoService
+	def htmlSanitizerService
 
     def show = {
 		def page = [:]
@@ -31,7 +32,9 @@ class RinfoController {
 					docContent = rinfoService.getHtmlContent(docPath)
 				}
 			}
-			
+			if(docContent != null) {
+				docContent = htmlSanitizerService.cleanHtml(docContent)
+			}
 			render(view:'show', model: [page: page, 
 										docInfo: docInfo, 
 										content: docContent, 
