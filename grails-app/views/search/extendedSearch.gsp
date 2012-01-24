@@ -30,17 +30,17 @@
 			<fieldset id="lagstatus">
 				<div class="inputGroup">
 					<g:checkBox name="gallande" checked="${forfattningarParams?.gallande == 'on' || !params.containsKey('_gallande') }" />
-					<label for="gallande"><p><strong><g:message code="extendedSearch.gallande.label" default="Gällande lagar" /></strong></p><p><g:message code="extendedSearch.description.gallande.label" default="Sök på gällande lagar" /></p></label>
+					<label for="gallande"><p><strong><g:message code="extendedSearch.gallande.label" default="Gällande författningar" /></strong></p><p><g:message code="extendedSearch.description.gallande.label" default="Sök på gällande författningar" /></p></label>
 				</div>
 				
 				<div class="inputGroup">
 					<g:checkBox name="upphavda" checked="${forfattningarParams?.upphavda == 'on' }"/>
-					<label for="upphavda"><p><strong><g:message code="extendedSearch.upphavda.label" default="Upphävda lagar" /></strong></p><p><g:message code="extendedSearch.description.upphavda.label" default="Sök på upphävda lagar"/></p></label>
+					<label for="upphavda"><p><strong><g:message code="extendedSearch.upphavda.label" default="Upphävda författningar" /></strong></p><p><g:message code="extendedSearch.description.upphavda.label" default="Sök på upphävda författningar"/></p></label>
 				</div>
 				
 				<div class="inputGroup">
 					<g:checkBox name="kommande" checked="${forfattningarParams?.kommande == 'on' }" />
-					<label for="kommande"><p><strong><g:message code="extendedSearch.kommande.label" default="Kommande lagar" /></strong></p><p><g:message code="extendedSearch.description.kommande.label" default="Sök på kommande lagar"/></p></label>
+					<label for="kommande"><p><strong><g:message code="extendedSearch.kommande.label" default="Kommande författningar" /></strong></p><p><g:message code="extendedSearch.description.kommande.label" default="Sök på kommande författningar"/></p></label>
 				</div>
 			</fieldset>
 					
