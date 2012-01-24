@@ -59,12 +59,14 @@
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${forfattningarParams?.fritext}" />
 			
-			<fieldset>
+			<fieldset id="dateSelect">
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
 				
-				<div class="inputGroup">
-					<g:radio checked="${forfattningarParams?.datum == null || forfattningarParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/><br /><br /></p></label>
-					<div class="inputGroup">
+				<div class="dateLeftCol">
+					<div class="dateTab">
+					<g:radio checked="${forfattningarParams?.datum == null || forfattningarParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/><br /></p></label>
+					</div>
+					<div class="lowerLeft">
 						<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
 						<input type="text" name="fromDate" size="10" value="${forfattningarParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 						<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
@@ -74,9 +76,11 @@
 						</g:hasErrors>
 					</div>
 				</div>
-				<div class="inputGroup">
+				<div class="dateRightCol">
+					<div class="dateTab">
 					<g:radio checked="${forfattningarParams?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades / föreskriften beslutades"/></p></label>
-					<div class="inputGroup">
+					</div>
+					<div class="lowerRight">
 						<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
 						<input type="text" name="toDate" size="10" value="${forfattningarParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 						<g:hasErrors bean="${extendedSearchCommand}" field="toDate">

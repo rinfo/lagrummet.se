@@ -336,6 +336,18 @@ jQuery(document).ready(function($) {
 		$(toggleId).toggleClass("hidden");
 		$(this).children("span").toggleClass("hidden");
 	});
+	
+	$('#dateSelect :radio').focus(updateSelectedStyle);
+    $('#dateSelect :radio').blur(updateSelectedStyle);
+    $('#dateSelect :radio').change(updateSelectedStyle);
+    
+	function updateSelectedStyle() {
+        $('#dateSelect :radio').parent().removeClass('focused');
+        $('#dateSelect :radio:checked').parent().addClass('focused');
+    }
+	
+	updateSelectedStyle();
+	
 });
 
 /* READSPEAKER */

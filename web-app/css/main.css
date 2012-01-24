@@ -956,6 +956,45 @@ fieldset .inputGroup p {
 	clear: both;
 }
 
+.extendedSearch .dateLeftCol {
+	float: left;
+	margin: 0em;
+}
+
+.extendedSearch .dateRightCol {
+	float: left;
+	margin: 0em;
+}
+
+.extendedSearch .dateTab {
+	border-bottom: 1px solid #EEE;
+	padding: 1em;
+	
+}
+
+.extendedSearch .focused {
+	background-color: #F7F7F7;
+	border: 1px solid #EEE;
+	border-bottom:none;
+	padding: 1em;
+}
+
+.extendedSearch .lowerLeft {
+	background-color: #F7F7F7;
+	border: 1px solid #EEE;
+	border-top: none;
+	border-right:none;
+	padding: 1em;
+}
+
+
+.extendedSearch .lowerRight {
+	background-color: #F7F7F7;
+	border: 1px solid #EEE;
+	border-top: none;
+	border-left: none;
+	padding: 1em;
+}
 /* ARTICLE in rinfo */
 #rinfo {
 	/*width: 500px;*/
