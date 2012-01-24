@@ -10,8 +10,8 @@
 		<fieldset class="category" id="extSearchCats">
 			<div class="legend"><g:message code="extendedSearch.chooseCategory.label" default="Välj en kategori" /></div>
 			<g:each in="['Forfattningar', 'Rattsfall', 'Forarbeten']">
-				<g:if test="${cat == it}"><div class="inputGroup"><input type="radio" checked="checked" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.${it}"/></strong></p><p><g:message code="category.description.${it}"/></p></label></div></g:if>
-				<g:else><div class="inputGroup"><input type="radio" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.${it}"/></strong></p><p><g:message code="category.description.${it}"/></p></label></div></g:else>
+				<g:if test="${cat == it}"><div class="inputGroup"><input type="radio" checked="checked" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.extendedSearch.${it}"/></strong></p><p><g:message code="category.extendedSearch.description.${it}"/></p></label></div></g:if>
+				<g:else><div class="inputGroup"><input type="radio" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.extendedSearch.${it}"/></strong></p><p><g:message code="category.extendedSearch.description.${it}"/></p></label></div></g:else>
 			</g:each>
 		</fieldset>
 
@@ -23,7 +23,7 @@
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Forfattningar">
 			<input type="hidden" name="kategori" value="Forfattningar" />
 
-			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ" /></label>
+			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ av författning" /></label>
 			<g:select name="typ" from="${['Alla författningar', 'Lagar', 'Förordningar', 'Myndigheters föreskrifter']}"
 									value="${forfattningarParams?.typ}" />
 
@@ -47,13 +47,13 @@
 			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
 			<g:textField name="titel" size="26" value="${forfattningarParams?.titel}" />
 			
-			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="SFS/Beteckning" /></label>
+			<label for="beteckning"><g:message code="extendedSearch.sfs.label" default="Beteckning" /></label>
 			<g:textField name="beteckning" size="12" value="${forfattningarParams?.beteckning}" />
 			
 			<label for="beslutandeMyndighet"><g:message code="extendedSearch.beslutandeMyndighet.label" default="Beslutande myndighet" /></label>
 			<g:textField name="utgivare" id="beslutandeMyndighet" size="26" value="${forfattningarParams?.utgivare}" />
 			
-			<label for="departement"><g:message code="extendedSearch.departement.label" default="Departement" /></label>
+			<label for="departement"><g:message code="extendedSearch.departement.label" default="Ansvarigt departement (SFS)" /></label>
 			<g:textField name="skapare" id="departement" size="26" value="${forfattningarParams?.skapare}" />			
 			
 			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
@@ -75,7 +75,7 @@
 					</div>
 				</div>
 				<div class="inputGroup">
-					<g:radio checked="${forfattningarParams?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades/beslutades"/></p></label>
+					<g:radio checked="${forfattningarParams?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades / föreskriften beslutades"/></p></label>
 					<div class="inputGroup">
 						<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
 						<input type="text" name="toDate" size="10" value="${forfattningarParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
@@ -99,7 +99,7 @@
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Rattsfall">
 			<input type="hidden" name="kategori" value="Rattsfall" />
 			
-			<label for="utgivare"><g:message code="extendedSearch.domstol.label" default="Domstol"/></label>
+			<label for="utgivare"><g:message code="extendedSearch.domstol.label" default="Völj domstol"/></label>
 			<select name="utgivare">
 				<g:each in="${grailsApplication.config.lagrummet.search.courtList}">
 					<option value="${it.value}"
