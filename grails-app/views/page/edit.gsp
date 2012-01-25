@@ -65,7 +65,7 @@
 	            <g:if test="${revisions}">
 	            	<ul>
 		            	<g:each in="${revisions}" var="r">
-		            		<li><g:link action="edit" id="${r.id}">${r.dateCreated}</g:link></li>
+		            		<li><g:link action="edit" id="${r.id}"><g:formatDate format="yyyy-MM-dd HH:mm" date="${r.dateCreated}" /></g:link></li>
 		            	</g:each>
 		            </ul>
 	            </g:if>
