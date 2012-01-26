@@ -26,22 +26,22 @@
                 
                 <div class="input ${hasErrors(bean: sitePropertiesInstance, field: 'siteTitle', 'errors')}">
 					<label for="title"><g:message code="siteProperties.siteTitle.label" default="siteTitle" /></label>
-					<g:textField name="siteTitle" value="${sitePropertiesInstance?.siteTitle}" />
+					<g:textField name="siteTitle" value="${sitePropertiesInstance?.siteTitle}" class="wideInput"/>
 				</div>
                 
                 <div class="input ${hasErrors(bean: sitePropertiesInstance, field: 'headerNavigation', 'errors')}">
 					<label for="title"><g:message code="siteProperties.headerNavigation.label" default="headerNavigation" /></label>
-					<g:textArea name="headerNavigation" value="${sitePropertiesInstance?.headerNavigation}" />
+					<g:textArea name="headerNavigation" value="${sitePropertiesInstance?.headerNavigation}" class="bigArea" />
 				</div>
 				
 				<div class="input ${hasErrors(bean: sitePropertiesInstance, field: 'footer', 'errors')}">
 					<label for="title"><g:message code="siteProperties.footer.label" default="Footer" /></label>
-					<g:textArea name="footer" value="${sitePropertiesInstance?.footer}" />
+					<g:textArea name="footer" value="${sitePropertiesInstance?.footer}" class="bigArea" />
 				</div>
 				
 				<div class="input ${hasErrors(bean: sitePropertiesInstance, field: 'primaryNavigation', 'errors')}">
 					<label for="title"><g:message code="siteProperties.primaryNavigation.label" default="primaryNavigation" /></label>
-					<g:textArea name="primaryNavigation" id="primNav" value="${sitePropertiesInstance?.primaryNavigation}" />
+					<g:textArea name="primaryNavigation" id="primNav" value="${sitePropertiesInstance?.primaryNavigation}" class="bigArea" />
 				</div>
 				
 				<div class="input ${hasErrors(bean: sitePropertiesInstance, field: 'searchCats', 'errors')}">

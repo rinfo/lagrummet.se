@@ -280,6 +280,14 @@ textarea {
 	vertical-align: top;
 }
 
+input.wideInput {
+	width: 40em;
+}
+textArea.bigArea {
+	width: 40em;
+	height:25em;
+}
+
 input:focus, select:focus, textarea:focus {
     border: 1px solid #b2d1ff;
 }

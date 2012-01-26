@@ -1,16 +1,16 @@
 <div class="input ${hasErrors(bean: legalSourceInstance, field: 'url', 'errors')}">
     <label for="url"><g:message code="legalSource.url.label" default="Url" /></label>
-    <g:textField name="url" value="${legalSourceInstance?.url}" size="30" />
+    <g:textField name="url" value="${legalSourceInstance?.url}" size="30" class="wideInput"/>
 </div>
         
 <div class="input ${hasErrors(bean: legalSourceInstance, field: 'name', 'errors')}">
     <label for="name"><g:message code="legalSource.name.label" default="Name" /></label>
-    <g:textField name="name" value="${legalSourceInstance?.name}" />
+    <g:textField name="name" value="${legalSourceInstance?.name}" class="wideInput"/>
 </div>
 
 <div class="input ${hasErrors(bean: legalSourceInstance, field: 'rdlName', 'errors')}">
     <label for="rdlName"><g:message code="legalSource.rdlName.label" default="Name in RDL" /></label>
-    <g:textField name="rdlName" value="${legalSourceInstance?.rdlName}" />
+    <g:textField name="rdlName" value="${legalSourceInstance?.rdlName}" class="wideInput"/>
 </div>
         
 <div class="input ${hasErrors(bean: legalSourceInstance, field: 'category', 'errors')}">
