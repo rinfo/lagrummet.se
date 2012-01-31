@@ -910,7 +910,7 @@ fieldset .inputGroup p {
 	float: left;
 	width: auto;
 	padding: 4px 1em 4px 0;
-	margin-left: 1em;
+	margin-left: 0;
 }
 
 .extendedSearch #lagstatus {
@@ -956,20 +956,37 @@ fieldset .inputGroup p {
 	clear: both;
 }
 
-.extendedSearch .dateLeftCol {
-	float: left;
-	margin: 0em;
-}
-
-.extendedSearch .dateRightCol {
-	float: left;
-	margin: 0em;
-}
-
 .extendedSearch .dateTab {
 	border-bottom: 1px solid #EEE;
 	padding: 1em;
-	
+	float: left;
+}
+
+.extendedSearch .dateTab.ikraft {
+	width: 18em;
+}
+
+.extendedSearch .dateTab.utfardandeDatum {
+	width: 28em;
+}
+
+.extendedSearch .dateTopCol {
+	width: 100%;
+	overflow: auto;
+}
+
+.extendedSearch .dateBottomCol {
+	background-color: #F7F7F7;
+	border: 1px solid #EEE;
+	border-top: none;
+	width: 50em;
+	overflow: auto;
+}
+
+.extendedSearch .dateBottomCol > div {
+	padding: 1em;
+	float: left;
+	margin: 0em;
 }
 
 .extendedSearch .focused {
@@ -979,22 +996,6 @@ fieldset .inputGroup p {
 	padding: 1em;
 }
 
-.extendedSearch .lowerLeft {
-	background-color: #F7F7F7;
-	border: 1px solid #EEE;
-	border-top: none;
-	border-right:none;
-	padding: 1em;
-}
-
-
-.extendedSearch .lowerRight {
-	background-color: #F7F7F7;
-	border: 1px solid #EEE;
-	border-top: none;
-	border-left: none;
-	padding: 1em;
-}
 /* ARTICLE in rinfo */
 #rinfo {
 	/*width: 500px;*/
