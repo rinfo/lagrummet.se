@@ -5,6 +5,10 @@
 	</title>
 	<link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
 	<link rel="stylesheet" href="${resource(dir:'css',file:'admin.css')}" />
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 	<META name="serverURL" content="${resource()}">
 	<g:javascript library="jquery" plugin="jquery" />
 	<g:javascript library="jquery.jstree" />

@@ -24,9 +24,9 @@
 			
 			<table>
 				<tr>
-					<th><a href="#">Titel</a></th>
-					<g:if test="${cat == 'Lagar' }"><th><a href="#">SFS-nummer</a></th></g:if>
-					<g:elseif test="${cat != 'Ovrigt' }"><th><a href="#">Identifierare</a></th></g:elseif>
+					<th>Titel</th>
+					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
+					<g:elseif test="${cat != 'Ovrigt' }"><th>Identifierare</th></g:elseif>
 				</tr>
 				<g:each in="${searchResult.items[(cat)]}" var="item">
 					<tr>
