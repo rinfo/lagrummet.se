@@ -11,6 +11,7 @@ class Page {
 	String template = "default" // See config.groovy -> lagrummet.page.templates for possible values
 	
 	String status = "draft" // draft, pending, published, autoSave
+	boolean metaPage
 	Date dateCreated
 	Date lastUpdated
 	Date publishStart

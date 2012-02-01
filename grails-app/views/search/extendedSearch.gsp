@@ -241,13 +241,13 @@
 	    	
 			<h2 id="sokresultat">Sökresultat</h2>
 		
-			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar i <strong><g:message code="category.${cat}"/></strong></p>
+			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar i <strong><g:message code="category.extendedSearch.${cat}"/></strong></p>
 			
 			<table>
 				<tr>
-					<th><a href="#">Titel</a></th>
-					<g:if test="${cat == 'Lagar' }"><th><a href="#">SFS-nummer</a></th></g:if>
-					<g:elseif test="${cat != 'Ovrigt' }"><th><a href="#">Identifierare</a></th></g:elseif>
+					<th>Titel</th>
+					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
+					<g:elseif test="${cat != 'Ovrigt' }"><th>Identifierare</th></g:elseif>
 				</tr>
 				<g:each in="${searchResult.itemsList}" var="item">
 					<tr>

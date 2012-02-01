@@ -158,7 +158,7 @@ class PageController {
 			}
 		}
 
-		if(page) {
+		if(page && !page.metaPage) {
 			if(page.publishStop && page.publishStop.before(new Date())) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND)
 			}
