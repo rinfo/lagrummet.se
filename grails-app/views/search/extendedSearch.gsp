@@ -62,11 +62,17 @@
 			<fieldset id="dateSelect">
 				<div class="legend"><g:message code="extendedSearch.chooseDate.label" default="Välj datum" /></div>
 				
-				<div class="dateLeftCol">
-					<div class="dateTab">
-					<g:radio checked="${forfattningarParams?.datum == null || forfattningarParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/><br /></p></label>
+				<div class="dateTopCol">
+					<div class="dateTab ikraft">
+						<g:radio checked="${forfattningarParams?.datum == null || forfattningarParams?.datum != 'utfardande'}" value="ikraft" name="datum" id="ikraftDatum" /><label for="ikraftDatum"><p><strong><g:message code="extendedSearch.ikraftDatum.label" default="Ikrafttädandedatum"/></strong></p><p><g:message code="extendedSearch.description.ikraftDatum.label" default="Datum då lagen trädde i kraft"/><br /></p></label>
 					</div>
-					<div class="lowerLeft">
+					<div class="dateTab utfardandeDatum">
+						<g:radio checked="${forfattningarParams?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades / föreskriften beslutades"/></p></label>
+					</div>
+				</div>
+				
+				<div class="dateBottomCol">
+					<div>
 						<label for="fromDate" class="date"><g:message code="extendedSearch.datumMin.label" default="Från:"/></label>
 						<input type="text" name="fromDate" size="10" value="${forfattningarParams?.fromDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 						<g:hasErrors bean="${extendedSearchCommand}" field="fromDate">
@@ -75,12 +81,8 @@
 							</div>
 						</g:hasErrors>
 					</div>
-				</div>
-				<div class="dateRightCol">
-					<div class="dateTab">
-					<g:radio checked="${forfattningarParams?.datum == 'utfardande'}" value="utfardande" name="datum" id="utfardandeDatum" /><label for="utfardandeDatum"><p><strong><g:message code="extendedSearch.utfardandeDatum.label" default="Utfärdandedatum/Beslutandedatum"/></strong></p><p><g:message code="extendedSearch.description.utfardandeDatum.label" default="Datum då lagen utfärdades / föreskriften beslutades"/></p></label>
-					</div>
-					<div class="lowerRight">
+				
+					<div>
 						<label for="toDate" class="date"><g:message code="extendedSearch.datumMax.label" default="Till:"/></label>
 						<input type="text" name="toDate" size="10" value="${forfattningarParams?.toDate}" placeholder="åååå-mm-dd" class="dateinput"/>
 						<g:hasErrors bean="${extendedSearchCommand}" field="toDate">
@@ -88,7 +90,7 @@
 								<g:renderErrors bean="${extendedSearchCommand}" field="toDate" />
 							</div>
 						</g:hasErrors>
-					</div>
+					</div>					
 				</div>
 			</fieldset>
 			
@@ -239,13 +241,13 @@
 	    	
 			<h2 id="sokresultat">Sökresultat</h2>
 		
-			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar i <strong><g:message code="category.${cat}"/></strong></p>
+			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar i <strong><g:message code="category.extendedSearch.${cat}"/></strong></p>
 			
 			<table>
 				<tr>
-					<th><a href="#">Titel</a></th>
-					<g:if test="${cat == 'Lagar' }"><th><a href="#">SFS-nummer</a></th></g:if>
-					<g:elseif test="${cat != 'Ovrigt' }"><th><a href="#">Identifierare</a></th></g:elseif>
+					<th>Titel</th>
+					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
+					<g:elseif test="${cat != 'Ovrigt' }"><th>Identifierare</th></g:elseif>
 				</tr>
 				<g:each in="${searchResult.itemsList}" var="item">
 					<tr>

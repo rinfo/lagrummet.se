@@ -11,16 +11,16 @@
 		<ul>
             <g:each in="${pageTreeList}" var="pI">
                 <g:if test="${!pI.parent}">
-                  <li id="p-${pI.id}">
-                  <a href="${resource()}/${pI.url()}">${pI.h1}</a>
+                  <li>
+                  <g:lLink page="${pI}" />
                   <g:if test="${pI.children?.size()}">
                     <ul>
                       <g:each in="${pI.children}" var="pIChild">
-                        <g:if test="${pIChild.status != 'autoSave'}"><li id="p-${pIChild.id}"><a href="${resource()}/${pIChild.url()}">${pIChild.h1}</a></li></g:if>
+                        <g:if test="${pIChild.status != 'autoSave'}"><li><g:lLink page="${pIChild}" /></li></g:if>
                         <g:if test="${pIChild.children?.size()}">
                         	<ul>
                         	<g:each in="${pIChild.children}" var="pIGrandChild">
-                        		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li id="p-${pIGrandChild.id}"><a href="${resource()}/${pIGrandChild.url()}">${pIGrandChild.h1}</a></li></g:if>
+                        		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li><g:lLink page="${pIGrandChild}" /></li></g:if>
                         	</g:each>
                         	</ul>
                         </g:if>

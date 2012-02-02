@@ -23,6 +23,14 @@ class MainSiteTagLib {
 		}
 	}
 	
+	def lLink = { attrs, body ->
+		if (attrs.page && !attrs.page.metaPage) {
+			out << '<a href="' << resource() << "/" << attrs.page.url() << '">' << attrs.page.h1 << "</a>"
+		} else {
+			out << attrs.page.h1
+		}
+	}
+	
 	def dropdown = { attrs, body ->
 		if (attrs.options) {
 			out << '<select name="' << attrs.name << '">'

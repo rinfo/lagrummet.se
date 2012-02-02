@@ -79,6 +79,11 @@
 </div>
   
 <div class="aside meta">  
+  	<div class="input ${hasErrors(bean: pageInstance, field: 'metaPage', 'errors')}">
+		<label for="metaPage"><g:message code="page.metaPage.label" default="Meta page: " /></label>
+		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
+	</div>
+
   	<div class="input ${hasErrors(bean: pageInstance, field: 'pageOrder', 'errors')}">
 		<label for="pageOrder"><g:message code="page.pageOrder.label" default="Page order: " /></label>
 		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />

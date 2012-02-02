@@ -32,7 +32,6 @@ body {
     position: relative;
     font: 12px verdana, arial, helvetica, sans-serif;
     line-height: 140%;
-    font-size: 12px;
 	background: url(../images/top_ribbon.png) no-repeat;
 	color: #111;
 }
@@ -304,6 +303,10 @@ a.print:visited {
 	display: block;
 }
 
+#content a {
+	text-decoration: underline;
+}
+
 /* =PRIMARY NAVIGATION */
 #primaryNavigation {
 	position: absolute;
@@ -545,6 +548,7 @@ article.legalSources section.Foreskrifter h2 {
 
 #siteFooter a {
 	color: #333;
+	text-decoration: none;
 }
 
 #siteFooter a:visited {
@@ -919,7 +923,7 @@ fieldset .inputGroup p {
 	float: left;
 	width: auto;
 	padding: 4px 1em 4px 0;
-	margin-left: 1em;
+	margin-left: 0;
 }
 
 .extendedSearch #lagstatus {
@@ -965,33 +969,37 @@ fieldset .inputGroup p {
 	clear: both;
 }
 
-.extendedSearch .dateLeftCol {
-	float: left;
-	margin: 0em;
-}
-
-.extendedSearch .dateRightCol {
-	float: left;
-	margin: 0em;
-}
-
 .extendedSearch .dateTab {
 	border-bottom: 1px solid #EEE;
 	padding: 1em;
-	float:left;
-	
+	float: left;
 }
 
-
-.extendedSearch .dateTabLeft {
-	width:200px;
-	
+.extendedSearch .dateTab.ikraft {
+	width: 18em;
 }
 
+.extendedSearch .dateTab.utfardandeDatum {
+	width: 28em;
+}
 
-.extendedSearch .dateTabRight{
-	width:400px;
-	
+.extendedSearch .dateTopCol {
+	width: 100%;
+	overflow: auto;
+}
+
+.extendedSearch .dateBottomCol {
+	background-color: #F7F7F7;
+	border: 1px solid #EEE;
+	border-top: none;
+	width: 50em;
+	overflow: auto;
+}
+
+.extendedSearch .dateBottomCol > div {
+	padding: 1em;
+	float: left;
+	margin: 0em;
 }
 
 .extendedSearch .focused {
@@ -999,33 +1007,9 @@ fieldset .inputGroup p {
 	border: 1px solid #EEE;
 	border-bottom:none;
 	padding: 1em;
-}
-
-.extendedSearch .bottomRow {
-	background-color: #F7F7F7;
-	border: 1px solid #EEE;
-	border-top: none;
-	float:left;
-	width:600px;
-}
-.extendedSearch .lowerLeft {
-	/*background-color: #F7F7F7;
-	border: 1px solid #EEE;
-	border-top: none;
-	border-right:none*;*/
-	padding: 1em;
 	float:left;
 }
 
-
-.extendedSearch .lowerRight {
-	/*background-color: #F7F7F7;
-	border: 1px solid #EEE;
-	border-top: none;
-	border-left: none;*/
-	padding: 1em;
-	float:left;
-}
 /* ARTICLE in rinfo */
 #rinfo {
 	/*width: 500px;*/
