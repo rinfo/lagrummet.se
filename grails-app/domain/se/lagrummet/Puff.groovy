@@ -18,7 +18,15 @@ class Puff {
 	Date dateCreated
 	Date lastUpdated
 	
+	boolean deleted
+	
+	static transients = ['deleted']
+	
 	static belongsTo = [
 		parent : Page
 	]
+	
+	def isEmpty() {
+		return !image && !title && !description && !link
+	}
 }

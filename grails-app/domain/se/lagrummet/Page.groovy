@@ -1,5 +1,8 @@
 package se.lagrummet
 
+import org.apache.commons.collections.FactoryUtils
+import org.apache.commons.collections.list.LazyList
+
 class Page {
 	
 	String title
@@ -15,6 +18,12 @@ class Page {
 	Date lastUpdated
 	Date publishStart
 	Date publishStop
+	
+	List puffs = new ArrayList()
+	
+	def getExpandablePuffList() {
+		return LazyList.decorate(puffs,FactoryUtils.instantiateFactory(Puff.class))
+	}
 	
 	static hasMany = [
 		children : Page,
@@ -45,7 +54,7 @@ class Page {
 	static mapping = {
 		sort "pageOrder"
 		children sort: "pageOrder"
-		puffs sort: "dateCreated", order: "asc"
+		puffs sort: "dateCreated", order: "asc", cascade: "all-delete-orphan"
 	}
 	
 	def url = {

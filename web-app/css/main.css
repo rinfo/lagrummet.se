@@ -421,6 +421,15 @@ aside.puffs {
 	padding-left: 10px;
 	border-left: 1px solid #ddd;
 }
+aside.puffs .puff:first-child {
+	margin-top:0px;
+}
+
+aside.puffs .puff img {
+   	height: auto; 
+	width: 100%;
+	margin: 0;
+}
 
 article.frontpage .puffs {
     clear: both;
@@ -969,6 +978,19 @@ fieldset .inputGroup p {
 .extendedSearch .dateTab {
 	border-bottom: 1px solid #EEE;
 	padding: 1em;
+	float:left;
+	
+}
+
+
+.extendedSearch .dateTabLeft {
+	width:200px;
+	
+}
+
+
+.extendedSearch .dateTabRight{
+	width:400px;
 	
 }
 
@@ -979,21 +1001,30 @@ fieldset .inputGroup p {
 	padding: 1em;
 }
 
-.extendedSearch .lowerLeft {
+.extendedSearch .bottomRow {
 	background-color: #F7F7F7;
 	border: 1px solid #EEE;
 	border-top: none;
-	border-right:none;
+	float:left;
+	width:600px;
+}
+.extendedSearch .lowerLeft {
+	/*background-color: #F7F7F7;
+	border: 1px solid #EEE;
+	border-top: none;
+	border-right:none*;*/
 	padding: 1em;
+	float:left;
 }
 
 
 .extendedSearch .lowerRight {
-	background-color: #F7F7F7;
+	/*background-color: #F7F7F7;
 	border: 1px solid #EEE;
 	border-top: none;
-	border-left: none;
+	border-left: none;*/
 	padding: 1em;
+	float:left;
 }
 /* ARTICLE in rinfo */
 #rinfo {

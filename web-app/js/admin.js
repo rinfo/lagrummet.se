@@ -142,4 +142,36 @@ jQuery(function($) {
 		$(this).hide();
 		$("#bodyContent form .content .title input").show();
 	});
+	
+	$("#addNewPuffButton").click(function() {
+			var puffCount = parseInt($("#puffCount").text());
+			
+			for(i = 1; i <= 2; i++) {
+				var row1 = $("#puffRow"+i).clone();
+				row1.attr("id", "puff_"+puffCount+"_"+i)
+				row1.find("input:disabled, select:disabled, textarea:disabled").each(function(index){
+					var newName = $(this).prop("name").replace("puffCount", puffCount);
+					$(this).prop("name", newName);
+					var newId = $(this).prop("id").replace("puffCount", puffCount);
+					$(this).prop("id", newId);
+				});
+				row1.find(":disabled").prop("disabled", false)
+				row1.toggleClass("hidden");
+				row1.find('[name="deletePuff"]').click(function() {
+					hidePuffToDelete(puffCount-1);
+				});
+				row1.appendTo("#puffs");
+			}
+			
+			puffCount++;
+			$("#puffCount").text(puffCount);
+	});
+	
+	
 });
+
+function hidePuffToDelete(puffIndex) {
+	$('#expandablePuffList\\['+puffIndex+'\\]\\.deleted').val('true'); 
+	$('#puff_'+puffIndex+'_1').hide(); 
+	$('#puff_'+puffIndex+'_2').hide();
+}

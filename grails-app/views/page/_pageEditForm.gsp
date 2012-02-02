@@ -22,22 +22,43 @@
     	<g:textArea name="content" value="${pageInstance?.content}" />
     </div>
     
-    <g:if test="${pageInstance.puffs?.size() > 0}">
     <h3>Puffar</h3>
     <table id="puffs">
 	    <tr><th><g:message code="puff.link.label" default="Länk" /></th><th><g:message code="puff.title.label" default="Titel" /></th><th><g:message code="puff.image.label" default="Bild" /></th></tr>
-	    <g:each in="${pageInstance.puffs}" var="puffInstance">
-	    	<g:hiddenField name="puffs.${puffInstance.id}.id" value="${puffInstance?.id}" />
-		    <tr>
-		    	<td class="${hasErrors(bean: puffInstance, field: 'link', 'errors')}"><g:textField name="puffs.${puffInstance.id}.link" value="${puffInstance?.link}" /></td>
-		    	<td class="${hasErrors(bean: puffInstance, field: 'title', 'errors')}"><g:textField name="puffs.${puffInstance.id}.title" value="${puffInstance?.title}" /></td>
+	    <g:each in="${pageInstance.puffs}" var="puffInstance" status="index">
+	    	<g:hiddenField name="expandablePuffList[${index}].id" value="${puffInstance?.id}" />
+	    	<input type="hidden" name='expandablePuffList[${index}].deleted' id='expandablePuffList[${index}].deleted' value='false'/>
+		    <tr id="puff_${index}_1">
+		    	<td class="${hasErrors(bean: puffInstance, field: 'link', 'errors')}"><g:textField name="expandablePuffList[${index}].link" value="${puffInstance?.link}" /></td>
+		    	<td class="${hasErrors(bean: puffInstance, field: 'title', 'errors')}"><g:textField name="expandablePuffList[${index}].title" value="${puffInstance?.title}" /></td>
 		    	<td class="${hasErrors(bean: puffInstance, field: 'image', 'errors')}">
-		    		<g:dropdown options="${images}" value="${fieldValue(bean: pageInstance, field: 'template')}" value="${puffInstance.image?.id}" name="puffs.${puffInstance.id}.image.id"></g:dropdown>
+		    		<g:dropdown options="${images}" value="${fieldValue(bean: pageInstance, field: 'template')}" value="${puffInstance.image?.id}" name="expandablePuffList[${index}].image.id"></g:dropdown>
 		    	</td></tr>
-		    <tr><td colspan="3"><g:textArea name="puffs.${puffInstance.id}.description" value="${puffInstance?.description}" /></td></tr>
+		    <tr id="puff_${index}_2">
+		    	<td colspan="2"><g:textArea name="expandablePuffList[${index}].description" value="${puffInstance?.description}" /></td>
+		    	<td colspan="1">
+		    		<div class="buttons"><span class="button"><input type="button" class="delete" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" onclick="hidePuffToDelete(${index});" /></span></div>
+		    	</td>
+		    </tr>
 		</g:each>
+		
+		    <tr id="puffRow1" class="hidden">
+		   		
+		    	<td><input type="hidden" name='expandablePuffList[puffCount].deleted' id='expandablePuffList[puffCount].deleted' value='false' disabled="disabled"/>
+		    		<g:textField name="expandablePuffList[puffCount].link" value="" disabled="disabled" /></td>
+		    	<td><g:textField name="expandablePuffList[puffCount].title" value="" disabled="disabled" /></td>
+		    	<td>
+		    		<g:select from="${images}" name="expandablePuffList[puffCount].image.id" optionKey="${{it.key}}" optionValue="${{it.value}}" disabled="true"/>
+		    	</td></tr>
+		    <tr id="puffRow2" class="hidden">
+		    	<td colspan="2"><g:textArea name="expandablePuffList[puffCount].description" value="" disabled="disabled" /></td>
+		    	<td colspan="1">
+		    	<div class="buttons"><span class="button"><input type="button" class="delete" name="deletePuff" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" /></span></div>
+		    	</td></tr>
+    
 	</table>
-	</g:if>
+	<div class="buttons"><input type="button" class="add" value="${message(code:'puff.addPuff.label', default:'Lägg till ny puff')}" id="addNewPuffButton" /><span id="puffCount" class="hidden">${pageInstance.puffs.size()}</span></div>
+	<br/>
 </div>
 
 <div class="aside publish">

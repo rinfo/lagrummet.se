@@ -264,8 +264,8 @@ class PageController {
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def update = {
-        def pageInstance = Page.get(params.id)
-        if (pageInstance) {
+		def pageInstance = Page.get(params.id)
+		if (pageInstance) {
             if (params.version) {
                 def version = Long.valueOf(params.version)
                 if (pageInstance.version > version) {
@@ -274,16 +274,16 @@ class PageController {
                     return
                 }
             }
-			
-			params.puffs.each {
-				if (it.value.getClass() != String) {
-					def puff = Puff.get(it.value.id)
-					puff.properties = it.value
-				}
-			}
 
+			
 			pageInstance.backup()
             pageInstance.properties = params
+			def toBeDeleted = pageInstance.puffs.findAll {
+				it.deleted || it.isEmpty()
+			}
+			if (toBeDeleted) {
+				pageInstance.puffs.removeAll(toBeDeleted)
+			}
 
             if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
 				flash.message = "${message(code: 'page.updated.message', args: [pageInstance.h1])}"

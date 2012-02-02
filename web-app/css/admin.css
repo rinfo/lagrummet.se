@@ -203,6 +203,7 @@ ul {
 
 #puffs {
 	width: 100%;
+	margin-bottom: 0em;
 }
 
 #puffs input, #puffs select, #puffs textarea {
@@ -225,6 +226,15 @@ ul {
 #puffs tr:nth-child(4n+2), #puffs tr:nth-child(4n+3) {
 	background-color: #fafafa;
 	border-top: 1px solid #eee;
+}
+
+#puffs .buttons {
+	margin-top: 0em;
+}
+
+.puffsButton {
+	margin-top: 0em;
+	margin-bottom: 1.5em;
 }
 
 /* ACTION BUTTONS */
@@ -260,6 +270,10 @@ ul {
 }
 .buttons input.save {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+.buttons input.add {
+	background: transparent url(../images/skin/database_add.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
