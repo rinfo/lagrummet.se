@@ -164,7 +164,7 @@ jQuery(function($) {
 				row1.find(":disabled").prop("disabled", false)
 				row1.toggleClass("hidden");
 				row1.find('[name="deletePuff"]').click(function() {
-					hidePuffToDelete(puffCount-1);
+					markPuffAsDeleted(puffCount-1);
 				});
 				row1.appendTo("#puffs");
 			}
@@ -176,7 +176,7 @@ jQuery(function($) {
 	
 });
 
-function hidePuffToDelete(puffIndex) {
+function markPuffAsDeleted(puffIndex) {
 	$('#expandablePuffList\\['+puffIndex+'\\]\\.deleted').val('true'); 
 	$('#puff_'+puffIndex+'_1').hide(); 
 	$('#puff_'+puffIndex+'_2').hide();

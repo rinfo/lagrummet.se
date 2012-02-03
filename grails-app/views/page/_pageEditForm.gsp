@@ -37,7 +37,7 @@
 		    <tr id="puff_${index}_2">
 		    	<td colspan="2"><g:textArea name="expandablePuffList[${index}].description" value="${puffInstance?.description}" /></td>
 		    	<td colspan="1">
-		    		<div class="buttons"><span class="button"><input type="button" class="delete" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" onclick="hidePuffToDelete(${index});" /></span></div>
+		    		<div class="buttons"><span class="button"><input type="button" class="delete" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" onclick="markPuffAsDeleted(${index});" /></span></div>
 		    	</td>
 		    </tr>
 		</g:each>
