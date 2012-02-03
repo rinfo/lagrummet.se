@@ -64,7 +64,13 @@ jQuery(function($) {
 	    return items;
 	}
 	
+	var metaPageArr = new Array();
+	$("#pageTree > ul > li.metaPage").each(function(n) {
+		metaPageArr.push($(this).attr("id"));
+	});
+	
 	$("#pageTree").jstree({"plugins" : ["themes","html_data","crrm", "dnd", "contextmenu"],	//,"ui"
+		"core" : { "initially_open" : metaPageArr },
 		/*"crrm" : { 
 			"move" : {
 				"check_move" : function (m) { 

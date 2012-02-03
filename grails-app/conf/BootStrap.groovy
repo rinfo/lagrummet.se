@@ -29,7 +29,7 @@ class BootStrap {
 			def sitemap = new Page(title: 'Webbkarta', template: "sitemap", pageOrder: 1, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: new Date() - 4).save()
 			def legalSources = new Page(title: 'Alla rättskällor', template: "legalSources", pageOrder: 1, permalink: 'samtliga-rattskallor', h1: 'Samtliga rättskällor', content: "", status: "published", publishStart: new Date() - 4).save()
 			def forarbeten = new Page(title: 'Förarbeten', template: "legalSource/forarbeten", pageOrder: 1, permalink: 'forarbeten', h1: 'Förarbeten', content: "", status: "published", publishStart: new Date() - 4).save()
-			def foreskrifter = new Page(title: 'Myndigheters föreskrifter', template: "legalSource/foreskrifter", pageOrder: 1, permalink: 'myndigheters-foreskrifter', h1: 'Myndigheters döreskrifter', content: "", status: "published", publishStart: new Date() - 4).save()
+			def foreskrifter = new Page(title: 'Myndigheters föreskrifter', template: "legalSource/foreskrifter", pageOrder: 1, permalink: 'myndigheters-foreskrifter', h1: 'Myndigheters föreskrifter', content: "", status: "published", publishStart: new Date() - 4).save()
 			def lagar = new Page(title: 'Lagar och förordningar', template: "legalSource/lagar", pageOrder: 1, permalink: 'lagar-och-forordningar', h1: 'Lagar och förordningar', content: "", status: "published", publishStart: new Date() - 4).save()
 			
 			

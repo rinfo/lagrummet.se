@@ -72,10 +72,14 @@ ul {
 
 #pageTree {
 	margin-top: 1em;
+	background-color: #fff;
 }
 
 #pageTree a { white-space:normal !important; height: auto; padding:1px 2px; } 
 #pageTree li > ins { vertical-align:top; }
+#pageTree li.metaPage > a {background-color: #f7f7f7; font-size: 1.1em; font-weight: bold; display: block; padding: 5px 10px;}
+#pageTree li.metaPage > a> ins.jstree-icon,
+#pageTree li.jstree-open > ins.jstree-icon {display: none; }
 #pageTree .jstree-hovered, #demo4 .jstree-clicked { border:0; }
 
 #quickSearch {
