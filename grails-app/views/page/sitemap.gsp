@@ -13,13 +13,13 @@
                 <g:if test="${!pI.parent}">
                   <li>
                   <g:lLink page="${pI}" />
-                  <g:if test="${pI.children?.size()}">
+                  <g:if test="${pI.publishedChildren?.size()}">
                     <ul>
-                      <g:each in="${pI.children}" var="pIChild">
+                      <g:each in="${pI.publishedChildren}" var="pIChild">
                         <g:if test="${pIChild.status != 'autoSave'}"><li><g:lLink page="${pIChild}" /></li></g:if>
-                        <g:if test="${pIChild.children?.size()}">
+                        <g:if test="${pIChild.publishedChildren?.size()}">
                         	<ul>
-                        	<g:each in="${pIChild.children}" var="pIGrandChild">
+                        	<g:each in="${pIChild.publishedChildren}" var="pIGrandChild">
                         		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li><g:lLink page="${pIGrandChild}" /></li></g:if>
                         	</g:each>
                         	</ul>
