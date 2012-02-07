@@ -43,7 +43,8 @@
 		<ul>
             <g:each in="${pageTreeList}" var="pI">
                 <g:if test="${!pI.parent}">
-                  <li id="p-${pI.id}">
+                	<% pIclass = (!pI.metaPage) ? "" : "metaPage" %>
+                  <li id="p-${pI.id}" class="<%=pIclass%>">
                   <g:link controller="page" action="edit" id="${pI.id}">${pI.h1}</g:link>
                   <g:if test="${pI.children?.size()}">
                     <ul>
