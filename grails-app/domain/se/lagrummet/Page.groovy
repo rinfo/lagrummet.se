@@ -14,7 +14,7 @@ class Page implements Comparable<Page>{
 	String template = "default" // See config.groovy -> lagrummet.page.templates for possible values
 	
 	String status = "draft" // draft, pending, published, autoSave
-	boolean metaPage
+	boolean metaPage = false
 	Date dateCreated
 	Date lastUpdated
 	Date publishStart
@@ -64,6 +64,7 @@ class Page implements Comparable<Page>{
 		publishStart(nullable: true)
 		publishStop(nullable: true)
 		masterRevision(nullable: true)
+		metaPage(nullable: false)
     }
 	
 	static mapping = {
@@ -90,6 +91,7 @@ class Page implements Comparable<Page>{
 	}
 	
 	static searchable = {
+		except = ["metaPage"]
 		spellCheck "include"
 		title boost: 2.0
 		publishStop nullValue: "NULL"
