@@ -19,7 +19,7 @@ function search() {
         		$("#dynamicSearchResults").html('<header><h1>Sökresultat</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column first" id="c-1" /><div class="column" id="c-2" />');
         		
         		// Redaktionella resultat
-        			$("#c-1").append('<p class="Ovrigt"><a href="'+serverUrl+'search?query='+query+'&cat=Ovrigt"><strong>Information från lagrummet.se</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></p>');
+        			$("#c-1").append('<p class="Ovrigt"><a href="'+serverUrl+'search?query='+query+'&cat=Ovrigt" class="catTitle">Information från lagrummet.se</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></p>');
         			if (data.searchResult.items['Ovrigt'] && data.searchResult.items['Ovrigt'].length > 0) {
         				if (data.searchResult.totalResultsPerCategory['Ovrigt'] > data.searchResult.items['Ovrigt'].length) $("#c-1 p.Ovrigt span.count").append(" Visar de första ").append(data.searchResult.items['Ovrigt'].length);
 
@@ -40,7 +40,7 @@ function search() {
         		
         		// Propositioner
         		
-    			$("#c-1").append('<p class="Propositioner"><a href="'+serverUrl+'search?query='+query+'&cat=Propositioner"><strong>Propositioner och skrivelser</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
+    			$("#c-1").append('<p class="Propositioner"><a href="'+serverUrl+'search?query='+query+'&cat=Propositioner" class="catTitle">Propositioner och skrivelser</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
         			
         		if (data.searchResult.items['Propositioner'] && data.searchResult.items['Propositioner'].length > 0) {
         			if (data.searchResult.totalResultsPerCategory['Propositioner'] > data.searchResult.items['Propositioner'].length) $("#c-1 p.Propositioner span.count").append(" Visar de första ").append(data.searchResult.items['Propositioner'].length);
@@ -63,7 +63,7 @@ function search() {
         		}
         		
         		// Rättsfall
-        			$("#c-1").append('<p class="Rattsfall"><a href="'+serverUrl+'search?query='+query+'&cat=Rattsfall"><strong>Rättsfall</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Rattsfall'] +')</span></p>');
+        			$("#c-1").append('<p class="Rattsfall"><a href="'+serverUrl+'search?query='+query+'&cat=Rattsfall" class="catTitle">Rättsfall</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Rattsfall'] +')</span></p>');
         			if (data.searchResult.items['Rattsfall'] && data.searchResult.items['Rattsfall'].length > 0) {
         				if (data.searchResult.totalResultsPerCategory['Rattsfall'] > data.searchResult.items['Rattsfall'].length) $("#c-1 p.Rattsfall span.count").append(" Visar de första ").append(data.searchResult.items['Rattsfall'].length);
         				
@@ -87,7 +87,7 @@ function search() {
         			}
         		
         		// Lagar
-        			$("#c-2").append('<p class="Lagar"><a href="'+serverUrl+'search?query='+query+'&cat=Lagar"><strong>Lagar och förordningar</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Lagar'] +')</span></p>');
+        			$("#c-2").append('<p class="Lagar"><a href="'+serverUrl+'search?query='+query+'&cat=Lagar" class="catTitle">Lagar och förordningar</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Lagar'] +')</span></p>');
         			if (data.searchResult.items['Lagar'] && data.searchResult.items['Lagar'].length > 0) {
         				if (data.searchResult.totalResultsPerCategory['Lagar'] > data.searchResult.items['Lagar'].length) $("#c-2 p.Lagar span.count").append(" Visar de första ").append(data.searchResult.items['Lagar'].length);
 
@@ -113,7 +113,7 @@ function search() {
         			}
         			
         		// Myndigheters föreskrifter
-        			$("#c-2").append('<p class="Foreskrifter"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter"><strong>Myndigheters föreskrifter</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Foreskrifter'] +')</span></p>');
+        			$("#c-2").append('<p class="Foreskrifter"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter" class="catTitle">Myndigheters föreskrifter</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Foreskrifter'] +')</span></p>');
         			if (data.searchResult.items['Foreskrifter'] && data.searchResult.items['Foreskrifter'].length > 0) {
         				if (data.searchResult.totalResultsPerCategory['Foreskrifter'] > data.searchResult.items['Foreskrifter'].length) $("#c-2 p.Foreskrifter span.count").append(" Visar de första ").append(data.searchResult.items['Foreskrifter'].length);
 
@@ -139,7 +139,7 @@ function search() {
         			}
         			
             	// Utredningar
-        			$("#c-2").append('<p class="Utredningar"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar"><strong>Utredningar</strong></a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></p>');
+        			$("#c-2").append('<p class="Utredningar"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar" class="catTitle">Utredningar</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></p>');
         			if (data.searchResult.items['Utredningar'] && data.searchResult.items['Utredningar'].length > 0) {
         				if (data.searchResult.totalResultsPerCategory['Utredningar'] > data.searchResult.items['Utredningar'].length) $("#c-2 p.Utredningar span.count").append(" Visar de första ").append(data.searchResult.items['Utredningar'].length);
 

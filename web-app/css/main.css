@@ -785,6 +785,11 @@ article.legalSources section.Foreskrifter h2 {
 	background: url(../images/Printer_Icon.png) center left no-repeat;
 }
 
+#content .searchResults .showAllLabel a,
+#content .searchResults .printLabel a {
+	text-decoration: none;
+}
+
 .searchResults .query {
 	font-weight: bold;
 	color: #873960;

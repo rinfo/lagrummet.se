@@ -117,7 +117,7 @@ ul {
 #pageTree.jstree li.metaPage > ul li {margin-left: 0;}
 #pageTree > ul > li.metaPage ul {margin-left: 5px; background-color: #fff;}
 #pageTree > ul > li.metaPage ul ul {margin-left: 18px;}
-#pageTree > ul > li.metaPage li.metaPage a {margin-left: 5px; font-weight: bold;}
+#pageTree > ul > li.metaPage li.metaPage a {margin-left: 3px; font-weight: bold;}
 
 #pageTree > ul > li.metaPage {background-color: #eee; margin: 5px 0; background-image: none;}
 #pageTree li.metaPage > ins { display: none; }
