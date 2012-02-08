@@ -3,7 +3,7 @@ package se.lagrummet
 import org.apache.commons.collections.FactoryUtils
 import org.apache.commons.collections.list.LazyList
 
-class Page {
+class Page implements Comparable<Page>{
 	
 	String title
 	String h1
@@ -21,10 +21,24 @@ class Page {
 	Date publishStop
 	
 	List puffs = new ArrayList()
+	SortedSet children
 	
 	def getExpandablePuffList() {
 		return LazyList.decorate(puffs,FactoryUtils.instantiateFactory(Puff.class))
 	}
+	
+	def getPublishedChildren() {
+		Date now = new Date()
+		SortedSet published = new TreeSet()
+		children.each{ it ->
+			if(it.publishStart < now  && it.status.equals("published")) {
+				published.add(it)
+			}
+			
+		}
+		return published
+	}
+	
 	
 	static hasMany = [
 		children : Page,
@@ -53,7 +67,7 @@ class Page {
     }
 	
 	static mapping = {
-		sort "pageOrder"
+		sort pageOrder:"asc", dateCreated: "desc"
 		children sort: "pageOrder"
 		puffs sort: "dateCreated", order: "asc", cascade: "all-delete-orphan"
 	}
@@ -85,4 +99,15 @@ class Page {
 	public String toString() {
 		return title
 	}
+
+	@Override
+	public int compareTo(Page other) {
+		def comp = pageOrder <=> other?.pageOrder
+		
+		if(comp == 0) {
+			comp = other?.dateCreated <=> dateCreated
+		}
+		return comp;
+	}
+
 }

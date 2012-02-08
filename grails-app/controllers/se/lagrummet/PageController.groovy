@@ -7,6 +7,8 @@ import groovy.xml.MarkupBuilder
 import javax.servlet.http.HttpServletResponse
 
 class PageController {
+	
+	def pageService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST", move: "POST", restore: "POST"]
 
@@ -152,6 +154,7 @@ class PageController {
 				eq("permalink", permalink)
 				parent {
 					eq("permalink", parentPermalink)
+					eq("status", "published")
 				}
 				eq("status", "published")
 				le('publishStart', new Date())
@@ -168,7 +171,7 @@ class PageController {
 			if (!page.template || page.template == "default") {
 				return model
 			} else if (page.template == "sitemap") {
-				model.pageTreeList = Page.findAllByStatusNotAndTemplateNot("autoSave","sitemap")
+				model.pageTreeList = pageService.getSiteMap()
 				render(view: "sitemap", model: model)
 			} else if (page.template == "english") {
 				render(view: "showEnglish", model: model)
