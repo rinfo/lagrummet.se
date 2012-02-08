@@ -307,6 +307,10 @@ a.print:visited {
 	text-decoration: underline;
 }
 
+#content a:hover {
+	background-color: #eee;
+}
+
 /* =PRIMARY NAVIGATION */
 #primaryNavigation {
 	position: absolute;
@@ -813,9 +817,10 @@ article.legalSources section.Foreskrifter h2 {
 	color: #888;
 }
 
-.searchResults a.catTitle {
+#content .searchResults a.catTitle {
 	color: #006383;
 	font-weight: bold;
+	text-decoration: none;
 }
 
 .searchResults table td, .searchResults table th {

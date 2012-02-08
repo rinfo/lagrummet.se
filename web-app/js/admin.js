@@ -65,7 +65,7 @@ jQuery(function($) {
 	}
 	
 	var metaPageArr = new Array();
-	$("#pageTree > ul > li.metaPage").each(function(n) {
+	$("#pageTree > ul > li").each(function(n) {
 		metaPageArr.push($(this).attr("id"));
 	});
 	
@@ -118,6 +118,15 @@ jQuery(function($) {
             }
         }, "json");
     });
+	
+	// Dynamic top menu for admin-functions
+	$("#adminFunctions > ul > li").hover(function() {
+		// mouse enter
+		$(this).children("ul").show();
+	}, function() {
+		// mouse leave
+		$(this).children("ul").hide();
+	});
 	
 	// Dynamic behaviour for creating and editing pages
 	$("#h1").focus().blur(function(e) {

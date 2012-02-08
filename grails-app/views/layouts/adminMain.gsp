@@ -18,27 +18,48 @@
 </head>
 <body class="admin">
 	<header>
-		<h1><a href="${grailsApplication.config.grails.serverURL}">Lagrummet.se CMS</a></h1>
+		<h1><a href="${grailsApplication.config.grails.serverURL}/admin">Lagrummet.se CMS</a></h1>
 		<sec:username/> (<g:link controller="logout">Logga ut</g:link>)
-	</header>
-	<nav id="primaryNav">
+		
+		<nav id="adminFunctions">
 		<ul>
 			<sec:ifAllGranted roles="ROLE_ADMIN">
-				<li><h3>Användare</h3></li>
-				<li><a href="${createLink(controller:'user', action:'create')}">Ny användare</a></li>
-				<li><a href="${createLink(controller:'user', action:'list')}">Hantera användare</a></li>
-				<li><h3>Inställningar</h3></li>
-				<li><a href="${createLink(controller:'siteProperties', action:'edit')}">Ändra siteinställningar</a></li>
-			</sec:ifAllGranted>
-			<li><h3>Media</h3></li>
-			<li><a href="${createLink(controller:'media', action:'create')}">Ny bild eller fil</a></li>
-			<li><a href="${createLink(controller:'media', action:'list')}">Hantera media</a></li>
-			<li><h3>Rättskällor</h3></li>
-			<li><a href="${createLink(controller:'legalSource', action:'create')}">Ny rättskälla</a></li>
-			<li><a href="${createLink(controller:'legalSource', action:'list')}">Hantera rättskällor</a></li>
+				<li>
+					<strong>Användare</strong>
+					<ul>
+						<li><a href="${createLink(controller:'user', action:'create')}">Ny användare</a></li>
+						<li><a href="${createLink(controller:'user', action:'list')}">Hantera användare</a></li>
+					</ul>
+				</li>
+			
+				<li>
+					<strong>Inställningar</strong>
+					<ul>
+						<li><a href="${createLink(controller:'siteProperties', action:'edit')}">Ändra siteinställningar</a></li>
+					</ul>
+				</li>
+			</sec:ifAllGranted>	
+			<li>
+				<strong>Media</strong>
+				<ul>
+					<li><a href="${createLink(controller:'media', action:'create')}">Ny bild eller fil</a></li>
+					<li><a href="${createLink(controller:'media', action:'list')}">Hantera media</a></li>
+				</ul>
+			</li>
+			<li>
+				<strong>Rättskällor</strong>
+				<ul>
+					<li><a href="${createLink(controller:'legalSource', action:'create')}">Ny rättskälla</a></li>
+					<li><a href="${createLink(controller:'legalSource', action:'list')}">Hantera rättskällor</a></li>
+				</ul>
+			</li>
 		</ul>
-		<h3>Sidor</h3>
-		<a href="${createLink(controller:'page', action:'create')}">Ny sida</a>
+		</nav>
+	</header>
+	<nav id="adminPages">
+		<g:form action="create" controller="page">
+		<div class="buttons"><g:actionSubmit name="create" action="create" class="add" value="Ny sida" /></div>
+		</g:form>
 		<div id="pageTree">
 		<ul>
             <g:each in="${pageTreeList}" var="pI">
@@ -49,11 +70,13 @@
                   <g:if test="${pI.children?.size()}">
                     <ul>
                       <g:each in="${pI.children}" var="pIChild">
-                        <g:if test="${pIChild.status != 'autoSave'}"><li id="p-${pIChild.id}"><g:link controller="page" action="edit" id="${pIChild.id}">${pIChild.h1}</g:link></li></g:if>
+                      	<% pIChildClass = (!pIChild.metaPage) ? "" : "metaPage" %>
+                        <g:if test="${pIChild.status != 'autoSave'}"><li id="p-${pIChild.id}" class="<%=pIChildClass%>"><g:link controller="page" action="edit" id="${pIChild.id}">${pIChild.h1}</g:link></li></g:if>
                         <g:if test="${pIChild.children?.size()}">
                         	<ul>
                         	<g:each in="${pIChild.children}" var="pIGrandChild">
-                        		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li id="p-${pIGrandChild.id}"><g:link controller="page" action="edit" id="${pIGrandChild.id}">${pIGrandChild.h1}</g:link></li></g:if>
+                        		<% pIGrandChildClass = (!pIGrandChild.metaPage) ? "" : "metaPage" %>
+                        		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li id="p-${pIGrandChild.id}" class="<%=pIGrandChildClass%>"><g:link controller="page" action="edit" id="${pIGrandChild.id}">${pIGrandChild.h1}</g:link></li></g:if>
                         	</g:each>
                         	</ul>
                         </g:if>

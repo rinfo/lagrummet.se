@@ -34,7 +34,7 @@ body > header > nav.logout {
 	right: 0px;
 }
 
-#primaryNav {
+#adminPages {
 	padding: 20px 20px 20px 10px;
 	/*float: left;
 	margin: 0;*/
@@ -44,12 +44,22 @@ body > header > nav.logout {
 	position: absolute;
 }
 
+#adminFunctions {
+	padding: 0 20px 20px 10px;
+	/*float: left;
+	margin: 0;*/
+	width: 770px;
+	top: 0;
+	left: 220px;
+	position: absolute;
+}
+
 #bodyContent {
 	/*float: left;
 	margin-left: 20px;*/
 	position: absolute;
 	left: 220px;
-	top: 0px;
+	top: 80px;
 	padding: 20px;
 	background-color: #fff;
 	width: 770px;
@@ -65,9 +75,34 @@ ul {
     list-style-type: none;
 }
 
-/* =PRIMARYNAV */
-#primaryNav h2, #primaryNav h3 {
+/* =adminFunctions */
+#adminFunctions > ul > li {
+	float: left;
+	margin-right: 1em;
+}
+
+#adminFunctions > ul > li strong {
+	cursor: default;
+}
+
+#adminFunctions > ul > li ul {
+	display: none;
+	position: absolute;
+	z-index: 10;
+	background-color: #fff;
+	-webkit-box-shadow: 2px 2px 6px #ccc;
+	-moz-box-shadow: 1px 1px 6px #ccc;
+	box-shadow: 2px 2px 6px #ccc;
+	padding: 1em;
+}
+
+/* =adminPages */
+#adminPages h2, #adminPages h3 {
 	color: #873960;
+}
+
+#adminPages .buttons {
+	margin-top: 0;
 }
 
 #pageTree {
@@ -77,9 +112,25 @@ ul {
 
 #pageTree a { white-space:normal !important; height: auto; padding:1px 2px; } 
 #pageTree li > ins { vertical-align:top; }
-#pageTree li.metaPage > a {background-color: #f7f7f7; font-size: 1.1em; font-weight: bold; display: block; padding: 5px 10px;}
+#pageTree li.metaPage {background-image: none;}
+
+#pageTree.jstree li.metaPage > ul li {margin-left: 0;}
+#pageTree > ul > li.metaPage ul {margin-left: 5px; background-color: #fff;}
+#pageTree > ul > li.metaPage ul ul {margin-left: 18px;}
+#pageTree > ul > li.metaPage li.metaPage a {margin-left: 5px; font-weight: bold;}
+
+#pageTree > ul > li.metaPage {background-color: #eee; margin: 5px 0; background-image: none;}
+#pageTree li.metaPage > ins { display: none; }
+#pageTree > ul > li.metaPage > a {font-size: 1.1em; font-weight: bold; display: block; padding: 5px 10px;}
+
+#pageTree.jstree-default > ul > li,
+#pageTree > ul > li.jstree-leaf > ins.jstree-icon {background-image: none;}
+
+
+
+
 #pageTree li.metaPage > a> ins.jstree-icon,
-#pageTree li.jstree-open > ins.jstree-icon {display: none; }
+#pageTree li.metaPage.jstree-open > ins.jstree-icon {display: none; }
 #pageTree .jstree-hovered, #demo4 .jstree-clicked { border:0; }
 
 #quickSearch {

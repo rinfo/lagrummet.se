@@ -87,7 +87,7 @@ class PageController {
 		def pageInstance = Page.get(params.id)
 		def parentInstance
 		def pageOrder = 1
-		
+		println params
 		if (params.position == "before" || params.position == "after") { // "before", "after", "inside", "first", "last"
 			// In relation to the sibling, find the parent (or no parent for top level)
 			def target = Page.get(params.targetId)
@@ -101,7 +101,8 @@ class PageController {
 		} else if (params.position) {
 			// In relation to the children of the new parent, the new parent is given
 			parentInstance = Page.get(params.targetId)
-			pageOrder = 0 // place first
+			pageOrder = parentInstance.children.size() // place last
+			println pageOrder
 		}
 		
 		if (pageOrder < 0) pageOrder = 0
