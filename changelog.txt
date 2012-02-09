@@ -1,3 +1,26 @@
+v0.6.1
+	Fix:
+		Exkluderar metaPage-propery i Page från indexering
+		
+v0.6.0
+	Nytt:
+		94 Sidträd i admin
+		93L Information i högerkolumnen
+		93 Metasidor
+	Fix:
+		IE8 vänstermarginal i admin
+		Understrykning av länkar
+		Sitemap visar bara publicerade sidor
+		
+v0.5.6
+	Fix:
+		#36 Uppdaterat rubriker för "Gällande författningar" i utökad sökning
+		#13 #14 Tvättar bort oönskade taggar i html-dokument från rdl
+		#32 Presentation av sökresultat
+		#8 Sökning genererar felmeddelande
+		Bredare textfält i admin
+		Tagit bort sekunder från revisionshistorik
+
 v0.5.5
 	Fix:
 		#12 Filtreringen i snabbsöket följer med till dokumentsidor
