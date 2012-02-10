@@ -58,7 +58,6 @@
 	    </div>
 	    
 	    <nav id="primaryNavigation">
-			
 			<g:menu root="huvudmeny" activePage="${page}" />
 	    </nav>
 	   
