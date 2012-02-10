@@ -83,7 +83,12 @@
 		<label for="metaPage"><g:message code="page.metaPage.label" default="Meta page: " /></label>
 		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
 	</div>
-
+	
+	<div class="input ${hasErrors(bean: pageInstance, field: 'menuStyle', 'errors')}">
+		<label for="menuStyle"><g:message code="page.menuStyle.label" default="Menystyling" /></label>
+		<g:textField name="menuStyle" value="${fieldValue(bean: pageInstance, field:'menuStyle') }"	/>
+	</div>
+  	
   	<div class="input ${hasErrors(bean: pageInstance, field: 'pageOrder', 'errors')}">
 		<label for="pageOrder"><g:message code="page.pageOrder.label" default="Page order: " /></label>
 		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
