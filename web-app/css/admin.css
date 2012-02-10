@@ -360,3 +360,7 @@ textArea.bigArea {
 input:focus, select:focus, textarea:focus {
     border: 1px solid #b2d1ff;
 }
+#searchCats {
+	width: 20em;
+	height: 10em;
+}
