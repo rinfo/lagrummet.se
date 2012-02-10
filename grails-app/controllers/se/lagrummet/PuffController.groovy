@@ -1,5 +1,8 @@
 package se.lagrummet
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 class PuffController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
