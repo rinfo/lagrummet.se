@@ -104,6 +104,16 @@
 		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
 	</div>
 	
+	<div class="input ${hasErrors(bean: pageInstance, field: 'menuStyle', 'errors')}">
+		<label for="menuStyle"><g:message code="page.menuStyle.label" default="Menystyling" /></label>
+		<g:textField name="menuStyle" value="${fieldValue(bean: pageInstance, field:'menuStyle') }"	/>
+	</div>
+  	
+  	<div class="input ${hasErrors(bean: pageInstance, field: 'pageOrder', 'errors')}">
+		<label for="pageOrder"><g:message code="page.pageOrder.label" default="Page order: " /></label>
+		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
+	</div>
+	
 	<g:if test="${Arrays.asList('frontpage', 'sitemap', 'legalSources').indexOf(pageInstance.template) == -1}">
 	<div class="input ${hasErrors(bean: pageInstance, field: 'template', 'errors')}">
 		<label for="template"><g:message code="page.template.label" default="Page template: " /></label>

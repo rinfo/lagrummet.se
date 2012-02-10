@@ -20,10 +20,9 @@
 		<a href="#primaryNavigation" id="mobileNavLink">Navigering</a>
 		<header id="siteHeader">
 			<nav id="sitelinks">
-				<ul>
-					${siteProps?.headerNavigation}
+				<g:menu root="toppmeny" rootTag="ul">
 					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;readid=content&amp;url=${resource(absolute: true).encodeAsURL()}%2F" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Lyssna</a> </li>
-				</ul>			
+				</g:menu>			
 			</nav>
 			<nav id="breadcrumbs">
 				<g:breadcrumbs parent="${page?.parent}" />
@@ -52,13 +51,14 @@
 		
 		<div id="content">
 	    	<g:layoutBody />
-	    	<footer id="siteFooter">${siteProps?.footer}
+	    	<footer id="siteFooter">
+	    		<g:menu root="sidfot" />
 		    	<div id="version">${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})</div>
 		    </footer>
 	    </div>
 	    
 	    <nav id="primaryNavigation">
-			${siteProps?.primaryNavigation}
+			<g:menu root="huvudmeny" activePage="${page}" />
 	    </nav>
 	   
 	    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js?ver=1.7.0'></script>
