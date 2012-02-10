@@ -265,6 +265,19 @@ class PageController {
             return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave", [sort:"dateCreated", order:"desc"]), images: images]
         }
     }
+	
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
+	def saveAsDraft = {
+		params.status = "draft"
+		forward(action: "save", params: params)
+	}
+	
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
+	def publish = {
+		params.status = "published"
+		forward(action: "update", params: params)
+	}
+	
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def update = {
@@ -278,7 +291,6 @@ class PageController {
                     return
                 }
             }
-
 			
 			pageInstance.backup()
             pageInstance.properties = params

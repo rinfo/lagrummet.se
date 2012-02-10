@@ -37,7 +37,7 @@
 		    <tr id="puff_${index}_2">
 		    	<td colspan="2"><g:textArea name="expandablePuffList[${index}].description" value="${puffInstance?.description}" /></td>
 		    	<td colspan="1">
-		    		<div class="buttons"><span class="button"><input type="button" class="delete" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" onclick="markPuffAsDeleted(${index});" /></span></div>
+		    		<div class="buttons"><input type="button" class="delete" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" onclick="markPuffAsDeleted(${index});" /></div>
 		    	</td>
 		    </tr>
 		</g:each>
@@ -62,9 +62,13 @@
 </div>
 
 <div class="aside publish">
+	<div class="buttons">
+		<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
+	</div>
+	
   	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
-		<label for="status"><g:message code="page.status.label" default="Status" /></label>
-		<g:select name="status" from="['draft', 'pending', 'published', 'autoSave']" value="${pageInstance?.status}" valueMessagePrefix="pageStatus" />
+  		<g:hiddenField name="status" value="${pageInstance?.status}" />
+		<label for="status"><g:message code="page.status.label" default="Nuvarande status" />: ${pageInstance?.status}</label>
 	</div>
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
@@ -76,17 +80,28 @@
 		<label for="publishStop"><g:message code="page.publishStop.label" default="Publish Stop" /></label>
 		<g:datePicker name="publishStop" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStop}" default="none" noSelection="['': '']" />
 	</div>
+	
+	<g:if test="${pageInstance.masterRevision}">
+		<div class="buttons">
+		  	<span class="button"><g:actionSubmit  name="restore" action="restore" class="restore exclamation" value="${message(code: 'default.button.restore.label', default: 'Restore')}" /></span>
+		</div>
+	</g:if>
+	
+	<div class="buttons">
+ 	  <g:actionSubmit name="saveAsDraft" action="saveAsDraft" class="add" value="Spara utkast" />
+ 	  <g:if test="${pageInstance?.status == 'published'}">
+ 	  	<span class="button"><g:actionSubmit name="update" action="update" class="save" value="Spara" /></span>
+ 	  </g:if>
+ 	  <g:else>
+ 	  	<span class="button"><g:actionSubmit name="publish" action="publish" class="save" value="Publicera" /></span>
+ 	  </g:else>
+  	</div>
 </div>
   
 <div class="aside meta">  
   	<div class="input ${hasErrors(bean: pageInstance, field: 'metaPage', 'errors')}">
-		<label for="metaPage"><g:message code="page.metaPage.label" default="Meta page: " /></label>
+		<label for="metaPage"><g:message code="page.metaPage.label" default="Underkategori: " /></label>
 		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
-	</div>
-
-  	<div class="input ${hasErrors(bean: pageInstance, field: 'pageOrder', 'errors')}">
-		<label for="pageOrder"><g:message code="page.pageOrder.label" default="Page order: " /></label>
-		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
 	</div>
 	
 	<g:if test="${Arrays.asList('frontpage', 'sitemap', 'legalSources').indexOf(pageInstance.template) == -1}">
@@ -95,5 +110,4 @@
 		<g:dropdown options="${grailsApplication.config.lagrummet.page.templates}" value="${fieldValue(bean: pageInstance, field: 'template')}" name="template"></g:dropdown>
 	</div>
 	</g:if>
-	
 </div>
