@@ -1,3 +1,7 @@
+v0.6.2
+	Nytt:
+		62 Som admin vill jag kunna redigera navigeringen på webbplatsen
+
 v0.6.1
 	Fix:
 		Exkluderar metaPage-propery i Page från indexering
