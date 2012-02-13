@@ -250,7 +250,7 @@ ul {
 	width: auto;
 }
 
-#bodyContent form .aside.buttons {
+#bodyContent form .aside .buttons {
 	text-align: right;
 	clear: none;
 	width: 220px;
@@ -305,32 +305,65 @@ ul {
     padding: 0;
 }*/
 
+.button {
+	height: 30px;
+	margin-left: 2px;
+	padding: 5px;
+	border: 1px solid #ddd;
+	background-color: #eee;
+	/*background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f2), to(#fff));*/
+	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.button:hover {
+	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+}
+
+.button:active {
+	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
+}
+
 .buttons input {
-    background: #fff;
+    background: transparent;
     border: 0;
     color: #333;
     cursor: pointer;
     font-size: 10px;
     font-weight: bold;
-    margin-left: 3px;
+    margin-left: 0;
     overflow: visible;
-    padding: 2px 6px;
+    padding: 2px 2px;
 }
 .buttons input.delete {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
-    padding-left: 28px;
+    padding-left: 24px;
 }
 .buttons input.edit, .buttons input.update {
     background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
-    padding-left: 28px;
+    padding-left: 24px;
 }
 .buttons input.save {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
-    padding-left: 28px;
+    padding-left: 24px;
 }
 .buttons input.add {
 	background: transparent url(../images/skin/database_add.png) 5px 50% no-repeat;
-    padding-left: 28px;
+    padding-left: 24px;
+}
+.buttons input.exclamation {
+	background: transparent url(../images/skin/exclamation.png) 5px 50% no-repeat;
+    padding-left: 24px;
 }
 
 /* Inputs and selects */

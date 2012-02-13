@@ -20,16 +20,7 @@
             </g:hasErrors>
             <g:form method="post" mapping="pageAdmin" params="[action: 'edit', id: pageInstance.id]">
                 <g:hiddenField name="version" value="${pageInstance?.version}" />
-                
                 <g:render template="pageEditForm" />
-
-                <div class="aside buttons">
-	                <g:if test="${pageInstance.masterRevision}">
-	                	<span class="button"><g:actionSubmit  name="restore" action="restore" class="restore" value="${message(code: 'default.button.restore.label', default: 'Restore')}" /></span>
-	                </g:if>
-                	<span class="button"><g:actionSubmit name="update" action="update" class="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" /></span>
-                </div>
             </g:form>    
             
             <div class="media">
@@ -65,7 +56,10 @@
 	            <g:if test="${revisions}">
 	            	<ul>
 		            	<g:each in="${revisions}" var="r">
-		            		<li><g:link action="edit" id="${r.id}"><g:formatDate format="yyyy-MM-dd HH:mm" date="${r.dateCreated}" /></g:link></li>
+		            		<li>
+		            			<g:link action="edit" id="${r.id}"><g:formatDate format="yyyy-MM-dd HH:mm" date="${r.dateCreated}" /></g:link>
+		            			<g:if test="${r.status == 'published'}">Publicerad</g:if>
+		            		</li>
 		            	</g:each>
 		            </ul>
 	            </g:if>
