@@ -48,23 +48,32 @@ class MenuTagLib {
 	   int size = headerStyles.size()
 	   
 	   if(rootTag) {
-		   xml.invokeMethod(rootTag)
+		   xml."$rootTag" {
+			   buildMenu(xml, rootNode, body)
+		   }
+	   } else {
+	   		buildMenu(xml, rootNode, body)
 	   }
+	   
+	   
+		out << writer.toString()
+   }
+   
+   def buildMenu(builder, rootNode, body) {
 	   rootNode.publishedChildren.each { node ->
 		   
 		   if(node.metaPage) {
-			   subMenu(xml, node)
+			   subMenu(builder, node)
 		   } else {
-			   createListElement(xml, node)
+			   createListElement(builder, node)
 		   }
 	   }
 		   
 	   if(body) {
-		   xml.getMkp().yieldUnescaped(body())
+		   builder.getMkp().yieldUnescaped(body())
 	   }
-	   
-		out << writer.toString()
    }
+   
    
    def subMenu(builder, metaNode) {
 	   
