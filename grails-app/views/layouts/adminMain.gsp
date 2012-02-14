@@ -66,17 +66,20 @@
                 <g:if test="${!pI.parent}">
                 	<% pIclass = (!pI.metaPage) ? "" : "metaPage" %>
                   <li id="p-${pI.id}" class="<%=pIclass%>">
-                  <g:link controller="page" action="edit" id="${pI.id}">${pI.h1}</g:link>
+                  <% isDraft = (pI.status == 'draft') ? '<span class="draft">*</span> ' : "" %>
+                  <g:link controller="page" action="edit" id="${pI.id}"><%=isDraft%>${pI.h1}</g:link>
                   <g:if test="${pI.children?.size()}">
                     <ul>
                       <g:each in="${pI.children}" var="pIChild">
                       	<% pIChildClass = (!pIChild.metaPage) ? "" : "metaPage" %>
-                        <g:if test="${pIChild.status != 'autoSave'}"><li id="p-${pIChild.id}" class="<%=pIChildClass%>"><g:link controller="page" action="edit" id="${pIChild.id}">${pIChild.h1}</g:link></li></g:if>
+                      	<% isDraft = (pIChild.status == 'draft') ? '<span class="draft">*</span> ' : "" %>
+                        <g:if test="${pIChild.status != 'autoSave'}"><li id="p-${pIChild.id}" class="<%=pIChildClass%>"><g:link controller="page" action="edit" id="${pIChild.id}"><%=isDraft%>${pIChild.h1}</g:link></li></g:if>
                         <g:if test="${pIChild.children?.size()}">
                         	<ul>
                         	<g:each in="${pIChild.children}" var="pIGrandChild">
                         		<% pIGrandChildClass = (!pIGrandChild.metaPage) ? "" : "metaPage" %>
-                        		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li id="p-${pIGrandChild.id}" class="<%=pIGrandChildClass%>"><g:link controller="page" action="edit" id="${pIGrandChild.id}">${pIGrandChild.h1}</g:link></li></g:if>
+                        		<% isDraft = (pIGrandChild.status == 'draft') ? '<span class="draft">*</span> ' : "" %>
+                        		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li id="p-${pIGrandChild.id}" class="<%=pIGrandChildClass%>"><g:link controller="page" action="edit" id="${pIGrandChild.id}"><%=isDraft%>${pIGrandChild.h1}</g:link></li></g:if>
                         	</g:each>
                         	</ul>
                         </g:if>

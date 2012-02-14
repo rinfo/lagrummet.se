@@ -339,10 +339,6 @@ a.print:visited {
 	color: #585858;
 }
 
-#primaryNavigation ul li:hover {
-	background-color: #f5f5f5;
-}
-
 #primaryNavigation ul li.active {
 	background-color: #e7e7e7;
 }
