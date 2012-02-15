@@ -47,7 +47,9 @@ class MainSiteTagLib {
 	}
 	
 	/**
-	 * @attr href OPTIONAL if href is set a html anchor tag will wrap the body content
+	 * Creates a html anchor tag that will wrap the body content if a href is provided.
+	 * When no href or a blank href is provided, the body will be rendered without a link
+	 * @attr href OPTIONAL href property for the anchor tag
 	 */
 	def linkConditional = { attrs, body ->
 		def href = attrs.href
