@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse
 class PageController {
 	
 	def pageService
+	def springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST", move: "POST", restore: "POST"]
 
@@ -53,7 +54,8 @@ class PageController {
 			params.parent = Page.get(params.parentId)
 			params.publishStart = new Date()
 		}
-
+		
+		params.author = SecUser.get(springSecurityService.principal.id)
         def pageInstance = new Page(params)
 		
 		def instanceToSave
@@ -70,7 +72,6 @@ class PageController {
 				render response as JSON
 			} else {
 				flash.message = "${message(code: 'page.created.message', args: [pageInstance.title])}"
-//				render(view: "edit", model: [pageInstance: pageInstance])
 				redirect(action: "edit", id: pageInstance.id)
 			}
         }
@@ -89,7 +90,7 @@ class PageController {
 		def pageInstance = Page.get(params.id)
 		def parentInstance
 		def pageOrder = 1
-		println params
+
 		if (params.position == "before" || params.position == "after") { // "before", "after", "inside", "first", "last"
 			// In relation to the sibling, find the parent (or no parent for top level)
 			def target = Page.get(params.targetId)
@@ -104,7 +105,6 @@ class PageController {
 			// In relation to the children of the new parent, the new parent is given
 			parentInstance = Page.get(params.targetId)
 			pageOrder = parentInstance.children.size() // place last
-			println pageOrder
 		}
 		
 		if (pageOrder < 0) pageOrder = 0
@@ -142,7 +142,7 @@ class PageController {
 
 		def page
 		if (url.size() < 2) {
-			page = Page.withCriteria(uniqueResult:true) {
+			page = Page.withCriteria() {
 				eq("permalink", permalink)
 				eq("status", "published")
 				le('publishStart', new Date())
@@ -262,14 +262,21 @@ class PageController {
 			Media.findAllByParent(pageInstance).each {
 				images[it.id] = it.title
 			}
-            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevisionAndStatus(pageInstance, "autoSave", [sort:"dateCreated", order:"desc"]), images: images]
+            return [pageInstance: pageInstance, revisions: Page.findAllByMasterRevision(pageInstance, [sort:"dateCreated", order:"desc"]), images: images]
         }
     }
 	
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 	def saveAsDraft = {
-		params.status = "draft"
-		forward(action: "save", params: params)
+		if (!params.id) {
+			forward(action: "save", params: params)
+		} else if (params.status == "draft") {
+			forward(action: "update", params: params)
+		} else {
+			def master = Page.get(params.id)
+			params.status = "draftFromPublished"
+			forward(action: "update", params: params)
+		}
 	}
 	
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
@@ -292,7 +299,14 @@ class PageController {
                 }
             }
 			
-			pageInstance.backup()
+			def changeStatus = true
+			if (params.status == "draftFromPublished") {
+				changeStatus =  false
+				params.status = "draft"
+			}
+			pageInstance.backup(changeStatus: changeStatus)
+			
+			params.author = SecUser.get(springSecurityService.principal.id)
             pageInstance.properties = params
 			def toBeDeleted = pageInstance.puffs.findAll {
 				it.deleted || it.isEmpty()
