@@ -90,7 +90,7 @@
 	<div class="buttons">
  	  <g:actionSubmit name="saveAsDraft" action="saveAsDraft" class="add" value="Spara utkast" />
  	  <g:if test="${pageInstance?.status == 'published'}">
- 	  	<span class="button"><g:actionSubmit name="update" action="update" class="save" value="Spara" /></span>
+ 	  	<span class="button"><g:actionSubmit name="update" action="update" class="save" value="Uppdatera" /></span>
  	  </g:if>
  	  <g:else>
  	  	<span class="button"><g:actionSubmit name="publish" action="publish" class="save" value="Publicera" /></span>
