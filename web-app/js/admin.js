@@ -175,6 +175,9 @@ jQuery(function($) {
 				row1.find('[name="deletePuff"]').click(function() {
 					markPuffAsDeleted(puffCount-1);
 				});
+				row1.find('[name="cancelDeletePuffButton"]').click(function() {
+					cancelDeletePuff(puffCount-1);
+				});
 				row1.appendTo("#puffs");
 			}
 			
@@ -187,6 +190,30 @@ jQuery(function($) {
 
 function markPuffAsDeleted(puffIndex) {
 	$('#expandablePuffList\\['+puffIndex+'\\]\\.deleted').val('true'); 
-	$('#puff_'+puffIndex+'_1').hide(); 
-	$('#puff_'+puffIndex+'_2').hide();
+	$('#puff_'+puffIndex+'_1').toggleClass("deleteRow"); 
+	$('#puff_'+puffIndex+'_2').toggleClass("deleteRow");
+	$('#puff_'+puffIndex+'_1').find("input:visible, select, textarea").each(function(index){
+		$(this).prop("disabled", true);
+	});
+	$('#puff_'+puffIndex+'_2').find("input:visible, select, textarea").each(function(index){
+		$(this).prop("disabled", true);
+	});
+	$('#puff_'+puffIndex+'_2').find(".buttons").each(function(index){
+		$(this).toggleClass("hidden");
+	});
+}
+
+function cancelDeletePuff(puffIndex) {
+	$('#expandablePuffList\\['+puffIndex+'\\]\\.deleted').val('false'); 
+	$('#puff_'+puffIndex+'_1').toggleClass("deleteRow"); 
+	$('#puff_'+puffIndex+'_2').toggleClass("deleteRow");
+	$('#puff_'+puffIndex+'_1').find("input:visible, select, textarea").each(function(index){
+		$(this).prop("disabled", false);
+	});
+	$('#puff_'+puffIndex+'_2').find("input, select, textarea").each(function(index){
+		$(this).prop("disabled", false);
+	});
+	$('#puff_'+puffIndex+'_2').find(".buttons").each(function(index){
+		$(this).toggleClass("hidden");
+	});
 }

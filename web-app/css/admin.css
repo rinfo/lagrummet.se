@@ -297,6 +297,10 @@ ul {
 	margin-bottom: 1.5em;
 }
 
+#puffs .deleteRow {
+	background-color: #f4f4f4;
+}
+
 /* ACTION BUTTONS */
 
 /*.buttons {

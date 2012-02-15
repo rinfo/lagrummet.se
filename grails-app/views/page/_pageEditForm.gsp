@@ -38,6 +38,7 @@
 		    	<td colspan="2"><g:textArea name="expandablePuffList[${index}].description" value="${puffInstance?.description}" /></td>
 		    	<td colspan="1">
 		    		<div class="buttons"><input type="button" class="delete" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" onclick="markPuffAsDeleted(${index});" /></div>
+		    		<div class="buttons hidden"><input type="button" value="${message(code:'puff.cancelDelete.label', default:'Återställ puff')}" onclick="cancelDeletePuff(${index});" /></div>
 		    	</td>
 		    </tr>
 		</g:each>
@@ -53,10 +54,12 @@
 		    <tr id="puffRow2" class="hidden">
 		    	<td colspan="2"><g:textArea name="expandablePuffList[puffCount].description" value="" disabled="disabled" /></td>
 		    	<td colspan="1">
-		    	<div class="buttons"><span class="button"><input type="button" class="delete" name="deletePuff" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" /></span></div>
+		    	<div class="buttons"><input type="button" class="delete" name="deletePuff" value="${message(code:'puff.deletePuff.label', default:'Ta bort puff')}" /></div>
+		    	<div class="buttons hidden"><input type="button" name="cancelDeletePuffButton" value="${message(code:'puff.cancelDelete.label', default:'Återställ puff')}" /></div>
 		    	</td></tr>
     
 	</table>
+	<div>Ändringar i puffar sparas när man klickar på spara/uppdatera sidan.<br/> Borttagna puffar försvinner inte förrän sidan sparas och man kan välja att återställa dem innan dess.</div>
 	<div class="buttons"><input type="button" class="add" value="${message(code:'puff.addPuff.label', default:'Lägg till ny puff')}" id="addNewPuffButton" /><span id="puffCount" class="hidden">${pageInstance.puffs.size()}</span></div>
 	<br/>
 </div>
