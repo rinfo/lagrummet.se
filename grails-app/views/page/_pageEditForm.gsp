@@ -59,7 +59,7 @@
 		    	</td></tr>
     
 	</table>
-	<div>Ändringar i puffar sparas när man klickar på spara/uppdatera sidan.<br/> Borttagna puffar försvinner inte förrän sidan sparas och man kan välja att återställa dem innan dess.</div>
+	<div id="puffEditDescription"><g:message code="puff.puffeditform.description" /></div>
 	<div class="buttons"><input type="button" class="add" value="${message(code:'puff.addPuff.label', default:'Lägg till ny puff')}" id="addNewPuffButton" /><span id="puffCount" class="hidden">${pageInstance.puffs.size()}</span></div>
 	<br/>
 </div>

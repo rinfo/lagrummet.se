@@ -301,6 +301,9 @@ ul {
 	background-color: #f4f4f4;
 }
 
+#puffEditDescription {
+	font-style: italic;
+}
 /* ACTION BUTTONS */
 
 /*.buttons {
