@@ -25,5 +25,8 @@
 		        
 		      </g:each>
 	</article>
+	<aside class="puffs" id="puffs">
+		<g:render template="puff" collection="${page.puffs}" var="puff" />
+	</aside>
 </body>
 </html>

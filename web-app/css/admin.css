@@ -297,6 +297,13 @@ ul {
 	margin-bottom: 1.5em;
 }
 
+#puffs .deleteRow {
+	background-color: #f4f4f4;
+}
+
+#puffEditDescription {
+	font-style: italic;
+}
 /* ACTION BUTTONS */
 
 /*.buttons {
