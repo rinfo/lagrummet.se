@@ -421,6 +421,13 @@ article.editorial img.pdfIcon {
 	margin: 0 0 1em 0;
 }
 
+#puffs .puff h3 a {
+	text-decoration:none;
+}
+#puffs .puff h3 a:hover {
+	text-decoration: underline;
+}
+
 aside.puffs {
 	float: right;
 	width: 228px;

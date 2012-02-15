@@ -46,4 +46,20 @@ class MainSiteTagLib {
 		
 	}
 	
+	/**
+	 * @attr href OPTIONAL if href is set a html anchor tag will wrap the body content
+	 */
+	def linkConditional = { attrs, body ->
+		def href = attrs.href
+		if(href) {
+			out << '<a href="' << href << '">'
+		}
+		
+		out << body()
+		
+		if(href) {
+			out << '</a>'
+		}
+	}
+	
 }
