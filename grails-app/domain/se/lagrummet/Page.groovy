@@ -9,12 +9,12 @@ class Page implements Comparable<Page>{
 	String h1
 	String permalink
 	String content
-//	User author
+	User author
 	int pageOrder = 0
 	String template = "default" // See config.groovy -> lagrummet.page.templates for possible values
 	String menuStyle
 	
-	String status = "draft" // draft, pending, published, autoSave
+	String status = "draft" // draft, published, autoSave
 	boolean metaPage = false
 	Date dateCreated
 	Date lastUpdated
@@ -80,15 +80,20 @@ class Page implements Comparable<Page>{
 		return response + permalink
 	}
 	
-	def backup = {
+	def backup = { changeStatus ->
 		def pageBackup = new Page()
 		pageBackup.properties = this.properties
+		
+		if (changeStatus) {
+			pageBackup.status == "autoSave"
+			pageBackup.publishStop = new Date()
+		}
+		
 		pageBackup.id = null
 		pageBackup.children = null
 		pageBackup.media = null
 		pageBackup.puffs = null
 		pageBackup.autoSaves = null
-		pageBackup.status = "autoSave"
 		this.addToAutoSaves(pageBackup).save()
 	}
 	

@@ -19,48 +19,48 @@ class BootStrap {
 			SecUserSecRole.create(user, roleAdmin, true)
 			
 			def fourDaysAgo = new Date() - 4
-			def kalles = new Page(title: 'Kalles sida', pageOrder: 1, permalink: 'kalle', h1: 'heja kalle!', content: "<p>Första försöket</p>", status: "published", publishStart: fourDaysAgo).save()
+			def kalles = new Page(title: 'Kalles sida', author: user, pageOrder: 1, permalink: 'kalle', h1: 'heja kalle!', content: "<p>Första försöket</p>", status: "published", publishStart: fourDaysAgo).save()
 			kalles.addToPuffs(new Puff(title:"kalles puff", description:"detta är en sidopuff. Det blir spännande", link:"kalle", parent:kalles))
 			kalles.addToPuffs(new Puff(title:"olles puff", description:"detta är också en sidopuff. Det blir spännande med lite mer text. Då kanske det kan bli något fel", link:"kalle", parent:kalles))
-			def kallesUndersida = new Page(title: 'Kalles undersida', pageOrder: 1, parent: kalles, permalink: 'kalle-undersida', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: fourDaysAgo).save()
-			def kallesUndersida2 = new Page(title: 'Kalles undersida 2', pageOrder: 0, parent: kalles, permalink: 'kalle-undersida-2', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: fourDaysAgo).save()
+			def kallesUndersida = new Page(title: 'Kalles undersida', author: user, pageOrder: 1, parent: kalles, permalink: 'kalle-undersida', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: fourDaysAgo).save()
+			def kallesUndersida2 = new Page(title: 'Kalles undersida 2', author: user, pageOrder: 0, parent: kalles, permalink: 'kalle-undersida-2', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: fourDaysAgo).save()
 			
-			def home = new Page(title: 'Lagrummet', template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo).save()
+			def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo).save()
 			home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
 			
-			def huvudMeny = new Page(title: "Huvudmeny", permalink:"huvudmeny", h1:"Huvudmeny", status:"published", publishStart: fourDaysAgo, metaPage: true).save()
+			def huvudMeny = new Page(title: "Huvudmeny", author: user, permalink:"huvudmeny", h1:"Huvudmeny", status:"published", publishStart: fourDaysAgo, metaPage: true).save()
 			
-			def rattsinfo = new Page(title: "Rättsinformation", permalink:"rattsinformation", h1:"Rättsinformation", status:"published", publishStart:fourDaysAgo, pageOrder:1, metaPage:true, parent: huvudMeny, menuStyle:"rinfo").save()
-			def lagar = new Page(title: 'Lagar och förordningar', template: "legalSource/lagar", pageOrder: 1, permalink: 'lagar-och-forordningar', h1: 'Lagar och förordningar', content: "", status: "published", publishStart: fourDaysAgo, parent:rattsinfo).save()
-			def foreskrifter = new Page(title: 'Myndigheters föreskrifter', template: "legalSource/foreskrifter", pageOrder: 1, permalink: 'myndigheters-foreskrifter', h1: 'Myndigheters föreskrifter', content: "", status: "published", publishStart: fourDaysAgo, parent:rattsinfo).save()
-			def forarbeten = new Page(title: 'Förarbeten', template: "legalSource/forarbeten", pageOrder: 1, permalink: 'forarbeten', h1: 'Förarbeten', content: "", status: "published", publishStart: fourDaysAgo, parent:rattsinfo).save()
-			def legalSources = new Page(title: 'Alla rättskällor', template: "legalSources", pageOrder: 1, permalink: 'samtliga-rattskallor', h1: 'Samtliga rättskällor', content: "", status: "published", publishStart: fourDaysAgo, parent:rattsinfo).save()
+			def rattsinfo = new Page(title: "Rättsinformation", author: user, permalink:"rattsinformation", h1:"Rättsinformation", status:"published", publishStart:fourDaysAgo, pageOrder:1, metaPage:true, parent: huvudMeny, menuStyle:"huvudmeny1").save()
+			def lagar = new Page(title: 'Lagar och förordningar', author: user, template: "legalSource/lagar", pageOrder: 1, permalink: 'lagar-och-forordningar', h1: 'Lagar och förordningar', content: "", status: "published", publishStart: fourDaysAgo, parent:rattsinfo).save()
+			def foreskrifter = new Page(title: 'Myndigheters föreskrifter', author: user, template: "legalSource/foreskrifter", pageOrder: 1, permalink: 'myndigheters-foreskrifter', h1: 'Myndigheters föreskrifter', content: "", status: "published", publishStart: fourDaysAgo, parent:rattsinfo).save()
+			def forarbeten = new Page(title: 'Förarbeten', author: user, template: "legalSource/forarbeten", pageOrder: 1, permalink: 'forarbeten', h1: 'Förarbeten', content: "", status: "published", publishStart: fourDaysAgo, parent:rattsinfo).save()
+			def legalSources = new Page(title: 'Alla rättskällor', author: user, template: "legalSources", pageOrder: 1, permalink: 'samtliga-rattskallor', h1: 'Samtliga rättskällor', content: "", status: "published", publishStart: fourDaysAgo, parent:rattsinfo).save()
 			
-			def hitvander = new Page(title:"Hit vänder du dig", permalink:"hit-vander-du-dig", h1:"Hit vänder du dig", status:"published", publishStart:fourDaysAgo, pageOrder:2, metaPage:true, parent:huvudMeny).save()
+			def hitvander = new Page(title:"Hit vänder du dig", author: user, permalink:"hit-vander-du-dig", h1:"Hit vänder du dig", status:"published", publishStart:fourDaysAgo, pageOrder:2, metaPage:true, parent:huvudMeny, menuStyle:"huvudmeny2").save()
 			
-			def lardigmer = new Page(title:"Lär dig mer", permalink:"lar-dig-mer", h1:"Lär dig mer", status:"published", publishStart:fourDaysAgo, metaPage:true, pageOrder:3, parent:huvudMeny).save()
+			def lardigmer = new Page(title:"Lär dig mer", author: user, permalink:"lar-dig-mer", h1:"Lär dig mer", status:"published", publishStart:fourDaysAgo, metaPage:true, pageOrder:3, parent:huvudMeny, menuStyle:"huvudmeny3").save()
 			
-			def toppmeny = new Page(title: "Toppmeny", permalink:"toppmeny", h1:"Toppmeny", status:"published", publishStart: fourDaysAgo, metaPage:true).save()
-			def otherLang = new Page(title: "Other languages", permalink:"other-languages", h1:"Other languages", status:"published", content:"", publishStart: fourDaysAgo, parent:toppmeny, pageOrder:1).save()
-			def sitemap = new Page(title: 'Webbkarta', template: "sitemap", pageOrder: 2, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: fourDaysAgo, parent:toppmeny).save()
+			def toppmeny = new Page(title: "Toppmeny", author: user, permalink:"toppmeny", h1:"Toppmeny", status:"published", publishStart: fourDaysAgo, metaPage:true).save()
+			def otherLang = new Page(title: "Other languages", author: user, permalink:"other-languages", h1:"Other languages", status:"published", content:"", publishStart: fourDaysAgo, parent:toppmeny, pageOrder:1).save()
+			def sitemap = new Page(title: 'Webbkarta', author: user, template: "sitemap", pageOrder: 2, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: fourDaysAgo, parent:toppmeny).save()
 
 			
-			def footer = new Page(title:"sidfot", pageOrder:10, permalink:"sidfot", h1:"sidfot", status:"published", publishStart: fourDaysAgo, metaPage:true).save()
-			def omLagrummet = new Page(title:"Om lagrummet.se", permalink:"om-lagrummet", h1:"Om lagrummet.se", status:"published", publishStart:fourDaysAgo, metaPage:true, parent: footer, pageOrder:1).save()
-			def jurInfo = new Page(title:"Juridisk information", permalink:"juridisk-information", h1:"Juridisk Information", status:"published", publishStart:fourDaysAgo, parent: omLagrummet).save()
-			def rattsInfo = new Page(title:"Rättsinfoprojektet", permalink:"rattsinfoprojektet", h1:"Rättsinfoprojektet", status:"published", publishStart:fourDaysAgo, parent: omLagrummet).save()
-			def domv = new Page(title:"Domstolsverket", permalink:"domstolsverket", h1:"Domstolsverket", status:"published", publishStart:fourDaysAgo, parent: omLagrummet).save()
+			def footer = new Page(title:"sidfot", author: user, pageOrder:10, permalink:"sidfot", h1:"sidfot", status:"published", publishStart: fourDaysAgo, metaPage:true).save()
+			def omLagrummet = new Page(title:"Om lagrummet.se", author: user, permalink:"om-lagrummet", h1:"Om lagrummet.se", status:"published", publishStart:fourDaysAgo, metaPage:true, parent: footer, pageOrder:1).save()
+			def jurInfo = new Page(title:"Juridisk information", author: user, permalink:"juridisk-information", h1:"Juridisk Information", status:"published", publishStart:fourDaysAgo, parent: omLagrummet).save()
+			def rattsInfo = new Page(title:"Rättsinfoprojektet", author: user, permalink:"rattsinfoprojektet", h1:"Rättsinfoprojektet", status:"published", publishStart:fourDaysAgo, parent: omLagrummet).save()
+			def domv = new Page(title:"Domstolsverket", author: user, permalink:"domstolsverket", h1:"Domstolsverket", status:"published", publishStart:fourDaysAgo, parent: omLagrummet).save()
 			
-			def omWebbplatsen = new Page(title:"Om webbplatsen", permalink:"om-webbplatsen", h1:"Om webbplatsen", status:"published", publishStart:fourDaysAgo, metaPage:true, parent: footer, pageOrder:2).save()
-			def anvTips = new Page(title:"Användningstips", permalink:"anvandningstips", h1:"Användningstips", status:"published", publishStart:fourDaysAgo, parent: omWebbplatsen).save()
-			def teknisk = new Page(title:"Teknisk infomation", permalink:"teknisk-information", h1:"Teknisk information", status:"published", publishStart:fourDaysAgo, parent: omWebbplatsen).save()
-			def omKakor = new Page(title:"Om kakor (cookies)", permalink:"om-kakor", h1:"Om kakor", status:"published", publishStart:fourDaysAgo, parent: omWebbplatsen).save()
+			def omWebbplatsen = new Page(title:"Om webbplatsen", author: user, permalink:"om-webbplatsen", h1:"Om webbplatsen", status:"published", publishStart:fourDaysAgo, metaPage:true, parent: footer, pageOrder:2).save()
+			def anvTips = new Page(title:"Användningstips", author: user, permalink:"anvandningstips", h1:"Användningstips", status:"published", publishStart:fourDaysAgo, parent: omWebbplatsen).save()
+			def teknisk = new Page(title:"Teknisk infomation", author: user, permalink:"teknisk-information", h1:"Teknisk information", status:"published", publishStart:fourDaysAgo, parent: omWebbplatsen).save()
+			def omKakor = new Page(title:"Om kakor (cookies)", author: user, permalink:"om-kakor", h1:"Om kakor", status:"published", publishStart:fourDaysAgo, parent: omWebbplatsen).save()
 			
-			def kontakta = new Page(title:"Kontakta", permalink:"kontakta", h1:"kontakta", status:"published", publishStart:fourDaysAgo, metaPage:true, parent: footer, pageOrder:3).save()
-			def kontaktaOss = new Page(title:"Kontakta oss", permalink:"kontakta-oss", h1:"Kontakta oss", status:"published", publishStart:fourDaysAgo, parent: kontakta).save()
-			def saSvarar = new Page(title:"Så svarar vi på e-post", permalink:"sa-svarar-vi-pa-e-post", h1:"Så svarar vi på e-post", status:"published", publishStart:fourDaysAgo, parent: kontakta).save()
+			def kontakta = new Page(title:"Kontakta", author: user, permalink:"kontakta", h1:"kontakta", status:"published", publishStart:fourDaysAgo, metaPage:true, parent: footer, pageOrder:3).save()
+			def kontaktaOss = new Page(title:"Kontakta oss", author: user, permalink:"kontakta-oss", h1:"Kontakta oss", status:"published", publishStart:fourDaysAgo, parent: kontakta).save()
+			def saSvarar = new Page(title:"Så svarar vi på e-post", author: user, permalink:"sa-svarar-vi-pa-e-post", h1:"Så svarar vi på e-post", status:"published", publishStart:fourDaysAgo, parent: kontakta).save()
 			
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html", name: "Kommittédirektiv", category: "Forarbeten", subCategory: "Regeringen").save()
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/2", name: "Kommittédirektiv 2", category: "Forarbeten", subCategory: "Regeringen").save()
@@ -189,6 +189,7 @@ class BootStrap {
 				permalink: 'home',
 				h1: 'Välkommen till lagrummet.se',
 				content: "Första försöket",
+				author: user,
 				status: "published", publishStart: new Date() - 4
 				).save()
 			if (home.puffs?.size() < 3) {
@@ -206,6 +207,7 @@ class BootStrap {
 				h1: 'Webbkarta över lagrummet.se',
 				content: "",
 				status: "published",
+				author: user,
 				publishStart: new Date() - 4
 				).save()
 				
@@ -217,6 +219,7 @@ class BootStrap {
 				h1: 'Information in English',
 				content: "",
 				status: "published",
+				author: user,
 				publishStart: new Date() - 4
 				).save()
 				
@@ -228,6 +231,7 @@ class BootStrap {
 				h1: 'Samtliga rättskällor',
 				content: "",
 				status: "published",
+				author: user,
 				publishStart: new Date() - 4
 			).save()
 		}

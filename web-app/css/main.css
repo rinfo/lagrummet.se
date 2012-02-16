@@ -350,17 +350,17 @@ a.print:visited {
 	padding: 10px;
 }
 
-#primaryNavigation ul.rinfo li.heading {
+#primaryNavigation ul.huvudmeny1 li.heading {
 	color: #873960;
 	border-bottom: 2px solid #873960;
 }
 
-#primaryNavigation ul.turnHere li.heading {
+#primaryNavigation ul.huvudmeny2 li.heading {
 	color: #bd9b44;
 	border-bottom: 2px solid #bd9b44;
 }
 
-#primaryNavigation ul.learnMore li.heading {
+#primaryNavigation ul.huvudmeny3 li.heading {
 	color: #006383;
 	border-bottom: 2px solid #006383;
 }
@@ -488,6 +488,15 @@ article.editorial #pageTree ul ul {
 
 article.editorial #pageTree ul ul li {
 	margin-bottom: 0;
+}
+
+#ordlista {
+	list-style-type: none;
+}
+
+#ordlista li {
+	float: left;
+	margin-left: 1em;
 }
 
 /* =FAQ template */

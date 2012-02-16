@@ -71,7 +71,7 @@
 	
   	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
   		<g:hiddenField name="status" value="${pageInstance?.status}" />
-		<label for="status"><g:message code="page.status.label" default="Nuvarande status" />: ${pageInstance?.status}</label>
+		<label for="status"><strong><g:message code="page.status.label" default="Nuvarande status" />: <g:message code="page.status.${pageInstance?.status}" default="" /></strong></label>
 	</div>
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
@@ -84,7 +84,7 @@
 		<g:datePicker name="publishStop" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStop}" default="none" noSelection="['': '']" />
 	</div>
 	
-	<g:if test="${pageInstance.masterRevision}">
+	<g:if test="${pageInstance.masterRevision && pageInstance.status == 'autoSave'}">
 		<div class="buttons">
 		  	<span class="button"><g:actionSubmit  name="restore" action="restore" class="restore exclamation" value="${message(code: 'default.button.restore.label', default: 'Restore')}" /></span>
 		</div>
@@ -103,7 +103,7 @@
   
 <div class="aside meta">  
   	<div class="input ${hasErrors(bean: pageInstance, field: 'metaPage', 'errors')}">
-		<label for="metaPage"><g:message code="page.metaPage.label" default="Underkategori: " /></label>
+  		<label for="metaPage"><g:message code="page.metaPage.label" default="Visa som kategori" /></label>
 		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
 	</div>
 	
