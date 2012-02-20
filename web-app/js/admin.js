@@ -68,6 +68,10 @@ jQuery(function($) {
 	$("#pageTree > ul > li").each(function(n) {
 		metaPageArr.push($(this).attr("id"));
 	});
+	$("#pageTree > ul > li > ul > li").each(function(n) {
+		metaPageArr.push($(this).attr("id"));
+	});
+	
 	
 	
 	$("#pageTree").jstree({"plugins" : ["themes","html_data","crrm", "dnd", "contextmenu"],	//,"ui"

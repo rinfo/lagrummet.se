@@ -29,3 +29,5 @@ ul.dropdown ul li {
 	*display: inline; 
 	*width: 100%; 
 	} 
+
+#pageTree > ul > li.metaPage li.metaPage ul li a {font-weight: normal;}
