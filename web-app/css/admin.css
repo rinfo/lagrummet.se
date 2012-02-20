@@ -76,15 +76,16 @@ ul {
 }
 
 /* =adminFunctions */
+/*
 #adminFunctions > ul > li {
-	float: left;
+	float: left; 
 	margin-right: 1em;
-}
+}*/
 
 #adminFunctions > ul > li strong {
 	cursor: default;
 }
-
+/*
 #adminFunctions > ul > li ul {
 	display: none;
 	position: absolute;
@@ -95,6 +96,34 @@ ul {
 	box-shadow: 2px 2px 6px #ccc;
 	padding: 1em;
 }
+*/
+ul.dropdown                         { position: relative; }
+ul.dropdown li                      { font-weight: bold; float: left; zoom: 1; margin-right: 1em; }
+ul.dropdown a:hover		            {  }
+ul.dropdown a:active                {  }
+ul.dropdown li a                    {  }
+ul.dropdown li:last-child a         {  } /* Doesn't work in IE */
+ul.dropdown li.hover,
+ul.dropdown li:hover                { background: #fff; color: black; position: relative; }
+ul.dropdown li.hover a              {  }
+
+
+/* 
+	LEVEL TWO
+*/
+ul.dropdown ul 						{ width: 220px; visibility: hidden; position: absolute; top: 100%; left: 0;
+										z-index: 10;
+										background-color: #fff;
+										-webkit-box-shadow: 2px 2px 6px #ccc;
+										-moz-box-shadow: 1px 1px 6px #ccc;
+										box-shadow: 2px 2px 6px #ccc;
+										padding: 1em;
+									}
+ul.dropdown ul li 					{ font-weight: normal; background: #fff; color: #000; 
+									   float: none; }
+									  
+                                    /* IE 6 & 7 Needs Inline Block */
+ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block; } 
 
 /* =adminPages */
 #adminPages h2, #adminPages h3 {

@@ -24,3 +24,8 @@
 #content {*top: 4em;}
 body {z-index: 14; position: relative;}
 .extendedSearch > label {width: auto;}
+
+ul.dropdown ul li { 
+	*display: inline; 
+	*width: 100%; 
+	} 

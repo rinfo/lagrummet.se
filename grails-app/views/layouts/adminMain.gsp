@@ -22,11 +22,11 @@
 		<sec:username/> (<g:link controller="logout">Logga ut</g:link>)
 		
 		<nav id="adminFunctions">
-		<ul>
+		<ul class="dropdown">
 			<sec:ifAllGranted roles="ROLE_ADMIN">
 				<li>
 					<strong>Användare</strong>
-					<ul>
+					<ul class="sub_menu">
 						<li><a href="${createLink(controller:'user', action:'create')}">Ny användare</a></li>
 						<li><a href="${createLink(controller:'user', action:'list')}">Hantera användare</a></li>
 					</ul>
@@ -34,21 +34,21 @@
 			
 				<li>
 					<strong>Inställningar</strong>
-					<ul>
+					<ul class="sub_menu">
 						<li><a href="${createLink(controller:'siteProperties', action:'edit')}">Ändra siteinställningar</a></li>
 					</ul>
 				</li>
 			</sec:ifAllGranted>	
 			<li>
 				<strong>Media</strong>
-				<ul>
+				<ul class="sub_menu">
 					<li><a href="${createLink(controller:'media', action:'create')}">Ny bild eller fil</a></li>
 					<li><a href="${createLink(controller:'media', action:'list')}">Hantera media</a></li>
 				</ul>
 			</li>
 			<li>
 				<strong>Rättskällor</strong>
-				<ul>
+				<ul class="sub_menu">
 					<li><a href="${createLink(controller:'legalSource', action:'create')}">Ny rättskälla</a></li>
 					<li><a href="${createLink(controller:'legalSource', action:'list')}">Hantera rättskällor</a></li>
 				</ul>

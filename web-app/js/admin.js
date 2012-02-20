@@ -69,6 +69,7 @@ jQuery(function($) {
 		metaPageArr.push($(this).attr("id"));
 	});
 	
+	
 	$("#pageTree").jstree({"plugins" : ["themes","html_data","crrm", "dnd", "contextmenu"],	//,"ui"
 		"core" : { "initially_open" : metaPageArr },
 		/*"crrm" : { 
@@ -120,13 +121,25 @@ jQuery(function($) {
     });
 	
 	// Dynamic top menu for admin-functions
-	$("#adminFunctions > ul > li").hover(function() {
+	/*$("#adminFunctions > ul > li").hover(function() {
 		// mouse enter
-		$(this).children("ul").show();
+		$(this).children("ul").css('display', 'inline');
 	}, function() {
 		// mouse leave
-		$(this).children("ul").hide();
+		$(this).children("ul").css('display', 'none');
 	});
+	*/
+	$("ul.dropdown li").hover(function(){
+	    
+        $(this).addClass("hover");
+        $('ul:first',this).css('visibility', 'visible');
+    
+    }, function(){
+    
+        $(this).removeClass("hover");
+        $('ul:first',this).css('visibility', 'hidden');
+    
+    });
 	
 	// Dynamic behaviour for creating and editing pages
 	$("#h1").focus().blur(function(e) {
