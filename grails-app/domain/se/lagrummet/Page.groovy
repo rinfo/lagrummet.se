@@ -85,8 +85,13 @@ class Page implements Comparable<Page>{
 		pageBackup.properties = this.properties
 		
 		if (changeStatus) {
-			pageBackup.status == "autoSave"
-			pageBackup.publishStop = new Date()
+			def now = new Date()
+			if(this.publishStart > now) {
+				pageBackup.publishStop = this.publishStart				
+			} else {
+				pageBackup.publishStop = now
+				pageBackup.status = "autoSave"
+			}
 		}
 		
 		pageBackup.id = null

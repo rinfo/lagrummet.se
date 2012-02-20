@@ -142,7 +142,7 @@ class PageController {
 
 		def page
 		if (url.size() < 2) {
-			page = Page.withCriteria() {
+			page = Page.withCriteria(uniqueResult:true) {
 				eq("permalink", permalink)
 				eq("status", "published")
 				le('publishStart', new Date())
@@ -162,7 +162,7 @@ class PageController {
 			}
 		}
 
-		if(page && !page.metaPage) {
+		if(page != null && !page.metaPage) {
 			if(page.publishStop && page.publishStop.before(new Date())) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND)
 			}
@@ -304,7 +304,7 @@ class PageController {
 				changeStatus =  false
 				params.status = "draft"
 			}
-			pageInstance.backup(changeStatus: changeStatus)
+			pageInstance.backup(changeStatus)
 			
 			params.author = SecUser.get(springSecurityService.principal.id)
             pageInstance.properties = params
