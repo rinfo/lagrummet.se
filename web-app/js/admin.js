@@ -125,14 +125,6 @@ jQuery(function($) {
     });
 	
 	// Dynamic top menu for admin-functions
-	/*$("#adminFunctions > ul > li").hover(function() {
-		// mouse enter
-		$(this).children("ul").css('display', 'inline');
-	}, function() {
-		// mouse leave
-		$(this).children("ul").css('display', 'none');
-	});
-	*/
 	$("ul.dropdown li").hover(function(){
 	    
         $(this).addClass("hover");

@@ -1,3 +1,9 @@
+v0.7.0
+	Fix:
+		Länkar och bilder i puffar
+		#60 Toppmenyn i IE7
+		#60 Sidträdet i admingränsnittet, alla grenar utfällda och ikoner för utkast
+
 v0.6.2
 	Nytt:
 		62 Som admin vill jag kunna redigera navigeringen på webbplatsen
