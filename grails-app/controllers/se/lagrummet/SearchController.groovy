@@ -1,10 +1,9 @@
 package se.lagrummet
 
 import grails.converters.*
-
 import java.text.SimpleDateFormat
-
 import static se.lagrummet.QueryBuilder.Operators.*
+import se.lagrummet.Search
 
 class SearchController {
 	
@@ -23,6 +22,8 @@ class SearchController {
 		} else if(params.query) {
 			searchResult = searchService.plainTextSearch(params.query, Category.getFromString(params.cat), null, null)
 		}
+		
+		new Search(query: params.query, category: params.cat).save()
 
 		if (params.ajax) {
 			def response = [query: params.query, searchResult: searchResult]

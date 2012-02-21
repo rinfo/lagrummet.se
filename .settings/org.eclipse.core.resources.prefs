@@ -1,7 +1,8 @@
-#Tue Jan 17 13:04:38 CET 2012
+#Tue Feb 21 11:43:38 CET 2012
 eclipse.preferences.version=1
 encoding//grails-app/conf/BootStrap.groovy=UTF-8
 encoding//grails-app/i18n/messages.properties=UTF-8
+encoding//grails-app/views/admin/index.gsp=UTF-8
 encoding//grails-app/views/layouts/adminMain.gsp=UTF-8
 encoding//grails-app/views/layouts/extendedSearchMain.gsp=UTF-8
 encoding//grails-app/views/layouts/main.gsp=UTF-8
