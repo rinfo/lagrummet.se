@@ -184,6 +184,10 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 	margin: 0 10px 0 0;
 }
 
+#bodyContent a {
+	text-decoration: underline;
+}
+
 #bodyContent .message, #bodyContent .errors {
 	width: 740px;
 	border: 1px dotted #ccc;
@@ -244,7 +248,7 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 
 #bodyContent form .content .permalink {
     font-style: italic;
-    color: #888;
+    color: #333;
 }
 
 #bodyContent form .content .permalink #permalink {
