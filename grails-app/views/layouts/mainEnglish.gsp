@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}">
+        <link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
         <g:mobileDeviceWidth />
         <g:layoutHead />
 		<!--[if lt IE 9]>

@@ -10,6 +10,7 @@
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<META name="serverURL" content="${resource()}">
+	<link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
 	<g:javascript library="jquery" plugin="jquery" />
 	<g:javascript library="jquery.jstree" />
 	<tinyMce:resources jquery="true" />
