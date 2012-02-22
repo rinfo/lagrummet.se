@@ -6,11 +6,9 @@ import grails.plugins.springsecurity.Secured
 class AdminController {
 
     def index = {
-		def daysOfSearches = params.daysOfSearches ? params.daysOfSearches.toInteger() : 30
-		def numberOfQueries = params.numberOfQueries ? params.numberOfQueries.toInteger() : 10
 		def c = Search.createCriteria()
 		def searches = c {
-			gt('dateCreated', new Date() - daysOfSearches)
+			gt('dateCreated', new Date() - 30)
 		    projections {
 		        countDistinct 'id', 'myCount'
 		        groupProperty 'query'
@@ -20,9 +18,9 @@ class AdminController {
 		}
 		
 		def totalSearches = Search.createCriteria().count {
-			gt('dateCreated', new Date() - daysOfSearches)
+			gt('dateCreated', new Date() - 30)
 		}
 		
-		[searches: searches, totalSearches: totalSearches, daysOfSearches: daysOfSearches, numberOfQueries: numberOfQueries]
+		[searches: searches, totalSearches: totalSearches, daysOfSearches: 30, numberOfQueries: 10]
 	}
 }

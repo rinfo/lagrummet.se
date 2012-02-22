@@ -4,11 +4,56 @@ import grails.converters.*
 import java.text.SimpleDateFormat
 import static se.lagrummet.QueryBuilder.Operators.*
 import se.lagrummet.Search
+import grails.plugins.springsecurity.Secured
 
 class SearchController {
 	
 	def searchService
 	def rdlSearchService
+	def springSecurityService
+	
+	def statistics = {
+		def daysOfSearches = params.daysOfSearches ? params.daysOfSearches.toInteger() : 30
+		def numberOfQueries = params.numberOfQueries ? params.numberOfQueries.toInteger() : 10
+		def c = Search.createCriteria()
+		def searches = c {
+			gt('dateCreated', new Date() - daysOfSearches)
+			projections {
+				countDistinct 'id', 'myCount'
+				groupProperty 'query'
+			}
+			order ('myCount', 'desc')
+			maxResults(numberOfQueries)
+		}
+		
+		def totalSearches = Search.createCriteria().count {
+			gt('dateCreated', new Date() - daysOfSearches)
+		}
+		
+		[searches: searches, totalSearches: totalSearches, daysOfSearches: daysOfSearches, numberOfQueries: numberOfQueries]
+	}
+	
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
+	def exportStats = {
+		def daysOfSearches = params.daysOfSearches ? params.daysOfSearches.toInteger() : 30
+		def searches = Search.findAllByDateCreatedGreaterThan(new Date() - daysOfSearches)
+		
+		def results = []
+		for(d in searches) {
+			def r= [d.query, d.category, '"' + d.dateCreated.toString() + '"']
+			results << r
+		}
+		def result = ''
+		results.each{ row ->
+			row.each{
+				col -> result += col + ';'
+			}
+			result = result[0..-2]
+			result += '\n'
+		}
+		response.setHeader("Content-disposition", "attachment; filename=search-history.csv");
+		render(contentType:'text/csv',text:result)
+	}
 
     def index = {
 		def searchResult = null

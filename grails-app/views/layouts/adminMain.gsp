@@ -54,6 +54,13 @@
 					<li><a href="${createLink(controller:'legalSource', action:'list')}">Hantera rättskällor</a></li>
 				</ul>
 			</li>
+			<li>
+				<strong>Sökverktyg</strong>
+				<ul class="sub_menu">
+					<li><a href="${createLink(controller:'search', action:'statistics')}">Statistik</a></li>
+					<li><a href="${createLink(controller:'synonyms', action:'index')}">Synonymer</a></li>
+				</ul>
+			</li>
 		</ul>
 		</nav>
 	</header>

@@ -8,6 +8,7 @@
     <body>
         <div class="body">
         	<h2>Sökhistorik</h2>
+        	<p>Visar de ${numberOfQueries} vanligaste sökningar under de senaste ${daysOfSearches} dagarna.</p> 
 	        <table>
 				<tr>
 					<th>&nbsp;</th>
@@ -24,8 +25,7 @@
 					</tr>
 				</g:each>
 			</table>
-			Antal dagar: <g:link params="[daysOfSearches: '30']">30</g:link>|<g:link params="[daysOfSearches: '90']">90</g:link>|<g:link params="[daysOfSearches: '365']">365</g:link>. Antal träffar: <g:link params="[numberOfQueries: '10']">10</g:link>|<g:link params="[numberOfQueries: '50']">50</g:link>|<g:link params="[numberOfQueries: '100']">100</g:link>
-			<br />Visar de ${numberOfQueries} vanligaste sökningar under de senaste ${daysOfSearches} dagarna.
-        </div>
+			<p><g:link controller="search" action="statistics">Visa annan period eller antal resultat</g:link>.</p>
+		   </div>
     </body>
 </html>

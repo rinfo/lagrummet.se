@@ -13,6 +13,12 @@ class PageTreeFilters {
 	}
 	
 	def filters = {
+			addPageTreeToModel(controller:'(search)', action: '(statistics)') {
+				after = { model ->
+					addPageTree(model)
+				}
+			}
+			
 			addPageTreeToModel(controller:'(page)', action: '(list|quickSearch|create|save|restore|edit|update|delete)') {
 				after = { model ->
 					addPageTree(model)
