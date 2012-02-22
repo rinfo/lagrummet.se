@@ -210,6 +210,7 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 
 #bodyContent form .content .title {
     margin: 0 0 20px 0;
+    padding-bottom: 5px;
     font-style: italic;
 }
 
