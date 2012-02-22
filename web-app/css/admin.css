@@ -217,11 +217,18 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
     display: none;
 }
 
-#bodyContent form .content .title input {
-    width: 100%;
-    display: none;
+#bodyContent form .content .title label {
+    width: auto;
+    display: inline;
+    float: left;
+    margin-top: 5px;
 }
 
+#bodyContent form .content .title input {
+    width: 30em;
+    display: none;
+    float: left;
+}
 
 #bodyContent form .content .permalink {
     font-style: italic;

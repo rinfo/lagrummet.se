@@ -142,6 +142,8 @@ jQuery(function($) {
 		if (!$("#bodyContent form .content .permalink input").val()) {
 			firstH1Blur = false;
 			$("#title").val($(this).val());
+			$("label[for=title] a").html($(this).val());
+			console.log($(this).val());
 			var value = $(this).val().replace(/ /g, "-").toLowerCase();
 			value = value.replace(/[åä]/g, 'a');
 			value = value.replace(/[ö]/g, 'o');
@@ -164,7 +166,7 @@ jQuery(function($) {
 	$("#bodyContent form .content .title a").click(function (e) {
 		e.preventDefault();
 		$(this).hide();
-		$("#bodyContent form .content .title input").show();
+		$("#bodyContent form .content .title input").css('display', 'inline');
 	});
 	
 	$("#addNewPuffButton").click(function() {
