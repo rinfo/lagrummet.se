@@ -282,7 +282,11 @@ class PageController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 	def publish = {
 		params.status = "published"
-		forward(action: "update", params: params)
+		if (!params.id) {
+			forward(action: "save", params: params)
+		} else {
+			forward(action: "update", params: params)
+		}
 	}
 	
 

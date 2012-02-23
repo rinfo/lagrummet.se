@@ -161,6 +161,10 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 	margin: 0 10px 0 0;
 }
 
+#bodyContent a {
+	text-decoration: underline;
+}
+
 #bodyContent .message, #bodyContent .errors {
 	width: 740px;
 	border: 1px dotted #ccc;
@@ -206,6 +210,7 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 
 #bodyContent form .content .title {
     margin: 0 0 20px 0;
+    padding-bottom: 5px;
     font-style: italic;
 }
 
@@ -213,15 +218,22 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
     display: none;
 }
 
-#bodyContent form .content .title input {
-    width: 100%;
-    display: none;
+#bodyContent form .content .title label {
+    width: auto;
+    display: inline;
+    float: left;
+    margin-top: 5px;
 }
 
+#bodyContent form .content .title input {
+    width: 30em;
+    display: none;
+    float: left;
+}
 
 #bodyContent form .content .permalink {
     font-style: italic;
-    color: #888;
+    color: #333;
 }
 
 #bodyContent form .content .permalink #permalink {

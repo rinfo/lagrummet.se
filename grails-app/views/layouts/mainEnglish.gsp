@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}">
+        <link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
         <g:mobileDeviceWidth />
         <g:layoutHead />
 		<!--[if lt IE 9]>
@@ -20,10 +21,9 @@
 		<a href="#primaryNavigation" id="mobileNavLink">Navigering</a>
 		<header id="siteHeader">
 			<nav id="sitelinks">
-				<ul>
-					${siteProps?.headerNavigation}
-					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=en_en&amp;readid=content&amp;url=${resource(absolute: true).encodeAsURL()}%2F" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker"> Listen</a> </li>
-				</ul>			
+				<g:menu root="toppmeny" rootTag="ul">
+					<li><a accesskey="L" href="http://app.eu.readspeaker.com/cgi-bin/rsent?customerid=5329&amp;lang=sv_se&amp;readid=content&amp;url=${resource(absolute: true).encodeAsURL()}%2F" onclick="readpage(this.href, 'xp1'); return false;"> <img src="${resource()}/images/readspeaker-icon.gif" alt="Lyssna p&aring; sidans text med ReadSpeaker" title="Lyssna p&aring; sidans text med ReadSpeaker" /> Lyssna</a></li>
+				</g:menu>		
 			</nav>
 			<nav id="breadcrumbs">
 				<g:breadcrumbs parent="${page?.parent}" />
@@ -52,13 +52,14 @@
 		
 		<div id="content">
 	    	<g:layoutBody />
-	    	<footer id="siteFooter">${siteProps?.footer}
+	    	<footer id="siteFooter">
+	    		<g:menu root="sidfot" />
 		    	<div id="version">${grailsApplication.metadata['app.name']} (v${grailsApplication.metadata['app.version']})</div>
 		    </footer>
 	    </div>
 	    
 	    <nav id="primaryNavigation">
-			${siteProps?.primaryNavigation}
+			<g:menu root="huvudmeny" activePage="${page}" />
 	    </nav>
 	   
 	    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js?ver=1.7.0'></script>

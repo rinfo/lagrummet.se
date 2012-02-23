@@ -14,7 +14,7 @@
 	</div>
   	
   	<div class="title input ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
-		<label for="title"><a href="#"><g:message code="page.title.label" default="Different title? Click here" /></a></label>
+		<label for="title"><g:message code="page.title.label" default="Title" />: <a href="#">${pageInstance?.title}</a></label>
 		<g:textField name="title" value="${pageInstance?.title}" />
 	</div>
   

@@ -553,6 +553,19 @@ article.legalSources section.Foreskrifter h2 {
 	margin-top: 0;
 }
 
+#ordlista {
+	margin: 1em 0;
+	width: 100%;
+	overflow: auto;
+	
+}
+#ordlista li {
+	margin-left: 0.5em;
+}
+#ordlista li:first-child {
+	margin-left: 0;
+}
+
 /* =FOOTER page footer */
 #siteFooter {
     padding-top: 1em;

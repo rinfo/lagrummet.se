@@ -10,6 +10,7 @@
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<META name="serverURL" content="${resource()}">
+	<link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
 	<g:javascript library="jquery" plugin="jquery" />
 	<g:javascript library="jquery.jstree" />
 	<tinyMce:resources jquery="true" />
@@ -58,6 +59,12 @@
 				<ul class="sub_menu">
 					<li><a href="${createLink(controller:'synonym', action:'create')}">Ny synonym</a></li>
 					<li><a href="${createLink(controller:'synonym', action:'list')}">Hantera synonymer</a></li>
+				</ul>
+			</li>
+			<li>
+				<strong>Sökverktyg</strong>
+				<ul class="sub_menu">
+					<li><a href="${createLink(controller:'search', action:'statistics')}">Statistik</a></li>
 				</ul>
 			</li>
 		</ul>
