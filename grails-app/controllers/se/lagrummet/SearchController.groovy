@@ -10,27 +10,37 @@ class SearchController {
 	
 	def searchService
 	def rdlSearchService
+	def synonymService
 
     def index = {
 		def searchResult = null
 		def offset
 		if (params.cat) session.cat = params.cat
+		
+		def synonyms = []
+		def queries = []
+		queries.add(params.query)
+		if(!params.alias || params.alias != "false"){
+				synonyms = synonymService.lookupSynonyms(params.query)
+				queries.addAll(synonyms)
+		}
+		
 		if(params.query && params.cat && params.cat != "Alla")  {
 			offset = parseInt(params.offset, 0)
 			def itemsPerPage = parseInt(params.max, 20)
-			searchResult = searchService.plainTextSearch(params.query, Category.getFromString(params.cat), offset, itemsPerPage)
+			searchResult = searchService.plainTextSearch(queries, Category.getFromString(params.cat), offset, itemsPerPage)
 			
 		} else if(params.query) {
-			searchResult = searchService.plainTextSearch(params.query, Category.getFromString(params.cat), null, null)
+			searchResult = searchService.plainTextSearch(queries, Category.getFromString(params.cat), null, null)
 		}
-
+		
 		if (params.ajax) {
-			def response = [query: params.query, searchResult: searchResult]
+			def response = [query: params.query, searchResult: searchResult, synonyms: synonyms]
 			render response as JSON
 		} else if(params.cat && params.cat != "Alla") {
-			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page(), offset:offset])
+			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page(), offset:offset, synonyms: synonyms, alias: params.alias])
 		} else {
-			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page()])
+			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page(), synonyms: synonyms, alias: params.alias])
 		}
 		
 	}

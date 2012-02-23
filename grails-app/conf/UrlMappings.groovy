@@ -51,6 +51,8 @@ class UrlMappings {
 		
 		"/admin/legalSource/$action"(controller: 'legalSource')
 		
+		"/admin/synonym/$action"(controller: 'synonym')
+		
 		name pageAdmin: "/admin/page/$action?" {
 			controller = 'page'
 		}

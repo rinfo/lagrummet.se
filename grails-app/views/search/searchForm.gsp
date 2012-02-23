@@ -26,6 +26,10 @@
 		
 		<g:if test="${searchResult?.totalResults}">
 		<p>Visar sökresultat för <span class="query">"${query.encodeAsHTML()}"</span> i <strong>alla rättskällor</strong> på lagrummet.se</p>	
+		<g:if test="${synonyms}">
+		<p>Din sökning gav även träff på följande: <span class="query">${synonyms.join(', ') }</span></p>
+		<p>För att se sökresultatet utan associerade träffar, <a href="${createLink(mapping:'search', params:[query:query, cat:'Alla', alias:'false']) }">klicka här</a></p>
+		</g:if>
 		<div class="column first">
 			<p>
 				<a href="${createLink(mapping:'search', params:[query:query, cat:'Ovrigt']) }" class="catTitle">Information från lagrummet.se</a> 

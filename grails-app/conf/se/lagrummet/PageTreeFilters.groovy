@@ -19,7 +19,7 @@ class PageTreeFilters {
 				}
 			}
 			
-			addPageTreeToModel(controller:'(admin|siteProperties|user|media|legalSource)', action: '*') {
+			addPageTreeToModel(controller:'(admin|siteProperties|user|media|legalSource|synonym)', action: '*') {
 				after = { model ->
 					addPageTree(model)
 				}

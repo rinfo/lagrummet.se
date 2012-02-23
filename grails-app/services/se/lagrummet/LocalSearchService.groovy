@@ -5,8 +5,8 @@ import org.compass.core.CompassQuery;
 class LocalSearchService {
 
     static transactional = true
-
-    public SearchResult plainTextSearch(String query, Category cat, Integer offset, Integer itemsPerPage) {
+	
+    public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
 		def options = [:]
 		if(cat && !cat.equals(Category.OVRIGT)){
 			return new SearchResult()
@@ -19,7 +19,7 @@ class LocalSearchService {
 		return queryWithOptions(query, options)
 	}
 	
-	private SearchResult queryWithOptions(String query, Map options) {
+	private SearchResult queryWithOptions(List<String> query, Map options) {
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = options.max ?: searchResult.maxItemsPerCategory
 		
@@ -32,11 +32,16 @@ class LocalSearchService {
 				]
 		}
 		
+		
 		options['withHighlighter'] = pageHighlighter
 		if(query) {
 			try {
 				def result = Page.search (  {
-						must(queryString(query))
+						must{
+							query.each { qs ->
+								queryString(qs)
+							}
+						}
 						must(term("status", "published"))
 						must(le("publishStart", new Date()))
 						must{

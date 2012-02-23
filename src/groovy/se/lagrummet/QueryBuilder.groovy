@@ -68,6 +68,11 @@ class QueryBuilder {
 		return this
 	}
 	
+	private QueryBuilder setValue(String key, value, String... operators) {
+		put(key, value, operators)
+		return this
+	}
+	
 	private void setBlankParam(String key, String value, String... operators) {
 		put(key, value, operators)
 	}
@@ -76,6 +81,11 @@ class QueryBuilder {
 		if(value != null) {
 			put(key, value, operators)
 		}
+	}
+	
+	public QueryBuilder setQueries(List<String> queries) {
+		setValue('q', queries)
+		return this
 	}
 	
 	public QueryBuilder setQuery(String query) {

@@ -14,7 +14,7 @@ class SearchService {
 	def rdlSearchService
 	def localSearchService
 	
-    public SearchResult plainTextSearch(String query, Category cat, Integer offset, Integer itemsPerPage) {
+    public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
 		
 		def remoteResult = rdlSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
 		def localResult = localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)

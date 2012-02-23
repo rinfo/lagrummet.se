@@ -13,9 +13,11 @@ class RdlSearchService {
 	
 	def availableCategories = [Category.RATTSFALL, Category.LAGAR, Category.MYNDIGHETERS_FORESKRIFTER, Category.PROPOSITIONER, Category.UTREDNINGAR]
 	
-    public SearchResult plainTextSearch(String query, Category cat, Integer offset, Integer itemsPerPage) {
+	
+    public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
 		def queryBuilder = new QueryBuilder()
-		queryBuilder.setQuery(query)
+		
+		queryBuilder.setQueries(query)
 		
 		if(cat && availableCategories.contains(cat)){
 			queryBuilder.setType(cat.getTypes())
@@ -79,7 +81,10 @@ class RdlSearchService {
 		} catch (SocketTimeoutException ex) {
 			log.error(ex)
 			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
-		}
+		} catch (UnknownHostException ex) {
+			log.error(ex)
+			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
+		} 
 		return searchResult
 	}
 	

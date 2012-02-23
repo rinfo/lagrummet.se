@@ -5,6 +5,7 @@ import se.lagrummet.Puff
 import se.lagrummet.SecRole
 import se.lagrummet.SecUserSecRole
 import se.lagrummet.SiteProperties
+import se.lagrummet.Synonym
 import se.lagrummet.User
 
 class BootStrap {
@@ -24,8 +25,9 @@ class BootStrap {
 			kalles.addToPuffs(new Puff(title:"olles puff", description:"detta är också en sidopuff. Det blir spännande med lite mer text. Då kanske det kan bli något fel", link:"kalle", parent:kalles))
 			def kallesUndersida = new Page(title: 'Kalles undersida', author: user, pageOrder: 1, parent: kalles, permalink: 'kalle-undersida', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: fourDaysAgo).save()
 			def kallesUndersida2 = new Page(title: 'Kalles undersida 2', author: user, pageOrder: 0, parent: kalles, permalink: 'kalle-undersida-2', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: fourDaysAgo).save()
+			def kallesUndersida3 = new Page(title: 'Olles undersida 3', author: user, pageOrder: 0, parent: kalles, permalink: 'olle-undersida-2', h1: 'heja olle igen!', content: "heja olle!", status: "published", publishStart: fourDaysAgo).save()
 			
-			def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo).save()
+			def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo, metaPage: false).save()
 			home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
@@ -86,7 +88,8 @@ class BootStrap {
 			new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", name:"Försvarets författningssamling", category:"Foreskrifter").save()
 			new LegalSource(url:"http://www.domstol.se/Ladda-ner--bestall/Vagledande-avgoranden/", name:"Domstolar", category:"Rattspraxis").save()
 
-			
+			new Synonym(synonym: "kalle", baseTerm: "olle").save()
+			new Synonym(synonym: "olle", baseTerm: "nisse").save()
 			
 			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>',
 				headerNavigation: '''
