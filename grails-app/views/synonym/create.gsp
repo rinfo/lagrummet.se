@@ -26,7 +26,7 @@
 				</div>                        
                             
 				<div class="input ${hasErrors(bean: synonymInstance, field: 'baseTerm', 'errors')}">
-					<label for="baseTerm"><g:message code="synonym.baseTerm.label" default="Search Term" /></label>
+					<label for="baseTerm"><g:message code="synonym.baseTerm.label" default="Grundterm" /></label>
 					<g:textField name="baseTerm" value="${synonymInstance?.baseTerm}" />
 				</div>
 				

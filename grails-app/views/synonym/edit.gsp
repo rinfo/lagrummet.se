@@ -37,7 +37,7 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="baseTerm"><g:message code="synonym.baseTerm.label" default="Search Term" /></label>
+                                  <label for="baseTerm"><g:message code="synonym.baseTerm.label" default="Grundterm" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: synonymInstance, field: 'baseTerm', 'errors')}">
                                     <g:textField name="baseTerm" value="${synonymInstance?.baseTerm}" />
