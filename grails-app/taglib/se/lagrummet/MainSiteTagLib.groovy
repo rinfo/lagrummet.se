@@ -46,6 +46,29 @@ class MainSiteTagLib {
 		
 	}
 	
+	def adminMenuItem = {attrs ->
+		def pageInstance = Page.get(attrs.pageId)
+		def noLinkForMetaPage = (attrs?.noLinkForMetaPage) ? true : false
+		def liClass = (!pageInstance.metaPage) ? "" : "metaPage"
+		def aSpan = (pageInstance.status == 'draft') ? '<span class="draft">*</span> ' : ""
+		
+		out << '<li id="p-' << pageInstance.id << '" class="'<< liClass << '">'
+		if (noLinkForMetaPage && pageInstance.metaPage) {
+			out << aSpan + pageInstance.h1
+		} else {
+			out << g.link(controller:"page", action:"edit", id: pageInstance.id) { aSpan + pageInstance.h1 }
+		}
+		
+		if (pageInstance?.children?.size()){
+			out << "<ul>"
+			pageInstance.children.each {it ->
+				out << adminMenuItem(pageId:it.id, noLinkForMetaPage: noLinkForMetaPage)
+			}
+			out << "</ul>"
+		}
+		out << '</li>'
+	}
+	
 	/**
 	 * Creates a html anchor tag that will wrap the body content if a href is provided.
 	 * When no href or a blank href is provided, the body will be rendered without a link

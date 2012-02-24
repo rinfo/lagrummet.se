@@ -74,37 +74,17 @@
 		<g:form action="create" controller="page">
 		<div class="buttons"><g:actionSubmit name="create" action="create" class="add" value="Ny sida" /></div>
 		</g:form>
+		
 		<div id="pageTree">
 		<ul>
-            <g:each in="${pageTreeList}" var="pI">
-                <g:if test="${!pI.parent}">
-                	<% pIclass = (!pI.metaPage) ? "" : "metaPage" %>
-                  <li id="p-${pI.id}" class="<%=pIclass%>">
-                  <% isDraft = (pI.status == 'draft') ? '<span class="draft">*</span> ' : "" %>
-                  <g:link controller="page" action="edit" id="${pI.id}"><%=isDraft%>${pI.h1}</g:link>
-                  <g:if test="${pI.children?.size()}">
-                    <ul>
-                      <g:each in="${pI.children}" var="pIChild">
-                      	<% pIChildClass = (!pIChild.metaPage) ? "" : "metaPage" %>
-                      	<% isDraft = (pIChild.status == 'draft') ? '<span class="draft">*</span> ' : "" %>
-                        <g:if test="${pIChild.status != 'autoSave'}"><li id="p-${pIChild.id}" class="<%=pIChildClass%>"><g:link controller="page" action="edit" id="${pIChild.id}"><%=isDraft%>${pIChild.h1}</g:link></li></g:if>
-                        <g:if test="${pIChild.children?.size()}">
-                        	<ul>
-                        	<g:each in="${pIChild.children}" var="pIGrandChild">
-                        		<% pIGrandChildClass = (!pIGrandChild.metaPage) ? "" : "metaPage" %>
-                        		<% isDraft = (pIGrandChild.status == 'draft') ? '<span class="draft">*</span> ' : "" %>
-                        		 <g:if test="${pIGrandChild.status != 'autoSave'}"><li id="p-${pIGrandChild.id}" class="<%=pIGrandChildClass%>"><g:link controller="page" action="edit" id="${pIGrandChild.id}"><%=isDraft%>${pIGrandChild.h1}</g:link></li></g:if>
-                        	</g:each>
-                        	</ul>
-                        </g:if>
-                      </g:each>
-                    </ul>
-                  </g:if>
-                  </li>
-                </g:if>
+			<g:each in="${pageTreeList}" var="pI">
+				<g:if test="${!pI.parent}">
+            		<g:adminMenuItem pageId="${pI.id}" />
+            	</g:if>
             </g:each>
           </ul>
 		</div>
+		
 		<g:form name="quickSearch" method="post" mapping="pageAdmin" action="quickSearch"> 
 			<g:textField size="22" name="query" id="adminQuery"/><g:submitButton name="search" value="${message(code:'default.button.find.label', default:'Find')}" />
 		</g:form>
