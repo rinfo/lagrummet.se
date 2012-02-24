@@ -141,11 +141,16 @@ class PageController {
 		def permalink = url[url.size()-1]
 
 		def page
+		def now = new Date()
 		if (url.size() < 2) {
 			page = Page.withCriteria(uniqueResult:true) {
 				eq("permalink", permalink)
 				eq("status", "published")
-				le('publishStart', new Date())
+				le('publishStart', now)
+				or {
+					ge('publishStop', now)
+					isNull('publishStop')
+				}
 				maxResults(1)
 			}
 		} else {
@@ -157,7 +162,11 @@ class PageController {
 					eq("status", "published")
 				}
 				eq("status", "published")
-				le('publishStart', new Date())
+				le('publishStart', now)
+				or {
+					ge('publishStop', now)
+					isNull('publishStop')
+				}
 				maxResults(1)
 			}
 		}
@@ -274,7 +283,7 @@ class PageController {
 			forward(action: "update", params: params)
 		} else {
 			def master = Page.get(params.id)
-			params.status = "draftFromPublished"
+			params.status = "draft"
 			forward(action: "update", params: params)
 		}
 	}
@@ -303,15 +312,23 @@ class PageController {
                 }
             }
 			
-			def changeStatus = true
-			if (params.status == "draftFromPublished") {
-				changeStatus =  false
-				params.status = "draft"
-			}
-			pageInstance.backup(changeStatus)
+			pageInstance.backup()
 			
 			params.author = SecUser.get(springSecurityService.principal.id)
             pageInstance.properties = params
+			
+			if(params.status == "published") {
+				def now = new Date()
+				pageInstance.autoSaves.each { revision ->
+					if(revision.isCurrentlyPublished()) {
+						if(pageInstance.publishStart > now) {
+							revision.publishStop = pageInstance.publishStart
+						} else {
+							revision.publishStop = now
+						}
+					}
+				}
+			}
 			def toBeDeleted = pageInstance.puffs.findAll {
 				it.deleted || it.isEmpty()
 			}

@@ -62,7 +62,9 @@ class MainSiteTagLib {
 		if (pageInstance?.children?.size()){
 			out << "<ul>"
 			pageInstance.children.each {it ->
-				out << adminMenuItem(pageId:it.id, noLinkForMetaPage: noLinkForMetaPage)
+				if(it.masterRevision == null) {
+					out << adminMenuItem(pageId:it.id, noLinkForMetaPage: noLinkForMetaPage)
+				}
 			}
 			out << "</ul>"
 		}

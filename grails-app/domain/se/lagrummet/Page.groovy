@@ -29,15 +29,19 @@ class Page implements Comparable<Page>{
 	}
 	
 	def getPublishedChildren() {
-		Date now = new Date()
 		SortedSet published = new TreeSet()
 		children.each{ it ->
-			if(it.publishStart < now  && it.status.equals("published")) {
+			if(it.isCurrentlyPublished()) {
 				published.add(it)
 			}
 			
 		}
 		return published
+	}
+	
+	def isCurrentlyPublished() {
+		def now = new Date()
+		return status == "published" && publishStart < now && (publishStop == null || publishStop > now)
 	}
 	
 	
@@ -80,19 +84,9 @@ class Page implements Comparable<Page>{
 		return response + permalink
 	}
 	
-	def backup = { changeStatus ->
+	def backup = {
 		def pageBackup = new Page()
 		pageBackup.properties = this.properties
-		
-		if (changeStatus) {
-			def now = new Date()
-			if(this.publishStart > now) {
-				pageBackup.publishStop = this.publishStart				
-			} else {
-				pageBackup.publishStop = now
-				pageBackup.status = "autoSave"
-			}
-		}
 		
 		pageBackup.id = null
 		pageBackup.children = null
