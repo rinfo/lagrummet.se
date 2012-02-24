@@ -1,3 +1,11 @@
+v0.7.1
+	Nytt:
+		8 Sökloggar
+		16 Synonymer
+		Favicon
+	Fix:
+		#67 Publicering av ny sida
+		
 v0.7.0
 	Fix:
 		Länkar och bilder i puffar
