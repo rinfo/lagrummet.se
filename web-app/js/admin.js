@@ -143,7 +143,6 @@ jQuery(function($) {
 			firstH1Blur = false;
 			$("#title").val($(this).val());
 			$("label[for=title] a").html($(this).val());
-			console.log($(this).val());
 			var value = $(this).val().replace(/ /g, "-").toLowerCase();
 			value = value.replace(/[åä]/g, 'a');
 			value = value.replace(/[ö]/g, 'o');
@@ -155,6 +154,14 @@ jQuery(function($) {
 		$("#bodyContent form .content .title").show();
 		$("#bodyContent form .content h1 a").html($(this).val()).parent().show();
 		
+	});
+	
+	// prevent form submit on enter in the text inputs
+	$("#h1,#permalink,#title").keypress(function(e) {
+		if(e.keyCode == 13) {
+			e.preventDefault();
+			return false;
+		}
 	});
 	
 	$("#bodyContent form .content h1 a").click(function(e) {
