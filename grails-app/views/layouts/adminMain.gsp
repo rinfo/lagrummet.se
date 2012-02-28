@@ -79,7 +79,7 @@
 		<ul>
 			<g:each in="${pageTreeList}" var="pI">
 				<g:if test="${!pI.parent}">
-            		<g:adminMenuItem pageId="${pI.id}" />
+            		<g:adminMenuItem pageId="${pI.id}" currentPageId="${pageInstance?.id}" />
             	</g:if>
             </g:each>
           </ul>

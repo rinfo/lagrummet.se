@@ -10,7 +10,7 @@
   	
  	
   	<div class="permalink input ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
-		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" />
+		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" /> <a href="${resource()}/${pageInstance.url()}">förhandsvisning</a>
 	</div>
   	
   	<div class="title input ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
@@ -65,9 +65,11 @@
 </div>
 
 <div class="aside publish">
-	<div class="buttons">
-		<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
-	</div>
+	<g:if test="${pageInstance.id}">
+		<div class="buttons">
+			<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
+		</div>
+	</g:if>
 	
   	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
   		<g:hiddenField name="status" value="${pageInstance?.status}" />

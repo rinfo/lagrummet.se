@@ -49,21 +49,27 @@ class MainSiteTagLib {
 	def adminMenuItem = {attrs ->
 		def pageInstance = Page.get(attrs.pageId)
 		def noLinkForMetaPage = (attrs?.noLinkForMetaPage) ? true : false
-		def liClass = (!pageInstance.metaPage) ? "" : "metaPage"
-		def aSpan = (pageInstance.status == 'draft') ? '<span class="draft">*</span> ' : ""
+		def now = new Date()
+		
+		def liClass = (!pageInstance.metaPage) ? "" : "metaPage "
+		if (attrs.currentPageId == pageInstance.id) liClass += "currentPage "
+		if (pageInstance.status == 'draft') liClass += "draft "
+		else if (pageInstance.status == 'published' && pageInstance.publishStart <= now && (pageInstance.publishStop == null || pageInstance.publishStop >= now)) liClass += "published "
+		else if (pageInstance.status == 'published' && pageInstance.publishStart > now) liClass += "publishLater "
+		else if (pageInstance.status == 'published' && pageInstance.publishStop < now) liClass += "wasPublished "
 		
 		out << '<li id="p-' << pageInstance.id << '" class="'<< liClass << '">'
 		if (noLinkForMetaPage && pageInstance.metaPage) {
-			out << aSpan + pageInstance.h1
+			out << pageInstance.h1
 		} else {
-			out << g.link(controller:"page", action:"edit", id: pageInstance.id) { aSpan + pageInstance.h1 }
+			out << g.link(controller:"page", action:"edit", id: pageInstance.id) { pageInstance.h1 }
 		}
 		
 		if (pageInstance?.children?.size()){
 			out << "<ul>"
 			pageInstance.children.each {it ->
 				if(it.masterRevision == null) {
-					out << adminMenuItem(pageId:it.id, noLinkForMetaPage: noLinkForMetaPage)
+					out << adminMenuItem(pageId:it.id, currentPageId: attrs.currentPageId, noLinkForMetaPage: noLinkForMetaPage)
 				}
 			}
 			out << "</ul>"
