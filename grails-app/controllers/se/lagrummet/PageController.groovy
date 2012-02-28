@@ -316,6 +316,7 @@ class PageController {
 			
 			params.author = SecUser.get(springSecurityService.principal.id)
             pageInstance.properties = params
+			if (params.reviewDate) pageInstance.publishStart = new Date()
 			
 			if(params.status == "published") {
 				def now = new Date()

@@ -84,6 +84,11 @@
 		<g:datePicker name="publishStop" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStop}" default="none" noSelection="['': '']" />
 	</div>
 	
+	<div class="input ${hasErrors(bean: pageInstance, field: 'reviewDate', 'errors')}">
+		<g:checkBox name="reviewDate" value="${false}" />
+  		<label for="reviewDate"><g:message code="page.reviewDate.label" default="Uppdatera granskad-datum" /></label>
+	</div>
+	
 	<g:if test="${pageInstance.masterRevision && pageInstance.status == 'autoSave'}">
 		<div class="buttons">
 		  	<span class="button"><g:actionSubmit  name="restore" action="restore" class="restore exclamation" value="${message(code: 'default.button.restore.label', default: 'Restore')}" /></span>
@@ -103,8 +108,8 @@
   
 <div class="aside meta">  
   	<div class="input ${hasErrors(bean: pageInstance, field: 'metaPage', 'errors')}">
+  		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
   		<label for="metaPage"><g:message code="page.metaPage.label" default="Visa som kategori" /></label>
-		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
 	</div>
 	
 	<div class="input ${hasErrors(bean: pageInstance, field: 'menuStyle', 'errors')}">

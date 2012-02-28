@@ -7,6 +7,7 @@
     <article class="editorial">
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
+		<footer class="reviewed">Senast granskad: ${page.publishStart.format('yyyy-MM-dd')}</footer>
 	</article>
 	<aside class="puffs">
 		<g:each in="${[]}" var="puff" >

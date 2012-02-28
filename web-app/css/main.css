@@ -413,6 +413,14 @@ article.editorial img.pdfIcon {
 	margin: 0 3px 0 0;
 }
 
+article .reviewed {
+	font-style: italic;
+	color: #555;
+	display: block;
+	margin-bottom: 1.1em;
+	clear: both;
+}
+
 .puff h3 {
 	margin: 0 0 1em 0;
 }

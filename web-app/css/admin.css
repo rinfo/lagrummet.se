@@ -278,6 +278,11 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 	width: 220px;
 }
 
+#bodyContent form .aside input[type=checkbox] {
+	float: left;
+	margin-right: 0.5em;
+}
+
 #puffs {
 	width: 100%;
 	margin-bottom: 0em;
