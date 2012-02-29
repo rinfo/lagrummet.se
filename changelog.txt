@@ -1,3 +1,15 @@
+v0.7.2
+	Nytt:
+		404 Error page
+	Fix:
+		#59 Admin, markering av sidan i trädstrukturen
+		#66 Skapande av ny sida
+		#69 Sparande av utkast
+		#72 Admin, sidan försvinner i trädstrukturen
+		#75 Avpublicering vid visst klockslag
+	Improved:
+		Admin för Synonymer
+
 v0.7.1
 	Nytt:
 		8 Sökloggar
