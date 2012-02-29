@@ -47,7 +47,6 @@ class BootStrap {
 			def toppmeny = new Page(title: "Toppmeny", author: user, permalink:"toppmeny", h1:"Toppmeny", status:"published", publishStart: fourDaysAgo, metaPage:true).save()
 			def otherLang = new Page(title: "Other languages", author: user, permalink:"other-languages", h1:"Other languages", status:"published", content:"", publishStart: fourDaysAgo, parent:toppmeny, pageOrder:1).save()
 			def sitemap = new Page(title: 'Webbkarta', author: user, template: "sitemap", pageOrder: 2, permalink: 'webbkarta', h1: 'Webbkarta över lagrummet.se', content: "", status: "published", publishStart: fourDaysAgo, parent:toppmeny).save()
-
 			
 			def footer = new Page(title:"sidfot", author: user, pageOrder:10, permalink:"sidfot", h1:"sidfot", status:"published", publishStart: fourDaysAgo, metaPage:true).save()
 			def omLagrummet = new Page(title:"Om lagrummet.se", author: user, permalink:"om-lagrummet", h1:"Om lagrummet.se", status:"published", publishStart:fourDaysAgo, metaPage:true, parent: footer, pageOrder:1).save()

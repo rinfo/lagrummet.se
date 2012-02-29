@@ -45,6 +45,7 @@
 	        </g:if>
 		    </g:each>
 		    </div>
+		    <footer class="reviewed">Senast granskad: ${page.publishStart.format('yyyy-MM-dd')}</footer>
 	</article>
 </body>
 </html>

@@ -139,9 +139,15 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 #pageTree.jstree-default > ul > li,
 #pageTree > ul > li.jstree-leaf > ins.jstree-icon {background-image: none;}
 
-#pageTree li.metaPage > a> ins.jstree-icon,
+#pageTree li.metaPage > a > ins.jstree-icon,
 #pageTree li.metaPage.jstree-open > ins.jstree-icon {display: none; }
 #pageTree .jstree-hovered, #demo4 .jstree-clicked { border:0; }
+
+#pageTree li.currentPage, #pageTree > ul > li.metaPage.currentPage {background-color: #FFECBE;}
+#pageTree li.draft > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/draft-icon.png) 5px 0 no-repeat;}
+#pageTree li.published > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/published-icon.png) 5px 0 no-repeat;}
+#pageTree li.wasPublished > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/was-published-icon.png) 5px 0 no-repeat;}
+#pageTree li.publishLater > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/publish-later-icon.png) 5px 0 no-repeat;}
 
 #quickSearch {
 	margin-top: 20px;
@@ -276,6 +282,11 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 	text-align: right;
 	clear: none;
 	width: 220px;
+}
+
+#bodyContent form .aside input[type=checkbox] {
+	float: left;
+	margin-right: 0.5em;
 }
 
 #puffs {

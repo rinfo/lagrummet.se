@@ -153,7 +153,11 @@ jQuery(function($) {
 		$(this).hide();
 		$("#bodyContent form .content .title").show();
 		$("#bodyContent form .content h1 a").html($(this).val()).parent().show();
-		
+	}).live("keypress", function(e) {
+		if (e.which == 13) {
+			e.preventDefault();
+			$(this).blur();
+		}
 	});
 	
 	// prevent form submit on enter in the text inputs

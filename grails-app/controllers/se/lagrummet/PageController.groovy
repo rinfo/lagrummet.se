@@ -201,11 +201,18 @@ class PageController {
 			} else {
 				render(view: page.template, model: model)
 			}
-			
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND)
 		}
     }
+	
+	def error = {
+		println "errorId: " + params.errorId
+		if (params.errorId == "404") {
+			def model = [siteProps: SiteProperties.findByTitle("lagrummet.se")]
+			render(view: "error404", model: model)
+		}
+	}
 	
 	def xmlSitemap = {
 		def pages = Page.findAllByStatusNot("autoSave")		
@@ -316,6 +323,7 @@ class PageController {
 			
 			params.author = SecUser.get(springSecurityService.principal.id)
             pageInstance.properties = params
+			if (params.reviewDate) pageInstance.publishStart = new Date()
 			
 			if(params.status == "published") {
 				def now = new Date()

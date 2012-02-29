@@ -10,7 +10,7 @@
   	
  	
   	<div class="permalink input ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
-		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" />
+		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" /> <a href="${resource()}/${pageInstance.url()}">förhandsvisning</a>
 	</div>
   	
   	<div class="title input ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
@@ -65,9 +65,11 @@
 </div>
 
 <div class="aside publish">
-	<div class="buttons">
-		<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
-	</div>
+	<g:if test="${pageInstance.id}">
+		<div class="buttons">
+			<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
+		</div>
+	</g:if>
 	
   	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
   		<g:hiddenField name="status" value="${pageInstance?.status}" />
@@ -82,6 +84,11 @@
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStop', 'errors')}">
 		<label for="publishStop"><g:message code="page.publishStop.label" default="Publish Stop" /></label>
 		<g:datePicker name="publishStop" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStop}" default="none" noSelection="['': '']" />
+	</div>
+	
+	<div class="input ${hasErrors(bean: pageInstance, field: 'reviewDate', 'errors')}">
+		<g:checkBox name="reviewDate" value="${false}" />
+  		<label for="reviewDate"><g:message code="page.reviewDate.label" default="Uppdatera granskad-datum" /></label>
 	</div>
 	
 	<g:if test="${pageInstance.masterRevision && pageInstance.status == 'autoSave'}">
@@ -103,8 +110,8 @@
   
 <div class="aside meta">  
   	<div class="input ${hasErrors(bean: pageInstance, field: 'metaPage', 'errors')}">
+  		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
   		<label for="metaPage"><g:message code="page.metaPage.label" default="Visa som kategori" /></label>
-		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
 	</div>
 	
 	<div class="input ${hasErrors(bean: pageInstance, field: 'menuStyle', 'errors')}">
