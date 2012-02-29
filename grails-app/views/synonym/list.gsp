@@ -13,37 +13,49 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
+            <g:form name="editSynonyms" action="updateList" controller="synonym">
+            <div class="buttons">
+            <input type="button" value="lägg till synonym" id="addSynonym" class="add" />
+            </div>
             <div class="list">
                 <table>
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'synonym.id.label', default: 'Id')}" />
+                            <g:sortableColumn property="synonym" title="${message(code: 'synonym.synonym.label', default: 'Populärnamn')}" />
                         
-                            <g:sortableColumn property="synonym" title="${message(code: 'synonym.synonym.label', default: 'Synonym')}" />
-                        
-                            <g:sortableColumn property="baseTerm" title="${message(code: 'synonym.baseTerm.label', default: 'Grundterm')}" />
-                        
+                            <g:sortableColumn property="baseTerm" title="${message(code: 'synonym.baseTerm.label', default: 'Formellt namn')}" />
+                        	
+                        	<th></th>
                         </tr>
                     </thead>
                     <tbody>
                     <g:each in="${synonymInstanceList}" status="i" var="synonymInstance">
-                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                        <tr>
                         
-                            <td><g:link action="edit" id="${synonymInstance.id}">${fieldValue(bean: synonymInstance, field: "id")}</g:link></td>
+                            <td><g:textField name="expandableSynonymList[${i}].synonym" value="${synonymInstance?.synonym}" size="50" disabled="disabled" /></td>
                         
-                            <td>${fieldValue(bean: synonymInstance, field: "synonym")}</td>
+                            <td><g:textField name="expandableSynonymList[${i}].baseTerm" value="${synonymInstance?.baseTerm}" size="50" disabled="disabled" /></td>
                         
-                            <td>${fieldValue(bean: synonymInstance, field: "baseTerm")}</td>
-                        
+                        	<td>
+                        		<div class="buttons"><input type="button" class="editSynonym update" value="&nbsp;" /> <input type="button" class="deleteSynonym delete" value="&nbsp;" /></div>
+                        		<g:hiddenField name="expandableSynonymList[${i}].id" value="${synonymInstance?.id}" disabled="disabled" />
+                        		<g:hiddenField name="expandableSynonymList[${i}].deleted" value="false" disabled="disabled" />
+                        	</td>
                         </tr>
                     </g:each>
                     </tbody>
                 </table>
             </div>
-            <div class="paginateButtons">
-                <g:paginate total="${synonymInstanceTotal}" />
+            <script type="text/javascript">
+			    var next_index = ${synonymInstanceList.size()}
+			</script>
+			<div class="buttons">
+				<span class="button">
+	            	<g:submitButton name="submitSynonym" value="Spara ändringar" class="save"/>
+	            </span>
             </div>
+            </g:form>
         </div>
     </body>
 </html>

@@ -204,6 +204,42 @@ jQuery(function($) {
 	});
 	
 	
+	var edit_eventhandler = function(e) {
+		e.preventDefault();
+		$(this).parents("tr").find(":disabled").prop("disabled", false);
+		$(this).parents("td").find("input[value='true']").val("false");
+		$(this).parents("tr").removeClass("deleteRow");
+		
+	}
+	
+	var delete_eventhandler = function(e){
+		e.preventDefault();
+		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+			$(this).parents("tr").find(":text").attr("disabled", "disabled");
+			$(this).parents("td").find(":hidden").attr("disabled", false);
+			$(this).parents("td").find("input[value='false']").val("true");
+			$(this).parents("tr").addClass("deleteRow");
+		}
+	}
+	
+	$(".editSynonym").click(edit_eventhandler);
+	$(".deleteSynonym").click(delete_eventhandler);
+	
+	$("#addSynonym").click(function(e) {
+		e.preventDefault();
+		
+		var inputRow = '<tr><td><input type="text" size="50" name="expandableSynonymList[' + next_index + '].synonym" /></td><td><input type="text" size="50" name="expandableSynonymList['+next_index+'].baseTerm" /></td>';
+		inputRow += '<td><div class="buttons"><input type="button" class="editSynonym update" /> <input type="button" class="deleteSynonym delete" /></div>';
+		inputRow += '<input type="hidden" name="expandableSynonymList[' + next_index + '].deleted" value="false" disabled="disabled" /></td></tr>';
+		next_index++;
+		$(".list").find("tbody").prepend(inputRow);
+		$(".list").find("tbody").find("tr:first").find(".deleteSynonym").click(delete_eventhandler);
+		$(".list").find("tbody").find("tr:first").find(".editSynonym").click(edit_eventhandler);
+	});
+	
+	
+	
+	
 });
 
 function markPuffAsDeleted(puffIndex) {

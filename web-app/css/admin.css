@@ -315,7 +315,7 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 	margin-bottom: 1.5em;
 }
 
-#puffs .deleteRow {
+#puffs .deleteRow, .list .deleteRow {
 	background-color: #f4f4f4;
 }
 
@@ -426,4 +426,11 @@ input:focus, select:focus, textarea:focus {
 #searchCats {
 	width: 20em;
 	height: 10em;
+}
+
+#editSynonyms input[disabled='disabled'] {
+	background-color: #eee;
+}
+.list .buttons {
+	margin-top: 0em;
 }

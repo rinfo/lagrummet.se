@@ -55,16 +55,10 @@
 				</ul>
 			</li>
 			<li>
-				<strong>Synonymer</strong>
-				<ul class="sub_menu">
-					<li><a href="${createLink(controller:'synonym', action:'create')}">Ny synonym</a></li>
-					<li><a href="${createLink(controller:'synonym', action:'list')}">Hantera synonymer</a></li>
-				</ul>
-			</li>
-			<li>
 				<strong>Sökverktyg</strong>
 				<ul class="sub_menu">
 					<li><a href="${createLink(controller:'search', action:'statistics')}">Statistik</a></li>
+					<li><a href="${createLink(controller:'synonym', action:'list')}">Hantera synonymer</a></li>
 				</ul>
 			</li>
 		</ul>
