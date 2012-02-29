@@ -160,14 +160,6 @@ jQuery(function($) {
 		}
 	});
 	
-	// prevent form submit on enter in the text inputs
-	$("#h1,#permalink,#title").keypress(function(e) {
-		if(e.keyCode == 13) {
-			e.preventDefault();
-			return false;
-		}
-	});
-	
 	$("#bodyContent form .content h1 a").click(function(e) {
 		e.preventDefault();
 		$("#h1").show().focus();
