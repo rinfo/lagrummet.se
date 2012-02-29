@@ -225,7 +225,7 @@ jQuery(function($) {
 		e.preventDefault();
 		
 		var inputRow = '<tr><td><input type="text" size="50" name="expandableSynonymList[' + next_index + '].synonym" /></td><td><input type="text" size="50" name="expandableSynonymList['+next_index+'].baseTerm" /></td>';
-		inputRow += '<td><div class="buttons"><input type="button" class="editSynonym update" /> <input type="button" class="deleteSynonym delete" /></div>';
+		inputRow += '<td><div class="buttons"><input type="button" class="editSynonym update" value="&nbsp;" /> <input type="button" class="deleteSynonym delete" value="&nbsp;" /></div>';
 		inputRow += '<input type="hidden" name="expandableSynonymList[' + next_index + '].deleted" value="false" disabled="disabled" /></td></tr>';
 		next_index++;
 		$(".list").find("tbody").prepend(inputRow);
