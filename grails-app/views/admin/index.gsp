@@ -25,7 +25,18 @@
 					</tr>
 				</g:each>
 			</table>
-			<p><g:link controller="search" action="statistics">Visa annan period eller antal resultat</g:link>.</p>
+			<p>Antal dagar: 
+			<g:each in="[30,90,365]" var="days">
+				<g:if test="${daysOfSearches != days }"><g:link action="statistics" controller="search" params="[daysOfSearches: days, numberOfQueries: numberOfQueries]">${days}</g:link></g:if>
+				<g:else>${daysOfSearches}</g:else>
+			</g:each>
+			. Antal sökfrågor: 
+			<g:each in="[10,50,100]" var="noQueries">
+				<g:if test="${numberOfQueries != noQueries }"><g:link action="statistics" controller="search" params="[numberOfQueries: noQueries, daysOfSearches: daysOfSearches]">${noQueries}</g:link></g:if>
+				<g:else>${noQueries}</g:else>
+			</g:each>
+			.</p>
+			<p><g:link action="exportStats" controller="search" params="[daysOfSearches: daysOfSearches, numberOfQueries: numberOfQueries]">Exportera all data under vald period till .csv (${daysOfSearches} dagar)</g:link>.</p>
 		   </div>
     </body>
 </html>
