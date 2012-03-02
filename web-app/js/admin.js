@@ -64,30 +64,14 @@ jQuery(function($) {
 	    return items;
 	}
 	
-	var metaPageArr = new Array();
-	$("#pageTree > ul > li").each(function(n) {
-		metaPageArr.push($(this).attr("id"));
-	});
-	$("#pageTree > ul > li > ul > li").each(function(n) {
-		metaPageArr.push($(this).attr("id"));
-	});
-	
+	var initiallyOpen = new Array();
+	$("#pageTree > ul > li, #pageTree ul li.metaPage").each(function(n) {
+		initiallyOpen.push($(this).attr("id"));
+	});	
 	
 	
 	$("#pageTree").jstree({"plugins" : ["themes","html_data","crrm", "dnd", "contextmenu"],	//,"ui"
-		"core" : { "initially_open" : metaPageArr },
-		/*"crrm" : { 
-			"move" : {
-				"check_move" : function (m) { 
-					var p = this._get_parent(m.o);
-					if(!p) return false;
-					p = p == -1 ? this.get_container() : p;
-					if(p === m.np) return true;
-					if(p[0] && m.np[0] && p[0] === m.np[0]) return true;
-					return false;
-				}
-			}
-		},*/
+		"core" : { "initially_open" : initiallyOpen },
 		"dnd" : {
 			"drop_target" : false,
 			"drag_target" : false
@@ -124,6 +108,12 @@ jQuery(function($) {
         }, "json");
     });
 	
+	// Expand all nodes in the tree
+	$("#treeExpandAll").click(function(e) {
+		e.preventDefault();
+		$("#pageTree").jstree("open_all");
+	});
+	
 	// Dynamic top menu for admin-functions
 	$("ul.dropdown li").hover(function(){
 	    
@@ -153,12 +143,15 @@ jQuery(function($) {
 		$(this).hide();
 		$("#bodyContent form .content .title").show();
 		$("#bodyContent form .content h1 a").html($(this).val()).parent().show();
-	}).live("keypress", function(e) {
+	});
+	
+	// Don't send the form when pressing enter in text fields
+	$("#bodyContent form input[type=text]").live("keypress", function(e) {
 		if (e.which == 13) {
 			e.preventDefault();
 			$(this).blur();
 		}
-	});
+	})
 	
 	$("#bodyContent form .content h1 a").click(function(e) {
 		e.preventDefault();

@@ -143,7 +143,7 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 #pageTree li.metaPage.jstree-open > ins.jstree-icon {display: none; }
 #pageTree .jstree-hovered, #demo4 .jstree-clicked { border:0; }
 
-#pageTree li.currentPage, #pageTree > ul > li.metaPage.currentPage {background-color: #FFECBE;}
+#pageTree li.currentPage > a, #pageTree > ul > li.metaPage.currentPage > a {background-color: #FFECBE;}
 #pageTree li.draft > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/draft-icon.png) 5px 0 no-repeat;}
 #pageTree li.published > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/published-icon.png) 5px 0 no-repeat;}
 #pageTree li.wasPublished > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/was-published-icon.png) 5px 0 no-repeat;}
