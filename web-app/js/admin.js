@@ -69,6 +69,10 @@ jQuery(function($) {
 		initiallyOpen.push($(this).attr("id"));
 	});	
 	
+	$("#pageTree li.currentPage").parents("#pageTree li").each(function(n) {
+		initiallyOpen.push($(this).attr("id"));
+	});	
+	
 	
 	$("#pageTree").jstree({"plugins" : ["themes","html_data","crrm", "dnd", "contextmenu"],	//,"ui"
 		"core" : { "initially_open" : initiallyOpen },
