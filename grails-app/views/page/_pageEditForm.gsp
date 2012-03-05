@@ -65,10 +65,15 @@
 </div>
 
 <div class="aside publish">
-	<g:if test="${pageInstance.id}">
+	<g:if test="${pageInstance.id && pageInstance.status == 'draft'}">
 		<div class="buttons">
 			<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
 		</div>
+	</g:if>
+	<g:if test="${pageInstance.id && pageInstance.isCurrentlyPublished()}">
+	  	<div class="buttons">
+	  		<g:actionSubmit name="unpublish" action="unpublish" class="delete" value="Avpublicera" />
+	  	</div>
 	</g:if>
 	
   	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
@@ -106,6 +111,8 @@
  	  	<span class="button"><g:actionSubmit name="publish" action="publish" class="save" value="Publicera" /></span>
  	  </g:else>
   	</div>
+  	
+
 </div>
   
 <div class="aside meta">  

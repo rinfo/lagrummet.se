@@ -44,6 +44,22 @@ class Page implements Comparable<Page>{
 		return status == "published" && publishStart < now && (publishStop == null || publishStop > now)
 	}
 	
+	def getCurrentPageStatus() {
+		def currentStatus
+		if(status == "draft") {
+			currentStatus = "DRAFT"
+		}
+		def now = new Date()
+		if(publishStart > now) {
+			currentStatus ="PUBLISHED_PENDING"
+		} else if(publishStart < now && (publishStop == null || publishStop > now)) {
+			currentStatus = "PUBLISHED"
+		} else {
+			currentStatus = "PUBLISHED_EXPIRED"
+		}
+		return currentStatus
+	}
+	
 	
 	static hasMany = [
 		children : Page,

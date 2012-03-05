@@ -207,7 +207,6 @@ class PageController {
     }
 	
 	def error = {
-		println "errorId: " + params.errorId
 		if (params.errorId == "404") {
 			def model = [siteProps: SiteProperties.findByTitle("lagrummet.se")]
 			render(view: "error404", model: model)
@@ -305,6 +304,12 @@ class PageController {
 		}
 	}
 	
+	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
+	def unpublish = {
+		params.doUnpublish = true
+		forward(action: "update", params: params)
+	}
+	
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def update = {
@@ -320,13 +325,13 @@ class PageController {
             }
 			
 			pageInstance.backup()
-			
 			params.author = SecUser.get(springSecurityService.principal.id)
             pageInstance.properties = params
+
 			if (params.reviewDate) pageInstance.publishStart = new Date()
 			
+			def now = new Date()
 			if(params.status == "published") {
-				def now = new Date()
 				pageInstance.autoSaves.each { revision ->
 					if(revision.isCurrentlyPublished()) {
 						if(pageInstance.publishStart > now) {
@@ -337,6 +342,10 @@ class PageController {
 					}
 				}
 			}
+			if(params.doUnpublish) {
+				pageInstance.publishStop = now
+			}
+			
 			def toBeDeleted = pageInstance.puffs.findAll {
 				it.deleted || it.isEmpty()
 			}
