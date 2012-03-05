@@ -46,16 +46,15 @@ class Page implements Comparable<Page>{
 	
 	def getCurrentPageStatus() {
 		def currentStatus
-		if(status == "draft") {
-			currentStatus = "DRAFT"
-		}
 		def now = new Date()
-		if(publishStart > now) {
-			currentStatus ="PUBLISHED_PENDING"
+		if(status == "draft") {
+			currentStatus = "draft"
+		} else if(publishStart > now) {
+			currentStatus ="pending"
 		} else if(publishStart < now && (publishStop == null || publishStop > now)) {
-			currentStatus = "PUBLISHED"
+			currentStatus = "published"
 		} else {
-			currentStatus = "PUBLISHED_EXPIRED"
+			currentStatus = "unpublished"
 		}
 		return currentStatus
 	}
