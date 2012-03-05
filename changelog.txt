@@ -1,3 +1,10 @@
+v0.7.3
+	Nytt:
+		103Y Admin, Avpublicering
+	Fix: 
+		#72 Admin, Sidan försvinner i trädstrukturen
+		#59 Admingränssnittet, Markering av sidan i trädstrukturen
+
 v0.7.2
 	Nytt:
 		404 Error page
