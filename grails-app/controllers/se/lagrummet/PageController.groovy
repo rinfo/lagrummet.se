@@ -173,7 +173,7 @@ class PageController {
 
 		if(page != null && !page.metaPage) {
 			if(page.publishStop && page.publishStop.before(new Date())) {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND)
+				forward(action: "error", params: [errorId: "404"])
 			}
 
 			def model = [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")]
@@ -202,13 +202,14 @@ class PageController {
 				render(view: page.template, model: model)
 			}
 		} else {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND)
+			forward(action: "error", params: [errorId: "404"])
 		}
     }
 	
 	def error = {
 		if (params.errorId == "404") {
 			def model = [siteProps: SiteProperties.findByTitle("lagrummet.se")]
+			response.status=404
 			render(view: "error404", model: model)
 		}
 	}
