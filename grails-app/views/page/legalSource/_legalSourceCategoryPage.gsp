@@ -24,6 +24,7 @@
 		        </g:if>
 		        
 		      </g:each>
+		      <footer class="reviewed">Senast granskad: ${page.publishStart.format('yyyy-MM-dd')}</footer>
 	</article>
 	<aside class="puffs" id="puffs">
 		<g:render template="puff" collection="${page.puffs}" var="puff" />
