@@ -19,7 +19,7 @@
 				<g:each in="${searches}" var="searchQuery" status="index">
 					<tr>
 						<td>${index + 1}.</td>
-						<td>${searchQuery[1]}</td>
+						<td>${searchQuery[1].encodeAsHTML()}</td>
 						<td>${searchQuery[0]}</td>
 						<td>${((searchQuery[0]/totalSearches)*100).setScale(2,BigDecimal.ROUND_HALF_EVEN)}%</td>
 					</tr>
@@ -36,7 +36,7 @@
 				<g:else>${noQueries}</g:else>
 			</g:each>
 			.</p>
-			<p><g:link action="exportStats" controller="search" params="[daysOfSearches: daysOfSearches, numberOfQueries: numberOfQueries]">Exportera all data under vald period till .csv (${daysOfSearches} dagar)</g:link>.</p>
+			<p><g:link action="exportStats" controller="search" params="[daysOfSearches: daysOfSearches, numberOfQueries: numberOfQueries]">Exportera all data under vald period till .csv (${daysOfSearches} dagar)</g:link>. Det kan finnas fler än 100 olika sökfrågor ställda under vald period, exportera datan för att se samtliga.</p>
 		   </div>
     </body>
 </html>

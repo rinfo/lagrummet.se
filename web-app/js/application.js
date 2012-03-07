@@ -1,9 +1,10 @@
 var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
+var originalUrl, t, query = "";
 
 // Instant search
 function search() {
 	var form = $("#search");
-	var query = $("#query").attr("value");
+	query = $("#query").attr("value");
 	var cat = $("#cat").attr("value");
 	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
 	
@@ -14,9 +15,8 @@ function search() {
 	
 	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
         if (data) {
-//        	console.log(data);
         	if (data.searchResult.totalResults > 0 && $("#cat").attr("value") == "Alla") {      		
-        		$("#dynamicSearchResults").html('<header><h1>Sökresultat</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column first" id="c-1" /><div class="column" id="c-2" />');
+        		$("#dynamicSearchResults").html('<header><h1>Sökresultat för '+query+'</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column first" id="c-1" /><div class="column" id="c-2" />');
         		
         		// Redaktionella resultat
         			$("#c-1").append('<p class="Ovrigt"><a href="'+serverUrl+'search?query='+query+'&cat=Ovrigt" class="catTitle">Information från lagrummet.se</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></p>');
@@ -194,8 +194,6 @@ function search() {
 }
 
 jQuery(document).ready(function($) {
-	var originalUrl, t;
-	
 	//Make the search category drop-down more dynamic
 	$("#cat").hide().after('<div id="searchCurrentCategory" /><ul id="searchCategoryList" />');
 	$("#searchCategory label").addClass("target");
@@ -234,7 +232,15 @@ jQuery(document).ready(function($) {
 			$("#dynamicSearchResults").remove();
 			$("#content > *").removeClass("searchHidden");
 		} else if ($(this).attr("value").length > 2) {
-			t=setTimeout("search()", 300);	
+			if ($(this).attr("value") != query) {
+				t=setTimeout("search()", 350);	
+			}
+		}
+	});
+	
+	$("header #search #query").live("keypress", function(e) {
+		if (e.which == 13 && query == $(this).attr("value")) {
+			e.preventDefault();
 		}
 	});
 	

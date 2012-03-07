@@ -19,14 +19,24 @@
 				<g:each in="${searches}" var="searchQuery" status="index">
 					<tr>
 						<td>${index + 1}.</td>
-						<td>${searchQuery[1]}</td>
+						<td>${searchQuery[1].encodeAsHTML()}</td>
 						<td>${searchQuery[0]}</td>
 						<td>${((searchQuery[0]/totalSearches)*100).setScale(2,BigDecimal.ROUND_HALF_EVEN)}%</td>
 					</tr>
 				</g:each>
 			</table>
-			<p>Antal dagar: <g:link action="statistics" params="[daysOfSearches: '30', numberOfQueries: numberOfQueries]">30</g:link>|<g:link action="statistics" params="[daysOfSearches: '90', numberOfQueries: numberOfQueries]">90</g:link>|<g:link action="statistics" params="[daysOfSearches: '365', numberOfQueries: numberOfQueries]">365</g:link>. Antal träffar: <g:link action="statistics" params="[numberOfQueries: '10', daysOfSearches: daysOfSearches]">10</g:link>|<g:link action="statistics" params="[numberOfQueries: '50', daysOfSearches: daysOfSearches]">50</g:link>|<g:link action="statistics" params="[numberOfQueries: '100', daysOfSearches: daysOfSearches]">100</g:link></p>
-			<p><g:link action="exportStats" params="[daysOfSearches: daysOfSearches, numberOfQueries: numberOfQueries]">Exportera all data under vald period till .csv (${daysOfSearches} dagar)</g:link>.</p>
-        </div>
+			<p>Antal dagar: 
+			<g:each in="[30,90,365]" var="days">
+				<g:if test="${daysOfSearches != days }"><g:link action="statistics" controller="search" params="[daysOfSearches: days, numberOfQueries: numberOfQueries]">${days}</g:link></g:if>
+				<g:else>${daysOfSearches}</g:else>
+			</g:each>
+			. Antal sökfrågor: 
+			<g:each in="[10,50,100]" var="noQueries">
+				<g:if test="${numberOfQueries != noQueries }"><g:link action="statistics" controller="search" params="[numberOfQueries: noQueries, daysOfSearches: daysOfSearches]">${noQueries}</g:link></g:if>
+				<g:else>${noQueries}</g:else>
+			</g:each>
+			.</p>
+			<p><g:link action="exportStats" controller="search" params="[daysOfSearches: daysOfSearches, numberOfQueries: numberOfQueries]">Exportera all data under vald period till .csv (${daysOfSearches} dagar)</g:link>. Det kan finnas fler än 100 olika sökfrågor ställda under vald period, exportera datan för att se samtliga.</p>
+	        </div>
     </body>
 </html>

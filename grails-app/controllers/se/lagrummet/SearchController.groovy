@@ -41,7 +41,7 @@ class SearchController {
 		
 		def results = []
 		for(d in searches) {
-			def r= [d.query, d.category, '"' + d.dateCreated.toString() + '"']
+			def r= ['"' + d.query + '"', d.category, '"' + d.dateCreated.toString().substring(0,10) + '"']
 			results << r
 		}
 		def result = ''
@@ -53,7 +53,7 @@ class SearchController {
 			result += '\n'
 		}
 		response.setHeader("Content-disposition", "attachment; filename=search-history.csv");
-		render(contentType:'text/csv',text:result)
+		render(contentType:'text/csv',text:result,encoding:"UTF-8")
 	}
 
     def index = {

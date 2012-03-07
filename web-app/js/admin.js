@@ -44,21 +44,6 @@ jQuery(function($) {
 	            		// The new page is created in during the rename_node event
 	            	});
 	            }
-	        },
-	        deleteItem: { // The "delete" menu item
-	            label: "Delete",
-	            action: function () {
-	            	var id = $(node).attr("id").replace("p-", "");
-	            	$.post(serverUrl+"admin/page/delete"+"?ajax=true", {"id":id}, function(data) {
-	                    if (data.success) {
-	                    	flashMessage(data.success);
-	                    	$("#pageTree").jstree("delete_node",node);
-
-	                    } else {
-	                    	errorMessage(data.error);
-	                    }
-	                }, "json");
-	            }
 	        }
 	    };
 	    return items;
@@ -144,6 +129,8 @@ jQuery(function($) {
 			$("#bodyContent form .content .permalink input").val(value).parent().show();
 		}
 		
+		if (!$(this).val()) $(this).val("Lägg till rubrik här");
+		
 		$(this).hide();
 		$("#bodyContent form .content .title").show();
 		$("#bodyContent form .content h1 a").html($(this).val()).parent().show();
@@ -155,10 +142,11 @@ jQuery(function($) {
 			e.preventDefault();
 			$(this).blur();
 		}
-	})
+	});
 	
 	$("#bodyContent form .content h1 a").click(function(e) {
 		e.preventDefault();
+		if ($("#h1").val() == "Lägg till rubrik här") $("#h1").val("");
 		$("#h1").show().focus();
 		$(this).parent().hide();
 	});
