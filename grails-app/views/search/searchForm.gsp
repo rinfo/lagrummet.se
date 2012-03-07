@@ -32,7 +32,7 @@
 		</g:if>
 		<div class="column first">
 			<p>
-				<a href="${createLink(mapping:'search', params:[query:query, cat:'Ovrigt']) }" class="catTitle">Information från lagrummet.se</a> 
+				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Ovrigt', alias:alias]) }" class="catTitle">Information från lagrummet.se</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})
 				<g:if test="${searchResult.items['Ovrigt'].size() > 0 && searchResult.totalResultsPerCategory['Ovrigt'] > searchResult.items['Ovrigt'].size()}"> Visar de första ${searchResult.items['Ovrigt'].size()}</g:if>
 				</span>
@@ -46,13 +46,13 @@
 							<p>${item.matches} ...</p>
 						</g:if>
 				</g:each>
-				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Ovrigt']) }">Visa fler träffar</a></li>
+				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Ovrigt', alias:alias]) }">Visa fler träffar</a></li>
 			</ul>
 			</g:if>
 			
 		
 			<p>
-				<a href="${createLink(mapping:'search', params:[query:query, cat:'Propositioner']) }" class="catTitle">Propositioner och skrivelser</a> 
+				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }" class="catTitle">Propositioner och skrivelser</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})
 				<g:if test="${searchResult.items['Propositioner'].size() > 0 && searchResult.totalResultsPerCategory['Propositioner'] > searchResult.items['Propositioner'].size()}"> Visar de första ${searchResult.items['Propositioner'].size()}</g:if>
 				
@@ -68,12 +68,12 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Propositioner']) }">Visa fler träffar</a></li>
+				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }">Visa fler träffar</a></li>
 			</ul>
 			</g:if>
 
 			<p>
-				<a href="${createLink(mapping:'search', params:[query:query, cat:'Rattsfall']) }" class="catTitle">Rättsfall</a> 
+				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Rattsfall', alias:alias]) }" class="catTitle">Rättsfall</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})
 				<g:if test="${searchResult.items['Rattsfall'].size() > 0 && searchResult.totalResultsPerCategory['Rattsfall'] > searchResult.items['Rattsfall'].size()}"> Visar de första ${searchResult.items['Rattsfall'].size()}</g:if>
 				</span>
@@ -88,7 +88,7 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Rattsfall']) }">Visa fler träffar</a></li>
+				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Rattsfall', alias:alias]) }">Visa fler träffar</a></li>
 			</ul>
 			</g:if>
 			
@@ -96,7 +96,7 @@
 		
 		<div class="column">
 			<p>
-				<a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }" class="catTitle">Lagar och förordningar</a> 
+				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Lagar', alias:alias]) }" class="catTitle">Lagar och förordningar</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Lagar']})
 				<g:if test="${searchResult.items['Lagar'].size() > 0 && searchResult.totalResultsPerCategory['Lagar'] > searchResult.items['Lagar'].size()}"> Visar de första ${searchResult.items['Lagar'].size()}</g:if>
 				</span>
@@ -115,12 +115,12 @@
 						</g:if>
 						</li>
 				</g:each>
-				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Lagar']) }">Visa fler träffar</a></li>
+				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Lagar', alias:alias]) }">Visa fler träffar</a></li>
 			</ul>
 			</g:if>
 			
 			<p>
-				<a href="${createLink(mapping:'search', params:[query:query, cat:'Foreskrifter']) }" class="catTitle">Myndigheters föreskrifter</a> 
+				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }" class="catTitle">Myndigheters föreskrifter</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Foreskrifter']})
 				<g:if test="${searchResult.items['Foreskrifter'].size() > 0 && searchResult.totalResultsPerCategory['Foreskrifter'] > searchResult.items['Foreskrifter'].size()}"> Visar de första ${searchResult.items['Foreskrifter'].size()}</g:if>
 				</span>
@@ -139,12 +139,12 @@
 						</g:if>					
 					</li>
 				</g:each>
-				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Foreskrifter']) }">Visa fler träffar</a></li>
+				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }">Visa fler träffar</a></li>
 			</ul>
 			</g:if>
 
 			<p>
-				<a href="${createLink(mapping:'search', params:[query:query, cat:'Utredningar']) }" class="catTitle">Utredningar</a>
+				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Utredningar', alias:alias]) }" class="catTitle">Utredningar</a>
 				<span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})
 				<g:if test="${searchResult.items['Utredningar'].size() > 0 && searchResult.totalResultsPerCategory['Utredningar'] > searchResult.items['Utredningar'].size()}"> Visar de första ${searchResult.items['Utredningar'].size()}</g:if>
 				</span>
@@ -159,7 +159,7 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="${createLink(mapping:'search', params:[query:query, cat:'Utredningar']) }">Visa fler träffar</a></li>
+				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Utredningar', alias:alias]) }">Visa fler träffar</a></li>
 			</ul>
 			</g:if>
 			
