@@ -38,7 +38,8 @@
                             <td><g:textField name="expandableSynonymList[${i}].baseTerm" value="${synonymInstance?.baseTerm}" size="50" disabled="disabled" /></td>
                         
                         	<td>
-                        		<div class="buttons"><input type="button" class="editSynonym update" value="&nbsp;" /> <input type="button" class="deleteSynonym delete" value="&nbsp;" /></div>
+                        		<div class="buttons"><input type="button" class="editSynonym update" value="&nbsp;" /> 
+                        			<a href="${createLink( controller:"synonym", action:"delete", params:[id: synonymInstance?.id])}"><input type="button" class="deleteSynonym delete" value="&nbsp;" /></a></div>
                         		<g:hiddenField name="expandableSynonymList[${i}].id" value="${synonymInstance?.id}" disabled="disabled" />
                         		<g:hiddenField name="expandableSynonymList[${i}].deleted" value="false" disabled="disabled" />
                         	</td>
