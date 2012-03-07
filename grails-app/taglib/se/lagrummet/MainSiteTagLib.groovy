@@ -30,7 +30,7 @@ class MainSiteTagLib {
 			out << attrs.page.h1
 		}
 	}
-	
+
 	def dropdown = { attrs, body ->
 		if (attrs.options) {
 			out << '<select name="' << attrs.name << '">'
@@ -94,5 +94,15 @@ class MainSiteTagLib {
 			out << '</a>'
 		}
 	}
+	
+
+	/**
+	 * Removes all empty values in the params map before rendering a link
+	 */
+	def createLinkParams = { attrs, body ->
+		attrs.params?.values()?.removeAll(['', null] as Set)
+		out << createLink(attrs, body)
+	}
+
 	
 }

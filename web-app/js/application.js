@@ -16,7 +16,13 @@ function search() {
 	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
         if (data) {
         	if (data.searchResult.totalResults > 0 && $("#cat").attr("value") == "Alla") {      		
-        		$("#dynamicSearchResults").html('<header><h1>Sökresultat för '+query+'</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p><div class="column first" id="c-1" /><div class="column" id="c-2" />');
+        		$("#dynamicSearchResults").html('<header><h1>Sökresultat för '+query+'</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p>');
+        		
+        		if(data.synonyms.length > 0) {
+	        		$("#dynamicSearchResults").append('<p>Din sökning gav även träff på följande: <span class="query">' + data.synonyms.join(', ') + '</span></p>');
+	        		$("#dynamicSearchResults").append('<p>För att se sökresultatet utan associerade träffar, <a href="'+serverUrl+'search?query='+query+'&cat=Alla&alias=false">klicka här</a></p>');
+        		}
+        		$("#dynamicSearchResults").append('<div class="column first" id="c-1" /><div class="column" id="c-2" />');
         		
         		// Redaktionella resultat
         			$("#c-1").append('<p class="Ovrigt"><a href="'+serverUrl+'search?query='+query+'&cat=Ovrigt" class="catTitle">Information från lagrummet.se</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></p>');

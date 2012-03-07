@@ -40,7 +40,7 @@ class RinfoController {
 										content: docContent, 
 										docEntry: docEntry])
 		} catch (HttpResponseException e) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, message(code:"error.rinfodocnotfound"))
+			forward(controller: "page", action: "error", params: [errorId: "404"])
 		}
 	}
 }

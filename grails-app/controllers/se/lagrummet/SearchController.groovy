@@ -67,6 +67,7 @@ class SearchController {
 		if(!params.alias || params.alias != "false"){
 				synonyms = synonymService.lookupSynonyms(params.query)
 				queries.addAll(synonyms)
+				params.alias = null
 		}
 		
 		if(params.query && params.cat && params.cat != "Alla")  {
@@ -79,7 +80,7 @@ class SearchController {
 		}
 		
 		new Search(query: params.query, category: params.cat).save()
-
+		
 		if (params.ajax) {
 			def response = [query: params.query, searchResult: searchResult, synonyms: synonyms]
 			render response as JSON
