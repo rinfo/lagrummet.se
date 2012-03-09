@@ -57,6 +57,9 @@ class PageController {
 		
 		params.author = SecUser.get(springSecurityService.principal.id)
         def pageInstance = new Page(params)
+		def now = new Date()
+		pageInstance.dateCreated = now
+		pageInstance.lastUpdated = now
 		
 		def instanceToSave
 		if (pageInstance.parent) {
@@ -353,7 +356,8 @@ class PageController {
 			if (toBeDeleted) {
 				pageInstance.puffs.removeAll(toBeDeleted)
 			}
-
+			
+			pageInstance.lastUpdated = now
             if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
 				flash.message = "${message(code: 'page.updated.message', args: [pageInstance.h1])}"
                 redirect(action: "edit", id: pageInstance.id)
