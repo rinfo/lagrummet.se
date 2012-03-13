@@ -1074,6 +1074,11 @@ fieldset .inputGroup p {
 	margin: 0;
 }
 
+
+#rinfo #leftCol {
+	width: 490px;
+	float:left;
+}
 #rinfoSidebar {
 	width: 210px;
 	position: relative;
