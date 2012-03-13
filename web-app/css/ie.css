@@ -9,8 +9,15 @@
 #siteHeader {z-index: 13;
 	*left: 40px;
 }
+#searchCurrentCategory {
+	left: 10px;
+}
 #search #query {padding: 0; margin: 2px 5px; width:290px;}
 #search #searchCategory {z-index: 11; position: relative; padding: 5px 5px 5px 10px;}
+#search div.input, #searchSubmit {
+	background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
+}
+
 #siteHeader > p.extSearchLabel {
 	*position: relative;
 	*top: 5em;
