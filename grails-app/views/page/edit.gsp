@@ -10,9 +10,12 @@
     </head>
     <body>
         <div class="body">
-            <g:if test="${flash.message}">
+        	<g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
+            <g:each in="${flash.messages}">
+            <div class="message">${it}</div>
+            </g:each>
             <g:hasErrors bean="${pageInstance}">
             <div class="errors">
                 <g:renderErrors bean="${pageInstance}" as="list" />

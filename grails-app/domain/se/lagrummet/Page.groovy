@@ -92,6 +92,7 @@ class Page implements Comparable<Page>{
 		sort pageOrder:"asc", dateCreated: "desc"
 		children sort: "pageOrder"
 		puffs sort: "dateCreated", order: "asc", cascade: "all-delete-orphan"
+		autoTimestamp false
 	}
 	
 	def url = {
@@ -108,6 +109,8 @@ class Page implements Comparable<Page>{
 		pageBackup.media = null
 		pageBackup.puffs = null
 		pageBackup.autoSaves = null
+		pageBackup.dateCreated = this.lastUpdated
+		pageBackup.lastUpdated = new Date()
 		this.addToAutoSaves(pageBackup).save()
 	}
 	

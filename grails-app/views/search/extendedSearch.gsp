@@ -105,7 +105,7 @@
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Rattsfall">
 			<input type="hidden" name="kategori" value="Rattsfall" />
 			
-			<label for="utgivare"><g:message code="extendedSearch.domstol.label" default="Völj domstol"/></label>
+			<label for="utgivare"><g:message code="extendedSearch.domstol.label" default="Välj domstol"/></label>
 			<select name="utgivare">
 				<g:each in="${grailsApplication.config.lagrummet.search.courtList}">
 					<option value="${it.value}"
