@@ -317,14 +317,13 @@ class PageController {
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def update = {
+		flash.messages = []
 		def pageInstance = Page.get(params.id)
 		if (pageInstance) {
             if (params.version) {
                 def version = Long.valueOf(params.version)
                 if (pageInstance.version > version) {
-                    pageInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'page.label', default: 'Page')] as Object[], "Another user has updated this Page while you were editing")
-                    render(view: "edit", model: [pageInstance: pageInstance])
-                    return
+                   flash.messages.add("${message(code: 'page.updated.updatedByAnotherUser')}")
                 }
             }
 			
@@ -359,7 +358,7 @@ class PageController {
 			
 			pageInstance.lastUpdated = now
             if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
-				flash.message = "${message(code: 'page.updated.message', args: [pageInstance.h1])}"
+				flash.messages.add "${message(code: 'page.updated.message', args: [pageInstance.h1])}"
                 redirect(action: "edit", id: pageInstance.id)
             }
             else {
@@ -367,7 +366,7 @@ class PageController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
+            flash.messages.add "${message(code: 'default.not.found.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
             redirect(action: "edit", id: pageInstance.id)
         }
     }
