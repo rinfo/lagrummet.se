@@ -30,7 +30,6 @@
 			</nav>
 			<g:form mapping="search" method="GET" name="search">
 				<div class="input" id="searchCategory">
-					Vad vill du söka?
 					<label for="cat">Avgränsa din sökning</label>
 					<select id="cat" name="cat">
 					<g:each in="${siteProps?.searchCats}">

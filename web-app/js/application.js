@@ -227,6 +227,8 @@ jQuery(document).ready(function($) {
 		e.stopPropagation();
 		$("#cat").val($(this).attr("rel"));
 		$("#searchCurrentCategory").html($(this).find("[rel=title]").html()).removeClass("active");
+		$("#searchCategoryList > .selected").removeClass("selected");
+		$(this).addClass("selected")
 		$("#searchCategoryList").hide();
 	});
 	

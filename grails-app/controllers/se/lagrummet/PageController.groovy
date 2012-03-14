@@ -292,7 +292,6 @@ class PageController {
 		} else if (params.status == "draft") {
 			forward(action: "update", params: params)
 		} else {
-			def master = Page.get(params.id)
 			params.status = "draft"
 			forward(action: "update", params: params)
 		}
