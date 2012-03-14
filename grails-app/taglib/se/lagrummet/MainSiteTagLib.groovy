@@ -50,7 +50,7 @@ class MainSiteTagLib {
 		def pageInstance = Page.get(attrs.pageId)
 		def noLinkForMetaPage = (attrs?.noLinkForMetaPage) ? true : false
 		def now = new Date()
-		
+
 		def liClass = (!pageInstance.metaPage) ? "" : "metaPage "
 		if (attrs.currentPageId == pageInstance.id) liClass += "currentPage "
 		if (pageInstance.status == 'draft') liClass += "draft "
@@ -58,6 +58,14 @@ class MainSiteTagLib {
 		else if (pageInstance.status == 'published' && pageInstance.publishStart > now) liClass += "publishLater "
 		else if (pageInstance.status == 'published' && pageInstance.publishStop < now) liClass += "wasPublished "
 		
+		if (pageInstance.autoSaves) {
+			pageInstance.autoSaves.each { it ->
+				println "autoSave: " + it.id
+				if (it.status == 'published' && it.publishStart <= now && (it.publishStop == null || it.publishStop >= now)) liClass += "published "
+			}
+			
+		}
+		println pageInstance.id + " " + liClass
 		out << '<li id="p-' << pageInstance.id << '" class="'<< liClass << '">'
 		if (noLinkForMetaPage && pageInstance.metaPage) {
 			out << pageInstance.h1
@@ -68,7 +76,9 @@ class MainSiteTagLib {
 		if (pageInstance?.children?.size()){
 			out << "<ul>"
 			pageInstance.children.each {it ->
-				if(it.masterRevision == null) {
+//				println it?.id
+//				println "status: " + it?.status
+				if (it.masterRevision == null|| (it.masterRevision.status == "draft" && it.status == "published")) {
 					out << adminMenuItem(pageId:it.id, currentPageId: attrs.currentPageId, noLinkForMetaPage: noLinkForMetaPage)
 				}
 			}
