@@ -6,52 +6,53 @@
 <body>
     <article id="rinfo">
     	<h1>${docInfo.title}</h1>    	
-		<table>
-		<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf') || docEntry*.content*.@type.join('|').contains('application/pdf')}">
-			<tr>
-				<td class="label">Lagtext:</td><td>
-						<g:each in="${docEntry.link}" var="link">
-							<g:if test="${link.@type == 'application/pdf'}">
-								<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}"><img src="${resource() }/images/PDF.png" class="pdfIcon" /> ${docInfo.title}</a>
+	    <div id="leftCol">
+			<table>
+			<g:if test="${docEntry*.link*.@type.join('|').contains('application/pdf') || docEntry*.content*.@type.join('|').contains('application/pdf')}">
+				<tr>
+					<td class="label">Lagtext:</td><td>
+							<g:each in="${docEntry.link}" var="link">
+								<g:if test="${link.@type == 'application/pdf'}">
+									<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}">${docInfo.title} <img src="${resource() }/images/PDF.png" class="pdfIcon" /></a>
+								</g:if>
+							</g:each>
+							<g:each in="${docEntry.content}" var="content">
+								<g:if test="${content.@type == 'application/pdf'}">
+									<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + content.@src}">${docInfo.title} <img src="${resource() }/images/PDF.png" class="pdfIcon" /></a>
+								</g:if>
+							</g:each>
+					</td></tr>
+				</g:if>
+				<tr><td class="label">Beteckning:</td><td> ${docInfo.identifier}</td></tr>
+	
+				<tmpl:labelRow label="Ikraft" value="${docInfo.ikrafttradandedatum}" />
+				
+				<tmpl:labelRow label="Målnummer" value="${docInfo.referatAvDomstolsavgorande?.malnummer}" />			
+				<tmpl:labelRow label="Målnummer" value="${docInfo.malnummer}" />	
+				
+				<tmpl:labelRow label="Avgörandedatum" value="${docInfo.referatAvDomstolsavgorande?.avgorandedatum}" />		
+				<tmpl:labelRow label="Avgörandedatum" value="${docInfo.avgorandedatum}" />		
+				
+				<g:if test="${docInfo.forarbete}">
+					<tr><td class="label">Förarbeten: </td><td>
+						<ul>
+						<g:each in="${docInfo.forarbete.sort{ it.identifier } }" var="forarbete">
+							<g:if test="${forarbete.identifier && forarbete.iri}">
+								<li><a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${forarbete.identifier}</a></li>
 							</g:if>
+							<g:elseif test="${forarbete.identifier}">
+								${forarbete.identifier}
+							</g:elseif>
 						</g:each>
-						<g:each in="${docEntry.content}" var="content">
-							<g:if test="${content.@type == 'application/pdf'}">
-								<a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + content.@src}"><img src="${resource() }/images/PDF.png" class="pdfIcon" /> ${docInfo.title}</a>
-							</g:if>
-						</g:each>
-				</td></tr>
+						</ul>
+					</td></tr>
+				</g:if>
+			</table>
+			<g:if test="${content}">
+				<hr/>
+				<div>${content }</div>
 			</g:if>
-			<tr><td class="label">Beteckning:</td><td> ${docInfo.identifier}</td></tr>
-
-			<tmpl:labelRow label="Ikraft" value="${docInfo.ikrafttradandedatum}" />
-			
-			<tmpl:labelRow label="Målnummer" value="${docInfo.referatAvDomstolsavgorande?.malnummer}" />			
-			<tmpl:labelRow label="Målnummer" value="${docInfo.malnummer}" />	
-			
-			<tmpl:labelRow label="Avgörandedatum" value="${docInfo.referatAvDomstolsavgorande?.avgorandedatum}" />		
-			<tmpl:labelRow label="Avgörandedatum" value="${docInfo.avgorandedatum}" />		
-			
-			<g:if test="${docInfo.forarbete}">
-				<tr><td class="label">Förarbeten: </td><td>
-					<ul>
-					<g:each in="${docInfo.forarbete.sort{ it.identifier } }" var="forarbete">
-						<g:if test="${forarbete.identifier && forarbete.iri}">
-							<li><a href="${forarbete.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${forarbete.identifier}</a></li>
-						</g:if>
-						<g:elseif test="${forarbete.identifier}">
-							${forarbete.identifier}
-						</g:elseif>
-					</g:each>
-					</ul>
-				</td></tr>
-			</g:if>
-		</table>
-		<g:if test="${content}">
-			<hr/>
-			<div>${content }</div>
-		</g:if>
-		
+		</div>
 		
 		<aside id="rinfoSidebar">
 		
@@ -69,6 +70,18 @@
 				</g:each>
 			</g:if>
 			
+			<g:if test="${docInfo.konsoliderar}">
+				<h3>Grundförfattning som ändras</h3>
+				<ul>
+					<li class="label">Titel:</li>
+					<li><a href="${docInfo.konsoliderar.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${docInfo.konsoliderar.title}</a></li>
+					<li class="label">Beteckning:</li>
+					<li>${docInfo.konsoliderar.identifier}</li>
+					<li class="label">Ikraft:</li>
+					<li>${docInfo.konsoliderar.ikrafttradandedatum}</li>
+				</ul>
+			</g:if>
+			
 			<g:if test="${docInfo.rev?.konsoliderar}">
 				<h3>Senaste konsoliderade versionen</h3>
 				<g:latestConsolidated in="${docInfo.rev.konsoliderar}" var="item">
@@ -77,8 +90,6 @@
 						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
 						<li class="label">Beteckning:</li>
 						<li>${item.identifier}</li>
-						<li class="label">Ikraft:</li>
-						<li>${item.ikrafttradandedatum}</li>
 					</ul>
 				</g:latestConsolidated>
 			</g:if>
