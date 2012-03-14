@@ -96,8 +96,14 @@ class Page implements Comparable<Page>{
 	}
 	
 	def url = {
-		def response = (parent) ? (parent.permalink + "/") : ""
-		return response + permalink
+		def fullUrl = ""
+		if(parent) {
+			fullUrl = parent.url() ? parent.url() + "/" : ""
+			fullUrl += permalink
+		} else if(!metaPage){
+			fullUrl = permalink
+		}
+		return fullUrl
 	}
 	
 	def backup = {

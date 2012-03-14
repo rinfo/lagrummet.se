@@ -26,7 +26,7 @@
 				</g:menu>			
 			</nav>
 			<nav id="breadcrumbs">
-				<g:breadcrumbs parent="${page?.parent}" />
+				<g:breadcrumbs page="${page}" />
 			</nav>
 			<g:form mapping="search" method="GET" name="search">
 				<div class="input" id="searchCategory">
