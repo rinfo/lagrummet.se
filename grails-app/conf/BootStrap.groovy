@@ -21,13 +21,7 @@ class BootStrap {
 			
 			def now = new Date()
 			def fourDaysAgo = now - 4
-			def kalles = new Page(title: 'Kalles sida', author: user, pageOrder: 1, permalink: 'kalle', h1: 'heja kalle!', content: "<p>Första försöket</p>", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now).save()
-			kalles.addToPuffs(new Puff(title:"kalles puff", description:"detta är en sidopuff. Det blir spännande", link:"kalle", parent:kalles))
-			kalles.addToPuffs(new Puff(title:"olles puff", description:"detta är också en sidopuff. Det blir spännande med lite mer text. Då kanske det kan bli något fel", link:"kalle", parent:kalles))
-			def kallesUndersida = new Page(title: 'Kalles undersida', author: user, pageOrder: 1, parent: kalles, permalink: 'kalle-undersida', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now).save()
-			def kallesUndersida2 = new Page(title: 'Kalles undersida 2', author: user, pageOrder: 0, parent: kalles, permalink: 'kalle-undersida-2', h1: 'heja kalle igen!', content: "Andra försöket", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now).save()
-			def kallesUndersida3 = new Page(title: 'Olles undersida 3', author: user, pageOrder: 0, parent: kalles, permalink: 'olle-undersida-2', h1: 'heja olle igen!', content: "heja olle!", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now).save()
-			
+
 			def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
 			home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))

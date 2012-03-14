@@ -46,10 +46,32 @@ class MainSiteTagLib {
 		
 	}
 	
-	def adminMenuItem = {attrs ->
+	def sitemapItem = { attrs ->
 		def pageInstance = (Page.get(attrs.pageId).masterRevision) ?: Page.get(attrs.pageId)
+		def now = new Date()
 		
-		def noLinkForMetaPage = (attrs?.noLinkForMetaPage) ? true : false
+//		out << '<li id="p-' << pageInstance.id << '">' 
+		if (pageInstance.metaPage && pageInstance.parent) {
+			out << '<li><strong>' << pageInstance.h1 << "</strong></li>"
+		} else if (!pageInstance.metaPage) {
+			out << '<li><a href="' << resource() << "/" << pageInstance.url() << '">' << pageInstance.title  << '</a></li>'
+		}
+		
+		if (pageInstance?.children?.size()){
+//			out << "<ul>"
+			pageInstance.children.each {it ->
+				if (it.masterRevision == null|| (it.masterRevision.status == "draft" && it.status == "published")) {
+					out << sitemapItem(pageId:it.id, currentPageId: attrs.currentPageId)
+				}
+			}
+//			out << "</ul>"
+		}
+//		out << '</li>'
+	}
+	
+	def adminMenuItem = { attrs ->
+		def pageInstance = (Page.get(attrs.pageId).masterRevision) ?: Page.get(attrs.pageId)
+
 		def now = new Date()
 
 		def liClass = (!pageInstance.metaPage) ? "" : "metaPage "
@@ -63,25 +85,16 @@ class MainSiteTagLib {
 			pageInstance.autoSaves.each { it ->
 				if (it.status == 'published' && it.publishStart <= now && (it.publishStop == null || it.publishStop >= now)) liClass += "published "
 			}
-			
 		}
 		
 		out << '<li id="p-' << pageInstance.id << '" class="'<< liClass << '">'
-		if (noLinkForMetaPage && pageInstance.metaPage) {
-			out << pageInstance.h1
-		} else {
-			out << g.link(controller:"page", action:"edit", id: pageInstance.id) { pageInstance.h1 }
-		}
+		out << g.link(controller:"page", action:"edit", id: pageInstance.id) { pageInstance.h1 }
 		
 		if (pageInstance?.children?.size()){
 			out << "<ul>"
 			pageInstance.children.each {it ->
 				if (it.masterRevision == null|| (it.masterRevision.status == "draft" && it.status == "published")) {
-					out << adminMenuItem(pageId:it.id, currentPageId: attrs.currentPageId, noLinkForMetaPage: noLinkForMetaPage)
-				} else {
-				println it.id + ": " + it.h1
-				println it.status
-				println it.masterRevision?.id + ": " + it.masterRevision?.h1
+					out << adminMenuItem(pageId:it.id, currentPageId: attrs.currentPageId)
 				}
 			}
 			out << "</ul>"

@@ -123,7 +123,8 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 	color: #E87F69;
 }
 
-#pageTree a { white-space:normal !important; height: auto; padding:1px 2px; } 
+#pageTree a { white-space:normal !important; height: auto; padding:1px 2px; }
+#pageTree li > a > ins.jstree-icon {min-height: 20px;}
 #pageTree li > ins { vertical-align:top; }
 #pageTree li.metaPage {background-image: none;}
 
@@ -148,7 +149,7 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 #pageTree li.published > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/published-icon.png) 5px 0 no-repeat;}
 #pageTree li.wasPublished > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/was-published-icon.png) 5px 0 no-repeat;}
 #pageTree li.publishLater > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/publish-later-icon.png) 5px 0 no-repeat;}
-#pageTree li.draft.published > a > ins.jstree-icon {padding-left: 14px; background: transparent url(../images/draft_published.png) 5px 0 no-repeat;}
+#pageTree li.draft.published > a > ins.jstree-icon {padding-left: 7px; background: transparent url(../images/draft_published.png) 5px 0 no-repeat;}
 
 #quickSearch {
 	margin-top: 20px;

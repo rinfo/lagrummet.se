@@ -3,7 +3,6 @@ package se.lagrummet
 class PageTreeFilters {
 	
 	private addPageTree(model) {
-//		model?.pageTreeList = Page.findAllByStatusNotAndMasterRevision("autoSave", null)
 		model?.pageTreeList = Page.withCriteria() {
 			ne("status", "autoSave")
 			isNull("masterRevision")
