@@ -47,7 +47,8 @@ class MainSiteTagLib {
 	}
 	
 	def adminMenuItem = {attrs ->
-		def pageInstance = Page.get(attrs.pageId)
+		def pageInstance = (Page.get(attrs.pageId).masterRevision) ?: Page.get(attrs.pageId)
+		
 		def noLinkForMetaPage = (attrs?.noLinkForMetaPage) ? true : false
 		def now = new Date()
 
@@ -60,12 +61,11 @@ class MainSiteTagLib {
 		
 		if (pageInstance.autoSaves) {
 			pageInstance.autoSaves.each { it ->
-				println "autoSave: " + it.id
 				if (it.status == 'published' && it.publishStart <= now && (it.publishStop == null || it.publishStop >= now)) liClass += "published "
 			}
 			
 		}
-		println pageInstance.id + " " + liClass
+		
 		out << '<li id="p-' << pageInstance.id << '" class="'<< liClass << '">'
 		if (noLinkForMetaPage && pageInstance.metaPage) {
 			out << pageInstance.h1
@@ -76,10 +76,12 @@ class MainSiteTagLib {
 		if (pageInstance?.children?.size()){
 			out << "<ul>"
 			pageInstance.children.each {it ->
-//				println it?.id
-//				println "status: " + it?.status
 				if (it.masterRevision == null|| (it.masterRevision.status == "draft" && it.status == "published")) {
 					out << adminMenuItem(pageId:it.id, currentPageId: attrs.currentPageId, noLinkForMetaPage: noLinkForMetaPage)
+				} else {
+				println it.id + ": " + it.h1
+				println it.status
+				println it.masterRevision?.id + ": " + it.masterRevision?.h1
 				}
 			}
 			out << "</ul>"
