@@ -12,15 +12,15 @@ class MainSiteTagLib {
 	
 	def breadcrumbs = { attrs, body ->
 		
-		def isStartElement = attrs.isStartElement ?: false
-		if(!isStartElement) {
+		def isParentElement = attrs.isParentElement ?: false
+		if(!isParentElement) {
 			out << '<a href="' << resource() << '">Startsida</a>'
 		}
 		if (attrs.page?.parent) {
-			out << g.breadcrumbs(page: attrs.page.parent, isStartElement: true)
+			out << g.breadcrumbs(page: attrs.page.parent, isParentElement: true)
 		}
-		if(!attrs.page.metaPage && attrs.page.permalink != "home") {
-			if(!isStartElement) {
+		if(attrs.page && !attrs.page?.metaPage && attrs.page?.permalink != "home") {
+			if(!isParentElement) {
 				out << " > " << attrs.page.title
 			} else {
 				out << " > " << '<a href="' << resource() << "/" << attrs.page.url() << '">' << attrs.page.title  << '</a>'
