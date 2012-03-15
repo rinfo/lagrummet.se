@@ -79,6 +79,7 @@
   	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
   		<g:hiddenField name="status" value="${pageInstance?.status}" />
 		<label for="status"><strong><g:message code="page.status.label" default="Nuvarande status" />: <g:message code="page.status.${pageInstance?.getCurrentPageStatus()}" default="" /></strong></label>
+		<label><g:message code="page.author.publishedBy" default="av"/>: ${pageInstance?.author?.username}</label>
 	</div>
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">

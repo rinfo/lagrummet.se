@@ -61,8 +61,8 @@
 		            	<g:each in="${revisions}" var="r">
 		            		<li>
 		            			<g:link action="edit" id="${r.id}">
-		            				<g:if test="${r.status == 'published'}"><strong><g:formatDate format="yyyy-MM-dd HH:mm" date="${r.dateCreated}" /> av ${r.author?.fullName}</strong></g:if>
-		            				<g:else><i>Utkast <g:formatDate format="yyyy-MM-dd HH:mm" date="${r.dateCreated}" /> av ${r.author?.fullName}</i></g:else>
+		            				<g:if test="${r.status == 'published'}"><strong><g:formatDate format="yyyy-MM-dd HH:mm" date="${r.dateCreated}" /> av ${r.author?.username}</strong></g:if>
+		            				<g:else><i>Utkast <g:formatDate format="yyyy-MM-dd HH:mm" date="${r.dateCreated}" /> av ${r.author?.username}</i></g:else>
 		            			</g:link>
 		            		</li>
 		            	</g:each>
