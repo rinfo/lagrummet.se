@@ -76,7 +76,7 @@ function search() {
         				$("#c-1").append('<ul id="rattsfall" />');
             			
             			$.each(data.searchResult.items['Rattsfall'], function(i, item) {
-                			var title = (item.title) ? item.title : item.identifier;
+                			var title = (item.identifier) ? item.identifier : item.malnummer;
                 			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
                 			
                 			$("#rattsfall").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
@@ -169,13 +169,13 @@ function search() {
         			$("#dynamicSearchResults").append(sokhjalp);
         	} else if ($("#cat").attr("value") != "Alla") {
 				$("#dynamicSearchResults").html('<h1>Sökresultat</h1><p>Visar '+ data.searchResult.items[cat].length  +' av totalt '+ data.searchResult.totalResults +' antal resultat </p>');
-				$("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Identifierare</th></tr></table>");
+				$("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Beteckning</th></tr></table>");
 				
 				$.each(data.searchResult.items[cat], function(i, item) {
-					var title = (item.title) ? item.title : item.identifier;
+					var title = (item.identifier) ? item.identifier : item.malnummer;
         			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
         			var excerpt = (item.matches) ? "<p>"+item.matches+"</p>" : "";
-        			var identifier = item.identifier;
+        			var identifier = (item.identifier) ? item.identifier : item.malnummer;
         			var ikraft = (item.ikrafttradandedatum) ? '<p class="type">Ikraft: '+item.ikrafttradandedatum+'</p>' : "";
         			
 					$("#dynamicSearchResults table").append('<tr><td><p><a href="'+serverUrl+href+'">' + title + "</a></p>" + excerpt + ikraft + "</td><td>"+identifier+"</td></tr>");

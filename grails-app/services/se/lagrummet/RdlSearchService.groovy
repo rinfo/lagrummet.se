@@ -58,7 +58,8 @@ class RdlSearchService {
 														identifier: item.identifier,
 														matches: getBestMatch(item),
 														type: item.type,
-														ikrafttradandedatum: item.ikrafttradandedatum
+														ikrafttradandedatum: item.ikrafttradandedatum,
+														malnummer: item.malnummer
 														)
 						if("category".equals(resultListType)) {
 							searchResult.addItemByType(searchResultItem)
