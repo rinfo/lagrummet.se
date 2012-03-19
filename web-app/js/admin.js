@@ -224,6 +224,14 @@ jQuery(function($) {
 	});
 	
 	
+	$("#pageEditForm input[type=submit]").click(function(){
+		if($(this).prop("id") == "previewSubmit") {
+			$("#pageEditForm").attr("target", "_blank");
+		} else {
+			$("#pageEditForm").attr("target", "");
+		}
+	});
+	
 	
 	
 });

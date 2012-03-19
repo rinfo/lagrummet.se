@@ -118,6 +118,10 @@
  	  </g:else>
   	</div>
   	
+  	<div class="buttons">
+  		<span><g:actionSubmit name="preview" action="preview" class="save" value="Förhandsgranska" id="previewSubmit"/></span>
+  	</div>
+  	
 
 </div>
   
