@@ -10,7 +10,7 @@
   	
  	
   	<div class="permalink input ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
-		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" /> <a href="${resource()}/${pageInstance.url()}">förhandsvisning</a>
+		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" />
 	</div>
   	
   	<div class="title input ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
@@ -119,7 +119,7 @@
   	</div>
   	
   	<div class="buttons">
-  		<span><g:actionSubmit name="preview" action="preview" class="save" value="Förhandsgranska" id="previewSubmit"/></span>
+  		<span><g:actionSubmit name="preview" action="preview" class="information" value="Förhandsgranska" id="previewSubmit"/></span>
   	</div>
   	
 

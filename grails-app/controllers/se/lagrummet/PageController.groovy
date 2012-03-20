@@ -2,9 +2,9 @@ package se.lagrummet
 
 import grails.plugins.springsecurity.Secured
 import grails.converters.*
-import groovy.xml.MarkupBuilder
 
-import javax.servlet.http.HttpServletResponse
+import org.apache.commons.collections.FactoryUtils
+import org.apache.commons.collections.list.LazyList
 
 class PageController {
 	
@@ -321,7 +321,20 @@ class PageController {
 	def preview = {
 		def page = new Page()
 		page.properties = params
+
+		page.puffs.eachWithIndex { puffItem, i ->
+				def xxx = "expandablePuffList["+i+"]"
+				def imgId = params."${xxx}"?.image?.id
+				puffItem.image = imgId ? Media.findById(imgId) : null
+		}
 		
+		def toBeDeleted = page.puffs.findAll {
+			it.deleted || it.isEmpty()
+		}
+		if (toBeDeleted) {
+			page.puffs.removeAll(toBeDeleted)
+		}
+		page.discard()
 		renderPage(page)
 		
 	}
@@ -411,4 +424,6 @@ class PageController {
             redirect(action: "list")
         }
     }
+	
+	
 }

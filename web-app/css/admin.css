@@ -407,6 +407,10 @@ ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block
 	background: transparent url(../images/skin/exclamation.png) 5px 50% no-repeat;
     padding-left: 24px;
 }
+.buttons input.information {
+	background: transparent url(../images/skin/information.png) 5px 50% no-repeat;
+    padding-left: 24px;
+}
 
 /* Inputs and selects */
 input, select, textarea {
