@@ -21,7 +21,8 @@ jQuery(function($) {
 		external_image_list_url : serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
 		theme_advanced_resizing : true,
 		theme_advanced_resizing_min_height : 480,
-		plugins : "advimage",
+		plugins : "advimage, paste",
+		paste_auto_cleanup_on_paste : true,
 		extended_valid_elements : "nav[class]",
 		entity_encoding : "raw",
 		formats : {
