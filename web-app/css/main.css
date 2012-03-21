@@ -422,6 +422,35 @@ article .reviewed {
 	clear: both;
 }
 
+article.editorial button {
+	height: 30px;
+	margin-left: 2px;
+	padding: 5px;
+	border: 1px solid #ddd;
+	background-color: #eee;
+	/*background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f2), to(#fff));*/
+	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+article.editorial button:hover {
+	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+}
+
+article.editorial button:active {
+	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
+	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
+}
+
 .puff h3 {
 	margin: 0 0 1em 0;
 }
@@ -576,8 +605,6 @@ article.legalSources section.Foreskrifter h2 {
 /* Contact form */
 #contact {
 	position: relative;
-	background-color: #f7f7f7;
-	padding: 1em;
 	margin: 1em 0;
 }
 
@@ -587,13 +614,13 @@ article.legalSources section.Foreskrifter h2 {
 
 #contact #message {
 	position: absolute;
-	right: 1em;
-	top: 1em;
+	right: 0;
+	top: 0;
 }
 
 #contact #message textarea {
 	width: 16em;
-	height: 11em;
+	height: 11.8em;
 	resize: none;
 }
 
@@ -603,7 +630,7 @@ article.legalSources section.Foreskrifter h2 {
 }
 
 #contact .required {
-	color: #A44C45 ;
+	color: #A44C45;
 }
 
 /* =FOOTER page footer */

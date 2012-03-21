@@ -362,6 +362,25 @@ jQuery(document).ready(function($) {
 	
 	updateSelectedStyle();
 	
+	/* Check required info on the contact page */
+	if ($.browser.msie && $.browser.version < 10) {
+		var block = false;
+		$("#contact").submit(function(e) {
+			$("#contact input[required]").each(function() {
+				if (!$(this).val()) block = true;
+			});
+			
+			$("#contact textarea[required]").each(function() {
+				if (!$(this).html()) block = true;
+			});
+			if (block) {
+				alert("Var vänlig och fyll i de markerade fälten");
+				return false;
+			} else {
+				return true;
+			}
+		});
+	}
 });
 
 /* READSPEAKER */
