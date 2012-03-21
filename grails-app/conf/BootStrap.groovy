@@ -55,8 +55,10 @@ class BootStrap {
 			def omKakor = new Page(title:"Om kakor (cookies)", author: user, permalink:"om-kakor", h1:"Om kakor", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, parent: omWebbplatsen).save()
 			
 			def kontakta = new Page(title:"Kontakta", author: user, permalink:"kontakta", h1:"kontakta", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage:true, parent: footer, pageOrder:3).save()
-			def kontaktaOss = new Page(title:"Kontakta oss", author: user, permalink:"kontakta-oss", h1:"Kontakta oss", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, parent: kontakta).save()
+			def kontaktaOss = new Page(title:"Kontakta oss", template: "contact", author: user, permalink:"kontakta-oss", h1:"Kontakta oss", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, parent: kontakta).save()
 			def saSvarar = new Page(title:"Så svarar vi på e-post", author: user, permalink:"sa-svarar-vi-pa-e-post", h1:"Så svarar vi på e-post", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, parent: kontakta).save()
+			kontaktaOss.addToPuffs(new Puff(title: "Address", description: "Domstolsverket<br />Juridiska avdelningen<br />551 81 Jönköping", link: "", parent: kontaktaOss))
+			def tackForDittMeddelande = new Page(title:"Tack för ditt meddelande", author: user, permalink:"tack-for-ditt-meddelande", h1:"Tack för ditt meddelande", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now).save()
 			
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html", name: "Kommittédirektiv", category: "Forarbeten", subCategory: "Regeringen").save()
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/2", name: "Kommittédirektiv 2", category: "Forarbeten", subCategory: "Regeringen").save()

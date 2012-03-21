@@ -110,9 +110,12 @@
 		<g:else>
 			<g:actionSubmit name="saveAsDraft" action="saveAsDraft" class="add" value="Spara utkast" />
 		</g:else>
- 	  <g:if test="${pageInstance?.status == 'published'}">
+ 	  <g:if test="${pageInstance?.status == 'published' && !pageInstance?.masterRevision}">
  	  	<span class="button"><g:actionSubmit name="update" action="update" class="save" value="Uppdatera" /></span>
  	  </g:if>
+ 	  <g:elseif test="${pageInstance?.masterRevision}">
+ 	  	<span class="button"><g:actionSubmit name="restore" action="restore" class="exclamation" value="Återställ" /></span>
+ 	  </g:elseif>
  	  <g:else>
  	  	<span class="button"><g:actionSubmit name="publish" action="publish" class="save" value="Publicera" /></span>
  	  </g:else>
@@ -130,6 +133,11 @@
   		<g:checkBox name="metaPage" checked="${pageInstance.metaPage ? 'true' : 'false'}" value="true" />
   		<label for="metaPage"><g:message code="page.metaPage.label" default="Visa som kategori" /></label>
 	</div>
+		
+	<div class="input ${hasErrors(bean: pageInstance, field: 'showInSitemap', 'errors')}">
+		<g:checkBox name="showInSitemap" checked="${pageInstance.showInSitemap ? 'true' : 'false'}" value="true" />
+  		<label for="showInSitemap"><g:message code="page.showInSitemap.label" default="Visa i webbkarta" /></label>
+	</div>
 	
 	<div class="input ${hasErrors(bean: pageInstance, field: 'menuStyle', 'errors')}">
 		<label for="menuStyle"><g:message code="page.menuStyle.label" default="Menystyling" /></label>
@@ -141,7 +149,7 @@
 		<g:textField name="pageOrder" size="4" value="${fieldValue(bean: pageInstance, field: 'pageOrder')}" />
 	</div>
 	
-	<g:if test="${Arrays.asList('frontpage', 'sitemap', 'legalSources').indexOf(pageInstance.template) == -1}">
+	<g:if test="${Arrays.asList('frontpage', 'sitemap', 'legalSources','contact').indexOf(pageInstance.template) == -1}">
 	<div class="input ${hasErrors(bean: pageInstance, field: 'template', 'errors')}">
 		<label for="template"><g:message code="page.template.label" default="Page template: " /></label>
 		<g:dropdown options="${grailsApplication.config.lagrummet.page.templates}" value="${fieldValue(bean: pageInstance, field: 'template')}" name="template"></g:dropdown>

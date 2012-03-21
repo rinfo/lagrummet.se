@@ -26,15 +26,14 @@
 				</g:menu>		
 			</nav>
 			<nav id="breadcrumbs">
-				<g:breadcrumbs parent="${page?.parent}" />
+				<g:breadcrumbs page="${page}" />
 			</nav>
 			<g:form mapping="search" method="GET" name="search">
 				<div class="input" id="searchCategory">
-					Vad vill du söka?
 					<label for="cat">Avgränsa din sökning</label>
 					<select id="cat" name="cat">
 					<g:each in="${siteProps?.searchCats}">
-						<g:if test="${params.cat == it}">
+						<g:if test="${session?.cat == it}">
 							<option value="${it}" selected="selected" rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
 						</g:if>
 						<g:else>

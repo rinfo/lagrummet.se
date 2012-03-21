@@ -16,6 +16,7 @@ jQuery(function($) {
 		mode : "exact",
 		elements : "content",
 		theme_advanced_toolbar_location : "top",
+		theme_advanced_blockformats : "p,h1,h2,h3,h4,",
 		force_p_newlines : true,
 		relative_urls : false,
 		external_image_list_url : serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,

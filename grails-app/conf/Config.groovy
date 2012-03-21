@@ -140,6 +140,7 @@ grails.plugins.springsecurity.ipRestrictions = [
 
 lagrummet {
 	googleAnalytics.webPropertyId = ""
+	contact.email = "redaktionen@lagrummet.se"
 	upload.dir = "files/"
 	rdl.service.baseurl="http://service.demo.lagrummet.se"
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"

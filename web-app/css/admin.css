@@ -442,7 +442,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 #editSynonyms input[disabled='disabled'] {
-	background-color: #eee;
+	background-color: #f7f7f7;
 }
 .list .buttons {
 	margin-top: 0em;

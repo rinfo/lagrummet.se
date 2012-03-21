@@ -60,31 +60,27 @@ class MainSiteTagLib {
 	def sitemapItem = { attrs ->
 		def pageInstance = (Page.get(attrs.pageId).masterRevision) ?: Page.get(attrs.pageId)
 		def now = new Date()
-		
-//		out << '<li id="p-' << pageInstance.id << '">' 
-		if (pageInstance.metaPage && pageInstance.parent) {
-			out << '<li><strong>' << pageInstance.h1 << "</strong></li>"
-		} else if (!pageInstance.metaPage) {
+
+		if (pageInstance.metaPage && pageInstance.parent && pageInstance.showInSitemap) {
+			out << '<li><h3>' << pageInstance.h1 << "</h3><li>"
+		} else if (!pageInstance.metaPage && pageInstance.showInSitemap) {
 			out << '<li><a href="' << resource() << "/" << pageInstance.url() << '">' << pageInstance.title  << '</a></li>'
 		}
 		
 		if (pageInstance?.children?.size()){
-//			out << "<ul>"
 			pageInstance.children.each {it ->
 				if (it.masterRevision == null|| (it.masterRevision.status == "draft" && it.status == "published")) {
 					out << sitemapItem(pageId:it.id, currentPageId: attrs.currentPageId)
 				}
 			}
-//			out << "</ul>"
 		}
-//		out << '</li>'
 	}
 	
 	def adminMenuItem = { attrs ->
 		def pageInstance = (Page.get(attrs.pageId).masterRevision) ?: Page.get(attrs.pageId)
 
 		def now = new Date()
-
+		
 		def liClass = (!pageInstance.metaPage) ? "" : "metaPage "
 		if (attrs.currentPageId == pageInstance.id) liClass += "currentPage "
 		if (pageInstance.status == 'draft') liClass += "draft "

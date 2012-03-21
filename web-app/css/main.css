@@ -339,8 +339,9 @@ a.print:visited {
 	color: #585858;
 }
 
-#primaryNavigation ul li.active {
+#primaryNavigation ul li a:hover {
 	background-color: #e7e7e7;
+	text-decoration: none;
 }
 
 #primaryNavigation ul li.heading {
@@ -488,14 +489,12 @@ article.frontpage .puffs .puff img {
 
 article.editorial #pageTree ul {
 	color: #006383;
+	list-style-type: none;
 }
 
-article.editorial #pageTree ul ul {
-	list-style-type: circle;
-}
-
-article.editorial #pageTree ul ul li {
-	margin-bottom: 0;
+article.editorial #pageTree ul, article.editorial #pageTree ul li {
+	padding-left: 0;
+	margin-left: 0;
 }
 
 #ordlista {
@@ -574,6 +573,39 @@ article.legalSources section.Foreskrifter h2 {
 	margin-left: 0;
 }
 
+/* Contact form */
+#contact {
+	position: relative;
+	background-color: #f7f7f7;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+#contact input, #contact select {
+	width: 16em;
+}
+
+#contact #message {
+	position: absolute;
+	right: 1em;
+	top: 1em;
+}
+
+#contact #message textarea {
+	width: 16em;
+	height: 11em;
+	resize: none;
+}
+
+#contact button {
+	clear: both;
+	margin-top: 2em;
+}
+
+#contact .required {
+	color: #A44C45 ;
+}
+
 /* =FOOTER page footer */
 #siteFooter {
     padding-top: 1em;
@@ -583,13 +615,9 @@ article.legalSources section.Foreskrifter h2 {
     margin: 1em 0;
 }
 
-#siteFooter a {
+#siteFooter a, #siteFooter a:visited {
 	color: #333;
 	text-decoration: none;
-}
-
-#siteFooter a:visited {
-	color: #585858;
 }
 
 #siteFooter ul {
