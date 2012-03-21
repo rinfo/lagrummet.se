@@ -1,3 +1,9 @@
+v0.8.1
+	Fix:
+		#61 Breadcrumbs visar fel information
+		Ikon för utkast/publicerade
+		Kolumnbredd i sidfot
+
 v0.8.0
 	Fix:
 		#65 två kolumner på dokumentsidor, grundförfattning visas för konsoliderade versioner
