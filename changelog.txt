@@ -1,3 +1,16 @@
+v0.8.2
+	Nytt:
+		102 Målnummer i träfflista
+	Fix:
+		#88 Förhandsvisning
+		Användarnamn i revisionshistorik
+
+v0.8.1
+	Fix:
+		#61 Breadcrumbs visar fel information
+		Ikon för utkast/publicerade
+		Kolumnbredd i sidfot
+
 v0.8.0
 	Fix:
 		#65 två kolumner på dokumentsidor, grundförfattning visas för konsoliderade versioner

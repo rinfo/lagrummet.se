@@ -85,9 +85,9 @@ class SearchController {
 			def response = [query: params.query, searchResult: searchResult, synonyms: synonyms]
 			render response as JSON
 		} else if(params.cat && params.cat != "Alla") {
-			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page(), offset:offset, synonyms: synonyms, alias: params.alias])
+			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias])
 		} else {
-			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page(), synonyms: synonyms, alias: params.alias])
+			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias])
 		}
 		
 	}
@@ -170,7 +170,7 @@ class SearchController {
 			searchResult = rdlSearchService.searchWithQuery(queryBuilder.getQueryParams(), "list")
 		}
 		def cat = params.kategori ?: "Forfattningar"
-		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(), offset: offset, extendedSearchCommand: esc])
+		render(view: 'extendedSearch', model: [queryParams: queryBuilder.getQueryParams(), query: queryBuilder, cat: cat, searchResult: searchResult, page: new Page(metaPage: false, title: message(code:"extendedSearch.label")), offset: offset, extendedSearchCommand: esc])
 	}
 	
 	def findCreatorsOrPublishers = {

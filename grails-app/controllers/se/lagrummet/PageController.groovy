@@ -2,9 +2,9 @@ package se.lagrummet
 
 import grails.plugins.springsecurity.Secured
 import grails.converters.*
-import groovy.xml.MarkupBuilder
 
-import javax.servlet.http.HttpServletResponse
+import org.apache.commons.collections.FactoryUtils
+import org.apache.commons.collections.list.LazyList
 
 class PageController {
 	
@@ -178,38 +178,41 @@ class PageController {
 			if(page.publishStop && page.publishStop.before(new Date())) {
 				forward(action: "error", params: [errorId: "404"])
 			}
-
-			def model = [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")]
-			if (!page.template || page.template == "default") {
-				return model
-			} else if (page.template == "sitemap") {
-				model.pageTreeList = pageService.getSiteMap()
-				render(view: "sitemap", model: model)
-			} else if (page.template == "english") {
-				render(view: "showEnglish", model: model)
-			} else if (page.template == "contact") {
-					render(view: "contact", model: model)
-			} else if (page.template == "legalSources") {	
-				model.legalSourceGroups = [:]
-				grailsApplication.config.lagrummet.legalSource.categories.each { category ->
-					def categoryList = ["sokbar": [:], "inteSokbar": [:]]
-					LegalSource.findAllByCategory(category).each {
-						def rdlName = (it.rdlName) ? "sokbar" : "inteSokbar" 
-						if (!categoryList[rdlName][it.subCategory]) {
-							categoryList[rdlName][it.subCategory] = []
-						}
-						categoryList[rdlName][it.subCategory].add(it)
-					}
-					model.legalSourceGroups[category] = categoryList
-				}
-				render(view: "legalSources", model: model)
-			} else {
-				render(view: page.template, model: model)
-			}
+			renderPage(page)
 		} else {
 			forward(action: "error", params: [errorId: "404"])
 		}
     }
+	
+	private void renderPage(Page page) {
+		def model = [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")]
+		if (!page.template || page.template == "default") {
+			render(view: "show", model: model)
+		} else if (page.template == "sitemap") {
+			model.pageTreeList = pageService.getSiteMap()
+			render(view: "sitemap", model: model)
+		} else if (page.template == "contact") {
+					render(view: "contact", model: model)
+		} else if (page.template == "english") {
+			render(view: "showEnglish", model: model)
+		} else if (page.template == "legalSources") {
+			model.legalSourceGroups = [:]
+			grailsApplication.config.lagrummet.legalSource.categories.each { category ->
+				def categoryList = ["sokbar": [:], "inteSokbar": [:]]
+				LegalSource.findAllByCategory(category).each {
+					def rdlName = (it.rdlName) ? "sokbar" : "inteSokbar"
+					if (!categoryList[rdlName][it.subCategory]) {
+						categoryList[rdlName][it.subCategory] = []
+					}
+					categoryList[rdlName][it.subCategory].add(it)
+				}
+				model.legalSourceGroups[category] = categoryList
+			}
+			render(view: "legalSources", model: model)
+		} else {
+			render(view: page.template, model: model)
+		}
+	}
 	
 	def error = {
 		if (params.errorId == "404") {
@@ -329,38 +332,23 @@ class PageController {
 	def preview = {
 		def page = new Page()
 		page.properties = params
+
+		page.puffs.eachWithIndex { puffItem, i ->
+				def puffListParam = "expandablePuffList["+i+"]"
+				def imgId = params."${puffListParam}"?.image?.id
+				puffItem.image = imgId ? Media.findById(imgId) : null
+		}
 		
+		def toBeDeleted = page.puffs.findAll {
+			it.deleted || it.isEmpty()
+		}
+		if (toBeDeleted) {
+			page.puffs.removeAll(toBeDeleted)
+		}
+		page.discard()
 		renderPage(page)
 	}
 	
-	private void renderPage(Page page) {
-		def model = [page: page, siteProps: SiteProperties.findByTitle("lagrummet.se")]
-		if (!page.template || page.template == "default") {
-			render(view: "show", model: model)
-		} else if (page.template == "sitemap") {
-			model.pageTreeList = pageService.getSiteMap()
-			render(view: "sitemap", model: model)
-		} else if (page.template == "english") {
-			render(view: "showEnglish", model: model)
-		} else if (page.template == "legalSources") {
-			model.legalSourceGroups = [:]
-			grailsApplication.config.lagrummet.legalSource.categories.each { category ->
-				def categoryList = ["sokbar": [:], "inteSokbar": [:]]
-				LegalSource.findAllByCategory(category).each {
-					def rdlName = (it.rdlName) ? "sokbar" : "inteSokbar"
-					if (!categoryList[rdlName][it.subCategory]) {
-						categoryList[rdlName][it.subCategory] = []
-					}
-					categoryList[rdlName][it.subCategory].add(it)
-				}
-				model.legalSourceGroups[category] = categoryList
-			}
-			render(view: "legalSources", model: model)
-		} else {
-			render(view: page.template, model: model)
-		}
-	}
-
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def update = {
 		flash.messages = []
@@ -447,4 +435,6 @@ class PageController {
             redirect(action: "list")
         }
     }
+	
+	
 }
