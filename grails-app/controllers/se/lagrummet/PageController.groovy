@@ -323,8 +323,8 @@ class PageController {
 		page.properties = params
 
 		page.puffs.eachWithIndex { puffItem, i ->
-				def xxx = "expandablePuffList["+i+"]"
-				def imgId = params."${xxx}"?.image?.id
+				def puffListParam = "expandablePuffList["+i+"]"
+				def imgId = params."${puffListParam}"?.image?.id
 				puffItem.image = imgId ? Media.findById(imgId) : null
 		}
 		
