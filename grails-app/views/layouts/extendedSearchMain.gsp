@@ -27,7 +27,7 @@
 				</g:menu>		
 			</nav>
 			<nav id="breadcrumbs">
-				<g:breadcrumbs parent="${page?.parent}" />
+				<g:breadcrumbs page="${page}" />
 			</nav>
 			<div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>
 		</header>
