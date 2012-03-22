@@ -24,9 +24,9 @@ if(System.getProperty(ENV_NAME)) {
 	println "Including configuration file specified in environment: " + System.getenv(ENV_NAME);
 	grails.config.locations << "file:" + System.getenv(ENV_NAME)
  
-} else if(new File("C:\\lagrummet.se\\config\\lagrummet.se-config.properties").exists()) {
-	println "Using default location: C:\\lagrummet.se\\config\\lagrummet.se-config.properties"
-	grails.config.locations << "file:C:\\lagrummet.se\\config\\lagrummet.se-config.properties"
+} else if(new File("C:\\lagrummet.se\\config\\lagrummet.se-config.groovy").exists()) {
+	println "Using default location: C:\\lagrummet.se\\config\\lagrummet.se-config.groovy"
+	grails.config.locations << "file:C:\\lagrummet.se\\config\\lagrummet.se-config.groovy"
 
 } else {
 	println "No external configuration file defined."
