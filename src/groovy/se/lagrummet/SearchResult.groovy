@@ -67,4 +67,10 @@ class SearchResult {
 		}
 	}
 	
+	public SearchResult resetCategory(Category cat) {
+		items[(cat.toString())] = []
+		totalResults -= totalResultsPerCategory[(cat.toString())]
+		totalResultsPerCategory[(cat.toString())] = 0
+		return this
+	}
 }

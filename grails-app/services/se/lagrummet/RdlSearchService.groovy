@@ -11,8 +11,8 @@ class RdlSearchService {
 
     static transactional = true
 	
-	def availableCategories = [Category.RATTSFALL, Category.LAGAR, Category.MYNDIGHETERS_FORESKRIFTER, Category.PROPOSITIONER, Category.UTREDNINGAR]
-	
+	def availableCategories = [Category.RATTSFALL, Category.MYNDIGHETERS_FORESKRIFTER, Category.PROPOSITIONER, Category.UTREDNINGAR]
+	def latestConsolidatedCategories = [Category.LAGAR]
 	
     public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
 		def queryBuilder = new QueryBuilder()
@@ -31,11 +31,56 @@ class RdlSearchService {
 		//force the ikraftdatum to be returned in the search result if the document has one
 		queryBuilder.setIkraftIfExists("")
 		queryBuilder.setParam("_stats", "on")
+		
+		def result = searchWithQuery(queryBuilder.getQueryParams())
+		result.resetCategory(Category.LAGAR)
+		return result
+	}
+	
+	/**
+	 * Find the best representation of a current or consolidated law
+	 * @param query
+	 * @param cat
+	 * @param offset
+	 * @param itemsPerPage
+	 * @return
+	 */
+	public SearchResult plainTextLatestConsolidated(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
+		
+		if(cat && !latestConsolidatedCategories.contains(cat)) {
+			return new SearchResult()
+		}
+		def today = new Date().format("yyyy-MM-dd")
+		def queryBuilder = new QueryBuilder()
+		
+		queryBuilder.setQueries(query)
+		
+		queryBuilder.setType(Category.LAGAR.getTypes())
+		queryBuilder.setParam('exists-rev.omtryckAv.iri', 'false')
+		queryBuilder.setParam('exists-rev.konsoliderar.iri', 'false')
+		queryBuilder.setParam('exists-rev.ersatter.iri', 'false')
+		queryBuilder.setParam('exists-upphaver.iri', 'false')
+		queryBuilder.setParam('or-exists-andrar.iri', 'false')
+		queryBuilder.setParam('or-exists-omtryckAv.iri', 'true')
+		queryBuilder.setParam('exists-isReplacedBy.iri', 'false')
+		queryBuilder.setParam('ifExists-max-ikrafttradandedatum', today)
+		queryBuilder.setParam('ifExists-minEx-rev.upphaver.ikrafttradandedatum', today)
+		queryBuilder.setParam('ifExists-max-omtryckAv.ikrafttradandedatum', today)
+		queryBuilder.setParam('ifExists-minEx-omtryckAv.rev.upphaver.ikrafttradandedatum', today)
+		queryBuilder.setParam('ifExists-max-konsoliderar.ikrafttradandedatum', today)
+		queryBuilder.setParam('ifExists-minEx-konsoliderar.rev.upphaver.ikrafttradandedatum', today)
+		
+		if(offset != null && itemsPerPage) {
+			queryBuilder.setPageAndPageSize((int)(offset / itemsPerPage), itemsPerPage)
+		}
+		
+		queryBuilder.setParam("_stats", "on")
 		return searchWithQuery(queryBuilder.getQueryParams())
 	}
 	
 	
 	public SearchResult searchWithQuery(Map queryParams, String resultListType = 'category') {
+
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
 		def http = new HTTPBuilder()

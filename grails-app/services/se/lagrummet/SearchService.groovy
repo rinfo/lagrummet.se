@@ -17,9 +17,10 @@ class SearchService {
     public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
 		
 		def remoteResult = rdlSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
+		def remoteLatestConsolidatedResult = rdlSearchService.plainTextLatestConsolidated(query, cat, offset, itemsPerPage)
 		def localResult = localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
 		
-		return remoteResult.mergeWith(localResult)
+		return remoteResult.mergeWith(localResult).mergeWith(remoteLatestConsolidatedResult)
 	}
 	
 	
