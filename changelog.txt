@@ -1,3 +1,11 @@
+v0.8.3
+	Nytt:
+		80 Kontaktformulär
+		94 Konsoliderade/gällande visas överst
+	Fix:
+		#61 Brödsmulor ska visas på startsidan
+		#91 Brödsmulor i utökad sökning
+
 v0.8.2
 	Nytt:
 		102 Målnummer i träfflista
