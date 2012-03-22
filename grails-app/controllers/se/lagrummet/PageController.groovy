@@ -178,7 +178,6 @@ class PageController {
 			if(page.publishStop && page.publishStop.before(new Date())) {
 				forward(action: "error", params: [errorId: "404"])
 			}
-
 			renderPage(page)
 		} else {
 			forward(action: "error", params: [errorId: "404"])
@@ -192,6 +191,8 @@ class PageController {
 		} else if (page.template == "sitemap") {
 			model.pageTreeList = pageService.getSiteMap()
 			render(view: "sitemap", model: model)
+		} else if (page.template == "contact") {
+					render(view: "contact", model: model)
 		} else if (page.template == "english") {
 			render(view: "showEnglish", model: model)
 		} else if (page.template == "legalSources") {
@@ -251,6 +252,17 @@ class PageController {
 		}
 	}
 	
+	def contact = {
+		def from = 'Från ' + params.name
+		if (params.epost) from += ', ' + params.epost 
+		sendMail {     
+		  to grailsApplication.config.lagrummet.contact.email     
+		  subject params.arende  
+		  html '<p>' + from + '</p><p>Ärendetyp: ' + arende + '</p><p>' + params.meddelande + '</p>'
+		}
+		forward(action: "show", params: [permalink: "tack-for-ditt-meddelande"])
+	}
+	
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 	def restore = {
 		def pageInstance = Page.get(params.id)
@@ -263,7 +275,6 @@ class PageController {
 		master.content = pageInstance.content
 		master.template = pageInstance.template
 		master.pageOrder = pageInstance.pageOrder
-
 		
 		if (!pageInstance.hasErrors() && master.save(flush:true)) {
 			flash.message = "${message(code: 'default.updated.message', args: [message(code: 'page.label', default: 'Page'), master.id])}"
@@ -336,7 +347,6 @@ class PageController {
 		}
 		page.discard()
 		renderPage(page)
-		
 	}
 	
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
@@ -381,6 +391,7 @@ class PageController {
 			}
 			
 			pageInstance.lastUpdated = now
+			
             if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
 				flash.messages.add "${message(code: 'page.updated.message', args: [pageInstance.h1])}"
                 redirect(action: "edit", id: pageInstance.id)

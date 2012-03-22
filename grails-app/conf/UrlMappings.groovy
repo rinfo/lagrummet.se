@@ -53,6 +53,11 @@ class UrlMappings {
 		
 		"/admin/synonym/$action"(controller: 'synonym')
 		
+		name contact: "/contact" {
+			controller = 'page'
+			action = 'contact'
+		}
+		
 		name pageAdmin: "/admin/page/$action?" {
 			controller = 'page'
 		}

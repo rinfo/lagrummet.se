@@ -10,9 +10,10 @@ class Page implements Comparable<Page>{
 	String permalink
 	String content
 	User author
-	int pageOrder = 0
+	int pageOrder = 1
 	String template = "default" // See config.groovy -> lagrummet.page.templates for possible values
 	String menuStyle
+	boolean showInSitemap = true
 	
 	String status = "draft" // draft, published, autoSave
 	boolean metaPage = false
@@ -112,6 +113,7 @@ class Page implements Comparable<Page>{
 		
 		pageBackup.id = null
 		pageBackup.children = null
+		pageBackup.parent = null
 		pageBackup.media = null
 		pageBackup.puffs = null
 		pageBackup.autoSaves = null
