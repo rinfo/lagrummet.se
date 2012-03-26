@@ -9,6 +9,8 @@ class SearchResult {
 	def items = [:]
 	def itemsList = []
 	
+	def topHits = []
+	
 	public SearchResult() {
 		for(Category cat : Category.values()) {
 			items[(cat.toString())] = []
@@ -49,6 +51,8 @@ class SearchResult {
 		
 		errorMessages.addAll(other.errorMessages)
 		
+		topHits.addAll(other.topHits)
+		
 		return this
 	}
 	
@@ -72,5 +76,9 @@ class SearchResult {
 		totalResults -= totalResultsPerCategory[(cat.toString())]
 		totalResultsPerCategory[(cat.toString())] = 0
 		return this
+	}
+	
+	public void addTopHit(item) {
+		topHits.add(item)
 	}
 }
