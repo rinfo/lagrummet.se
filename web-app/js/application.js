@@ -2,7 +2,25 @@ var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
 var originalUrl, t, query = "";
 
 // Instant search
-function search() {
+function searchSuggestions() {
+	var form = $("#search");
+	var cat = $("#cat").attr("value");
+	
+	$.get(serverUrl + "search/searchSuggestions", form.serialize(), function(data) {
+		if (data) {
+			$("#searchSuggestions").empty().show();
+			$.each(data.topHits, function(i, item) {
+    			var title = (item.title) ? item.title : item.identifier;
+    			var href = serverUrl + item.iri.replace(/http:\/\/.*?\//,"rinfo/");
+    			if (title.length > 40) title = title.substr(0, 40) + "...";
+    			
+    			$("#searchSuggestions").append('<li><a href="'+href+'">' + title + "</a></li>");         		
+    		});
+		}
+	}, "json");
+}
+
+function instantSearch() {
 	var form = $("#search");
 	query = $("#query").attr("value");
 	var cat = $("#cat").attr("value");
@@ -208,7 +226,7 @@ jQuery(document).ready(function($) {
 		$("#cat").change();
 	}
 	$("html").click(function() {
-		$("#searchCategoryList").hide();
+		$("#searchCategoryList, #searchSuggestions").hide();
 		$("#searchCurrentCategory").removeClass("active");
 	});
 	$("#searchCurrentCategory").html($("#cat option[selected=selected]").html());
@@ -241,13 +259,18 @@ jQuery(document).ready(function($) {
 			$("#content > *").removeClass("searchHidden");
 		} else if ($(this).attr("value").length > 2) {
 			if ($(this).attr("value") != query) {
-				t=setTimeout("search()", 350);	
+				t=setTimeout("instantSearch(); searchSuggestions()", 350);	
 			}
 		}
 	});
 	
 	$("header #search #query").live("keypress", function(e) {
 		if (e.which == 13 && query == $(this).attr("value")) {
+			// load the search suggestion if one is selected
+			var searchSuggestion = $("#searchSuggestions li.active");
+			if (searchSuggestion.length) {
+				window.location = searchSuggestion.children("a").attr("href");
+			}
 			e.preventDefault();
 		}
 	});
@@ -260,6 +283,33 @@ jQuery(document).ready(function($) {
 				});
 			}
 		}, "json");
+	});
+	
+	// Step through the search suggestions with arrow keys
+	$("#query").focus(function() {
+		$(this).bind("keydown", function(e) {
+			var selected = $("#searchSuggestions li.active");
+			
+			if (e.keyCode == 40) { 
+				if (selected.length) {
+					selected.removeClass("active").next().addClass("active");
+				} else {
+					$("#searchSuggestions li").first().addClass("active");
+		      	}
+		      	return false;
+			}
+			
+			if (e.keyCode == 38) { 
+				if (selected.length) {
+					selected.removeClass("active").prev().addClass("active");
+				} else {
+					$("#searchSuggestions li").last().addClass("active");
+				}
+				return false;
+			}
+		});
+	}).blur(function() {
+		
 	});
 	
 	// Interactive form on the extended search page
