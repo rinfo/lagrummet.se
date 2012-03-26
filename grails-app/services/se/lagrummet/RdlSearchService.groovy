@@ -37,6 +37,16 @@ class RdlSearchService {
 		return result
 	}
 	
+	public SearchResult quickSearch(String query, Integer items) {
+		def queryBuilder = new QueryBuilder()
+		
+		queryBuilder.setQuery(query)
+		
+		queryBuilder.setPageAndPageSize(0, items)
+		def result = searchWithQuery(queryBuilder.getQueryParams(), 'list')
+		return result
+	}
+	
 	/**
 	 * Find the best representation of a current or consolidated law
 	 * @param query
