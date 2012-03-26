@@ -48,6 +48,7 @@ class LocalSearchService {
 							ge("publishStop", new Date())
 							term("publishStop", "NULL")
 						}
+						must(term("metaPage", false))
 						sort(CompassQuery.SortImplicitType.SCORE, CompassQuery.SortDirection.AUTO)
 					},
 					options )
