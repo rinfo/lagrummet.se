@@ -852,6 +852,43 @@ article.legalSources section.Foreskrifter h2 {
 	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
 }
 
+
+#searchQuery {
+	position: relative;
+}
+
+#searchSuggestions {
+	position: absolute;
+	display: none;
+	background-color: #fff;
+	width: 310px;
+	top: 35px;
+	z-index: 10;
+	border: 1px solid #eee;
+}
+
+#searchSuggestions li {
+	padding: 0.5em 0.5em 0.1em 0.5em;
+}
+
+#searchSuggestions li a, #searchSuggestions li a:hover {
+	font-weight: normal;
+	text-decoration: none;
+	color: #888;
+}
+
+#searchSuggestions li:hover {
+	background-color: #309DC1;
+}
+
+#searchSuggestions li.active {
+	background-color: #006283;
+}
+
+#searchSuggestions li.active a, #searchSuggestions li a:hover, #searchSuggestions li.active a:visited {
+	color: #fff;
+}
+
 .searchHidden {
 	display: none;
 }
