@@ -2,22 +2,20 @@ var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
 var originalUrl, t, query = "";
 
 // Instant search
-function searchSuggestions() {
+function searchSuggestions(data) {
 	var form = $("#search");
 	var cat = $("#cat").attr("value");
 	
-	$.get(serverUrl + "search/searchSuggestions", form.serialize(), function(data) {
-		if (data) {
-			$("#searchSuggestions").empty().show();
-			$.each(data.topHits, function(i, item) {
-    			var title = (item.title) ? item.title : item.identifier;
-    			var href = serverUrl + item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-    			if (title.length > 40) title = title.substr(0, 40) + "...";
-    			
-    			$("#searchSuggestions").append('<li><a href="'+href+'">' + title + "</a></li>");         		
-    		});
-		}
-	}, "json");
+	if (data) {
+		$("#searchSuggestions").empty().show();
+		$.each(data.searchResult.topHits, function(i, item) {
+			var title = (item.title) ? item.title : item.identifier;
+			var href = serverUrl + item.iri.replace(/http:\/\/.*?\//,"rinfo/");
+			if (title.length > 40) title = title.substr(0, 40) + "...";
+			
+			$("#searchSuggestions").append('<li><a href="'+href+'">' + title + "</a></li>");         		
+		});
+	}
 }
 
 function instantSearch() {
@@ -32,7 +30,9 @@ function instantSearch() {
     }
 	
 	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
+		
         if (data) {
+        	searchSuggestions(data);
         	if (data.searchResult.totalResults > 0 && $("#cat").attr("value") == "Alla") {      		
         		$("#dynamicSearchResults").html('<header><h1>Sökresultat för '+query+'</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p>');
         		
@@ -259,7 +259,7 @@ jQuery(document).ready(function($) {
 			$("#content > *").removeClass("searchHidden");
 		} else if ($(this).attr("value").length > 2) {
 			if ($(this).attr("value") != query) {
-				t=setTimeout("instantSearch(); searchSuggestions()", 350);	
+				t=setTimeout("instantSearch()", 350);	
 			}
 		}
 	});
@@ -290,6 +290,7 @@ jQuery(document).ready(function($) {
 		$(this).bind("keydown", function(e) {
 			var selected = $("#searchSuggestions li.active");
 			
+			// Step down using down-arrow
 			if (e.keyCode == 40) { 
 				if (selected.length) {
 					selected.removeClass("active").next().addClass("active");
@@ -299,12 +300,20 @@ jQuery(document).ready(function($) {
 		      	return false;
 			}
 			
+			// Step up using up-arrow
 			if (e.keyCode == 38) { 
 				if (selected.length) {
 					selected.removeClass("active").prev().addClass("active");
 				} else {
 					$("#searchSuggestions li").last().addClass("active");
 				}
+				return false;
+			}
+			
+			// Hide suggestions on Escape
+			if (e.keyCode == 27) {
+				$("#searchSuggestions li.active").removeClass("active");
+				$("#searchSuggestions").hide();
 				return false;
 			}
 		});
