@@ -48,13 +48,13 @@ class LocalSearchService {
 							ge("publishStop", new Date())
 							term("publishStop", "NULL")
 						}
+						must(term("metaPage", false))
 						sort(CompassQuery.SortImplicitType.SCORE, CompassQuery.SortDirection.AUTO)
 					},
 					options )
 				searchResult.totalResults = result.total
 				
-				def i = 0
-				result.results.each{ item ->
+				result.results.eachWithIndex{ item, i ->
 					def searchResultItem = new SearchResultItem(
 													title: item.title,
 													iri: item.url(),
@@ -63,7 +63,9 @@ class LocalSearchService {
 													matches: result.highlights[i].content
 													)
 					searchResult.addItemByType(searchResultItem)
-					i++
+					if(i < 2) {
+						searchResult.addTopHit(searchResultItem)
+					}
 				}
 			}
 			catch(e) {

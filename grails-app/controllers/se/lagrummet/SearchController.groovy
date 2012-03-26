@@ -55,19 +55,6 @@ class SearchController {
 		response.setHeader("Content-disposition", "attachment; filename=search-history.csv");
 		render(contentType:'text/csv',text:result,encoding:"UTF-8")
 	}
-
-	def searchSuggestions = {
-		
-		def searchResult = null
-		
-		if(params.query) {		
-			searchResult = rdlSearchService.quickSearch(params.query, 5)
-		}
-		
-		def response = [query: params.query, searchResult: searchResult]
-		render response as JSON
-	}
-	
 	
     def index = {
 		def searchResult = null

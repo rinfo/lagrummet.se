@@ -37,16 +37,6 @@ class RdlSearchService {
 		return result
 	}
 	
-	public SearchResult quickSearch(String query, Integer items) {
-		def queryBuilder = new QueryBuilder()
-		
-		queryBuilder.setQuery(query)
-		
-		queryBuilder.setPageAndPageSize(0, items)
-		def result = searchWithQuery(queryBuilder.getQueryParams(), 'list')
-		return result
-	}
-	
 	/**
 	 * Find the best representation of a current or consolidated law
 	 * @param query
@@ -104,7 +94,7 @@ class RdlSearchService {
 				response.success = {resp, json ->
 					searchResult.totalResults = json.totalResults
 					
-					json.items.each { item ->
+					json.items.eachWithIndex { item, i ->
 						def searchResultItem = new SearchResultItem(
 														title: item.title,
 														iri: item.iri,
@@ -120,6 +110,10 @@ class RdlSearchService {
 							searchResult.addItemByType(searchResultItem)
 						} else if("list".equals(resultListType)) {
 							searchResult.addItem(searchResultItem)
+						}
+						
+						if(i < 2) {
+							searchResult.addTopHit(searchResultItem)
 						}
 					}
 					

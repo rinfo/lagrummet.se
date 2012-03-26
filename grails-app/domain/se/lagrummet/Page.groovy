@@ -123,7 +123,7 @@ class Page implements Comparable<Page>{
 	}
 	
 	static searchable = {
-		except = ["template", "metaPage", "pageOrder", "menuStyle"]
+		except = ["template", "pageOrder", "menuStyle", "url"]
 		spellCheck "include"
 		title boost: 2.0
 		publishStop nullValue: "NULL"
