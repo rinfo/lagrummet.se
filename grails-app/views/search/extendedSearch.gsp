@@ -257,7 +257,7 @@
 								<p>${item.matches} ...</p>
 							</g:if>
 						</td>
-						<g:if test="${cat != 'Ovrigt' }"><td>${item.identifier}</td></g:if>
+						<g:if test="${cat != 'Ovrigt' }"><td>${item.identifier ?: item.malnummer}</td></g:if>
 					</tr>
 				</g:each>
 			</table>
