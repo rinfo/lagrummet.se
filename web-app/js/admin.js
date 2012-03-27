@@ -37,7 +37,7 @@ jQuery(function($) {
 	    // The default set of all items
 	    var items = {
 	        createItem: { // The "create" menu item
-	            label: "Create",
+	            label: "Skapa ny sida",
 	            action: function () {
 	            	newNodeParentId = null;
 	            	var id = $(node).attr("id").replace("p-", "");
