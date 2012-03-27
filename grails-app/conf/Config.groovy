@@ -179,10 +179,28 @@ lagrummet {
 	legalSource.subCategories = ["", "Regeringen", "Riksdagen", "Lagradet", "Domstolars_Vagledande_Avgoranden", "Myndigheters_Vagledande_Avgoranden", "Domstolars_Beslut"]
 }
 
+<<<<<<< HEAD
 // Mail settings for contact form (and other Grails Mail)
 grails.mail.host = 'Mailgw1.dom.se'
 grails.mail.port = 25
 grails.mail.default.from="redaktionen@lagrummet.se"
+=======
+
+//Override in external config
+//Examples for gmail config
+grails {
+	mail {
+	  host = ""			//"smtp.gmail.com"
+	  port = 0			//465
+	  username = "" 	//"youracount@gmail.com"
+	  password = ""		//"yourpassword"
+//	  props = ["mail.smtp.auth":"true",
+//			   "mail.smtp.socketFactory.port":"465",
+//			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+//			   "mail.smtp.socketFactory.fallback":"false"]   
+	  }
+ }
+>>>>>>> 1a57cbe261c8064b9ec4998b15bb6ea843b08eaf
 
 environments {
 	production {

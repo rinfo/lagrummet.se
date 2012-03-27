@@ -160,10 +160,6 @@ class PageController {
 			def parentPermalink = (url[url.size()-2])
 			page = Page.withCriteria(uniqueResult:true) {
 				eq("permalink", permalink)
-				parent {
-					eq("permalink", parentPermalink)
-					eq("status", "published")
-				}
 				eq("status", "published")
 				le('publishStart', now)
 				or {
@@ -262,6 +258,7 @@ class PageController {
 		  subject params.arende
 		  from fromAdress
 		  html '<p>' + title + '</p><p>Ärendetyp: ' + params.arende + '</p><p>' + params.meddelande + '</p>'
+
 		}
 		forward(action: "show", params: [permalink: "tack-for-ditt-meddelande"])
 	}
