@@ -22,7 +22,7 @@ function instantSearch() {
 	var form = $("#search");
 	query = $("#query").attr("value");
 	var cat = $("#cat").attr("value");
-	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
+	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="'+serverUrl+'sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
 	
 	if (!$("#dynamicSearchResults").length) {
     	$("#content > *:not(#siteFooter)").addClass("searchHidden");
