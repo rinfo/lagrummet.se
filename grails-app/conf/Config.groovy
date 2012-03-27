@@ -179,6 +179,11 @@ lagrummet {
 	legalSource.subCategories = ["", "Regeringen", "Riksdagen", "Lagradet", "Domstolars_Vagledande_Avgoranden", "Myndigheters_Vagledande_Avgoranden", "Domstolars_Beslut"]
 }
 
+// Mail settings for contact form (and other Grails Mail)
+grails.mail.host = 'Mailgw1.dom.se'
+grails.mail.port = 25
+grails.mail.default.from="redaktionen@lagrummet.se"
+
 environments {
 	production {
 		lagrummet.app.basedir = ""

@@ -253,12 +253,15 @@ class PageController {
 	}
 	
 	def contact = {
-		def from = 'Från ' + params.name
-		if (params.epost) from += ', ' + params.epost 
+		def title = 'Från ' + params.name
+		if (params.epost) title += ', ' + params.epost
+		def fromAdress = params.epost ?: "lagrummet@lagrummet.se"
+		
 		sendMail {     
 		  to grailsApplication.config.lagrummet.contact.email     
-		  subject params.arende  
-		  html '<p>' + from + '</p><p>Ärendetyp: ' + arende + '</p><p>' + params.meddelande + '</p>'
+		  subject params.arende
+		  from fromAdress
+		  html '<p>' + title + '</p><p>Ärendetyp: ' + params.arende + '</p><p>' + params.meddelande + '</p>'
 		}
 		forward(action: "show", params: [permalink: "tack-for-ditt-meddelande"])
 	}
