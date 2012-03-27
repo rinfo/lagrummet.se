@@ -433,7 +433,7 @@ jQuery(document).ready(function($) {
 				if (!$(this).html()) block = true;
 			});
 			if (block) {
-				alert("Var vänlig och fyll i de markerade fälten");
+				alert("Var vänlig och fyll i de obligatoriska fälten");
 				return false;
 			} else {
 				return true;

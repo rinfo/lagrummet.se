@@ -423,12 +423,11 @@ article .reviewed {
 }
 
 article.editorial button {
-	height: 30px;
 	margin-left: 2px;
-	padding: 5px;
+	padding: 1em 1.5em;
 	border: 1px solid #ddd;
 	background-color: #eee;
-	/*background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f2), to(#fff));*/
+	background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
 	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
 	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
 	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
@@ -606,16 +605,20 @@ article.legalSources section.Foreskrifter h2 {
 #contact {
 	position: relative;
 	margin: 1em 0;
+	width: 100%;
+	overflow: hidden;
 }
 
 #contact input, #contact select {
 	width: 16em;
 }
 
+#contact #contactInfo {
+	float: left;
+}
+
 #contact #message {
-	position: absolute;
-	right: 0;
-	top: 0;
+	float: right;
 }
 
 #contact #message textarea {
@@ -624,9 +627,16 @@ article.legalSources section.Foreskrifter h2 {
 	resize: none;
 }
 
-#contact button {
+#contact .buttons {
+	width: 100%;
 	clear: both;
+	overflow: hidden;
 	margin-top: 2em;
+}
+
+#contact .buttons button {
+	float: right;
+	margin: 1em 0;
 }
 
 #contact .required {
@@ -709,7 +719,7 @@ article.legalSources section.Foreskrifter h2 {
 	display: block;
 	float: left;
 	background-color: #eee;
-	/*background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f2), to(#fff));*/
+	background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
 	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
 	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
 	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
@@ -877,11 +887,12 @@ article.legalSources section.Foreskrifter h2 {
 	color: #888;
 }
 
-#searchSuggestions li:hover {
+#searchSuggestions li:hover, #searchSuggestions li:hover a {
 	background-color: #309DC1;
+	color: #fff;
 }
 
-#searchSuggestions li.active {
+#searchSuggestions li.active,  #searchSuggestions li.active:hover a {
 	background-color: #006283;
 }
 

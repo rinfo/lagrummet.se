@@ -6,6 +6,13 @@
 	*top: 5em;
 	*position: relative;
 }
+#searchSuggestions {
+	*position: relative;
+	*top: -2px;
+	left: 5px;
+	*left: 6px;
+	width: 290px;
+}
 #siteHeader {z-index: 13;
 	*left: 40px;
 }

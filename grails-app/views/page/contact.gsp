@@ -24,7 +24,9 @@
 				<legend for="meddelande">Mitt meddelande <span class="required">*</span></legend>
 				<textarea name="meddelande" required></textarea>
 			</fieldset>
-			<button type="submit">Skicka</button>
+				<div class="buttons">
+					<button type="submit">Skicka</button>
+				</div>
 		</g:form>
 	</article>
 	<aside class="puffs" id="puffs">
