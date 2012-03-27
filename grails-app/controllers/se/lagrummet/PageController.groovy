@@ -346,6 +346,9 @@ class PageController {
 			page.puffs.removeAll(toBeDeleted)
 		}
 		page.discard()
+		page.puffs.each {
+			it.discard()
+		}
 		renderPage(page)
 	}
 	
