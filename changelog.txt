@@ -1,3 +1,12 @@
+v0.8.4
+	Nytt:
+	  	26 Sökförslag
+	
+	Fix:
+		#93 Får ej upp några resultat om filtret är på lagrummet.se
+		#100 Utökad sökning, inget målnmmer i träfflistan
+		#95 Träfflistan inkluderar nu bara publicerade sidor
+
 v0.8.3
 	Nytt:
 		80 Kontaktformulär
