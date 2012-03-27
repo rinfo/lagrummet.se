@@ -258,7 +258,7 @@ class PageController {
 		sendMail {     
 		  to grailsApplication.config.lagrummet.contact.email     
 		  subject params.arende  
-		  html '<p>' + from + '</p><p>Ärendetyp: ' + arende + '</p><p>' + params.meddelande + '</p>'
+		  html '<p>' + from + '</p><p>Ärendetyp: ' + params.arende + '</p><p>' + params.meddelande + '</p>'
 		}
 		forward(action: "show", params: [permalink: "tack-for-ditt-meddelande"])
 	}
