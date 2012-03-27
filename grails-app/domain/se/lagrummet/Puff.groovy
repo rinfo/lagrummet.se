@@ -6,7 +6,7 @@ class Puff {
 
     static constraints = {
 		title(nullable: true)
-		description(nullable: true)
+		description(nullable: true, maxSize: 1024)
 		image(nullable: true)
     }
 	

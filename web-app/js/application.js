@@ -30,7 +30,6 @@ function instantSearch() {
     }
 	
 	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
-		
         if (data) {
         	searchSuggestions(data);
         	if (data.searchResult.totalResults > 0 && $("#cat").attr("value") == "Alla") {      		
@@ -190,10 +189,22 @@ function instantSearch() {
 				$("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Beteckning</th></tr></table>");
 				
 				$.each(data.searchResult.items[cat], function(i, item) {
-					var title = (item.identifier) ? item.identifier : item.malnummer;
+					var title = "";
+					if(item.identifier) {
+						title = item.identifier;
+					} else if(item.malnummer) {
+						title = item.malnummer;
+					} else if(item.title) {
+						title = item.title;
+					}
         			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
         			var excerpt = (item.matches) ? "<p>"+item.matches+"</p>" : "";
-        			var identifier = (item.identifier) ? item.identifier : item.malnummer;
+        			var identifier = "";
+        			if(item.identifier) {
+        				identifier = item.identifier;
+        			} else if(item.malnummer) {
+        				identifier = item.malnummer;
+        			}
         			var ikraft = (item.ikrafttradandedatum) ? '<p class="type">Ikraft: '+item.ikrafttradandedatum+'</p>' : "";
         			
 					$("#dynamicSearchResults table").append('<tr><td><p><a href="'+serverUrl+href+'">' + title + "</a></p>" + excerpt + ikraft + "</td><td>"+identifier+"</td></tr>");
