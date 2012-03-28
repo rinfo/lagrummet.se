@@ -155,4 +155,7 @@
 		<g:dropdown options="${grailsApplication.config.lagrummet.page.templates}" value="${fieldValue(bean: pageInstance, field: 'template')}" name="template"></g:dropdown>
 	</div>
 	</g:if>
+	<g:else>
+		<g:hiddenField name="template" value="${fieldValue(bean: pageInstance, field: 'template')}" />
+	</g:else>
 </div>
