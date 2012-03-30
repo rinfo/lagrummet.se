@@ -65,15 +65,15 @@
 </div>
 
 <div class="aside publish">
-	<g:if test="${pageInstance.id && pageInstance.status == 'draft'}">
+	<g:if test="${(pageInstance.id && pageInstance.status == 'draft') || (pageInstance.id && pageInstance.isCurrentlyPublished())}">
 		<div class="buttons">
-			<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
+		<g:if test="${pageInstance.id && pageInstance.status == 'draft'}">
+				<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
+		</g:if>
+		<g:if test="${pageInstance.id && pageInstance.isCurrentlyPublished()}">
+		  		<g:actionSubmit name="unpublish" action="unpublish" class="delete" value="Avpublicera" />
+		</g:if>
 		</div>
-	</g:if>
-	<g:if test="${pageInstance.id && pageInstance.isCurrentlyPublished()}">
-	  	<div class="buttons">
-	  		<g:actionSubmit name="unpublish" action="unpublish" class="delete" value="Avpublicera" />
-	  	</div>
 	</g:if>
 	
   	<div class="input ${hasErrors(bean: pageInstance, field: 'status', 'errors')}">
@@ -122,7 +122,7 @@
   	</div>
   	
   	<div class="buttons">
-  		<span><g:actionSubmit name="preview" action="preview" class="information" value="Förhandsgranska" id="previewSubmit"/></span>
+  		<span><g:actionSubmit name="preview" action="preview" value="Förhandsgranska" id="previewSubmit"/></span>
   	</div>
   	
 

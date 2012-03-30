@@ -251,12 +251,12 @@ jQuery(document).ready(function($) {
 
 	$("#cat option").each(function() {
 		var selected = ($(this).attr("selected")) ? ' class="' + $(this).attr("selected") + '"' : "";
-		$("#searchCategoryList").append('<li rel="'+$(this).val()+'"'+selected+'><p><strong rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("rel")+'</p></li>');
+		$("#searchCategoryList").append('<li data-rel="'+$(this).val()+'"'+selected+'><p><strong data-rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("data-rel")+'</p></li>');
 	});
 	$("#searchCategoryList li").click(function(e) {
 		e.stopPropagation();
-		$("#cat").val($(this).attr("rel"));
-		$("#searchCurrentCategory").html($(this).find("[rel=title]").html()).removeClass("active");
+		$("#cat").val($(this).attr("data-rel"));
+		$("#searchCurrentCategory").html($(this).find("[data-rel=title]").html()).removeClass("active");
 		$("#searchCategoryList > .selected").removeClass("selected");
 		$(this).addClass("selected")
 		$("#searchCategoryList").hide();
