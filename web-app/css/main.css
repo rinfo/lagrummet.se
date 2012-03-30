@@ -335,6 +335,10 @@ a.print:visited {
 	border-bottom: 2px groove #fff;
 }
 
+#primaryNavigation ul li.active {
+	font-weight: bold;
+}
+
 #primaryNavigation ul li a, #primaryNavigation ul li a:visited {
 	color: #585858;
 }
