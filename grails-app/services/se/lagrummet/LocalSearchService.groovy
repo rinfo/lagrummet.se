@@ -63,7 +63,7 @@ class LocalSearchService {
 													matches: result.highlights[i].content
 													)
 					searchResult.addItemByType(searchResultItem)
-					if(i < 2) {
+					if(i < 5) {
 						searchResult.addTopHit(searchResultItem)
 					}
 				}

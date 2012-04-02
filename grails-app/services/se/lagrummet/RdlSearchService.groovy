@@ -112,7 +112,7 @@ class RdlSearchService {
 							searchResult.addItem(searchResultItem)
 						}
 						
-						if(i < 2) {
+						if(i < 5) {
 							searchResult.addTopHit(searchResultItem)
 						}
 					}
