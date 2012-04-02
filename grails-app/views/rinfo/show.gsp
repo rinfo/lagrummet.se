@@ -170,6 +170,20 @@
 				</g:if>
 			</g:if>
 			
+			<g:if test="${docInfo.rev?.referatAvDomstolsavgorande}">
+				<h3>Referat av domstolsavgörande:</h3>
+				<g:each in="${docInfo.rev?.referatAvDomstolsavgorande}" var="item">
+					<ul>
+						<li class="label">Referatrubrik:</li>
+						<li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.referatrubrik}</a></li>
+						<li class="label">Beteckning:</li>
+						<li>${item.identifier}</li>
+						<li class="label">Utgivet:</li>
+						<li>${item.issued}</li>
+					</ul>
+				</g:each>
+			</g:if>
+			
 		</aside>
 	</article>
 	
