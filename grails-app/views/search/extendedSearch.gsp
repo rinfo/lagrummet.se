@@ -247,12 +247,12 @@
 				<tr>
 					<th>Titel</th>
 					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
-					<g:elseif test="${cat != 'Ovrigt' }"><th>Identifierare</th></g:elseif>
+					<g:elseif test="${cat != 'Ovrigt' }"><th>Beteckning</th></g:elseif>
 				</tr>
 				<g:each in="${searchResult.itemsList}" var="item">
 					<tr>
 						<td>
-							<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+							<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.malnummer ?: item.title ?: item.identifier}</a></p>
 							<g:if test="${item.matches}">
 								<p>${item.matches} ...</p>
 							</g:if>
