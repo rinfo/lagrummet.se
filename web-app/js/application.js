@@ -238,6 +238,7 @@ jQuery(document).ready(function($) {
 	}
 	$("html").click(function() {
 		$("#searchCategoryList, #searchSuggestions").hide();
+		$("#searchSuggestions li").removeClass("active");
 		$("#searchCurrentCategory").removeClass("active");
 	});
 	$("#searchCurrentCategory").html($("#cat option[selected=selected]").html());
@@ -250,21 +251,20 @@ jQuery(document).ready(function($) {
 
 	$("#cat option").each(function() {
 		var selected = ($(this).attr("selected")) ? ' class="' + $(this).attr("selected") + '"' : "";
-		$("#searchCategoryList").append('<li rel="'+$(this).val()+'"'+selected+'><p><strong rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("rel")+'</p></li>');
+		$("#searchCategoryList").append('<li data-rel="'+$(this).val()+'"'+selected+'><p><strong data-rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("data-rel")+'</p></li>');
 	});
 	$("#searchCategoryList li").click(function(e) {
 		e.stopPropagation();
-		$("#cat").val($(this).attr("rel"));
-		$("#searchCurrentCategory").html($(this).find("[rel=title]").html()).removeClass("active");
+		$("#cat").val($(this).attr("data-rel"));
+		$("#searchCurrentCategory").html($(this).find("[data-rel=title]").html()).removeClass("active");
 		$("#searchCategoryList > .selected").removeClass("selected");
 		$(this).addClass("selected")
 		$("#searchCategoryList").hide();
 	});
 	
-	$("header #search #query").keyup(function(e) {
-		var form = $("#search");
+	var form = $("#search");
+	$("#query").keyup(function(e) {
 		clearTimeout(t);
-		
 		if (!$(this).attr("value")) {
 			$("#dynamicSearchResults").remove();
 			$("#content > *").removeClass("searchHidden");
@@ -297,39 +297,37 @@ jQuery(document).ready(function($) {
 	});
 	
 	// Step through the search suggestions with arrow keys
-	$("#query").focus(function() {
-		$(this).bind("keydown", function(e) {
-			var selected = $("#searchSuggestions li.active");
-			
-			// Step down using down-arrow
-			if (e.keyCode == 40) { 
-				if (selected.length) {
-					selected.removeClass("active").next().addClass("active");
-				} else {
-					$("#searchSuggestions li").first().addClass("active");
-		      	}
-		      	return false;
-			}
-			
-			// Step up using up-arrow
-			if (e.keyCode == 38) { 
-				if (selected.length) {
-					selected.removeClass("active").prev().addClass("active");
-				} else {
-					$("#searchSuggestions li").last().addClass("active");
-				}
-				return false;
-			}
-			
-			// Hide suggestions on Escape
-			if (e.keyCode == 27) {
-				$("#searchSuggestions li.active").removeClass("active");
-				$("#searchSuggestions").hide();
-				return false;
-			}
-		});
-	}).blur(function() {
+	$("#query").keyup(function(e) {
+		//selected = $("#searchSuggestions li.active");
+		var key = e.charCode || e.keyCode || 0;
+		var selected = $("#searchSuggestions li.active");
 		
+		// Step down using down-arrow
+		if (key == 40) {
+			if (selected.length) {
+				selected.removeClass("active").next().addClass("active");
+			} else {
+				$("#searchSuggestions li").first().addClass("active");
+	      	}
+	      	return false;
+		}
+		
+		// Step up using up-arrow
+		if (key == 38) { 
+			if (selected.length) {
+				selected.removeClass("active").prev().addClass("active");
+			} else {
+				$("#searchSuggestions li").last().addClass("active");
+			}
+			return false;
+		}
+		
+		// Hide suggestions on Escape
+		if (key == 27) {
+			selected.removeClass("active");
+			$("#searchSuggestions").hide();
+			return false;
+		}
 	});
 	
 	// Interactive form on the extended search page

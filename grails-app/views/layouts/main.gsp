@@ -2,9 +2,10 @@
 <html>
     <head>
         <title><g:layoutTitle default="Grails" /></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
-        <META name="serverURL" content="${resource()}">
+        <META name="serverURL" content="${resource()}" />
         <link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
         <g:mobileDeviceWidth />
         <g:layoutHead />
@@ -34,10 +35,10 @@
 					<select id="cat" name="cat">
 					<g:each in="${siteProps?.searchCats}">
 						<g:if test="${session?.cat == it}">
-							<option value="${it}" selected="selected" rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
+							<option value="${it}" selected="selected" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
 						</g:if>
 						<g:else>
-							<option value="${it}" rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
+							<option value="${it}" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
 						</g:else>
 					</g:each>
 					</select>

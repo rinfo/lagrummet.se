@@ -30,10 +30,16 @@ class MenuTagLib {
 	   if(attrs.activePage) {
 		   page = attrs.activePage
 	   }
+	   
+	   def now = new Date()
 	   def rootNode = Page.withCriteria(uniqueResult:true) {
 			   eq("permalink", attrs.root)
 			   eq("status", "published")
-			   le('publishStart', new Date())
+			   le('publishStart', now)
+			   or {
+				   ge('publishStop', now)
+				   isNull('publishStop')
+			   }
 			   maxResults(1)
 		   }
 	   if(!rootNode){
@@ -95,7 +101,7 @@ class MenuTagLib {
    
    def createListElement(builder, node) {
 	   def active = ""
-	   if(node.id == page?.id){
+	   if(node.permalink == page?.permalink){
 		   active = "active"
 	   }
 	   builder.li('class':active) {

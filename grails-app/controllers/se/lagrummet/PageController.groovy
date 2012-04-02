@@ -142,32 +142,17 @@ class PageController {
     def show = {
 		def url = (params.permalink) ? params.permalink.tokenize("/") : ["home"]
 		def permalink = url[url.size()-1]
-
-		def page
+		
 		def now = new Date()
-		if (url.size() < 2) {
-			page = Page.withCriteria(uniqueResult:true) {
-				eq("permalink", permalink)
-				eq("status", "published")
-				le('publishStart', now)
-				or {
-					ge('publishStop', now)
-					isNull('publishStop')
-				}
-				maxResults(1)
+		def page = Page.withCriteria(uniqueResult:true) {
+			eq("permalink", permalink)
+			eq("status", "published")
+			le('publishStart', now)
+			or {
+				ge('publishStop', now)
+				isNull('publishStop')
 			}
-		} else {
-			def parentPermalink = (url[url.size()-2])
-			page = Page.withCriteria(uniqueResult:true) {
-				eq("permalink", permalink)
-				eq("status", "published")
-				le('publishStart', now)
-				or {
-					ge('publishStop', now)
-					isNull('publishStop')
-				}
-				maxResults(1)
-			}
+			maxResults(1)
 		}
 
 		if(page != null && !page.metaPage) {

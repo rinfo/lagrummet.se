@@ -62,7 +62,7 @@ class MainSiteTagLib {
 		def now = new Date()
 
 		if (pageInstance.metaPage && pageInstance.parent && pageInstance.showInSitemap) {
-			out << '<li><h3>' << pageInstance.h1 << "</h3><li>"
+			out << '<li><h3>' << pageInstance.h1 << "</h3></li>"
 		} else if (!pageInstance.metaPage && pageInstance.showInSitemap) {
 			out << '<li><a href="' << resource() << "/" << pageInstance.url() << '">' << pageInstance.title  << '</a></li>'
 		}
@@ -116,8 +116,10 @@ class MainSiteTagLib {
 	 */
 	def linkConditional = { attrs, body ->
 		def href = attrs.href
+		def classParam = (attrs.class) ? 'class="' + attrs.class + '"' : ""
+		
 		if(href) {
-			out << '<a href="' << href << '">'
+			out << '<a href="' << href << '"'+classParam+'>'
 		}
 		
 		out << body()

@@ -34,10 +34,10 @@
 					<select id="cat" name="cat">
 					<g:each in="${siteProps?.searchCats}">
 						<g:if test="${session?.cat == it}">
-							<option value="${it}" selected="selected" rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
+							<option value="${it}" selected="selected" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
 						</g:if>
 						<g:else>
-							<option value="${it}" rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
+							<option value="${it}" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
 						</g:else>
 					</g:each>
 					</select>
