@@ -189,7 +189,10 @@ class BootStrap {
 				h1: 'Välkommen till lagrummet.se',
 				content: "Första försöket",
 				author: user,
-				status: "published", publishStart: new Date() - 4
+				status: "published", 
+				publishStart: new Date() - 4,
+				dateCreated: new Date() - 4,
+				lastUpdated: new Date() - 4
 				).save()
 			if (home.puffs?.size() < 3) {
 				home.addToPuffs(new Puff(title: "Puff 1", description: "", link: "home", parent: home))
@@ -207,7 +210,9 @@ class BootStrap {
 				content: "",
 				status: "published",
 				author: user,
-				publishStart: new Date() - 4
+				publishStart: new Date() - 4,
+				dateCreated: new Date() -4,
+				lastUpdated: new Date() - 4
 				).save()
 				
 			def english = Page.findByPermalink('english') ?: new Page(
@@ -219,7 +224,9 @@ class BootStrap {
 				content: "",
 				status: "published",
 				author: user,
-				publishStart: new Date() - 4
+				publishStart: new Date() - 4,
+				dateCreated: new Date() - 4,
+				lastUpdated: new Date() - 4
 				).save()
 				
 			def legalSources = Page.findByPermalink('samtliga-rattskallor') ?: new Page(
@@ -231,7 +238,9 @@ class BootStrap {
 				content: "",
 				status: "published",
 				author: user,
-				publishStart: new Date() - 4
+				publishStart: new Date() - 4,
+				dateCreated: new Date() -4,
+				lastUpdated: new Date() - 4
 			).save()
 		}
     }
