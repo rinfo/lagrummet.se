@@ -1257,6 +1257,8 @@ fieldset .inputGroup p {
 
 /* =MEDIA-QUERIES */
 /* For all narrow devices and screens */
+
+/* 
 @media all and (max-width: 480px) {
 	body {
 	    position: relative;
@@ -1344,7 +1346,15 @@ fieldset .inputGroup p {
 		width: auto;
 		margin: 0 5% 0.5em 5%;
 		float: none;
-		height: 4em;
+		height: 3em;
+	}
+	
+	#searchCategoryList li p {
+		display: none;
+	}
+	
+	#searchCategoryList li p:first-child {
+		display: block;
 	}
 	
 	#searchQuery {
@@ -1361,7 +1371,7 @@ fieldset .inputGroup p {
 	#search #searchSubmit {
 		float: right;
 		margin: 0 5% 0 2%;
-		width: 15%;
+		width: 14.5%;
 	}
 	
 	#search > *{
@@ -1460,3 +1470,4 @@ fieldset .inputGroup p {
 		clear: both;
 	}
 }
+*/

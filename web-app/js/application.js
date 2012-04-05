@@ -228,7 +228,7 @@ function instantSearch() {
     }, "json");
 }
 
-jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {	
 	//Make the search category drop-down more dynamic
 	$("#cat").hide().after('<div id="searchCurrentCategory" /><ul id="searchCategoryList" />');
 	$("#searchCategory label").addClass("target");

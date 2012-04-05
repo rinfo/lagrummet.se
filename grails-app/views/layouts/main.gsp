@@ -19,7 +19,7 @@
 		<div id="logo">
 			<a href="${resource()}">${siteProps?.siteTitle}</a>
 		</div>
-		<a href="#primaryNavigation" id="mobileNavLink">Navigering</a>
+		<!-- <a href="#primaryNavigation" id="mobileNavLink">Navigering</a>  -->
 		<header id="siteHeader">
 			<nav id="sitelinks">
 				<g:menu root="toppmeny" rootTag="ul">
