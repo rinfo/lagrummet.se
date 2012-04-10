@@ -52,7 +52,7 @@ Extern konfiguration
 
 	Vilken extern config-fil som används kan anges på ett av följande tre sätt:
 		1. System property på kommandoraden
-			* Ange en system property på kommandoraden vid uppstart av tomcatservern med -DLAGRUMMET_SE_CONFIG=C:\sökvägen\till\config-filen.property
+			* Ange en system property på kommandoraden vid uppstart av tomcatservern med -DLAGRUMMET_SE_CONFIG=C:\sökvägen\till\config-filen.groovy
 		2. Miljövariabel
 			* Sätt en miljövariabel med namnet LAGRUMMET_SE_CONFIG som innehåller sökvägen till config-filen
 		3. Default-sökväg
