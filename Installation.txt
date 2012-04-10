@@ -1,0 +1,78 @@
+Deploy på existerande server, PSDOM003
+	Produktionsservern har en Apache Tomcat installerad under C:\tomcat6 där webappen för lagrummet.se ska driftsättas.
+
+	* Kopiera war-filen till servern. Det finns en katalog på skrivbordet som heter "war archive" som kan användas för att spara alla versioner.
+	* Stoppa Tomcat-servicen från Windows Service-konsolen.
+	(* Valfritt: Kopiera den gamla installationen till {backup-katalog} och suffixa-katalogen med dagens datum).
+	* Ta bort lagrummet.se.war-filen och katalogen lagrummet.se från "C:\tomcat6\webapps\".
+	* Kopiera in den nya war-filen till C:\tomcat6\webapps\ och döp om den till "lagrummet.se.war".
+	* Uppdatera en eventuell extern konfigurationsfil med nya inställningar.
+	* Starta Tomcat-servicen från Windows Service-konsolen.
+	* Kontrollera att inga nya felmeddelanden dyker upp i loggfilerna.
+
+
+Bygga en ny war
+	* Uppdatera ditt lokala repo med de senaste ändringarna från github.
+	* Uppdatera app.version i application.properties-filen och checka in ändringen.
+		Formatet på app.version är {major.sprint.fix}, t.ex. "0.4.3".
+		"major" är helt enkelt applikationens nuvarande version, inkrementeras när teamet anser att det behövs.
+		"sprint" beskriver pågående sprintens nummer, skall inkrementeras vid första bygget i varje ny sprint.
+		"fix" är ett löpnummer inom sprinten, inkrementeras för varje bygge inom sprinten.
+	* Skapa en tag i git med kommandot 'git tag -a lagrummet.se-{app.version} -m "lagrummet.se-{app.version}"'.
+	* Kör grailskommandot "grails war" för att bygga war-filen.
+	* Sammanställ och checka in release notes.
+	* Pusha dina ändringar till github med "git push".
+	* Pusha den nya taggen till github med "git push --tags".
+
+
+
+Installation och konfiguration
+	Följande configparametrar är miljöspecifika och krävs för installation. Dessa kan läggas i en extern configfil ifall man inte vill bygga en ny war.
+		grails.serverURL = "http://www.lagrummet.se"
+		lagrummet.local.rinfo.view = "${grails.serverURL}/rinfo/"
+
+		lagrummet.rdl.service.baseurl="http://service.lagrummet.se"
+		lagrummet.rdl.rinfo.baseurl="http://rinfo.lagrummet.se"
+
+		dataSource.url = "jdbc:mysql://localhost:3306/lagrummet"
+		dataSource.username = "user"
+		dataSource.password = "password"
+		
+	grails.serverUrl är den publika adressen för siten.
+	lagrummet.local.rinfo ska alltid se ut exakt som i exemplet ovan. Den måste dock finnas med i samma configfil som grails.serverURL ifall man använder en extern config.
+	lagrummet.rdl.service.baseurl ska peka ut adressen till Rättsdatalagrets söktjänst.
+	lagrummet.rdl.rinfo.baseurl anger adressen till Rättsdatalagrets dokumenttjänst.
+	dataSource.url anger databasanslutningen.
+	dataSource.username är databasanvändaren för applikationen.
+	dataSource.password är lösenordet för databasanvändaren.
+
+Extern konfiguration
+	En extern config-fil kan användas för inställningar som inte är kända vid tiden för bygget av war-filen eller för känsliga inställningar som man inte vill ha incheckade i git (t.ex. databaslösenord).
+	Inställningarna kan anges både på Java property-format eller i en groovyfil enligt ConfigSlurper (http://groovy.codehaus.org/ConfigSlurper).
+
+	Vilken extern config-fil som används kan anges på ett av följande tre sätt:
+		1. System property på kommandoraden
+			* Ange en system property på kommandoraden vid uppstart av tomcatservern med -DLAGRUMMET_SE_CONFIG=C:\sökvägen\till\config-filen.property
+		2. Miljövariabel
+			* Sätt en miljövariabel med namnet LAGRUMMET_SE_CONFIG som innehåller sökvägen till config-filen
+		3. Default-sökväg
+			* Om det finns en fil med namn "C:\lagrummet.se\config\lagrummet.se-config.groovy" kommer den automatisk att plockas upp av applikationen
+
+	Endast en av ovanstående externa konfigurationer kan användas åt gången, där System property har högst prioritet följt av miljövariabel, och default-sökvägen bara kommer att användas ifall ingen av de föregående existerar.
+
+Installation med Apache proxy
+	Om man har en Apache http server som proxy deployar man lagrummet.se.war som vanligt i webapps. 
+	Därefter skapar man en virtual host-konfiguration i Apache-inställningarna. Både mod_proxy och ajp connector kan användas.
+	(För instruktioner om hur en virtual host ska konfigureras hänvisas till respektive servers dokumentation)
+
+Installation utan Apache proxy
+	Har man ingen Apache som front kan man deploya applikationen som root context. Enklaste sättet är att döpa om war-filen till ROOT.war innan deploy.
+	Glöm ej heller att ändra så att Tomcat lyssnar på port 80 istället för 8080.
+
+Minneskonfiguration
+	Servern bör konfigureras med MaxPermSize=256m.
+
+Databas 
+	Applikationen kommer vid första uppstarten automatiskt skapa de tabeller som krävs och populera dem med initialt data.
+	Innan första uppstarten måste man ha skapat ett tomt databasschema där applikationen har rättigheter att skapa tabeller.
+	Schemat heter normalt sett "lagrummet" men kan döpas till valfritt namn som man därefter anger i configparametern "dataSource.url"
