@@ -86,6 +86,15 @@ Databas
 	Innan första uppstarten måste man ha skapat ett tomt databasschema där applikationen har rättigheter att skapa tabeller.
 	Schemat heter normalt sett "lagrummet" men kan döpas till valfritt namn som man därefter anger i configparametern "dataSource.url"
 	
+Kontaktformulär
+	Kontaktformuläret använder sig av ett mail-plugin (Grails Mail 1.0) som behöver åtkomst till en mailserver, antingen lokalt eller externt. Domstolsverket har ett par egna där man för att använda dessa måste se till att applikationsservern kan kommunicera på port 25. Det går även bra att använda till exempel ett Gmail-konto för att skicka e-post, exempel på det finns i dokumentationen till Grails Mail. Mottagande e-postaddress för kontaktformuläret är propertyn lagrummet.contact.email.
+	
+	Exempel på inställningar i config.groovy
+	
+	grails.mail.host = 'Mailgw1.dom.se'
+	grails.mail.port = 25
+	grails.mail.default.from="redaktionen@lagrummet.se"
+	
 Readspeaker
 	Inga särskilda inställningar behöver göras på lagrummet.se för att Readspeaker ska fungera. Däremot måste man i Readspeakers egna adminkonsol ange vilja sajter som Readspeaker tillåts användas från.
 	Kontakta Readspeakers support för ytterligare information.
