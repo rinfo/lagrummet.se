@@ -82,7 +82,7 @@
 			<ul>
 				<g:each in="${searchResult.items['Rattsfall']}" var="item">
 					<li>
-						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.malnummer}</a></p>
+						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier ?: item.malnummer}</a></p>
 						<g:if test="${item.matches}">
 							<p>${item.matches} ...</p>
 						</g:if>
