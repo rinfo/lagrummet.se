@@ -34,7 +34,16 @@
 				<g:each in="${searchResult.items[(cat)]}" var="item">
 					<tr>
 						<td>
-							<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier ?: item.malnummer ?: item.title}</a></p>
+							<p>
+                                <a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">
+                                  <g:if test="${cat == 'Lagar' }">
+                                   ${item.title}                                  
+                                  </g:if>
+                                  <g:else>
+                                    ${item.identifier ?: item.malnummer ?: item.title}                                  
+                                  </g:else>
+                                </a>
+                            </p>
 							<g:if test="${item.matches}">
 								<p>${item.matches} ...</p>
 							</g:if>
