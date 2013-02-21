@@ -23,7 +23,7 @@
 							</g:each>
 					</td></tr>
 				</g:if>
-				<tr><td class="label">Beteckning:</td><td> ${item.identifier} ${docInfo.identifier}</td></tr>
+				<tr><td class="label">Beteckning:</td><td> ${docInfo.identifier}</td></tr>
 	
 				<tmpl:labelRow label="Ikraft" value="${docInfo.ikrafttradandedatum}" />
 				
