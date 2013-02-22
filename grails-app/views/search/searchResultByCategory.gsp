@@ -37,7 +37,7 @@
 							<p>
                                 <a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">
                                   <g:if test="${cat == 'Lagar' }">
-                                   ${item.title}                                  
+                                   ${item.title} ...                                 
                                   </g:if>
                                   <g:else>
                                     ${item.identifier ?: item.malnummer ?: item.title}                                  
