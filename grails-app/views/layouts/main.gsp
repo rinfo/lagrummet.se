@@ -64,9 +64,6 @@
 	   
 	    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js?ver=1.7.0'></script>
 	    <g:javascript library="application" />		
-		
-		<g:menu root="huvudmeny" />
-		
-		
+	
     </body>
 </html>
