@@ -187,7 +187,7 @@ class BootStrap {
 				pageOrder: 0,
 				permalink: 'home',
 				h1: 'Välkommen till lagrummet.se',
-				content: "Första försöket",
+				content: "Första försöket 1",
 				author: user,
 				status: "published", 
 				publishStart: new Date() - 4,
