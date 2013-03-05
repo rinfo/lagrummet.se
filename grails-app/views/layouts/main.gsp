@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
     <head>
         <title><g:layoutTitle default="Grails" /></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
