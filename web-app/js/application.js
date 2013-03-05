@@ -216,12 +216,15 @@ function instantSearch() {
         		$("#dynamicSearchResults").html('<h1>Inga sökresultat</h1>' + sokhjalp);
         	}
         	
+                /*
         	if(data.searchResult.errorMessages.length > 0) {
         		$("#dynamicSearchResults").prepend('<div class="message"><ul id="errors" /></div>');
         		$.each(data.searchResult.errorMessages, function(i, item) {
         			$("#errors").append('<li>' + item + '</li>');
         		});
         	}
+                */
+                
         } else {
         	$("#dynamicSearchResults").html("<h1>Det blev tyvärr fel, försök igen</h1>");
         }
@@ -249,10 +252,15 @@ jQuery(document).ready(function($) {
 		$("#searchCurrentCategory").toggleClass("active");
 	});
 
+        // 130305
+        // Changed from: <p><strong data-rel="title">
+        // to: <h5 data-rel="title">
 	$("#cat option").each(function() {
 		var selected = ($(this).attr("selected")) ? ' class="' + $(this).attr("selected") + '"' : "";
-		$("#searchCategoryList").append('<li data-rel="'+$(this).val()+'"'+selected+'><p><strong data-rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("data-rel")+'</p></li>');
+		//$("#searchCategoryList").append('<li data-rel="'+$(this).val()+'"'+selected+'><p><strong data-rel="title">'+$(this).html()+'</strong></p><p>'+$(this).attr("data-rel")+'</p></li>');
+                $("#searchCategoryList").append('<li data-rel="'+$(this).val()+'"'+selected+'><h5 data-rel="title">'+$(this).html()+'</h5><p>'+$(this).attr("data-rel")+'</p></li>');
 	});
+        
 	$("#searchCategoryList li").click(function(e) {
 		e.stopPropagation();
 		$("#cat").val($(this).attr("data-rel"));
