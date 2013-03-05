@@ -22,8 +22,8 @@ class BootStrap {
 			def now = new Date()
 			def fourDaysAgo = now - 4
 
-			def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket 11", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
-			home.addToPuffs(new Puff(title: "Kalle 1", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
+			def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
+			home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
 			
@@ -32,7 +32,7 @@ class BootStrap {
 			def rattsinfo = new Page(title: "Rättsinformation", author: user, permalink:"rattsinformation", h1:"Rättsinformation", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, pageOrder:1, metaPage:true, parent: huvudMeny, menuStyle:"huvudmeny1").save()
 			def lagar = new Page(title: 'Lagar och förordningar', author: user, template: "legalSource/lagar", pageOrder: 1, permalink: 'lagar-och-forordningar', h1: 'Lagar och förordningar', content: "", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, parent:rattsinfo).save()
 			def foreskrifter = new Page(title: 'Myndigheters föreskrifter', author: user, template: "legalSource/foreskrifter", pageOrder: 1, permalink: 'myndigheters-foreskrifter', h1: 'Myndigheters föreskrifter', content: "", status: "published", publishStart: fourDaysAgo,  dateCreated: now, lastUpdated: now, parent:rattsinfo).save()
-			def forarbeten = new Page(title: 'Förarbeten 1', author: user, template: "legalSource/forarbeten", pageOrder: 1, permalink: 'forarbeten', h1: 'Förarbeten', content: "", status: "published", publishStart: fourDaysAgo,  dateCreated: now, lastUpdated: now, parent:rattsinfo).save()
+			def forarbeten = new Page(title: 'Förarbeten', author: user, template: "legalSource/forarbeten", pageOrder: 1, permalink: 'forarbeten', h1: 'Förarbeten', content: "", status: "published", publishStart: fourDaysAgo,  dateCreated: now, lastUpdated: now, parent:rattsinfo).save()
 			def legalSources = new Page(title: 'Alla rättskällor', author: user, template: "legalSources", pageOrder: 1, permalink: 'samtliga-rattskallor', h1: 'Samtliga rättskällor', content: "", status: "published", publishStart: fourDaysAgo,  dateCreated: now, lastUpdated: now, parent:rattsinfo).save()
 			
 			def hitvander = new Page(title:"Hit vänder du dig", author: user, permalink:"hit-vander-du-dig", h1:"Hit vänder du dig", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, pageOrder:2, metaPage:true, parent:huvudMeny, menuStyle:"huvudmeny2").save()
