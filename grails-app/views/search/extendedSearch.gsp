@@ -1,4 +1,4 @@
-<html>
+ipu<html>
 <head>
 	<g:if test="${!params.query}"><title>Utökad sökning</title></g:if>
 	<g:else><title>Utökade sökresultat för ${params.query.encodeAsHTML()}</title></g:else>
@@ -10,17 +10,42 @@
 		<fieldset class="category" id="extSearchCats">
 			<div class="legend"><g:message code="extendedSearch.chooseCategory.label" default="Välj en kategori" /></div>
 			<g:each in="['Forfattningar', 'Rattsfall', 'Forarbeten']">
-				<g:if test="${cat == it}"><div class="inputGroup"><input type="radio" checked="checked" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.extendedSearch.${it}"/></strong></p><p><g:message code="category.extendedSearch.description.${it}"/></p></label></div></g:if>
-				<g:else><div class="inputGroup"><input type="radio" value="${it}" name="kategori" id="cat${it}" /><label for="cat${it}"><p><strong><g:message code="category.extendedSearch.${it}"/></strong></p><p><g:message code="category.extendedSearch.description.${it}"/></p></label></div></g:else>
+				<g:if test="${cat == it}">
+                                    <div class="inputGroup">
+                                        <input type="radio" checked="checked" value="${it}" name="kategori" id="cat${it}" />
+                                        <label for="cat${it}">
+                                          <p><strong><g:message code="category.extendedSearch.${it}"/></strong></p>
+                                          <p><g:message code="category.extendedSearch.description.${it}"/></p>
+                                        </label>
+                                    </div>
+                                </g:if>
+				<g:else>
+                                  <div class="inputGroup">
+                                    <input type="radio" value="${it}" name="kategori" id="cat${it}" />
+                                    <label for="cat${it}">
+                                      <p><strong><g:message code="category.extendedSearch.${it}"/></strong></p>
+                                      <p><g:message code="category.extendedSearch.description.${it}"/></p>
+                                    </label>
+                                  </div>
+                                </g:else>
 			</g:each>
 		</fieldset>
 
+                
+                <!--                
+                  Författningar
+                -->
+                
 		<g:if test="${cat == 'Forfattningar'}">
-			<g:set var="hidden" value="" />
-			<g:set var="forfattningarParams" value="${params}" />
+                  <g:set var="hidden" value="" />
+                  <g:set var="forfattningarParams" value="${params}" />
 		</g:if>
-		<g:else><g:set var="hidden" value="hidden" /></g:else>
-		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Forfattningar">
+		<g:else>
+                  <g:set var="hidden" value="hidden" />
+                </g:else>
+                
+
+                <g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Forfattningar">
 			<input type="hidden" name="kategori" value="Forfattningar" />
 
 			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ av författning" /></label>
@@ -56,7 +81,7 @@
 			<label for="departement"><g:message code="extendedSearch.departement.label" default="Ansvarigt departement (SFS)" /></label>
 			<g:textField name="skapare" id="departement" size="26" value="${forfattningarParams?.skapare}" />			
 			
-			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
+			<label for="fritext"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
 			<g:textField name="fritext" size="26" value="${forfattningarParams?.fritext}" />
 			
 			<fieldset id="dateSelect">
@@ -98,10 +123,17 @@
 			<div class="buttons"><g:submitButton name="extendedSearchSubmit" value="Sök"/></div>
 		</g:form>
 		
+                <!--                
+                  Rättsfall                
+                -->
+                
+                
 		<g:if test="${cat == 'Rattsfall'}">
 			<g:set var="hidden" value="" />
 			<g:set var="rattsfallParams" value="${params}" />
 		</g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
+                
+                
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Rattsfall">
 			<input type="hidden" name="kategori" value="Rattsfall" />
 			
@@ -120,14 +152,14 @@
 			<label for="referatrubrik"><g:message code="extendedSearch.referatrubrik.label" default="Rubrik" /></label>
 			<g:textField name="referatrubrik" size="26" value="${rattsfallParams?.referatrubrik}" />
 			
-			<label for="beteckning"><g:message code="extendedSearch.beteckning.label" default="Beteckning" /></label>
-			<g:textField name="beteckning" size="26" value="${rattsfallParams?.beteckning}" />
+			<label for="beteckning_rattsfall"><g:message code="extendedSearch.beteckning.label" default="Beteckning" /></label>
+			<g:textField name="beteckning" size="26" value="${rattsfallParams?.beteckning}" id="beteckning_rattsfall" />
 			
 			<label for="malnummer"><g:message code="extendedSearch.malnummer.label" default="Målnummer" /></label>
 			<g:textField name="malnummer" size="12" value="${rattsfallParams?.malnummer}" />
 			
-			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
-			<g:textField name="fritext" size="26" value="${rattsfallParams?.fritext}" />
+			<label for="fritext_rattsfall"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
+			<g:textField name="fritext" size="26" value="${rattsfallParams?.fritext}" id="fritext_rattsfall" />
 			
 			<label for="sokord"><g:message code="extendedSearch.sokord.label" default="Sökord" /></label>
 			<g:textField name="sokord" size="26" value="${rattsfallParams?.sokord}" />
@@ -175,10 +207,18 @@
 			<div class="buttons"><g:submitButton name="extendedSearchSubmit" value="Sök"/></div>
 		</g:form>
 		
+                
+                <!--
+                  Förarbeten
+                -->
+                
+                
 		<g:if test="${cat == 'Forarbeten'}">
 			<g:set var="hidden" value="" />
 			<g:set var="forarbeteParams" value="${params}" />
 		</g:if><g:else><g:set var="hidden" value="hidden" /></g:else>
+                
+                
 		<g:form mapping="extendedSearch" fragment="searchResults" method="GET" class="extendedSearch ${hidden}" name="Forarbeten">
 			<input type="hidden" name="kategori" value="Forarbeten" />
 			
@@ -187,14 +227,14 @@
 									keys="${['Alla förarbeten', 'Propositioner', 'Utredningar'] }"
 									value="${forarbeteParams?.typ}"/>
 			
-			<label for="beteckning"><g:message code="extendedSearch.beteckning.label" default="Beteckning" /></label>
-			<g:textField name="beteckning" size="26" value="${forarbeteParams?.beteckning}" />
+			<label for="beteckning_forarbeten"><g:message code="extendedSearch.beteckning.label" default="Beteckning" /></label>
+			<g:textField name="beteckning" size="26" value="${forarbeteParams?.beteckning}" id="beteckning_forarbeten" />
 			
-			<label for="titel"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
-			<g:textField name="titel" size="26" value="${forarbeteParams?.titel}" />
+			<label for="titel_forarbeten"><g:message code="extendedSearch.titel.label" default="Titel" /></label>
+			<g:textField name="titel" size="26" value="${forarbeteParams?.titel}" id="titel_forarbeten" />
 			
-			<label for="query"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
-			<g:textField name="fritext" size="26" value="${forarbeteParams?.fritext}" />
+			<label for="fritext_forarbeten"><g:message code="extendedSearch.fritext.label" default="Fritext" /></label>
+			<g:textField name="fritext" size="26" value="${forarbeteParams?.fritext}" id="fritext_forarbeten" />
 			
 			<fieldset>
 				<div class="legend"><g:message code="extendedSearch.utgivandeDatum.label" default="Utgivandedatum" /></div>
