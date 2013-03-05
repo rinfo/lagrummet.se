@@ -98,6 +98,11 @@ h4 {
     color: #222;
 }
 
+h5 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
 p {
 	margin-bottom: 1.1em;
 }
@@ -642,7 +647,7 @@ article.legalSources section.Foreskrifter h2 {
 }
 
 #contact #message textarea {
-	width: 16em;
+	width: 23em;
 	height: 11.8em;
 	resize: none;
 }
