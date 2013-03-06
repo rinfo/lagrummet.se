@@ -14,7 +14,7 @@ class LegalSourceController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 20, 100)
-		params.sort = params.sort ?: 'category'
+		params.sort = params.sort ?: 'name'
         [legalSourceInstanceList: LegalSource.list(params), legalSourceInstanceTotal: LegalSource.count()]
     }
 
