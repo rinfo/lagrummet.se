@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 <head>
 	<title>Admin - <g:layoutTitle default="Grails" />
 	</title>
