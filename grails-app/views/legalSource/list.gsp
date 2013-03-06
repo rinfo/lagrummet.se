@@ -26,7 +26,7 @@
                             
                             <g:sortableColumn property="subCategory" title="${message(code: 'legalSource.subCategory.label', default: 'Grupp')}" />
                             
-                            <g:sortableColumn property="description" title="${message(code: 'legalSource.description.label', default: 'Description')}" />
+                            <g:sortableColumn property="description" title="${message(code: 'legalSource.description.label', default: 'Beskrivning')}" />
                         
                         </tr>
                     </thead>
