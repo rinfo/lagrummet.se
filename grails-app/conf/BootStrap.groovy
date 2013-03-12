@@ -14,14 +14,19 @@ class BootStrap {
 		
 		if(Environment.current == Environment.DEVELOPMENT) {
 			
+                        // start: Login to admin portal
 			def user = new User(fullName: 'Test Testsson', username: 'testadmin', password:'testadmin', enabled: true, department:"Domstolsverket").save(failOnError:true)
 			def roleAdmin = new SecRole(authority: 'ROLE_ADMIN', name: 'Admin').save(failOnError:true)
 			def roleEditor = new SecRole(authority: 'ROLE_EDITOR', name: 'Editor').save(failOnError:true)
 			SecUserSecRole.create(user, roleAdmin, true)
-			
+			// end
+            
+            
 			def now = new Date()
 			def fourDaysAgo = now - 4
 
+            
+                        // start: Page specifics                        
 			def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
 			home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
@@ -59,7 +64,10 @@ class BootStrap {
 			def saSvarar = new Page(title:"Så svarar vi på e-post", author: user, permalink:"sa-svarar-vi-pa-e-post", h1:"Så svarar vi på e-post", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, parent: kontakta).save()
 			kontaktaOss.addToPuffs(new Puff(title: "Address", description: "Domstolsverket<br />Juridiska avdelningen<br />551 81 Jönköping", link: "", parent: kontaktaOss))
 			def tackForDittMeddelande = new Page(title:"Tack för ditt meddelande", author: user, permalink:"tack-for-ditt-meddelande", h1:"Tack för ditt meddelande", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now).save()
-			
+                        // end
+            
+            
+                        // start: dummy Legal sources
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html", name: "Kommittédirektiv", category: "Forarbeten", subCategory: "Regeringen").save()
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/2", name: "Kommittédirektiv 2", category: "Forarbeten", subCategory: "Regeringen").save()
 			new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html/3", name: "Kommittédirektiv 3", category: "Forarbeten", subCategory: "Regeringen").save()
@@ -80,13 +88,27 @@ class BootStrap {
 			new LegalSource(url: "http://62.95.69.15/sfs/sfsr_form2.html/2", name: "Register över Svensk författningssamling (SFS) 2", category: "Lagar", subCategory: "").save()
 			new LegalSource(url: "http://62.95.69.15/sfs/sfsr_form2.html/3", name: "Register över Svensk författningssamling (SFS) 3", category: "Lagar", subCategory: "").save()
 			new LegalSource(url:"http://www.lagrummet.se", name:"Lagrummet", category:"Lagar").save()
-			new LegalSource(url:"http://www.domstolsverket.se", name:"Domstolsverket", category:"Lagar").save()
-			new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", name:"Försvarets författningssamling", category:"Foreskrifter").save()
-			new LegalSource(url:"http://www.domstol.se/Ladda-ner--bestall/Vagledande-avgoranden/", name:"Domstolar", category:"Rattspraxis").save()
-
+			new LegalSource(url:"http://www.domstolsverket.se", name:"Domstolsverket", category:"Lagar").save()			
+                        new LegalSource(url:"http://www.domstol.se/Ladda-ner--bestall/Vagledande-avgoranden/", name:"Domstolar", category:"Rattspraxis").save()
+                        
+                        new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", rdlName: "foo", name:"K Försvarets författningssamling", category:"Foreskrifter").save()
+                        new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", rdlName: "foo", name:"B Försvarets författningssamling", category:"Foreskrifter").save()
+                        new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", rdlName: "foo", name:"M Försvarets författningssamling", category:"Foreskrifter").save()
+			new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", rdlName: "foo", name:"A Försvarets författningssamling", category:"Foreskrifter").save()
+                        new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", rdlName: "foo", name:"P Försvarets författningssamling", category:"Foreskrifter").save()
+                        new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", name:"Försvarets författningssamling", category:"Foreskrifter").save()
+                        new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", name:"Försvarets författningssamling 2", category:"Foreskrifter").save()
+                        new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", rdlName: "foo", name:"D Försvarets författningssamling", category:"Foreskrifter").save()
+                        new LegalSource(url:"http://www.mil.se/sv/Om-Forsvarsmakten/Dokument/Lagrum/", rdlName: "foo", name:"C Försvarets författningssamling", category:"Foreskrifter").save()
+                                                
+                        // end
+            
+            
 			new Synonym(synonym: "kalle", baseTerm: "olle").save()
 			new Synonym(synonym: "olle", baseTerm: "nisse").save()
 			
+            
+                        // start: Site properties
 			new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>',
 				headerNavigation: '''
 				<li><a href="">Other languages</a></li>
@@ -127,8 +149,13 @@ class BootStrap {
 				<li><a href="">Om r&auml;ttsinformation</a></li>
 			</ul>''', searchCats: ["Alla","Lagar","Rattsfall","Propositioner","Utredningar","Foreskrifter","Ovrigt"]).save()
 			
-
-		} else {
+                        // end
+            
+            
+		} 
+                else 
+                {                    
+                        // start: login to admin portal
 			def user = User.findByUsername("admin") ?: new User(
 				fullName: 'System Admin',
 				username: 'admin',
@@ -141,6 +168,8 @@ class BootStrap {
 			def roleEditor = SecRole.findByName("Editor") ?: new SecRole(authority: 'ROLE_EDITOR', name: 'Editor').save(failOnError:true)
 			SecUserSecRole.create(user, roleAdmin, true)
 		
+            
+                        // start: site properties
 			def sProps = SiteProperties.findByTitle('lagrummet.se') ?: new SiteProperties(
 				title: "lagrummet.se",
 				siteTitle: 'lagrummet<span class="hlight">.se</span>',
@@ -180,7 +209,10 @@ class BootStrap {
 					<li class="heading">Lär dig mer</li>
 				</ul>
 				''').save()
-				
+                                // end
+            
+                                
+                        // start: page specifics
 			def home = Page.findByPermalink('home') ?: new Page(
 				title: 'Lagrummet',
 				template: "frontpage",
@@ -242,6 +274,9 @@ class BootStrap {
 				dateCreated: new Date() -4,
 				lastUpdated: new Date() - 4
 			).save()
+                        
+                        // end
+            
 		}
     }
 	
