@@ -8,6 +8,7 @@ env.use_ssh_config = True
 
 
 def beta():
+    """set environment: beta (prod)"""
     env.tomcat_stop = '/etc/init.d/tomcat stop'
     env.tomcat_start = '/etc/init.d/tomcat start'
     env.user = 'rinfo'
@@ -20,24 +21,16 @@ def beta():
     }
 
 
-
-@roles('rinfo')
-def ls():
-    run("ls /tmp")
+def build_war():
+    """Build war-file locally"""
+    local("gails clean war")
 
 
 @roles('rinfo')
 def deploy(headless="0"):
-    _deploy_war(env.localwar,
-            "lagrummet.war", int(headless))
-
-
-
-def _deploy_war(localwar, warname, headless=False):
-    #_needs_targetenv()
+    """Deploy locally built war-file to tomcat and restart"""
     with _managed_tomcat_restart(5, headless):
-        put(localwar, env.deploydir+warname)
-
+        put(localwar, env.deploydir+"lagrummet.war")
 
 
 
@@ -56,9 +49,12 @@ def _managed_tomcat_restart(wait=5, headless=False):
     sudo("%(tomcat_start)s" % env, shell=not headless)
 
 
-
+@roles('rinfo')
 def restart_tomcat():
+    """Restart tomcat"""
     with _managed_tomcat_restart(): pass
+
+
 
 
 
