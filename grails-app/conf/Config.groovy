@@ -24,9 +24,9 @@ if(System.getProperty(ENV_NAME)) {
 	println "Including configuration file specified in environment: " + System.getenv(ENV_NAME);
 	grails.config.locations << "file:" + System.getenv(ENV_NAME)
  
-} else if(new File("C:\\lagrummet.se\\config\\lagrummet.se-config.groovy").exists()) {
-	println "Using default location: C:\\lagrummet.se\\config\\lagrummet.se-config.groovy"
-	grails.config.locations << "file:C:\\lagrummet.se\\config\\lagrummet.se-config.groovy"
+} else if(new File("/etc/lagrummet.se/lagrummet.se-config.groovy").exists()) {
+	println "Using default location: /etc/lagrummet.se/lagrummet.se-config.groovy"
+	grails.config.locations << "file:/etc/lagrummet.se/lagrummet.se-config.groovy"
 
 } else {
 	println "No external configuration file defined."
@@ -96,7 +96,7 @@ log4j = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
     
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+    all  'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP
            'org.codehaus.groovy.grails.web.sitemesh', //  layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
@@ -108,7 +108,9 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 
-    warn   'org.mortbay.log'
+    all   'org.mortbay.log'
+
+    all	  'se.lagrummet'
 }
 
 //jquery plugin installation
