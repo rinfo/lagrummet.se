@@ -9,3 +9,5 @@ web-app/uploads/files/
 stacktrace.log
 target-eclipse/classes/
 .idea
+*.pyc
+
