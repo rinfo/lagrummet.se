@@ -138,6 +138,9 @@ grails.plugins.springsecurity.ipRestrictions = [
 
 // Properties for the Lagrummet.se CMS
 
+// Google Analytics kod, hämtad från (Sharepoint) Rättsinfosystemet Wiki > Lagrummet.se
+// googleAnalytics.webPropertyId = "UA-10527860-1"
+
 lagrummet {
 	googleAnalytics.webPropertyId = ""
 	contact.email = "redaktionen@lagrummet.se"
@@ -157,7 +160,7 @@ lagrummet {
 		[value: 'svea_hovraett', title: 'Svea hovr&auml;tt'],
 		[value: 'goeta_hovraett', title: 'G&ouml;ta hovr&auml;tt'],
 		[value: 'hovraetten_oever_skaane_och_blekinge', title: 'Hovr&auml;tten &ouml;ver Sk&aring;ne och Blekinge'],
-		[value: 'hovraetten_oever_vaestra_sverige', title: 'Hovr&auml;tten &ouml;ver V&auml;stra Sverige'],
+		[value: 'hovraetten_oever_vaestra_sverige', title: 'Hovr&auml;tten f&ouml;r V&auml;stra Sverige'],
 		[value: 'hovraetten_foer_nedre_norrland', title: 'Hovr&auml;tten f&ouml;r Nedre Norrland'],
 		[value: 'hovraetten_foer_oevre_norrland', title: 'Hovr&auml;tten f&ouml;r &Ouml;vre Norrland'],
 		[value: '', title: '', disabled: true],
