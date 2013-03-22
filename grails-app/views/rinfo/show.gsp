@@ -36,16 +36,18 @@
                             </td></tr>
                     </g:if>
 
-                  <tr><td class="label">Beteckning:</td><td> ${docInfo.identifier}</td></tr>
+                    <g:if test="${docInfo.identifier}">
+                      <tr><td class="label">Beteckning:</td><td> ${docInfo.identifier}</td></tr>  
+                    </g:if>                  
 
+              
                     <tmpl:labelRow label="Ikraft" value="${docInfo.ikrafttradandedatum}" />
-
                     <tmpl:labelRow label="Målnummer" value="${docInfo.referatAvDomstolsavgorande?.malnummer}" />			
                     <tmpl:labelRow label="Målnummer" value="${docInfo.malnummer}" />	
-
                     <tmpl:labelRow label="Avgörandedatum" value="${docInfo.referatAvDomstolsavgorande?.avgorandedatum}" />		
                     <tmpl:labelRow label="Avgörandedatum" value="${docInfo.avgorandedatum}" />		
 
+                    
                     <g:if test="${docInfo.forarbete}">
                             <tr><td class="label">Förarbeten: </td><td>
                                     <ul>
