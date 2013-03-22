@@ -11,6 +11,13 @@
 <body>
     <article id="searchResults" class="searchResults">
     	<p class="showAllLabel">Totalt ${searchResult?.totalResults} träffar</p>
+                
+        <!--
+        ********************************************************************************
+          Tekniskt felmeddelande        
+        ********************************************************************************
+        -->
+        <!--
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
@@ -20,9 +27,12 @@
     			</ul>
     		</div>
     	</g:if>
+        -->
+        
+        
     	<g:if test="${query}">
 		<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
-		</g:if>
+	</g:if>
 		
 		<g:if test="${searchResult?.totalResults}">
 		<p>Visar sökresultat för <span class="query">"${query.encodeAsHTML()}"</span> i <strong>alla rättskällor</strong> på lagrummet.se</p>	
