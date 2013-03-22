@@ -1,4 +1,4 @@
-ipu<html>
+<html>
 <head>
 	<g:if test="${!params.query}"><title>Utökad sökning</title></g:if>
 	<g:else><title>Utökade sökresultat för ${params.query.encodeAsHTML()}</title></g:else>
@@ -30,12 +30,12 @@ ipu<html>
                                 </g:else>
 			</g:each>
 		</fieldset>
-
                 
-                <!--                
+                <!--          
+                ********************************************************************************
                   Författningar
-                -->
-                
+                ********************************************************************************
+                -->                
 		<g:if test="${cat == 'Forfattningar'}">
                   <g:set var="hidden" value="" />
                   <g:set var="forfattningarParams" value="${params}" />
@@ -124,10 +124,10 @@ ipu<html>
 		</g:form>
 		
                 <!--                
-                  Rättsfall                
-                -->
-                
-                
+                ********************************************************************************
+                  Vägledande domar (Rättsfall)
+                ********************************************************************************
+                -->                                
 		<g:if test="${cat == 'Rattsfall'}">
 			<g:set var="hidden" value="" />
 			<g:set var="rattsfallParams" value="${params}" />
@@ -209,10 +209,10 @@ ipu<html>
 		
                 
                 <!--
+                ********************************************************************************
                   Förarbeten
+                ********************************************************************************
                 -->
-                
-                
 		<g:if test="${cat == 'Forarbeten'}">
 			<g:set var="hidden" value="" />
 			<g:set var="forarbeteParams" value="${params}" />
@@ -264,49 +264,63 @@ ipu<html>
 		</g:form>
 	</article>
 
-    <article id="searchResults" class="searchResults">
-    	<g:if test="${searchResult?.errorMessages?.size > 0}">
-    		<div class="message">
-    			<ul>
-    				<g:each in="${searchResult.errorMessages}" var="message">
-    					<li><g:message code="${message}" /></li>
-    				</g:each>
-    			</ul>
-    		</div>
-    	</g:if>
+  
+        <!--
+        ********************************************************************************
+          Sökresultat
+        ********************************************************************************
+        -->
+        <article id="searchResults" class="searchResults">
+          
+            <!--
+            ********************************************************************************
+              Tekniskt felmeddelande        
+            ********************************************************************************
+            -->
+            <!--
+            <g:if test="${searchResult?.errorMessages?.size > 0}">
+                    <div class="message">
+                            <ul>
+                                    <g:each in="${searchResult.errorMessages}" var="message">
+                                            <li><g:message code="${message}" /></li>
+                                    </g:each>
+                            </ul>
+                    </div>
+            </g:if>
+            -->
 
-		<g:if test="${searchResult?.totalResults}">
-			<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
-	    	<p class="showAllLabel"><a href="${createLink(mapping:'extendedSearch', fragment: "searchResults", params:params + [max: searchResult?.totalResults, offset: 0])}">Visa alla ${searchResult?.totalResults} träffar</a></p>
-	    	
-			<h2 id="sokresultat">Sökresultat</h2>
-		
-			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar i <strong><g:message code="category.extendedSearch.${cat}"/></strong></p>
-			
-			<table>
-				<tr>
-					<th>Titel</th>
-					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
-					<g:elseif test="${cat != 'Ovrigt' }"><th>Beteckning</th></g:elseif>
-				</tr>
-				<g:each in="${searchResult.itemsList}" var="item">
-					<tr>
-						<td>
-							<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.malnummer ?: item.title ?: item.identifier}</a></p>
-							<g:if test="${item.matches}">
-								<p>${item.matches} ...</p>
-							</g:if>
-						</td>
-						<g:if test="${cat != 'Ovrigt' }"><td>${item.identifier ?: item.malnummer}</td></g:if>
-					</tr>
-				</g:each>
-			</table>
-			<g:paginate total="${searchResult.totalResults}" max="20" params="${params}"/>
-			<div id="searchHelpPuff">
-				<strong>Hittade du inte vad du sökte?</strong>
-				<p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>
-			</div>
-		</g:if>
+            <g:if test="${searchResult?.totalResults}">
+                    <p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
+            <p class="showAllLabel"><a href="${createLink(mapping:'extendedSearch', fragment: "searchResults", params:params + [max: searchResult?.totalResults, offset: 0])}">Visa alla ${searchResult?.totalResults} träffar</a></p>
+
+                    <h2 id="sokresultat">Sökresultat</h2>
+
+                    <p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar i <strong><g:message code="category.extendedSearch.${cat}"/></strong></p>
+
+                    <table>
+                            <tr>
+                                    <th>Titel</th>
+                                    <g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
+                                    <g:elseif test="${cat != 'Ovrigt' }"><th>Beteckning</th></g:elseif>
+                            </tr>
+                            <g:each in="${searchResult.itemsList}" var="item">
+                                    <tr>
+                                            <td>
+                                                    <p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.malnummer ?: item.title ?: item.identifier}</a></p>
+                                                    <g:if test="${item.matches}">
+                                                            <p>${item.matches} ...</p>
+                                                    </g:if>
+                                            </td>
+                                            <g:if test="${cat != 'Ovrigt' }"><td>${item.identifier ?: item.malnummer}</td></g:if>
+                                    </tr>
+                            </g:each>
+                    </table>
+                    <g:paginate total="${searchResult.totalResults}" max="20" params="${params}"/>
+                    <div id="searchHelpPuff">
+                            <strong>Hittade du inte vad du sökte?</strong>
+                            <p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>
+                    </div>
+            </g:if>
 	</article>
 </body>
 </html>
