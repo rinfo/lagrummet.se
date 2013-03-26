@@ -96,7 +96,7 @@ log4j = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
     
-    all  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP
            'org.codehaus.groovy.grails.web.sitemesh', //  layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
@@ -108,7 +108,7 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 
-    all   'org.mortbay.log'
+    warn   'org.mortbay.log'
 
     all	  'se.lagrummet'
 }
