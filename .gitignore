@@ -10,4 +10,6 @@ stacktrace.log
 target-eclipse/classes/
 .idea
 *.pyc
-
+*.iml
+*.ipr
+*.iws
