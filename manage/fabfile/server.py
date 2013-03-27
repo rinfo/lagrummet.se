@@ -3,8 +3,9 @@ import contextlib
 import time
 
 
+@task
 @roles('rinfo')
-def deploy(headless="0"):
+def deploy_lagrummet(headless="0"):
     """Deploy locally built war-file to tomcat and restart"""
     with _managed_tomcat_restart(5, headless):
         put(localwar, env.deploydir+"lagrummet.war")
@@ -26,6 +27,7 @@ def _managed_tomcat_restart(wait=5, headless=False):
     sudo("%(tomcat_start)s" % env, shell=not headless)
 
 
+@task
 @roles('rinfo')
 def restart_tomcat():
     """Restart tomcat"""

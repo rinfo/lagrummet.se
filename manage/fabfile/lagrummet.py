@@ -7,3 +7,5 @@ def build_war():
         local("grails clean")
         local("grails war")
         local("ls -l target")
+
+
