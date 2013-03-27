@@ -13,3 +13,4 @@ target-eclipse/classes/
 *.iml
 *.ipr
 *.iws
+logs/
