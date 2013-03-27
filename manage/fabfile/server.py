@@ -3,12 +3,19 @@ import contextlib
 import time
 
 
+
+@task
+@roles('apache')
+def restart_apache():
+    """Restart apache"""
+    sudo("/etc/init.d/apache2 restart")
+
+
 @task
 @roles('rinfo')
-def deploy_lagrummet(headless="0"):
-    """Deploy locally built war-file to tomcat and restart"""
-    with _managed_tomcat_restart(5, headless):
-        put(localwar, env.deploydir+"lagrummet.war")
+def restart_tomcat():
+    """Restart tomcat"""
+    with _managed_tomcat_restart(): pass
 
 
 
@@ -25,17 +32,4 @@ def _managed_tomcat_restart(wait=5, headless=False):
         time.sleep(1)
     print
     sudo("%(tomcat_start)s" % env, shell=not headless)
-
-
-@task
-@roles('rinfo')
-def restart_tomcat():
-    """Restart tomcat"""
-    with _managed_tomcat_restart(): pass
-
-
-
-
-
-
 
