@@ -3,7 +3,7 @@ from fabric.api import *
 @task
 @roles('apache')
 def config_apache():
-    """Install apache config for lagrummet site"""
+    """Add lagrummet site-config to existing apache"""
     with lcd(env.projectroot):
         with cd("/etc/apache2"):
             put("manage/sysconf/prod/etc/apache2/sites-available/lagrummet", "sites-available")
