@@ -38,6 +38,8 @@ env.roledefs = {
 ##
 # Import tasks
 
+import target
+import server
 import sysconf
 import lagrummet
 
