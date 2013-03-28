@@ -19,7 +19,7 @@ def prod():
 
 @task
 def build_war():
-    """Build war-file locally"""
+    """Build lagrummet grails-war locally"""
     with lcd(env.projectroot):
         local("grails clean")
         local("grails war")
