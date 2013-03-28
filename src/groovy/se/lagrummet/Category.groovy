@@ -60,12 +60,12 @@ public enum Category {
 		]
 	
 	static extendedSearchTypes = [
-		'Alla författningar' : [LAGAR.getTypes(), MYNDIGHETERS_FORESKRIFTER.getTypes()],
+		'Alla foerfattningar' : [LAGAR.getTypes(), MYNDIGHETERS_FORESKRIFTER.getTypes()],
 		'Lagar' : ['Lag', 'Grundlag'],
 		'Myndigheters föreskrifter' : ['Myndighetsforeskrift'],
-		'Förordningar' : ['Forordning'],
+		'Foerordningar' : ['Forordning'],
 		
-		'Alla förarbeten' : ['Proposition', 'Utredningsbetankande', 'Kommittedirektiv'],
+		'Alla foerarbeten' : ['Proposition', 'Utredningsbetankande', 'Kommittedirektiv'],
 		'Propositioner' : ['Proposition'],
 		'Utredningar' : ['Utredningsbetankande', 'Kommittedirektiv']
 	]

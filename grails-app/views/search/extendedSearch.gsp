@@ -49,7 +49,8 @@
 			<input type="hidden" name="kategori" value="Forfattningar" />
 
 			<label for="typ"><g:message code="extendedSearch.chooseType.label" default="Välj typ av författning" /></label>
-			<g:select name="typ" from="${['Alla författningar', 'Lagar', 'Förordningar', 'Myndigheters föreskrifter']}"
+			<g:select name="typ" from="${['Alla foerfattningar', 'Lagar', 'Foerordningar', 'Myndigheters foereskrifter']}"
+			        optionValue="${{it.replace('oe','ö')}}"
 									value="${forfattningarParams?.typ}" />
 
 			<fieldset id="lagstatus">
