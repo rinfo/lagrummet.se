@@ -15,8 +15,7 @@
     </Directory>
 
     ProxyPassMatch ^/robots\.txt$ !
-    ProxyPass /lagrummet/ ajp://localhost:8009/lagrummet/
-    ProxyPass / ajp://localhost:8009/lagrummet/
+    ProxyPass / ajp://localhost:8009/
 
     ServerAdmin rinfo@lagrummet.se
 

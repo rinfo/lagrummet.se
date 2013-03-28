@@ -34,7 +34,7 @@ def build_war():
 def deploy_war(headless="0"):
     """Deploy locally built war-file to tomcat and restart"""
     with _managed_tomcat_restart(5, headless):
-        put(env.localwar, env.deploydir+"lagrummet.war")
+        put(env.localwar, env.deploydir+"ROOT.war")
 
 
 
