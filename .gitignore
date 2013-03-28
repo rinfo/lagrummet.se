@@ -8,3 +8,9 @@ web-app/uploads/images/
 web-app/uploads/files/
 stacktrace.log
 target-eclipse/classes/
+.idea
+*.pyc
+*.iml
+*.ipr
+*.iws
+logs/
