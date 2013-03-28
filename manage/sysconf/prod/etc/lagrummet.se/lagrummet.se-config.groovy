@@ -6,6 +6,6 @@ lagrummet.rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se/"
 
 dataSource.url = "jdbc:mysql://localhost:3306/lagrummet"
 dataSource.username = "lagrummet2"
-dataSource.password = "changeme"
+dataSource.password = "<CHANGEME>"
 
 lagrummet.googleAnalytics.webPropertyId = ""
