@@ -191,7 +191,7 @@ class PageController {
                     grailsApplication.config.lagrummet.legalSource.categories.each { category ->
                             def categoryList = ["sokbar": [:], "inteSokbar": [:]]
 
-                            LegalSource.findAllByCategory(category).each 
+                            LegalSource.findAllByCategory(category, [sort:"name", order:"asc"]).each 
                             {
                                     def rdlName = (it.rdlName) ? "sokbar" : "inteSokbar"
 
@@ -202,8 +202,8 @@ class PageController {
 
                                     categoryList[rdlName][it.subCategory].add(it)
                             
-                                    if (category == "Foreskrifter") 
-                                         categoryList[rdlName][it.subCategory].sort()   
+                                    //if (category == "Foreskrifter") 
+                                         categoryList[rdlName][it.subCategory].sort{it.name}   
                             }
                             
                                                   
