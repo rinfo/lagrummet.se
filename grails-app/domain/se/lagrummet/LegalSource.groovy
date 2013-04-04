@@ -17,4 +17,9 @@ class LegalSource {
 		description(nullable:true, blank:true, maxSize:1000)
 		rdlName(nullable:true, blank:true)
     }
+    
+    	static mapping = {
+		sort name:"asc"
+	}
+        
 }
