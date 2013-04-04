@@ -111,6 +111,9 @@ log4j = {
     warn   'org.mortbay.log'
 
     all	  'se.lagrummet'
+    
+    'null' name:'stacktrace'
+    
 }
 
 //jquery plugin installation
