@@ -62,11 +62,15 @@
 			
 		
 			<p>
-				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }" class="catTitle">Propositioner och skrivelser</a> 
+				<!--
+                                  <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }" class="catTitle">Propositioner och skrivelser</a> 
+                                 -->
+                                 <b>Propositioner och skrivelser</b>                                 
 				<span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})
-				<g:if test="${searchResult.items['Propositioner'].size() > 0 && searchResult.totalResultsPerCategory['Propositioner'] > searchResult.items['Propositioner'].size()}"> Visar de första ${searchResult.items['Propositioner'].size()}</g:if>
-				
+				<g:if test="${searchResult.items['Propositioner'].size() > 0 && searchResult.totalResultsPerCategory['Propositioner'] > searchResult.items['Propositioner'].size()}"> Visar de första ${searchResult.items['Propositioner'].size()}</g:if>				
 				</span>
+                                 <br />Dessa dokument är inte sökbara i denna version av lagrummet.se.
+                                 
 			</p>
 			<g:if test="${searchResult.items['Propositioner']}">
 			<ul>
@@ -154,10 +158,14 @@
 			</g:if>
 
 			<p>
+                            <!--
 				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Utredningar', alias:alias]) }" class="catTitle">Utredningar</a>
+                             -->
+                             <b>Utredningar</b>
 				<span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})
 				<g:if test="${searchResult.items['Utredningar'].size() > 0 && searchResult.totalResultsPerCategory['Utredningar'] > searchResult.items['Utredningar'].size()}"> Visar de första ${searchResult.items['Utredningar'].size()}</g:if>
 				</span>
+                                <br />Dessa dokument är inte sökbara i denna version av lagrummet.se.
 			</p>
 			<g:if test="${searchResult.items['Utredningar']}">
 			<ul>
