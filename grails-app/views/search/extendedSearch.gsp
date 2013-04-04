@@ -6,10 +6,19 @@
 </head>
 <body>
 	<article id="extendedSearch">
+          
+               <!--          
+                ********************************************************************************
+                  Välj en kategori
+                ********************************************************************************
+                -->           
 		<h1><g:message code="extendedSearch.label" default="Utökad sökning" /></h1>
 		<fieldset class="category" id="extSearchCats">
-			<div class="legend"><g:message code="extendedSearch.chooseCategory.label" default="Välj en kategori" /></div>
-			<g:each in="['Forfattningar', 'Rattsfall', 'Forarbeten']">
+			<div class="legend">
+                            <g:message code="extendedSearch.chooseCategory.label" default="Välj en kategori" />
+                       </div>
+			
+                        <g:each in="['Forfattningar', 'Rattsfall']">
 				<g:if test="${cat == it}">
                                     <div class="inputGroup">
                                         <input type="radio" checked="checked" value="${it}" name="kategori" id="cat${it}" />
@@ -29,6 +38,13 @@
                                   </div>
                                 </g:else>
 			</g:each>
+                                  <div class="inputGroup">
+                                    <input type="radio" disabled value="Forarbeten" name="kategori" id="catForarbeten" />
+                                    <label for="catForarbeten">
+                                      <p><strong><g:message code="category.extendedSearch.Forarbeten"/></strong></p>
+                                      <p>Förarbeten är inte sökbara i denna version av lagrummet.se.</p>
+                                    </label>
+                                  </div>                        
 		</fieldset>
                 
                 <!--          
