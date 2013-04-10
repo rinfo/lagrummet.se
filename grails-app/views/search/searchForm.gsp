@@ -40,7 +40,12 @@
 		<p>Din sökning gav även träff på följande: <span class="query">${synonyms.join(', ') }</span></p>
 		<p>För att se sökresultatet utan associerade träffar, <a href="${createLink(mapping:'search', params:[query:query, cat:'Alla', alias:'false']) }">klicka här</a></p>
 		</g:if>
-		<div class="column first">
+		<div class="column first">                  
+                        <!--
+                        ********************************************************************************
+                            Information från lagrummet.se                        
+                        ********************************************************************************
+                        -->                  
 			<p>
 				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Ovrigt', alias:alias]) }" class="catTitle">Information från lagrummet.se</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})
@@ -60,7 +65,11 @@
 			</ul>
 			</g:if>
 			
-		
+                       <!--
+                        ********************************************************************************
+                            Propositioner och skrivelser                        
+                        ********************************************************************************
+                        --> 		
 			<p>
 				<!--
                                   <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }" class="catTitle">Propositioner och skrivelser</a> 
@@ -86,6 +95,12 @@
 			</ul>
 			</g:if>
 
+                        
+                       <!--
+                        ********************************************************************************
+                            Rättsfall                     
+                        ********************************************************************************
+                        -->                         
 			<p>
 				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Rattsfall', alias:alias]) }" class="catTitle">Rättsfall</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})
@@ -109,6 +124,12 @@
 		</div>
 		
 		<div class="column">
+                  
+                       <!--
+                        ********************************************************************************
+                            Lagar och förordningar                  
+                        ********************************************************************************
+                        -->                                     
 			<p>
 				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Lagar', alias:alias]) }" class="catTitle">Lagar och förordningar</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Lagar']})
@@ -133,6 +154,13 @@
 			</ul>
 			</g:if>
 			
+                        
+                        
+                       <!--
+                        ********************************************************************************
+                            Myndigheters föreskrifter                    
+                        ********************************************************************************
+                        -->                         
 			<p>
 				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }" class="catTitle">Myndigheters föreskrifter</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Foreskrifter']})
@@ -143,6 +171,7 @@
 			<ul>
 				<g:each in="${searchResult.items['Foreskrifter']}" var="item">
 					<li>
+                                              <!-- title or identifier -->
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
 						<g:if test="${item.matches}">
 							<p>${item.matches} ...</p>
@@ -157,6 +186,13 @@
 			</ul>
 			</g:if>
 
+                        
+                        
+                       <!--
+                        ********************************************************************************
+                            Utredningar                     
+                        ********************************************************************************
+                        -->                         
 			<p>
                             <!--
 				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Utredningar', alias:alias]) }" class="catTitle">Utredningar</a>
