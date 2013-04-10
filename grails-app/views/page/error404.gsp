@@ -11,7 +11,7 @@
       <h2>Gå vidare</h2>      
       <ul>
         <li><a href="${resource()}">Startsidan för lagrummet.se</a></li>
-        <li><g:link controller="page" action="show" url="webbkarta">Webbkarta</g:link> - översikt över innehålet på lagrummet.se</li>
+        <li><g:link controller="page" action="show" url="webbkarta">Webbkarta</g:link> - översikt över innehållet på lagrummet.se</li>
       </ul>
       
       <p>Kom du hit på en länk från vår webbplats? Kontakta <g:link contoller="page" url="kontakta-oss">redaktionen</g:link> så kan vi rätta till felet. Ange vilken länk det gäller och på vilken sida länken finns.</p>
@@ -23,7 +23,8 @@
   <article class="editorial 404">
     <header><h1>The page could not be found</h1></header>
     <p>The page might have been removed or moved to a different location.</p>
-    <p>Please visit our page in English about <g:link controller="page" url="english">the Swedish legal information system</g:link></p>    
+    <p>Please visit our page in English about <g:link controller="page" url="english">the Swedish legal information system</g:link>.</p>    
+    <p>Felkod 404</p>
   </article>
   
     <!--
