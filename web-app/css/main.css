@@ -639,15 +639,15 @@ article.legalSources section.Foreskrifter h2 {
 }
 
 #contact #contactInfo {
-	float: left;
+	clear: both;
 }
 
 #contact #message {
-	float: right;
+	clear: both;
 }
 
 #contact #message textarea {
-	width: 23em;
+	width: 98%;
 	height: 11.8em;
 	resize: none;
 }
@@ -656,7 +656,6 @@ article.legalSources section.Foreskrifter h2 {
 	width: 100%;
 	clear: both;
 	overflow: hidden;
-	margin-top: 2em;
 }
 
 #contact .buttons button {
