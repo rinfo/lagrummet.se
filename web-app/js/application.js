@@ -18,20 +18,26 @@ function searchSuggestions(data) {
 	}
 }
 
-function instantSearch() {
+function instantSearch() {    
 	var form = $("#search");
 	query = $("#query").attr("value");
 	var cat = $("#cat").attr("value");
 	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="'+serverUrl+'sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
 	
 	if (!$("#dynamicSearchResults").length) {
-    	$("#content > *:not(#siteFooter)").addClass("searchHidden");
-    	$("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></article>');
-    }
+            $("#content > *:not(#siteFooter)").addClass("searchHidden");
+            $("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></article>');
+        }
 	
-	$.get(form.attr("action")+"?ajax=true", form.serialize(), function(data) {
+        var url = form.attr("action")+"?ajax=true";
+        
+	$.get(url, form.serialize(), function(data) {
         if (data) {
         	searchSuggestions(data);
+                
+                //********************************************************************************
+                // Enkel sökning - Alla rättskällor
+                //********************************************************************************                
         	if (data.searchResult.totalResults > 0 && $("#cat").attr("value") == "Alla") {      		
         		$("#dynamicSearchResults").html('<header><h1>Sökresultat för '+query+'</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p>');
         		
@@ -63,7 +69,8 @@ function instantSearch() {
         		
         		// Propositioner
         		
-    			$("#c-1").append('<p class="Propositioner"><a href="'+serverUrl+'search?query='+query+'&cat=Propositioner" class="catTitle">Propositioner och skrivelser</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
+    			//$("#c-1").append('<p class="Propositioner"><a href="'+serverUrl+'search?query='+query+'&cat=Propositioner" class="catTitle">Propositioner och skrivelser</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
+                        $("#c-1").append('<p class="Propositioner"><b>Propositioner och skrivelser</b> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span><br />Dessa dokument är inte sökbara i denna version av lagrummet.se.</p>');
         			
         		if (data.searchResult.items['Propositioner'] && data.searchResult.items['Propositioner'].length > 0) {
         			if (data.searchResult.totalResultsPerCategory['Propositioner'] > data.searchResult.items['Propositioner'].length) $("#c-1 p.Propositioner span.count").append(" Visar de första ").append(data.searchResult.items['Propositioner'].length);
@@ -147,6 +154,7 @@ function instantSearch() {
                 			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
                 			
                 			$("#foreskrifter").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
+                                        
                 			if (item.matches) {
                 				$("#foreskrifter li").filter(":last").append("<p>" + item.matches + " ...</p>");
                 			}
@@ -162,7 +170,8 @@ function instantSearch() {
         			}
         			
             	// Utredningar
-        			$("#c-2").append('<p class="Utredningar"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar" class="catTitle">Utredningar</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></p>');
+        			//$("#c-2").append('<p class="Utredningar"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar" class="catTitle">Utredningar</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></p>');
+                                $("#c-2").append('<p class="Utredningar"><b>Utredningar</b> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span><br />Dessa dokument är inte sökbara i denna version av lagrummet.se.</p>');
         			if (data.searchResult.items['Utredningar'] && data.searchResult.items['Utredningar'].length > 0) {
         				if (data.searchResult.totalResultsPerCategory['Utredningar'] > data.searchResult.items['Utredningar'].length) $("#c-2 p.Utredningar span.count").append(" Visar de första ").append(data.searchResult.items['Utredningar'].length);
 
@@ -184,19 +193,31 @@ function instantSearch() {
         			}
         		
         			$("#dynamicSearchResults").append(sokhjalp);
-        	} else if ($("#cat").attr("value") != "Alla") {
+        	} 
+                //********************************************************************************
+                // Enkel sökning - specifik kategori
+                //********************************************************************************
+                else if ($("#cat").attr("value") != "Alla") {
 				$("#dynamicSearchResults").html('<h1>Sökresultat</h1><p>Visar '+ data.searchResult.items[cat].length  +' av totalt '+ data.searchResult.totalResults +' antal resultat </p>');
 				$("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Beteckning</th></tr></table>");
 				
 				$.each(data.searchResult.items[cat], function(i, item) {
 					var title = "";
-					if(item.identifier) {
-						title = item.identifier;
-					} else if(item.malnummer) {
-						title = item.malnummer;
-					} else if(item.title) {
-						title = item.title;
-					}
+                                        
+                                        if (item.type == 'Myndighetsforeskrift') {
+                                            title = item.title;
+                                        }
+                                        else {
+                                            if(item.identifier) {
+                                                    title = item.identifier;
+                                            } else if(item.malnummer) {
+                                                    title = item.malnummer;
+                                            } else if(item.title) {
+                                                    title = item.title;
+                                            }                                            
+                                        }
+                                        
+                                            
         			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
         			var excerpt = (item.matches) ? "<p>"+item.matches+"</p>" : "";
         			var identifier = "";
@@ -224,6 +245,8 @@ function instantSearch() {
         		});
         	}
                 */
+                
+                window.history.pushState(null, null, form.attr("action") + "?" + form.serialize());
                 
         } else {
         	$("#dynamicSearchResults").html("<h1>Det blev tyvärr fel, försök igen</h1>");
