@@ -9,7 +9,7 @@
 		${page.content}
 		<g:form name="contact" mapping="contact" method="post">
 			<fieldset id="contactInfo">
-				<legend for="name">Mitt Namn <span class="required">*</span></legend>
+				<legend for="name">Mitt namn <span class="required">*</span></legend>
 				<input type="text" name="name" required />
 				<legend for="epost">Min e-postaddress</legend>
 				<input type="text" name="epost" />
