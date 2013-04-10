@@ -8,6 +8,8 @@
     	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
     	<p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult?.totalResults, offset: 0, alias: alias]) }">Visa alla ${searchResult?.totalResults} träffar</a></p>
     	
+        
+        <!--
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
@@ -17,7 +19,15 @@
     			</ul>
     		</div>
     	</g:if>
-
+        -->
+        
+        
+            <!--
+            ********************************************************************************
+              Sökresultat per kategori
+            ********************************************************************************
+            -->
+        
 		<g:if test="${searchResult?.totalResults}">
 			<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
 			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.items[(cat)].size()} av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> i <strong><g:message code="category.${cat}"/></strong></p>
@@ -27,7 +37,7 @@
 			</g:if>
 			<table>
 				<tr>
-					<th>Titel</th>
+					<th>Tite</th>
 					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
 					<g:elseif test="${cat != 'Ovrigt' }"><th>Beteckning</th></g:elseif>
 				</tr>
@@ -36,11 +46,11 @@
 						<td>
 							<p>
                                 <a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">
-                                  <g:if test="${cat == 'Lagar' }">
-                                    ${item.title}                                 
-                                  </g:if>
+                                  <g:if test="${cat == 'Lagar' || item.type == 'Myndighetsforeskrift'}">
+                                        ${item.title}                                 
+                                  </g:if>                                  
                                   <g:else>
-                                    ${item.identifier ?: item.malnummer ?: item.title}                                  
+                                        ${item.identifier ?: item.malnummer ?: item.title}                                  
                                   </g:else>
                                 </a>
                             </p>
