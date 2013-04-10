@@ -196,7 +196,7 @@ form label {
 	display: block;
 }
 
-form .buttons {
+form .buttons:not(#contact .buttons) {
 	width: 100%;
 	clear: both;
 	margin-top: 1.5em;
@@ -636,6 +636,7 @@ article.legalSources section.Foreskrifter h2 {
 
 #contact input, #contact select {
 	width: 16em;
+        margin-bottom: 1em;
 }
 
 #contact #contactInfo {
