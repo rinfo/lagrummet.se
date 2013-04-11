@@ -14,7 +14,8 @@ class MainSiteTagLib {
 		
 		def isTopElement = attrs.get('isTopElement', true)
 		if(isTopElement && attrs.page?.title && attrs.page?.permalink != "home") {
-			out << '<a href="' << resource() << '">Startsida</a>'
+			//out << '<a href="' << resource() << '">Startsida</a>'
+                        out << '<a href="' << grailsApplication.config.grails.serverURL << '">Startsida</a>'
 		}
 		if (attrs.page?.parent) {
 			out << g.breadcrumbs(page: attrs.page.parent, isTopElement: false)
@@ -23,7 +24,8 @@ class MainSiteTagLib {
 			if(isTopElement) {
 				out << " > " << attrs.page.title
 			} else {
-				out << " > " << '<a href="' << resource() << "/" << attrs.page.url() << '">' << attrs.page.title  << '</a>'
+				//out << " > " << '<a href="' << resource() << "/" << attrs.page.url() << '">' << attrs.page.title  << '</a>'
+                                out << " > " << '<a href="' << grailsApplication.config.grails.serverURL << "/" << attrs.page.url() << '">' << attrs.page.title  << '</a>'
 			}
 		}
 	}
