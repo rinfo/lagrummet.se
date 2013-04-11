@@ -16,7 +16,7 @@
     </head>
     <body>
 		<div id="logo">
-			<a href="${resource()}">${siteProps?.siteTitle}</a>
+			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle}</a>
 		</div>
 		<!-- <a href="#primaryNavigation" id="mobileNavLink">Navigering</a>  -->
 		<header id="siteHeader">
