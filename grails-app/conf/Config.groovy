@@ -73,16 +73,20 @@ grails.spring.bean.packages = []
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
+
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://83.145.60.248:8080/${appName}"
+        //grails.serverURL = "http://83.145.60.248:8080/${appName}"
+        
+        // Motsvarande finns i config-filen i produktionsmiljön
+        grails.serverURL = "http://beta.lagrummet.se"       
     }
     development {
-        grails.serverURL = "http://localhost:8080/${appName}"
+        grails.serverURL = "http://localhost:8080/lagrummet.se"
     }
     test {
-        grails.serverURL = "http://localhost:8080/${appName}"
+        grails.serverURL = "http://localhost:8080/lagrummet.se"
     }
 
 }
