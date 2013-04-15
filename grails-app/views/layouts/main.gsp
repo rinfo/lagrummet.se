@@ -1,8 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="sv">
     <head>
-        <title><g:layoutTitle default="Grails" /></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+        <title><g:layoutTitle default="Grails" /></title>        
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}" />
