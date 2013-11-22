@@ -2,6 +2,10 @@ from fabric.api import *
 from server import _managed_tomcat_restart
 
 
+@task()
+def all():
+    build_war()
+    deploy_war()
 
 @task
 def build_war():
