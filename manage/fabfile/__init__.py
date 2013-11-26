@@ -12,7 +12,7 @@ from fabric.api import *
 
 env.project = 'lagrummet'
 
-env.use_ssh_config = True
+env.use_ssh_config = False
 
 env.manageroot = p.normpath(p.join(p.dirname(__file__), '..'))
 

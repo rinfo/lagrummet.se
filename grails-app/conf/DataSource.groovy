@@ -19,7 +19,7 @@ environments {
     }
     test {
         dataSource {
-            dbCreate = "update"
+            dbCreate = "create-drop"
             url = "jdbc:hsqldb:mem:testDb"
         }
     }
@@ -32,6 +32,28 @@ environments {
 			username = ""	//override in external config file
 			password = ""	//override in external config file
 			
+        }
+    }
+    demo {
+        dataSource {
+            pooled = true
+            dbCreate = "update"
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://localhost:3306/lagrummet"
+            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+            username = ""	//override in external config file
+            password = ""	//override in external config file
+        }
+    }
+    beta {
+        dataSource {
+            pooled = true
+            dbCreate = "update"
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://localhost:3306/lagrummet"
+            username = ""	//override in external config file
+            password = ""	//override in external config file
+
         }
     }
 }

@@ -77,10 +77,13 @@ grails.exceptionresolver.params.exclude = ['password']
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        //grails.serverURL = "http://83.145.60.248:8080/${appName}"
-        
-        // Motsvarande finns i config-filen i produktionsmiljön
-        grails.serverURL = "http://beta.lagrummet.se"       
+        grails.serverURL = "http://www.lagrummet.se"
+    }
+    beta {
+        grails.serverURL = "http://beta.lagrummet.se"
+    }
+    demo {
+        grails.serverURL = "http://demo.lagrummet.se"
     }
     development {
         grails.serverURL = "http://localhost:8080/lagrummet.se"
@@ -200,9 +203,23 @@ grails.mail.default.from="redaktionen@lagrummet.se"
 environments {
 	production {
 		lagrummet.app.basedir = ""
-	}
+        lagrummet.rdl.service.baseurl="http://service.lagrummet.se"
+        lagrummet.rdl.rinfo.baseurl="http://rinfo.lagrummet.se"
+    }
+    beta {
+        lagrummet.app.basedir = "web-app/"
+        lagrummet.rdl.service.baseurl="http://beta.lagrummet.se"
+        lagrummet.rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
+    }
+    demo {
+        lagrummet.app.basedir = ""
+        lagrummet.rdl.service.baseurl="http://service.demo.lagrummet.se"
+        lagrummet.rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
+    }
 	development {
 		lagrummet.app.basedir = "web-app/"
+        lagrummet.rdl.service.baseurl="http://service.demo.lagrummet.se"
+        lagrummet.rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
 	}
 	test {
 		lagrummet.app.basedir = "web-app/"
