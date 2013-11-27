@@ -1,4 +1,4 @@
-grails.serverURL = "http:///demo.lagrummet.se"
+grails.serverURL = "http://demo.lagrummet.se"
 lagrummet.local.rinfo.view = "${grails.serverURL}/rinfo/"
 
 lagrummet.rdl.service.baseurl="http://service.demo.lagrummet.se/"
