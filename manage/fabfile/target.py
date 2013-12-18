@@ -34,3 +34,21 @@ def demo():
     env.roledefs = {
         'rinfo': ['demo.lagrummet.se'],
     }
+
+@task
+def test():
+    """set environment: demo"""
+    env.target='test'
+    env.demodata=True
+    env.tomcat_stop = '/etc/init.d/tomcat stop'
+    env.tomcat_start = '/etc/init.d/tomcat start'
+    env.user = 'rinfo'
+    env.deploydir='/opt/tomcat/webapps/'
+    env.warname='lagrummet.war'
+    env.localwar=env.projectroot+"/target/lagrummet.se-0.8.7.war"
+    env.hosts = ['test.lagrummet.se']
+    #env.grails_build_env="test"
+    env.grails_build_env="test"
+    env.roledefs = {
+        'rinfo': ['test.lagrummet.se'],
+    }
