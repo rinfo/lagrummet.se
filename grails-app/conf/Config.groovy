@@ -195,7 +195,7 @@ lagrummet {
 }
 
 // Mail settings for contact form (and other Grails Mail)
-grails.mail.host = 'Mailgw1.dom.se'
+grails.mail.host = 'mailgw1.dom.se'
 grails.mail.port = 25
 grails.mail.default.from="redaktionen@lagrummet.se"
 

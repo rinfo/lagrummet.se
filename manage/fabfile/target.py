@@ -29,7 +29,6 @@ def demo():
     env.warname='lagrummet.war'
     env.localwar=env.projectroot+"/target/lagrummet.se-0.8.7.war"
     env.hosts = ['demo.lagrummet.se']
-    #env.grails_build_env="demo"
     env.grails_build_env="demo"
     env.roledefs = {
         'rinfo': ['demo.lagrummet.se'],
@@ -47,8 +46,7 @@ def test():
     env.warname='lagrummet.war'
     env.localwar=env.projectroot+"/target/lagrummet.se-0.8.7.war"
     env.hosts = ['test.lagrummet.se']
-    #env.grails_build_env="test"
-    env.grails_build_env="test"
+    env.grails_build_env="demo"
     env.roledefs = {
         'rinfo': ['test.lagrummet.se'],
     }
