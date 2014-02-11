@@ -12,6 +12,5 @@ class AdminControllerTests extends ControllerUnitTestCase {
     }
 
     void testSomething() {
-
     }
 }

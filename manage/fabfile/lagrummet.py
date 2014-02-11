@@ -12,6 +12,7 @@ def build_war():
     """Build lagrummet grails-war locally"""
     with lcd(env.projectroot):
         local("grails clean")
+        local("grails test-app")
         local("grails -Dgrails.env=%(grails_build_env)s war" % env)
         local("ls -l target")
 
