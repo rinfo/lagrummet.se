@@ -59,7 +59,7 @@ class SearchController {
     def index = {
 		def searchResult = null
 		def offset
-		if (params.cat) session.cat = params.cat
+		if (params.cat) session.cat = params.cat //todo this could end up in very suspicious behaviour when using multiple tabs/windows in the browser
 		
 		def synonyms = []
 		def queries = []

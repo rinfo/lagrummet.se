@@ -32,7 +32,7 @@ class BootStrap {
 			.addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
 			.addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
 			
-			def huvudMeny = new Page(title: "Huvudmeny", author: user, permalink:"huvudmeny", h1:"Huvudmeny", status:"published", publishStart: fourDaysAgo, , dateCreated: now, lastUpdated: now, metaPage: true).save()
+			def huvudMeny = new Page(title: "Huvudmeny", author: user, permalink:"huvudmeny", h1:"Huvudmeny", status:"published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: true).save()
 			
 			def rattsinfo = new Page(title: "Rättsinformation", author: user, permalink:"rattsinformation", h1:"Rättsinformation", status:"published", publishStart:fourDaysAgo, dateCreated: now, lastUpdated: now, pageOrder:1, metaPage:true, parent: huvudMeny, menuStyle:"huvudmeny1").save()
 			def lagar = new Page(title: 'Lagar och förordningar', author: user, template: "legalSource/lagar", pageOrder: 1, permalink: 'lagar-och-forordningar', h1: 'Lagar och förordningar', content: "", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, parent:rattsinfo).save()

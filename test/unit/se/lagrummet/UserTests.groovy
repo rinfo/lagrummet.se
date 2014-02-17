@@ -16,6 +16,9 @@ class UserTests extends GrailsUnitTestCase {
 		
 		def user = new User()
 		assertFalse(user.validate())
+
+        println(user.errors)
+
 		assertEquals("nullable", user.errors["fullName"])
 		assertEquals("nullable", user.errors["username"])
 		assertEquals("nullable", user.errors["password"])
