@@ -167,7 +167,7 @@ class RinfoServiceIntegrationTests extends GroovyTestCase {
         mockServer.verify(request)
    }
 
-   void testRealExternalRequest() {
+   void NotestRealExternalRequest() {
        //String url = "http://rinfo.test.lagrummet.se/publ/sfs/1999:175/konsolidering/2011-05-02"
        String httpRequestPath = "/publ/sfs/1999:175/konsolidering/2011-05-02"
        ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl = "http://rinfo.test.lagrummet.se"

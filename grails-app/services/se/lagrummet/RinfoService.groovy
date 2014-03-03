@@ -66,11 +66,13 @@ class RinfoService {
 		return docContent
 	}
 
+    // Temporary replace sharp version until RDL returns correct encoding
     public String getXHtmlContentJavaVersion(String docPath) {
         URL url = new URL(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl+docPath);
         return getXHtmlContentJavaVersion(url.openStream())
     }
 
+    // se above. Examines XMLs encoding to properly create string
     public String getXHtmlContentJavaVersion(InputStream inputStream) {
         byte[] data = readStreamToBuffer(inputStream)
         String header = readHeader(data.length, 150, data)
@@ -94,8 +96,7 @@ class RinfoService {
             int indexOfEncoding = header.indexOf("encoding");
             int indexOfFirstQuote = header.indexOf("\"", indexOfEncoding + 1);
             int indexOfSecondQuote = header.indexOf("\"", indexOfFirstQuote + 1);
-            String encoding = header.substring(indexOfFirstQuote + 1, indexOfSecondQuote)
-            encoding
+            return header.substring(indexOfFirstQuote + 1, indexOfSecondQuote)
         } catch (Exception e) {
             return "utf-8"
         }
@@ -108,75 +109,32 @@ class RinfoService {
     }
 
     public String getXHtmlContent(String docPath) {
-        return getXHtmlContentJavaVersion(docPath)
+        return getXHtmlContentJavaVersion(docPath) // Temporary redirect until RDL returns correct encoding of content
     }
 
+    // Original version, hans problems when encoding with header that differs from encoding in XML
     public String getXHtmlContentHttpBuilderVersion(String docPath) {
-        try {
-            println "RinfoService.getXHtmlContent "+docPath
-            def docContent = ""
-
-            def http = new HTTPBuilder()
-            //http.parser.'text/html' = http.parser.'text/plain'
-            //http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "text/html") {
-            //http.parser.'application/xhtml+xml' = http.parser.'text/plain'
-            http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "application/xhtml+xml") {
-                uri.path = docPath
-                response.success = {resp, reader ->
-                    docContent = reader.text
-                    println "RinfoService.getXHtmlContentHttpBuilderVersion *******************************************************"
-                    println docContent
-                    println "RinfoService.getXHtmlContentHttpBuilderVersion *******************************************************"
-                }
+        def docContent = ""
+        def http = new HTTPBuilder()
+        http.parser.'text/html' = http.parser.'text/plain'
+        http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "application/xhtml+xml") {
+            uri.path = docPath
+            response.success = {resp, reader ->
+                docContent = reader.text
             }
-            return docContent
-        } catch (HttpResponseException e) {
-            throw new Exception("Problem med anrop till '"+ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl+docPath+"'",e)
         }
+        return docContent
     }
 
+    // Simplified version, still problems when encoding with header that differs from encoding in XML
     public String getXHtmlContentHttpBuilderVersion2(String docPath) {
-        println "RinfoService.getXHtmlContentHttpBuilderVersion2 "+docPath
         def docContent = ""
         def http = new HTTPBuilder(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl)
-        println "RinfoService.getXHtmlContentHttpBuilderVersion2 GET"
-        http.get( path: docPath) { resp, xml ->
-            println "RinfoService.getXHtmlContentHttpBuilderVersion2 resp.status="+resp.status
-
-            //docContent = xml.text()
-            println "RinfoService.getXHtmlContentHttpBuilderVersion2 **************************"
-            xml.each{
+        http.get(path: docPath) { resp, xml ->
+            xml.each {
                 docContent += "\n" + it.text()
-                println it.text()
             }
-            println "RinfoService.getXHtmlContentHttpBuilderVersion2 **************************"
-
         }
         return docContent
     }
-
-    /*public String getXHtmlContent(String docPath) {
-        println "RinfoService.getXHtmlContent "+docPath
-        def docContent = ""
-        try {
-            def http = new HTTPBuilder()
-            http.parser.'text/html' = http.parser.'text/plain'
-            http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "text/html") {
-                uri.path = docPath
-                response.success = {resp, reader ->
-                    docContent = readXMLAsString(reader)
-                    //def original = reader.text
-                    //byte[] utf8bytes = original.getBytes(ParserRegistry.getCharset(resp))
-                    //byte[] utf8bytes = original.getBytes("Windows-1252")
-                    //docContent = new String(utf8bytes, "UTF-8")
-                    //docContent = new String(utf8bytes, "Windows-1252")
-                }
-            }
-        } catch (Exception e) {
-            println "RinfoService.getXHtmlContent exception="+e.message
-        }
-        return docContent
-    }
-    */
-
 }
