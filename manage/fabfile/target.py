@@ -15,6 +15,7 @@ def prod():
     env.grails_build_env="production"
     env.roledefs = {
         'rinfo': ['beta.lagrummet.se'],
+        'apache': ['beta.lagrummet.se'],
     }
 
 @task
@@ -32,6 +33,7 @@ def demo():
     env.grails_build_env="demo"
     env.roledefs = {
         'rinfo': ['demo.lagrummet.se'],
+        'apache': ['demo.lagrummet.se'],
     }
 
 @task
@@ -49,6 +51,7 @@ def test():
     env.grails_build_env="demo"
     env.roledefs = {
         'rinfo': ['test.lagrummet.se'],
+        'apache': ['test.lagrummet.se'],
     }
 
 @task
