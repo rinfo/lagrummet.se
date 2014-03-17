@@ -87,4 +87,5 @@ def skrapat():
     env.grails_build_env="demo"
     env.roledefs = {
         'rinfo': ['skrapat.lagrummet.se'],
+        'apache': ['test.lagrummet.se'],
     }
