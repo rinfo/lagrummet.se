@@ -73,6 +73,23 @@ def test():
     }
 
 @task
+def regression():
+    """set environment: regression"""
+    env.target='regression'
+    env.demodata=True
+    env.tomcat_stop = '/etc/init.d/tomcat stop'
+    env.tomcat_start = '/etc/init.d/tomcat start'
+    env.user = 'rinfo'
+    env.deploydir='/opt/tomcat/webapps/'
+    env.warname='lagrummet.war'
+    env.localwar=env.projectroot+"/target/lagrummet.se-0.8.7.war"
+    env.hosts = ['regression.lagrummet.se']
+    env.grails_build_env="prod"
+    env.roledefs = {
+        'rinfo': ['regression.lagrummet.se'],
+    }
+
+@task
 def skrapat():
     """set environment: demo"""
     env.target='skrapat'
