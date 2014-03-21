@@ -3,7 +3,10 @@
 grails.serverURL = "http://test.lagrummet.se"
 lagrummet.local.rinfo.view = "${grails.serverURL}/rinfo/"
 
-lagrummet.rdl.service.baseurl="http://service.test.lagrummet.se/"
+// Route rinfo-service requests through varnish
+lagrummet.rdl.service.baseurl="http://127.0.0.1:8383/rinfo-service/"
+
+//lagrummet.rdl.service.baseurl="http://service.test.lagrummet.se/"
 lagrummet.rdl.rinfo.baseurl="http://rinfo.test.lagrummet.se/"
 
 dataSource.url = "jdbc:mysql://127.0.0.1:3306/lagrummet"
