@@ -7,7 +7,7 @@ casper.on('page.error', function(msg, trace) {
    }
 });
 casper.test.begin('Test rendering of xhtml content with swedish characters', function(test) {
-   casper.start('http://demo.lagrummet.se/rinfo/publ/sfs/1999:175/konsolidering/2011-05-02');
+   casper.start('http://test.lagrummet.se/rinfo/publ/sfs/1999:175/konsolidering/2011-05-02');
    casper.waitForSelector("body",
        function success() {
            test.assertExists("body");
