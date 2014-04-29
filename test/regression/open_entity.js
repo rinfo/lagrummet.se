@@ -16,12 +16,12 @@ casper.test.begin('Test rendering of xhtml content with swedish characters', fun
        function fail() {
            test.assertExists("body");
    });
-   casper.waitForSelector(x("//*[contains(text(), \'Rättsinformationsförordning (1999:175)\')]"),
+   casper.waitForSelector(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"),
        function success() {
-           test.assertExists(x("//*[contains(text(), \'Rättsinformationsförordning (1999:175)\')]"));
+           test.assertExists(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"));
          },
        function fail() {
-           test.assertExists(x("//*[contains(text(), \'Rättsinformationsförordning (1999:175)\')]"));
+           test.assertExists(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"));
    });
 
    casper.run(function() {test.done();});
