@@ -29,14 +29,14 @@ def build_war():
 def deploy_war(headless="0"):
     """Deploy locally built war-file to tomcat and restart"""
     #with _managed_tomcat_restart(5, headless):
-    put(env.localwar, env.deploydir+"ROOT.war")
+    put(env.localwar, env.deploydir + "ROOT.war")
 
 @task
 @roles('rinfo')
 def test():
     """Test functions of lagrummet.se regressionstyle"""
     with lcd(env.projectroot+"/test/ui"):
-        local("casperjs test .")
+        local("casperjs test . --xunit=casperjs.log")
     #www_url = "http://%s/" % env.roledefs['rinfo'][0]
     #http_response = verify_url_content(www_url)
     #if not http_response in "Gitticah":
