@@ -1,0 +1,65 @@
+# Prepare local install machine for running Fabric scripts
+# Will create subdirectory rinfo and checkout develop branch or selected version/feature
+
+# SETUP PATHS
+if [ -z "$INSTALL_PATH_RDL" ]; then
+	INSTALL_PATH_RDL=/tmp/regressiontest/rinfo/rdl
+fi
+
+if [ -z "$INSTALL_PATH_LAGRUMMET" ]; then
+	INSTALL_PATH_LAGRUMMET=/tmp/regressiontest/rinfo/lagrummet.se
+fi
+
+# Prepare temporary install dir
+rm -rf $INSTALL_PATH_LAGRUMMET
+rm -rf $INSTALL_PATH_RDL
+mkdir -p $INSTALL_PATH_LAGRUMMET
+mkdir -p $INSTALL_PATH_RDL
+
+cd $INSTALL_PATH_LAGRUMMET/..
+git clone https://github.com/rinfo/lagrummet.se
+cd lagrummet.se
+if [ -z "$1" ]; then
+	git checkout develop
+else
+	git checkout $1
+fi
+
+cd $INSTALL_PATH_RDL/..
+git clone https://github.com/rinfo/rdl
+cd rdl
+if [ -z "$1" ]; then
+	git checkout develop
+else
+	git checkout $1
+fi
+
+if [ -z "$PW_RINFO" ]; then
+        echo "Enter sudo password: "
+        read PW_RINFO
+fi
+
+
+# RDL (prepare)
+cd $INSTALL_PATH_RDL/manage/
+fab -p $PW_RINFO target.regression -R service app.service.all:test="0"
+fab -p $PW_RINFO target.regression -R service server.restart_apache
+fab -p $PW_RINFO target.regression -R service server.restart_tomcat
+sleep 20
+fab -p $PW_RINFO target.regression -R service app.service.ping_start_collect
+sleep 60
+
+# lagrummet (setup and test)
+cd $INSTALL_PATH_LAGRUMMET/manage/
+fab -p $PW_RINFO target.regression sysconf.install_server
+fab -p $PW_RINFO target.regression sysconf.config_server
+fab -p $PW_RINFO target.regression lagrummet.test_all
+EXIT_STATUS=$?
+if [ $EXIT_STATUS -ne 0 ];then
+   echo "Main module returned $EXIT_STATUS! Exiting!"
+   exit $EXIT_STATUS
+fi
+
+# RDL (clean up)
+cd $INSTALL_PATH_RDL/manage/
+fab -p $PW_RINFO target.regression -R service app.service.clean

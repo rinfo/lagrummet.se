@@ -1,0 +1,1 @@
+drop user "lagrummet2"@"localhost";

@@ -106,3 +106,4 @@ def skrapat():
         'rinfo': ['skrapat.lagrummet.se'],
         'apache': ['test.lagrummet.se'],
     }
+
