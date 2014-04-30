@@ -204,7 +204,7 @@ function instantSearch() {
 				$.each(data.searchResult.items[cat], function(i, item) {
 					var title = "";
                                         
-                                        if (item.type == 'Myndighetsforeskrift') {
+                                        if (item.type == 'Myndighetsforeskrift' || cat == 'Lagar') {
                                             title = item.title;
                                         }
                                         else {
