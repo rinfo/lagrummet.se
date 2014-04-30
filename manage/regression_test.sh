@@ -35,8 +35,8 @@ fab -p $PW_RINFO target.regression -R service server.restart_tomcat
 sleep 20
 fab -p $PW_RINFO target.regression -R service app.service.ping_start_collect
 fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_admin
-fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_feed
 sleep 20
+fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_feed
 sleep 60
 
 # lagrummet (setup and test)
