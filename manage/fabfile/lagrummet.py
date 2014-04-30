@@ -35,8 +35,12 @@ def deploy_war(headless="0"):
 @roles('rinfo')
 def test():
     """Test functions of lagrummet.se regressionstyle"""
-    with lcd(env.projectroot+"/test/regression"):
-        local("casperjs test . --xunit=casperjs.log")
+    if env.target=='regression':
+        with lcd(env.projectroot+"/test/regression"):
+            local("casperjs test . --xunit=casperjs.log")
+    else:
+        with lcd(env.projectroot+"/test/ui"):
+            local("casperjs test . --xunit=casperjs.log")
     #www_url = "http://%s/" % env.roledefs['rinfo'][0]
     #http_response = verify_url_content(www_url)
     #if not http_response in "Gitticah":

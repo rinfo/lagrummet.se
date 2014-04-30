@@ -29,10 +29,14 @@ fi
 # RDL (prepare)
 cd $INSTALL_PATH_RDL/manage/
 fab -p $PW_RINFO target.regression -R service app.service.all:test="0"
+fab -p $PW_RINFO target.regression -R main app.main.all:test="0"
 fab -p $PW_RINFO target.regression -R service server.restart_apache
 fab -p $PW_RINFO target.regression -R service server.restart_tomcat
 sleep 20
 fab -p $PW_RINFO target.regression -R service app.service.ping_start_collect
+fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_admin
+fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_feed
+sleep 20
 sleep 60
 
 # lagrummet (setup and test)
@@ -49,3 +53,5 @@ fi
 # RDL (clean up)
 cd $INSTALL_PATH_RDL/manage/
 fab -p $PW_RINFO target.regression -R service app.service.clean
+fab -p $PW_RINFO target.regression -R service app.main.clean
+rm -rf $INSTALL_PATH_RDL

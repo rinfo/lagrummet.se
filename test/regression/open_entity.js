@@ -6,7 +6,7 @@ casper.on('page.error', function(msg, trace) {
        this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
    }
 });
-casper.test.begin('Test rendering of xhtml content with swedish characters', function(test) {
+casper.test.begin('Test fetching content from direct url', function(test) {
    casper.start('http://regression.lagrummet.se/rinfo/publ/emfs/2011:39');
    casper.waitForSelector("body",
        function success() {
