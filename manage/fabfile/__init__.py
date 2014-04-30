@@ -35,6 +35,8 @@ env.roledefs = {
     'lagrummet': []
 }
 
+venv = lambda: dict(env, **sys._getframe(1).f_locals)
+
 ##
 # Import tasks
 
