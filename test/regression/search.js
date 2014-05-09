@@ -33,12 +33,12 @@ casper.test.begin('Test search of 2011', function(test) {
            test.assertExists("form[name=search] input[type=submit][value='Sök']");
    });
    /* submit form */
-   casper.waitForSelector(x("//*[contains(text(), \'2011:39\')]"),
+   casper.waitForSelector(x("//*[contains(text(), \'2x011:39\')]"),
        function success() {
-           test.assertExists(x("//*[contains(text(), \'2011:39\')]"));
+           test.assertExists(x("//*[contains(text(), \'2x011:39\')]"));
          },
        function fail() {
-           test.assertExists(x("//*[contains(text(), \'2011:39\')]"));
+           test.assertExists(x("//*[contains(text(), \'2x011:39\')]"));
    });
 
    casper.run(function() {test.done();});
