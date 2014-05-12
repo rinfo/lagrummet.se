@@ -8,7 +8,7 @@ casper.on('page.error', function(msg, trace) {
    }
 });
 casper.test.begin('Test search of 2011', function(test) {
-   casper.start('http://regression.lagrummet.se/');
+   casper.start(casper.cli.get("url"));
    casper.waitForSelector("form[name=search] input[name='query']",
        function success() {
            test.assertExists("form[name=search] input[name='query']");

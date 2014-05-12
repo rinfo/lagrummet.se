@@ -7,7 +7,7 @@ casper.on('page.error', function(msg, trace) {
    }
 });
 casper.test.begin('Test fetching content from direct url', function(test) {
-   casper.start('http://regression.lagrummet.se/rinfo/publ/emfs/2011:39');
+   casper.start(casper.cli.get("url")+'/rinfo/publ/emfs/2011:39');
    casper.waitForSelector("body",
        function success() {
            test.assertExists("body");

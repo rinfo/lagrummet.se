@@ -13,7 +13,7 @@ casper.on('resource.requested', function(requestData, request) {
             }
   });
 casper.test.begin('Test that when performing search there should be a request sent to GA', function(test) {
-   casper.start('http://test.lagrummet.se/');
+   casper.start(casper.cli.get("url"));
    casper.waitForSelector("form[name=search] input[name='query']",
        function success() {
            test.assertExists("form[name=search] input[name='query']");
