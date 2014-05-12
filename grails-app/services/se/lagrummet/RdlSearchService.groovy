@@ -80,7 +80,6 @@ class RdlSearchService {
 	
 	
 	public SearchResult searchWithQuery(Map queryParams, String resultListType = 'category') {
-        log.error("searchWithQuery()");
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
 		def http = new HTTPBuilder()
