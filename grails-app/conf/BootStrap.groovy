@@ -9,9 +9,15 @@ import se.lagrummet.Synonym
 import se.lagrummet.User
 
 class BootStrap {
-
+    def grailsApplication
     def init = { servletContext ->
-		
+
+        //due to #131 should be removed and tested when we're not on 1.3.7 anymore
+        //Eager initialize GORM Domain Mixin Methods.
+        grailsApplication.domainClasses.each { dc ->
+            dc.clazz.count()
+        }
+
 		if(Environment.current == Environment.DEVELOPMENT) {
 			
                         // start: Login to admin portal
