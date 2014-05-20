@@ -305,8 +305,8 @@ jQuery(document).ready(function($) {
 			}
 		}
 	});
-	
-	$("header #search #query").live("keypress", function(e) {
+
+    $("header #search #query").keypress(function(e) {
 		if (e.which == 13 && query == $(this).attr("value")) {
 			// load the search suggestion if one is selected
 			var searchSuggestion = $("#searchSuggestions li.active");
@@ -314,7 +314,7 @@ jQuery(document).ready(function($) {
                 sendGaPageView($(location).attr('href'));
 				window.location = searchSuggestion.children("a").attr("href");
 			}
-			e.preventDefault();
+			return false;
 		}
 	});
 	
