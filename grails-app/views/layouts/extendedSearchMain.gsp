@@ -43,7 +43,7 @@
 	    <nav id="primaryNavigation">
 			<g:menu root="huvudmeny" activePage="${page}" />
 		</nav>
-	    <g:javascript library="jquery" plugin="jquery" />
+        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js?ver=1.7.0'></script>
 	    <g:javascript library="jquery-ui-1.8.16.custom.min" />
 	    <g:javascript library="jquery.ui.datepicker-sv" />
 	    <g:javascript library="application" />
