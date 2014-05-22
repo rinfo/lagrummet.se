@@ -39,6 +39,8 @@ def test():
     if env.target=='regression':
         with lcd(env.projectroot+"/test/regression"):
             local("casperjs test . --xunit=casperjs.log --url="+url+" --target=%(target)s" % env)
+            local("casperjs test recorded --xunit=casperjs.log --url="+url+" --target=%(target)s" % env)
+
     else:
         with lcd(env.projectroot+"/test/ui"):
             local("casperjs test . --xunit=casperjs.log --url="+url+" --target=%(target)s" % env)
