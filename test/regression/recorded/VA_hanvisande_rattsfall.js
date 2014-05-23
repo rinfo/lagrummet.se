@@ -9,6 +9,7 @@ casper.on('page.error', function(msg, trace) {
 });
 casper.test.begin('Verifiera att VA-hänvisande existerar', function(test) {
    casper.start(casper.cli.get("url")+'/rinfo/publ/rf/ra/2010:107');
+   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.waitForSelector(x("//a[normalize-space(text())='HFD 2012 ref. 3']"),
        function success() {
            test.assertExists(x("//a[normalize-space(text())='HFD 2012 ref. 3']"));
@@ -17,6 +18,6 @@ casper.test.begin('Verifiera att VA-hänvisande existerar', function(test) {
        function fail() {
            test.assertExists(x("//a[normalize-space(text())='HFD 2012 ref. 3']"));
    });
-
+*/
    casper.run(function() {test.done();});
 });

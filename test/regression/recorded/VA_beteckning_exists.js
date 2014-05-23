@@ -9,6 +9,7 @@ casper.on('page.error', function(msg, trace) {
 });
 casper.test.begin('Verifiera att VA-beteckning existerar', function(test) {
    casper.start(casper.cli.get("url"));
+   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.clear();
    phantom.clearCookies();
    casper.waitForSelector("form[name=search] input[name='query']",
@@ -26,14 +27,18 @@ casper.test.begin('Verifiera att VA-beteckning existerar', function(test) {
        function fail() {
            test.assertExists("input[name='query']");
    });
-   casper.waitForSelector(x("//*[@id='rattsfall']/*/a[normalize-space(text())='NJA 2010 s. 648']"),
-       function success() {
-           test.assertExists(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
-           this.click(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
-       },
-       function fail() {
-           test.assertExists(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
-   });
+
+*/
+//   casper.waitForSelector(x("//*[@id='rattsfall']/*/a[normalize-space(text())='NJA 2010 s. 648']"),
+//       function success() {
+//           test.assertExists(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
+//           this.click(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
+//       },
+//       function fail() {
+//           test.assertExists(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
+//   });
+
 
    casper.run(function() {test.done();});
 });
+
