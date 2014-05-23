@@ -83,7 +83,6 @@ def install_mysql_backup():
     with lcd(env.projectroot):
         sudo("mkdir -p /root/mysql_backup")
         put("manage/cron/backup_mysql_lagrummet.sh", "/root/mysql_backup/",use_sudo=True)
-        sudo('chmod +x /root/mysql_backup/backup_mysql_lagrummet.sh')
         put("manage/cron/crontab", "/root/mysql_backup/",use_sudo=True)
         install_crontab()
         create_public_key()
