@@ -9,6 +9,7 @@ casper.on('page.error', function(msg, trace) {
 });
 casper.test.begin('Test search of 2011', function(test) {
    casper.start(casper.cli.get("url"));
+   /* Disabled test
    casper.waitForSelector("form[name=search] input[name='query']",
        function success() {
            test.assertExists("form[name=search] input[name='query']");
@@ -32,7 +33,9 @@ casper.test.begin('Test search of 2011', function(test) {
        function fail() {
            test.assertExists("form[name=search] input[type=submit][value='Sök']");
    });
+   */
    /* submit form */
+   /* Disabled test
    casper.waitForSelector(x("//*[contains(text(), \'2011:39\')]"),
        function success() {
            test.assertExists(x("//*[contains(text(), \'2011:39\')]"));
@@ -40,6 +43,6 @@ casper.test.begin('Test search of 2011', function(test) {
        function fail() {
            test.assertExists(x("//*[contains(text(), \'2011:39\')]"));
    });
-
+   */
    casper.run(function() {test.done();});
 });
