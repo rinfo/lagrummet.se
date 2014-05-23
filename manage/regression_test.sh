@@ -1,3 +1,4 @@
+#!/bin/bash
 # Prepare local install machine for running Fabric scripts
 # Will create subdirectory rinfo and checkout develop branch or selected version/feature
 
@@ -32,12 +33,12 @@ fab -p $PW_RINFO target.regression -R service app.service.all:test="0"
 fab -p $PW_RINFO target.regression -R main app.main.all:test="0"
 fab -p $PW_RINFO target.regression -R service server.restart_apache
 fab -p $PW_RINFO target.regression -R service server.restart_tomcat
-sleep 20
-fab -p $PW_RINFO target.regression -R service app.service.ping_start_collect
-fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_admin
-sleep 20
-fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_feed
-sleep 60
+#sleep 20
+#fab -p $PW_RINFO target.regression -R service app.service.ping_start_collect
+#fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_admin
+#sleep 20
+#fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_feed
+#sleep 60
 
 # lagrummet (setup and test)
 cd $WORK_DIR

@@ -1,3 +1,4 @@
+#!/bin/sh
 # Prepare local install machine for running Fabric scripts
 # Will create subdirectory rinfo and checkout develop branch or selected version/feature
 # This script is dependent of running rinfo/rdl "fab target.$2 sysconf.install_server sysconf.config_server" first

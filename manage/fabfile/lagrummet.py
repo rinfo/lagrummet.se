@@ -61,29 +61,19 @@ def clean():
 @roles('rinfo')
 def test_all():
     try:
-        print "****************************** all() *********************************"
         all()
-        print "****************************** setup_mysql() *********************************"
         setup_mysql()
-        print "****************************** setup_demodata() *********************************"
         setup_demodata()
-        print "****************************** restart_apache() *********************************"
         restart_apache()
-        print "****************************** restart_tomcat() *********************************"
         restart_tomcat()
-        print "****************************** sleep() *********************************"
         msg_sleep(10, "Wait for install to settle")
-        print "****************************** test() *********************************"
         test()
     except:
-        print "****************************** except: *********************************"
         e = sys.exc_info()[0]
         print e
         sys.exit(1)
     finally:
-        print "****************************** finally: *********************************"
         clean()
-    print "****************************** end! *********************************"
 
 def msg_sleep(sleep_time, msg=""):
     print "Pause in {0} second(s) for {1}!".format(sleep_time,msg)
@@ -91,6 +81,7 @@ def msg_sleep(sleep_time, msg=""):
 
 def verify_url_content(url, string_exists_in_content, sleep_time=15, max_retry=3):
     retry_count = 1
+    respHttp = ""
     while retry_count < max_retry:
         respHttp = local("curl %(url)s"%vars(), capture=True)
         if not string_exists_in_content in respHttp:
