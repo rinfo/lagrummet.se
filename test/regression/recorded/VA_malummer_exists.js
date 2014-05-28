@@ -1,5 +1,5 @@
 var x = require('casper').selectXPath;
-casper.options.viewportSize = {width: 1855, height: 968};
+casper.options.viewportSize = {width: 1920, height: 1128};
 casper.on('page.error', function(msg, trace) {
    this.echo('Error: ' + msg, 'ERROR');
    for(var i=0; i<trace.length; i++) {
@@ -7,9 +7,9 @@ casper.on('page.error', function(msg, trace) {
        this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
    }
 });
-casper.test.begin('Test search of 2011', function(test) {
+casper.test.begin('Fritext sök VA, verifiera att målnummer existerar', function(test) {
    casper.start(casper.cli.get("url"));
-   /* Disabled test
+   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.waitForSelector("form[name=search] input[name='query']",
        function success() {
            test.assertExists("form[name=search] input[name='query']");
@@ -20,29 +20,19 @@ casper.test.begin('Test search of 2011', function(test) {
    });
    casper.waitForSelector("input[name='query']",
        function success() {
-           this.sendKeys("input[name='query']", "2011\r");
+           this.sendKeys("input[name='query']", "brott mot tjänsteman");
        },
        function fail() {
            test.assertExists("input[name='query']");
    });
-   casper.waitForSelector("form[name=search] input[type=submit][value='Sök']",
+   casper.waitForSelector(x("//a[normalize-space(text())='B2788-02']"),
        function success() {
-           test.assertExists("form[name=search] input[type=submit][value='Sök']");
-           this.click("form[name=search] input[type=submit][value='Sök']");
+           test.assertExists(x("//a[normalize-space(text())='B2788-02']"));
+           this.click(x("//a[normalize-space(text())='B2788-02']"));
        },
        function fail() {
-           test.assertExists("form[name=search] input[type=submit][value='Sök']");
+           test.assertExists(x("//a[normalize-space(text())='B2788-02']"));
    });
-   */
-   /* submit form */
-   /* Disabled test
-   casper.waitForSelector(x("//*[contains(text(), \'2011:39\')]"),
-       function success() {
-           test.assertExists(x("//*[contains(text(), \'2011:39\')]"));
-         },
-       function fail() {
-           test.assertExists(x("//*[contains(text(), \'2011:39\')]"));
-   });
-   */
+*/
    casper.run(function() {test.done();});
 });

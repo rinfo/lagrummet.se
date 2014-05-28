@@ -5,6 +5,7 @@ def prod():
     """set environment: prod (beta)"""
     env.target='prod'
     env.demodata=False
+    env.mysql_backup=False #should be fixed
     env.tomcat_stop = '/etc/init.d/tomcat stop'
     env.tomcat_start = '/etc/init.d/tomcat start'
     env.user = 'rinfo'
@@ -23,6 +24,7 @@ def demo():
     """set environment: demo"""
     env.target='demo'
     env.demodata=True
+    env.mysql_backup=False
     env.tomcat_stop = '/etc/init.d/tomcat stop'
     env.tomcat_start = '/etc/init.d/tomcat start'
     env.user = 'rinfo'
@@ -41,6 +43,7 @@ def beta():
     """set environment: beta"""
     env.target='beta'
     env.demodata=False
+    env.mysql_backup=True
     env.tomcat_stop = '/etc/init.d/tomcat stop'
     env.tomcat_start = '/etc/init.d/tomcat start'
     env.user = 'rinfo'
@@ -59,6 +62,7 @@ def test():
     """set environment: demo"""
     env.target='test'
     env.demodata=True
+    env.mysql_backup=False
     env.tomcat_stop = '/etc/init.d/tomcat stop'
     env.tomcat_start = '/etc/init.d/tomcat start'
     env.user = 'rinfo'
@@ -77,6 +81,7 @@ def regression():
     """set environment: regression"""
     env.target='regression'
     env.demodata=True
+    env.mysql_backup=False
     env.tomcat_stop = '/etc/init.d/tomcat stop'
     env.tomcat_start = '/etc/init.d/tomcat start'
     env.user = 'rinfo'
@@ -94,6 +99,7 @@ def skrapat():
     """set environment: demo"""
     env.target='skrapat'
     env.demodata=True
+    env.mysql_backup=False
     env.tomcat_stop = '/etc/init.d/tomcat stop'
     env.tomcat_start = '/etc/init.d/tomcat start'
     env.user = 'rinfo'
