@@ -77,13 +77,14 @@ def setup_demodata():
 @task
 @roles('rinfo')
 def install_mysql_backup():
+    require('target', 'roledefs', 'user', provided_by=env)
     if env.target is not 'beta':
         print('Right now, we only backup beta-mysql')
         return
     with lcd(env.projectroot):
         sudo("mkdir -p /root/mysql_backup")
-        put("manage/cron/backup_mysql_lagrummet.sh", "/root/mysql_backup/",use_sudo=True)
-        put("manage/cron/crontab", "/root/mysql_backup/",use_sudo=True)
+        put("manage/cron/backup_mysql_lagrummet.sh", "/root/mysql_backup/backup_mysql_lagrummet.sh",use_sudo=True)
+        put("manage/cron/crontab", "/root/mysql_backup/crontab",use_sudo=True)
         install_crontab()
         create_public_key()
         install_public_key()
@@ -93,10 +94,10 @@ def create_public_key():
     sudo('ssh-keygen -t rsa -N "" -f /root/.ssh/id_rsa')
 
 def install_crontab():
-    sudo('crontab -l > /root/mysql_backup/crontab_backup')
     sudo('crontab /root/mysql_backup/crontab')
 
 def install_public_key():
-    get('/root/.ssh/id_rsa.pub', '~/id_rsa_tmp.pub', use_sudo=True)
-    local('cat id_rsa_tmp.pub >> .ssh/authorized_keys')
-    local('rm ~/id_rsa_tmp.pub')
+    sudo('cp /root/.ssh/id_rsa.pub /home/%(user)s/id_rsa_tmp.pub' % env)
+    get('~/id_rsa_tmp.pub', '/home/%(user)s/id_rsa_tmp.pub' % env)
+    local('cat /home/%(user)s/id_rsa_tmp.pub >> /home/%(user)s/.ssh/authorized_keys' % env)
+    local('rm /home/%(user)s/id_rsa_tmp.pub' % env)
