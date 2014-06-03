@@ -16,3 +16,4 @@ target-eclipse/classes/
 logs/
 out/
 test/regression/casperjs.log
+test/ui/casperjs.log
