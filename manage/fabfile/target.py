@@ -113,3 +113,20 @@ def skrapat():
         'apache': ['test.lagrummet.se'],
     }
 
+@task
+def local():
+    """set environment: local"""
+    env.target='local'
+    env.demodata=False
+    env.mysql_backup=False
+    env.tomcat_stop = '/etc/init.d/tomcat stop'
+    env.tomcat_start = '/etc/init.d/tomcat start'
+    env.user = 'rinfo'
+    env.deploydir='/opt/tomcat/webapps/'
+    env.warname='lagrummet.war'
+    env.localwar=env.projectroot+"/target/lagrummet.se-0.8.7.war"
+    env.hosts = ['localhost:8080/lagrummet.se']
+    env.grails_build_env="test"
+    env.roledefs = {
+        'rinfo': ['localhost:8080/lagrummet.se'],
+    }
