@@ -73,21 +73,13 @@ class RinfoService {
 
     // se above. Examines XMLs encoding to properly create string
     public String getXHtmlContentJavaVersion(InputStream inputStream) {
-        byte[] data = readStreamToBuffer(inputStream)
+        byte[] data = inputStream.getBytes()
         String header = readHeader(data.length, 150, data)
         String encoding = extractEncodingFromXmlHeader(header)
         String xhtml = new String(data, 0, data.length, encoding)
         if (xhtml.indexOf("html") == -1)
             return "";
         return xhtml
-    }
-
-    private byte[] readStreamToBuffer(InputStream stream) {
-        byte[] data = new byte[100000]
-        int read = stream.read(data)
-        byte[] buffer = new byte[read]
-        System.arraycopy(data, 0, buffer, 0, read)
-        return buffer
     }
 
     private String extractEncodingFromXmlHeader(String header) {
