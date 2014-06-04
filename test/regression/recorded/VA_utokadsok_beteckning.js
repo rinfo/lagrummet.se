@@ -9,7 +9,6 @@ casper.on('page.error', function(msg, trace) {
 });
 casper.test.begin('Utökad VA-sök på beteckning', function(test) {
    casper.start(casper.cli.get("url"));
-   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.waitForSelector(x("//a[normalize-space(text())='Utökad sökning']"),
        function success() {
            test.assertExists(x("//a[normalize-space(text())='Utökad sökning']"));
@@ -65,9 +64,8 @@ casper.test.begin('Utökad VA-sök på beteckning', function(test) {
        function fail() {
            test.assertExists("form[name=Rattsfall] input[type=submit][value='Sök']");
    });
-   */
+
    /* submit form */
-   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.waitForSelector(x("//a[normalize-space(text())='RÅ 2010 ref. 107']"),
        function success() {
            test.assertExists(x("//a[normalize-space(text())='RÅ 2010 ref. 107']"));
@@ -76,6 +74,6 @@ casper.test.begin('Utökad VA-sök på beteckning', function(test) {
        function fail() {
            test.assertExists(x("//a[normalize-space(text())='RÅ 2010 ref. 107']"));
    });
-*/
+
    casper.run(function() {test.done();});
 });

@@ -9,7 +9,6 @@ casper.on('page.error', function(msg, trace) {
 });
 casper.test.begin('Fritext sök VA, verifiera att målnummer existerar', function(test) {
    casper.start(casper.cli.get("url"));
-   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.waitForSelector("form[name=search] input[name='query']",
        function success() {
            test.assertExists("form[name=search] input[name='query']");
@@ -33,6 +32,6 @@ casper.test.begin('Fritext sök VA, verifiera att målnummer existerar', functio
        function fail() {
            test.assertExists(x("//a[normalize-space(text())='B2788-02']"));
    });
-*/
+
    casper.run(function() {test.done();});
 });

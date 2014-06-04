@@ -39,8 +39,11 @@ def config_war():
 @task
 @roles('rinfo')
 def install_mysql():
+    require('password', provided_by=env)
     """Install mysql"""
     sudo("apt-get update")
+    sudo('debconf-set-selections <<< \'mysql-server mysql-server/root_password password %(password)s\'', env)
+    sudo('debconf-set-selections <<< \'mysql-server mysql-server/root_password_again password %(password)s\'', env)
     sudo("apt-get install mysql-server -y")
     create_mysql_config_file()
 

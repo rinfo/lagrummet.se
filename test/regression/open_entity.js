@@ -7,22 +7,26 @@ casper.on('page.error', function(msg, trace) {
    }
 });
 casper.test.begin('Test fetching content from direct url', function(test) {
-   casper.start(casper.cli.get("url")+'/rinfo/publ/emfs/2011:39');
-   casper.waitForSelector("body",
-       function success() {
-           test.assertExists("body");
-           this.click("body");
-       },
-       function fail() {
-           test.assertExists("body");
-   });
-   casper.waitForSelector(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"),
-       function success() {
-           test.assertExists(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"));
-         },
-       function fail() {
-           test.assertExists(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"));
-   });
+
+   if (casper.cli.get("target")=='regression') {
+       casper.start(casper.cli.get("url")+'/rinfo/publ/emfs/2011:39');
+       casper.waitForSelector("body",
+           function success() {
+               test.assertExists("body");
+               this.click("body");
+           },
+           function fail() {
+               test.assertExists("body");
+       });
+       casper.waitForSelector(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"),
+           function success() {
+               test.assertExists(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"));
+             },
+           function fail() {
+               test.assertExists(x("//*[contains(text(), \'Exempelmyndighetens föreskrifter\')]"));
+       });
+   } else
+    casper.start(casper.cli.get("url"));
 
    casper.run(function() {test.done();});
 });
