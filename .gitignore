@@ -17,3 +17,4 @@ logs/
 out/
 test/regression/casperjs.log
 test/ui/casperjs.log
+test/casperjs.log

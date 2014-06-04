@@ -9,7 +9,6 @@ casper.on('page.error', function(msg, trace) {
 });
 casper.test.begin('Utökad VA-sök på målnummer', function(test) {
    casper.start(casper.cli.get("url")+'/search/ext');
-   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.waitForSelector("input[value='Rattsfall']",
        function success() {
            test.assertExists("input[value='Rattsfall']");
@@ -57,9 +56,8 @@ casper.test.begin('Utökad VA-sök på målnummer', function(test) {
        function fail() {
            test.assertExists("form[name=Rattsfall] input[type=submit][value='Sök']");
    });
-   */
+
    /* submit form */
-   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.waitForSelector(x("//a[normalize-space(text())='1088-08']"),
        function success() {
            test.assertExists(x("//a[normalize-space(text())='1088-08']"));
@@ -76,6 +74,6 @@ casper.test.begin('Utökad VA-sök på målnummer', function(test) {
        function fail() {
            test.assertExists(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"));
    });
-  */
+
    casper.run(function() {test.done();});
 });

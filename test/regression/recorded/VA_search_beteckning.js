@@ -9,7 +9,6 @@ casper.on('page.error', function(msg, trace) {
 });
 casper.test.begin('Sök på VA-beteckning', function(test) {
    casper.start(casper.cli.get("url"));
-   /*  Comment out VA test until valid test data present in regression.lagrummet.se
    casper.waitForSelector("form[name=search] input[name='query']",
        function success() {
            test.assertExists("form[name=search] input[name='query']");
@@ -33,6 +32,6 @@ casper.test.begin('Sök på VA-beteckning', function(test) {
        function fail() {
            test.assertExists(x("//a[normalize-space(text())='RÅ 2010 ref. 107']"));
    });
-*/
+
    casper.run(function() {test.done();});
 });
