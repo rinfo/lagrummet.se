@@ -37,8 +37,8 @@ def test():
     """Test functions of lagrummet.se regressionstyle"""
     url="http:\\"+env.roledefs['rinfo'][0]
     with lcd(env.projectroot+"/test/regression"):
-        #testpath="*.js recorded/*.js recorded/admin/*.js"
-        testpath="*.js recorded/*.js"
+        testpath="*.js recorded/*.js recorded/admin/*.js"
+        #testpath="*.js recorded/*.js"
         local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s" % (testpath,url,env.target))
     with lcd(env.projectroot+"/test/ui"):
         local("casperjs test *.js --xunit=../casperjs.log --url="+url+" --target=%(target)s" % env)
