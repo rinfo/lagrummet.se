@@ -9,14 +9,20 @@ casper.on('page.error', function(msg, trace) {
 });
 casper.test.begin('Verifiera att VA-hänvisande existerar', function(test) {
    casper.start(casper.cli.get("url")+'/rinfo/publ/rf/ra/2010:107');
-   casper.waitForSelector(x("//a[normalize-space(text())='HFD 2012 ref. 3']"),
+   casper.waitForSelector("#leftCol > table tr:nth-child(1) td:nth-child(2)",
        function success() {
-           test.assertExists(x("//a[normalize-space(text())='HFD 2012 ref. 3']"));
-           this.click(x("//a[normalize-space(text())='HFD 2012 ref. 3']"));
+           test.assertExists("#leftCol > table tr:nth-child(1) td:nth-child(2)");
+           this.click("#leftCol > table tr:nth-child(1) td:nth-child(2)");
        },
        function fail() {
-           test.assertExists(x("//a[normalize-space(text())='HFD 2012 ref. 3']"));
+           test.assertExists("#leftCol > table tr:nth-child(1) td:nth-child(2)");
    });
-
+   casper.waitForSelector(x("//*[contains(text(), \'RÅ 2010 ref. 107\')]"),
+       function success() {
+           test.assertExists(x("//*[contains(text(), \'RÅ 2010 ref. 107\')]"));
+         },
+       function fail() {
+           test.assertExists(x("//*[contains(text(), \'RÅ 2010 ref. 107\')]"));
+   });
    casper.run(function() {test.done();});
 });

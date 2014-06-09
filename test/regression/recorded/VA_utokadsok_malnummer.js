@@ -66,14 +66,14 @@ casper.test.begin('Utökad VA-sök på målnummer', function(test) {
        function fail() {
            test.assertExists(x("//a[normalize-space(text())='1088-08']"));
    });
-   casper.waitForSelector(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"),
+   /*casper.waitForSelector(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"),
        function success() {
            test.assertExists(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"));
            this.click(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"));
        },
        function fail() {
            test.assertExists(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"));
-   });
+   });*/
 
    casper.run(function() {test.done();});
 });
