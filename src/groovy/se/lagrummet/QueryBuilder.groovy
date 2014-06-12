@@ -77,12 +77,12 @@ class QueryBuilder {
 		put(key, value, operators)
 	}
 	
-	private void setParam(String key, Integer value, String... operators) {
+	public void setParam(String key, Integer value, String... operators) {
 		if(value != null) {
 			put(key, value, operators)
 		}
 	}
-	
+
 	public QueryBuilder setQueries(List<String> queries) {
 		setValue('q', queries)
 		return this

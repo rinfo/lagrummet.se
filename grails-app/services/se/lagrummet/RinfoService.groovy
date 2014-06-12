@@ -27,7 +27,7 @@ class RinfoService {
 		return docInfo
 	}
 	
-	private void fixForarbeteList(JSONObject docInfo) {
+	private void fixForarbeteList(docInfo) {
 		if(docInfo.forarbete && !docInfo.forarbete.isArray()) {
 			def arr = new JSONArray()
 			arr.add(docInfo.forarbete)

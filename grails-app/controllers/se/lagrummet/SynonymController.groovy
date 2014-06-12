@@ -49,14 +49,12 @@ class SynonymController {
 			redirect(action: "list")
 		}
 	}
+}
 
-    
-	
-	class UpdateListCommand {
-		List synonyms = new ArrayList()
-		
-		def getExpandableSynonymList() {
-			LazyList.decorate(synonyms, FactoryUtils.instantiateFactory(Synonym.class))
-		}
-	}
+class UpdateListCommand {
+    List synonyms = new ArrayList()
+
+    def getExpandableSynonymList() {
+        LazyList.decorate(synonyms, FactoryUtils.instantiateFactory(Synonym.class))
+    }
 }

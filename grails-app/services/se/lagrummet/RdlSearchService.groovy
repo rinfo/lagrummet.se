@@ -201,7 +201,7 @@ class RdlSearchService {
 		return publishers
 	}
 	
-	public String getBestMatch(JSONObject item) {
+	public String getBestMatch(item) {
 		def bestMatch = ""
 		item.matches?.each{ matchKey, matchesList ->
 				if(!bestMatch) {
