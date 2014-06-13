@@ -20,7 +20,7 @@ class RinfoService {
 		http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
 			uri.path = docPath + "/data"
 			response.success = {resp, json ->
-				docInfo = json
+				docInfo = JSONObject.fromObject(json)
 				fixForarbeteList(docInfo)
 			}
 		}
