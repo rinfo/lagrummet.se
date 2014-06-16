@@ -687,8 +687,14 @@ article.legalSources section.Foreskrifter h2 {
 	float: left;
 }
 
+/*
 #siteFooter ul.contact {
 	float: right;
+}
+*/
+
+#siteFooter ul.contact {
+    display: none;
 }
 
 #siteFooter ul li {
@@ -722,10 +728,6 @@ article.legalSources section.Foreskrifter h2 {
     display: block;
     float: left;
     height: 100%;
-}
-
-#siteFooter ul.contact {
-    display: none;
 }
 
 */
