@@ -156,7 +156,7 @@ grails.plugins.springsecurity.ipRestrictions = [
 
 lagrummet {
 	googleAnalytics.webPropertyId = ""
-	contact.email = "redaktionen@lagrummet.se"
+	contact.email = "betafeedback@lagrummet.se"
 	upload.dir = "files/"
 	rdl.service.baseurl="http://service.demo.lagrummet.se"
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
@@ -198,7 +198,7 @@ lagrummet {
 // Mail settings for contact form (and other Grails Mail)
 grails.mail.host = 'mailgw1.dom.se'
 grails.mail.port = 25
-grails.mail.default.from="redaktionen@lagrummet.se"
+grails.mail.default.from="betafeedback@lagrummet.se"
 
 
 environments {
