@@ -1,8 +1,8 @@
-package lagrummet.se
+package se.lagrummet
 
 import grails.test.*
 
-class PuffTests extends GrailsUnitTestCase {
+class SearchTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

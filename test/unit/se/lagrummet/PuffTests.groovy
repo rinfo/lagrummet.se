@@ -2,7 +2,7 @@ package se.lagrummet
 
 import grails.test.*
 
-class RinfoDocumentControllerTests extends ControllerUnitTestCase {
+class PuffTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

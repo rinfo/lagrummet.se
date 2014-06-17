@@ -37,7 +37,7 @@
 			</g:if>
 			<table>
 				<tr>
-					<th>Tite</th>
+					<th>Titel</th>
 					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
 					<g:elseif test="${cat != 'Ovrigt' }"><th>Beteckning</th></g:elseif>
 				</tr>

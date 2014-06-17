@@ -1,8 +1,8 @@
-package lagrummet.se
+package se.lagrummet
 
 import grails.test.*
 
-class SearchTests extends GrailsUnitTestCase {
+class SitePropsFitersFiltersTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

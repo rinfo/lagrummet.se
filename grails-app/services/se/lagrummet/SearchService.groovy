@@ -5,8 +5,6 @@ import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
 import net.sf.json.JSONObject
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
-
 class SearchService {
 
 	static transactional = true
@@ -19,31 +17,33 @@ class SearchService {
 		def remoteResult = rdlSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
 		def remoteLatestConsolidatedResult = rdlSearchService.plainTextLatestConsolidated(query, cat, offset, itemsPerPage)
 		def localResult = localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
-		
-		def topHits = []
-		def consolidatedTophits = remoteLatestConsolidatedResult.topHits
-		def rdlTophits = remoteResult.topHits
-		def localTopHits = localResult.topHits
-		
-		if('Lagar'.equals(cat?.toString())) {
-			topHits = remoteLatestConsolidatedResult.topHits
-			
-		} else if ('Ovrigt'.equals(cat?.toString())) {
-			topHits = localResult.topHits
-		} else if (cat != null) {
-			topHits = remoteResult.topHits
-		} else {
-			topHits.addAll(getTopHits(remoteLatestConsolidatedResult.topHits))
-			topHits.addAll(getTopHits(remoteResult.topHits))
-			topHits.addAll(getTopHits(localResult.topHits, 1))
-		}
-		
+
+        def topHits = selectTopHitsDependingOnCategory(cat, remoteLatestConsolidatedResult, localResult, remoteResult)
+
 		def result = remoteLatestConsolidatedResult.mergeWith(remoteResult).mergeWith(localResult)
-		result.topHits = topHits
+
+		result.topHits = topHits;
+
 		return result
 	}
-	
-	private getTopHits(topHits, nbOfHits = 2) {
+
+    private ArrayList selectTopHitsDependingOnCategory(Category cat, remoteLatestConsolidatedResult, localResult, remoteResult) {
+        if (cat==null) {
+            def topHits = []
+            topHits.addAll(reduceHits(remoteLatestConsolidatedResult.topHits))
+            topHits.addAll(reduceHits(remoteResult.topHits))
+            topHits.addAll(reduceHits(localResult.topHits, 1))
+            return topHits
+        }
+
+        switch (cat) {
+            case Category.LAGAR: return new ArrayList(remoteLatestConsolidatedResult.topHits)
+            case Category.OVRIGT: return new ArrayList(localResult.topHits)
+            default: return new ArrayList(remoteResult.topHits)
+        }
+    }
+
+    private reduceHits(topHits, nbOfHits = 2) {
 		if(topHits.size() == 0) {
 			return []
 		}

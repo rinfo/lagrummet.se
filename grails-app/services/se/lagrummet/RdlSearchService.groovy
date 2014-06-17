@@ -80,16 +80,17 @@ class RdlSearchService {
 	
 	
 	public SearchResult searchWithQuery(Map queryParams, String resultListType = 'category') {
-
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
 		def http = new HTTPBuilder()
+        http.getClient().getParams().setParameter("http.connection.timeout", new Integer(100000))
+        http.getClient().getParams().setParameter("http.socket.timeout", new Integer(100000))
 		try {
 			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
 				uri.path = "/-/publ"
 				uri.query = queryParams
-				req.getParams().setParameter("http.connection.timeout", new Integer(10000));
-				req.getParams().setParameter("http.socket.timeout", new Integer(10000));
+				req.getParams().setParameter("http.connection.timeout", new Integer(100000));
+				req.getParams().setParameter("http.socket.timeout", new Integer(100000));
 				
 				response.success = {resp, json ->
 					searchResult.totalResults = json.totalResults
@@ -130,6 +131,7 @@ class RdlSearchService {
 			}
 		} catch (SocketTimeoutException ex) {
 			log.error(ex)
+            log.error("Failed to communicate with *"+ConfigurationHolder.config.lagrummet.rdl.service.baseurl+"'");
 			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
 		} catch (UnknownHostException ex) {
 			log.error(ex)

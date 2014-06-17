@@ -64,7 +64,7 @@ Extern konfiguration
 		2. Miljövariabel
 			* Sätt en miljövariabel med namnet LAGRUMMET_SE_CONFIG som innehåller sökvägen till config-filen
 		3. Default-sökväg
-			* Om det finns en fil med namn "C:\lagrummet.se\config\lagrummet.se-config.groovy" kommer den automatisk att plockas upp av applikationen
+			* Om det finns en fil med namn "/etc/lagrummet.se/lagrummet.se-config.groovy" kommer den automatisk att plockas upp av applikationen
 
 	Endast en av ovanstående externa konfigurationer kan användas åt gången, där System property har högst prioritet följt av miljövariabel, och default-sökvägen bara kommer att användas ifall ingen av de föregående existerar.
 

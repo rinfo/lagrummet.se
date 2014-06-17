@@ -64,7 +64,7 @@ class UrlMappings {
 		
 		"/admin/"(controller: 'admin')
 		
-		"500"(view:'/error')
+		"500"(view:'/page/error500')
 		"404"{
 			controller = "page"
 			action = "error"

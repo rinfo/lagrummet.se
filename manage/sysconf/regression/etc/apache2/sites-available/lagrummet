@@ -1,0 +1,14 @@
+<VirtualHost *:80>
+    ServerName regression.lagrummet.se
+    ServerSignature On
+
+    ProxyPassMatch ^/robots\.txt$ !
+    ProxyPass / ajp://localhost:8009/
+
+    ServerAdmin rinfo@lagrummet.se
+
+    ErrorLog /var/log/apache2/error.log
+    LogLevel warn
+    CustomLog /var/log/apache2/access.log combined
+
+</VirtualHost>

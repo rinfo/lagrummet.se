@@ -1,5 +1,6 @@
 #Ignore .class files
 target/classes/
+classes/
 *.class
 target/stacktrace.log
 target/
@@ -15,3 +16,6 @@ target-eclipse/classes/
 *.iws
 logs/
 out/
+test/regression/casperjs.log
+test/ui/casperjs.log
+test/casperjs.log
