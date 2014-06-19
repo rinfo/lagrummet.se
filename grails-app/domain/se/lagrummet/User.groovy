@@ -10,6 +10,7 @@ class User extends SecUser {
 	
 	static mapping = {
 		table "users"
+        autoTimestamp: true
 	}
 	
     static constraints = {

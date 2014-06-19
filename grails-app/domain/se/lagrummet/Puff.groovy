@@ -29,4 +29,8 @@ class Puff {
 	def isEmpty() {
 		return !image && !title && !description && !link
 	}
+
+    static mapping = {
+        autoTimestamp: true
+    }
 }

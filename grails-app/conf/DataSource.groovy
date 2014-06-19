@@ -19,7 +19,7 @@ environments {
     }
     test {
         dataSource {
-            dbCreate = "create-drop"
+            dbCreate = "update"
             url = "jdbc:hsqldb:mem:testDb"
         }
     }
@@ -29,8 +29,8 @@ environments {
 			dbCreate = "update"
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://localhost:3306/lagrummet"
-			username = ""	//override in external config file
-			password = ""	//override in external config file
+			username = "root"	//override in external config file
+			password = "zse4xDr5"	//override in external config file
 			
         }
     }

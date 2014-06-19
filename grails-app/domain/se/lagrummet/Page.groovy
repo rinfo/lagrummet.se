@@ -99,7 +99,7 @@ class Page implements Comparable<Page>{
 		sort pageOrder:"asc", dateCreated: "desc"
 		children sort: "pageOrder"
 		puffs sort: "dateCreated", order: "asc", cascade: "all-delete-orphan"
-		autoTimestamp false
+		autoTimestamp: true
 	}
 	
 	def url = {

@@ -19,6 +19,7 @@ class Media {
 	
 	static mapping = {
 		sort "title"
+        autoTimestamp: true
 	}
 	
 	Date dateCreated

@@ -1,19 +1,16 @@
 package se.lagrummet
 
-import grails.test.GrailsUnitTestCase
+import grails.test.mixin.TestFor
+import spock.lang.Specification
 
-/**
- * Created with IntelliJ IDEA.
- * User: christian
- * Date: 6/2/14
- * Time: 8:56 AM
- * To change this template use File | Settings | File Templates.
- */
-class PingDBServiceTests extends GrailsUnitTestCase {
+@TestFor(PingDBService)
+class PingDBServiceTests extends Specification {
 
     def pingDBService
 
-    void testPing() {
+    void "Test DB Ping"() {
+        when: "Calling PingDBService"
+        then: "Should not throw an exception"
         pingDBService.pingDB()
     }
 }

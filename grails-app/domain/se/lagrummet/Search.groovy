@@ -13,4 +13,8 @@ class Search {
 	
 	Date dateCreated
 	Date lastUpdated
+
+    static mapping = {
+        autoTimestamp: true
+    }
 }
