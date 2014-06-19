@@ -11,16 +11,17 @@ from sysconf import setup_demodata
 
 
 @task()
-def all():
-    build_war()
+def all(test=1):
+    build_war(test)
     deploy_war()
 
 @task
-def build_war():
+def build_war(test=1):
     """Build lagrummet grails-war locally"""
     with lcd(env.projectroot):
         local("grails clean")
-        local("grails test-app")
+        if test==1:
+            local("grails test-app")
         local("grails -Dgrails.env=%(grails_build_env)s war --non-interactive" % env)
         local("ls -l target")
 
