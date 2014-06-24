@@ -1,7 +1,7 @@
 package se.lagrummet
 
 import grails.plugins.springsecurity.Secured
-import grails.converters.*
+import grails.plugin.gson.converters.GSON
 
 import org.apache.commons.collections.FactoryUtils
 import org.apache.commons.collections.list.LazyList
@@ -72,7 +72,7 @@ class PageController {
         if (instanceToSave.save(flush: true)) {
 			if (params.ajax) {
 				def response = [success: "true", pageInstance: pageInstance]
-				render response as JSON
+				render response as GSON
 			} else {
 				flash.message = "${message(code: 'page.created.message', args: [pageInstance.title])}"
 				redirect(action: "edit", id: pageInstance.id)
@@ -81,7 +81,7 @@ class PageController {
         else {
 			if (params.ajax) {
 				def response = [error: pageInstance.errors]
-				render response as JSON
+				render response as GSON
 			} else {
             	render(view: "create", model: [pageInstance: pageInstance])
 			}
@@ -131,11 +131,11 @@ class PageController {
 		// Only Ajax response
 		if (instanceToSave.save(flush: true)) {
 			def response = [success: "true", pageInstance: pageInstance]
-			render response as JSON
+			render response as GSON
 		}
 		else {
 			def response = [error: pageInstance.errors]
-			render response as JSON
+			render response as GSON
 		}
 	}
 
@@ -250,7 +250,7 @@ class PageController {
 			}.toString()
 		} else if (request.format == "json") {
 			def response = [pages: pages]
-			render response as JSON
+			render response as GSON
 		} else {
 			forward(action: "show", params: [permalink: "webbkarta"])
 		}
@@ -425,7 +425,7 @@ class PageController {
                 pageInstance.delete(flush: true)
 				if (params.ajax) {
 					def response = [success: "${message(code: 'default.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"]
-					render response as JSON
+					render response as GSON
 				} else {
 	                flash.message = "${message(code: 'page.deleted.message', args: [params.title])}"
 	                redirect(action: "list")
@@ -434,7 +434,7 @@ class PageController {
             catch (org.springframework.dao.DataIntegrityViolationException e) {
 				if (params.ajax) {
 					def response = [error: "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}", pageInstance: pageInstance]
-					render response as JSON
+					render response as GSON
 				} else {
 	                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
 					redirect(action: "edit", id: pageInstance.id)

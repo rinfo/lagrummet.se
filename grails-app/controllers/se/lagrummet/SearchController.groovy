@@ -1,6 +1,6 @@
 package se.lagrummet
 
-import grails.converters.*
+import grails.plugin.gson.converters.GSON
 import java.text.SimpleDateFormat
 import static se.lagrummet.QueryBuilder.Operators.*
 import se.lagrummet.Search
@@ -83,7 +83,7 @@ class SearchController {
 		
 		if (params.ajax) {
 			def response = [query: params.query, searchResult: searchResult, synonyms: synonyms]
-			render response as JSON
+			render response as GSON
 		} else if(params.cat && params.cat != "Alla") {
 			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias])
 		} else {
@@ -177,16 +177,16 @@ class SearchController {
 		if (params.type) {
 			if (params.type == "departement") {
 				def response = ['publishers' : grailsApplication.config.lagrummet.search.availableDepartement]
-				render response as JSON
+				render response as GSON
 			} else if (params.type == "beslutandeMyndighet") {
 				def response = ['publishers' : rdlSearchService.getAvailablePublishers()]
-				render response as JSON
+				render response as GSON
 			}
 		} else {
 			def publishers = rdlSearchService.getExistingPublishers(params.q)
 			
 			def response = ['publishers' : publishers]
-			render response as JSON
+			render response as GSON
 		}
 	}
 	

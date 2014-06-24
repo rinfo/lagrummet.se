@@ -43,6 +43,7 @@ grails.project.dependency.resolution = {
         compile ":mail:1.0.6"
         compile ":spring-security-core:1.2.7.4"
         compile ":webxml:1.4.1"
+        compile 'org.grails.plugins:gson:1.1.4'
 
         build ":tomcat:7.0.54"
 
