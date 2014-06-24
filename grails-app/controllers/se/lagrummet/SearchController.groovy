@@ -204,12 +204,12 @@ class ExtendedSearchCommand {
 	String fromDate
 	
 	static constraints = {
-		fromDate(
+		fromDate (nullable: true,
 			validator : { date ->
 				return validDate(date)	
 			})
 		
-		toDate(
+		toDate(nullable: true,
 			validator : { date ->
 				return validDate(date)
 		})
