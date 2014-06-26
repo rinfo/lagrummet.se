@@ -5,9 +5,9 @@ import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
 import net.sf.json.JSONObject
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
-
 class RdlSearchService {
+
+    def grailsApplication
 
     static transactional = true
 	
@@ -86,7 +86,7 @@ class RdlSearchService {
         http.getClient().getParams().setParameter("http.connection.timeout", new Integer(100000))
         http.getClient().getParams().setParameter("http.socket.timeout", new Integer(100000))
 		try {
-			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
+			http.request(grailsApplication.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
 				uri.path = "/-/publ"
 				uri.query = queryParams
 				req.getParams().setParameter("http.connection.timeout", new Integer(100000));
@@ -131,7 +131,7 @@ class RdlSearchService {
 			}
 		} catch (SocketTimeoutException ex) {
 			log.error(ex)
-            log.error("Failed to communicate with *"+ConfigurationHolder.config.lagrummet.rdl.service.baseurl+"'");
+            log.error("Failed to communicate with *"+grailsApplication.config.lagrummet.rdl.service.baseurl+"'");
 			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
 		} catch (UnknownHostException ex) {
 			log.error(ex)
@@ -145,7 +145,7 @@ class RdlSearchService {
 		def publishers = []
 		def http = new HTTPBuilder()
 		try {
-			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
+			http.request(grailsApplication.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
 				uri.path = "/var/common.json"
 				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
 				req.getParams().setParameter("http.socket.timeout", new Integer(5000));
@@ -173,7 +173,7 @@ class RdlSearchService {
 		def publishers = []
 		def http = new HTTPBuilder()
 		try {
-			http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
+			http.request(grailsApplication.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
 				uri.path = "/-/publ;stats"
 				req.getParams().setParameter("http.connection.timeout", new Integer(5000));
 				req.getParams().setParameter("http.socket.timeout", new Integer(5000));

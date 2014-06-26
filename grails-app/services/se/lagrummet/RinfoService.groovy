@@ -8,16 +8,16 @@ import groovyx.net.http.ParserRegistry
 import net.sf.json.JSONArray
 import net.sf.json.JSONObject
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
-
 class RinfoService {
+
+    def grailsApplication
 
     static transactional = false
 	
     public JSONObject getDocumentMetaData(String docPath) {
 		def docInfo = ""
 		def http = new HTTPBuilder()
-		http.request(ConfigurationHolder.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
+		http.request(grailsApplication.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) {
 			uri.path = docPath + "/data"
 			response.success = {resp, json ->
 				docInfo = JSONObject.fromObject(json)
@@ -41,7 +41,7 @@ class RinfoService {
 		def atomEntry
 		def http = new HTTPBuilder()
 		http.parser.'application/atom+xml' = http.parser.'text/plain'
-		http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "application/atom+xml"  ) {
+		http.request(grailsApplication.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "application/atom+xml"  ) {
 			uri.path = docPath + "/entry"
 			response.success = {resp, reader ->
 				atomEntry = XML.parse(reader.text)
@@ -54,7 +54,7 @@ class RinfoService {
 		def docContent = ""
 		def http = new HTTPBuilder()
 		http.parser.'text/html' = http.parser.'text/plain'
-		http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "text/html") {
+		http.request(grailsApplication.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "text/html") {
 			uri.path = docPath
 			response.success = {resp, reader ->
 				def original = reader.text
@@ -67,7 +67,7 @@ class RinfoService {
 
     // Temporary replace sharp version until RDL returns correct encoding
     public String getXHtmlContentJavaVersion(String docPath) {
-        URL url = new URL(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl+docPath);
+        URL url = new URL(grailsApplication.config.lagrummet.rdl.rinfo.baseurl+docPath);
         return getXHtmlContentJavaVersion(url.openStream())
     }
 
@@ -108,7 +108,7 @@ class RinfoService {
         def docContent = ""
         def http = new HTTPBuilder()
         http.parser.'text/html' = http.parser.'text/plain'
-        http.request(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "application/xhtml+xml") {
+        http.request(grailsApplication.config.lagrummet.rdl.rinfo.baseurl, Method.GET, "application/xhtml+xml") {
             uri.path = docPath
             response.success = {resp, reader ->
                 docContent = reader.text
@@ -120,7 +120,7 @@ class RinfoService {
     // Simplified version, still problems when encoding with header that differs from encoding in XML
     public String getXHtmlContentHttpBuilderVersion2(String docPath) {
         def docContent = ""
-        def http = new HTTPBuilder(ConfigurationHolder.config.lagrummet.rdl.rinfo.baseurl)
+        def http = new HTTPBuilder(grailsApplication.config.lagrummet.rdl.rinfo.baseurl)
         http.get(path: docPath) { resp, xml ->
             xml.each {
                 docContent += "\n" + it.text()
