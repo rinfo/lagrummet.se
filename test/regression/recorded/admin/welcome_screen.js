@@ -7,9 +7,43 @@ casper.on('page.error', function(msg, trace) {
         this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
     }
 });
+
+captureScreen = function() {
+   var file_name = casper.cli.get("output")+'test_correct_va_check_screen_error.png';
+   this.capture(file_name);
+   this.echo('Captured "'+file_name+'"');
+}
+
 casper.test.begin('Välkomstsida', function(test) {
     casper.start(casper.cli.get("url"));
-    casper.waitForSelector(x("//*[contains(text(), \'Välkommen till lagrummet.se\')]"),
+
+   casper.waitForSelector("body");
+
+   casper.then(function() {
+        switch (casper.cli.get("target")) {
+            case 'beta':
+                this.test.assertTitle('Beta lagrummet.se - startsida');
+                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till beta.lagrummet.se!');
+                break;
+            case 'demo':
+                this.test.assertTitle('Beta lagrummet.se - startsida');
+                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till lagrummet.se  BETA!');
+                break;
+            case 'test':
+                this.test.assertTitle('Lagrummet.se - startsida');
+                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till lagrummet.se   TESTVERSION!');
+                break;
+            case 'regression':
+                this.test.assertTitle('Lagrummet.se - startsida');
+                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till lagrummet.se   TESTVERSION!');
+                break;
+            default:
+                this.test.assertTitle('Lagrummet.se - startsida');
+                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till lagrummet.se  BETA!');
+        }
+   });
+
+/*    casper.waitForSelector(x("//*[contains(text(), \'Välkommen till lagrummet.se\')]"),
         function success() {
             test.assertExists(x("//*[contains(text(), \'Välkommen till lagrummet.se\')]"));
         },
@@ -65,5 +99,6 @@ casper.test.begin('Välkomstsida', function(test) {
             test.assertExists(x("//div[@id='logo']/a/span[@class='hlight'][contains(text(), \'.se\')]"));
         });
 
+*/
     casper.run(function() {test.done();});
 });
