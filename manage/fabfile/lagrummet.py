@@ -37,12 +37,13 @@ def deploy_war(headless="0"):
 def test(test_selector='*.js', testpath='%s recorded/%s recorded/admin/%s'):
     """Test functions of lagrummet.se regressionstyle"""
     url="http:\\"+env.roledefs['rinfo'][0]
+    output = "%s/target/test-reports/" % env.projectroot
     with lcd(env.projectroot+"/test/regression"):
         testpath=testpath % (test_selector,test_selector,test_selector)
         #testpath="*.js recorded/*.js"
-        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s" % (testpath,url,env.target))
+        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (testpath,url,env.target,output))
     with lcd(env.projectroot+"/test/ui"):
-        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s" % (test_selector,url,env.target) )
+        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (test_selector,url,env.target,output) )
 
 @task
 @roles('rinfo')
