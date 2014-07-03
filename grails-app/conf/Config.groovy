@@ -140,6 +140,7 @@ grails.plugins.springsecurity.ipRestrictions = [
 		'159.190.240.168', '159.190.240.169', '159.190.240.170', '159.190.240.171',	//DV Göteborg
 		'193.45.43.33',																//Sogeti VPN for development and testing, TODO: remove before going live
         '90.236.61.164',                                                            // DV Sthml 4G Router
+        '109.74.9.93',                                                              // ci.lagrummet.se (jenkins) for automated testing
 		]
  	]
 
