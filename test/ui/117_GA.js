@@ -24,7 +24,7 @@ casper.test.begin('Test that when performing search there should be a request se
    });
    casper.waitForSelector("input[name='query']",
        function success() {
-           this.sendKeys("input[name='query']", "2000:");
+           this.sendKeys("input[name='query']", "2000:6");
        },
        function fail() {
            test.assertExists("input[name='query']");
@@ -38,9 +38,9 @@ casper.test.begin('Test that when performing search there should be a request se
            test.assertExists(x("//a[normalize-space(text())='Tillkännagivande (2000:6) av uppgift om ...']"));
    });
 
-   /*casper.then(function() {
+   casper.then(function() {
         test.assertEquals(hasGaRequestBeenSent, true, 'request has been sent to GA for the performed search');
-   })*/
+   })
 
    casper.run(function() {test.done();});
 });
