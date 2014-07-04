@@ -17,7 +17,7 @@ captureScreen = function() {
 casper.test.begin('Navigera från konsolidering till grund', function(test) {
    casper.start(casper.cli.get("url"));
 
-   casper.waitForSelector("body");
+   casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
    casper.then(function() {
         this.test.assertExists("form[name=search] input[name='query']");

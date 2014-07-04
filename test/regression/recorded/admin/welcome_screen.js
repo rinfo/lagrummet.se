@@ -17,7 +17,7 @@ captureScreen = function() {
 casper.test.begin('Välkomstsida', function(test) {
     casper.start(casper.cli.get("url"));
 
-   casper.waitForSelector("body");
+   casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
    casper.then(function() {
         switch (casper.cli.get("target")) {
