@@ -21,7 +21,7 @@ casper.test.begin('Sök efter OLS', function(test) {
 
    casper.then(function() {
         this.test.assertExists("form[name=search] input[name='query']");
-        this.test.assertTextDoesntExist('Lag (1974:981) om arbetstagares rätt till ledighet för utbildning');
+        this.test.assertTextDoesntExist('Offentlighets- och sekretesslag (2009:400)');
 
         this.sendKeys("input[name='query']", "offentlighets och sekretesslag");
    });
