@@ -58,7 +58,7 @@ function instantSearch() {
                 			var title = (item.title) ? item.title : item.identifier;
                 			var href = serverUrl + item.iri;
                 			
-                			$("#ovrigt").append('<li><p><a href="'+href+'">' + title + "</a></p></li>");
+                			$("#ovrigt").append('<li><p><a href="'+href+'" class="searchLink">' + title + "</a></p></li>");
                 			if (item.matches) {
                 				$("#ovrigt li").filter(":last").append("<p>" + item.matches + " ...</p>");
                 			}            		
@@ -81,7 +81,7 @@ function instantSearch() {
             			var title = (item.title) ? item.title : item.identifier;
             			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
             			
-            			$("#propositioner").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
+            			$("#propositioner").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
             			if (item.matches) {
             				$("#propositioner li").filter(":last").append("<p>" + item.matches + " ...</p>");
             			}
@@ -103,7 +103,7 @@ function instantSearch() {
                 			var title = (item.identifier) ? item.identifier : item.malnummer;
                 			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
                 			
-                			$("#rattsfall").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
+                			$("#rattsfall").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
                 			if (item.matches) {
                 				$("#rattsfall li").filter(":last").append("<p>" + item.matches + " ...</p>");
                 			}
@@ -127,7 +127,7 @@ function instantSearch() {
                 			var title = (item.title) ? item.title : item.identifier;
                 			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
                 			
-                			$("#lagar").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
+                			$("#lagar").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
                 			if (item.matches) {
                 				$("#lagar li").filter(":last").append("<p>" + item.matches + " ...</p>");
                 			}
@@ -153,7 +153,7 @@ function instantSearch() {
                 			var title = (item.title) ? item.title : item.identifier;
                 			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
                 			
-                			$("#foreskrifter").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
+                			$("#foreskrifter").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
                                         
                 			if (item.matches) {
                 				$("#foreskrifter li").filter(":last").append("<p>" + item.matches + " ...</p>");
@@ -181,7 +181,7 @@ function instantSearch() {
                 			var title = (item.title) ? item.title : item.identifier;
                 			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
                 			
-                			$("#utredningar").append('<li><p><a href="'+serverUrl+href+'">' + title + "</a></p></li>");
+                			$("#utredningar").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
                 			if (item.matches) {
                 				$("#utredningar li").filter(":last").append("<p>" + item.matches + " ...</p>");
                 			}
