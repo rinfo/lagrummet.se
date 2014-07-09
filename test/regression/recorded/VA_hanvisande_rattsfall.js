@@ -18,9 +18,9 @@ casper.test.begin('Verifiera att VA-hänvisande existerar', function(test) {
 
    casper.then(function() {
         this.test.assertSelectorHasText('#leftCol > table > tbody > tr:nth-child(1) > td:nth-child(2)','RÅ 2010 ref. 107');
-        this.test.assertSelectorHasText('#rinfoSidebar > ul:nth-child(5) > li:nth-child(3)','2048-13');
-        this.test.assertSelectorHasText('#leftCol > div > div > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > span','7723-09');
-        this.test.assertSelectorHasText('#leftCol > div > div > div > table > tbody > tr:nth-child(14) > td:nth-child(2) > p > span','Allmän försäkring');
+        this.test.assertTextExists('2048-13');
+        this.test.assertTextExists('7723-09');
+        this.test.assertTextExists('Allmän försäkring');
    });
 
    casper.run(function() {test.done();});
