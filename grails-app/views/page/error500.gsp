@@ -15,7 +15,7 @@
         <li><g:link controller="page" action="show" url="webbkarta">Webbkarta</g:link> - översikt över innehållet på lagrummet.se</li>
     </ul>
 
-    <p>Kom du hit på en länk från vår webbplats? Kontakta <g:link contoller="page" url="kontakta-oss">redaktionen</g:link> så kan vi rätta till felet. Ange vilken länk det gäller och på vilken sida länken finns.</p>
+    <p>Kom du hit på en länk från vår webbplats? Kontakta redaktionen så kan vi rätta till felet. Ange vilken länk det gäller och på vilken sida länken finns.</p>
 
     <p>Kom du hit på en länk från en annan webbplats? Kontakta gärna webbansvarig där och meddela att länken är trasig.</p>
 </article>

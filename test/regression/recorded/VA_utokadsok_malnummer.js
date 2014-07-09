@@ -1,5 +1,4 @@
 var x = require('casper').selectXPath;
-casper.options.viewportSize = {width: 1920, height: 1128};
 casper.on('page.error', function(msg, trace) {
    this.echo('Error: ' + msg, 'ERROR');
    for(var i=0; i<trace.length; i++) {
@@ -7,73 +6,37 @@ casper.on('page.error', function(msg, trace) {
        this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
    }
 });
+captureScreen = function() {
+   var file_name = casper.cli.get("output")+'VA_utokadesok_malnummer_screen_error.png';
+   this.capture(file_name);
+   this.echo('Captured "'+file_name+'"');
+}
+
 casper.test.begin('Utökad VA-sök på målnummer', function(test) {
    casper.start(casper.cli.get("url")+'/search/ext');
-   casper.waitForSelector("input[value='Rattsfall']",
-       function success() {
-           test.assertExists("input[value='Rattsfall']");
-           this.click("input[value='Rattsfall']");
-       },
-       function fail() {
-           test.assertExists("input[value='Rattsfall']");
-   });
-   casper.waitForSelector("form[name=Rattsfall] input[name='referatrubrik']",
-       function success() {
-           test.assertExists("form[name=Rattsfall] input[name='referatrubrik']");
-           this.click("form[name=Rattsfall] input[name='referatrubrik']");
-       },
-       function fail() {
-           test.assertExists("form[name=Rattsfall] input[name='referatrubrik']");
-   });
-   casper.waitForSelector("form[name=Rattsfall] input[name='beteckning']",
-       function success() {
-           test.assertExists("form[name=Rattsfall] input[name='beteckning']");
-           this.click("form[name=Rattsfall] input[name='beteckning']");
-       },
-       function fail() {
-           test.assertExists("form[name=Rattsfall] input[name='beteckning']");
-   });
-   casper.waitForSelector("form[name=Rattsfall] input[name='malnummer']",
-       function success() {
-           test.assertExists("form[name=Rattsfall] input[name='malnummer']");
-           this.click("form[name=Rattsfall] input[name='malnummer']");
-       },
-       function fail() {
-           test.assertExists("form[name=Rattsfall] input[name='malnummer']");
-   });
-   casper.waitForSelector("input[name='malnummer']",
-       function success() {
-           this.sendKeys("input[name='malnummer']", "1088-08\r");
-       },
-       function fail() {
-           test.assertExists("input[name='malnummer']");
-   });
-   casper.waitForSelector("form[name=Rattsfall] input[type=submit][value='Sök']",
-       function success() {
-           test.assertExists("form[name=Rattsfall] input[type=submit][value='Sök']");
-           this.click("form[name=Rattsfall] input[type=submit][value='Sök']");
-       },
-       function fail() {
-           test.assertExists("form[name=Rattsfall] input[type=submit][value='Sök']");
+
+   casper.waitForSelector("body", function(){}, captureScreen, 5000);
+
+   casper.then(function() {
+        this.test.assertSelectorHasText('#extendedSearch > h1','Utökad sökning');
+        this.test.assertNotVisible('#Rattsfall > select');
+        this.click('#catRattsfall');
    });
 
-   /* submit form */
-   casper.waitForSelector(x("//a[normalize-space(text())='1088-08']"),
-       function success() {
-           test.assertExists(x("//a[normalize-space(text())='1088-08']"));
-           this.click(x("//a[normalize-space(text())='1088-08']"));
-       },
-       function fail() {
-           test.assertExists(x("//a[normalize-space(text())='1088-08']"));
+   casper.waitUntilVisible('#Rattsfall > select', function(){}, captureScreen, 20000);
+
+   casper.then(function() {
+        this.test.assertVisible('#Rattsfall > select');
+        this.sendKeys('#malnummer', "1088-08");
+        this.click('#Rattsfall > div > input');
    });
-   /*casper.waitForSelector(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"),
-       function success() {
-           test.assertExists(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"));
-           this.click(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"));
-       },
-       function fail() {
-           test.assertExists(x("//a[normalize-space(text())='Enligt 18 kap. 18 § inkomstskattelagen får det ytterligare avdrag för värdeminskning på inventarier göras som behövs för att inventariernas skattemässiga värde inte ska överstiga deras verkliga värde. Prövningen ska avse samtliga inventarier på vilka bestämmelserna om värdeminskningsavdrag är tillämpliga. Inkomsttaxering 2004.']"));
-   });*/
+
+   casper.waitForSelector("#sokresultat", function(){}, captureScreen, 20000);
+
+   casper.then(function() {
+        this.test.assertExists('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a');
+        this.test.assertSelectorHasText('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a','1088-08');
+   });
 
    casper.run(function() {test.done();});
 });

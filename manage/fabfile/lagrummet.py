@@ -11,16 +11,17 @@ from sysconf import setup_demodata
 
 
 @task()
-def all():
-    build_war()
+def all(test=1):
+    build_war(test)
     deploy_war()
 
 @task
-def build_war():
+def build_war(test=1):
     """Build lagrummet grails-war locally"""
     with lcd(env.projectroot):
         local("grails clean")
-        local("grails test-app")
+        if test==1:
+            local("grails test-app")
         local("grails -Dgrails.env=%(grails_build_env)s war --non-interactive" % env)
         local("ls -l target")
 
@@ -33,15 +34,16 @@ def deploy_war(headless="0"):
 
 @task
 @roles('rinfo')
-def test():
+def test(test_selector='*.js', testpath='%s recorded/%s recorded/admin/%s'):
     """Test functions of lagrummet.se regressionstyle"""
     url="http:\\"+env.roledefs['rinfo'][0]
+    output = "%s/target/test-reports/" % env.projectroot
     with lcd(env.projectroot+"/test/regression"):
-        testpath="*.js recorded/*.js recorded/admin/*.js"
+        testpath=testpath % (test_selector,test_selector,test_selector)
         #testpath="*.js recorded/*.js"
-        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s" % (testpath,url,env.target))
+        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (testpath,url,env.target,output))
     with lcd(env.projectroot+"/test/ui"):
-        local("casperjs test *.js --xunit=../casperjs.log --url="+url+" --target=%(target)s" % env)
+        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (test_selector,url,env.target,output) )
 
 @task
 @roles('rinfo')
