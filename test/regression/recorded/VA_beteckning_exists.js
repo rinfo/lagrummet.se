@@ -35,32 +35,6 @@ casper.test.begin('Verifiera att VA-beteckning existerar', function(test) {
         this.test.assertSelectorHasText('#rattsfall > li:nth-child(1) > p:nth-child(1) > a','NJA 2010 s. 648');
    });
 
-
-   /*casper.waitForSelector("form[name=search] input[name='query']",
-       function success() {
-           test.assertExists("form[name=search] input[name='query']");
-           this.click("form[name=search] input[name='query']");
-       },
-       function fail() {
-           test.assertExists("form[name=search] input[name='query']");
-   });
-   casper.waitForSelector("input[name='query']",
-       function success() {
-           this.sendKeys("input[name='query']", "NJA 2010 s. 648");
-       },
-       function fail() {
-           test.assertExists("input[name='query']");
-   });
-
-       function success() {
-           test.assertExists(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
-           this.click(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
-       },
-       function fail() {
-           test.assertExists(x("//a[normalize-space(text())='NJA 2010 s. 648']"));
-   }); */
-
-
    casper.run(function() {test.done();});
 });
 
