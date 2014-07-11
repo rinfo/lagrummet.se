@@ -17,30 +17,30 @@ casper.test.begin('Utökad VA-sök på målnummer', function(test) {
 
    casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
-   if (casper.cli.get("target")!="regression") {
-
-       casper.then(function() {
-            this.test.assertSelectorHasText('#extendedSearch > h1','Utökad sökning');
-            this.test.assertNotVisible('#Rattsfall > select');
-            this.click('#catRattsfall');
-       });
-
-       casper.waitUntilVisible('#Rattsfall > select', function(){}, captureScreen, 20000);
-
-       casper.then(function() {
-            this.test.assertVisible('#Rattsfall > select');
-            this.sendKeys('#malnummer', "1088-08");
-            this.click('#Rattsfall > div > input');
-       });
-
-       casper.waitForSelector("#sokresultat", function(){}, captureScreen, 20000);
-
-       casper.then(function() {
-            this.test.assertExists('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a');
-            this.test.assertSelectorHasText('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a','1088-08');
-       });
-
-   }
+//   if (casper.cli.get("target")!="regression") {
+//
+//       casper.then(function() {
+//            this.test.assertSelectorHasText('#extendedSearch > h1','Utökad sökning');
+//            this.test.assertNotVisible('#Rattsfall > select');
+//            this.click('#catRattsfall');
+//       });
+//
+//       casper.waitUntilVisible('#Rattsfall > select', function(){}, captureScreen, 20000);
+//
+//       casper.then(function() {
+//            this.test.assertVisible('#Rattsfall > select');
+//            this.sendKeys('#malnummer', "1088-08");
+//            this.click('#Rattsfall > div > input');
+//       });
+//
+//       casper.waitForSelector("#sokresultat", function(){}, captureScreen, 20000);
+//
+//       casper.then(function() {
+//            this.test.assertExists('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a');
+//            this.test.assertSelectorHasText('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a','1088-08');
+//       });
+//
+//   }
 
    casper.run(function() {test.done();});
 });
