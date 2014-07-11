@@ -1,0 +1,76 @@
+Admingränssnittstester
+
+Logga in som redaktör fixa så att casper kan göra inloggning via flaggor! komihåg att inte checka in lösenord ;)
+
+Lägga till ny rättskälla utan koppling till RDL
+	- i menyn rättskällor -> lägg till rättskälla
+	- fyll i namn ABC-myndigheten
+	- fyll i url fältet med http://www.abcmyndigheten.se
+	- lämna RDL url tom
+	- välj Myndighet i rubrik dropdownen
+	Klicka spara
+	Verifiera att det dyker upp en ruta som innehåller namnet på myndigheten och att det har skapats.
+	gå till lagrummet
+	gå till Myndigheters föreskrifter (lagrummet.se/rattsinformation/myndigheters-foreskrifter)
+	verifiera att den nya rättskällan finns rätt sorterad i listan
+	gå till Alla rättskällor (lagrummet.se/rattsinformation/samtliga-rattskallor)
+	verifiera att den nya myndigheten ligger i listan under "Myndigheters föreskrifter" / "Inte sökbara på lagrummet.se"
+
+
+Lägga till ny rättskälla med koppling till RDL
+	- i menyn rättskällor -> lägg till rättskälla
+	- fyll i namn Överklagandenämnden ABC
+	- fyll i url fältet med http://www.abcmyndigheten.se
+	- fyll i url till en rinfo.lagrummet.se/något/current.atom text boverket
+	- välj myndighet VA i rubrik dropdownen	
+		- välj rättspraxis i underrubrik dropdownen
+	Klicka spara
+	Verifiera att det dyker upp en ruta som innehåller namnet på myndigheten och att det har skapats.
+	gå till lagrummet
+	gå till Alla rättskällor (lagrummet.se/rattsinformation/samtliga-rattskallor)
+	verifiera att den nya myndigheten ligger i listan under "Rättspraxis" / "Sökbara på lagrummet.se" / "Myndigheters vägledande avgöranden"
+
+
+Lägga till ny rättskälla med koppling till RDL och beskrivning
+	- i menyn rättskällor -> lägg till rättskälla
+	- fyll i namn Förarbete
+	- fyll i url fältet med http://www.abcmyndigheten.se
+	- fyll i url till en rinfo.lagrummet.se/något/current.atom text boverket
+	- välj förarbeten i rubrik dropdownen	
+		- välj regeringen i underrubrik dropdownen
+	Klicka spara
+	Verifiera att det dyker upp en ruta som innehåller namnet på myndigheten och att det har skapats.
+	gå till lagrummet
+	gå till förarbeten (lagrummet.se/rattsinformation/forarbeten)
+	verifiera att under "Regeringen" ligger det nya förarbetet (länk) med en beskrivningstext under.
+	gå till Alla rättskällor (lagrummet.se/rattsinformation/samtliga-rattskallor)
+	verifiera att den nya källan existerar under "Förarbeten" / "Sökbara på lagrummet.se" / "Regeringen" utan en beskrivning
+
+Redigera rättskälla
+	- i menyn rättskällor -> hantera rättskällor
+	- hitta det nyss skapade förarbetet
+	- ändra beskrivning
+	- klicka spara
+	- verifiera som tidigare
+
+Tabort rättskälla
+	- i menyn rättskällor -> hantera rättskällor
+	- hitta det nyss skapade förarbetet
+	- klicka ta bort
+	- klicka OK i efterföljande popup-fönster
+	verifiera att det dyker upp en ruta som talar om att rättskällan är borttagen
+	verifiera borttagningen under alla rättskällor
+
+Lägg till Synonym
+	-i menyn lagrummet - synoymer
+	-lägg till ny synonym t.ex. rinfo -> rättsinformationsförordning (1999:175)
+	-klicka på spara ändringar
+	gå till lagrummet gör en sökning på synonymen
+	verifiera att det dyker upp en "Din sökning gav även träff på följande: rättsinformationsförordning (1999:175)"
+Tabort Synonymen
+	Gör ett test i samband med att issuen för detta görs
+	-i menyn lagrummet - synoymer
+	-klicka på kryss-ikonen på raden för nysskapade synonym
+	-klicka på OK i efterföljande pop-up för att verifiera borttagningen
+	gå till lagrummet gör en sökning på synonymen
+	verifiera att det inte dyker upp en "Din sökning gav även träff på följande: XXXX"
