@@ -20,27 +20,8 @@ casper.test.begin('Välkomstsida', function(test) {
    casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
    casper.then(function() {
-        switch (casper.cli.get("target")) {
-            case 'beta':
-                this.test.assertTitle('Beta lagrummet.se - startsida');
-                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till beta.lagrummet.se!');
-                break;
-            case 'demo':
-                this.test.assertTitle('Beta lagrummet.se - startsida');
-                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till lagrummet.se  BETA!');
-                break;
-            case 'test':
-                this.test.assertTitle('Lagrummet.se - startsida');
-                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till lagrummet.se   TESTVERSION!');
-                break;
-            case 'regression':
-                this.test.assertTitle('Lagrummet.se - startsida');
-                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till lagrummet.se   TESTVERSION!');
-                break;
-            default:
-                this.test.assertTitle('Lagrummet.se - startsida');
-                this.test.assertSelectorHasText('#content > article > header > h1', 'Välkommen till lagrummet.se  BETA!');
-        }
+        this.test.assertTextExists("lagrummet.se");
+        this.test.assertTextExists("Välkommen till");
         this.test.assertSelectorHasText('#searchCategory > label', 'Avgränsa din sökning');
         this.test.assertSelectorHasText('#siteHeader > p > a', 'Utökad sökning');
         this.test.assertSelectorHasText('#content > article > div > div:nth-child(3) > h3 > a','Nya lagrummet.se');
