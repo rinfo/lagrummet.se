@@ -28,7 +28,7 @@ casper.test.begin('Fritext sök VA, verifiera att målnummer existerar', functio
 
    casper.then(function() {
         this.test.assertSelectorHasText('#dynamicSearchResults > header > h1','Sökresultat för brott mot tjänsteman');
-        this.test.assertSelectorHasText('#rattsfall > li:nth-child(1) > p:nth-child(1) > a','B2788-02');
+        this.test.assertSelectorHasText('#rattsfall > li:nth-child(2) > p:nth-child(1) > a','B2788-02');
    });
 
    casper.run(function() {test.done();});
