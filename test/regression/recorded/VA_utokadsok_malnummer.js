@@ -17,26 +17,30 @@ casper.test.begin('Utökad VA-sök på målnummer', function(test) {
 
    casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
-   casper.then(function() {
-        this.test.assertSelectorHasText('#extendedSearch > h1','Utökad sökning');
-        this.test.assertNotVisible('#Rattsfall > select');
-        this.click('#catRattsfall');
-   });
+   if (casper.cli.get("target")!="regression") {
 
-   casper.waitUntilVisible('#Rattsfall > select', function(){}, captureScreen, 20000);
+       casper.then(function() {
+            this.test.assertSelectorHasText('#extendedSearch > h1','Utökad sökning');
+            this.test.assertNotVisible('#Rattsfall > select');
+            this.click('#catRattsfall');
+       });
 
-   casper.then(function() {
-        this.test.assertVisible('#Rattsfall > select');
-        this.sendKeys('#malnummer', "1088-08");
-        this.click('#Rattsfall > div > input');
-   });
+       casper.waitUntilVisible('#Rattsfall > select', function(){}, captureScreen, 20000);
 
-   casper.waitForSelector("#sokresultat", function(){}, captureScreen, 20000);
+       casper.then(function() {
+            this.test.assertVisible('#Rattsfall > select');
+            this.sendKeys('#malnummer', "1088-08");
+            this.click('#Rattsfall > div > input');
+       });
 
-   casper.then(function() {
-        this.test.assertExists('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a');
-        this.test.assertSelectorHasText('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a','1088-08');
-   });
+       casper.waitForSelector("#sokresultat", function(){}, captureScreen, 20000);
+
+       casper.then(function() {
+            this.test.assertExists('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a');
+            this.test.assertSelectorHasText('#searchResults > table > tbody > tr:nth-child(2) > td:nth-child(1) > p > a','1088-08');
+       });
+
+   }
 
    casper.run(function() {test.done();});
 });
