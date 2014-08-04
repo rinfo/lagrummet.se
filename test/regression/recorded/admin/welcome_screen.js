@@ -15,7 +15,7 @@ captureScreen = function() {
 }
 
 casper.test.begin('Välkomstsida', function(test) {
-    casper.start(casper.cli.get("url"));
+   casper.start(casper.cli.get("url"));
 
    casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
@@ -24,7 +24,7 @@ casper.test.begin('Välkomstsida', function(test) {
         this.test.assertTextExists("Välkommen till");
         this.test.assertSelectorHasText('#searchCategory > label', 'Avgränsa din sökning');
         this.test.assertSelectorHasText('#siteHeader > p > a', 'Utökad sökning');
-        this.test.assertSelectorHasText('#content > article > div > div:nth-child(3) > h3 > a','Nya lagrummet.se');
+        //this.test.assertSelectorHasText('#content > article > div > div:nth-child(3) > h3 > a','Nya lagrummet.se');
 
    });
    casper.run(function() {test.done();});

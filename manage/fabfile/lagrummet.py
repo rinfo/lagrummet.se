@@ -38,12 +38,16 @@ def test(test_selector='*.js', testpath='%s recorded/%s recorded/admin/%s'):
     """Test functions of lagrummet.se regressionstyle"""
     url="http:\\"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
-    with lcd(env.projectroot+"/test/regression"):
-        testpath=testpath % (test_selector,test_selector,test_selector)
-        #testpath="*.js recorded/*.js"
-        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (testpath,url,env.target,output))
-    with lcd(env.projectroot+"/test/ui"):
-        local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (test_selector,url,env.target,output) )
+    if env.target=="local":
+        with lcd(env.projectroot+"/test/regression/recorded/admin"):
+            local("casperjs test *.js --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (url,env.target,output))
+    else:
+        with lcd(env.projectroot+"/test/regression"):
+            testpath=testpath % (test_selector,test_selector,test_selector)
+            #testpath="*.js recorded/*.js"
+            local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (testpath,url,env.target,output))
+        with lcd(env.projectroot+"/test/ui"):
+            local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s" % (test_selector,url,env.target,output) )
 
 @task
 @roles('rinfo')
