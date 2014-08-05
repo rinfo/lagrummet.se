@@ -8,16 +8,24 @@ casper.on('page.error', function(msg, trace) {
     }
 });
 
-casper.test.begin('Välkomstsida', function suite(test) {
-    casper.start(casper.cli.get("url"), function() {
-        test.assertExists(x("//*[contains(text(), \'Välkommen till lagrummet.se\')]"));
-        test.assertExists(x("//*[contains(text(), \'Prova vår nya sökfunktion\')]"));
-        test.assertExists(x("//a[normalize-space(text())='Hitta orden!']"));
-        test.assertExists(x("//a[normalize-space(text())='Ordlista A–Ö']"));
-        test.assertExists(x("//img[contains(@alt, \'Förstoringsglas\')]"));
-        test.assertExists(x("//div[@id='logo']/a[contains(text(), \'lagrummet\')]"));
-        test.assertExists(x("//div[@id='logo']/a/span[@class='hlight'][contains(text(), \'.se\')]"));
-    });
+captureScreen = function() {
+   var file_name = casper.cli.get("output")+'welcome_screen_error.png';
+   this.capture(file_name);
+   this.echo('Captured "'+file_name+'"');
+}
 
-    casper.run(function() {test.done();});
+casper.test.begin('Välkomstsida', function(test) {
+   casper.start(casper.cli.get("url"));
+
+   casper.waitForSelector("body", function(){}, captureScreen, 5000);
+
+   casper.then(function() {
+        this.test.assertTextExists("lagrummet.se");
+        this.test.assertTextExists("Välkommen till");
+        this.test.assertSelectorHasText('#searchCategory > label', 'Avgränsa din sökning');
+        this.test.assertSelectorHasText('#siteHeader > p > a', 'Utökad sökning');
+        //this.test.assertSelectorHasText('#content > article > div > div:nth-child(3) > h3 > a','Nya lagrummet.se');
+
+   });
+   casper.run(function() {test.done();});
 });
