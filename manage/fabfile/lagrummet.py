@@ -34,18 +34,17 @@ def deploy_war(headless="0"):
 
 @task
 @roles('rinfo')
-def test(test_selector='*.js', testpath='%s recorded/%s recorded/admin/%s', username='testadmin', password='testadmin'):
+def test(test_selector='*.js', testpath='%s recorded/%s', username='testadmin', password='testadmin'):
     """Test functions of lagrummet.se regressionstyle"""
     url="http:\\"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
     if env.target=="local":
-        with lcd(env.projectroot+"/test/regression/recorded/admin"):
-            local("casperjs test *.js --xunit=../casperjs.log --url=%s --target=%s --output=%s --username=%s --password=%s" % (url,env.target,output,username,password))
+        with lcd(env.projectroot+"/test/regression"):
+            local("casperjs test recorded/admin/*.js --xunit=../casperjs.log --url=%s --target=%s --output=%s --username=%s --password=%s" % (url,env.target,output,username,password))
     else:
         with lcd(env.projectroot+"/test/regression"):
-            testpath=testpath % (test_selector,test_selector,test_selector)
-            #testpath="*.js recorded/*.js"
-            local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s --username=%s --password=%s" % (testpath,url,env.target,output,username,password))
+            testpath=testpath % (test_selector,test_selector)
+            local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s  --username=%s --password=%s" % (testpath,url,env.target,output,username,password))
         with lcd(env.projectroot+"/test/ui"):
             local("casperjs test %s --xunit=../casperjs.log --url=%s --target=%s --output=%s --username=%s --password=%s" % (test_selector,url,env.target,output,username,password) )
 
