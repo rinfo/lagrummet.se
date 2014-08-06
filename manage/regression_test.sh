@@ -27,6 +27,16 @@ if [ -z "$PW_RINFO" ]; then
         read PW_RINFO
 fi
 
+if [ -z "$ADMIN_USERNAME" ]; then
+        echo "Enter admin username: "
+        read ADMIN_USERNAME
+fi
+
+if [ -z "$ADMIN_PASSWORD" ]; then
+        echo "Enter admin password: "
+        read ADMIN_PASSWORD
+fi
+
 # RDL (prepare)
 cd $INSTALL_PATH_RDL/manage/
 fab -p $PW_RINFO target.regression -R service app.service.all:test="0"
