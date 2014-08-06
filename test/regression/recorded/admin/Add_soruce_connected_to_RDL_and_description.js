@@ -53,9 +53,12 @@ casper.test.begin('Login', function(test) {
         this.test.assertSelectorHasText('#bodyContent > div > h1','Skapa Rättskälla');
 
         this.sendKeys("#url", 'http://www.abcmyndigheten.se');
-        this.sendKeys("#name", 'ABC-myndigheten');
+        this.sendKeys("#name", 'Förarbete');
+        this.sendKeys("#rdlName", 'https://rinfo.boverket.se/index.atom');
+
         this.evaluate(function() {
-            document.querySelector("#category").value = "Foreskrifter";
+            document.querySelector("#category").value = "Forarbeten";
+            document.querySelector("#subCategory").value = "Regeringens";
             return true;
         });
 
@@ -72,23 +75,23 @@ casper.test.begin('Login', function(test) {
 
    casper.waitForSelector("#logo > a", function(){}, captureScreen, 20000);
 
-   var CSS_PATH_TO_MENU = casper.cli.get("target")=='local'?'#primaryNavigation > ul.huvudmeny1 > li:nth-child(4) > a':'#primaryNavigation > ul.huvudmeny1 > li:nth-child(3) > a';
-   var CSS_PATH_TO_ITEM = casper.cli.get("target")=='local'?'#content > article > ul > li:nth-child(2) > a':'#content > article > ul > li:nth-child(1) > a';
+   var CSS_PATH_TO_MENU = casper.cli.get("target")=='local'?'#primaryNavigation > ul.huvudmeny1 > li:nth-child(3) > a':'#primaryNavigation > ul.huvudmeny1 > li:nth-child(4) > a';
+   var CSS_PATH_TO_ITEM = casper.cli.get("target")=='local'?'#content > article > ul:nth-child(3) > li:nth-child(1) > a':'#content > article > ul:nth-child(5) > li:nth-child(1) > a';
 
    casper.then(function() {
-        this.test.assertSelectorHasText(CSS_PATH_TO_MENU,'Myndigheters föreskrifter');
+        this.test.assertSelectorHasText(CSS_PATH_TO_MENU,'Förarbeten');
         this.click(CSS_PATH_TO_MENU);
    });
 
    casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#content > article > header > h1','Myndigheters föreskrifter');
-        this.test.assertSelectorHasText(CSS_PATH_TO_ITEM,'ABC-myndigheten');
+        this.test.assertSelectorHasText(CSS_PATH_TO_MENU,'Förarbeten');
+        this.test.assertSelectorHasText(CSS_PATH_TO_ITEM,'Förarbete');
    });
 
    var CSS_PATH_TO_ALL_MENU = casper.cli.get("target")=='local'?'#primaryNavigation > ul.huvudmeny1 > li:nth-child(2) > a':'#primaryNavigation > ul.huvudmeny1 > li:nth-child(7) > a';
-   var CSS_PATH_TO_ALL_ITEM = casper.cli.get("target")=='local'?'#content > article > div > section.Foreskrifter > ul:nth-child(7) > li:nth-child(1) > a':'#content > article > div > section.Foreskrifter > ul > li:nth-child(1) > a';
+   var CSS_PATH_TO_ALL_ITEM = casper.cli.get("target")=='local'?'#content > article > div > section.Forarbeten > ul:nth-child(3) > li:nth-child(1) > a':'#content > article > div > section.Forarbeten > ul:nth-child(4) > li > a';
 
    casper.then(function() {
         this.test.assertSelectorHasText(CSS_PATH_TO_ALL_MENU,'Alla rättskällor');
@@ -99,7 +102,7 @@ casper.test.begin('Login', function(test) {
 
    casper.then(function() {
         this.test.assertSelectorHasText('#content > article > header > h1',casper.cli.get("target")=='local'?'Samtliga rättskällor':'Lista över rättskällorna');
-        this.test.assertSelectorHasText(CSS_PATH_TO_ALL_ITEM,'ABC-myndigheten');
+        this.test.assertSelectorHasText(CSS_PATH_TO_ALL_ITEM,'Förarbete');
    });
 
    casper.run(function() {test.done();});
