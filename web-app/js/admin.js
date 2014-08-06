@@ -139,12 +139,12 @@ jQuery(function($) {
 	});
 	
 	// Don't send the form when pressing enter in text fields
-	$("#bodyContent form input[type=text]").live("keypress", function(e) {
-		if (e.which == 13) {
-			e.preventDefault();
-			$(this).blur();
-		}
-	});
+    $("#bodyContent form input[type=text]").on("keypress", function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $(this).blur();
+        }
+    });
 	
 	$("#bodyContent form .content h1 a").click(function(e) {
 		e.preventDefault();
