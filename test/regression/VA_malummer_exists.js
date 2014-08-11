@@ -20,6 +20,7 @@ casper.test.begin('Fritext sök VA, verifiera att målnummer existerar', functio
    casper.then(function() {
         this.test.assertExists("form[name=search] input[name='query']");
         this.test.assertTextDoesntExist('Sökresultat för brott mot tjänsteman');
+        this.test.assertTextDoesntExist('B2788-02');
 
         this.sendKeys("input[name='query']", "brott mot tjänsteman");
    });
@@ -27,8 +28,10 @@ casper.test.begin('Fritext sök VA, verifiera att målnummer existerar', functio
    casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
+           var file_name = casper.cli.get("output")+'VA_malnummer_exists_screen_error_1.png';
+           this.capture(file_name);
         this.test.assertSelectorHasText('#dynamicSearchResults > header > h1','Sökresultat för brott mot tjänsteman');
-        this.test.assertSelectorHasText('#rattsfall > li:nth-child(2) > p:nth-child(1) > a','B2788-02');
+        this.test.assertTextExist('B2788-02');
    });
 
    casper.run(function() {test.done();});

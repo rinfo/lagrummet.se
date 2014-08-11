@@ -147,6 +147,10 @@ class Page implements Comparable<Page>{
 		if(comp == 0) {
 			comp = other?.dateCreated <=> dateCreated
 		}
+
+        if(comp == 0) {
+            comp = other?.id <=> id
+        }
 		return comp;
 	}
 

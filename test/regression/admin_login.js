@@ -14,22 +14,23 @@ captureScreen = function() {
    this.echo('Captured "'+file_name+'"');
 }
 
+login = function() {
+    this.test.assertTextExists("lagrummet.se");
+    this.test.assertExists("#username");
+    this.test.assertExists("#password");
+    this.sendKeys("#username", casper.cli.get("username"));
+    this.sendKeys("#password", casper.cli.get("password"));
+    this.click('#submit');
+}
+
 casper.test.begin('Login', function(test) {
-    casper.start(casper.cli.get("url")+'/admin');
+   casper.start(casper.cli.get("url")+'/admin');
 
    casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
-   casper.then(function() {
-        this.test.assertTextExists("lagrummet.se");
-        this.test.assertExists("#username");
-        this.test.assertExists("#password");
-        this.sendKeys("#username", "testadmin");
-        this.sendKeys("#password", "testadmin");
-        this.click('#submit');
-   });
+   casper.then(login);
 
    casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
-
 
    casper.then(function() {
            this.test.assertTextExists("lagrummet.se");
