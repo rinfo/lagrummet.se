@@ -231,7 +231,35 @@
                                 </ul>
                         </g:each>
                 </g:if>
+                <%-- Underlag/register för konsolidering --%>
+                <g:if test="${docInfo.konsolideringsunderlag}">
+                    <g:set var="toggleId" value="toggleRegister" />
+                    <g:set var="isExpanded" value="${params[(toggleId)]}" />
+                    <h3>Konsolideringsunderlag</h3>
+                    <g:each in="${docInfo.konsolideringsunderlag.findAll { it.title }?.sort{ it.ikrafttradandedatum }}" var="item" status="i">
+                        <g:if test="${i >= 4}">
+                            <ul class="${toggleId} ${isExpanded ? '' : 'hidden' }">
+                        </g:if>
+                        <g:else>
+                            <ul>
+                        </g:else>
+                        <li class="label">Titel:</li>
+                        <li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
+                        <li class="label">SFS-nummer:</li>
+                        <li>${item.identifier}</li>
+                        <%-- omfattning saknas! --%>
+                        <li class="label">Ikraft:</li>
+                        <li>${item.ikrafttradandedatum}</li>
+                        </ul>
+                    </g:each>
+                    <g:if test="${docInfo.konsolideringsunderlag.size() > 4}">
+                        <g:toggleLink toggleId="${toggleId}" mapping="rinfo">
+                            <span class="${isExpanded ? 'hidden' : '' }">Visa alla ${docInfo.konsolideringsunderlag.size()} konsolideringsunderlag &#x25BC;</span>
+                            <span class="${!isExpanded ? 'hidden' : '' }">Dölj konsolideringsunderlag &#x25b2;</span>
+                        </g:toggleLink>
+                    </g:if>
+                </g:if>
         </aside>
-  </article>	
+  </article>
 </body>
 </html>
