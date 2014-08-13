@@ -5,11 +5,6 @@ casper.on('resource.requested', function(requestData, request) {
     if (/\.lagrummet\.se%2Fsearch%3Fcat%3DAlla%26query%3D2000%/.exec(requestData.url)) {
       hasGaRequestBeenSent = true;
     }
-    //block requests to GA collect
-    if(requestData.url.indexOf('http://www.google-analytics.com/collect') === 0) {
-        //this.echo('Aborting request to GA collect', 'INFO');
-        request.abort();
-    }
 });
 
 captureScreen = function() {
