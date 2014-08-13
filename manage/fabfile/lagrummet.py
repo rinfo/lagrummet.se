@@ -65,7 +65,7 @@ def restore_database_for_descructive_tests():
 @roles('rinfo')
 def test(username='testadmin', password='testadmin'):
     """Test functions of lagrummet.se regressionstyle"""
-    url="http:\\"+env.roledefs['rinfo'][0]
+    url="http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
     try:
         test_targets_local_and_regression(output, password, url, username) #todo fix these tests for regression
