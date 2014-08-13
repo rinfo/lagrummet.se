@@ -23,10 +23,26 @@ login = function() {
     this.click('#submit');
 }
 
-
+//casper.open('http://some.testserver.com/post.php', {
+//    method: 'post',
+//    data:   {
+//       'title': 'Plop',
+//        'body':  'Wow.'
+//    },
+//    headers: {
+//       'Accept-Language': 'fr,fr-fr;q=0.8,en-us;q=0.5,en;q=0.3'
+//    }
+//});
 
 casper.test.begin('Login', function(test) {
-   casper.start(casper.cli.get("url")+'/admin');
+   casper.start().then(function() {
+        casper.open(casper.cli.get("url")+'/admin?lang=sv', {
+            headers: {
+               //'Accept-Language': 'sv,sv-se;q=0.8,en-us;q=0.5,en;q=0.3'
+               'Accept-Language': 'sv,sv-se'
+            }
+        });
+   });
 
    casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
