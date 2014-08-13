@@ -16,10 +16,14 @@ captureScreen = function() {
 casper.test.begin('Test rendering of xhtml content with swedish characters', function(test) {
    casper.start(casper.cli.get("url")+'/rinfo/publ/sfs/1999:175/konsolidering/2011-05-02');
 
-   casper.waitForSelector("body", function(){}, captureScreen, 20000);
+   casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
    casper.then(function() {
-       this.test.assertTextExists("Rättsinformationsförordning (1999:175)");
+       var file_name = casper.cli.get("output")+'106_xhtml_1.png';
+       this.capture(file_name);
+       this.echo('Captured "'+file_name+'"');
+
+       this.test.assertSelectorHasText("#rinfo > h1","Rättsinformationsförordning (1999:175)");
    });
 
    casper.run(function() {test.done();});
