@@ -72,7 +72,11 @@ def clean():
     sudo("rm -rf %(deploydir)s/ROOT" % env)
     sudo("rm -rf %(deploydir)s/ROOT.war" % env)
     start_tomcat()
-    sudo("mysqladmin -u root --force drop lagrummet") ## needs priviliges to be pre-configured
+    try:
+        sudo("mysqladmin -u root --force drop lagrummet") ## needs priviliges to be pre-configured
+    except:
+        e = sys.exc_info()[0]
+        print "Ignored! Failed to drop database because %s" % e
     with lcd(env.projectroot):
         put("manage/sysconf/%(target)s/mysql/drop_user.sql" % env,"/tmp")
         sudo("mysql -u root < /tmp/drop_user.sql")

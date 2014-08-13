@@ -54,6 +54,7 @@ fab -p $PW_RINFO target.regression -R service server.restart_tomcat
 cd $WORK_DIR
 fab -p $PW_RINFO target.regression sysconf.install_server
 fab -p $PW_RINFO target.regression sysconf.config_server
+sleep 120
 fab -p $PW_RINFO target.regression lagrummet.test_all
 EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ];then
