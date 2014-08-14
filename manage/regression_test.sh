@@ -27,6 +27,16 @@ if [ -z "$PW_RINFO" ]; then
         read PW_RINFO
 fi
 
+if [ -z "$ADMIN_USERNAME" ]; then
+        echo "Enter admin username: "
+        read ADMIN_USERNAME
+fi
+
+if [ -z "$ADMIN_PASSWORD" ]; then
+        echo "Enter admin password: "
+        read ADMIN_PASSWORD
+fi
+
 # RDL (prepare)
 cd $INSTALL_PATH_RDL/manage/
 fab -p $PW_RINFO target.regression -R service app.service.all:test="0"
@@ -39,11 +49,15 @@ fab -p $PW_RINFO target.regression -R service server.restart_tomcat
 #sleep 20
 #fab -p $PW_RINFO target.regression -R main app.main.ping_start_collect_feed
 #sleep 60
+curl http://rinfo.regression.lagrummet.se/feed/current
 
 # lagrummet (setup and test)
 cd $WORK_DIR
 fab -p $PW_RINFO target.regression sysconf.install_server
 fab -p $PW_RINFO target.regression sysconf.config_server
+#sleep 120
+sleep 10
+curl http://regression.lagrummet.se/rinfo/publ/sfs/1999:175/konsolidering/2011-$
 fab -p $PW_RINFO target.regression lagrummet.test_all
 EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ];then
