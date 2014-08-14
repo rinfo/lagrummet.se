@@ -26,5 +26,6 @@ casper.test.begin('Test rendering of xhtml content with swedish characters', fun
        this.test.assertSelectorHasText("#rinfo > h1","Rättsinformationsförordning (1999:175)");
    });
 
+
    casper.run(function() {test.done();});
 });

@@ -38,21 +38,21 @@ def test_targets_local_and_regression(output, password, url, username):
     if env.target in ["local", "regression", "test"]:
         with lcd(env.projectroot + "/test/regression/db"):
             local(
-                "casperjs test *.js --xunit=../casperjs.log --url=%s --target=%s --output=%s --username=%s --password=%s" % (
+                "casperjs test *.js --xunit=../casperjs.log --includes=../../GAblocker.js --url=%s --target=%s --output=%s --username=%s --password=%s" % (
                 url, env.target, output, username, password))
 
 def test_targets_local(output, password, url, username):
     if env.target in ["local"]:
         with lcd(env.projectroot + "/test/regression/db"):
             local(
-                "casperjs test *.js --xunit=../casperjs.log --url=%s --target=%s --output=%s --username=%s --password=%s" % (
+                "casperjs test *.js --xunit=../casperjs.log --includes=../../GAblocker.js --url=%s --target=%s --output=%s --username=%s --password=%s" % (
                     url, env.target, output, username, password))
 
 def test_all_targets_except_local(output, password, url, username):
     if env.target != "local":
         with lcd(env.projectroot + "/test/regression"):
             local(
-                "casperjs test *.js --xunit=../casperjs.log --url=%s --target=%s --output=%s  --username=%s --password=%s" % (
+                "casperjs test *.js --xunit=../casperjs.log --includes=../GAblocker.js --url=%s --target=%s --output=%s  --username=%s --password=%s" % (
                 url, env.target, output, username, password))
 
 
@@ -65,7 +65,7 @@ def restore_database_for_descructive_tests():
 @roles('rinfo')
 def test(username='testadmin', password='testadmin'):
     """Test functions of lagrummet.se regressionstyle"""
-    url="http:\\"+env.roledefs['rinfo'][0]
+    url="http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
     try:
         test_targets_local_and_regression(output, password, url, username) #todo fix these tests for regression
