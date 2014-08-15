@@ -6,23 +6,26 @@ casper.on('page.error', function(msg, trace) {
        this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
    }
 });
+
+captureScreen = function() {
+   var file_name = casper.cli.get("output")+'106_xhtml.png';
+   this.capture(file_name);
+   this.echo('Captured "'+file_name+'"');
+}
+
 casper.test.begin('Test rendering of xhtml content with swedish characters', function(test) {
    casper.start(casper.cli.get("url")+'/rinfo/publ/sfs/1999:175/konsolidering/2011-05-02');
-   casper.waitForSelector("body",
-       function success() {
-           test.assertExists("body");
-           this.click("body");
-       },
-       function fail() {
-           test.assertExists("body");
+
+   casper.waitForSelector("body", function(){}, captureScreen, 5000);
+
+   casper.then(function() {
+       var file_name = casper.cli.get("output")+'106_xhtml_1.png';
+       this.capture(file_name);
+       this.echo('Captured "'+file_name+'"');
+
+       this.test.assertSelectorHasText("#rinfo > h1","Rättsinformationsförordning (1999:175)");
    });
-   casper.waitForSelector(x("//*[contains(text(), \'Rättsinformationsförordning (1999:175)\')]"),
-       function success() {
-           test.assertExists(x("//*[contains(text(), \'Rättsinformationsförordning (1999:175)\')]"));
-         },
-       function fail() {
-           test.assertExists(x("//*[contains(text(), \'Rättsinformationsförordning (1999:175)\')]"));
-   });
+
 
    casper.run(function() {test.done();});
 });

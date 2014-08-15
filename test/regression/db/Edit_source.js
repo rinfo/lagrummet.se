@@ -34,7 +34,7 @@ login = function() {
 
 
 casper.test.begin('Login', function(test) {
-   casper.start(casper.cli.get("url")+'/admin');
+   casper.start(casper.cli.get("url")+'/admin?lang=sv');
 
    casper.waitForSelector("body", function(){}, captureScreen, 5000);
 

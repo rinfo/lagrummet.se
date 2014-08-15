@@ -34,36 +34,45 @@ def deploy_war(headless="0"):
 
 
 def test_targets_local_and_regression(output, password, url, username):
-    if env.target in ["local", "regression"]:
+    #if env.target in ["local", "regression", "test"]:
+    if env.target in ["local", "regression", "test"]:
         with lcd(env.projectroot + "/test/regression/db"):
             local(
-                "casperjs test *.js --xunit=../casperjs.log --url=%s --target=%s --output=%s --username=%s --password=%s" % (
+                "casperjs test *.js --xunit=../casperjs.log --includes=../../GAblocker.js --url=%s --target=%s --output=%s --username=%s --password=%s" % (
                 url, env.target, output, username, password))
 
 def test_targets_local(output, password, url, username):
     if env.target in ["local"]:
         with lcd(env.projectroot + "/test/regression/db"):
             local(
-                "casperjs test *.js --xunit=../casperjs.log --url=%s --target=%s --output=%s --username=%s --password=%s" % (
+                "casperjs test *.js --xunit=../casperjs.log --includes=../../GAblocker.js --url=%s --target=%s --output=%s --username=%s --password=%s" % (
                     url, env.target, output, username, password))
 
 def test_all_targets_except_local(output, password, url, username):
     if env.target != "local":
         with lcd(env.projectroot + "/test/regression"):
             local(
-                "casperjs test *.js --xunit=../casperjs.log --url=%s --target=%s --output=%s  --username=%s --password=%s" % (
+                "casperjs test *.js --xunit=../casperjs.log --includes=../GAblocker.js --url=%s --target=%s --output=%s  --username=%s --password=%s" % (
                 url, env.target, output, username, password))
+
+
+def restore_database_for_descructive_tests():
+    if env.target in ["regression","test"]:
+        setup_demodata()
 
 
 @task
 @roles('rinfo')
 def test(username='testadmin', password='testadmin'):
     """Test functions of lagrummet.se regressionstyle"""
-    url="http:\\"+env.roledefs['rinfo'][0]
+    url="http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
-    #test_targets_local_and_regression(output, password, url, username)  //todo fix these tests for regression
-    test_targets_local(output, password, url, username)
-    test_all_targets_except_local(output, password, url, username)
+    try:
+        test_targets_local_and_regression(output, password, url, username) #todo fix these tests for regression
+        #test_targets_local(output, password, url, username)
+        test_all_targets_except_local(output, password, url, username)
+    finally:
+        restore_database_for_descructive_tests()
 
 @task
 @roles('rinfo')
@@ -72,7 +81,11 @@ def clean():
     sudo("rm -rf %(deploydir)s/ROOT" % env)
     sudo("rm -rf %(deploydir)s/ROOT.war" % env)
     start_tomcat()
-    sudo("mysqladmin -u root --force drop lagrummet") ## needs priviliges to be pre-configured
+    try:
+        sudo("mysqladmin -u root --force drop lagrummet") ## needs priviliges to be pre-configured
+    except:
+        e = sys.exc_info()[0]
+        print "Ignored! Failed to drop database because %s" % e
     with lcd(env.projectroot):
         put("manage/sysconf/%(target)s/mysql/drop_user.sql" % env,"/tmp")
         sudo("mysql -u root < /tmp/drop_user.sql")
