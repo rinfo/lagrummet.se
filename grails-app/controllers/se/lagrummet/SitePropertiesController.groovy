@@ -18,7 +18,7 @@ class SitePropertiesController {
 
     def create = {
         def sitePropertiesInstance = new SiteProperties()
-        sitePropertiesInstance.properties = params
+        bindData(sitePropertiesInstance, params)
         return [sitePropertiesInstance: sitePropertiesInstance]
     }
 
@@ -68,7 +68,7 @@ class SitePropertiesController {
                 }
             }
 			
-            sitePropertiesInstance.properties = params
+            bindData(sitePropertiesInstance, params)
             if (!sitePropertiesInstance.hasErrors() && sitePropertiesInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'siteProperties.label', default: 'SiteProperties'), sitePropertiesInstance.id])}"
                 redirect(action: "edit", id: sitePropertiesInstance.id)

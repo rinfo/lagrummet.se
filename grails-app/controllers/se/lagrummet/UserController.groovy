@@ -19,7 +19,7 @@ class UserController {
 
     def create = {
         def userInstance = new User()
-        userInstance.properties = params
+        bindData(userInstance, params)
         return [userInstance: userInstance]
     }
 
@@ -76,7 +76,7 @@ class UserController {
 			if(!params.password) {
 				params.password = userInstance.password
 			}
-            userInstance.properties = params
+            bindData(userInstance, params)
             if (!userInstance.hasErrors() && userInstance.save(flush: true)) {
 				def role = SecRole.findById(roleId)
 				SecUserSecRole.removeAll(userInstance)

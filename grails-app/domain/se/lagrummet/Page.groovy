@@ -2,6 +2,7 @@ package se.lagrummet
 
 import org.apache.commons.collections.FactoryUtils
 import org.apache.commons.collections.list.LazyList
+import org.codehaus.groovy.runtime.InvokerHelper
 
 class Page implements Comparable<Page>{
 	
@@ -115,7 +116,10 @@ class Page implements Comparable<Page>{
 	
 	def backup = {
 		def pageBackup = new Page()
-		pageBackup.properties = this.properties
+
+        InvokerHelper.setProperties(pageBackup, this.properties)
+
+		//pageBackup.properties = this.properties
 		
 		pageBackup.id = null
 		pageBackup.children = null

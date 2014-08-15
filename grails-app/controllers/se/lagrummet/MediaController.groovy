@@ -126,7 +126,7 @@ class MediaController {
                     return
                 }
             }
-            mediaInstance.properties = params
+            bindData(mediaInstance, params)
             if (!mediaInstance.hasErrors() && mediaInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'media.label', default: 'Media'), mediaInstance.id])}"
                 redirect(action: "edit", id: mediaInstance.id)

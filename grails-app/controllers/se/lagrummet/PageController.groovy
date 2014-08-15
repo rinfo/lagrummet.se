@@ -5,6 +5,7 @@ import grails.plugin.gson.converters.GSON
 
 import org.apache.commons.collections.FactoryUtils
 import org.apache.commons.collections.list.LazyList
+import org.codehaus.groovy.runtime.InvokerHelper
 
 class PageController {
 	
@@ -43,7 +44,7 @@ class PageController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def create = {
         def pageInstance = new Page()
-        pageInstance.properties = params
+        bindData(pageInstance, params)
 		pageInstance.publishStart = new Date()
         return [pageInstance: pageInstance]
     }
@@ -339,7 +340,7 @@ class PageController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 	def preview = {
 		def page = new Page()
-		page.properties = params
+        bindData(page, params)
 
 		page.puffs.eachWithIndex { puffItem, i ->
 				def puffListParam = "expandablePuffList["+i+"]"
@@ -374,7 +375,7 @@ class PageController {
 			
 			pageInstance.backup()
 			params.author = SecUser.get(springSecurityService.principal.id)
-            pageInstance.properties = params
+            bindData(pageInstance, params)
 
 			if (params.reviewDate) pageInstance.publishStart = new Date()
 			

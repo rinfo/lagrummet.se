@@ -18,7 +18,7 @@ class PuffController {
 
     def create = {
         def puffInstance = new Puff()
-        puffInstance.properties = params
+        bindData(puffInstance, params)
         return [puffInstance: puffInstance]
     }
 
@@ -67,7 +67,7 @@ class PuffController {
                     return
                 }
             }
-            puffInstance.properties = params
+            bindData(puffInstance, params)
             if (!puffInstance.hasErrors() && puffInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'puff.label', default: 'Puff'), puffInstance.id])}"
                 redirect(action: "show", id: puffInstance.id)

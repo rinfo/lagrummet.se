@@ -21,7 +21,7 @@ class LegalSourceController {
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def create = {
         def legalSourceInstance = new LegalSource()
-        legalSourceInstance.properties = params
+        bindData(legalSourceInstance, params)
         return [legalSourceInstance: legalSourceInstance]
     }
 
