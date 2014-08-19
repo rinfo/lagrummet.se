@@ -35,9 +35,11 @@ class BootStrap {
 
             // start: Page specifics
             def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
+
             home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
                     .addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
                     .addToPuffs(new Puff(title: "Kalle 3", description: "Läs allt om Kalle och hans tredje otroliga äventyr.", link: "kalle", parent: home))
+
 
             def huvudMeny = new Page(title: "Huvudmeny", author: user, permalink: "huvudmeny", h1: "Huvudmeny", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: true).save()
 
@@ -69,9 +71,10 @@ class BootStrap {
             def kontakta = new Page(title: "Kontakta", author: user, permalink: "kontakta", h1: "kontakta", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: true, parent: footer, pageOrder: 3).save()
             def kontaktaOss = new Page(title: "Kontakta oss", template: "contact", author: user, permalink: "kontakta-oss", h1: "Kontakta oss", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, parent: kontakta).save()
             def saSvarar = new Page(title: "Så svarar vi på e-post", author: user, permalink: "sa-svarar-vi-pa-e-post", h1: "Så svarar vi på e-post", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, parent: kontakta).save()
-            kontaktaOss.addToPuffs(new Puff(title: "Address", description: "Domstolsverket<br />Juridiska avdelningen<br />551 81 Jönköping", link: "", parent: kontaktaOss))
+
             def tackForDittMeddelande = new Page(title: "Tack för ditt meddelande", author: user, permalink: "tack-for-ditt-meddelande", h1: "Tack för ditt meddelande", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now).save()
             // end
+
 
             // start: dummy Legal sources
             new LegalSource(url: "http://62.95.69.15/dir/dir_form2.html", name: "Kommittédirektiv", category: "Forarbeten", subCategory: "Regeringen").save()
