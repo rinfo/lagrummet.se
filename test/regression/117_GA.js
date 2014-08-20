@@ -42,3 +42,5 @@ casper.test.begin('Test that when performing search there should be a request se
 
    casper.run(function() {test.done();});
 });
+
+#content > article > div > section.Foreskrifter > ul > li:nth-child(2) > a

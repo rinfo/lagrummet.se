@@ -1,86 +1,39 @@
 var x = require('casper').selectXPath;
 
-casper.on('page.error', function(msg, trace) {
-    this.echo('Error: ' + msg, 'ERROR');
-    for(var i=0; i<trace.length; i++) {
-        var step = trace[i];
-        this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
-    }
-});
 
-captureScreen = function() {
-   var file_name = casper.cli.get("output")+'login.png';
-   this.capture(file_name);
-   this.echo('Captured "'+file_name+'"');
-}
+casper.test.begin('Add source connected to rdl', function(test) {
+    casper.start(casper.cli.get("url")+'/admin?lang=sv');
 
-login = function() {
-    this.test.assertTextExists("lagrummet.se");
-    this.test.assertExists("#username");
-    this.test.assertExists("#password");
-    this.sendKeys("#username", casper.cli.get("username"));
-    this.sendKeys("#password", casper.cli.get("password"));
-    this.click('#submit');
-}
-
-//casper.open('http://some.testserver.com/post.php', {
-//    method: 'post',
-//    data:   {
-//       'title': 'Plop',
-//        'body':  'Wow.'
-//    },
-//    headers: {
-//       'Accept-Language': 'fr,fr-fr;q=0.8,en-us;q=0.5,en;q=0.3'
-//    }
-//});
-
-casper.test.begin('Login', function(test) {
-   casper.start().then(function() {
-        casper.open(casper.cli.get("url")+'/admin?lang=sv', {
-            headers: {
-               //'Accept-Language': 'sv,sv-se;q=0.8,en-us;q=0.5,en;q=0.3'
-               'Accept-Language': 'sv,sv-se'
-            }
-        });
-   });
-
-   casper.waitForSelector("body", function(){}, captureScreen, 5000);
-
-   casper.then(login);
-
-   casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
-
-   casper.then(function() {
-        this.test.assertTextExists("lagrummet.se");
-        this.test.assertTextExists("Sökhistorik");
-        this.test.assertSelectorHasText('body > header > h1 > a','Lagrummet.se CMS');
-   });
+    // prepare test
+    casper.waitForSelector("body", function(){}, captureScreen, 5000);
+    casper.then(login);
+    casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
+    casper.then(verifyLogin);
 
     // Test starts here
 
-   casper.then(function() {
+    casper.then(function() {
         this.test.assertSelectorDoesntHaveText('#bodyContent > div > h1','Skapa Rättskälla');
         this.click('#adminFunctions > ul > li:nth-child(4) > ul > li:nth-child(1) > a'); // Click at 'Rättskällor -> ny rättskälla'
-   });
+    });
 
-   casper.waitForSelector("#bodyContent > div", function(){}, captureScreen, 5000);
+    casper.waitForSelector("#bodyContent > div", function(){}, captureScreen, 5000);
 
-   casper.then(function() {
+    casper.then(function() {
         this.test.assertSelectorHasText('#bodyContent > div > h1','Skapa Rättskälla');
 
-        this.sendKeys("#url", 'http://www.abcmyndigheten.se');
-        this.sendKeys("#name", 'Överklagandenämnden ABC');
-        this.sendKeys("#rdlName", 'https://rinfo.boverket.se/index.atom');
-        this.evaluate(function() {
-            document.querySelector("#category").value = "Rattspaxis";
-            document.querySelector("#subCategory").value = "Domstolars_Vagledande_Avgoranden";
-            return true;
+        this.fill('form#form_create_source', {
+            'url':    'http://www.abcmyndigheten.se',
+            'name':    'Överklagandenämnden ABC',
+            'rdlName':   'https://rinfo.boverket.se/index.atom',
+            'category':       'Rattspraxis',
+            'subCategory':      'Domstolars_Vagledande_Avgoranden',
         });
 
         this.click('#create');
    });
 
-   casper.waitUntilVisible('#bodyContent > div > div', function(){}, captureScreen, 20000);
+   casper.waitForText('Redigera Rättskälla', function(){}, captureScreen, 20000);
 
    casper.then(function() {
         this.test.assertSelectorHasText('#bodyContent > div > h1','Redigera Rättskälla');
@@ -88,22 +41,23 @@ casper.test.begin('Login', function(test) {
         this.click('body > header > a');
    });
 
-   casper.waitForSelector("#logo > a", function(){}, captureScreen, 20000);
-
-   var CSS_PATH_TO_ALL_MENU = casper.cli.get("target")=='local'?'#primaryNavigation > ul.huvudmeny1 > li:nth-child(2) > a':'#primaryNavigation > ul.huvudmeny1 > li:nth-child(7) > a';
-   var CSS_PATH_TO_ALL_ITEM = casper.cli.get("target")=='local'?'#content > article > div > section.Foreskrifter > ul:nth-child(5) > li > a':'#content > article > div > section.Rattspraxis > ul:nth-child(6) > li > a';
+   casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
+        var CSS_PATH_TO_ALL_MENU = casper.evaluate(findTextInNthChildMenu,'Alla rättskällor');
+
         this.test.assertSelectorHasText(CSS_PATH_TO_ALL_MENU,'Alla rättskällor');
+
         this.click(CSS_PATH_TO_ALL_MENU);
    });
 
    casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#content > article > header > h1',casper.cli.get("target")=='local'?'Samtliga rättskällor':'Lista över rättskällorna');
-        this.test.assertSelectorHasText(CSS_PATH_TO_ALL_ITEM,'Överklagandenämnden ABC');
+        this.test.assertSelectorHasText('#content > article > header > h1','Lista över rättskällorna');
+        this.test.assertSelectorHasText('#Rattspraxis_sokbar_list > li > a','Överklagandenämnden ABC');
    });
 
    casper.run(function() {test.done();});
 });
+

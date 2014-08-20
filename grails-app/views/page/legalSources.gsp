@@ -21,7 +21,7 @@
 	            
                   <g:each in="${category.value}">	          
                       <g:if test="${it.value}">                        
-	            	<h3><g:message code="legalSource.category.${it.key}" /></h3>
+	            	<h3 id="${category.key}_${it.key}"><g:message code="legalSource.category.${it.key}" /></h3>
 	            	
                                 <g:each in="${it.value}" var="subCategory">                                                    
                                             <g:if test="${subCategory.key != ''}">
@@ -31,7 +31,7 @@
                                             <g:set var="toggleId" value="${category.key.toLowerCase()}_${it.key.toLowerCase()}_${subCategory.key?.toLowerCase() ?: category.key.toLowerCase()}" />
                                             <g:set var="isExpanded" value="${params[(toggleId)]}" />
 
-                                            <ul>
+                                            <ul id="${category.key}_${it.key}_list">
                                               <g:each in="${subCategory.value}" var="lI" status="i">
                                                 <g:if test="${i<=9}">
                                                   <li><a href="${lI.url}">${lI.name}</a></li>
