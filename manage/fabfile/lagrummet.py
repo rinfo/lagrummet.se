@@ -90,7 +90,7 @@ def test_all(username='testadmin', password='testadmin'):
         restart_tomcat()
         msg_sleep(10, "Wait for install to settle")
         test()
-        if env.taget in ["regression","local","test"]:
+        if env.target in ["regression","local","test"]:
             db_test(username,password)
     except:
         e = sys.exc_info()[0]
