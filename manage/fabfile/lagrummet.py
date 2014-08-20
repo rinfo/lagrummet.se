@@ -39,7 +39,7 @@ def restore_database_for_descructive_tests():
 
 @task
 @roles('rinfo')
-def test(wildcard='*.js'):
+def test(username='testadmin', password='testadmin', wildcard='*.js'):
     """Test functions of lagrummet.se regressionstyle"""
     url="http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
