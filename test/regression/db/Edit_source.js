@@ -8,35 +8,6 @@
 */
 var x = require('casper').selectXPath;
 
-casper.on('page.error', function(msg, trace) {
-    this.echo('Error: ' + msg, 'ERROR');
-    for(var i=0; i<trace.length; i++) {
-        var step = trace[i];
-        this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
-    }
-});
-
-casper.on('remote.message', function(msg) {
-    this.echo('remote message caught: ' + msg);
-})
-
-captureScreen = function() {
-   var file_name = casper.cli.get("output")+'login.png';
-   this.capture(file_name);
-   this.echo('Captured "'+file_name+'"');
-}
-
-login = function() {
-    this.test.assertTextExists("lagrummet.se");
-    this.test.assertExists("#username");
-    this.test.assertExists("#password");
-    this.sendKeys("#username", casper.cli.get("username"));
-    this.sendKeys("#password", casper.cli.get("password"));
-    this.click('#submit');
-}
-
-
-
 casper.test.begin('Edit source', function(test) {
    casper.start(casper.cli.get("url")+'/admin?lang=sv');
 
