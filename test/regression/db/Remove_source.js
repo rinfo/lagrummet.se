@@ -18,6 +18,7 @@ casper.test.begin('Remove source', function(test) {
     casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
     casper.then(verifyLogin);
 
+/*
     // Test starts here
    casper.then(function() {
         this.test.assertSelectorDoesntHaveText('#bodyContent > div > h1','Rättskällor');
@@ -88,6 +89,7 @@ casper.test.begin('Remove source', function(test) {
         this.test.assertSelectorHasText('#content > article > header > h1','Lista över rättskällorna');
         this.test.assertSelectorHasText('#Forarbeten_sokbar_list > li:nth-child(1) > a','Förarbete');
     });
+*/
 
    casper.run(function() {test.done();});
 });

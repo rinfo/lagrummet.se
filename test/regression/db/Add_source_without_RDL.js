@@ -42,7 +42,7 @@ casper.test.begin('Add source without rdl', function(test) {
    casper.then(function() {
         var CSS_PATH_TO_MENU = casper.evaluate(findTextInNthChildMenu,'Myndigheters föreskrifter');
         if (CSS_PATH_TO_MENU=='')
-            captureScreen();
+            this.wait(1,captureScreen);
         this.test.assertSelectorHasText(CSS_PATH_TO_MENU,'Myndigheters föreskrifter');
         this.click(CSS_PATH_TO_MENU);
    });
@@ -57,7 +57,7 @@ casper.test.begin('Add source without rdl', function(test) {
    casper.then(function() {
         var CSS_PATH_TO_ALL_MENU = casper.evaluate(findTextInNthChildMenu,'Alla rättskällor');
         if (CSS_PATH_TO_ALL_MENU=='')
-            captureScreen();
+            this.wait(1,captureScreen);
         this.test.assertSelectorHasText(CSS_PATH_TO_ALL_MENU,'Alla rättskällor');
         this.click(CSS_PATH_TO_ALL_MENU);
    });
