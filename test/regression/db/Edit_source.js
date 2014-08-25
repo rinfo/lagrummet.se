@@ -13,17 +13,17 @@ casper.test.begin('Edit source', function(test) {
 
     // prepare test
     casper.waitForSelector("body", function(){}, captureScreen, 5000);
-    casper.then(login);
-    casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
-    casper.then(verifyLogin);
+    //casper.then(login);
+    //casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
+    //casper.then(verifyLogin);
 
     // Test starts here
-   casper.then(function() {
+   /*casper.then(function() {
         this.test.assertSelectorDoesntHaveText('#bodyContent > div > h1','Rättskällor');
         //this.click('#adminFunctions > ul > li:nth-child(4) > ul > li:nth-child(2) > a'); // Click at 'Rättskällor -> Hantera rättskällor'
    });
 
-   /*var MY_URL = casper.cli.get("url")+'/admin/legalSource/list?offset=0&max=1000&sort=name&lang=sv';
+   var MY_URL = casper.cli.get("url")+'/admin/legalSource/list?offset=0&max=1000&sort=name&lang=sv';
 
    casper.thenOpen(MY_URL, function(){}, captureScreen, 5000);
 

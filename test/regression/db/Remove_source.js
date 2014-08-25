@@ -14,9 +14,9 @@ casper.test.begin('Remove source', function(test) {
 
     // prepare test
     casper.waitForSelector("body", function(){}, captureScreen, 5000);
-    casper.then(login);
-    casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
-    casper.then(verifyLogin);
+    //casper.then(login);
+    //casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
+    //casper.then(verifyLogin);
 
 /*
     // Test starts here
