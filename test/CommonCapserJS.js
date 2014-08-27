@@ -20,8 +20,13 @@ var captureScreen = function() {
 }
 
 var login = function() {
-    this.sendKeys("#username", casper.cli.get("username"));
-    this.sendKeys("#password", casper.cli.get("password"));
+        this.fill('form#loginForm', {
+            'j_username':    casper.cli.get("username"),
+            'j_password':    casper.cli.get("password"),
+        });
+
+    //this.sendKeys("#username", casper.cli.get("username"));
+    //this.sendKeys("#password", casper.cli.get("password"));
     this.click('#submit');
 }
 

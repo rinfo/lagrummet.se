@@ -34,12 +34,12 @@ def deploy_war(headless="0"):
 
 
 def restore_database_for_descructive_tests():
-    if env.target in ["regression","test"]:
+    if env.target in ["regression","test","demo"]:
         setup_demodata()
 
 @task
 @roles('rinfo')
-def test(username='testadmin', password='testadmin', wildcard='*.js'):
+def test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js'):
     """Test functions of lagrummet.se regressionstyle"""
     url="http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot

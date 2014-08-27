@@ -3,6 +3,7 @@ var x = require('casper').selectXPath;
 
 
 casper.test.begin('Add source connected to rdl and with description', function(test) {
+    phantom.cookies = '';
     casper.start(casper.cli.get("url")+'/admin?lang=sv');
 
     // prepare test

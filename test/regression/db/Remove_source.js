@@ -10,6 +10,7 @@
 var x = require('casper').selectXPath;
 
 casper.test.begin('Remove source', function(test) {
+   phantom.cookies = '';
    casper.start(casper.cli.get("url")+'/admin?lang=sv');
 
     // prepare test

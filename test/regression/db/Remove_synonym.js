@@ -10,7 +10,8 @@
 var x = require('casper').selectXPath;
 
 casper.test.begin('Remove synonym', function(test) {
-   casper.start(casper.cli.get("url")+'/admin?lang=sv');
+    phantom.cookies = '';
+    casper.start(casper.cli.get("url")+'/admin?lang=sv');
 
     // prepare test
     casper.waitForSelector("body", function(){}, captureScreen, 5000);

@@ -1,3 +1,4 @@
+var x = require('casper').selectXPath;
 //TODO Complete according to spec
 /*Redigera rättskälla
   	- i menyn rättskällor -> hantera rättskällor
@@ -6,19 +7,19 @@
   	- klicka spara
   	- verifiera som tidigare
 */
-var x = require('casper').selectXPath;
 
 casper.test.begin('Edit source', function(test) {
+   phantom.cookies = '';
    casper.start(casper.cli.get("url")+'/admin?lang=sv');
 
     // prepare test
     casper.waitForSelector("body", function(){}, captureScreen, 5000);
-    //casper.then(login);
-    //casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
-    //casper.then(verifyLogin);
+    casper.then(login);
+    casper.waitForSelector("#adminPages", function(){}, captureScreen, 5000);
+    casper.then(verifyLogin);
 
     // Test starts here
-   /*casper.then(function() {
+   casper.then(function() {
         this.test.assertSelectorDoesntHaveText('#bodyContent > div > h1','Rättskällor');
         //this.click('#adminFunctions > ul > li:nth-child(4) > ul > li:nth-child(2) > a'); // Click at 'Rättskällor -> Hantera rättskällor'
    });
@@ -63,9 +64,9 @@ casper.test.begin('Edit source', function(test) {
    casper.then(function() {
         this.test.assertSelectorHasText('#bodyContent > div > div','Rättskälla Förarbete uppdaterad');
         this.click('body > header > a');
-   });*/
+   });
 
-/*
+
     casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 5000);
 
     casper.then(function() {
@@ -97,7 +98,7 @@ casper.test.begin('Edit source', function(test) {
         this.test.assertSelectorHasText('#content > article > header > h1','Lista över rättskällorna');
         this.test.assertSelectorHasText('#Forarbeten_sokbar_list > li:nth-child(1) > a','Förarbete');
     });
-*/
+
 
    casper.run(function() {test.done();});
 });
