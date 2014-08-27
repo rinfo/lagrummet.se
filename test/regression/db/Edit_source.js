@@ -59,10 +59,12 @@ casper.test.begin('Edit source', function(test) {
         this.click('#save'); //Click spara
    });
 
-   casper.waitForText('Rättskälla Förarbete uppdaterad', function(){}, captureScreen, 5000);
+   //casper.waitForText('Rättskälla Förarbete uppdaterad', function(){}, captureScreen, 5000);
+   casper.waitUntilVisible('#bodyContent > div > div', function(){}, captureScreen, 5000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#bodyContent > div > div','Rättskälla Förarbete uppdaterad');
+        //this.test.assertSelectorHasText('#bodyContent > div > div','Rättskälla Förarbete uppdaterad');
+        this.test.assertVisible('#bodyContent > div > div');
         this.click('body > header > a');
    });
 
