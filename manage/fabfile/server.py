@@ -14,12 +14,15 @@ def restart_apache():
 @roles('rinfo')
 def restart_tomcat():
     """Restart tomcat"""
-    with _managed_tomcat_restart(): pass
+    with _managed_tomcat_restart():
+        pass
+
 
 def stop_tomcat(headless=False):
     result = sudo("%(tomcat_stop)s" % env, shell="not headless")
     if result.failed:
         raise OSError(result)
+
 
 def start_tomcat(wait=5, headless=False):
     print "... restarting in",
@@ -28,6 +31,7 @@ def start_tomcat(wait=5, headless=False):
         time.sleep(1)
     print
     sudo("%(tomcat_start)s" % env, shell="not headless")
+
 
 @contextlib.contextmanager
 def _managed_tomcat_restart(wait=5, headless=False):
