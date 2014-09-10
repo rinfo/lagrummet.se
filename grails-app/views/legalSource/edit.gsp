@@ -19,14 +19,14 @@
                 <g:renderErrors bean="${legalSourceInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post" >
+            <g:form method="post" name="form_edit_source">
                 <g:hiddenField name="id" value="${legalSourceInstance?.id}" />
                 <g:hiddenField name="version" value="${legalSourceInstance?.version}" />
                 
                 <g:render template="legalSourceEditForm" />
                 
                 <div class="buttons">
-                    <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
+                    <span class="button"><g:actionSubmit id="save" class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'legalSource.button.delete.confirm.message', args:[legalSourceInstance.name], default: 'Are you sure?')}');" /></span>
                 </div>
             </g:form>

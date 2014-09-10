@@ -19,10 +19,6 @@ casper.test.begin('Test rendering of xhtml content with swedish characters', fun
    casper.waitForSelector("body", function(){}, captureScreen, 5000);
 
    casper.then(function() {
-       var file_name = casper.cli.get("output")+'106_xhtml_1.png';
-       this.capture(file_name);
-       this.echo('Captured "'+file_name+'"');
-
        this.test.assertSelectorHasText("#rinfo > h1","Rättsinformationsförordning (1999:175)");
    });
 
