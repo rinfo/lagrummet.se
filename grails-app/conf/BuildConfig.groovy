@@ -36,11 +36,11 @@ grails.project.dependency.resolution = {
     plugins {
         compile ":hibernate:3.6.10.17"
         compile ":tiny-mce:3.4.9"
-        compile ":searchable:0.6.8"
+        compile ":searchable:0.6.9"
         compile ":quartz2:2.1.6.2"
         compile ":jquery:1.11.1"
         compile ":rest:0.8"
-        compile ":mail:1.0.6"
+        compile ":mail:1.0.7"
         compile ":spring-security-core:1.2.7.4"
         compile ":webxml:1.4.1"
         compile 'org.grails.plugins:gson:1.1.4'
