@@ -2,7 +2,7 @@ var x = require('casper').selectXPath;
 
 var hasGaRequestBeenSent = false;
 casper.on('resource.requested', function(requestData, request) {
-    if (/\.lagrummet\.se%2Fsearch%3Fcat%3DAlla%26query%3D2000%/.exec(requestData.url)) {
+    if (/\lagrummet\.se%2Fsearch%3Fcat%3DAlla%26query%3D2000%/.exec(requestData.url)) {
       hasGaRequestBeenSent = true;
     }
 });
