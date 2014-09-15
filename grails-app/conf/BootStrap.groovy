@@ -116,6 +116,11 @@ class BootStrap {
             new Synonym(synonym: "kalle", baseTerm: "olle").save()
             new Synonym(synonym: "olle", baseTerm: "nisse").save()
 
+            // This is needed to make some browser tests work. See for instance "test/regression/SFS_goto_grund.js"
+            new Synonym(synonym: "studieledighetslagen", baseTerm: "Lag om arbetstagares rätt till ledighet för utbildning (1974:981)").save()
+
+
+
             // start: Site properties
             new SiteProperties(title: "lagrummet.se", siteTitle: 'lagrummet<span class="hlight">.se</span>',
                     headerNavigation: '''
