@@ -27,6 +27,15 @@ grails.project.dependency.resolution = {
 
         runtime 'hsqldb:hsqldb:1.8.0.10'
 
+        // We had runtime production problems as reported in: https://github.com/robfletcher/grails-gson/issues/38
+        // This fix was suggested:  compile 'org.springframework:spring-test:2.5'
+        // However, installing spring-test from Grails Central didn't work.
+        // Instead, manually downloaded jar file is currently in project's lib folder.
+        build 'org.springframework:spring-test:3.2.5.RELEASE'
+        runtime 'org.springframework:spring-test:3.2.5.RELEASE'
+
+
+
         build("org.tmatesoft.svnkit:svnkit:1.3.5") {
             excludes "jna", "trilead-ssh2", "sqljet"
         }
@@ -45,10 +54,7 @@ grails.project.dependency.resolution = {
         compile ":webxml:1.4.1"
         compile 'org.grails.plugins:gson:1.1.4'
 
-        // We had runtime production problems as reported in: https://github.com/robfletcher/grails-gson/issues/38
-        // This fix was suggested:  compile 'org.springframework:spring-test:2.5'
-        // However, installing spring-test from Grails Central didn't work.
-        // Instead, manually downloaded jar file is currently in project's lib folder.
+
 
 
         build ":tomcat:7.0.54"
