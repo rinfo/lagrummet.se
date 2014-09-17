@@ -16,6 +16,8 @@ grails.project.dependency.resolution = {
         grailsCentral()
 
         mavenRepo "http://repo.grails.org/grails/core"
+        mavenRepo "http://repository.codehaus.org"
+        mavenRepo "http://download.java.net/maven/2/"
 
         mavenCentral()
         mavenLocal()
@@ -31,8 +33,10 @@ grails.project.dependency.resolution = {
         // This fix was suggested:  compile 'org.springframework:spring-test:2.5'
         // However, installing spring-test from Grails Central didn't work.
         // Instead, manually downloaded jar file is currently in project's lib folder.
+
         build 'org.springframework:spring-test:3.2.5.RELEASE'
-        runtime 'org.springframework:spring-test:3.2.5.RELEASE'
+        //runtime 'org.springframework:spring-test:3.2.5.RELEASE'
+        //test 'org.springframework:spring-test:3.2.5.RELEASE'
 
 
 
@@ -53,9 +57,6 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:1.2.7.4"
         compile ":webxml:1.4.1"
         compile 'org.grails.plugins:gson:1.1.4'
-
-
-
 
         build ":tomcat:7.0.54"
 
