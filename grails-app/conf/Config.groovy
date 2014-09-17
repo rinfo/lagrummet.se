@@ -134,8 +134,10 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'se.lagrummet.Use
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'se.lagrummet.SecUserSecRole'
 grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 
+/*
 grails.plugins.springsecurity.ipRestrictions = [
-	'/admin/**': [
+	'/admin*/
+/**': [
 		'159.190.240.1', '159.190.240.2', '159.190.240.3', '159.190.240.254', '159.190.251.57',		//DV Jönköping
 		'159.190.240.66', '159.190.251.56', '159.190.240.42',											//DV Stockholm
 		'159.190.240.150', '159.190.240.151',										//DV Malmö
@@ -145,6 +147,7 @@ grails.plugins.springsecurity.ipRestrictions = [
         '109.74.9.93',                                                              // ci.lagrummet.se (jenkins) for automated testing
 		]
  	]
+*/
 
 //grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 //grails.plugins.springsecurity.interceptUrlMap = [
