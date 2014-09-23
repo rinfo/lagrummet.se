@@ -28,6 +28,8 @@ env.docbuild = sep.join((env.builddir, 'documentation'))
 env.timestamp = datetime.utcnow().strftime('%Y_%m_%d_%H-%M-%S')
 env.datestamp = datetime.utcnow().strftime('%Y-%m-%d')
 
+env.ftp_server_url = "ftp://archive0d.glesys.com"
+
 # env.roledefs defines available roles but the actual host lists for a certain
 # role is environment dependent and set up by the targets defined in
 # target.py (see i.e. tg_dev_unix)
