@@ -6,7 +6,8 @@ from server import restart_apache
 from server import restart_tomcat
 from server import stop_tomcat
 from server import start_tomcat
-from sysconf import setup_mysql
+from sysconf import setup_mysql, get_value_from_password_store, PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, \
+    PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME
 from sysconf import setup_demodata
 
 
@@ -57,8 +58,12 @@ def test_all_targets_except_local(output, password, url, username):
 
 @task
 @roles('rinfo')
-def test(username='testadmin', password='testadmin'):
+def test(username='testadmin', password='testadmin', use_password_file=True):
     """Test functions of lagrummet.se regressionstyle"""
+    if use_password_file:
+        username = get_value_from_password_store(PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, username)
+        password = get_value_from_password_store(PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME, password)
+
     url="http:\\"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
     #test_targets_local_and_regression(output, password, url, username)  //todo fix these tests for regression
