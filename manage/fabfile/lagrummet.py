@@ -1,8 +1,7 @@
 import sys
 import time
 from fabric.api import *
-from server import _managed_tomcat_restart
-from server import restart_apache
+from server import restart_apache, restore_db
 from server import restart_tomcat
 from server import stop_tomcat
 from server import start_tomcat
@@ -124,3 +123,10 @@ def verify_url_content(url, string_exists_in_content, sleep_time=15, max_retry=3
     print respHttp
     print "#########################################################################################"
     return False
+
+@task
+def verify_backup(name, username='', password='', use_password_file=True):
+    restore_db(name, username=username, password=password, use_password_file=use_password_file)
+    time.sleep(20)
+    test(use_password_file=use_password_file)
+
