@@ -1,11 +1,12 @@
 import sys
 import time
 from fabric.api import *
-from server import restart_apache
+from server import restart_apache, restore_db
 from server import restart_tomcat
 from server import stop_tomcat
 from server import start_tomcat
-from sysconf import setup_mysql
+from sysconf import setup_mysql, get_value_from_password_store, PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, \
+    PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME
 from sysconf import setup_demodata
 
 
@@ -41,8 +42,12 @@ def restore_database_for_descructive_tests():
 
 @task
 @roles('rinfo')
-def test(username='testadmin', password='testadmin', wildcard='*.js'):
+def test(username='testadmin', password='testadmin', wildcard='*.js', use_password_file=True):
     """Test functions of lagrummet.se regressionstyle"""
+    if use_password_file:
+        username = get_value_from_password_store(PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, username)
+        password = get_value_from_password_store(PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME, password)
+
     url = "http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
     with lcd(env.projectroot + "/test/regression"):
@@ -53,8 +58,12 @@ def test(username='testadmin', password='testadmin', wildcard='*.js'):
 
 @task
 @roles('rinfo')
-def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js'):
+def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js', use_password_file=True):
     """Test functions of lagrummet.se regressionstyle"""
+    if use_password_file:
+        username = get_value_from_password_store(PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, username)
+        password = get_value_from_password_store(PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME, password)
+
     url = "http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
     try:
@@ -125,3 +134,10 @@ def verify_url_content(url, string_exists_in_content, sleep_time=15, max_retry=3
     print resp_http
     print "#########################################################################################"
     return False
+
+@task
+def verify_backup(name, username='', password='', use_password_file=True):
+    restore_db(name, username=username, password=password, use_password_file=use_password_file)
+    time.sleep(20)
+    test(use_password_file=use_password_file)
+

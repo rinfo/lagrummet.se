@@ -1,5 +1,8 @@
+import ConfigParser
 from fabric.api import *
 from fabric.contrib.files import append
+from os.path import expanduser
+
 
 
 @task
@@ -117,3 +120,48 @@ def install_public_key():
     get('~/id_rsa_tmp.pub', '/home/%(user)s/id_rsa_tmp.pub' % env)
     local('cat /home/%(user)s/id_rsa_tmp.pub >> /home/%(user)s/.ssh/authorized_keys' % env)
     local('rm /home/%(user)s/id_rsa_tmp.pub' % env)
+
+PASSWORD_FILE_NAME = 'password.cfg'
+PASSWORD_FILE_STANDARD_PASSWORD_PARAM_NAME = 'standard.password'
+PASSWORD_FILE_FTP_USERNAME_PARAM_NAME = 'ftp.username'
+PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME = 'ftp.password'
+PASSWORD_FILE_DB_USERNAME_PARAM_NAME = 'db.username'
+PASSWORD_FILE_DB_PASSWORD_PARAM_NAME = 'db.password'
+PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME = 'admin.username'
+PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME = 'admin.password'
+PASSWORD_FILE_PARAMS = (PASSWORD_FILE_STANDARD_PASSWORD_PARAM_NAME,
+                        PASSWORD_FILE_FTP_USERNAME_PARAM_NAME,
+                        PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME,
+                        PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME,
+                        PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME,
+                        PASSWORD_FILE_DB_USERNAME_PARAM_NAME,
+                        PASSWORD_FILE_DB_PASSWORD_PARAM_NAME)
+
+def get_password_file_name_and_path():
+    return "%s/%s" % (expanduser("~"), PASSWORD_FILE_NAME)
+
+def get_password_config():
+    password_file_name_ = get_password_file_name_and_path()
+    try:
+        config = ConfigParser.RawConfigParser()
+        config.read(password_file_name_)
+        print "Opened %s " % password_file_name_
+        return config
+    except:
+        config = ConfigParser.RawConfigParser()
+        print "Config file not found %s " % password_file_name_
+        return config
+
+
+@task
+def get_value_from_password_store(name, default_value=''):
+    if not name in PASSWORD_FILE_PARAMS:
+        print "Param name '%s' not accepted here"
+        return default_value
+    try:
+        value = get_password_config().get(env.target, name)
+        if not value:
+            return default_value
+        return value
+    except:
+        return default_value

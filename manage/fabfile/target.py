@@ -1,4 +1,6 @@
 from fabric.api import *
+from fabfile.sysconf import get_value_from_password_store, PASSWORD_FILE_STANDARD_PASSWORD_PARAM_NAME
+
 
 
 @task
@@ -19,6 +21,7 @@ def prod():
         'rinfo': ['beta.lagrummet.se'],
         'apache': ['beta.lagrummet.se'],
     }
+    _initialize_password()
 
 
 @task
@@ -39,6 +42,7 @@ def demo():
         'rinfo': ['demo.lagrummet.se'],
         'apache': ['demo.lagrummet.se'],
     }
+    _initialize_password()
 
 
 @task
@@ -59,6 +63,7 @@ def beta():
         'rinfo': ['beta.lagrummet.se'],
         'apache': ['beta.lagrummet.se'],
     }
+    _initialize_password()
 
 
 @task
@@ -79,6 +84,7 @@ def test():
         'rinfo': ['test.lagrummet.se'],
         'apache': ['test.lagrummet.se'],
     }
+    _initialize_password()
 
 
 @task
@@ -98,6 +104,7 @@ def regression():
     env.roledefs = {
         'rinfo': ['regression.lagrummet.se'],
     }
+    _initialize_password()
 
 
 @task
@@ -118,6 +125,7 @@ def skrapat():
         'rinfo': ['skrapat.lagrummet.se'],
         'apache': ['test.lagrummet.se'],
     }
+    _initialize_password()
 
 
 @task
@@ -137,3 +145,8 @@ def local():
     env.roledefs = {
         'rinfo': ['localhost:8080/lagrummet.se'],
     }
+    _initialize_password()
+
+
+def _initialize_password():
+    env.password = get_value_from_password_store(PASSWORD_FILE_STANDARD_PASSWORD_PARAM_NAME,env.password)
