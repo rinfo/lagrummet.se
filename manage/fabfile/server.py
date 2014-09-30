@@ -23,7 +23,7 @@ def restart_tomcat():
 
 
 @task
-def backup_db(name, username='', password='', use_password_file=True):
+def backup_db(name='', username='', password='', use_password_file=True):
     """Back up database and move file to ftp store"""
     # todo this solution uses poor security. Need improvement
     if not name:
