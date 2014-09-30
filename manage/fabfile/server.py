@@ -27,7 +27,7 @@ def backup_db(name, username='', password='', use_password_file=True):
     """Back up database and move file to ftp store"""
     # todo this solution uses poor security. Need improvement
     if not name:
-        name = "lagrummet_backup_%s" % env.timestamp
+        name = "lagrummet_backup_%s_%s" % (env.target, env.timestamp)
     filename = "lagrummet.sql"
     tmp_path = "/tmp/%s" % name
     create_path(tmp_path)
