@@ -202,7 +202,7 @@ class RdlSearchService {
 	}
 	
 	public String getBestMatch(item) {
-        def pickOrder = ['title','text','identifier']
+        def pickOrder = ['text','title','identifier']
 		def bestMatch = ""
         pickOrder.each {
             if (item.matches?.containsKey(it)) {
