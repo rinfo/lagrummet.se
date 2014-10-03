@@ -44,13 +44,7 @@ casper.test.begin('Add source connected to rdl', function(test) {
 
    casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
 
-   casper.then(function() {
-        var CSS_PATH_TO_ALL_MENU = casper.evaluate(findTextInNthChildMenu,'Alla rättskällor');
-
-        this.test.assertSelectorHasText(CSS_PATH_TO_ALL_MENU,'Alla rättskällor');
-
-        this.click(CSS_PATH_TO_ALL_MENU);
-   });
+   casper.then(goToAllaRattskallor);
 
    casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
 
