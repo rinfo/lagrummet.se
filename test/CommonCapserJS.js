@@ -59,7 +59,6 @@ function findTextInNthChildMenu(textToFind) {
     return "";
 }
 
-
 // Navigate to Alla Rättskällor from Rättsinformation menu
 var goToAllaRattskallor = function() {
     this.test.assertExists(x('//ul[@class="huvudmeny1"]/*/a[text()="Alla rättskällor"]'));
