@@ -55,3 +55,15 @@ function findTextInNthChildMenu(textToFind) {
     return "";
 }
 
+
+// Navigate to Alla Rättskällor from Rättsinformation menu
+var goToAllaRattskallor = function() {
+    this.test.assertExists(x('//ul[@class="huvudmeny1"]/*/a[text()="Alla rättskällor"]'));
+    this.click(x('//ul[@class="huvudmeny1"]/*/a[text()="Alla rättskällor"]'));
+}
+
+// Navigate to Förarbeten from Rättsinformation menu
+var goToForarbeten = function() {
+    this.test.assertExists(x('//ul[@class="huvudmeny1"]/*/a[text()="Förarbeten"]'));
+    this.click(x('//ul[@class="huvudmeny1"]/*/a[text()="Förarbeten"]'));
+}
