@@ -59,12 +59,12 @@ def test(username='testadmin', password='testadmin', wildcard='*.js', use_passwo
 
 @task
 @roles('rinfo')
-def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js', use_password_file=True, use_backup_restore=False):
+def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js', use_password_file=True, preserve_database=False):
     """Test admin functionality using database
 
      Run tests reading and writing the database and restore database afterwards.
      Default restore database with dump from GitHub.
-     Optionally set use_backup_restore=True to use backup and restore current database.
+     Optionally set preserve_database=True to use backup and restore current database.
     """
     if use_password_file:
         username = get_value_from_password_store(PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, username)
@@ -74,7 +74,7 @@ def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js
     output = "%s/target/test-reports/" % env.projectroot
     backup_name = 'Backup_for_test_%s_%s' % (env.target, env.timestamp)
 
-    if use_backup_restore:
+    if preserve_database:
         server.backup_db(name=backup_name)
 
     try:
@@ -83,7 +83,7 @@ def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js
                   "--includes=../../CommonCapserJS.js --url=%s --target=%s --output=%s --username=%s --password=%s"
                   % (wildcard, url, env.target, output, username, password))
     finally:
-        if use_backup_restore:
+        if preserve_database:
             server.restore_db(name=backup_name)
         else:
             restore_database_for_descructive_tests()
