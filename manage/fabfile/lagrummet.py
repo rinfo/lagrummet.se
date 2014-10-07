@@ -1,6 +1,7 @@
 import sys
 import time
 from fabric.api import *
+from fabfile import server
 from server import restart_apache, restore_db
 from server import restart_tomcat
 from server import stop_tomcat
@@ -58,21 +59,34 @@ def test(username='testadmin', password='testadmin', wildcard='*.js', use_passwo
 
 @task
 @roles('rinfo')
-def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js', use_password_file=True):
-    """Test functions of lagrummet.se regressionstyle"""
+def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js', use_password_file=True, use_backup_restore=False):
+    """Test admin functionality using database
+
+     Run tests reading and writing the database and restore database afterwards.
+     Default restore database with dump from GitHub.
+     Optionally set use_backup_restore=True to use backup and restore current database.
+    """
     if use_password_file:
         username = get_value_from_password_store(PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, username)
         password = get_value_from_password_store(PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME, password)
 
     url = "http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
+    backup_name = 'Backup_for_test_%s_%s' % (env.target, env.timestamp)
+
+    if use_backup_restore:
+        server.backup_db(name=backup_name)
+
     try:
         with lcd(env.projectroot + "/test/regression/db"):
             local("casperjs test %s --xunit=../casperjs.log --includes=../../GAblocker.js "
                   "--includes=../../CommonCapserJS.js --url=%s --target=%s --output=%s --username=%s --password=%s"
                   % (wildcard, url, env.target, output, username, password))
     finally:
-        restore_database_for_descructive_tests()
+        if use_backup_restore:
+            server.restore_db(name=backup_name)
+        else:
+            restore_database_for_descructive_tests()
 
 
 @task
