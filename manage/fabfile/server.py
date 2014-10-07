@@ -2,8 +2,7 @@ from fabric.api import *
 import contextlib
 import time
 from fabfile.sysconf import get_value_from_password_store, PASSWORD_FILE_FTP_USERNAME_PARAM_NAME, \
-    PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME
-
+    PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME, PASSWORD_FILE_DB_USERNAME_PARAM_NAME, PASSWORD_FILE_DB_PASSWORD_PARAM_NAME
 
 
 @task
@@ -23,7 +22,7 @@ def restart_tomcat():
 
 
 @task
-def backup_db(name='', username='', password='', use_password_file=True):
+def backup_db(name='', username='', password='', db_username='', db_password='', use_password_file=True):
     """Back up database and move file to ftp store"""
     # todo this solution uses poor security. Need improvement
     if not name:
@@ -36,12 +35,16 @@ def backup_db(name='', username='', password='', use_password_file=True):
         username = get_value_from_password_store(PASSWORD_FILE_FTP_USERNAME_PARAM_NAME, username)
         password = get_value_from_password_store(PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME, password)
 
-    sudo("mysqldump -a lagrummet > %s/%s" % (tmp_path, filename))
+    if use_password_file:
+        db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, db_username)
+        db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, db_password)
+
+    run("mysqldump -a -u %s --password=%s lagrummet > %s/%s" % (db_username, db_password, tmp_path, filename))
     pack_and_ftp_push(name, filename, username, password, tmp_path)
 
 
 @task
-def restore_db(name, username='', password='', use_password_file=True):
+def restore_db(name, username='', password='', db_username='', db_password='', use_password_file=True):
     """Restore database backup from ftp store"""
     # todo this solution uses poor security. Need improvement
     if not name:
@@ -55,9 +58,13 @@ def restore_db(name, username='', password='', use_password_file=True):
         username = get_value_from_password_store(PASSWORD_FILE_FTP_USERNAME_PARAM_NAME, username)
         password = get_value_from_password_store(PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME, password)
 
+    if use_password_file:
+        db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, db_username)
+        db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, db_password)
+
     download_from_ftp_and_unpack(name, "lagrummet.sql", tmp_path, username, password)
     stop_tomcat()
-    sudo("mysql lagrummet < %s/lagrummet.sql" % tmp_path)
+    run("mysql  -u %s --password=%s lagrummet < %s/lagrummet.sql" % (db_username, db_password, tmp_path) )
     start_tomcat(wait=0)
 
 
