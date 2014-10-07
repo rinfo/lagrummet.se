@@ -1,8 +1,7 @@
 import sys
 import time
 from fabric.api import *
-from fabfile import server
-from server import restart_apache, restore_db
+from server import restart_apache, restore_db, backup_db
 from server import restart_tomcat
 from server import stop_tomcat
 from server import start_tomcat
@@ -75,7 +74,7 @@ def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js
     backup_name = 'Backup_for_test_%s_%s' % (env.target, env.timestamp)
 
     if preserve_database:
-        server.backup_db(name=backup_name)
+        backup_db(name=backup_name)
 
     try:
         with lcd(env.projectroot + "/test/regression/db"):
@@ -84,7 +83,7 @@ def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js
                   % (wildcard, url, env.target, output, username, password))
     finally:
         if preserve_database:
-            server.restore_db(name=backup_name)
+            restore_db(name=backup_name)
         else:
             restore_database_for_descructive_tests()
 
