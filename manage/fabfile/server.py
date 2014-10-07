@@ -24,7 +24,6 @@ def restart_tomcat():
 @task
 def backup_db(name='', username='', password='', db_username='', db_password='', use_password_file=True):
     """Back up database and move file to ftp store"""
-    # todo this solution uses poor security. Need improvement
     if not name:
         name = "lagrummet_backup_%s_%s" % (env.target, env.timestamp)
     filename = "lagrummet.sql"
@@ -32,12 +31,12 @@ def backup_db(name='', username='', password='', db_username='', db_password='',
     create_path(tmp_path)
 
     if use_password_file:
-        username = get_value_from_password_store(PASSWORD_FILE_FTP_USERNAME_PARAM_NAME, username)
-        password = get_value_from_password_store(PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME, password)
+        username = get_value_from_password_store(PASSWORD_FILE_FTP_USERNAME_PARAM_NAME, default_value=username)
+        password = get_value_from_password_store(PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME, default_value=password)
 
     if use_password_file:
-        db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, db_username)
-        db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, db_password)
+        db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, default_value=db_username)
+        db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, default_value=db_password)
 
     run("mysqldump -a -u %s --password=%s lagrummet > %s/%s" % (db_username, db_password, tmp_path, filename))
     pack_and_ftp_push(name, filename, username, password, tmp_path)
@@ -46,7 +45,6 @@ def backup_db(name='', username='', password='', db_username='', db_password='',
 @task
 def restore_db(name, username='', password='', db_username='', db_password='', use_password_file=True):
     """Restore database backup from ftp store"""
-    # todo this solution uses poor security. Need improvement
     if not name:
         print "Missing parameter 'name'!"
         return
@@ -55,12 +53,12 @@ def restore_db(name, username='', password='', db_username='', db_password='', u
     create_path(tmp_path)
 
     if use_password_file:
-        username = get_value_from_password_store(PASSWORD_FILE_FTP_USERNAME_PARAM_NAME, username)
-        password = get_value_from_password_store(PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME, password)
+        username = get_value_from_password_store(PASSWORD_FILE_FTP_USERNAME_PARAM_NAME, default_value=username)
+        password = get_value_from_password_store(PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME, default_value=password)
 
     if use_password_file:
-        db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, db_username)
-        db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, db_password)
+        db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, default_value=db_username)
+        db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, default_value=db_password)
 
     download_from_ftp_and_unpack(name, "lagrummet.sql", tmp_path, username, password)
     stop_tomcat()
