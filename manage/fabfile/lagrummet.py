@@ -1,7 +1,7 @@
 import sys
 import time
 from fabric.api import *
-from server import restart_apache, restore_db
+from server import restart_apache, restore_db, backup_db
 from server import restart_tomcat
 from server import stop_tomcat
 from server import start_tomcat
@@ -72,13 +72,21 @@ def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js
 
     url = "http://"+env.roledefs['rinfo'][0]
     output = "%s/target/test-reports/" % env.projectroot
+    backup_name = 'Backup_for_test_%s_%s' % (env.target, env.timestamp)
+
+    if preserve_database:
+        backup_db(name=backup_name)
+
     try:
         with lcd(env.projectroot + "/test/regression/db"):
             local("casperjs test %s --xunit=../casperjs.log --includes=../../GAblocker.js "
                   "--includes=../../CommonCapserJS.js --url=%s --target=%s --output=%s --username=%s --password=%s"
                   % (wildcard, url, env.target, output, username, password))
     finally:
-        restore_database_for_descructive_tests()
+        if preserve_database:
+            restore_db(name=backup_name)
+        else:
+            restore_database_for_descructive_tests()
 
 
 @task
