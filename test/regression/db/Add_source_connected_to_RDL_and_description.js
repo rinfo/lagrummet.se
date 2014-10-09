@@ -38,9 +38,9 @@ casper.test.begin('Add source connected to rdl and with description', function(t
 
     casper.then(function() {
         this.test.assertSelectorHasText('#bodyContent > div > h1','Redigera Rättskälla');
-
-        this.click('body > header > a');
     });
+
+    casper.then(logout);
 
     casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
 
