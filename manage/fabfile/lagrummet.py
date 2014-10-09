@@ -58,7 +58,7 @@ def test(username='testadmin', password='testadmin', wildcard='*.js', use_passwo
 
 @task
 @roles('rinfo')
-def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js Add_synonym.js', use_password_file=True, preserve_database=False):
+def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js Add_synonym.js Remove_synonym.js', use_password_file=True, preserve_database=False):
     """Test admin functionality using database
 
      Run tests reading and writing the database and restore database afterwards.

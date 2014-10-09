@@ -21,14 +21,13 @@ casper.test.begin('Add synonym', function(test) {
    // Test starts here
    casper.then(function() {
        this.test.assertSelectorHasText(x('//*[@id="adminFunctions"]/ul/*/ul/*/a'), 'Hantera synonymer');
-        this.click(x('//*[@id="adminFunctions"]/ul/*/ul/*/a[text()="Hantera synonymer"]')); // Click at 'Rättskällor -> Hantera rättskällor'
+       this.click(x('//*[@id="adminFunctions"]/ul/*/ul/*/a[text()="Hantera synonymer"]')); // Click at 'Rättskällor -> Hantera rättskällor'
    });
 
    casper.waitForSelector("#bodyContent > div", function(){}, captureScreen, 5000);
 
    casper.then(function() {
        this.test.assertSelectorHasText('#bodyContent > div > h1','Synonymer');
-       //this.test.assertExists('//*[@id="addSynonym" and @value="lägg till synonym"]');
 
        this.click(x('//*[@id="addSynonym"]'));
 
@@ -48,6 +47,16 @@ casper.test.begin('Add synonym', function(test) {
    casper.then(logout);
 
    casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
+
+   casper.then(function() {
+       this.sendKeys("input[name='query']", "rinfo");
+   });
+
+   casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
+
+    casper.then(function() {
+       this.test.assertExists(x('//*[@id="dynamicSearchResults"]/p/span[text()="rättsinformationsförordning (1999:175)"]'));
+    });
 
    casper.run(function() {test.done();});
 });
