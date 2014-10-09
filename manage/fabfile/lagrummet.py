@@ -58,7 +58,7 @@ def test(username='testadmin', password='testadmin', wildcard='*.js', use_passwo
 
 @task
 @roles('rinfo')
-def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js', use_password_file=True):
+def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js Add_synonym.js', use_password_file=True):
     """Test functions of lagrummet.se regressionstyle"""
     if use_password_file:
         username = get_value_from_password_store(PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, username)
