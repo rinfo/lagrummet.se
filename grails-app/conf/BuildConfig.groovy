@@ -58,7 +58,7 @@ grails.project.dependency.resolution = {
         compile ":webxml:1.4.1"
         compile 'org.grails.plugins:gson:1.1.4'
 
-        build ":tomcat:7.0.54"
+        build ":tomcat:7.0.56"
 
     }
 }
