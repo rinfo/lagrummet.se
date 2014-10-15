@@ -24,8 +24,7 @@ casper.test.begin('Add source without rdl', function(test) {
        this.fill('form#form_create_source', {
            'url':    'http://www.abcmyndigheten.se',
            'name':    'ABC-myndigheten 2',
-           'category':       'Foreskrifter',
-           'subCategory':      'Regeringen'
+           'category':       'Foreskrifter'
        });
 
        this.click('#create');
