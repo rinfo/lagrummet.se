@@ -76,6 +76,9 @@ grails.spring.bean.packages = []
 grails.exceptionresolver.params.exclude = ['password']
 
 
+grails.databinding.convertEmptyStringsToNull = false
+
+
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
@@ -198,7 +201,7 @@ lagrummet {
 		[value: 'patentbesvaersraetten', title: 'Patentbesv&auml;rsr&auml;tten'],
 	]
 	legalSource.categories = ["Foreskrifter","Lagar","Forarbeten","Rattspraxis","Internationellt"]
-	legalSource.subCategories = ["", "Regeringen", "Riksdagen", "Lagradet", "Domstolars_Vagledande_Avgoranden", "Myndigheters_Vagledande_Avgoranden", "Domstolars_Beslut"]
+	legalSource.subCategories = ["Regeringen", "Riksdagen", "Lagradet", "Domstolars_Vagledande_Avgoranden", "Myndigheters_Vagledande_Avgoranden", "Domstolars_Beslut"]
 }
 
 // Mail settings for contact form (and other Grails Mail)
