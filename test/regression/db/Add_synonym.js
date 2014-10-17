@@ -31,8 +31,8 @@ casper.test.begin('Add synonym', function(test) {
 
        this.click(x('//*[@id="addSynonym"]'));
 
-       this.sendKeys(x('//*[@name=concat("expandableSynonymList[", count(//tbody/tr)-1, "].synonym")]'), 'rinfo');
-       this.sendKeys(x('//*[@name=concat("expandableSynonymList[", count(//tbody/tr)-1, "].baseTerm")]'), 'rättsinformationsförordning (1999:175)');
+       this.sendKeys(x('//*[@name=concat("synonyms[", count(//tbody/tr)-1, "].synonym")]'), 'rinfo');
+       this.sendKeys(x('//*[@name=concat("synonyms[", count(//tbody/tr)-1, "].baseTerm")]'), 'rättsinformationsförordning (1999:175)');
 
        this.click(x('//*[@id="submitSynonym"]'));
    });
