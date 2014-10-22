@@ -30,6 +30,10 @@ class SearchService {
     private ArrayList selectTopHitsDependingOnCategory(Category cat, remoteLatestConsolidatedResult, localResult, remoteResult) {
         if (cat==null) {
             def topHits = []
+            remoteResult.topHits?.removeAll {
+                def iri = it.iri
+                remoteLatestConsolidatedResult.topHits?.any { it.iri == iri }
+            }
             topHits.addAll(reduceHits(remoteLatestConsolidatedResult.topHits))
             topHits.addAll(reduceHits(remoteResult.topHits))
             topHits.addAll(reduceHits(localResult.topHits, 1))
