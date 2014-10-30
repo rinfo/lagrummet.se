@@ -2,7 +2,6 @@
 <head>
     <title>${docInfo.identifier} - ${docInfo.title}</title>
 	<meta name="layout" content="main" />
-    <g:javascript library="jquery" plugin="jquery"/>
 </head>
 <body>
     <article id="rinfo">    	
@@ -265,11 +264,6 @@
                 </g:if>
         </aside>
   </article>
-
-  <!-- Hide unwanted sections of remote content -->
-  <g:javascript>$(document).ready(function(){
-      $('div.preambel').addClass('hidden')
-  });</g:javascript>
 
 </body>
 </html>

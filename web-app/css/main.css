@@ -1212,6 +1212,9 @@ fieldset .inputGroup p {
 	margin: 0;
 }
 
+#rinfo div.preambel {
+    display: none;
+}
 
 #rinfo #leftCol {
 	width: 490px;
