@@ -145,7 +145,7 @@ def get_password_config():
     try:
         config = ConfigParser.RawConfigParser()
         config.read(password_file_name_)
-        print "Opened %s " % password_file_name_
+        #print "Opened %s " % password_file_name_
         return config
     except:
         config = ConfigParser.RawConfigParser()
