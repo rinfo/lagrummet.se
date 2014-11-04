@@ -50,7 +50,7 @@ def beta():
     """set environment: beta"""
     env.target = 'beta'
     env.demodata = False
-    env.mysql_backup = True
+    env.mysql_backup = False
     env.tomcat_stop = '/etc/init.d/tomcat stop'
     env.tomcat_start = '/etc/init.d/tomcat start'
     env.user = 'rinfo'
