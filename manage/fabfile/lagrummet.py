@@ -58,13 +58,14 @@ def test(username='testadmin', password='testadmin', wildcard='*.js', use_passwo
 
 @task
 @roles('rinfo')
-def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js', use_password_file=True, preserve_database=False):
+def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js Add_synonym.js Remove_*.js', use_password_file=True, preserve_database=False):
     """Test admin functionality using database
 
      Run tests reading and writing the database and restore database afterwards.
      Default restore database with dump from GitHub.
      Optionally set preserve_database=True to use backup and restore current database.
     """
+    
     if use_password_file:
         username = get_value_from_password_store(PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, username)
         password = get_value_from_password_store(PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME, password)

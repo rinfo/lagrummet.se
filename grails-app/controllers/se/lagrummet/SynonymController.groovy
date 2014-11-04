@@ -22,12 +22,9 @@ class SynonymController {
 	def updateList = { UpdateListCommand cmd ->
 
 		cmd.synonyms.each { synonym ->
-			if(synonym?.deleted) {
-				synonym.delete(flush:true)
-			} else {
-				synonym?.save(flush:true)
-			}
+    		synonym?.save(flush:true)
 		}
+
 		redirect(action: "list")
 	}
 	
@@ -52,9 +49,5 @@ class SynonymController {
 }
 
 class UpdateListCommand {
-    List synonyms = new ArrayList()
-
-    def getExpandableSynonymList() {
-        LazyList.decorate(synonyms, FactoryUtils.instantiateFactory(Synonym.class))
-    }
+    List<Synonym> synonyms = [].withLazyDefault {new Synonym()}
 }

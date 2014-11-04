@@ -33,15 +33,14 @@
                     <g:each in="${synonymInstanceList}" status="i" var="synonymInstance">
                         <tr>
                         
-                            <td><g:textField name="expandableSynonymList[${i}].synonym" value="${synonymInstance?.synonym}" size="50" disabled="disabled" /></td>
+                            <td><g:textField name="synonyms[${i}].synonym" value="${synonymInstance?.synonym}" size="50" disabled="disabled" /></td>
                         
-                            <td><g:textField name="expandableSynonymList[${i}].baseTerm" value="${synonymInstance?.baseTerm}" size="50" disabled="disabled" /></td>
+                            <td><g:textField name="synonyms[${i}].baseTerm" value="${synonymInstance?.baseTerm}" size="50" disabled="disabled" /></td>
                         
                         	<td>
                         		<div class="buttons"><input type="button" class="editSynonym update" value="&nbsp;" /> 
                         			<a href="${createLink( controller:"synonym", action:"delete", params:[id: synonymInstance?.id])}"><input type="button" class="deleteSynonym delete" value="&nbsp;" /></a></div>
-                        		<g:hiddenField name="expandableSynonymList[${i}].id" value="${synonymInstance?.id}" disabled="disabled" />
-                        		<g:hiddenField name="expandableSynonymList[${i}].deleted" value="false" disabled="disabled" />
+                        		<g:hiddenField name="synonyms[${i}].id" value="${synonymInstance?.id}" disabled="disabled" />
                         	</td>
                         </tr>
                     </g:each>

@@ -9,7 +9,7 @@
     <article class="editorial">
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
-			<g:each in="${grailsApplication.config.lagrummet.legalSource.subCategories}" var="subCat">
+			<g:each in="${[""] + grailsApplication.config.lagrummet.legalSource.subCategories}" var="subCat">
             <g:def value="${LegalSource.findAllByCategoryAndSubCategory(cat, subCat)}" var="liList" />
 				<g:if test="${liList.size() > 0}">
             	<h4 id="${subCat ? 'legalSource.subCategory.'+subCat : 'legalSource.category.'+cat}">${message(code: (subCat ? 'legalSource.subCategory.'+subCat : 'legalSource.category.'+cat))}</h4>

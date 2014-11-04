@@ -36,6 +36,10 @@ var verifyLogin = function() {
     this.test.assertSelectorHasText('body > header > h1 > a','Lagrummet.se CMS');
 }
 
+var logout = function() {
+    this.click('body > header > a');
+}
+
 // Will search lagrummet menu for the text in "textToFind" and return the corresponding menu item url
 function findTextInNthChildMenu(textToFind) {
     //console.log('findTextInNthChildMenu('+textToFind+')');
@@ -55,3 +59,20 @@ function findTextInNthChildMenu(textToFind) {
     return "";
 }
 
+// Navigate to Alla Rättskällor from Rättsinformation menu
+var goToAllaRattskallor = function() {
+    this.test.assertExists(x('//ul[@class="huvudmeny1"]/*/a[text()="Alla rättskällor"]'));
+    this.click(x('//ul[@class="huvudmeny1"]/*/a[text()="Alla rättskällor"]'));
+}
+
+// Navigate to Förarbeten from Rättsinformation menu
+var goToForarbeten = function() {
+    this.test.assertExists(x('//ul[@class="huvudmeny1"]/*/a[text()="Förarbeten"]'));
+    this.click(x('//ul[@class="huvudmeny1"]/*/a[text()="Förarbeten"]'));
+}
+
+// Navigate to Myndigheters föreskrifter from Rättsinformation menu
+var goToMyndighetersForeskrifter = function() {
+    this.test.assertExists(x('//ul[@class="huvudmeny1"]/*/a[text()="Myndigheters föreskrifter"]'));
+    this.click(x('//ul[@class="huvudmeny1"]/*/a[text()="Myndigheters föreskrifter"]'));
+}

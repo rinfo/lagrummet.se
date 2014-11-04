@@ -1,7 +1,5 @@
 var x = require('casper').selectXPath;
 
-
-
 casper.test.begin('Add source connected to rdl and with description', function(test) {
     phantom.cookies = '';
     casper.start(casper.cli.get("url")+'/admin?lang=sv');
@@ -26,10 +24,11 @@ casper.test.begin('Add source connected to rdl and with description', function(t
 
         this.fill('form#form_create_source', {
             'url':    'http://www.abcmyndigheten.se',
-            'name':    'Förarbete',
+            'name':    'Förarbete TEST',
             'rdlName':   'https://rinfo.boverket.se/index.atom',
             'category':       'Forarbeten',
             'subCategory':      'Regeringen',
+            'description':      'Beskrivning'
         });
 
         this.click('#create');
@@ -39,39 +38,27 @@ casper.test.begin('Add source connected to rdl and with description', function(t
 
     casper.then(function() {
         this.test.assertSelectorHasText('#bodyContent > div > h1','Redigera Rättskälla');
-
-        this.click('body > header > a');
     });
+
+    casper.then(logout);
+
+    casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
+
+    casper.then(goToForarbeten);
 
     casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
 
     casper.then(function() {
-        var CSS_PATH_TO_MENU = casper.evaluate(findTextInNthChildMenu,'Förarbeten');
-        if (CSS_PATH_TO_MENU=='')
-            this.wait(1,captureScreen);
-        this.test.assertSelectorHasText(CSS_PATH_TO_MENU,'Förarbeten');
-        this.click(CSS_PATH_TO_MENU);
+        this.test.assertSelectorHasText('#legalSource_subCategory_Regeringen_list > li > a','Förarbete TEST');
     });
 
-    casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
-
-    casper.then(function() {
-        this.test.assertSelectorHasText('#legalSource_subCategory_Regeringen_list > li:nth-child(1) > a','Förarbete');
-    });
-
-    casper.then(function() {
-        var CSS_PATH_TO_ALL_MENU = casper.evaluate(findTextInNthChildMenu,'Alla rättskällor');
-        if (CSS_PATH_TO_ALL_MENU=='')
-            this.wait(1,captureScreen);
-        this.test.assertSelectorHasText(CSS_PATH_TO_ALL_MENU,'Alla rättskällor');
-        this.click(CSS_PATH_TO_ALL_MENU);
-    });
+    casper.then(goToAllaRattskallor);
 
     casper.waitForText("Lista över rättskällorna", function(){}, captureScreen, 20000);
 
     casper.then(function() {
         this.test.assertSelectorHasText('#content > article > header > h1','Lista över rättskällorna');
-        this.test.assertSelectorHasText('#Forarbeten_sokbar_list > li:nth-child(1) > a','Förarbete');
+        this.test.assertSelectorHasText('#Forarbeten_sokbar_list > li > a','Förarbete TEST');
     });
 
     casper.run(function() {test.done();});

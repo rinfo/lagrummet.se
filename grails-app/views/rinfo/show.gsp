@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>${docInfo.identifier} - ${docInfo.title}</title>
+    <title>${docInfo.identifier} - ${docInfo.title}</title>
 	<meta name="layout" content="main" />
 </head>
 <body>
@@ -264,5 +264,6 @@
                 </g:if>
         </aside>
   </article>
+
 </body>
 </html>

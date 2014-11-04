@@ -216,9 +216,9 @@ jQuery(function($) {
 	$("#addSynonym").click(function(e) {
 		e.preventDefault();
 		
-		var inputRow = '<tr><td><input type="text" size="50" name="expandableSynonymList[' + next_index + '].synonym" /></td><td><input type="text" size="50" name="expandableSynonymList['+next_index+'].baseTerm" /></td>';
+		var inputRow = '<tr><td><input type="text" size="50" name="synonyms[' + next_index + '].synonym" /></td><td><input type="text" size="50" name="synonyms['+next_index+'].baseTerm" /></td>';
 		inputRow += '<td><div class="buttons"><input type="button" class="editSynonym update" value="&nbsp;" /> <input type="button" class="deleteUnsavedSynonym delete" value="&nbsp;" /></div>';
-		inputRow += '<input type="hidden" name="expandableSynonymList[' + next_index + '].deleted" value="false" disabled="disabled" /></td></tr>';
+		inputRow += '<input type="hidden" name="synonyms[' + next_index + '].id" value="" disabled="disabled" /></td></tr>';
 		next_index++;
 		$(".list").find("tbody").prepend(inputRow);
 		$(".list").find("tbody").find("tr:first").find(".deleteUnsavedSynonym").click(deleteUnsavedSynonym);
