@@ -38,7 +38,8 @@ def backup_db(name='', username='', password='', db_username='', db_password='',
         db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, default_value=db_username)
         db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, default_value=db_password)
 
-    run("mysqldump -a -u %s --password=%s lagrummet > %s/%s" % (db_username, db_password, tmp_path, filename))
+    with hide('output','running'):
+        run("mysqldump -a -u %s --password=%s lagrummet > %s/%s" % (db_username, db_password, tmp_path, filename))
     pack_and_ftp_push(name, filename, username, password, tmp_path)
 
 
@@ -62,7 +63,8 @@ def restore_db(name, username='', password='', db_username='', db_password='', u
 
     download_from_ftp_and_unpack(name, "lagrummet.sql", tmp_path, username, password)
     stop_tomcat()
-    run("mysql  -u %s --password=%s lagrummet < %s/lagrummet.sql" % (db_username, db_password, tmp_path) )
+    with hide('output','running'):
+        run("mysql  -u %s --password=%s lagrummet < %s/lagrummet.sql" % (db_username, db_password, tmp_path) )
     start_tomcat(wait=0)
 
 
@@ -90,12 +92,14 @@ def _managed_tomcat_restart(wait=5, headless=False):
 
 
 def ftp_push(filename, ftp_address, username, password):
-    run('curl -T %s %s --user %s:%s --ftp-create-dirs' % (filename, ftp_address, username, password))
+    with hide('output','running'):
+        run('curl -T %s %s --user %s:%s --ftp-create-dirs' % (filename, ftp_address, username, password))
 
 
 def ftp_fetch(filename, ftp_address, target_path, username, password):
     with cd(target_path):
-        run('curl %s/%s --user %s:%s --ftp-create-dirs -o %s' % (ftp_address, filename, username, password,
+        with hide('output','running'):
+            run('curl %s/%s --user %s:%s --ftp-create-dirs -o %s' % (ftp_address, filename, username, password,
                                                                      filename))
 
 def pack(filename, path):
