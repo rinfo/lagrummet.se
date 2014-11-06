@@ -15,7 +15,7 @@
 
 <div class="input ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
 	<label for="title"><g:message code="user.password.label" default="Password" /></label>
-	<g:textField name="password" value="${userInstance?.password}" class="wideInput" />
+	<g:textField name="password" value="${userInstance?.password}" class="wideInput" autocomplete="off" />
 </div>
 
 <div class="input ${hasErrors(bean: userInstance, field: 'department', 'errors')}">
