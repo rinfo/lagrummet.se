@@ -34,7 +34,7 @@ casper.test.begin('Login', function(test) {
 
    casper.then(function() {
            this.test.assertTextExists("lagrummet.se");
-           this.test.assertTextExists("Sökhistorik");
+         //this.test.assertTextExists("Sökhistorik");
            this.test.assertSelectorHasText('body > header > h1 > a','Lagrummet.se CMS');
    });
 
