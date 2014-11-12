@@ -79,6 +79,7 @@ grails.exceptionresolver.params.exclude = ['password']
 grails.databinding.convertEmptyStringsToNull = false
 
 
+
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
@@ -167,6 +168,8 @@ lagrummet {
 	googleAnalytics.webPropertyId = ""
 	contact.email = "betafeedback@lagrummet.se"
 	upload.dir = "files/"
+    onlyLocalSearch = true
+    mainLayoutName = "main"
 	rdl.service.baseurl="http://service.demo.lagrummet.se"
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
 	local.rinfo.view="${grails.serverURL}/rinfo/"

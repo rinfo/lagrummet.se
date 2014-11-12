@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>500 Internt serverfel</title>
-    <meta name="layout" content="main" />
+    <meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}" />
 </head>
 <body>
 <article class="editorial 500">

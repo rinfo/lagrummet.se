@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
+        <meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}" />
         <g:set var="entityName" value="${message(code: 'siteProperties.label', default: 'SiteProperties')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>

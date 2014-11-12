@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>404 - Sidan kunde inte hittas</title>
-	<meta name="layout" content="main" />
+	<meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}" />
 </head>
 <body>
     <article class="editorial 404">

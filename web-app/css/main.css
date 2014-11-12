@@ -993,7 +993,7 @@ article.legalSources section.Foreskrifter h2 {
 	color: #888;
 }
 
-#content .searchResults a.catTitle {
+#content .searchResults .catTitle {
 	color: #006383;
 	font-weight: bold;
 	text-decoration: none;

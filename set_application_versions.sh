@@ -4,8 +4,8 @@ export GRAILS_VERSION=`sed '/^\#/d' application.properties | grep 'app.grails.ve
 export GROOVY_VERSION=`sed '/^\#/d' application.properties | grep 'app.groovy.version'  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'`
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-export GROOVY_HOME=~.gvm/groovy/$GROOVY_VERSION
-export GRAILS_HOME=~.gvm/grails/$GRAILS_VERSION
+export GROOVY_HOME=~/.gvm/groovy/$GROOVY_VERSION
+export GRAILS_HOME=~/.gvm/grails/$GRAILS_VERSION
 export PATH=$JAVA_HOME/bin:$GROOVY_HOME/bin:$GRAILS_HOME/bin:$PATH
 
 echo "*************** SETUP ******************"

@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>${docInfo.identifier} - ${docInfo.title}</title>
-	<meta name="layout" content="main" />
+	<meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}" />
 </head>
 <body>
     <article id="rinfo">    	

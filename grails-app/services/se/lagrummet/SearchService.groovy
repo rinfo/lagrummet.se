@@ -9,11 +9,15 @@ class SearchService {
 
 	static transactional = true
 
+    def grailsApplication
 	def rdlSearchService
 	def localSearchService
 	
     public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
-		
+
+        if (grailsApplication.config.lagrummet.onlyLocalSearch)
+            return localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
+
 		def remoteResult = rdlSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
 		def remoteLatestConsolidatedResult = rdlSearchService.plainTextLatestConsolidated(query, cat, offset, itemsPerPage)
 		def localResult = localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)

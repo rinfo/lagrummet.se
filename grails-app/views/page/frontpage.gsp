@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>${page.title}</title>
-	<meta name="layout" content="main" />
+	<meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}" />
 </head>
 <body>
     <article class="frontpage editorial">

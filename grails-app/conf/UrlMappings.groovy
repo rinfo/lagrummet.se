@@ -9,11 +9,20 @@ class UrlMappings {
 		"/logout/$action"(controller:'logout')
 		"/sitemap"(controller: 'page', action: "xmlSitemap")
 
-		name extendedSearch: "/search/ext/" {
-			controller = "search"
-			action = "ext"
-		}
-		
+        name extendedSearch: "/search/ext/" {
+            switch (grailsApplication.config.lagrummet.onlyLocalSearch) {
+                case false:
+                    controller = "search"
+                    action = "ext"
+                    break
+                case true:
+                    controller = "page"
+                    action = "error"
+                    errorId = "404"
+                    break
+                }
+        }
+
 		name search: "/search/" {
 			controller = "search"
 			action = "index"
@@ -22,9 +31,17 @@ class UrlMappings {
 		"/search/$action"(controller:'search')
 		
 		name rinfo: "/rinfo/$docPath**" {
-			controller = "rinfo"
-			action = "show"
-		}	
+            switch (grailsApplication.config.lagrummet.onlyLocalSearch) {
+                case false:
+                    controller = "rinfo"
+                    action = "show"
+                case true:
+                    controller = "page"
+                    action = "error"
+                    errorId = "404"
+                    break
+            }
+		}
 
 		"/files/$filename**" {
 			controller = "media"

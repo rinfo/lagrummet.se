@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Welcome to Grails</title>
-        <meta name="layout" content="main" />
+        <meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}" />
         <style type="text/css" media="screen">
 
         #nav {

@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>Sökresultat för ${query.encodeAsHTML()}</title>
-	<meta name="layout" content="main"/>
+	<meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}"/>
 </head>
 <body>
     <article id="searchResults" class="searchResults">

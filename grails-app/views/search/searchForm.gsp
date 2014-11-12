@@ -6,7 +6,7 @@
 	<g:else>
 	<title>Sök</title>
 	</g:else>
-	<meta name="layout" content="main"/>
+	<meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}"/>
 </head>
 <body>
     <article id="searchResults" class="searchResults">
@@ -74,7 +74,7 @@
 				<!--
                                   <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }" class="catTitle">Propositioner och skrivelser</a> 
                                  -->
-                                 <b>Propositioner och skrivelser</b>                                 
+                                 <span class="catTitle">Propositioner och skrivelser</span>
 				<span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})
 				<g:if test="${searchResult.items['Propositioner'].size() > 0 && searchResult.totalResultsPerCategory['Propositioner'] > searchResult.items['Propositioner'].size()}"> Visar de första ${searchResult.items['Propositioner'].size()}</g:if>				
 				</span>
@@ -102,10 +102,18 @@
                         ********************************************************************************
                         -->                         
 			<p>
-				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Rattsfall', alias:alias]) }" class="catTitle">Rättsfall</a> 
+			    <g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
+			      <span class="catTitle">Rättsfall</span>
+				</g:if>
+				<g:else>
+				  <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Rattsfall', alias:alias]) }" class="catTitle">Rättsfall</a>
+				</g:else>
 				<span class="count">(${searchResult.totalResultsPerCategory['Rattsfall']})
 				<g:if test="${searchResult.items['Rattsfall'].size() > 0 && searchResult.totalResultsPerCategory['Rattsfall'] > searchResult.items['Rattsfall'].size()}"> Visar de första ${searchResult.items['Rattsfall'].size()}</g:if>
 				</span>
+				<g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
+				  <br />Dessa dokument är inte sökbara i denna version av lagrummet.se.
+				</g:if>
 			</p>
 			<g:if test="${searchResult.items['Rattsfall']}">
 			<ul>
@@ -131,10 +139,18 @@
                         ********************************************************************************
                         -->                                     
 			<p>
-				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Lagar', alias:alias]) }" class="catTitle">Lagar och förordningar</a> 
+			    <g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
+			      <span class="catTitle">Lagar och förordningar</span>
+				</g:if>
+				<g:else>
+				  <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Lagar', alias:alias]) }" class="catTitle">Lagar och förordningar</a>
+				</g:else>
 				<span class="count">(${searchResult.totalResultsPerCategory['Lagar']})
 				<g:if test="${searchResult.items['Lagar'].size() > 0 && searchResult.totalResultsPerCategory['Lagar'] > searchResult.items['Lagar'].size()}"> Visar de första ${searchResult.items['Lagar'].size()}</g:if>
 				</span>
+				<g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
+				  <br />Dessa dokument är inte sökbara i denna version av lagrummet.se.
+				</g:if>
 			</p>
 			<g:if test="${searchResult.items['Lagar']}">
 			<ul>
@@ -162,10 +178,18 @@
                         ********************************************************************************
                         -->                         
 			<p>
-				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }" class="catTitle">Myndigheters föreskrifter</a> 
+			    <g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
+			      <span class="catTitle">Myndigheters föreskrifter</span>
+				</g:if>
+				<g:else>
+				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }" class="catTitle">Myndigheters föreskrifter</a>
+				</g:else>
 				<span class="count">(${searchResult.totalResultsPerCategory['Foreskrifter']})
 				<g:if test="${searchResult.items['Foreskrifter'].size() > 0 && searchResult.totalResultsPerCategory['Foreskrifter'] > searchResult.items['Foreskrifter'].size()}"> Visar de första ${searchResult.items['Foreskrifter'].size()}</g:if>
 				</span>
+				<g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
+				  <br />Dessa dokument är inte sökbara i denna version av lagrummet.se.
+				</g:if>
 			</p>
 			<g:if test="${searchResult.items['Foreskrifter']}">
 			<ul>
@@ -197,7 +221,7 @@
                             <!--
 				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Utredningar', alias:alias]) }" class="catTitle">Utredningar</a>
                              -->
-                             <b>Utredningar</b>
+                             <span class="catTitle">Utredningar</span>
 				<span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})
 				<g:if test="${searchResult.items['Utredningar'].size() > 0 && searchResult.totalResultsPerCategory['Utredningar'] > searchResult.items['Utredningar'].size()}"> Visar de första ${searchResult.items['Utredningar'].size()}</g:if>
 				</span>
