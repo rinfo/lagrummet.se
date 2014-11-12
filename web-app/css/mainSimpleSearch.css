@@ -1,0 +1,63 @@
+
+.slogan {
+    float: left;
+    text-align: center;
+    width: 720px;
+    margin-bottom: 25px;
+}
+
+.searchForm#search {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+
+.searchButton#searchSubmit {
+    background: 0;
+    background-color: #873960;
+    border-color: #873960;
+    border: 0;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 4px;
+    height: 40px;
+}
+
+.searchField#query {
+    border-radius: 4px;
+    border-color: #ddd;
+    background: url(../images/magnifyglass-lagrummet.png) no-repeat 96% center;
+    background-size: 15px 15px;
+    padding: 0;
+    padding-right: 5px;
+    margin-left: 25px;
+    width: 85%;
+    height: 38px;
+    padding-left: 10px;
+}
+
+div.input#searchQuery{
+    background: url(../images/pil-sokruta.png) no-repeat left center;
+    background-size: 20px auto;
+    padding-left: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 75%;
+    height: 40px;
+    border: 0;
+}
+
+div.input#cat {
+    display: none;
+}
+
+article.frontpage > header {
+    background: url(../images/illustrationer_lagrummet.png) no-repeat left top;
+    padding-top: 120px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+article.frontpage {
+    text-align: center;
+}
