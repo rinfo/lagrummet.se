@@ -4,7 +4,7 @@ var originalUrl, t, query = "";
 // Instant search
 function searchSuggestions(data) {
 	var form = $("#search");
-	var cat = $("#cat").attr("value");
+	var cat = $("#cat").attr("value") || "Ovrigt";
 	
 	if (data) {
 		$("#searchSuggestions").empty().show();
@@ -21,7 +21,7 @@ function searchSuggestions(data) {
 function instantSearch() {    
 	var form = $("#search");
 	query = $("#query").attr("value");
-	var cat = $("#cat").attr("value");
+	var cat = $("#cat").attr("value")  || "Ovrigt";
 	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="'+serverUrl+'sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
 	
 	if (!$("#dynamicSearchResults").length) {
