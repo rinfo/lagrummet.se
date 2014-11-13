@@ -101,10 +101,13 @@ def clean():
     except:
         e = sys.exc_info()[0]
         print "Ignored! Failed to drop database because %s" % e
-    with lcd(env.projectroot):
-        put("manage/sysconf/%(target)s/mysql/drop_user.sql" % env, "/tmp")
-        sudo("mysql -u root < /tmp/drop_user.sql")
-
+    try:
+        with lcd(env.projectroot):
+            put("manage/sysconf/%(target)s/mysql/drop_user.sql" % env, "/tmp")
+            sudo("mysql -u root < /tmp/drop_user.sql")
+    except:
+        e = sys.exc_info()[0]
+        print "Ignored! Failed to drop user because %s" % e
 
 @task
 @roles('rinfo')

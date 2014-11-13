@@ -33,8 +33,10 @@ def config_apache():
         with cd("/etc/apache2"):
             put("manage/sysconf/%(target)s/etc/apache2/sites-available/lagrummet" % env, "sites-available",
                 use_sudo=True)
-            sudo("ln -s ../sites-available/lagrummet sites-enabled/lagrummet")
-
+            try:
+                sudo("ln -s ../sites-available/lagrummet sites-enabled/lagrummet")
+            except:
+                print "Ignored failed to create symbolic link!"
 
 @task
 @roles('rinfo')
@@ -52,8 +54,9 @@ def install_mysql():
     """ Install mysql """
     require('password', provided_by=env)
     sudo("apt-get update")
-    sudo('debconf-set-selections <<< "mysql-server mysql-server/root_password password %(password)s"' % env)
-    sudo('debconf-set-selections <<< "mysql-server mysql-server/root_password_again password %(password)s"' % env)
+    with hide('output', 'running', 'warnings'), settings(warn_only=True):
+        sudo('debconf-set-selections <<< "mysql-server mysql-server/root_password password %(password)s"' % env)
+        sudo('debconf-set-selections <<< "mysql-server mysql-server/root_password_again password %(password)s"' % env)
     sudo("apt-get install mysql-server -y")
     create_mysql_config_file()
 
