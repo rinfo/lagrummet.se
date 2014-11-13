@@ -37,7 +37,11 @@
                         </p>
                     </div>
                     <g:form mapping="search" method="GET" name="search" class="searchForm">
-                            <div class="input" id="searchQuery"><g:textField name="query" autocomplete="off" placeholder="Sök" class="searchField " /><ul id="searchSuggestions"></ul></div>
+                            <input type="hidden" id="cat" name="cat" class="hidden" value="Ovrigt" />
+                            <div class="input" id="searchQuery">
+                                <g:textField name="query" autocomplete="off" placeholder="Sök" class="searchField " />
+                                <ul id="searchSuggestions" class="searchDropdown"></ul>
+                            </div>
                             <g:submitButton name="searchSubmit" value="Sök" class="searchButton" />
                     </g:form>
             <div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>

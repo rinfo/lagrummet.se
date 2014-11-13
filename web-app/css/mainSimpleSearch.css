@@ -47,8 +47,20 @@ div.input#searchQuery{
     border: 0;
 }
 
-div.input#cat {
+.searchDropdown#searchSuggestions {
+    position: relative;
+    width: 89%;
+    margin-left: 25px;
+    margin-top: 2px;
+    top: 0;
+}
+
+input.hidden#cat {
     display: none;
+}
+
+div#searchCurrentCategory {
+    display: none!important;
 }
 
 article.frontpage > header {
@@ -60,4 +72,16 @@ article.frontpage > header {
 
 article.frontpage {
     text-align: center;
+}
+
+.searchResults#dynamicSearchResults {
+    border-top: 0;
+}
+
+article.searchResults#searchResults {
+    border-top: 0;
+}
+
+.searchResults > table {
+    width: 100%!important;
 }
