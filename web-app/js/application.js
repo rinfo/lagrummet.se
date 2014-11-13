@@ -199,7 +199,11 @@ function instantSearch() {
                 //********************************************************************************
                 else if ($("#cat").attr("value") != "Alla") {
 				$("#dynamicSearchResults").html('<h1>Sökresultat</h1><p>Visar '+ data.searchResult.items[cat].length  +' av totalt '+ data.searchResult.totalResults +' antal resultat </p>');
-				$("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Beteckning</th></tr></table>");
+				if (cat == "Ovrigt") {
+                    $("#dynamicSearchResults").append("<table><tr><th>Titel</th></tr></table>");
+                } else {
+                    $("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Beteckning</th></tr></table>");
+                }
 				
 				$.each(data.searchResult.items[cat], function(i, item) {
 					var title = "";
