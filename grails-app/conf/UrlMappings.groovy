@@ -3,14 +3,15 @@ import org.apache.jasper.compiler.Node.ParamsAction;
 class UrlMappings {
 
 	static excludes = ["/images/*", "/plugins/*", "/css/*", "/js/*", "/uploads/*", "/WEB-INF/*"]
-	
+
 	static mappings = {
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
 		"/sitemap"(controller: 'page', action: "xmlSitemap")
 
         name extendedSearch: "/search/ext/" {
-            switch (grailsApplication.config.lagrummet.onlyLocalSearch) {
+            //switch (grailsApplication.config.lagrummet.onlyLocalSearch) {
+            switch (true) {
                 case false:
                     controller = "search"
                     action = "ext"
@@ -31,7 +32,8 @@ class UrlMappings {
 		"/search/$action"(controller:'search')
 		
 		name rinfo: "/rinfo/$docPath**" {
-            switch (grailsApplication.config.lagrummet.onlyLocalSearch) {
+            //switch (grailsApplication.config.lagrummet.onlyLocalSearch) {
+            switch (true) {
                 case false:
                     controller = "rinfo"
                     action = "show"
