@@ -101,6 +101,10 @@ article.searchResults#searchResults {
     border-top: 0;
 }
 
+article.frontpage .puffs {
+    margin-top: 45px;
+}
+
 .searchResults > table {
     width: 100%!important;
 }
