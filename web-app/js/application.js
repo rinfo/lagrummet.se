@@ -11,7 +11,6 @@ function searchSuggestions(data) {
 		$.each(data.searchResult.topHits, function(i, item) {
 			var title = (item.title) ? item.title : item.identifier;
 			var href = serverUrl + item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-			if (title.length > 40) title = title.substr(0, 40) + "...";
 			
 			$("#searchSuggestions").append('<li><a href="'+href+'" class="searchLink">' + title + "</a></li>");
 		});
