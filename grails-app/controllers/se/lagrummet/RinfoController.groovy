@@ -11,9 +11,15 @@ class RinfoController {
 	
 	def rinfoService
 	def htmlSanitizerService
+    def grailsApplication
 
     def show = {
-		def page = [:]
+        if (grailsApplication.config.lagrummet.onlyLocalSearch) {
+            forward(controller: "page", action: "error", params: [errorId: "404"])
+            return
+        }
+
+            def page = [:]
 		page.parent = null
 
         Date timeStart = new Date();
