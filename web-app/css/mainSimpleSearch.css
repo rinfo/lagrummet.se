@@ -85,6 +85,10 @@ article.frontpage {
     text-align: center;
 }
 
+article.frontpage h1 {
+    text-transform: uppercase;
+}
+
 .searchResults#dynamicSearchResults {
     border-top: 0;
 }
