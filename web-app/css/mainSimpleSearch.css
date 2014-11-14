@@ -82,10 +82,14 @@ article.frontpage > header {
 }
 
 article.frontpage {
+    font-family: 'Fira Sans', sans-serif;
     text-align: center;
 }
 
 article.frontpage h1 {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 3em;
+    font-weight: bold;
     text-transform: uppercase;
 }
 
