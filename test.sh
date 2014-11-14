@@ -7,4 +7,4 @@ export GROOVY_HOME=~/.gvm/groovy/$GROOVY_VERSION
 export GRAILS_HOME=~/.gvm/grails/$GRAILS_VERSION
 
 #grails -Djetty.host=0.0.0.0 run-app
-$GRAILS_HOME/bin/grails run-app
+$GRAILS_HOME/bin/grails test-app

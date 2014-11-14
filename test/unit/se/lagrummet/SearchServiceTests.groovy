@@ -26,6 +26,7 @@ class SearchServiceTests extends GrailsUnitTestCase {
 
         searchService.localSearchService = localSearchServiceMocker.createMock()
         searchService.rdlSearchService = localRdlSearchService.createMock()
+        searchService.grailsApplication = [config:[lagrummet:[onlyLocalSearch: false]]]
 
         def queries = []
 
@@ -60,6 +61,7 @@ class SearchServiceTests extends GrailsUnitTestCase {
 
         searchService.localSearchService = localSearchServiceMocker.createMock()
         searchService.rdlSearchService = localRdlSearchService.createMock()
+        searchService.grailsApplication = [config:[lagrummet:[onlyLocalSearch: false]]]
 
         def queries = []
 
@@ -106,6 +108,7 @@ class SearchServiceTests extends GrailsUnitTestCase {
 
         searchService.localSearchService = localSearchServiceMocker.createMock()
         searchService.rdlSearchService = localRdlSearchService.createMock()
+        searchService.grailsApplication = [config:[lagrummet:[onlyLocalSearch: false]]]
 
         def queries = []
 
@@ -159,6 +162,7 @@ class SearchServiceTests extends GrailsUnitTestCase {
 
         searchService.localSearchService = localSearchServiceMocker.createMock()
         searchService.rdlSearchService = localRdlSearchService.createMock()
+        searchService.grailsApplication = [config:[lagrummet:[onlyLocalSearch: false]]]
 
         def queries = []
 
@@ -212,6 +216,7 @@ class SearchServiceTests extends GrailsUnitTestCase {
 
         searchService.localSearchService = localSearchServiceMocker.createMock()
         searchService.rdlSearchService = localRdlSearchService.createMock()
+        searchService.grailsApplication = [config:[lagrummet:[onlyLocalSearch: false]]]
 
         def queries = []
 
@@ -265,6 +270,7 @@ class SearchServiceTests extends GrailsUnitTestCase {
 
         searchService.localSearchService = localSearchServiceMocker.createMock()
         searchService.rdlSearchService = localRdlSearchService.createMock()
+        searchService.grailsApplication = [config:[lagrummet:[onlyLocalSearch: false]]]
 
         def queries = []
 

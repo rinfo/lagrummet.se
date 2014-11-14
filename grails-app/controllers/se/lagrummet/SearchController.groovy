@@ -12,6 +12,7 @@ class SearchController {
 	def rdlSearchService
 	def synonymService
 	def springSecurityService
+    def grailsApplication
 	
 	def statistics = {
 		def daysOfSearches = params.daysOfSearches ? params.daysOfSearches.toInteger() : 30
@@ -93,6 +94,10 @@ class SearchController {
 	}
 	
 	def ext = { ExtendedSearchCommand esc ->
+        if (grailsApplication.config.lagrummet.onlyLocalSearch) {
+            forward(controller: "page", action: "error", params: [errorId: "404"])
+            return
+        }
 		def searchResult
 		def offset = parseInt(params.offset, 0)
 		def itemsPerPage = parseInt(params.max, 20)

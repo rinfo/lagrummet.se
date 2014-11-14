@@ -168,7 +168,7 @@ lagrummet {
 	googleAnalytics.webPropertyId = ""
 	contact.email = "betafeedback@lagrummet.se"
 	upload.dir = "files/"
-    onlyLocalSearch = true
+    onlyLocalSearch = false
     mainLayoutName = "main"
 	rdl.service.baseurl="http://service.demo.lagrummet.se"
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
