@@ -35,6 +35,10 @@
     padding-left: 10px;
 }
 
+.searchField#query::-ms-clear {
+    display: none;
+}
+
 div.input#searchQuery{
     background: url(../images/pil-sokruta.png) no-repeat left center;
     padding-left: 30px;
