@@ -114,7 +114,10 @@ def clean():
 def test_all(username='testadmin', password='testadmin'):
     try:
         all()
-        setup_mysql()
+        try:
+            setup_mysql()
+        except:
+            print "Warning problems setting config mysql!"
         setup_demodata()
         restart_apache()
         restart_tomcat()
