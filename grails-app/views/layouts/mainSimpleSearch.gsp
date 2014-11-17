@@ -40,7 +40,7 @@
                     <g:form mapping="search" method="GET" name="search" class="searchForm">
                             <input type="hidden" id="cat" name="cat" class="hidden" value="Ovrigt" />
                             <div class="input" id="searchQuery">
-                                <g:textField name="query" autocomplete="off" placeholder="Sök ur Lagrummets texter" class="searchField " />
+                                <g:textField name="query" autocomplete="off" placeholder="Sök ur texter på lagrummet.se" class="searchField " />
                                 <ul id="searchSuggestions" class="searchDropdown"></ul>
                             </div>
                             <g:submitButton name="searchSubmit" value="Sök" class="searchButton" />
