@@ -81,16 +81,21 @@ article.frontpage > header {
     margin-bottom: 2em;
 }
 
-article.frontpage {
+article.frontpage p, h1, h2, h3, h4 {
     font-family: 'Fira Sans', sans-serif;
     text-align: center;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 article.frontpage h1 {
     font-family: 'Fira Sans', sans-serif;
     font-size: 3em;
     font-weight: bold;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .searchResults#dynamicSearchResults {
@@ -101,8 +106,17 @@ article.searchResults#searchResults {
     border-top: 0;
 }
 
+
 article.frontpage .puffs {
     margin-top: 45px;
+}
+
+div.puffs p, h1, h2, h3, h4 {
+    font-family: 'Fira Sans', sans-serif;
+    text-align: left;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .searchResults > table {
