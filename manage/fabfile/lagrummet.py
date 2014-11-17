@@ -58,6 +58,22 @@ def test(username='testadmin', password='testadmin', wildcard='*.js', use_passwo
 
 @task
 @roles('rinfo')
+def new_test(username='testadmin', password='testadmin', wildcard='*.js', use_password_file=True):
+    """Test functions of lagrummet.se regressionstyle"""
+    if use_password_file:
+        username = get_value_from_password_store(PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, username)
+        password = get_value_from_password_store(PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME, password)
+
+    url = "http://"+env.roledefs['rinfo'][0]
+    output = "%s/target/test-reports/" % env.projectroot
+    with lcd(env.projectroot + "/test/regression/new_main"):
+        local("casperjs test %s --xunit=../casperjs.log --includes=../GAblocker.js --includes=../CommonCapserJS.js"
+              " --url=%s --target=%s --output=%s  --username=%s --password=%s"
+              % (wildcard, url, env.target, output, username, password))
+
+
+@task
+@roles('rinfo')
 def db_test(username='testadmin', password='testadmin', wildcard='Add_source*.js Edit_source.js Add_synonym.js Remove_*.js', use_password_file=True, preserve_database=False):
     """Test admin functionality using database
 
