@@ -81,7 +81,7 @@ article.frontpage > header {
     margin-bottom: 2em;
 }
 
-article.frontpage p, h1, h2, h3, h4 {
+p, h1, h2, h3, h4 .frontpage {
     font-family: 'Fira Sans', sans-serif;
     text-align: center;
     width: 80%;
@@ -111,7 +111,7 @@ article.frontpage .puffs {
     margin-top: 45px;
 }
 
-div.puffs p, h1, h2, h3, h4 {
+div.puffs * {
     font-family: 'Fira Sans', sans-serif;
     text-align: left;
     width: 100%;
