@@ -58,7 +58,6 @@ def test(username='testadmin', password='testadmin', wildcard='*.js', use_passwo
 
 @task
 @roles('rinfo')
-
 def new_test(username='testadmin', password='testadmin', wildcard='*.js', use_password_file=True):
     """Test functions of lagrummet.se regressionstyle"""
     if use_password_file:
