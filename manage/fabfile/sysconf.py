@@ -40,12 +40,16 @@ def config_apache():
 
 @task
 @roles('rinfo')
-def config_war():
+def config_war(alternate=False):
     """Install config file for lagrummet grails-app"""
     with lcd(env.projectroot):
         sudo("mkdir -p /etc/lagrummet.se")
-        put("manage/sysconf/%(target)s/etc/lagrummet.se/lagrummet.se-config.groovy" % env, "/etc/lagrummet.se",
-            use_sudo=True)
+        if alternate:
+            put("manage/sysconf/%(target)s/alternate/lagrummet.se-config.groovy" % env, "/etc/lagrummet.se",
+                use_sudo=True)
+        else:
+            put("manage/sysconf/%(target)s/etc/lagrummet.se/lagrummet.se-config.groovy" % env, "/etc/lagrummet.se",
+                use_sudo=True)
 
 
 @task
