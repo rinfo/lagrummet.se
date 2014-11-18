@@ -33,6 +33,7 @@ def deploy_war(headless="0"):
     """Deploy locally built war-file to tomcat and restart"""
     #with _managed_tomcat_restart(5, headless):
     put(env.localwar, env.deploydir + "ROOT.war")
+    run("touch "+env.deploydir + "ROOT.war")
 
 
 def restore_database_for_descructive_tests():

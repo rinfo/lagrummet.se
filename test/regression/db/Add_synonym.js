@@ -52,11 +52,15 @@ casper.test.begin('Add synonym', function(test) {
        this.sendKeys("input[name='query']", "rinfo");
    });
 
+   /* New frontpage dooesn't support search to RDL - This test will fail
+
    casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
 
     casper.then(function() {
        this.test.assertExists(x('//*[@id="dynamicSearchResults"]/p/span[text()="rättsinformationsförordning (1999:175)"]'));
     });
+
+    */
 
    casper.run(function() {test.done();});
 });

@@ -21,7 +21,7 @@ casper.test.begin('Välkomstsida', function(test) {
 
    casper.then(function() {
         this.test.assertTextExists("lagrummet.se");
-        this.test.assertTextExists("NU BLIR DET LÄTTARE ATT HITTA INFORMATION");
+        this.test.assertTextExists("Lagrummet.se är en gemensam webbplats för den offentliga förvaltningens rättsinformation.");
         //this.test.assertSelectorHasText('#searchCategory > label', 'Avgränsa din sökning');
         //this.test.assertSelectorHasText('#siteHeader > p > a', 'Utökad sökning');
         //this.test.assertSelectorHasText('#content > article > div > div:nth-child(3) > h3 > a','Nya lagrummet.se');
