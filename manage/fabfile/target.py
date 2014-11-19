@@ -104,6 +104,7 @@ def dom():
         'rinfo': ['t1.lagr.dev.dom.se'],
         'apache': ['t1.lagr.dev.dom.se'],
         }
+    _initialize_password()
 
 @task
 def ville():
@@ -123,6 +124,7 @@ def ville():
         'rinfo': ['ville.lagrummet.se'],
         'apache': ['ville.lagrummet.se'],
         }
+    _initialize_password()
 
 @task
 def regression():
