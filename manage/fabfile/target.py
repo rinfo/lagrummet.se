@@ -117,7 +117,7 @@ def ville():
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
     env.localwar = env.projectroot + "/target/lagrummet.se-0.8.7.war"
-    env.hosts = ['t1.lagr.dev.dom.se']
+    env.hosts = ['ville.lagrummet.se']
     env.grails_build_env = "demo"
     env.roledefs = {
         'rinfo': ['ville.lagrummet.se'],
