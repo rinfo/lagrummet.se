@@ -110,7 +110,7 @@ log4j = {
         appender new DailyRollingFileAppender(
                 name: 'lagrummet_file',
                 datePattern: '.yyyy-MM-dd',
-                fileName: "${System.properties['catalina.home']}/logs/lagrummet.log",
+                fileName: "${System.properties['catalina.base']}/logs/lagrummet.log",
                 layout: pattern(conversionPattern: "[%p] %d %c %M - %m%n"))
     }
     
