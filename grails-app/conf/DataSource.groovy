@@ -31,7 +31,12 @@ environments {
 			url = "jdbc:mysql://localhost:3306/lagrummet"
 			username = "root"	//override in external config file
 			password = "zse4xDr5"	//override in external config file
-			
+            properties {
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = false
+                validationQuery = "SELECT 1"
+            }
         }
     }
     demo {

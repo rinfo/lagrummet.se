@@ -13,7 +13,7 @@ class PingDBJob {
 
     static triggers = {
         simple startDelay: 60*60*1000, repeatInterval: 60*60*1000  // ping once an houre
-        //simple startDelay: 5*1000, repeatInterval: 5*1000
+        //simple startDelay: 5*1000, repeatInterval: 5*1000 // ping every five seconds
     }
 
     def execute() {
