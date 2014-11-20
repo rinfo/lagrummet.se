@@ -128,7 +128,8 @@ log4j = {
 
     warn   'org.mortbay.log'
 
-    all	  'se.lagrummet'
+    all	  'se.lagrummet',
+            'grails.app.jobs.se.lagrummet'
     
     'null' name:'stacktrace'
 
