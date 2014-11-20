@@ -19,7 +19,7 @@ function searchSuggestions(data) {
 
 function instantSearch() {    
 	var form = $("#search");
-	query = $("#query").attr("value");
+	query = $("#query").attr("value").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 	var cat = $("#cat").attr("value")  || "Ovrigt";
 	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="'+serverUrl+'sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
 	
