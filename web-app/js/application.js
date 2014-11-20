@@ -18,6 +18,23 @@ function searchSuggestions(data) {
 	}
 }
 
+function encodedMailAddress(coded) {
+	  key = "4xqdRiHltKJmFYoTuNMfyLQswUbICaAD9pnrcG13E0V6BP7O2jXze8hkgW5vZS"
+		  shift=coded.length
+		  link=""
+		  for (i=0; i<coded.length; i++) {
+		    if (key.indexOf(coded.charAt(i))==-1) {
+		      ltr = coded.charAt(i)
+		      link += (ltr)
+		    }
+		    else {     
+		      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+		      link += (key.charAt(ltr))
+		    }
+		  }
+	  return link
+}
+
 function instantSearch() {    
 	var form = $("#search");
 	query = $("#query").attr("value");
@@ -254,7 +271,16 @@ function instantSearch() {
     }, "json");
 }
 
-jQuery(document).ready(function($) {	
+jQuery(document).ready(function($) {
+	
+	if($(".safeemail").length != 0) {
+		var coded = $(".safeemail").prop("href");
+		coded = coded.replace("mailto:", "");
+		var decoded = encodedMailAddress(coded);
+		$(".safeemail").prop("href", "mailto:"+decoded);
+		$(".safeemail").text(decoded);
+	}
+	
 	//Make the search category drop-down more dynamic
 	$("#cat").hide().after('<div id="searchCurrentCategory" /><ul id="searchCategoryList" />');
 	$("#searchCategory label").addClass("target");
