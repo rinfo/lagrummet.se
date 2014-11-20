@@ -86,6 +86,43 @@ def test():
     }
     _initialize_password()
 
+@task
+def dom():
+    """set environment: demo"""
+    env.target = 'dom'
+    env.demodata = True
+    env.mysql_backup = False
+    env.tomcat_stop = '/etc/init.d/tomcat stop'
+    env.tomcat_start = '/etc/init.d/tomcat start'
+    env.user = 'rinfo'
+    env.deploydir = '/opt/tomcat/webapps/'
+    env.warname = 'lagrummet.war'
+    env.localwar = env.projectroot + "/target/lagrummet.se-0.8.7.war"
+    env.hosts = ['t1.lagr.dev.dom.se']
+    env.grails_build_env = "demo"
+    env.roledefs = {
+        'rinfo': ['t1.lagr.dev.dom.se'],
+        'apache': ['t1.lagr.dev.dom.se'],
+        }
+
+@task
+def ville():
+    """set environment: demo"""
+    env.target = 'ville'
+    env.demodata = True
+    env.mysql_backup = False
+    env.tomcat_stop = '/etc/init.d/tomcat stop'
+    env.tomcat_start = '/etc/init.d/tomcat start'
+    env.user = 'rinfo'
+    env.deploydir = '/opt/tomcat/webapps/'
+    env.warname = 'lagrummet.war'
+    env.localwar = env.projectroot + "/target/lagrummet.se-0.8.7.war"
+    env.hosts = ['ville.lagrummet.se']
+    env.grails_build_env = "demo"
+    env.roledefs = {
+        'rinfo': ['ville.lagrummet.se'],
+        'apache': ['ville.lagrummet.se'],
+        }
 
 @task
 def regression():

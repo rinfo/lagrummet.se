@@ -10,11 +10,13 @@ jQuery(function($) {
 //		console.log(message);
 	}
 
+	// The relative "../../" on content_css makes it vulnerable. Must be loaded from a secnd level down .gsp.
 	var pageId = ($("#parentId")) ? $("#parentId").attr("value") : "";
 	tinyMCE.init({
 		theme : "advanced",
 		mode : "exact",
 		elements : "content",
+		content_css : "../../css/main.css",
 		theme_advanced_toolbar_location : "top",
 		theme_advanced_blockformats : "p,h1,h2,h3,h4,",
 		force_p_newlines : true,
@@ -30,7 +32,6 @@ jQuery(function($) {
             p : {selector : 'p', classes : '', styles: ''}
 		}
 	});
-	
 	
 	
 	function jsTreeContextMenu(node) {
