@@ -1,5 +1,5 @@
 import grails.plugins.springsecurity.SecurityConfigType
-
+import org.apache.log4j.DailyRollingFileAppender
 
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
@@ -105,9 +105,14 @@ log4j = {
     // Example of changing the log pattern for the default console
     // appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+        console name:'stdout', layout:pattern(conversionPattern: '[%p] %d %c %M - %m%n')
+        appender new DailyRollingFileAppender(
+                name: 'lagrummet_file',
+                datePattern: '.yyyy-MM-dd',
+                fileName: "${System.properties['catalina.home']}/logs/lagrummet.log",
+                layout: pattern(conversionPattern: "[%p] %d %c %M - %m%n"))
+    }
     
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -126,7 +131,10 @@ log4j = {
     all	  'se.lagrummet'
     
     'null' name:'stacktrace'
-    
+
+    root {
+        warn 'stdout', 'lagrummet_file'
+    }
 }
 
 //jquery plugin installation
