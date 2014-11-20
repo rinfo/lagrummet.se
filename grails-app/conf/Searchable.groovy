@@ -31,9 +31,13 @@ searchable {
      *
      * The default is "${user.home}/.grails/projects/${app.name}/searchable-index/${grails.env}"
      */
+    //compassConnection = new File(
+    //    "${userHome}/.grails/projects/${appName}/searchable-index/${grailsEnv}"
+    //).absolutePath
     compassConnection = new File(
-        "${userHome}/.grails/projects/${appName}/searchable-index/${grailsEnv}"
+            "${System.properties['catalina.base']}/work/${appName}/searchable-index/${grailsEnv}"
     ).absolutePath
+    //compassConnection = "ram://test-index"
 
     /**
      * Any settings you wish to pass to Compass
@@ -174,6 +178,7 @@ environments {
     production {
         searchable {
             // add your production settings here
+            //compassConnection = "ram://test-index"
         }
     }
 }
