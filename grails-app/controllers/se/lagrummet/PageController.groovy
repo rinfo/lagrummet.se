@@ -343,7 +343,7 @@ class PageController {
         bindData(page, params)
 
 		page.puffs.eachWithIndex { puffItem, i ->
-				def puffListParam = "expandablePuffList["+i+"]"
+				def puffListParam = "puffs["+i+"]"
 				def imgId = params."${puffListParam}"?.image?.id
 				puffItem.image = imgId ? Media.findById(imgId) : null
 		}
@@ -372,7 +372,7 @@ class PageController {
                    flash.messages.add("${message(code: 'page.updated.updatedByAnotherUser')}")
                 }
             }
-			
+
 			pageInstance.backup()
 			params.author = SecUser.get(springSecurityService.principal.id)
             bindData(pageInstance, params)
@@ -394,10 +394,15 @@ class PageController {
 			if(params.doUnpublish) {
 				pageInstance.publishStop = now
 			}
-			
-			def toBeDeleted = pageInstance.puffs.findAll {
-				it.deleted || it.isEmpty()
-			}
+
+            def toBeDeleted = []
+
+            pageInstance.puffs.eachWithIndex { puffItem, i ->
+                def puffListParam = "puffs["+i+"]"
+                if(params."${puffListParam}"?.deleted == "true") {
+                    toBeDeleted << puffItem
+                }
+            }
 			if (toBeDeleted) {
 				pageInstance.puffs.removeAll(toBeDeleted)
 			}

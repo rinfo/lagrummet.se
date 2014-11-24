@@ -23,12 +23,8 @@ class Page implements Comparable<Page>{
 	Date publishStart
 	Date publishStop
 	
-	List puffs = new ArrayList()
+	List<Puff> puffs = new ArrayList<Puff>()
 	SortedSet children
-	
-	def getExpandablePuffList() {
-		return LazyList.decorate(puffs,FactoryUtils.instantiateFactory(Puff.class))
-	}
 	
 	def getPublishedChildren() {
 		SortedSet published = new TreeSet()
@@ -94,6 +90,7 @@ class Page implements Comparable<Page>{
 		masterRevision(nullable: true)
 		metaPage(nullable: false)
 		menuStyle(blank:true, nullable:true)
+        puffs(bindable: true)
     }
 	
 	static mapping = {

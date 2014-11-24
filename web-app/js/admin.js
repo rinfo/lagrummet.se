@@ -240,7 +240,7 @@ jQuery(function($) {
 });
 
 function markPuffAsDeleted(puffIndex) {
-	$('#expandablePuffList\\['+puffIndex+'\\]\\.deleted').val('true'); 
+	$('#puffs\\['+puffIndex+'\\]\\.deleted').val('true');
 	$('#puff_'+puffIndex+'_1').toggleClass("deleteRow"); 
 	$('#puff_'+puffIndex+'_2').toggleClass("deleteRow");
 	$('#puff_'+puffIndex+'_1').find("input:visible, select, textarea").each(function(index){
@@ -255,7 +255,7 @@ function markPuffAsDeleted(puffIndex) {
 }
 
 function cancelDeletePuff(puffIndex) {
-	$('#expandablePuffList\\['+puffIndex+'\\]\\.deleted').val('false'); 
+	$('#puffs\\['+puffIndex+'\\]\\.deleted').val('false');
 	$('#puff_'+puffIndex+'_1').toggleClass("deleteRow"); 
 	$('#puff_'+puffIndex+'_2').toggleClass("deleteRow");
 	$('#puff_'+puffIndex+'_1').find("input:visible, select, textarea").each(function(index){
