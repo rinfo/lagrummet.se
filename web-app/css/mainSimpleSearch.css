@@ -82,6 +82,8 @@ article.frontpage > header {
 }
 .frontpage p, .frontpage h1, .frontpage h2, .frontpage h3, .frontpage h4 {
     font-family: 'Fira Sans', sans-serif;
+    font-size: 16px;
+    line-height: 120%;
     text-align: center;
     width: 75%;
     margin-left: auto;
@@ -110,7 +112,8 @@ article.frontpage .puffs {
 }
 
 article.frontpage div.puffs * {
-    font-family: 'Fira Sans', sans-serif;
+    font: 12px verdana, arial, helvetica, sans-serif;
+    line-height: 140%;
     text-align: left;
     width: 100%;
     margin-left: 0;
