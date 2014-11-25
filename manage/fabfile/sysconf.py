@@ -23,7 +23,13 @@ def config_server():
     if env.mysql_backup:
         create_mysql_config_file()
         install_mysql_backup()
+    logrotate_tomcat()
 
+
+def logrotate_tomcat(test=1):
+    put("%(projectroot)s/src/conf/tomcat" % env, "/home/rinfo/tomcat")
+    sudo("mv /home/rinfo/tomcat /etc/logrotate.d/tomcat ; chown root:root /etc/logrotate.d/tomcat")
+    
 
 @task
 @roles('rinfo')
