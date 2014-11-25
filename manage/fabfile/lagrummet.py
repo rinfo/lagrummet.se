@@ -1,3 +1,4 @@
+from fabric.contrib.files import exists
 import sys
 import time
 from fabric.api import *
@@ -32,6 +33,12 @@ def build_war(test=1):
 def deploy_war(headless="0"):
     """Deploy locally built war-file to tomcat and restart"""
     #with _managed_tomcat_restart(5, headless):
+    if exists(env.deploydir+"ROOT"):
+        stop_tomcat()
+        sudo("rm -rf %s " % (env.deploydir+"ROOT"))
+        put(env.localwar, env.deploydir + "ROOT.war")
+        start_tomcat()
+        return
     put(env.localwar, env.deploydir + "ROOT.war")
     run("touch "+env.deploydir + "ROOT.war")
 
