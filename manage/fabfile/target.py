@@ -127,6 +127,25 @@ def ville():
     _initialize_password()
 
 @task
+def valle():
+    """set environment: demo"""
+    env.target = 'valle'
+    env.demodata = True
+    env.mysql_backup = False
+    env.tomcat_stop = '/etc/init.d/tomcat stop'
+    env.tomcat_start = '/etc/init.d/tomcat start'
+    env.user = 'rinfo'
+    env.deploydir = '/opt/tomcat/webapps/'
+    env.warname = 'lagrummet.war'
+    env.localwar = env.projectroot + "/target/lagrummet.se-0.8.7.war"
+    env.hosts = ['valle.lagrummet.se']
+    env.grails_build_env = "demo"
+    env.roledefs = {
+        'rinfo': ['valle.lagrummet.se'],
+        'apache': ['valle.lagrummet.se'],
+        }
+
+@task
 def regression():
     """set environment: regression"""
     env.target = 'regression'
