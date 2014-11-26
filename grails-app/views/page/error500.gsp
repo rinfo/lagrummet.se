@@ -6,26 +6,18 @@
 </head>
 <body>
 <article class="editorial 500">
-    <header><h1>500 Internt serverfel!</h1></header>
-    <p>Oops, något gick fel, vi är hemskt ledsna.</p>
+    <header><h1>Något gick fel på vår sida</h1></header>
+    <p>Var vänlig gå tillbaka till <g:link controller="page" uri="/">startsidan</g:link> och försök igen.</p>
 
-    <h2>Gå vidare</h2>
-    <ul>
-        <li><a href="${resource()}">Startsidan för lagrummet.se</a></li>
-        <li><g:link controller="page" action="show" url="webbkarta">Webbkarta</g:link> - översikt över innehållet på lagrummet.se</li>
-    </ul>
-
-    <p>Kom du hit på en länk från vår webbplats? Kontakta redaktionen så kan vi rätta till felet. Ange vilken länk det gäller och på vilken sida länken finns.</p>
-
-    <p>Kom du hit på en länk från en annan webbplats? Kontakta gärna webbansvarig där och meddela att länken är trasig.</p>
 </article>
 
 
 <article class="editorial 500">
-    <header><h1>500 internal server error</h1></header>
-    <p>Something went wrong</p>
-    <p>Please visit our page in English about <g:link controller="page" url="english">the Swedish legal information system</g:link>.</p>
+    <header><h1>Something went wrong at our side</h1></header>
+    <p>Please try again from the <g:link controller="page" url="english">homepage</g:link>.</p>
 </article>
-
+<article class="editorial 500">
+    <p>Felkod 500</p>
+</article>
 </body>
 </html>
