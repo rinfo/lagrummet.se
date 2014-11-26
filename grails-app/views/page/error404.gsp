@@ -6,7 +6,7 @@
 <body>
     <article class="editorial 404">
       <header><h1>Sidan gick inte att hitta</h1></header>
-      <p>Sidan du söker gick inte att hitta. Den kan ha flyttats eller tagits bort</p>
+      <p>Sidan du söker gick inte att hitta. Den kan ha flyttats eller tagits bort.</p>
       
       <h2>Gå vidare</h2>      
       <ul>
