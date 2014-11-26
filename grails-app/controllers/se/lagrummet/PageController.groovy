@@ -225,6 +225,11 @@ class PageController {
 			response.status=404
 			render(view: "error404", model: model)
 		}
+        if (params.errorId == "500") {
+            def model = [siteProps: SiteProperties.findByTitle("lagrummet.se")]
+            response.status=500
+            render(view: "error500", model: model)
+        }
 	}
 	
 	def xmlSitemap = {
