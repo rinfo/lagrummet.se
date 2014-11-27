@@ -179,6 +179,7 @@ lagrummet {
 	upload.dir = "files/"
     onlyLocalSearch = false
     mainLayoutName = "main"
+    mainEnglishLayoutName = "mainEnglish"
 	rdl.service.baseurl="http://service.demo.lagrummet.se"
 	rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se"
 	local.rinfo.view="${grails.serverURL}/rinfo/"
