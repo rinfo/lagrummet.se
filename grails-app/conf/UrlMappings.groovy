@@ -5,6 +5,7 @@ class UrlMappings {
 	static excludes = ["/images/*", "/plugins/*", "/css/*", "/js/*", "/uploads/*", "/WEB-INF/*"]
 
 	static mappings = {
+        "/status" (view: "/index")
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
 		"/sitemap"(controller: 'page', action: "xmlSitemap")
@@ -40,7 +41,9 @@ class UrlMappings {
 				params.action = params.a ?: "show"
 			}
 		}
-		
+
+
+
 		"/"(controller: 'page', action: "show")
 
 		"/admin/user/$action"(controller: 'user')
