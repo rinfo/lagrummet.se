@@ -23,4 +23,8 @@ class AdminController {
 		
 		[searches: searches, totalSearches: totalSearches, daysOfSearches: 30, numberOfQueries: 10]
 	}
+
+    def status = {
+        render(view: "/index")
+    }
 }

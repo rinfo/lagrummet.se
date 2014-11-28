@@ -5,7 +5,7 @@ class UrlMappings {
 	static excludes = ["/images/*", "/plugins/*", "/css/*", "/js/*", "/uploads/*", "/WEB-INF/*"]
 
 	static mappings = {
-        "/status" (view: "/index")
+
 		"/login/$action"(controller:'login')
 		"/logout/$action"(controller:'logout')
 		"/sitemap"(controller: 'page', action: "xmlSitemap")
@@ -46,6 +46,8 @@ class UrlMappings {
 
 		"/"(controller: 'page', action: "show")
 
+
+
 		"/admin/user/$action"(controller: 'user')
 		
 		"/admin/site/$action"(controller: 'siteProperties')
@@ -64,10 +66,12 @@ class UrlMappings {
 		name pageAdmin: "/admin/page/$action?" {
 			controller = 'page'
 		}
-		
+
+        "/admin/$action"(controller: 'admin')
+
 		"/admin/"(controller: 'admin')
-		
-		//"500"(view:'/page/error500')
+
+        //"500"(view:'/page/error500')
         "500"{
             controller = "page"
             action = "error"
