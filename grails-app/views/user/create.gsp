@@ -20,7 +20,7 @@
             </div>
             <br/>
             </g:hasErrors>
-            <g:form action="save" >
+            <g:form action="save" useToken="true">
                 <g:render template="userEditForm" />
                 
                 <div class="input ${hasErrors(bean: userInstance, field: 'role', 'errors')}">

@@ -21,7 +21,7 @@
                 <g:renderErrors bean="${pageInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post" mapping="pageAdmin" params="[action: 'edit', id: pageInstance.id]" name="pageEditForm">
+            <g:form method="post" mapping="pageAdmin" params="[action: 'edit', id: pageInstance.id]" name="pageEditForm" useToken="true">
                 <g:hiddenField name="version" value="${pageInstance?.version}" />
                 <g:render template="pageEditForm" />
             </g:form>    

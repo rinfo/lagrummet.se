@@ -18,7 +18,7 @@
 		    </div>
 		</g:hasErrors>   
 		
-		<g:form mapping="pageAdmin" class="create" method="post">
+		<g:form mapping="pageAdmin" class="create" method="post" useToken="true">
 		    <g:render template="pageEditForm" />
 		    
 		    <div class="aside buttons">

@@ -19,7 +19,7 @@
                 <g:renderErrors bean="${legalSourceInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post" name="form_edit_source">
+            <g:form method="post" name="form_edit_source" useToken="true">
                 <g:hiddenField name="id" value="${legalSourceInstance?.id}" />
                 <g:hiddenField name="version" value="${legalSourceInstance?.version}" />
                 

@@ -13,7 +13,7 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:form name="editSynonyms" action="updateList" controller="synonym">
+            <g:form name="editSynonyms" action="updateList" controller="synonym" useToken="true">
             <div class="buttons">
             <input type="button" value="lägg till synonym" id="addSynonym" class="add" />
             </div>

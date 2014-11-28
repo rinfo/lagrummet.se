@@ -65,7 +65,7 @@
 		</nav>
 	</header>
 	<nav id="adminPages">
-		<g:form action="create" controller="page">
+		<g:form action="create" controller="page" useToken="true">
 		<div class="buttons"><span class="button"><g:actionSubmit name="create" action="create" class="add" value="Ny sida" /></span>&nbsp;<input type="submit" id="treeExpandAll" value="Expandera alla" /></div>
 		</g:form>
 		

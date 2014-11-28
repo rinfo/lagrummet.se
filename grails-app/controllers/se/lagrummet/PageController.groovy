@@ -43,50 +43,58 @@ class PageController {
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def create = {
-        def pageInstance = new Page()
-        bindData(pageInstance, params)
-		pageInstance.publishStart = new Date()
-        return [pageInstance: pageInstance]
+		withForm {
+			def pageInstance = new Page()
+			bindData(pageInstance, params)
+			pageInstance.publishStart = new Date()
+			return [pageInstance: pageInstance]
+		}.invalidToken {
+			response.status = 403
+		}
     }
 
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def save = {
-		if (params.ajax) {
-			params.parent = Page.get(params.parentId)
-			params.publishStart = new Date()
-		}
-		
-		params.author = SecUser.get(springSecurityService.principal.id)
-        def pageInstance = new Page(params)
-		def now = new Date()
-		pageInstance.dateCreated = now
-		pageInstance.lastUpdated = now
-		
-		def instanceToSave
-		if (pageInstance.parent) {
-			pageInstance.parent.addToChildren(pageInstance)
-			instanceToSave = pageInstance.parent
-		} else {
-			instanceToSave = pageInstance
-		}
-		
-        if (instanceToSave.save(flush: true)) {
+		withForm {
 			if (params.ajax) {
-				def response = [success: "true", pageInstance: pageInstance]
-				render response as GSON
-			} else {
-				flash.message = "${message(code: 'page.created.message', args: [pageInstance.title])}"
-				redirect(action: "edit", id: pageInstance.id)
+				params.parent = Page.get(params.parentId)
+				params.publishStart = new Date()
 			}
-        }
-        else {
-			if (params.ajax) {
-				def response = [error: pageInstance.errors]
-				render response as GSON
+
+			params.author = SecUser.get(springSecurityService.principal.id)
+			def pageInstance = new Page(params)
+			def now = new Date()
+			pageInstance.dateCreated = now
+			pageInstance.lastUpdated = now
+
+			def instanceToSave
+			if (pageInstance.parent) {
+				pageInstance.parent.addToChildren(pageInstance)
+				instanceToSave = pageInstance.parent
 			} else {
-            	render(view: "create", model: [pageInstance: pageInstance])
+				instanceToSave = pageInstance
 			}
-        }
+
+			if (instanceToSave.save(flush: true)) {
+				if (params.ajax) {
+					def response = [success: "true", pageInstance: pageInstance]
+					render response as GSON
+				} else {
+					flash.message = "${message(code: 'page.created.message', args: [pageInstance.title])}"
+					redirect(action: "edit", id: pageInstance.id)
+				}
+			}
+			else {
+				if (params.ajax) {
+					def response = [error: pageInstance.errors]
+					render response as GSON
+				} else {
+					render(view: "create", model: [pageInstance: pageInstance])
+				}
+			}
+		}.invalidToken {
+			response.status = 403
+		}
     }
 	
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])

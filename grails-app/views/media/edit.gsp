@@ -19,7 +19,7 @@
 	    </div>
 		</g:hasErrors>
 	
-	         <g:form method="post" >
+	         <g:form method="post" useToken="true">
 	            <g:hiddenField name="id" value="${mediaInstance?.id}" />
 	            <g:hiddenField name="version" value="${mediaInstance?.version}" />
 	             

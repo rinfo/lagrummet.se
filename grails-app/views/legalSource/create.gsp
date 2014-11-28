@@ -19,7 +19,7 @@
                 <g:renderErrors bean="${legalSourceInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" name="form_create_source">
+            <g:form action="save" name="form_create_source" useToken="true">
             	<g:render template="legalSourceEditForm" />
                 
                 <div class="buttons">

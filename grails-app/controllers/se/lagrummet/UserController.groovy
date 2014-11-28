@@ -24,16 +24,20 @@ class UserController {
     }
 
     def save = {
-        def userInstance = new User(params)
-		def roleId = params.role
-        if (userInstance.save(flush: true)) {
-        	def role = SecRole.findById(roleId)
-			SecUserSecRole.create(userInstance, role, true)
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.fullName])}"
-            redirect(action: "edit", id: userInstance.id)
-        }
-        else {
-            render(view: "create", model: [userInstance: userInstance])
+        withForm {
+            def userInstance = new User(params)
+            def roleId = params.role
+            if (userInstance.save(flush: true)) {
+                def role = SecRole.findById(roleId)
+                SecUserSecRole.create(userInstance, role, true)
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.fullName])}"
+                redirect(action: "edit", id: userInstance.id)
+            }
+            else {
+                render(view: "create", model: [userInstance: userInstance])
+            }
+        }.invalidToken {
+            response.status = 403
         }
     }
 
@@ -61,55 +65,64 @@ class UserController {
     }
 
     def update = {
-        def userInstance = User.get(params.id)
-		def roleId = params.role
-        if (userInstance) {
-            if (params.version) {
-                def version = params.version.toLong()
-                if (userInstance.version > version) {
-                    
-                    userInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'user.label', default: 'User')] as Object[], "Another user has updated this User while you were editing")
+        withForm {
+            def userInstance = User.get(params.id)
+            def roleId = params.role
+            if (userInstance) {
+                if (params.version) {
+                    def version = params.version.toLong()
+                    if (userInstance.version > version) {
+
+                        userInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'user.label', default: 'User')] as Object[], "Another user has updated this User while you were editing")
+                        render(view: "edit", model: [userInstance: userInstance])
+                        return
+                    }
+                }
+                if(!params.password) {
+                    params.password = userInstance.password
+                }
+                bindData(userInstance, params)
+                if (!userInstance.hasErrors() && userInstance.save(flush: true)) {
+                    def role = SecRole.findById(roleId)
+                    SecUserSecRole.removeAll(userInstance)
+                    SecUserSecRole.create(userInstance, role, true)
+                    flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.fullName])}"
+                    redirect(action: "edit", id: userInstance.id)
+                }
+                else {
                     render(view: "edit", model: [userInstance: userInstance])
-                    return
                 }
             }
-			if(!params.password) {
-				params.password = userInstance.password
-			}
-            bindData(userInstance, params)
-            if (!userInstance.hasErrors() && userInstance.save(flush: true)) {
-				def role = SecRole.findById(roleId)
-				SecUserSecRole.removeAll(userInstance)
-				SecUserSecRole.create(userInstance, role, true)
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.fullName])}"
-                redirect(action: "edit", id: userInstance.id)
-            }
             else {
-                render(view: "edit", model: [userInstance: userInstance])
+                flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+                redirect(action: "list")
             }
+        }.invalidToken {
+            response.status = 403
         }
-        else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
-            redirect(action: "list")
-        }
+
     }
 
     def delete = {
-        def userInstance = User.get(params.id)
-        if (userInstance) {
-            try {
-                userInstance.delete(flush: true)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+        withForm {
+            def userInstance = User.get(params.id)
+            if (userInstance) {
+                try {
+                    userInstance.delete(flush: true)
+                    flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+                    redirect(action: "list")
+                }
+                catch (org.springframework.dao.DataIntegrityViolationException e) {
+                    flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+                    redirect(action: "show", id: params.id)
+                }
+            }
+            else {
+                flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
                 redirect(action: "list")
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
-                redirect(action: "show", id: params.id)
-            }
-        }
-        else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
-            redirect(action: "list")
+        }.invalidToken {
+            response.status = 403
         }
     }
 }

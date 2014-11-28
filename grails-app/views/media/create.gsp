@@ -18,7 +18,7 @@
 		    </div>
 		</g:hasErrors>
 		
-		<g:form action="save" method="post" enctype="multipart/form-data">
+		<g:form action="save" method="post" enctype="multipart/form-data" useToken="true">
 			<div class="input ${hasErrors(bean: mediaInstance, field: 'imageFile', 'errors')}">
 				<label for="mediaFile"><g:message code="user.file.label" default="Fil" /></label>
 				<input type="file" name="mediaFile" />

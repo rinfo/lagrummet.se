@@ -23,13 +23,17 @@ class SitePropertiesController {
     }
 
     def save = {
-        def sitePropertiesInstance = new SiteProperties(params)
-        if (sitePropertiesInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'siteProperties.label', default: 'SiteProperties'), sitePropertiesInstance.id])}"
-            redirect(action: "show", id: sitePropertiesInstance.id)
-        }
-        else {
-            render(view: "create", model: [sitePropertiesInstance: sitePropertiesInstance])
+        withForm {
+            def sitePropertiesInstance = new SiteProperties(params)
+            if (sitePropertiesInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'siteProperties.label', default: 'SiteProperties'), sitePropertiesInstance.id])}"
+                redirect(action: "show", id: sitePropertiesInstance.id)
+            }
+            else {
+                render(view: "create", model: [sitePropertiesInstance: sitePropertiesInstance])
+            }
+        }.invalidToken {
+            response.status = 403
         }
     }
 

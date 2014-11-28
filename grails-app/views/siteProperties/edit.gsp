@@ -19,7 +19,7 @@
                 <g:renderErrors bean="${sitePropertiesInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post">
+            <g:form method="post" useToken="true">
                 <g:hiddenField name="id" value="${sitePropertiesInstance?.id}" />
                 <g:hiddenField name="version" value="${sitePropertiesInstance?.version}" />
                 <g:hiddenField name="title" value="${sitePropertiesInstance?.title}" />
