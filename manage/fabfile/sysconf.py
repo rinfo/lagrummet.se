@@ -4,7 +4,6 @@ from fabric.contrib.files import append
 from os.path import expanduser
 
 
-
 @task
 @roles('rinfo')
 def install_server():
@@ -18,8 +17,6 @@ def config_server():
     config_apache()
     config_war()
     setup_mysql()
-    if env.demodata:
-        setup_demodata()
     if env.mysql_backup:
         create_mysql_config_file()
         install_mysql_backup()
@@ -93,14 +90,7 @@ def create_mysql_config_file():
     sudo("chmod 600 /root/.my.cnf")
 
 
-@task
-@roles('rinfo')
-def setup_demodata():
-    """Setup mysql demo data"""
-    with lcd(env.projectroot):
-        put("manage/sysconf/%(target)s/mysql/dump.sql" % env, "/tmp")
-        #sudo("mysql -u root -p lagrummet < /tmp/dump.sql")
-        sudo("mysql -u root lagrummet < /tmp/dump.sql")
+
 
 
 @task

@@ -1,5 +1,9 @@
 from fabric.api import *
 import contextlib
+from fabric.context_managers import lcd
+from fabric.decorators import task, roles
+from fabric.operations import put, sudo
+from fabric.state import env
 import time
 from fabfile.sysconf import get_value_from_password_store, PASSWORD_FILE_FTP_USERNAME_PARAM_NAME, \
     PASSWORD_FILE_FTP_PASSWORD_PARAM_NAME, PASSWORD_FILE_DB_USERNAME_PARAM_NAME, PASSWORD_FILE_DB_PASSWORD_PARAM_NAME
@@ -138,5 +142,12 @@ def create_path(tar_target_path, use_sudo=False):
         run("mkdir -p %s" % tar_target_path)
 
 
-
-
+@task
+@roles('rinfo')
+def setup_demodata():
+    """Setup mysql demo data"""
+    restore_db("demodata_lagrummet_2014_11_28")
+    #with lcd(env.projectroot):
+        #put("manage/sysconf/%(target)s/mysql/dump.sql" % env, "/tmp")
+        ##sudo("mysql -u root -p lagrummet < /tmp/dump.sql")
+        #sudo("mysql -u root lagrummet < /tmp/dump.sql")

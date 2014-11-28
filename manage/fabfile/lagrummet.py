@@ -2,13 +2,13 @@ from fabric.contrib.files import exists
 import sys
 import time
 from fabric.api import *
+from fabfile.server import setup_demodata
 from server import restart_apache, restore_db, backup_db
 from server import restart_tomcat
 from server import stop_tomcat
 from server import start_tomcat
 from sysconf import setup_mysql, get_value_from_password_store, PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, \
     PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME
-from sysconf import setup_demodata
 
 
 @task()
