@@ -54,7 +54,7 @@ casper.test.begin('Add source without rdl', function(test) {
    casper.waitForSelector("#content > article > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#content > article > header > h1','Lista över rättskällorna');
+        this.test.assertSelectorHasText('#content > article > header > h1','Alla rättskällor');
         this.test.assertSelectorHasText('#Foreskrifter_inteSokbar_list > li > a','ABC-myndigheten 2');
    });
 

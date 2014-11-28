@@ -54,10 +54,10 @@ casper.test.begin('Add source connected to rdl and with description', function(t
 
     casper.then(goToAllaRattskallor);
 
-    casper.waitForText("Lista över rättskällorna", function(){}, captureScreen, 20000);
+    casper.waitForText("Alla rättskällor", function(){}, captureScreen, 20000);
 
     casper.then(function() {
-        this.test.assertSelectorHasText('#content > article > header > h1','Lista över rättskällorna');
+        this.test.assertSelectorHasText('#content > article > header > h1','Alla rättskällor');
         this.test.assertSelectorHasText('#Forarbeten_sokbar_list > li > a','Förarbete TEST');
     });
 

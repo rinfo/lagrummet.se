@@ -53,7 +53,7 @@ casper.test.begin('Remove source', function(test) {
 
     casper.then(goToAllaRattskallor);
 
-    casper.waitForText("Lista över rättskällorna", function(){}, captureScreen, 20000);
+    casper.waitForText("Alla rättskällor", function(){}, captureScreen, 20000);
 
     casper.then(function() {
 
