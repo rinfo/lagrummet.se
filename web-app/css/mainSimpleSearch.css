@@ -111,13 +111,22 @@ article.frontpage .puffs {
     margin-top: 45px;
 }
 
-article.frontpage div.puffs * {
+article.frontpage div.puffs p {
     font: 12px verdana, arial, helvetica, sans-serif;
     line-height: 140%;
     text-align: left;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+}
+
+
+article.frontpage div.puffs h3 {
+    font-size: 1.3em;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
 }
 
 .searchResults > table {
