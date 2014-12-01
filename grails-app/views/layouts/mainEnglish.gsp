@@ -16,7 +16,7 @@
     </head>
     <body>
 		<div id="logo">
-			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle}</a>
+			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle ?: "lagrummet<span class='hlight'>.se</span>"}</a>
 		</div>
 		<!-- <a href="#primaryNavigation" id="mobileNavLink">Navigering</a>  -->
 		<header id="siteHeader">
