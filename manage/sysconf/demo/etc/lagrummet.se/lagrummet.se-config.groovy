@@ -5,6 +5,7 @@ lagrummet.rdl.service.baseurl="http://service.demo.lagrummet.se/"
 lagrummet.rdl.rinfo.baseurl="http://rinfo.demo.lagrummet.se/"
 lagrummet.onlyLocalSearch = true
 lagrummet.mainLayoutName = "mainSimpleSearch"
+lagrummet.mainEnglishLayoutName = "mainSimpleSearch"
 
 dataSource.url = "jdbc:mysql://127.0.0.1:3306/lagrummet"
 dataSource.username = "lagrummet2"
