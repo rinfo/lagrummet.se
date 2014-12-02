@@ -66,7 +66,7 @@ class SearchController {
 		
 		def synonyms = []
 		def queries = []
-        String query = !params.query ? "" : params.query.length() > grailsApplication.config.lagrummet.search.maxLength ? params.query.substring(0,grailsApplication.config.lagrummet.search.maxLength) : params.query
+        String query = params.query?.take(grailsApplication.config.lagrummet.search.maxLength)
 
 		queries.add(query)
 		if(!params.alias || params.alias != "false"){
@@ -96,7 +96,7 @@ class SearchController {
 		}
 		
 	}
-	
+
 	def ext = { ExtendedSearchCommand esc ->
         if (grailsApplication.config.lagrummet.onlyLocalSearch) {
             forward(controller: "page", action: "error", params: [errorId: "404"])
@@ -244,4 +244,5 @@ class ExtendedSearchCommand {
 		
 		return true
 	}
+
 }
