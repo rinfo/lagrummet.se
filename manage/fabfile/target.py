@@ -144,6 +144,7 @@ def valle():
         'rinfo': ['valle.lagrummet.se'],
         'apache': ['valle.lagrummet.se'],
         }
+    _initialize_password()
 
 @task
 def regression():
