@@ -66,7 +66,7 @@ class SearchController {
 		
 		def synonyms = []
 		def queries = []
-        String query = params.query?.take(grailsApplication.config.lagrummet.search.maxLength)
+        String query = params.query?.take(grailsApplication.config.lagrummet.search.maxLength) ?: ""
 
 		queries.add(query)
 		if(!params.alias || params.alias != "false"){
