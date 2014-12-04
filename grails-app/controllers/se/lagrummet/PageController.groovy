@@ -139,7 +139,7 @@ class PageController {
 
 		// Only Ajax response
 		if (instanceToSave.save(flush: true)) {
-			def response = [success: "true", pageInstance: pageInstance]
+			def response = [success: "true"]
 			render response as GSON
 		}
 		else {
