@@ -118,7 +118,7 @@ class MainSiteTagLib {
 	 */
 	def linkConditional = { attrs, body ->
 		def href = attrs.href
-		def classParam = (attrs.class) ? 'class="' + attrs.class + '"' : ""
+		def classParam = (attrs.class) ? ' class="' + attrs.class + '"' : ""
 		
 		if(href) {
 			out << '<a href="' << href << '"'+classParam+'>'
