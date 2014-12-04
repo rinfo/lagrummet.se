@@ -148,6 +148,11 @@ class PageController {
 		}
 	}
 
+
+	def redirect = {
+		redirect(url: params.destination, permanent: true)
+	}
+
     def show = {
 		def url = (params.permalink) ? params.permalink.tokenize("/") : ["home"]
 		def permalink = url[url.size()-1]
