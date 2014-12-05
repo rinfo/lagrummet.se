@@ -7,7 +7,16 @@ lagrummet.onlyLocalSearch = true
 lagrummet.mainLayoutName = "mainSimpleSearch"
 
 dataSource.url = "jdbc:mysql://127.0.0.1:3306/lagrummet"
-dataSource.username = "lagrummet2"
+dataSource.username = "lagrummet"
 dataSource.password = "<CHANGEME>"
 
 lagrummet.googleAnalytics.webPropertyId = ""
+
+
+grails.plugins.springsecurity.ipRestrictions = [
+	 '/admin/**': [
+		 '159.190.251.56', '159.190.251.57', '159.190.240.67', 
+		 ]
+	  ]
+
+ 
