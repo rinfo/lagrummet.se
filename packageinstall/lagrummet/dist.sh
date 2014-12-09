@@ -7,6 +7,8 @@ sed 's/dnsplaceholderforsed/lagrummet\.se/g' ../../manage/sysconf/template/etc/a
 
 sed 's/usernameplaceholderforsed/'$2'/;s/passwordplaceholderforsed/'$3'/' ../../manage/sysconf/template/mysql/setup-mysql.sql > tmp/mysql-config.sql
 
+cp ~/.ssh/id_rsa.pub tmp/
+
 cp $4/manage/sysconf/template/www/robots.txt tmp/
 
 cp $4/packageinstall/reuse/bootstrap.sh tmp/
@@ -14,7 +16,6 @@ cp $4/packageinstall/reuse/install_apache.sh tmp/
 cp $4/packageinstall/reuse/install_tomcat.sh tmp/
 cp $4/packageinstall/reuse/start_apache.sh tmp/
 cp $4/packageinstall/reuse/start_tomcat.sh tmp/
-#cp $4/manage/sysconf/common/etc/init.d/tomcat tmp/init.d_tomcat
 
 sed 's/dnsplaceholderforsed/'$1'/;s/usernameplaceholderforsed/'$2'/;s/passwordplaceholderforsed/'$3'/' ../../manage/sysconf/template/etc/lagrummet.se/lagrummet.se-config.groovy > tmp/lagrummet.se-config.groovy
 

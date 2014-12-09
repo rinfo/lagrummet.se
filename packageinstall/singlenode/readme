@@ -1,0 +1,8 @@
+Kör
+
+source ./dist.sh test.lagrummet.se lagrummet changeme ../../../rdl
+
+eller
+
+source ./dist.sh <domän> <användarnamn> <användarlösen> <rdl katalog> 
+

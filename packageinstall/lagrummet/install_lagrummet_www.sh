@@ -17,7 +17,7 @@ a2ensite lagrummet
 
 cp lagrummet.se.war /var/lib/tomcat7/webapps/ROOT.war
 
-mkdir -p /etc/lagrummet/
-cp lagrummet.se-config.groovy /etc/lagrummet/
+mkdir -p /etc/lagrummet.se/
+cp lagrummet.se-config.groovy /etc/lagrummet.se/
 
 cp server.xml /var/lib/tomcat7/conf/
