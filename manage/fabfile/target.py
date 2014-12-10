@@ -14,7 +14,7 @@ def prod():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot+"/target/lagrummet.se.war"
+    env.localwar = env.projectroot+"/target/lagrummet.war"
     env.hosts = ['beta.lagrummet.se']
     env.grails_build_env = "production"
     env.roledefs = {
@@ -35,7 +35,7 @@ def demo():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot+"/target/lagrummet.se.war"
+    env.localwar = env.projectroot+"/target/lagrummet.war"
     env.hosts = ['demo.lagrummet.se']
     env.grails_build_env = "demo"
     env.roledefs = {
@@ -56,7 +56,7 @@ def beta():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot+"/target/lagrummet.se.war"
+    env.localwar = env.projectroot+"/target/lagrummet.war"
     env.hosts = ['beta.lagrummet.se']
     env.grails_build_env = "beta"
     env.roledefs = {
@@ -77,7 +77,7 @@ def test():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot + "/target/lagrummet.se.war"
+    env.localwar = env.projectroot + "/target/lagrummet.war"
     env.hosts = ['test.lagrummet.se']
     env.grails_build_env = "demo"
     env.roledefs = {
@@ -97,7 +97,7 @@ def dom():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot + "/target/lagrummet.se.war"
+    env.localwar = env.projectroot + "/target/lagrummet.war"
     env.hosts = ['t1.lagr.dev.dom.se']
     env.grails_build_env = "demo"
     env.roledefs = {
@@ -117,7 +117,7 @@ def ville():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot + "/target/lagrummet.se.war"
+    env.localwar = env.projectroot + "/target/lagrummet.war"
     env.hosts = ['ville.lagrummet.se']
     env.grails_build_env = "demo"
     env.roledefs = {
@@ -137,7 +137,7 @@ def valle():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot + "/target/lagrummet.se.war"
+    env.localwar = env.projectroot + "/target/lagrummet.war"
     env.hosts = ['valle.lagrummet.se']
     env.grails_build_env = "demo"
     env.roledefs = {
@@ -157,7 +157,7 @@ def regression():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot+"/target/lagrummet.se.war"
+    env.localwar = env.projectroot+"/target/lagrummet.war"
     env.hosts = ['regression.lagrummet.se']
     env.grails_build_env = "prod"
     env.roledefs = {
@@ -177,7 +177,7 @@ def skrapat():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot+"/target/lagrummet.se.war"
+    env.localwar = env.projectroot+"/target/lagrummet.war"
     env.hosts = ['skrapat.lagrummet.se']
     env.grails_build_env = "demo"
     env.roledefs = {
@@ -198,7 +198,7 @@ def local():
     env.user = 'rinfo'
     env.deploydir = '/opt/tomcat/webapps/'
     env.warname = 'lagrummet.war'
-    env.localwar = env.projectroot+"/target/lagrummet.se.war"
+    env.localwar = env.projectroot+"/target/lagrummet.war"
     env.hosts = ['localhost:8080/lagrummet.se']
     env.grails_build_env = "test"
     env.roledefs = {
