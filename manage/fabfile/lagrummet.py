@@ -8,25 +8,30 @@ from server import restart_tomcat
 from server import stop_tomcat
 from server import start_tomcat
 from sysconf import setup_mysql, get_value_from_password_store, PASSWORD_FILE_ADMIN_USERNAME_PARAM_NAME, \
-    PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME
+    PASSWORD_FILE_ADMIN_PASSWORD_PARAM_NAME, set_build_number_in_application_properties, \
+    restore_app_version_in_application_properties
 
 
 @task()
-def all(test=1):
-    build_war(test)
+def all(test=1, build_number=0):
+    build_war(test, build_number)
     deploy_war()
 
 
 @task
-def build_war(test=1):
+def build_war(test=1, build_number=0):
     """Build lagrummet grails-war locally"""
+    app_version = ''
+    if build_number>0:
+        app_version = set_build_number_in_application_properties(build_number)
     with lcd(env.projectroot):
         local("grails clean")
         if test == 1:
             local("grails test-app")
-        local("grails -Dgrails.env=%(grails_build_env)s war --non-interactive" % env)
+        local("grails -Dgrails.env=%(grails_build_env)s war target/lagrummet.war --non-interactive" % env)
         local("ls -l target")
-
+    if app_version:
+        restore_app_version_in_application_properties(app_version)
 
 @task
 @roles('rinfo')

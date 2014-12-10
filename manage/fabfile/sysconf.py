@@ -1,6 +1,7 @@
 import ConfigParser
 from fabric.api import *
 from fabric.contrib.files import append
+import os
 from os.path import expanduser
 
 
@@ -168,3 +169,39 @@ def get_value_from_password_store(name, default_value=''):
         return value
     except:
         return default_value
+
+
+def get_application_properites_file_name():
+    return '%s/application.properties' % env.projectroot
+
+
+@task
+def set_build_number_in_application_properties(build_nuber):
+    tmp_file_name = get_application_properites_file_name()+'.tmp'
+    read_file = open(get_application_properites_file_name(), 'r')
+    write_file = open(tmp_file_name, 'w')
+    app_version = ''
+    for line in read_file:
+        if line.startswith('app.version'):
+            app_version = line
+            line = "%s.%s\n" % (line.rstrip('\n'), str(build_nuber))
+        write_file.write(line)
+    read_file.close()
+    write_file.close()
+    os.remove(get_application_properites_file_name())
+    os.rename(tmp_file_name, get_application_properites_file_name())
+    return app_version
+
+@task
+def restore_app_version_in_application_properties(app_version):
+    tmp_file_name = get_application_properites_file_name()+'.tmp'
+    read_file = open(get_application_properites_file_name(), 'r')
+    write_file = open(tmp_file_name, 'w')
+    for line in read_file:
+        if line.startswith('app.version'):
+            line = app_version
+        write_file.write(line)
+    read_file.close()
+    write_file.close()
+    os.remove(get_application_properites_file_name())
+    os.rename(tmp_file_name, get_application_properites_file_name())
