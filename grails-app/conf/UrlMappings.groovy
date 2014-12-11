@@ -147,7 +147,7 @@ class UrlMappings {
 		"/Om-lagrummetse/om_lagrummet_se" {
 			controller = "page"
 			action = "redirect"
-			destination = "/om-lagrummet/Om%20lagrummet.se"
+			destination = "/om-lagrummet/Om-lagrummet.se"
 		}
 		"/Om-lagrummetse/om_lagrummet_se/rattsinformationsprojektet" {
 			controller = "page"

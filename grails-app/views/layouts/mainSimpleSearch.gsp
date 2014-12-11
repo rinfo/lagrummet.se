@@ -13,7 +13,7 @@
         <g:mobileDeviceWidth />
         <g:layoutHead />
 		<!--[if lt IE 9]>
-			<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
+			<link rel="stylesheet" href="${resource(dir:'css',file:'ieSimpleSearch.css')}" />
 			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
