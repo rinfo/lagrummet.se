@@ -50,7 +50,6 @@ grails.project.dependency.resolution = {
     }
     plugins {
         compile ":hibernate:3.6.10.17"
-        compile ":tiny-mce:3.4.9"
         compile ":searchable:0.6.9"
         compile ":quartz2:2.1.6.2"
         compile ":jquery:1.11.1"
