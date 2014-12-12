@@ -21,15 +21,13 @@ class MediaController {
 		def mediaInstances = (params.parentId) ? Media.findAllByParentIsNull() : Media.list(params)
 		def mediaInstancesCount =  mediaInstances.size()
 		if (params.ajax) {
-			render "var tinyMCEImageList = new Array("
 			
 			def pageMediaInstances = Page.get(params.parentId).media
 			def pageMediaInstancesCount =  pageMediaInstances.size()
-
+            render '['
 			if (pageMediaInstancesCount > 0) {
-				render '["- Page-specific media", ""],'
 				pageMediaInstances.eachWithIndex() { mI, i ->
-					render '["' + mI.title + '", "' + resource(absolute: true) + "/" + mI.filename + '"]'
+					render '{title:"' + mI.title + '", value:"' + resource(absolute: true) + "/" + mI.filename + '"}'
 					if ((i+1) != pageMediaInstancesCount || mediaInstances.size() > 0) {
 						render ","
 					}
@@ -38,16 +36,14 @@ class MediaController {
 			
 			
 			if (mediaInstancesCount > 0) {
-				render '["- Sitewide media", ""],'
 				mediaInstances.eachWithIndex() { mI, i ->
-					render '["' + mI.title + '", "' + grailsApplication.getConfig().grails.serverURL + '/' + mI.filename + '"]'
+					render '{title:"' + mI.title + '", value:"' + grailsApplication.getConfig().grails.serverURL + '/' + mI.filename + '"}'
 					if ((i+1) != mediaInstancesCount) {
 						render ","
 					}
 				}
 			}
-			
-			render ");"
+            render ']'
 		} else {
 			[mediaInstanceList: mediaInstances, mediaInstanceTotal: Media.count()]
 		}
