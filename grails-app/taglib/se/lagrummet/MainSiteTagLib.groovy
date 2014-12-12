@@ -63,9 +63,9 @@ class MainSiteTagLib {
 		def pageInstance = (Page.get(attrs.pageId).masterRevision) ?: Page.get(attrs.pageId)
 		def now = new Date()
 
-		if (pageInstance.metaPage && pageInstance.parent && pageInstance.showInSitemap) {
+		if (pageInstance.metaPage && pageInstance.parent && pageInstance.showInSitemap && pageInstance.isCurrentlyPublished()) {
 			out << '<li><h3>' << pageInstance.h1 << "</h3></li>"
-		} else if (!pageInstance.metaPage && pageInstance.showInSitemap) {
+		} else if (!pageInstance.metaPage && pageInstance.showInSitemap && pageInstance.isCurrentlyPublished()) {
 			out << '<li><a href="' << resource() << "/" << pageInstance.url() << '">' << pageInstance.title  << '</a></li>'
 		}
 		

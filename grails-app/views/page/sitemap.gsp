@@ -10,7 +10,7 @@
 		<div id="pageTree">
 		<ul>
 			<g:each in="${pageTreeList}" var="pI">
-				<g:if test="${!pI.parent && pI.children}">
+				<g:if test="${!pI.parent && pI.children && pI.isCurrentlyPublished()}">
 					<ul>
             		<g:sitemapItem pageId="${pI.id}" />
             		</ul>
