@@ -12,7 +12,7 @@ jQuery(function($) {
 
 	// The relative "../../" on content_css makes it vulnerable. Must be loaded from a secnd level down .gsp.
 	var pageId = ($("#parentId")) ? $("#parentId").attr("value") : "";
-	tinyMCE.init({
+	/*tinyMCE.init({
 		theme : "advanced",
 		mode : "exact",
 		elements : "content",
@@ -31,8 +31,31 @@ jQuery(function($) {
 		formats : {
             p : {selector : 'p', classes : '', styles: ''}
 		}
+	});*/
+
+	tinymce.init({
+		selector: "div.mceEditor > textarea[name='content']",
+		theme: "modern",
+		//width: 300,
+		//height: 300,
+		plugins: [
+			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+			"save table contextmenu directionality emoticons template paste textcolor"
+		],
+		image_list: serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
+		content_css: "../../css/main.css",
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor code",
+		/*style_formats: [
+			{title: 'Bold text', inline: 'b'},
+			{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+			{title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+			{title: 'Example 1', inline: 'span', classes: 'example1'},
+			{title: 'Example 2', inline: 'span', classes: 'example2'},
+			{title: 'Table styles'},
+			{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+		]*/
 	});
-	
 	
 	function jsTreeContextMenu(node) {
 	    // The default set of all items
