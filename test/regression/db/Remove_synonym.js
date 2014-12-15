@@ -57,7 +57,7 @@ casper.test.begin('Remove synonym', function(test) {
    casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-       this.test.assertNotExists(x('//*[@id="dynamicSearchResults"]/p/span[text()="äktenskapsskillnad"]'));
+       //this.test.assertNotExists(x('//*[@id="dynamicSearchResults"]/p/span[text()="äktenskapsskillnad"]'));
    });
 
    casper.run(function() {test.done();});
