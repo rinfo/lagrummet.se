@@ -34,7 +34,9 @@ casper.test.begin('Remove synonym', function(test) {
        this.test.assertExists(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="skilsmässa"]'));
        this.test.assertExists(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="äktenskapsskillnad"]'));
 
-       this.click(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="skilsmässa"]/../../td/div[@class="buttons"]/a'));
+       //this.click(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="skilsmässa"]/../../td/div[@class="Buttons"]/input[2]'));
+       this.click(x('//*[@id="editSynonyms"]/div[2]/table/tbody/tr[16]/td[3]/div/input[2]'));
+
    });
 
    casper.waitForText('borttagen', function(){}, captureScreen, 5000);
