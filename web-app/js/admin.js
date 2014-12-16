@@ -12,32 +12,12 @@ jQuery(function($) {
 
 	// The relative "../../" on content_css makes it vulnerable. Must be loaded from a secnd level down .gsp.
 	var pageId = ($("#parentId")) ? $("#parentId").attr("value") : "";
-	/*tinyMCE.init({
-		theme : "advanced",
-		mode : "exact",
-		elements : "content",
-		content_css : "../../css/main.css",
-		theme_advanced_toolbar_location : "top",
-		theme_advanced_blockformats : "p,h1,h2,h3,h4,",
-		force_p_newlines : true,
-		relative_urls : false,
-		external_image_list_url : serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
-		theme_advanced_resizing : true,
-		theme_advanced_resizing_min_height : 480,
-		plugins : "advimage, paste",
-		paste_auto_cleanup_on_paste : true,
-		extended_valid_elements : "nav[class]",
-		entity_encoding : "raw",
-		formats : {
-            p : {selector : 'p', classes : '', styles: ''}
-		}
-	});*/
 
 	tinymce.init({
 		selector: "div.mceEditor > textarea[name='content']",
 		theme: "modern",
-		//width: 300,
-		//height: 300,
+		forced_root_block : "",
+		force_p_newlines : true,
 		plugins: [
 			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
 			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
@@ -45,16 +25,12 @@ jQuery(function($) {
 		],
 		image_list: serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
 		content_css: "../../css/main.css",
-		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor code",
-		/*style_formats: [
-			{title: 'Bold text', inline: 'b'},
-			{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-			{title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-			{title: 'Example 1', inline: 'span', classes: 'example1'},
-			{title: 'Example 2', inline: 'span', classes: 'example2'},
-			{title: 'Table styles'},
-			{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
-		]*/
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor code ",
+		extended_valid_elements : "nav[class]",
+		entity_encoding : "raw",
+		formats : {
+			p : {selector : 'p', classes : '', styles: ''}
+		}
 	});
 	
 	function jsTreeContextMenu(node) {
