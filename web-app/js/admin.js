@@ -23,6 +23,21 @@ jQuery(function($) {
 			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 			"save table contextmenu directionality emoticons template paste textcolor"
 		],
+		external_plugins: {
+			"codemirror": serverUrl+"js/tinyPlugins/codemirror/plugin.min.js"
+		},
+		codemirror: {
+			indentOnInit: true, // Whether or not to indent code on init.
+			path: serverUrl+'js/tinyPlugins/codemirror/codemirror-4.8', // Path to CodeMirror distribution
+			config: {           // CodeMirror config object
+				mode: 'htmlmixed',
+				lineNumbers: true
+			},
+			jsFiles: [          // Additional JS files to load
+				'mode/htmlmixed/htmlmixed.js'
+			]
+		},
+		relative_urls : false,
 		image_list: serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
 		content_css: "../../css/main.css",
 		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor code ",
