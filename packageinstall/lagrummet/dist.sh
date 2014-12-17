@@ -27,7 +27,7 @@ sed 's/usernameplaceholderforsed/'$2'/;s/passwordplaceholderforsed/'$3'/' ./inst
 cp ./install.sh tmp/
 cp ./server.xml tmp/
 
-cp ~/releaser/2014DEC03-1203/lagrummet_beta_2014DEC03.sql tmp/lagrummet_dump.sql
+cp ~/releaser/2014DEC17/lagrummet_prod_2014DEC17.sql tmp/lagrummet_dump.sql§
 
 git log -1 | grep 'commit' > tmp/git_status.txt
 
