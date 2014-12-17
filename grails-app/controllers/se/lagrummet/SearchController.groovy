@@ -61,12 +61,7 @@ class SearchController {
 		render(contentType:'text/csv',text:result,encoding:"UTF-8")
 	}
 
-    def ajax = {
-
-    }
-
     def index = {
-        log.trace("search")
 		def searchResult = null
 		def offset
 		if (params.cat) session.cat = params.cat //todo this could end up in very suspicious behaviour when using multiple tabs/windows in the browser
@@ -74,7 +69,6 @@ class SearchController {
 		def synonyms = []
 		def queries = []
         String query = params.query?.take(grailsApplication.config.lagrummet.search.maxLength) ?: ""
-        log.trace("search query='"+query+"'")
 
 		queries.add(query)
 		if(!params.alias || params.alias != "false"){
@@ -93,35 +87,21 @@ class SearchController {
 		}
 		
 		new Search(query: query, category: params.cat).save()
-		
+
+        def dynamicSearchResults
+        if (grailsApplication.config.lagrummet.onlyLocalSearch && params.cat && params.cat != "Alla") {
+            dynamicSearchResults = groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, cat: 'Ovrigt',  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias, excludeBody: true])
+        } else {
+            dynamicSearchResults = groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias, excludeBody: true])
+        }
+
 		if (params.ajax) {
-            log.trace("search ajax reply")
-			//def response = [query: query, searchResult: searchResult, synonyms: synonyms]
-			//render response as GSON
-            //render(view: 'searchFormBody', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias])
-            //render(view: 'searchResultByCategoryBody', model: [query: query, cat: params.cat,  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias])
-            def dynamicSearchResults = groovyPageRenderer.render(view: 'searchResultByCategoryContents', model: [query: query, cat: 'Ovrigt',  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias, excludeBody: true])
-            println "*************************************************************************************************************"
-            println dynamicSearchResults
-            println "*************************************************************************************************************"
-            if (grailsApplication.config.lagrummet.onlyLocalSearch && params.cat && params.cat != "Alla") {
-                log.trace("search ajax reply (searchResultByCategory)")
-                dynamicSearchResults = groovyPageRenderer.render(view: 'searchResultByCategory', model: [query: query, cat: 'Ovrigt',  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias, excludeBody: true])
-            } else {
-                log.trace("search ajax reply (searchForm)")
-                dynamicSearchResults = groovyPageRenderer.render(view: 'searchForm', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias, excludeBody: true])
-            }
-            println "se.lagrummet.SearchController.index *************************************************************************"
-            println dynamicSearchResults
-            println "*************************************************************************************************************"
             def response = [query: query, searchResult: searchResult, synonyms: synonyms, dynamicSearchResults: dynamicSearchResults]
-            println response
-            println "*************************************************************************************************************"
             render response as GSON
 		} else if(params.cat && params.cat != "Alla") {
-			render(view: 'searchResultByCategory', model: [query: query, cat: params.cat,  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias, excludeBody: false])
+			render(view: 'searchResultByCategory', model: [query: query, cat: params.cat,  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias, contents: dynamicSearchResults])
 		} else {
-			render(view: 'searchForm', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias, excludeBody: false])
+			render(view: 'searchForm', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias, contents: dynamicSearchResults])
 		}
 		
 	}

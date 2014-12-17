@@ -1,4 +1,4 @@
-<body>
+
     <article id="searchResults" class="searchResults">
     	<p class="showAllLabel">Totalt ${searchResult?.totalResults} träffar</p>
                 
@@ -238,4 +238,3 @@
 		<strong>Hittade du inte vad du sökte?</strong>
 		<p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>
 	</div>
-</body>
