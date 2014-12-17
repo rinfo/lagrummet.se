@@ -87,8 +87,6 @@ class Page implements Comparable<Page>{
 		status(nullable: true)
 		publishStart(nullable: true)
 		publishStop(nullable: true)
-		masterRevision(nullable: true)
-		metaPage(nullable: false)
 		menuStyle(blank:true, nullable:true)
         puffs(bindable: true)
     }
@@ -98,7 +96,9 @@ class Page implements Comparable<Page>{
 		children sort: "pageOrder"
 		puffs sort: "dateCreated", order: "asc", cascade: "all-delete-orphan"
 		autoTimestamp: true
-	}
+        metaPage defaultValue: false
+        showInSitemap defaultValue: true
+    }
 	
 	def url = {
 		def fullUrl = ""

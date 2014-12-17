@@ -11,4 +11,4 @@ dataSource.url = "jdbc:mysql://127.0.0.1:3306/lagrummet"
 dataSource.username = "lagrummet2"
 dataSource.password = "<CHANGEME>"
 
-lagrummet.googleAnalytics.webPropertyId = ""
+lagrummet.googleAnalytics.webPropertyId = "UA-10527860-1"

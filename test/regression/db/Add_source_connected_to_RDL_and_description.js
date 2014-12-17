@@ -58,7 +58,7 @@ casper.test.begin('Add source connected to rdl and with description', function(t
 
     casper.then(function() {
         this.test.assertSelectorHasText('#content > article > header > h1','Alla rättskällor');
-        this.test.assertSelectorHasText('#Forarbeten_sokbar_list > li > a','Förarbete TEST');
+        this.test.assertSelectorHasText('#Forarbeten_regeringen_sokbar_list > li > a','Förarbete TEST');
     });
 
     casper.run(function() {test.done();});
