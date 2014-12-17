@@ -3,11 +3,12 @@ var originalUrl, t, query = "";
 
 // Instant search
 function searchSuggestions(data) {
+    console.log("searchSuggestions()");
 	var form = $("#search");
 	var cat = $("#cat").attr("value") || "Ovrigt";
-	
 	if (data) {
-		$("#searchSuggestions").empty().show();
+        console.log("searchSuggestions() topHits="+data.searchResult.topHits);
+        $("#searchSuggestions").empty().show();
 		$.each(data.searchResult.topHits, function(i, item) {
 			var title = (item.title) ? item.title : item.identifier;
 			var href = serverUrl + item.iri.replace(/http:\/\/.*?\//,"rinfo/");
@@ -34,21 +35,35 @@ function encodedMailAddress(coded) {
 	  return link
 }
 
-function instantSearch() {    
+function instantSearch() {
+    console.log("instantSearch(1)");
 	var form = $("#search");
 	query = $("#query").attr("value").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 	var cat = $("#cat").attr("value")  || "Ovrigt";
 	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="'+serverUrl+'sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
-	
+
+	console.log("instantSearch(2)");
 	if (!$("#dynamicSearchResults").length) {
-            $("#content > *:not(#siteFooter)").addClass("searchHidden");
-            $("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></article>');
-        }
+        $("#content > *:not(#siteFooter)").addClass("searchHidden");
+        $("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></article>');
+    }
 	
-        var url = form.attr("action")+"?ajax=true";
-        
-	$.get(url, form.serialize(), function(data) {
-        if (data) {
+    var url = form.attr("action")+"?ajax=true";
+
+    console.log("instantSearch(3)");
+	$.post(url, form.serialize(), function(data) {
+	    console.log("instantSearch(4) data="+data);
+	    if (data) {
+            searchSuggestions(data);
+            try {
+                $("#dynamicSearchResults").html(data.dynamicSearchResults);
+            } catch (e) {
+                console.log("instantSearch() Failed to search because "+e.message);
+            }
+        }
+    }, "json");
+
+        /*if (data) {
         	searchSuggestions(data);
                 
                 //********************************************************************************
@@ -257,21 +272,18 @@ function instantSearch() {
         		$("#dynamicSearchResults").html('<h1>Inga sökresultat</h1>' + sokhjalp);
         	}
         	
-                /*
-        	if(data.searchResult.errorMessages.length > 0) {
-        		$("#dynamicSearchResults").prepend('<div class="message"><ul id="errors" /></div>');
-        		$.each(data.searchResult.errorMessages, function(i, item) {
-        			$("#errors").append('<li>' + item + '</li>');
-        		});
-        	}
-                */
-                
+//        	if(data.searchResult.errorMessages.length > 0) {
+//        		$("#dynamicSearchResults").prepend('<div class="message"><ul id="errors" /></div>');
+//        		$.each(data.searchResult.errorMessages, function(i, item) {
+//        			$("#errors").append('<li>' + item + '</li>');
+//        		});
+//        	}
                 window.history.pushState(null, null, form.attr("action") + "?" + form.serialize());
                 
         } else {
         	$("#dynamicSearchResults").html("<h1>Det blev tyvärr fel, försök igen</h1>");
         }
-    }, "json");
+    }, "json"); */
 }
 
 jQuery(document).ready(function($) {

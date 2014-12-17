@@ -1,13 +1,3 @@
-<g:if test="${!excludeBody}"><html>
-<head>
-	<g:if test="${query}">
-	<title>Sökresultat för ${query.encodeAsHTML()}</title>
-	</g:if>
-	<g:else>
-	<title>Sök</title>
-	</g:else>
-	<meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}"/>
-</head></g:if>
 <body>
     <article id="searchResults" class="searchResults">
     	<p class="showAllLabel">Totalt ${searchResult?.totalResults} träffar</p>
@@ -248,6 +238,4 @@
 		<strong>Hittade du inte vad du sökte?</strong>
 		<p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>
 	</div>
-
-</body><g:if test="${!excludeBody}">
-</html></g:if>
+</body>

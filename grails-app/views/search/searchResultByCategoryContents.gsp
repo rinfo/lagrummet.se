@@ -1,9 +1,3 @@
-<g:if test="${!excludeBody}"><html>
-<head>
-	<title>Sökresultat för ${query.encodeAsHTML()}</title>
-	<meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}"/>
-</head></g:if>
-<body>
     <article id="searchResults" class="searchResults">
     	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
     	<p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult?.totalResults, offset: 0, alias: alias]) }">Visa alla ${searchResult?.totalResults} träffar</a></p>
@@ -72,5 +66,3 @@
 		<strong>Hittade du inte vad du sökte?</strong>
 		<p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>
 	</div>
-</body><g:if test="${!excludeBody}">
-</html></g:if>
