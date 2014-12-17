@@ -166,6 +166,9 @@ class MediaController {
 		def fileName = grailsApplication.config.lagrummet.upload.dir + params.filename
 		def media = Media.findByFilename(fileName)
 		if(media?.content) {
+            lastModified (media.lastUpdated ?: media.dateCreated)
+            cache validFor: 864000, shared:true
+
 			response.setContentLength(media.content.content.length)
 			response.outputStream.write(media.content.content)
 		} else {

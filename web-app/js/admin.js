@@ -18,6 +18,7 @@ jQuery(function($) {
 		theme: "modern",
 		forced_root_block : "",
 		force_p_newlines : true,
+		menubar : false,
 		plugins: [
 			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
 			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
@@ -40,7 +41,7 @@ jQuery(function($) {
 		relative_urls : false,
 		image_list: serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
 		content_css: "../../css/main.css",
-		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor code ",
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | removeformat visualchars | bullist numlist outdent indent | link anchor image | forecolor backcolor | code fullscreen",
 		extended_valid_elements : "nav[class]",
 		entity_encoding : "raw",
 		formats : {
@@ -69,7 +70,7 @@ jQuery(function($) {
 	var initiallyOpen = new Array();
 	$("#pageTree > ul > li, #pageTree ul li.metaPage").each(function(n) {
 		initiallyOpen.push($(this).attr("id"));
-	});	
+	});
 	
 	$("#pageTree li.currentPage").parents("#pageTree li").each(function(n) {
 		initiallyOpen.push($(this).attr("id"));
@@ -212,6 +213,9 @@ jQuery(function($) {
 	
 	var delete_eventhandler = function(e){
 		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+			var id = $(this).parent().siblings('input[type=hidden]').val()
+			var serverName = $('meta[name=serverURL]').attr('content');
+			window.location.replace(serverName+'/admin/synonym/delete?id='+id)
 			return true;
 		}
 		return false;

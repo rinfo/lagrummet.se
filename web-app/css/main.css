@@ -1270,6 +1270,10 @@ fieldset .inputGroup p {
 	width: auto;
 }
 
+body#tinymce.mceContentBody {
+	width: 100%;
+}
+
 /* =MEDIA-QUERIES */
 /* For all narrow devices and screens */
 
