@@ -16,7 +16,7 @@
     </head>
     <body>
 		<div id="logo">
-			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle}</a>
+			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle ?: "lagrummet<span class='hlight'>.se</span>"}</a>
 		</div>
 		<!-- <a href="#primaryNavigation" id="mobileNavLink">Navigering</a>  -->
 		<header id="siteHeader">
@@ -42,7 +42,7 @@
 					</g:each>
 					</select>
 				</div>
-				<div class="input" id="searchQuery"><g:textField name="query" autocomplete="off" /><ul id="searchSuggestions"></ul></div>
+				<div class="input" id="searchQuery"><g:textField name="query" autocomplete="off" maxlength="${grailsApplication.config.lagrummet.search.maxLength}"/><ul id="searchSuggestions"></ul></div>
 				<g:submitButton name="searchSubmit" value="Sök"/>
 			</g:form>
 			<p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>

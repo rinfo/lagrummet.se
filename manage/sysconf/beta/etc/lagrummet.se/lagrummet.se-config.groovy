@@ -5,6 +5,7 @@ lagrummet.local.rinfo.view = "${grails.serverURL}/rinfo/"
 lagrummet.rdl.service.baseurl="http://service.beta.lagrummet.se:8383/"
 lagrummet.onlyLocalSearch = true
 lagrummet.mainLayoutName = "mainSimpleSearch"
+lagrummet.mainEnglishLayoutName = "mainSimpleSearch"
 
 //lagrummet.rdl.service.baseurl="http://service.beta.lagrummet.se/"
 lagrummet.rdl.rinfo.baseurl="http://rinfo.beta.lagrummet.se/"

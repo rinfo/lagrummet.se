@@ -7,7 +7,9 @@ import se.lagrummet.Search
 import grails.plugins.springsecurity.Secured
 
 class SearchController {
-	
+
+    static int STANDARD_QUERY_LIMIT_INPUT_LENGTH = 1000
+
 	def searchService
 	def rdlSearchService
 	def synonymService
@@ -64,35 +66,37 @@ class SearchController {
 		
 		def synonyms = []
 		def queries = []
-		queries.add(params.query)
+        String query = params.query?.take(grailsApplication.config.lagrummet.search.maxLength) ?: ""
+
+		queries.add(query)
 		if(!params.alias || params.alias != "false"){
-				synonyms = synonymService.lookupSynonyms(params.query)
+				synonyms = synonymService.lookupSynonyms(query)
 				queries.addAll(synonyms)
 				params.alias = null
 		}
 		
-		if(params.query && params.cat && params.cat != "Alla")  {
+		if(query && params.cat && params.cat != "Alla")  {
 			offset = parseInt(params.offset, 0)
 			def itemsPerPage = parseInt(params.max, 20)
 			searchResult = searchService.plainTextSearch(queries, Category.getFromString(params.cat), offset, itemsPerPage)
 			
-		} else if(params.query) {
+		} else if(query) {
 			searchResult = searchService.plainTextSearch(queries, Category.getFromString(params.cat), null, null)
 		}
 		
-		new Search(query: params.query, category: params.cat).save()
+		new Search(query: query, category: params.cat).save()
 		
 		if (params.ajax) {
-			def response = [query: params.query, searchResult: searchResult, synonyms: synonyms]
+			def response = [query: query, searchResult: searchResult, synonyms: synonyms]
 			render response as GSON
 		} else if(params.cat && params.cat != "Alla") {
-			render(view: 'searchResultByCategory', model: [query: params.query, cat: params.cat,  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias])
+			render(view: 'searchResultByCategory', model: [query: query, cat: params.cat,  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias])
 		} else {
-			render(view: 'searchForm', model: [query: params.query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias])
+			render(view: 'searchForm', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias])
 		}
 		
 	}
-	
+
 	def ext = { ExtendedSearchCommand esc ->
         if (grailsApplication.config.lagrummet.onlyLocalSearch) {
             forward(controller: "page", action: "error", params: [errorId: "404"])
@@ -194,8 +198,8 @@ class SearchController {
 			render response as GSON
 		}
 	}
-	
-	private Integer parseInt(String input, Integer defaultValue = 0) {
+
+    private Integer parseInt(String input, Integer defaultValue = 0) {
 		try {
 			return input.toInteger()
 		} catch (Exception e) {
@@ -240,4 +244,5 @@ class ExtendedSearchCommand {
 		
 		return true
 	}
+
 }
