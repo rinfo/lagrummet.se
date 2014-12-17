@@ -17,3 +17,7 @@ target-eclipse/classes/
 logs/
 out/
 **/casperjs.log
+.classpath
+.project
+.settings/org.eclipse.core.resources.prefs
+
