@@ -3,11 +3,9 @@ var originalUrl, t, query = "";
 
 // Instant search
 function searchSuggestions(data) {
-    console.log("searchSuggestions()");
 	var form = $("#search");
 	var cat = $("#cat").attr("value") || "Ovrigt";
 	if (data) {
-        console.log("searchSuggestions() topHits="+data.searchResult.topHits);
         $("#searchSuggestions").empty().show();
 		$.each(data.searchResult.topHits, function(i, item) {
 			var title = (item.title) ? item.title : item.identifier;
@@ -45,6 +43,7 @@ function showRollingImageWaitForSearchResult() {
 function instantSearch() {
 	var form = $("#search");
     var url = form.attr("action")+"?ajax=true";
+    query = $("#query").attr("value").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
     showRollingImageWaitForSearchResult();
 
