@@ -128,6 +128,8 @@ jQuery(document).ready(function($) {
 			if (searchSuggestion.length) {
                 sendGaPageView($(location).attr('href'));
 				window.location = searchSuggestion.children("a").attr("href");
+			} else { // If no search selection submit form
+			    $("#search").submit();
 			}
 			return false;
 		}

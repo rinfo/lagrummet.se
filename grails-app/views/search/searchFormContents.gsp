@@ -36,14 +36,14 @@
                             Information från lagrummet.se                        
                         ********************************************************************************
                         -->                  
-			<p>
+			<p id="LagrummetHead">
 				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Ovrigt', alias:alias]) }" class="catTitle">Information från lagrummet.se</a> 
 				<span class="count">(${searchResult.totalResultsPerCategory['Ovrigt']})
 				<g:if test="${searchResult.items['Ovrigt'].size() > 0 && searchResult.totalResultsPerCategory['Ovrigt'] > searchResult.items['Ovrigt'].size()}"> Visar de första ${searchResult.items['Ovrigt'].size()}</g:if>
 				</span>
 			</p>
 			<g:if test="${searchResult.items['Ovrigt']}">
-			<ul>
+			<ul id="LagrummetList">
 				<g:each in="${searchResult.items['Ovrigt']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
@@ -60,7 +60,7 @@
                             Propositioner och skrivelser                        
                         ********************************************************************************
                         --> 		
-			<p>
+			<p id="PropHead">
 				<!--
                                   <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }" class="catTitle">Propositioner och skrivelser</a> 
                                  -->
@@ -72,7 +72,7 @@
                                  
 			</p>
 			<g:if test="${searchResult.items['Propositioner']}">
-			<ul>
+			<ul id="PropList">
 				<g:each in="${searchResult.items['Propositioner']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
@@ -91,7 +91,7 @@
                             Rättsfall                     
                         ********************************************************************************
                         -->                         
-			<p>
+			<p id="RattsfallHead">
 			    <g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
 			      <span class="catTitle">Rättsfall</span>
 				</g:if>
@@ -106,7 +106,7 @@
 				</g:if>
 			</p>
 			<g:if test="${searchResult.items['Rattsfall']}">
-			<ul>
+			<ul id="RattsfallList">
 				<g:each in="${searchResult.items['Rattsfall']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier ?: item.malnummer}</a></p>
@@ -128,7 +128,7 @@
                             Lagar och förordningar                  
                         ********************************************************************************
                         -->                                     
-			<p>
+			<p id="LagarHead">
 			    <g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
 			      <span class="catTitle">Lagar och förordningar</span>
 				</g:if>
@@ -143,7 +143,7 @@
 				</g:if>
 			</p>
 			<g:if test="${searchResult.items['Lagar']}">
-			<ul>
+			<ul id="LagarList">
 				<g:each in="${searchResult.items['Lagar']}" var="item">
 					<li>
 						<p><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
@@ -167,7 +167,7 @@
                             Myndigheters föreskrifter                    
                         ********************************************************************************
                         -->                         
-			<p>
+			<p id="ForeskrifterHead">
 			    <g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
 			      <span class="catTitle">Myndigheters föreskrifter</span>
 				</g:if>
@@ -182,7 +182,7 @@
 				</g:if>
 			</p>
 			<g:if test="${searchResult.items['Foreskrifter']}">
-			<ul>
+			<ul id="ForeskrifterList">
 				<g:each in="${searchResult.items['Foreskrifter']}" var="item">
 					<li>
                                               <!-- title or identifier -->

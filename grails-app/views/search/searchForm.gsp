@@ -1,4 +1,4 @@
-<g:if test="${!excludeBody}"><html>
+<html>
 <head>
 	<g:if test="${query}">
 	<title>Sökresultat för ${query.encodeAsHTML()}</title>
@@ -7,7 +7,7 @@
 	<title>Sök</title>
 	</g:else>
 	<meta name="layout" content="${grailsApplication.config.lagrummet.mainLayoutName}"/>
-</head></g:if>
+</head><
 <body>
     ${contents}
 </body>

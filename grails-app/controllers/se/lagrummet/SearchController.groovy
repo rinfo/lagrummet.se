@@ -88,25 +88,28 @@ class SearchController {
 		
 		new Search(query: query, category: params.cat).save()
 
-        def dynamicSearchResults
-        if (grailsApplication.config.lagrummet.onlyLocalSearch && params.cat && params.cat != "Alla") {
-            dynamicSearchResults = groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, cat: 'Ovrigt',  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias, excludeBody: true])
-        } else {
-            dynamicSearchResults = groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias, excludeBody: true])
-        }
+        def dynamicSearchResults = selectAndRenderContents(query, searchResult, offset, synonyms)
 
 		if (params.ajax) {
             def response = [query: query, searchResult: searchResult, synonyms: synonyms, dynamicSearchResults: dynamicSearchResults]
             render response as GSON
-		} else if(params.cat && params.cat != "Alla") {
-			render(view: 'searchResultByCategory', model: [query: query, cat: params.cat,  searchResult: searchResult, page: new Page(metaPage:false, title:message(code:"searchResult.label")), offset:offset, synonyms: synonyms, alias: params.alias, contents: dynamicSearchResults])
+		} else if(params.cat && params.cat != "Alla" || grailsApplication.config.lagrummet.onlyLocalSearch) {
+			render(view: 'searchResultByCategory', model: [query: query, contents: dynamicSearchResults])
 		} else {
-			render(view: 'searchForm', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title:message(code:"searchResult.label")), synonyms: synonyms, alias: params.alias, contents: dynamicSearchResults])
+			render(view: 'searchForm', model: [query: query, contents: dynamicSearchResults])
 		}
 		
 	}
 
-	def ext = { ExtendedSearchCommand esc ->
+    private def selectAndRenderContents(String query, def searchResult, def offset, def synonyms) {
+        if (grailsApplication.config.lagrummet.onlyLocalSearch)
+            return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, cat: 'Ovrigt', searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
+        if (params.cat && params.cat != "Alla")
+            return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, cat: params.cat, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
+        return groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), synonyms: synonyms, alias: params.alias])
+    }
+
+    def ext = { ExtendedSearchCommand esc ->
         if (grailsApplication.config.lagrummet.onlyLocalSearch) {
             forward(controller: "page", action: "error", params: [errorId: "404"])
             return
