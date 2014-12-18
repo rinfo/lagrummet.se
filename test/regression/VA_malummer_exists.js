@@ -25,12 +25,12 @@ casper.test.begin('Fritext sök VA, verifiera att målnummer existerar', functio
         this.sendKeys("input[name='query']", "brott mot tjänsteman");
    });
 
-   casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
+   casper.waitForSelector("#searchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
            var file_name = casper.cli.get("output")+'VA_malnummer_exists_screen_error_1.png';
            this.capture(file_name);
-        this.test.assertSelectorHasText('#dynamicSearchResults > header > h1','Sökresultat för brott mot tjänsteman');
+        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för brott mot tjänsteman');
         this.test.assertTextExist('B2788-02');
    });
 

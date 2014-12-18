@@ -23,11 +23,11 @@ casper.test.begin('Sök på VA-beteckning', function(test) {
         this.sendKeys("input[name='query']", "RÅ 2010 ref. 107");
    });
 
-   casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
+   casper.waitForSelector("#searchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#dynamicSearchResults > header > h1','Sökresultat för RÅ 2010 ref. 107');
-        this.test.assertSelectorHasText('#rattsfall > li:nth-child(1) > p:nth-child(1) > a','RÅ 2010 ref. 107');
+        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för RÅ 2010 ref. 107');
+        this.test.assertSelectorHasText('#RattsfallList > li:nth-child(1) > p:nth-child(1) > a','RÅ 2010 ref. 107');
    });
 
    casper.run(function() {test.done();});
