@@ -27,12 +27,12 @@ casper.test.begin('Verifiera att VA-beteckning existerar', function(test) {
         this.sendKeys("input[name='query']", "NJA 2010 s. 648");
    });
 
-   casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
+   casper.waitForSelector("#searchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#dynamicSearchResults > header > h1','Sökresultat för NJA 2010 s. 648');
+        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för NJA 2010 s. 648');
         this.test.assertSelectorHasText('#searchSuggestions > li:nth-child(1) > a','NJA 2010 s. 648');
-        this.test.assertSelectorHasText('#rattsfall > li:nth-child(1) > p:nth-child(1) > a','NJA 2010 s. 648');
+        this.test.assertSelectorHasText('#RattsfallList > li:nth-child(1) > p:nth-child(1) > a','NJA 2010 s. 648');
    });
 
    casper.run(function() {test.done();});

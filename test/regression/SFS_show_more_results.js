@@ -26,14 +26,14 @@ casper.test.begin('Navigera via "Visa fler träffar"', function(test) {
         this.sendKeys("input[name='query']", "lag om offentlig upphandling");
    });
 
-   casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
+   casper.waitForSelector("#searchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#dynamicSearchResults > header > h1','Sökresultat för lag om offentlig upphandling');
-        this.test.assertSelectorHasText('#rattsfall > li.showAll > a','Visa fler träffar');
-        this.test.assertSelectorHasText('#c-2 > ul > li.showAll > a','Visa fler träffar');
+        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för lag om offentlig upphandling');
+        this.test.assertSelectorHasText('#RattsfallList > li.showAll > a','Visa fler träffar');
+        this.test.assertSelectorHasText('#LagarList > li.showAll > a','Visa fler träffar');
 
-        this.click('#c-2 > ul > li.showAll > a');
+        this.click('#LagarList > li.showAll > a');
    });
 
    casper.waitForSelector("#searchResults > p:nth-child(4) > span");
