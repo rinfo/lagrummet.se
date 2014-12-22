@@ -38,8 +38,10 @@
                             <td><g:textField name="synonyms[${i}].baseTerm" value="${synonymInstance?.baseTerm}" size="50" disabled="disabled" /></td>
                         
                         	<td>
-                        		<div class="buttons"><input type="button" class="editSynonym update" value="&nbsp;" /> 
-                        			<a href="${createLink( controller:"synonym", action:"delete", params:[id: synonymInstance?.id])}"><input type="button" class="deleteSynonym delete" value="&nbsp;" /></a></div>
+                        		<div class="buttons">
+                                    <input type="button" class="editSynonym update" value="&nbsp;" />
+                        			<input type="button" class="deleteSynonym delete" value="&nbsp;" />
+                                </div>
                         		<g:hiddenField name="synonyms[${i}].id" value="${synonymInstance?.id}" disabled="disabled" />
                         	</td>
                         </tr>

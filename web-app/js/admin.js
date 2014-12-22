@@ -197,6 +197,9 @@ jQuery(function($) {
 	
 	var delete_eventhandler = function(e){
 		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+			var id = $(this).parent().siblings('input[type=hidden]').val()
+			var serverName = $('meta[name=serverURL]').attr('content');
+			window.location.replace(serverName+'/admin/synonym/delete?id='+id)
 			return true;
 		}
 		return false;

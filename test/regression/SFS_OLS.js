@@ -26,12 +26,12 @@ casper.test.begin('Sök efter OLS', function(test) {
         this.sendKeys("input[name='query']", "offentlighets och sekretesslag");
    });
 
-   casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
+   casper.waitForSelector("#searchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#dynamicSearchResults > header > h1','Sökresultat för offentlighets och sekretesslag');
-        this.test.assertSelectorHasText('#lagar > li:nth-child(1) > p:nth-child(1) > a','Offentlighets- och sekretesslag (2009:400)');
-        this.click('#lagar > li:nth-child(1) > p:nth-child(1) > a');
+        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för offentlighets och sekretesslag');
+        this.test.assertSelectorHasText('#LagarList > li:nth-child(1) > p:nth-child(1) > a','Offentlighets- och sekretesslag (2009:400)');
+        this.click('#LagarList > li:nth-child(1) > p:nth-child(1) > a');
    });
 
    casper.waitForSelector("#rinfo", function(){}, captureScreen, 20000);

@@ -26,12 +26,12 @@ casper.test.begin('Sök rättsinformationsförordning', function(test) {
         this.sendKeys("input[name='query']", "rättsinformationsförordning");
    });
 
-   casper.waitForSelector("#dynamicSearchResults > header > h1", function(){}, captureScreen, 20000);
+   casper.waitForSelector("#searchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#dynamicSearchResults > header > h1','Sökresultat för rättsinformationsförordning');
-        this.test.assertSelectorHasText('#lagar > li:nth-child(1) > p:nth-child(1) > a','Rättsinformationsförordning (1999:175)');
-        this.click('#lagar > li:nth-child(1) > p:nth-child(1) > a');
+        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för rättsinformationsförordning');
+        this.test.assertSelectorHasText('#LagarList > li:nth-child(1) > p:nth-child(1) > a','Rättsinformationsförordning (1999:175)');
+        this.click('#LagarList > li:nth-child(1) > p:nth-child(1) > a');
    });
 
    casper.waitForSelector("#rinfo", function(){}, captureScreen, 20000);
