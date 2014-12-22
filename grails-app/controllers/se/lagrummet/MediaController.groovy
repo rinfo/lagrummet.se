@@ -1,6 +1,7 @@
 package se.lagrummet
 
 import grails.plugins.springsecurity.Secured
+import grails.plugin.gson.converters.GSON
 import org.apache.commons.io.IOUtils
 import javax.imageio.*
 import org.springframework.web.multipart.commons.CommonsMultipartFile
@@ -19,35 +20,22 @@ class MediaController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		
 		def mediaInstances = (params.parentId) ? Media.findAllByParentIsNull() : Media.list(params)
-		def mediaInstancesCount =  mediaInstances.size()
 		if (params.ajax) {
-			render "var tinyMCEImageList = new Array("
-			
-			def pageMediaInstances = Page.get(params.parentId).media
-			def pageMediaInstancesCount =  pageMediaInstances.size()
-
-			if (pageMediaInstancesCount > 0) {
-				render '["- Page-specific media", ""],'
-				pageMediaInstances.eachWithIndex() { mI, i ->
-					render '["' + mI.title + '", "' + resource(absolute: true) + "/" + mI.filename + '"]'
-					if ((i+1) != pageMediaInstancesCount || mediaInstances.size() > 0) {
-						render ","
-					}
-				}
-			}
-			
-			
-			if (mediaInstancesCount > 0) {
-				render '["- Sitewide media", ""],'
-				mediaInstances.eachWithIndex() { mI, i ->
-					render '["' + mI.title + '", "' + grailsApplication.getConfig().grails.serverURL + '/' + mI.filename + '"]'
-					if ((i+1) != mediaInstancesCount) {
-						render ","
-					}
-				}
-			}
-			
-			render ");"
+            def media = [] as List
+            def pageMediaInstances = Page.get(params.parentId).media
+            if (pageMediaInstances) {
+                media << [title: "- Page-specific media", value: "#"]
+                pageMediaInstances.each {
+                    media << [title: it.title, value: resource(absolute: true) + '/' + it.filename]
+                }
+            }
+            if (mediaInstances) {
+                media << [title: "- Sitewide media", value: "#"]
+                mediaInstances.each {
+                    media << [title: it.title, value: resource(absolute: true) + '/' + it.filename]
+                }
+            }
+            render media as GSON
 		} else {
 			[mediaInstanceList: mediaInstances, mediaInstanceTotal: Media.count()]
 		}
