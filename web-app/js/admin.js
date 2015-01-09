@@ -196,7 +196,7 @@ jQuery(function($) {
 	}
 	
 	var delete_eventhandler = function(e){
-		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+		if(confirm('Är du säker på att du vill ta bort denna synonym?')) {
 			var id = $(this).parent().siblings('input[type=hidden]').val()
 			var serverName = $('meta[name=serverURL]').attr('content');
 			window.location.replace(serverName+'/admin/synonym/delete?id='+id)
@@ -206,7 +206,7 @@ jQuery(function($) {
 	}
 	
 	var deleteUnsavedSynonym = function(e) {
-		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+		if(confirm('Är du säker på att du vill ta bort denna synonym?')) {
 			$(this).parents("tr").remove();
 			return true;
 		}
