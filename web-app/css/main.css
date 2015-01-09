@@ -683,7 +683,7 @@ article.legalSources section.Foreskrifter h2 {
 }
 
 #siteFooter ul {
-	width: 30%;
+	width: 33.3%;
 	float: left;
 }
 
@@ -1272,6 +1272,15 @@ fieldset .inputGroup p {
 
 ul[id^="legalSource_"] > li > div {
 	white-space: pre-line;
+}
+
+body#tinymce.mceContentBody {
+	width: 518px;
+}
+
+/*change the margin abit for middle column to sync with puffs */
+#siteFooter ul:nth-child(2) > li {
+	margin-left: 5px;
 }
 
 /* =MEDIA-QUERIES */

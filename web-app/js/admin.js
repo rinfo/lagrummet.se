@@ -12,27 +12,26 @@ jQuery(function($) {
 
 	// The relative "../../" on content_css makes it vulnerable. Must be loaded from a secnd level down .gsp.
 	var pageId = ($("#parentId")) ? $("#parentId").attr("value") : "";
-	tinyMCE.init({
-		theme : "advanced",
-		mode : "exact",
-		elements : "content",
-		content_css : "../../css/main.css",
-		theme_advanced_toolbar_location : "top",
-		theme_advanced_blockformats : "p,h1,h2,h3,h4,",
+
+	tinymce.init({
+		selector: "div.mceEditor > textarea[name='content']",
+		theme: "modern",
+		forced_root_block : "",
 		force_p_newlines : true,
-		relative_urls : false,
-		external_image_list_url : serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
-		theme_advanced_resizing : true,
-		theme_advanced_resizing_min_height : 480,
-		plugins : "advimage, paste",
-		paste_auto_cleanup_on_paste : true,
+		plugins: [
+			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+			"save table contextmenu directionality emoticons template paste textcolor"
+		],
+		image_list: serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
+		content_css: "../../css/main.css",
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor code ",
 		extended_valid_elements : "nav[class]",
 		entity_encoding : "raw",
 		formats : {
-            p : {selector : 'p', classes : '', styles: ''}
+			p : {selector : 'p', classes : '', styles: ''}
 		}
 	});
-	
 	
 	function jsTreeContextMenu(node) {
 	    // The default set of all items
@@ -197,14 +196,17 @@ jQuery(function($) {
 	}
 	
 	var delete_eventhandler = function(e){
-		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+		if(confirm('Är du säker på att du vill ta bort denna synonym?')) {
+			var id = $(this).parent().siblings('input[type=hidden]').val()
+			var serverName = $('meta[name=serverURL]').attr('content');
+			window.location.replace(serverName+'/admin/synonym/delete?id='+id)
 			return true;
 		}
 		return false;
 	}
 	
 	var deleteUnsavedSynonym = function(e) {
-		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+		if(confirm('Är du säker på att du vill ta bort denna synonym?')) {
 			$(this).parents("tr").remove();
 			return true;
 		}

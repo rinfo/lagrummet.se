@@ -5,9 +5,8 @@ var originalUrl, t, query = "";
 function searchSuggestions(data) {
 	var form = $("#search");
 	var cat = $("#cat").attr("value") || "Ovrigt";
-	
 	if (data) {
-		$("#searchSuggestions").empty().show();
+        $("#searchSuggestions").empty().show();
 		$.each(data.searchResult.topHits, function(i, item) {
 			var title = (item.title) ? item.title : item.identifier;
 			var href = serverUrl + item.iri.replace(/http:\/\/.*?\//,"rinfo/");
@@ -34,242 +33,29 @@ function encodedMailAddress(coded) {
 	  return link
 }
 
-function instantSearch() {    
-	var form = $("#search");
-	query = $("#query").attr("value").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-	var cat = $("#cat").attr("value")  || "Ovrigt";
-	var sokhjalp = '<div id="searchHelpPuff"><strong>Hittade du inte vad du sökte?</strong><p><a href="'+serverUrl+'sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p></div>';
-	
+function showRollingImageWaitForSearchResult() {
 	if (!$("#dynamicSearchResults").length) {
-            $("#content > *:not(#siteFooter)").addClass("searchHidden");
-            $("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></article>');
-        }
-	
-        var url = form.attr("action")+"?ajax=true";
-        
-	$.get(url, form.serialize(), function(data) {
-        if (data) {
-        	searchSuggestions(data);
-                
-                //********************************************************************************
-                // Enkel sökning - Alla rättskällor
-                //********************************************************************************                
-        	if (data.searchResult.totalResults > 0 && $("#cat").attr("value") == "Alla") {      		
-        		$("#dynamicSearchResults").html('<header><h1>Sökresultat för '+query+'</h1></header><p>Totalt antal resultat '+ data.searchResult.totalResults +'</p>');
-        		
-        		if(data.synonyms.length > 0) {
-	        		$("#dynamicSearchResults").append('<p>Din sökning gav även träff på följande: <span class="query">' + data.synonyms.join(', ') + '</span></p>');
-	        		$("#dynamicSearchResults").append('<p>För att se sökresultatet utan associerade träffar, <a href="'+serverUrl+'search?query='+query+'&cat=Alla&alias=false">klicka här</a></p>');
-        		}
-        		$("#dynamicSearchResults").append('<div class="column first" id="c-1" /><div class="column" id="c-2" />');
-        		
-        		// Redaktionella resultat
-        			$("#c-1").append('<p class="Ovrigt"><a href="'+serverUrl+'search?query='+query+'&cat=Ovrigt" class="catTitle">Information från lagrummet.se</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Ovrigt'] +')</span></p>');
-        			if (data.searchResult.items['Ovrigt'] && data.searchResult.items['Ovrigt'].length > 0) {
-        				if (data.searchResult.totalResultsPerCategory['Ovrigt'] > data.searchResult.items['Ovrigt'].length) $("#c-1 p.Ovrigt span.count").append(" Visar de första ").append(data.searchResult.items['Ovrigt'].length);
+        $("#content > *:not(#siteFooter)").addClass("searchHidden");
+        $("#content").prepend('<article id="dynamicSearchResults" class="searchResults"><p><img src="'+serverUrl+'images/ajax-loader.gif"> Laddar sökresultat</p></article>');
+    }
+}
 
-        				$("#c-1").append('<ul id="ovrigt" />');
-            			
-            			$.each(data.searchResult.items['Ovrigt'], function(i, item) {
-                			var title = (item.title) ? item.title : item.identifier;
-                			var href = serverUrl + item.iri;
-                			
-                			$("#ovrigt").append('<li><p><a href="'+href+'" class="searchLink">' + title + "</a></p></li>");
-                			if (item.matches) {
-                				$("#ovrigt li").filter(":last").append("<p>" + item.matches + " ...</p>");
-                			}            		
-                		});
-            			$("#ovrigt").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Ovrigt">Visa fler träffar</a></li>');
-        			}
-        			
-        		
-        		// Propositioner
-        		
-    			//$("#c-1").append('<p class="Propositioner"><a href="'+serverUrl+'search?query='+query+'&cat=Propositioner" class="catTitle">Propositioner och skrivelser</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span></p>');
-                        $("#c-1").append('<p class="Propositioner"><b>Propositioner och skrivelser</b> <span class="count">('+ data.searchResult.totalResultsPerCategory['Propositioner'] +')</span><br />Dessa dokument är inte sökbara i denna version av lagrummet.se.</p>');
-        			
-        		if (data.searchResult.items['Propositioner'] && data.searchResult.items['Propositioner'].length > 0) {
-        			if (data.searchResult.totalResultsPerCategory['Propositioner'] > data.searchResult.items['Propositioner'].length) $("#c-1 p.Propositioner span.count").append(" Visar de första ").append(data.searchResult.items['Propositioner'].length);
+function instantSearch() {
+	var form = $("#search");
+    var url = form.attr("action")+"?ajax=true";
+    query = $("#query").attr("value").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-        			$("#c-1").append('<ul id="propositioner" />');
-        			
-        			$.each(data.searchResult.items['Propositioner'], function(i, item) {
-            			var title = (item.title) ? item.title : item.identifier;
-            			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-            			
-            			$("#propositioner").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
-            			if (item.matches) {
-            				$("#propositioner li").filter(":last").append("<p>" + item.matches + " ...</p>");
-            			}
-            		
-            			$("#propositioner li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
-            		
-            		});
-        			$("#propositioner").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Propositioner">Visa fler träffar</a></li>');
-        		}
-        		
-        		// Rättsfall
-        			$("#c-1").append('<p class="Rattsfall"><a href="'+serverUrl+'search?query='+query+'&cat=Rattsfall" class="catTitle">Rättsfall</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Rattsfall'] +')</span></p>');
-        			if (data.searchResult.items['Rattsfall'] && data.searchResult.items['Rattsfall'].length > 0) {
-        				if (data.searchResult.totalResultsPerCategory['Rattsfall'] > data.searchResult.items['Rattsfall'].length) $("#c-1 p.Rattsfall span.count").append(" Visar de första ").append(data.searchResult.items['Rattsfall'].length);
-        				
-        				$("#c-1").append('<ul id="rattsfall" />');
-            			
-            			$.each(data.searchResult.items['Rattsfall'], function(i, item) {
-                			var title = (item.identifier) ? item.identifier : item.malnummer;
-                			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-                			
-                			$("#rattsfall").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
-                			if (item.matches) {
-                				$("#rattsfall li").filter(":last").append("<p>" + item.matches + " ...</p>");
-                			}
-                		
-                			if(item.identifier) {
-                				$("#rattsfall li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
-                			}
-                		
-                		});
-            			$("#rattsfall").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Rattsfall">Visa fler träffar</a></li>');
-        			}
-        		
-        		// Lagar
-        			$("#c-2").append('<p class="Lagar"><a href="'+serverUrl+'search?query='+query+'&cat=Lagar" class="catTitle">Lagar och förordningar</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Lagar'] +')</span></p>');
-        			if (data.searchResult.items['Lagar'] && data.searchResult.items['Lagar'].length > 0) {
-        				if (data.searchResult.totalResultsPerCategory['Lagar'] > data.searchResult.items['Lagar'].length) $("#c-2 p.Lagar span.count").append(" Visar de första ").append(data.searchResult.items['Lagar'].length);
+    showRollingImageWaitForSearchResult();
 
-        				$("#c-2").append('<ul id="lagar" />');
-            			
-            			$.each(data.searchResult.items['Lagar'], function(i, item) {
-                			var title = (item.title) ? item.title : item.identifier;
-                			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-                			
-                			$("#lagar").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
-                			if (item.matches) {
-                				$("#lagar li").filter(":last").append("<p>" + item.matches + " ...</p>");
-                			}
-                		
-                			$("#lagar li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
-                			
-                			if(item.ikrafttradandedatum) {
-                				$("#lagar li").filter(":last").append('<p class="type">Ikraft: '+item.ikrafttradandedatum+'</p></li>');
-                			}
-                		
-                		});
-            			$("#lagar").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Lagar">Visa fler träffar</a></li>');
-        			}
-        			
-        		// Myndigheters föreskrifter
-        			$("#c-2").append('<p class="Foreskrifter"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter" class="catTitle">Myndigheters föreskrifter</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Foreskrifter'] +')</span></p>');
-        			if (data.searchResult.items['Foreskrifter'] && data.searchResult.items['Foreskrifter'].length > 0) {
-        				if (data.searchResult.totalResultsPerCategory['Foreskrifter'] > data.searchResult.items['Foreskrifter'].length) $("#c-2 p.Foreskrifter span.count").append(" Visar de första ").append(data.searchResult.items['Foreskrifter'].length);
-
-        				$("#c-2").append('<ul id="foreskrifter" />');
-            			
-            			$.each(data.searchResult.items['Foreskrifter'], function(i, item) {
-                			var title = (item.title) ? item.title : item.identifier;
-                			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-                			
-                			$("#foreskrifter").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
-                                        
-                			if (item.matches) {
-                				$("#foreskrifter li").filter(":last").append("<p>" + item.matches + " ...</p>");
-                			}
-                		
-                			$("#foreskrifter li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
-                			
-                			if(item.ikrafttradandedatum) {
-                				$("#foreskrifter li").filter(":last").append('<p class="type">Ikraft: '+item.ikrafttradandedatum+'</p></li>');
-                			}
-                		
-                		});
-            			$("#foreskrifter").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Foreskrifter">Visa fler träffar</a></li>');
-        			}
-        			
-            	// Utredningar
-        			//$("#c-2").append('<p class="Utredningar"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar" class="catTitle">Utredningar</a> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span></p>');
-                                $("#c-2").append('<p class="Utredningar"><b>Utredningar</b> <span class="count">('+ data.searchResult.totalResultsPerCategory['Utredningar'] +')</span><br />Dessa dokument är inte sökbara i denna version av lagrummet.se.</p>');
-        			if (data.searchResult.items['Utredningar'] && data.searchResult.items['Utredningar'].length > 0) {
-        				if (data.searchResult.totalResultsPerCategory['Utredningar'] > data.searchResult.items['Utredningar'].length) $("#c-2 p.Utredningar span.count").append(" Visar de första ").append(data.searchResult.items['Utredningar'].length);
-
-        				$("#c-2").append('<ul id="utredningar" />');
-            			
-            			$.each(data.searchResult.items['Utredningar'], function(i, item) {
-                			var title = (item.title) ? item.title : item.identifier;
-                			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-                			
-                			$("#utredningar").append('<li><p><a href="'+serverUrl+href+'" class="searchLink">' + title + "</a></p></li>");
-                			if (item.matches) {
-                				$("#utredningar li").filter(":last").append("<p>" + item.matches + " ...</p>");
-                			}
-                		
-                			$("#utredningar li").filter(":last").append('<p class="type">'+item.identifier+'</p></li>');
-                		
-                		});
-            			$("#utredningar").append('<li class="showAll"><a href="'+serverUrl+'search?query='+query+'&cat=Utredningar">Visa fler träffar</a></li>');
-        			}
-        		
-        			$("#dynamicSearchResults").append(sokhjalp);
-        	} 
-                //********************************************************************************
-                // Enkel sökning - specifik kategori
-                //********************************************************************************
-                else if ($("#cat").attr("value") != "Alla") {
-				$("#dynamicSearchResults").html('<h1>Sökresultat</h1><p>Visar '+ data.searchResult.items[cat].length  +' av totalt '+ data.searchResult.totalResults +' antal resultat </p>');
-				if (cat == "Ovrigt") {
-                    $("#dynamicSearchResults").append("<table><tr><th>Titel</th></tr></table>");
-                } else {
-                    $("#dynamicSearchResults").append("<table><tr><th>Titel</th><th>Beteckning</th></tr></table>");
-                }
-				
-				$.each(data.searchResult.items[cat], function(i, item) {
-					var title = "";
-                                        
-                                        if (item.type == 'Myndighetsforeskrift' || cat == 'Lagar') {
-                                            title = item.title;
-                                        }
-                                        else {
-                                            if(item.identifier) {
-                                                    title = item.identifier;
-                                            } else if(item.malnummer) {
-                                                    title = item.malnummer;
-                                            } else if(item.title) {
-                                                    title = item.title;
-                                            }                                            
-                                        }
-                                        
-                                            
-        			var href = item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-        			var excerpt = (item.matches) ? "<p>"+item.matches+"</p>" : "";
-        			var identifier = "";
-        			if(item.identifier) {
-        				identifier = item.identifier;
-        			} else if(item.malnummer) {
-        				identifier = item.malnummer;
-        			}
-        			var ikraft = (item.ikrafttradandedatum) ? '<p class="type">Ikraft: '+item.ikrafttradandedatum+'</p>' : "";
-        			
-					$("#dynamicSearchResults table").append('<tr><td><p><a href="'+serverUrl+href+'">' + title + "</a></p>" + excerpt + ikraft + "</td><td>"+identifier+"</td></tr>");
-					
-				});
-
-				$("#dynamicSearchResults").append('<p class="showAll"><a href="'+serverUrl+'search?'+form.serialize()+'">Visa fler träffar</a></p>' + sokhjalp);
-        	} else {
-        		$("#dynamicSearchResults").html('<h1>Inga sökresultat</h1>' + sokhjalp);
-        	}
-        	
-                /*
-        	if(data.searchResult.errorMessages.length > 0) {
-        		$("#dynamicSearchResults").prepend('<div class="message"><ul id="errors" /></div>');
-        		$.each(data.searchResult.errorMessages, function(i, item) {
-        			$("#errors").append('<li>' + item + '</li>');
-        		});
-        	}
-                */
-                
-                window.history.pushState(null, null, form.attr("action") + "?" + form.serialize());
-                
-        } else {
-        	$("#dynamicSearchResults").html("<h1>Det blev tyvärr fel, försök igen</h1>");
+	$.post(url, form.serialize(), function(data) {
+	    if (data) {
+            searchSuggestions(data);
+            try {
+                $("#dynamicSearchResults").html(data.dynamicSearchResults);
+            } catch (e) {
+                console.log("instantSearch() Failed to search because "+e.message);
+            }
+            window.history.pushState(null, null, form.attr("action") + "?" + form.serialize());
         }
     }, "json");
 }
@@ -342,6 +128,8 @@ jQuery(document).ready(function($) {
 			if (searchSuggestion.length) {
                 sendGaPageView($(location).attr('href'));
 				window.location = searchSuggestion.children("a").attr("href");
+			} else { // If no search selection submit form
+			    $("#search").submit();
 			}
 			return false;
 		}

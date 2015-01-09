@@ -146,8 +146,9 @@ def create_path(tar_target_path, use_sudo=False):
 @roles('rinfo')
 def setup_demodata():
     """Setup mysql demo data"""
-    restore_db("demodata_lagrummet_2014_11_28")
+    restore_db("demodata_lagrummet_2014_12_04")
     #with lcd(env.projectroot):
         #put("manage/sysconf/%(target)s/mysql/dump.sql" % env, "/tmp")
         ##sudo("mysql -u root -p lagrummet < /tmp/dump.sql")
         #sudo("mysql -u root lagrummet < /tmp/dump.sql")
+
