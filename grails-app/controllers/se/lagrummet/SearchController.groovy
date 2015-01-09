@@ -47,6 +47,8 @@ class SearchController {
 		def result = new StringBuilder()
 		def dateFormatter = new SimpleDateFormat("yyyy-MM-dd")
 
+		result.append("\uFEFF") //this is the UTF-8 BOM, MS Excel likes it.
+
 		for(d in searches) {
 			result.append("\"${d.query}\";${d.category};\"${dateFormatter.format(d.dateCreated)}\"\n")
 		}
