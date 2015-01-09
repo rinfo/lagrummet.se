@@ -28,7 +28,6 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         //compile "org.compass-project:compass:2.2.1"
-
         runtime 'hsqldb:hsqldb:1.8.0.10'
 
         // We had runtime production problems as reported in: https://github.com/robfletcher/grails-gson/issues/38
@@ -50,7 +49,6 @@ grails.project.dependency.resolution = {
     }
     plugins {
         compile ":hibernate:3.6.10.17"
-        compile ":tiny-mce:3.4.9"
         compile ":searchable:0.6.9"
         compile ":quartz2:2.1.6.2"
         compile ":jquery:1.11.1"
@@ -59,8 +57,9 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:1.2.7.4"
         compile ":webxml:1.4.1"
         compile 'org.grails.plugins:gson:1.1.4'
-
+        compile ':cache-headers:1.1.7'
         build ":tomcat:7.0.55"
+
 
     }
 }

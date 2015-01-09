@@ -30,8 +30,12 @@
 
                                             <g:set var="toggleId" value="${category.key.toLowerCase()}_${it.key.toLowerCase()}_${subCategory.key?.toLowerCase() ?: category.key.toLowerCase()}" />
                                             <g:set var="isExpanded" value="${params[(toggleId)]}" />
-
-                                            <ul id="${category.key}_${it.key}_list">
+                                            <g:if test="${subCategory.key}">
+                                                <ul id="${category.key}_${subCategory.key?.toLowerCase()}_${it.key}_list">
+                                            </g:if>
+                                            <g:else>
+                                                <ul id="${category.key}_${it.key}_list">
+                                            </g:else>
                                               <g:each in="${subCategory.value}" var="lI" status="i">
                                                 <g:if test="${i<=9}">
                                                   <li><a href="${lI.url}">${lI.name}</a></li>

@@ -25,23 +25,22 @@ casper.test.begin('Remove synonym', function(test) {
         this.click(x('//*[@id="adminFunctions"]/ul/*/ul/*/a[text()="Hantera synonymer"]')); // Click at 'Rättskällor -> Hantera rättskällor'
     });
 
-    casper.waitForSelector("#bodyContent > div", function(){}, captureScreen, 5000);
+   casper.waitForSelector("#bodyContent > div", function(){}, captureScreen, 5000);
 
    casper.then(function() {
        this.test.assertSelectorHasText('#bodyContent > div > h1','Synonymer');
 
-
        this.test.assertExists(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="skilsmässa"]'));
        this.test.assertExists(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="äktenskapsskillnad"]'));
 
-       this.click(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="skilsmässa"]/../../td/div[@class="buttons"]/a'));
+       this.click(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="skilsmässa"]/../../td/*/input[@class="deleteSynonym delete"]'));
    });
 
    casper.waitForText('borttagen', function(){}, captureScreen, 5000);
 
    casper.then(function() {
-       this.test.assertNotExists(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="skilsmässa"]'));
-       this.test.assertNotExists(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="äktenskapsskillnad"]'));
+        this.test.assertNotExists(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="skilsmässa"]'));
+        this.test.assertNotExists(x('//*[@id="editSynonyms"]/*/table/tbody/*/td/input[@type="text" and @value="äktenskapsskillnad"]'));
    });
 
    casper.then(logout);

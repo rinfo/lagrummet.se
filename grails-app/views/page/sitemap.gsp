@@ -8,18 +8,20 @@
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
 		<div id="pageTree">
-		<ul>
-			<g:each in="${pageTreeList}" var="pI">
-				<g:if test="${!pI.parent && pI.children && pI.isCurrentlyPublished()}">
-					<ul>
-            		<g:sitemapItem pageId="${pI.id}" />
-            		</ul>
-            	</g:if>
-            	<g:elseif test="${!pI.parent && !pI.children && pI.isCurrentlyPublished() && pI.showInSitemap}">
-            		<li><a href="${resource() + '/' + pI.url()}">${pI.title}</a></li>
-            	</g:elseif>
-            </g:each>
-            </ul>
+			<ul>
+				<g:each in="${pageTreeList.findAll { !it.parent }}" var="pI">
+					<g:if test="${pI.children}">
+						<li>
+							<ul>
+								<g:sitemapItem pageId="${pI.id}" />
+							</ul>
+						</li>
+					</g:if>
+					<g:elseif test="${!pI.children && pI.isCurrentlyPublished() && pI.showInSitemap}">
+						<li><a href="${resource() + '/' + pI.url()}">${pI.title}</a></li>
+					</g:elseif>
+				</g:each>
+			</ul>
 		</div>
 	</article>
 </body>
