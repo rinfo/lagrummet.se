@@ -43,20 +43,14 @@ class SearchController {
 	def exportStats = {
 		def daysOfSearches = params.daysOfSearches ? params.daysOfSearches.toInteger() : 30
 		def searches = Search.findAllByDateCreatedGreaterThan(new Date() - daysOfSearches)
-		
-		def results = []
+
+		def result = new StringBuilder()
+		def dateFormatter = new SimpleDateFormat("yyyy-MM-dd")
+
 		for(d in searches) {
-			def r= ['"' + d.query + '"', d.category, '"' + d.dateCreated.toString().substring(0,10) + '"']
-			results << r
+			result.append("\"${d.query}\";${d.category};\"${dateFormatter.format(d.dateCreated)}\"\n")
 		}
-		def result = ''
-		results.each{ row ->
-			row.each{
-				col -> result += col + ';'
-			}
-			result = result[0..-2]
-			result += '\n'
-		}
+
 		response.setHeader("Content-disposition", "attachment; filename=search-history.csv");
 		render(contentType:'text/csv',text:result,encoding:"UTF-8")
 	}
