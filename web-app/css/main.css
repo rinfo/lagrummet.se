@@ -1271,7 +1271,7 @@ fieldset .inputGroup p {
 }
 
 body#tinymce.mceContentBody {
-	width: 518px;
+	width: 100%;
 }
 
 /*change the margin abit for middle column to sync with puffs */
