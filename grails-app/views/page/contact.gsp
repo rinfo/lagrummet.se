@@ -7,6 +7,10 @@
     <article class="editorial">
 		<header><h1>${page.h1}</h1></header>
 		${page.content}
+
+		<g:if test="${flash.message}">
+			<div class="message">${flash.message}</div>
+		</g:if>
 		<g:form name="contact" mapping="contact" method="post">
 			<fieldset id="contactInfo">
 				<legend for="name">Mitt namn <span class="required">*</span></legend>
