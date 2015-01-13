@@ -95,13 +95,14 @@ class LegalSourceController {
         withForm {
             def legalSourceInstance = LegalSource.get(params.id)
             if (legalSourceInstance) {
+                def textIdentifier = "${legalSourceInstance.name} (${legalSourceInstance.category} / ${legalSourceInstance.subCategory ?: "(ingen underrubrik)"})"
                 try {
                     legalSourceInstance.delete(flush: true)
-                    flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), params.id])}"
+                    flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), textIdentifier])}"
                     redirect(action: "list")
                 }
                 catch (org.springframework.dao.DataIntegrityViolationException e) {
-                    flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), params.id])}"
+                    flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'legalSource.label', default: 'LegalSource'), textIdentifier])}"
                     redirect(action: "show", id: params.id)
                 }
             }
