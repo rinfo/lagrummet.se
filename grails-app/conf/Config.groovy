@@ -147,20 +147,21 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'se.lagrummet.Use
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'se.lagrummet.SecUserSecRole'
 grails.plugins.springsecurity.authority.className = 'se.lagrummet.SecRole'
 
-/*
-grails.plugins.springsecurity.ipRestrictions = [
-	'/admin*/
-/**': [
-		'159.190.240.1', '159.190.240.2', '159.190.240.3', '159.190.240.254', '159.190.251.57',		//DV Jönköping
-		'159.190.240.66', '159.190.251.56', '159.190.240.42',											//DV Stockholm
-		'159.190.240.150', '159.190.240.151',										//DV Malmö
-		'159.190.240.168', '159.190.240.169', '159.190.240.170', '159.190.240.171',	//DV Göteborg
-		'193.45.43.33',																//Sogeti VPN for development and testing, TODO: remove before going live
+ipRestrictions = [
+        '159.190.240.1', '159.190.240.2', '159.190.240.3', '159.190.240.254', '159.190.251.57',		//DV Jönköping
+        '159.190.240.66', '159.190.251.56', '159.190.240.42',											//DV Stockholm
+        '159.190.240.150', '159.190.240.151',										//DV Malmö
+        '159.190.240.168', '159.190.240.169', '159.190.240.170', '159.190.240.171',	//DV Göteborg
+        '193.45.43.33',																//Sogeti VPN for development and testing, TODO: remove before going live
         '94.234.170.41',                                                            // DV Sthml 4G Router
         '109.74.9.93',                                                              // ci.lagrummet.se (jenkins) for automated testing
-		]
- 	]
-*/
+]
+
+//grails.plugins.springsecurity.ipRestrictions = [
+//	    '/admin/*': ipRestrictions,
+//        '/login/*': ipRestrictions,
+// 	]
+
 
 //grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 //grails.plugins.springsecurity.interceptUrlMap = [
