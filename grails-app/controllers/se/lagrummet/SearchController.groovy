@@ -88,7 +88,7 @@ class SearchController {
 		
 		new Search(query: query, category: params.cat).save()
 
-        def dynamicSearchResults = selectAndRenderContents(query, searchResult, offset, synonyms)
+        def dynamicSearchResults = selectAndRenderContents(query, searchResult, offset, synonyms, params.ajax.asBoolean())
 
 		if (params.ajax) {
             def response = [query: query, searchResult: searchResult, synonyms: synonyms, dynamicSearchResults: dynamicSearchResults]
@@ -101,12 +101,13 @@ class SearchController {
 		
 	}
 
-    private def selectAndRenderContents(String query, def searchResult, def offset, def synonyms) {
+    private def selectAndRenderContents(String query, def searchResult, def offset, def synonyms, boolean searchFromAjax) {
+        String searchLink = searchFromAjax?"class=\"searchLink\"":""
         if (grailsApplication.config.lagrummet.onlyLocalSearch)
-            return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, cat: 'Ovrigt', searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
+            return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, searchLink: searchLink, cat: 'Ovrigt', searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
         if (params.cat && params.cat != "Alla")
-            return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, cat: params.cat, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
-        return groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), synonyms: synonyms, alias: params.alias])
+            return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, searchLink: searchLink, cat: params.cat, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
+        return groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchLink: searchLink, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), synonyms: synonyms, alias: params.alias])
     }
 
     def ext = { ExtendedSearchCommand esc ->
