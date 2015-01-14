@@ -47,6 +47,11 @@ class Page implements Comparable<Page>{
 		}
 		return status
 	}
+
+	//this works due to how autosaves work when changing status.
+	def hasBeenPublished() {
+		return autoSaves?.any {it.status == 'published'}
+	}
 	
 	def getCurrentPageStatus() {
 		def currentStatus

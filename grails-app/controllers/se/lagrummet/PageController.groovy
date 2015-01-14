@@ -455,7 +455,7 @@ class PageController {
 		withForm {
 			def pageInstance = Page.get(params.id)
 			if (pageInstance) {
-				if (pageInstance.isCurrentlyPublished()) {
+				if (pageInstance.isCurrentlyPublished() || pageInstance.hasBeenPublished()) {
 					if (params.ajax) {
 						def response = [error: message(code: 'page.not.deleted.published.message', [args: pageInstance.title]), pageInstance: pageInstance]
 						render response as GSON
