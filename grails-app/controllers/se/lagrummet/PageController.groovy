@@ -450,6 +450,16 @@ class PageController {
     def delete = {
         def pageInstance = Page.get(params.id)
         if (pageInstance) {
+			if(pageInstance.isCurrentlyPublished()) {
+				if (params.ajax) {
+					def response = [error: message(code: 'page.not.deleted.published.message', [args: pageInstance.title]), pageInstance: pageInstance]
+					render response as GSON
+				} else {
+					flash.message = message(code: 'page.not.deleted.published.message', args: [pageInstance.title])
+					redirect(action: "edit", id: pageInstance.id)
+				}
+				return
+			}
             try {
                 pageInstance.delete(flush: true)
 				if (params.ajax) {
