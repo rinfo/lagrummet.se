@@ -446,7 +446,7 @@ class PageController {
         }
     }
 
-	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
+	@Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def delete = {
         def pageInstance = Page.get(params.id)
         if (pageInstance) {
