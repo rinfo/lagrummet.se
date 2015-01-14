@@ -452,42 +452,45 @@ class PageController {
 
 	@Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def delete = {
-        def pageInstance = Page.get(params.id)
-        if (pageInstance) {
-			if(pageInstance.isCurrentlyPublished()) {
-				if (params.ajax) {
-					def response = [error: message(code: 'page.not.deleted.published.message', [args: pageInstance.title]), pageInstance: pageInstance]
-					render response as GSON
-				} else {
-					flash.message = message(code: 'page.not.deleted.published.message', args: [pageInstance.title])
-					redirect(action: "edit", id: pageInstance.id)
+		withForm {
+			def pageInstance = Page.get(params.id)
+			if (pageInstance) {
+				if (pageInstance.isCurrentlyPublished()) {
+					if (params.ajax) {
+						def response = [error: message(code: 'page.not.deleted.published.message', [args: pageInstance.title]), pageInstance: pageInstance]
+						render response as GSON
+					} else {
+						flash.message = message(code: 'page.not.deleted.published.message', args: [pageInstance.title])
+						redirect(action: "edit", id: pageInstance.id)
+					}
+					return
 				}
-				return
+				try {
+					pageInstance.delete(flush: true)
+					if (params.ajax) {
+						def response = [success: "${message(code: 'default.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"]
+						render response as GSON
+					} else {
+						flash.message = "${message(code: 'page.deleted.message', args: [params.title])}"
+						redirect(action: "list")
+					}
+				}
+				catch (org.springframework.dao.DataIntegrityViolationException e) {
+					if (params.ajax) {
+						def response = [error: "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}", pageInstance: pageInstance]
+						render response as GSON
+					} else {
+						flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
+						redirect(action: "edit", id: pageInstance.id)
+					}
+				}
+			} else {
+				flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
+				redirect(action: "list")
 			}
-            try {
-                pageInstance.delete(flush: true)
-				if (params.ajax) {
-					def response = [success: "${message(code: 'default.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"]
-					render response as GSON
-				} else {
-	                flash.message = "${message(code: 'page.deleted.message', args: [params.title])}"
-	                redirect(action: "list")
-				}
-            }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
-				if (params.ajax) {
-					def response = [error: "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}", pageInstance: pageInstance]
-					render response as GSON
-				} else {
-	                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
-					redirect(action: "edit", id: pageInstance.id)
-				}
-            }
-        }
-        else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
-            redirect(action: "list")
-        }
+		}.invalidToken {
+			response.status = 403
+		}
     }
 	
 	
