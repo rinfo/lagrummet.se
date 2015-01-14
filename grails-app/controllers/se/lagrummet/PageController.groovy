@@ -386,64 +386,68 @@ class PageController {
 	
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
     def update = {
-		flash.messages = []
-		def pageInstance = Page.get(params.id)
-		if (pageInstance) {
-            if (params.version) {
-                def version = Long.valueOf(params.version)
-                if (pageInstance.version > version) {
-                   flash.messages.add("${message(code: 'page.updated.updatedByAnotherUser')}")
-                }
-            }
+		withForm {
+			flash.messages = []
+			def pageInstance = Page.get(params.id)
+			if (pageInstance) {
+				if (params.version) {
+					def version = Long.valueOf(params.version)
+					if (pageInstance.version > version) {
+					   flash.messages.add("${message(code: 'page.updated.updatedByAnotherUser')}")
+					}
+				}
 
-			pageInstance.backup()
-			params.author = SecUser.get(springSecurityService.principal.id)
-            bindData(pageInstance, params)
+				pageInstance.backup()
+				params.author = SecUser.get(springSecurityService.principal.id)
+				bindData(pageInstance, params)
 
-			if (params.reviewDate) pageInstance.publishStart = new Date()
-			
-			def now = new Date()
-			if(params.status == "published") {
-				pageInstance.autoSaves.each { revision ->
-					if(revision.isCurrentlyPublished()) {
-						if(pageInstance.publishStart > now) {
-							revision.publishStop = pageInstance.publishStart
-						} else {
-							revision.publishStop = now
+				if (params.reviewDate) pageInstance.publishStart = new Date()
+
+				def now = new Date()
+				if(params.status == "published") {
+					pageInstance.autoSaves.each { revision ->
+						if(revision.isCurrentlyPublished()) {
+							if(pageInstance.publishStart > now) {
+								revision.publishStop = pageInstance.publishStart
+							} else {
+								revision.publishStop = now
+							}
 						}
 					}
 				}
-			}
-			if(params.doUnpublish) {
-				pageInstance.publishStop = now
-			}
+				if(params.doUnpublish) {
+					pageInstance.publishStop = now
+				}
 
-            def toBeDeleted = []
+				def toBeDeleted = []
 
-            pageInstance.puffs.eachWithIndex { puffItem, i ->
-                def puffListParam = "puffs["+i+"]"
-                if(params."${puffListParam}"?.deleted == "true") {
-                    toBeDeleted << puffItem
-                }
-            }
-			if (toBeDeleted) {
-				pageInstance.puffs.removeAll(toBeDeleted)
+				pageInstance.puffs.eachWithIndex { puffItem, i ->
+					def puffListParam = "puffs["+i+"]"
+					if(params."${puffListParam}"?.deleted == "true") {
+						toBeDeleted << puffItem
+					}
+				}
+				if (toBeDeleted) {
+					pageInstance.puffs.removeAll(toBeDeleted)
+				}
+
+				pageInstance.lastUpdated = now
+
+				if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
+					flash.messages.add "${message(code: 'page.updated.message', args: [pageInstance.h1])}"
+					redirect(action: "edit", id: pageInstance.id)
+				}
+				else {
+					render(view: "edit", model: [pageInstance: pageInstance])
+				}
 			}
-			
-			pageInstance.lastUpdated = now
-			
-            if (!pageInstance.hasErrors() && pageInstance.save(flush:true)) {
-				flash.messages.add "${message(code: 'page.updated.message', args: [pageInstance.h1])}"
-                redirect(action: "edit", id: pageInstance.id)
-            }
-            else {
-                render(view: "edit", model: [pageInstance: pageInstance])
-            }
-        }
-        else {
-            flash.messages.add "${message(code: 'default.not.found.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
-            redirect(action: "edit", id: pageInstance.id)
-        }
+			else {
+				flash.messages.add "${message(code: 'default.not.found.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
+				redirect(action: "edit", id: pageInstance.id)
+			}
+		}.invalidToken {
+			response.status = 403
+		}
     }
 
 	@Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
