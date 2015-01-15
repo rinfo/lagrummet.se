@@ -61,4 +61,28 @@ class PageTests extends GrailsUnitTestCase {
         sleep(10) //fails otherwise sometimes. wierd.
         assertEquals(true, page.isCurrentlyPublished())
     }
+
+    void testThatPageHasBeenPublishedEarlier() {
+        def page = new Page()
+
+        def previouslyPublishedPage = new Page()
+        previouslyPublishedPage.status = 'published'
+        previouslyPublishedPage.publishStart = new Date().minus(1)
+
+        def previouslyNotPublishedPage = new Page()
+
+        page.autoSaves = [previouslyNotPublishedPage, previouslyPublishedPage]
+
+        assertEquals(true, page.hasBeenPublished())
+    }
+
+    void testThatPageHasNotBeenPublishedEarlier() {
+        def page = new Page()
+
+        def previouslyNotPublishedPage = new Page()
+
+        page.autoSaves = [previouslyNotPublishedPage]
+
+        assertEquals(false, page.hasBeenPublished())
+    }
 }
