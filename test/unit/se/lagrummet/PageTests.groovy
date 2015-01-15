@@ -73,7 +73,7 @@ class PageTests extends GrailsUnitTestCase {
 
         page.autoSaves = [previouslyNotPublishedPage, previouslyPublishedPage]
 
-        assertEquals(true, page.hasBeenPublished())
+        assertEquals(true, page.hasBeenPublishedEarlier())
     }
 
     void testThatPageHasNotBeenPublishedEarlier() {
@@ -83,6 +83,6 @@ class PageTests extends GrailsUnitTestCase {
 
         page.autoSaves = [previouslyNotPublishedPage]
 
-        assertEquals(false, page.hasBeenPublished())
+        assertEquals(false, page.hasBeenPublishedEarlier())
     }
 }

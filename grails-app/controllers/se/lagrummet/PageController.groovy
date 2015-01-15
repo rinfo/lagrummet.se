@@ -3,10 +3,6 @@ package se.lagrummet
 import grails.plugins.springsecurity.Secured
 import grails.plugin.gson.converters.GSON
 
-import org.apache.commons.collections.FactoryUtils
-import org.apache.commons.collections.list.LazyList
-import org.codehaus.groovy.runtime.InvokerHelper
-
 class PageController {
 	
 	def pageService
@@ -455,7 +451,7 @@ class PageController {
 		withForm {
 			def pageInstance = Page.get(params.id)
 			if (pageInstance) {
-				if (pageInstance.isCurrentlyPublished() || pageInstance.hasBeenPublished()) {
+				if (pageInstance.isCurrentlyPublished() || pageInstance.hasBeenPublishedEarlier()) {
 					if (params.ajax) {
 						def response = [error: message(code: 'page.not.deleted.published.message', [args: pageInstance.title]), pageInstance: pageInstance]
 						render response as GSON
