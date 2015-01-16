@@ -63,6 +63,19 @@ class PageController {
 
 			params.author = SecUser.get(springSecurityService.principal.id)
 			def pageInstance = new Page(params)
+
+			if(!isNewUrlUnique(params.permalink)) {
+				pageInstance.errors.reject('permalink', message(code: 'page.permalink.not.unique.message', args: [params.permalink]))
+				flash.message = message(code: 'page.permalink.not.unique.message', args: [params.permalink])
+				pageInstance.permalink = ''
+				if (params.ajax) {
+					def response = [error: pageInstance.errors]
+					render response as GSON
+				} else {
+					render(view: "create", model: [pageInstance: pageInstance])
+				}
+				return
+			}
 			def now = new Date()
 			pageInstance.dateCreated = now
 			pageInstance.lastUpdated = now
@@ -389,12 +402,22 @@ class PageController {
 		flash.messages = []
 		def pageInstance = Page.get(params.id)
 		if (pageInstance) {
-            if (params.version) {
-                def version = Long.valueOf(params.version)
-                if (pageInstance.version > version) {
-                   flash.messages.add("${message(code: 'page.updated.updatedByAnotherUser')}")
-                }
-            }
+			if (params.version) {
+				def version = Long.valueOf(params.version)
+				if (pageInstance.version > version) {
+				   flash.messages.add("${message(code: 'page.updated.updatedByAnotherUser')}")
+				}
+			}
+
+			if(pageInstance.permalink != params.permalink && !isNewUrlUnique(params.permalink)) {
+				flash.messages.add(message(code: 'page.permalink.not.unique.message', args: [params.permalink]))
+				redirect(action: "edit", id: pageInstance.id)
+				return
+			}
+
+			pageInstance.backup()
+			params.author = SecUser.get(springSecurityService.principal.id)
+			bindData(pageInstance, params)
 
 			pageInstance.backup()
 			params.author = SecUser.get(springSecurityService.principal.id)
@@ -475,6 +498,13 @@ class PageController {
             redirect(action: "list")
         }
     }
-	
+
+	private def isNewUrlUnique(url) {
+		def sharesUrl = Page.findAllByPermalink(url)
+		if(!sharesUrl) {
+			return true
+		}
+		return false
+	}
 	
 }
