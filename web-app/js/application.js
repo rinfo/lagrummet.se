@@ -282,12 +282,8 @@ jQuery(document).ready(function($) {
 	/* Check required info on the contact page */
     var block = false;
     $("#contact").submit(function(e) {
-        $("#contact input[required]").each(function() {
+        $("#contact :required").each(function() {
             if (!$(this).val()) block = true;
-        });
-
-        $("#contact textarea[required]").each(function() {
-            if (!$(this).html()) block = true;
         });
         if (block) {
             alert("Var vänlig och fyll i de obligatoriska fälten");

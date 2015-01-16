@@ -276,6 +276,11 @@ class PageController {
 	}
 	
 	def contact = {
+		if(!(params.name && params.meddelande)) {
+			flash.message = message(code: 'contact.invalid.fields')
+			redirect(uri: request.getHeader('referer'))
+			return
+		}
 		def title = 'Från ' + params.name
 		if (params.epost) title += ', ' + params.epost
 		def fromAdress = params.epost ?: "lagrummet@lagrummet.se"
