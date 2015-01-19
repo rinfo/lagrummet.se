@@ -25,7 +25,7 @@
 		    	<td class="${hasErrors(bean: puff, field: 'link', 'errors')}"><g:textField name="puffs[${index}].link" value="${puff?.link}" /></td>
 		    	<td class="${hasErrors(bean: puff, field: 'title', 'errors')}"><g:textField name="puffs[${index}].title" value="${puff?.title}" /></td>
 		    	<td class="${hasErrors(bean: puff, field: 'image', 'errors')}">
-		    		<g:dropdown options="${images}" value="${fieldValue(bean: pageInstance, field: 'template')}" value="${puff.image?.id}" name="puffs[${index}].image.id"></g:dropdown>
+		    		<g:dropdown options="${images}" value="${puff.image?.id}" name="puffs[${index}].image.id"></g:dropdown>
 		    	</td></tr>
 		    <tr id="puff_${index}_2">
 		    	<td colspan="2"><g:textArea name="puffs[${index}].description" value="${puff?.description}" /></td>
