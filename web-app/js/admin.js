@@ -142,7 +142,6 @@ jQuery(function($) {
 		}
 		$(this).css('border-color', '');
 		if (!$("#bodyContent form .content .permalink input").val()) {
-			firstH1Blur = false;
 			$("#title").val($(this).val());
 			$("label[for=title] a").html($(this).val());
 			var value = $(this).val().replace(/ /g, "-").toLowerCase();
@@ -151,9 +150,6 @@ jQuery(function($) {
 			value = value.replace(/[^a-zA-Z 0-9-_]+/g,'');
 			$("#bodyContent form .content .permalink input").val(value).parent().show();
 		}
-		
-		if (!$(this).val()) $(this).val("Lägg till rubrik här");
-		
 		$(this).hide();
 		$("#bodyContent form .content .title").show();
 		$("#bodyContent form .content h1 a").html($(this).val()).parent().show();
@@ -169,7 +165,6 @@ jQuery(function($) {
 	
 	$("#bodyContent form .content h1 a").click(function(e) {
 		e.preventDefault();
-		if ($("#h1").val() == "Lägg till rubrik här") $("#h1").val("");
 		$("#h1").show().focus();
 		$(this).parent().hide();
 	});
