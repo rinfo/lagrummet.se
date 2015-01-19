@@ -77,7 +77,7 @@
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
 		<label for="publishStart"><g:message code="page.publishStart.label" default="Publish Start" /></label>
-		<g:datePicker name="publishStart" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStart}" default="none" noSelection="['': '']" />
+		<g:datePicker name="publishStart" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStart}" default="none" />
 	</div>
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStop', 'errors')}">
