@@ -1,25 +1,18 @@
 <div class="content">
-	<g:if test="${pageInstance?.id != null}">
-		<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
-  		<g:textField name="h1" value="${pageInstance?.h1}" />
-	</g:if>
-	<g:else>
-		<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
-  		<g:textField name="h1" value="${message(code: 'page.enterTitle.label', default: 'Enter heading here')}" />
-	</g:else>
-  	
- 	
+	<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
+	<g:textField name="h1" placeholder="${message(code: 'page.enterTitle.label', default: 'Enter heading here')}" value="${pageInstance?.h1}" required="" />
+
   	<div class="permalink input ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
-		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" />
+		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" required=""/>
 	</div>
   	
   	<div class="title input ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
 		<label for="title"><g:message code="page.title.label" default="Title" />: <a href="#">${pageInstance?.title}</a></label>
-		<g:textField name="title" value="${pageInstance?.title}" />
+		<g:textField name="title" value="${pageInstance?.title}" required="" />
 	</div>
   
     <div class="mceEditor input">
-    	<g:textArea name="content" value="${pageInstance?.content}" />
+    	<g:textArea name="content" value="${pageInstance?.content}" required="" />
     </div>
     
     <h3>Puffar</h3>
@@ -32,7 +25,7 @@
 		    	<td class="${hasErrors(bean: puff, field: 'link', 'errors')}"><g:textField name="puffs[${index}].link" value="${puff?.link}" /></td>
 		    	<td class="${hasErrors(bean: puff, field: 'title', 'errors')}"><g:textField name="puffs[${index}].title" value="${puff?.title}" /></td>
 		    	<td class="${hasErrors(bean: puff, field: 'image', 'errors')}">
-		    		<g:dropdown options="${images}" value="${fieldValue(bean: pageInstance, field: 'template')}" value="${puff.image?.id}" name="puffs[${index}].image.id"></g:dropdown>
+		    		<g:dropdown options="${images}" value="${puff.image?.id}" name="puffs[${index}].image.id"></g:dropdown>
 		    	</td></tr>
 		    <tr id="puff_${index}_2">
 		    	<td colspan="2"><g:textArea name="puffs[${index}].description" value="${puff?.description}" /></td>
@@ -84,7 +77,7 @@
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStart', 'errors')}">
 		<label for="publishStart"><g:message code="page.publishStart.label" default="Publish Start" /></label>
-		<g:datePicker name="publishStart" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStart}" default="none" noSelection="['': '']" />
+		<g:datePicker name="publishStart" precision="minute" years="${2010..2020}" value="${pageInstance?.publishStart}" default="none" />
 	</div>
 
 	<div class="input ${hasErrors(bean: pageInstance, field: 'publishStop', 'errors')}">
