@@ -1,14 +1,7 @@
 <div class="content">
-	<g:if test="${pageInstance?.id != null}">
-		<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
-  		<g:textField name="h1" value="${pageInstance?.h1}" />
-	</g:if>
-	<g:else>
-		<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
-  		<g:textField name="h1" value="${message(code: 'page.enterTitle.label', default: 'Enter heading here')}" />
-	</g:else>
-  	
- 	
+	<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
+	<g:textField name="h1" placeholder="${message(code: 'page.enterTitle.label', default: 'Enter heading here')}" value="${pageInstance?.h1}" />
+
   	<div class="permalink input ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
 		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" />
 	</div>
