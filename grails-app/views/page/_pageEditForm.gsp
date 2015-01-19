@@ -1,18 +1,18 @@
 <div class="content">
 	<h1 class="${hasErrors(bean: pageInstance, field: 'h1', 'errors')}"><a href="#">${pageInstance?.h1}</a></h1>
-	<g:textField name="h1" placeholder="${message(code: 'page.enterTitle.label', default: 'Enter heading here')}" value="${pageInstance?.h1}" />
+	<g:textField name="h1" placeholder="${message(code: 'page.enterTitle.label', default: 'Enter heading here')}" value="${pageInstance?.h1}" required="" />
 
   	<div class="permalink input ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
-		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" />
+		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" required=""/>
 	</div>
   	
   	<div class="title input ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
 		<label for="title"><g:message code="page.title.label" default="Title" />: <a href="#">${pageInstance?.title}</a></label>
-		<g:textField name="title" value="${pageInstance?.title}" />
+		<g:textField name="title" value="${pageInstance?.title}" required="" />
 	</div>
   
     <div class="mceEditor input">
-    	<g:textArea name="content" value="${pageInstance?.content}" />
+    	<g:textArea name="content" value="${pageInstance?.content}" required="" />
     </div>
     
     <h3>Puffar</h3>
