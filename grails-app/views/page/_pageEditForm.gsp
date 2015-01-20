@@ -12,13 +12,13 @@
 	</div>
   
     <div class="mceEditor input">
-    	<g:textArea name="content" value="${pageInstance?.content}" required="" />
+    	<g:textArea name="content" value="${pageInstance?.content}" />
     </div>
     
     <h3>Puffar</h3>
     <table id="puffs">
 	    <tr><th><g:message code="puff.link.label" default="Länk" /></th><th><g:message code="puff.title.label" default="Titel" /></th><th><g:message code="puff.image.label" default="Bild" /></th></tr>
-	    <g:each in="${pageInstance.puffs}" var="puff" status="index">
+	    <g:each in="${pageInstance?.puffs}" var="puff" status="index">
 	    	<g:hiddenField name="puffs[${index}].id" value="${puff?.id}" />
 	    	<input type="hidden" name='puffs[${index}].deleted' id='puffs[${index}].deleted' value='false'/>
 		    <tr id="puff_${index}_1">
