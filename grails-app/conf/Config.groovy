@@ -106,12 +106,12 @@ log4j = {
     // appender:
     //
     appenders {
-        console name:'stdout', layout:pattern(conversionPattern: '[%p] %d %c %M - %m%n')
+        console name:'stdout', layout:pattern(conversionPattern: '[%p] %d [%t] %x %c %M - %m%n')
         appender new DailyRollingFileAppender(
                 name: 'lagrummet_file',
                 datePattern: '.yyyy-MM-dd',
                 fileName: "${System.properties['catalina.base']}/logs/lagrummet.log",
-                layout: pattern(conversionPattern: "[%p] %d %c %M - %m%n"))
+                layout: pattern(conversionPattern: "[%p] %d [%t] %x %c %M - %m%n"))
     }
     
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
@@ -128,14 +128,22 @@ log4j = {
 
     warn   'org.mortbay.log'
 
-    all	  'se.lagrummet',
-            'grails.app.jobs.se.lagrummet'
-    
+    debug ''
+
+    info  'se.lagrummet',
+          'grails.app.jobs.se.lagrummet',
+          'grails.app.controllers',
+          'grails.app.services'
+
+
     'null' name:'stacktrace'
 
+
     root {
-        warn 'stdout', 'lagrummet_file'
+        debug 'stdout'
+        warn 'lagrummet_file'
     }
+
 }
 
 //jquery plugin installation
