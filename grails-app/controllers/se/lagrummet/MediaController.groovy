@@ -149,8 +149,8 @@ class MediaController {
                     redirect(action: "list")
                 }
                 catch (org.springframework.dao.DataIntegrityViolationException e) {
-                    flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'media.label', default: 'Media'), params.id])}"
-                    redirect(action: "show", id: params.id)
+                    flash.message = "${message(code: 'media.not.deleted.message', args: [message(code: 'media.label', default: 'Media'), params.title])}"
+                    redirect(action: "edit", id: params.id)
                 }
             }
             else {
