@@ -39,7 +39,7 @@
 					<tr>
 						<td>
 							<p>
-                                <a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">
+                                <a ${searchLink} href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">
                                   <g:if test="${cat == 'Lagar' || item.type == 'Myndighetsforeskrift'}">
                                         ${item.title}                                 
                                   </g:if>                                  

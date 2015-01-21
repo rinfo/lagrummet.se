@@ -115,6 +115,15 @@ class Page implements Comparable<Page>{
 		}
 		return fullUrl
 	}
+
+	def absoluteParentPath(host) {
+		if(parent) {
+			def path = parent.url()
+			if(path)
+				host += "/${path}"
+		}
+		return host
+	}
 	
 	def backup = {
 		def pageBackup = new Page()

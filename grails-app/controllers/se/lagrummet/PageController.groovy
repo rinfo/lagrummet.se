@@ -169,6 +169,16 @@ class PageController {
 			if(page.publishStop && page.publishStop.before(new Date())) {
 				forward(action: "error", params: [errorId: "404"])
 			}
+			//this "prevents" using different urls for the same page.
+			//"home" gets treated in a different way.
+			if(url.first() != 'home' && params.permalink != page.url()) {
+				println permalink
+				if(url.last() == 'home')
+					redirect(url: "/", permanent: true)
+				else
+					redirect(url: "/${page.url()}", permanent: true)
+				return
+			}
 			renderPage(page)
 		} else {
 			forward(action: "error", params: [errorId: "404"])
