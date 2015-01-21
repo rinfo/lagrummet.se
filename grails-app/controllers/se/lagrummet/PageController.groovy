@@ -61,10 +61,10 @@ class PageController {
 			def pageInstance = new Page(params)
 
 			if(!isNewUrlUnique(params.permalink)) {
-				pageInstance.errors.reject('permalink', message(code: 'page.permalink.not.unique.message', args: [params.permalink]))
 				flash.message = message(code: 'page.permalink.not.unique.message', args: [params.permalink])
 				pageInstance.permalink = ''
 				if (params.ajax) {
+					pageInstance.errors.reject('permalink', message(code: 'page.permalink.not.unique.message', args: [params.permalink]))
 					def response = [error: pageInstance.errors]
 					render response as GSON
 				} else {
