@@ -14,20 +14,20 @@ class SearchService {
 	def localSearchService
 	
     public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
-
         if (grailsApplication.config.lagrummet.onlyLocalSearch)
             return localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
+        def result = new SearchResult()
+        Benchmark.section("Total search time", log) {
+            def remoteResult = rdlSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
+            def remoteLatestConsolidatedResult = rdlSearchService.plainTextLatestConsolidated(query, cat, offset, itemsPerPage)
+            def localResult = localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
 
-		def remoteResult = rdlSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
-		def remoteLatestConsolidatedResult = rdlSearchService.plainTextLatestConsolidated(query, cat, offset, itemsPerPage)
-		def localResult = localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
+            def topHits = selectTopHitsDependingOnCategory(cat, remoteLatestConsolidatedResult, localResult, remoteResult)
 
-        def topHits = selectTopHitsDependingOnCategory(cat, remoteLatestConsolidatedResult, localResult, remoteResult)
+            result = remoteLatestConsolidatedResult.mergeWith(remoteResult).mergeWith(localResult)
 
-		def result = remoteLatestConsolidatedResult.mergeWith(remoteResult).mergeWith(localResult)
-
-		result.topHits = topHits;
-
+            result.topHits = topHits;
+        }
 		return result
 	}
 

@@ -35,7 +35,7 @@ cd $WORK_DIR
 fab target.regression sysconf.install_server
 fab target.regression sysconf.config_server
 sleep 10
-curl http://regression.lagrummet.se/rinfo/publ/sfs/1999:175/konsolidering/2011-$
+# curl http://regression.lagrummet.se/rinfo/publ/sfs/1999:175/konsolidering/2011-
 fab target.regression lagrummet.test_all
 EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ];then
