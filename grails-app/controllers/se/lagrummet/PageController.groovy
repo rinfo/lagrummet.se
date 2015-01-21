@@ -59,6 +59,19 @@ class PageController {
 
 			params.author = SecUser.get(springSecurityService.principal.id)
 			def pageInstance = new Page(params)
+
+			if(!isNewUrlUnique(params.permalink)) {
+				pageInstance.errors.reject('permalink', message(code: 'page.permalink.not.unique.message', args: [params.permalink]))
+				flash.message = message(code: 'page.permalink.not.unique.message', args: [params.permalink])
+				pageInstance.permalink = ''
+				if (params.ajax) {
+					def response = [error: pageInstance.errors]
+					render response as GSON
+				} else {
+					render(view: "create", model: [pageInstance: pageInstance])
+				}
+				return
+			}
 			def now = new Date()
 			pageInstance.dateCreated = now
 			pageInstance.lastUpdated = now
@@ -403,6 +416,12 @@ class PageController {
 					}
 				}
 
+				if(pageInstance.permalink != params.permalink && !isNewUrlUnique(params.permalink)) {
+					flash.messages.add(message(code: 'page.permalink.not.unique.message', args: [params.permalink]))
+					redirect(action: "edit", id: pageInstance.id)
+					return
+				}
+
 				pageInstance.backup()
 				params.author = SecUser.get(springSecurityService.principal.id)
 				bindData(pageInstance, params)
@@ -498,6 +517,13 @@ class PageController {
 			response.status = 403
 		}
     }
-	
+
+	private def isNewUrlUnique(url) {
+		def sharesUrl = Page.findAllByPermalink(url)
+		if(!sharesUrl) {
+			return true
+		}
+		return false
+	}
 	
 }
