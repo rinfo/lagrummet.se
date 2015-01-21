@@ -16,14 +16,11 @@ fi
 
 cd manage/fabfile/
 
-echo "Enter sudo password: "
-read pwd
-
-fab -p ${pwd} target.$2 sysconf.install_server
-fab -p ${pwd} target.$2 sysconf.config_server
-fab -p ${pwd} target.$2 lagrummet.all
+fab target.$2 sysconf.install_server
+fab target.$2 sysconf.config_server
+fab target.$2 lagrummet.all
 
 read -p "[press any key; to restart tomcat and apache on target server(s)]" -s -n1
-fab -p ${pwd} target.$2 server.restart_tomcat
-fab -p ${pwd} target.$2 server.restart_apache
+fab target.$2 server.restart_tomcat
+fab target.$2 server.restart_apache
 
