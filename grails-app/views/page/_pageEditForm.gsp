@@ -12,7 +12,7 @@
 	</div>
   
     <div class="mceEditor input">
-    	<g:textArea name="content" value="${pageInstance?.content}" required="" />
+    	<g:textArea name="content" value="${pageInstance?.content}" />
     </div>
     
     <h3>Puffar</h3>
