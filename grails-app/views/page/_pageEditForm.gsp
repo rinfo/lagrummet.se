@@ -3,7 +3,7 @@
 	<g:textField name="h1" placeholder="${message(code: 'page.enterTitle.label', default: 'Enter heading here')}" value="${pageInstance?.h1}" required="" />
 
   	<div class="permalink input ${hasErrors(bean: pageInstance, field: 'permalink', 'errors')}">
-		${grailsApplication.config.grails.serverURL}/<g:textField name="permalink" value="${pageInstance?.permalink}" required=""/>
+		${pageInstance?.absoluteParentPath(grailsApplication.config.grails.serverURL)}/<g:textField name="permalink" value="${pageInstance?.permalink}" required=""/>
 	</div>
   	
   	<div class="title input ${hasErrors(bean: pageInstance, field: 'title', 'errors')}">
@@ -18,7 +18,7 @@
     <h3>Puffar</h3>
     <table id="puffs">
 	    <tr><th><g:message code="puff.link.label" default="Länk" /></th><th><g:message code="puff.title.label" default="Titel" /></th><th><g:message code="puff.image.label" default="Bild" /></th></tr>
-	    <g:each in="${pageInstance.puffs}" var="puff" status="index">
+	    <g:each in="${pageInstance?.puffs}" var="puff" status="index">
 	    	<g:hiddenField name="puffs[${index}].id" value="${puff?.id}" />
 	    	<input type="hidden" name='puffs[${index}].deleted' id='puffs[${index}].deleted' value='false'/>
 		    <tr id="puff_${index}_1">
@@ -60,10 +60,10 @@
 <div class="aside publish">
 	<g:if test="${(pageInstance.id && pageInstance.status == 'draft') || (pageInstance.id && pageInstance.isCurrentlyPublished())}">
 		<div class="buttons">
-		<g:if test="${pageInstance.id && pageInstance.status == 'draft'}">
+		<g:if test="${pageInstance.id && pageInstance.status == 'draft' && !pageInstance.autoSaves }">
 				<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
 		</g:if>
-		<g:if test="${pageInstance.id && pageInstance.isCurrentlyPublished()}">
+		<g:if test="${pageInstance.id && pageInstance.isCurrentlyPublished() && pageInstance.status != 'draft'}">
 		  		<g:actionSubmit name="unpublish" action="unpublish" class="delete" value="Avpublicera" />
 		</g:if>
 		</div>

@@ -161,7 +161,7 @@ class MediaController {
             response.status = 403
         }
     }
-	
+
 	def viewMediaContent = {
 		def fileName = grailsApplication.config.lagrummet.upload.dir + params.filename
 		def media = Media.findByFilename(fileName)
