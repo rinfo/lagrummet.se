@@ -60,10 +60,10 @@
 <div class="aside publish">
 	<g:if test="${(pageInstance.id && pageInstance.status == 'draft') || (pageInstance.id && pageInstance.isCurrentlyPublished())}">
 		<div class="buttons">
-		<g:if test="${pageInstance.id && pageInstance.status == 'draft'}">
+		<g:if test="${pageInstance.id && pageInstance.status == 'draft' && !pageInstance.autoSaves }">
 				<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'page.button.delete.confirm.message', args:[pageInstance.title], default: 'Are you sure?')}');" />
 		</g:if>
-		<g:if test="${pageInstance.id && pageInstance.isCurrentlyPublished()}">
+		<g:if test="${pageInstance.id && pageInstance.isCurrentlyPublished() && pageInstance.status != 'draft'}">
 		  		<g:actionSubmit name="unpublish" action="unpublish" class="delete" value="Avpublicera" />
 		</g:if>
 		</div>
