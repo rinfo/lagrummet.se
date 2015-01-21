@@ -63,6 +63,7 @@
 			<g:menu root="huvudmeny" activePage="${page}" />
 	    </nav>
 
+		<script src="http://f1.eu.readspeaker.com/script/5329/rs_embhl_v2_sv_se.js" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	    <g:javascript library="application" />		
 	
