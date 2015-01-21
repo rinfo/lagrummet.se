@@ -135,7 +135,7 @@ jQuery(function($) {
     });
 	
 	// Dynamic behaviour for creating and editing pages
-	$("#h1").focus().blur(function(e) {
+	$("#h1").blur(function(e) {
 		if (!$(this).val()) {
 			$(this).css('border-color', 'red');
 			return
@@ -252,9 +252,6 @@ jQuery(function($) {
 			$("#pageEditForm").attr("target", "");
 		}
 	});
-	
-	
-	
 });
 
 function markPuffAsDeleted(puffIndex) {
