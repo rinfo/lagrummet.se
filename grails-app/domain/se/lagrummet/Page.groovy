@@ -39,13 +39,18 @@ class Page implements Comparable<Page>{
 	
 	def isCurrentlyPublished() {
 		def now = new Date()
-		def status = "published" && publishStart < now && (publishStop == null || publishStop > now)
-		if (!status && autoSaves) {
+		def pageStatus = status == "published" && publishStart < now && (publishStop == null || publishStop > now)
+		if (!pageStatus && autoSaves) {
 				autoSaves.each { it ->
-					if (it.status == 'published' && it.publishStart <= now && (it.publishStop == null || it.publishStop >= now)) status = true
+					if (it.status == 'published' && it.publishStart <= now && (it.publishStop == null || it.publishStop >= now)) pageStatus = true
 			}
 		}
-		return status
+		return pageStatus
+	}
+
+	//this works due to how autosaves work when changing status.
+	def hasBeenPublishedEarlier() {
+		return autoSaves?.any {it.status == 'published'}
 	}
 	
 	def getCurrentPageStatus() {
