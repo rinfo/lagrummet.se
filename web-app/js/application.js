@@ -121,6 +121,12 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+    $('#search').submit(function() {
+        if ($.trim($("#query").val()) === "") {
+            return false;
+        }
+    });
+
     $("header #search #query").keypress(function(e) {
 		if (e.which == 13 && query == $(this).attr("value")) {
 			// load the search suggestion if one is selected
