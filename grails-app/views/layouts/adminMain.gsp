@@ -61,6 +61,14 @@
 					<li><a href="${createLink(controller:'synonym', action:'list')}">Hantera synonymer</a></li>
 				</ul>
 			</li>
+			<li>
+				<strong>Profil</strong>
+				<ul class="sub_menu">
+					<li><a href="${createLink(controller:'profile', action:'edit')}">Ändra</a></li>
+					<li><a href="${createLink(controller:'profile', action:'show')}">Kontrollera</a></li>
+					<li><a href="${createLink(controller:'profile', action:'credentials')}">Ändra behörigheter</a></li>
+				</ul>
+			</li>
 		</ul>
 		</nav>
 	</header>

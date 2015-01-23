@@ -22,6 +22,8 @@ class UrlMappings {
 		
 		"/search/$action"(controller:'search')
 		
+		"/profile/$action"(controller:'profile')
+		
 		name rinfo: "/rinfo/$docPath**" {
             controller = "rinfo"
             action = "show"

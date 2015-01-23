@@ -35,6 +35,10 @@ class SecUser {
 	}
 
 	protected void encodePassword() {
-		password = springSecurityService.encodePassword(password)
+		if(password.length() != 64) {
+			// Due to some unknown logic for dirtiness in Grails domain objects, this is 
+			// necessary to update a password.
+			password = springSecurityService.encodePassword(password)
+		}
 	}
 }
