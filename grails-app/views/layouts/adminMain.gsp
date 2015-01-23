@@ -65,8 +65,8 @@
 				<strong>Profil</strong>
 				<ul class="sub_menu">
 					<li><a href="${createLink(controller:'profile', action:'edit')}">Ändra</a></li>
-					<li><a href="${createLink(controller:'profile', action:'show')}">Kontrollera</a></li>
-					<li><a href="${createLink(controller:'profile', action:'credentials')}">Ändra behörigheter</a></li>
+					<li><a href="${createLink(controller:'profile', action:'show')}">Visa</a></li>
+					<li><a href="${createLink(controller:'profile', action:'credentials')}">Byt lösenord</a></li>
 				</ul>
 			</li>
 		</ul>
