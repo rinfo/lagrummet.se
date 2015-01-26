@@ -58,7 +58,7 @@ class ProfileController {
 			redirect(action: "show")
 		}
 
-		if(encryptedPassword <=> userInstance.password) {
+		if(encryptedPassword == userInstance.password) {
 		}
 		else {
 			flash.message = "${message(code: 'user.password.wrong.label', args: [message(code: 'user.label', default: 'User'), params.id])}"
@@ -66,7 +66,7 @@ class ProfileController {
 			return;
 		}
 		
-		if(params.newpassword <=> params.newrepeatedpassword) {
+		if(params.newpassword == params.newrepeatedpassword) {
 		}
 		else {
 			flash.message = "${message(code: 'user.password.wrongrepetition.label', args: [message(code: 'user.label', default: 'User'), params.id])}"
