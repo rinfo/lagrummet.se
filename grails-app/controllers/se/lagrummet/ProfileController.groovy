@@ -8,7 +8,7 @@ class ProfileController {
 	def springSecurityService
 	
 	def edit = {
-        def userInstance = User.get(springSecurityService.principal.id)
+        def userInstance = User.get(springSecurityService.principal?.id)
 
         if (!userInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
@@ -20,22 +20,22 @@ class ProfileController {
 	}
 	
 	def updateProfile = {
-        User userInstanceOld = User.get(springSecurityService.principal.id)
+        User userInstance = User.get(springSecurityService.principal?.id)
 
-		        if (!userInstanceOld) {
+		if (!userInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
             redirect(action: "list")
 			return
         }
-		userInstanceOld.department = params.department
-		userInstanceOld.email = params.email
-		userInstanceOld.fullName = params.fullName
-		userInstanceOld.save(flush: true)
+		userInstance.department = params.department
+		userInstance.email = params.email
+		userInstance.fullName = params.fullName
+		userInstance.save(flush: true)
 		redirect(action: "show")
 	}
 	
 	def show = {
-        def userInstance = User.get(springSecurityService.principal.id)
+        def userInstance = User.get(springSecurityService.principal?.id)
 		
 		if (!userInstance) {
 			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
@@ -52,13 +52,13 @@ class ProfileController {
 	def updateCredentials = {
 		String encryptedPassword = springSecurityService.encodePassword(params.currentpassword)
 		
-        def userInstance = User.get(springSecurityService.principal.id)
+        def userInstance = User.get(springSecurityService.principal?.id)
 		if (!userInstance) {
 			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
 			redirect(action: "show")
 		}
 
-		if(encryptedPassword.compareTo(userInstance.password) == 0) {
+		if(encryptedPassword <=> userInstance.password) {
 		}
 		else {
 			flash.message = "${message(code: 'user.password.wrong.label', args: [message(code: 'user.label', default: 'User'), params.id])}"
@@ -66,7 +66,7 @@ class ProfileController {
 			return;
 		}
 		
-		if(params.newpassword.compareTo(params.newrepeatedpassword) == 0) {
+		if(params.newpassword <=> params.newrepeatedpassword) {
 		}
 		else {
 			flash.message = "${message(code: 'user.password.wrongrepetition.label', args: [message(code: 'user.label', default: 'User'), params.id])}"
@@ -78,8 +78,6 @@ class ProfileController {
 		
 		userInstance.save(flush: true)
 		redirect(action: "show")
-
-		
 	}
 
 }
