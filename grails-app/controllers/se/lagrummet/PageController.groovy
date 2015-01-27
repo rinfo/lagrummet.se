@@ -86,7 +86,7 @@ class PageController {
 
 			if (instanceToSave.save(flush: true)) {
 				if (params.ajax) {
-					def response = [success: "true", pageInstance: pageInstance]
+					def response = [success: "true", pageInstance: toJson(pageInstance, false)]
 					render response as GSON
 				} else {
 					flash.message = "${message(code: 'page.created.message', args: [pageInstance.title])}"
@@ -105,7 +105,24 @@ class PageController {
 			response.status = 403
 		}
     }
-	
+
+    def toJson(Page page, boolean shallow) {
+        def res = [id: page.id, title: page.title, h1: page.h1, permalink: page.permalink, content: page.content, pageOrder: page.pageOrder,
+        template: page.template, menuStyle: page.menuStyle, showInSitemap: page.showInSitemap, status: page.status,
+        metaPage: page.metaPage, dateCreated: page.dateCreated, lastUpdated: page.lastUpdated,
+        publishStart: page.publishStart, publishStop: page.publishStop,
+        //errors: page.errors?:"",
+        author: [username: "testadmin"]]
+        if (!shallow) {
+            res << [puffs: page.puffs.collect { [id: it.id, title: it.title, description: it.description, link: it.link]},
+            children: page.children.collect{toJson(it,true)},
+            media: page.media.collect {[id: it.id, title: it.title, filename: it.filename, dateCreated: it.dateCreated,
+                lastUpdated: it.lastUpdated, content: [id: content.id, content: content.content]]},
+            autoSaves: page.children.collect{toJson(it,true)}]
+        }
+        return res
+    }
+
 	@Secured(['ROLE_EDITOR', 'ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 	def move = {
 		def pageInstance = Page.get(params.id)
@@ -148,7 +165,8 @@ class PageController {
 
 		// Only Ajax response
 		if (instanceToSave.save(flush: true)) {
-			def response = [success: "true"]
+			//def response = [success: "true"]
+            def response = [success: "true", pageInstance: toJson(pageInstance, false)]
 			render response as GSON
 		}
 		else {
@@ -287,7 +305,7 @@ class PageController {
 				}
 			}.toString()
 		} else if (request.format == "json") {
-			def response = [pages: pages]
+			def response = [pages: pages.collect{toJson(it,false)}]
 			render response as GSON
 		} else {
 			forward(action: "show", params: [permalink: "webbkarta"])
@@ -482,7 +500,7 @@ class PageController {
 			if (pageInstance) {
 				if (pageInstance.isCurrentlyPublished() || pageInstance.hasBeenPublishedEarlier()) {
 					if (params.ajax) {
-						def response = [error: message(code: 'page.not.deleted.published.message', [args: pageInstance.title]), pageInstance: pageInstance]
+						def response = [error: message(code: 'page.not.deleted.published.message', [args: pageInstance.title]), pageInstance: toJson(pageInstance,false)]
 						render response as GSON
 					} else {
 						flash.message = message(code: 'page.not.deleted.published.message', args: [pageInstance.title])
@@ -502,7 +520,7 @@ class PageController {
 				}
 				catch (org.springframework.dao.DataIntegrityViolationException e) {
 					if (params.ajax) {
-						def response = [error: "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}", pageInstance: pageInstance]
+						def response = [error: "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}", pageInstance: toJson(pageInstance,false)]
 						render response as GSON
 					} else {
 						flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'page.label', default: 'Page'), params.id])}"
