@@ -1274,7 +1274,7 @@ ul[id^="legalSource_"] > li > div {
 	white-space: pre-line;
 }
 
-body#tinymce.mceContentBody {
+body#tinymce.mce-content-body {
 	width: 100%;
 }
 
