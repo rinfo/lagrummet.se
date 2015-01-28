@@ -46,7 +46,15 @@ jQuery(function($) {
 		entity_encoding : "raw",
 		formats : {
 			p : {selector : 'p', classes : '', styles: ''}
-		}
+		},
+		style_formats: [
+			{title: 'Paragraph', block: 'p'},
+			{title: 'Heading 1', block: 'h1'},
+			{title: 'Heading 2', block: 'h2'},
+			{title: 'Heading 3', block: 'h3'},
+			{title: 'Heading 4', block: 'h4'},
+
+		]
 	});
 	
 	function jsTreeContextMenu(node) {
