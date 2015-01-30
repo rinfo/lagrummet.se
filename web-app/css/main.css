@@ -235,11 +235,13 @@ a.step, .currentStep {
 }
 
 #siteHeader > p.extSearchLabel {
+    margin-top: 20px;
 	float: right;
 	margin-bottom: 1em;
 }
 
 #logo {
+    position: absolute;
     width: 220px;
     float: left;
     margin: 0;
@@ -265,7 +267,8 @@ a.step, .currentStep {
 }
 
 #sitelinks {
-    position: absolute;
+    position: relative;
+    float: right;
     top: 0px;
     right: 0px;
 }
@@ -288,9 +291,11 @@ a.step, .currentStep {
 
 #breadcrumbs {
 	width: auto;
-	top: 2em;
-	position: absolute;
+	top: 40px;
+	position: relative;
 	font: 1.2em 'Century Gothic', sans-serif;
+    float: left;
+    margin-bottom: 20px;
 }
 
 a.print:visited {
@@ -740,6 +745,9 @@ article.legalSources section.Foreskrifter h2 {
 	color: #585858;
 	height: 40px;
 	clear: both;
+    position: relative;
+    float: left;
+    top: 25px;
 }
 
 #search > *{
@@ -1277,6 +1285,53 @@ ul[id^="legalSource_"] > li > div {
 body#tinymce.mceContentBody {
 	width: 100%;
 }
+
+#cookie-banner {
+    position: absolute;
+    z-index: 20;
+    margin-top: 4px;
+    height: 60px;
+    margin-left: 1px;
+    padding: 5px;
+    #border: 1px solid #ddd;
+    border: 1px solid #873960;
+    display: none;
+    float: left;
+    background-color: #eee;
+    background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
+    background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image: 	      linear-gradient(top, #ddd, #f7f7f7, #fff);
+}
+
+#cookie-banner strong {
+    color: #bd9b44;
+}
+
+#cookie-banner a {
+    float: left;
+    cursor: pointer;
+    color: #006383;
+}
+
+#cookie-banner a:hover {
+    color: #006383;
+}
+
+#cookie-banner a:visited {
+    color: #006383;
+}
+
+#cookie-banner input {
+    cursor: pointer;
+    float: right;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 1px;
+}
+
 
 /*change the margin abit for middle column to sync with puffs */
 #siteFooter ul:nth-child(2) > li {

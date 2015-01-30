@@ -17,6 +17,13 @@
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
+            <div id="cookie-banner">
+                <strong>På lagrummet.se använder cookies för att fungera på ett bra sätt. Genom att välja "Jag accepterar cookies" samtycker du till att cookies används. Vill du neka till cookies kan du själv stänga av funktionen via din webbläsares säkerhetsinställningar.</strong>
+                <br>
+                <a style="cursor: pointer;" href="om-webbplatsen/om-kakor" id="more-cookie-text">Mer information om cookies</a>
+                <input type="button" class="cookie-button" id="cookie-button" value="Jag accepterar cookies" />
+            </div>
+
             <div id="logo">
                     <a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle ?: "lagrummet<span class='hlight'>.se</span>"}</a>
             </div>

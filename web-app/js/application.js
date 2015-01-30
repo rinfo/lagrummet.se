@@ -61,7 +61,26 @@ function instantSearch() {
 }
 
 jQuery(document).ready(function($) {
-	
+
+	// check user accept cookie
+    if (navigator.cookieEnabled && getCookie("userAcceptCookie")=="") {
+        var cookieBannerHeight = $('#cookie-banner').outerHeight() + 4;
+        $('#primaryNavigation').css('top', (cookieBannerHeight+60)+'px');
+        $('#siteHeader').css('top', cookieBannerHeight+'px');
+        $('#content').css('top', cookieBannerHeight+'px');
+        $('#logo').css('margin-top', cookieBannerHeight+'px');
+        $('#cookie-button').click(function() {
+            $('#cookie-banner').hide();
+            $('#primaryNavigation').css('top', '60px');
+            $('#siteHeader').css('top', '0px');
+            $('#content').css('top', '0px');
+            $('#logo').css('margin-top', '0px');
+            setCookie("userAcceptCookie", "true", 100);
+            console.log("Cookies accepted by user.")
+        })
+        $('#cookie-banner').show();
+    }
+
 	if($(".safeemail").length != 0) {
 		var coded = $(".safeemail").prop("href");
 		coded = coded.replace("mailto:", "");
@@ -305,3 +324,22 @@ $(document).on("click",".searchLink", function() {
     var url = $(location).attr('href');
     sendGaPageView(url);
 });
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "; expires="+d.toUTCString();
+    var maxAge = "; max-age="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + expires + maxAge + "; path=/;";
+}
