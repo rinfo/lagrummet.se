@@ -1283,6 +1283,10 @@ body#tinymce.mceContentBody {
 	margin-left: 5px;
 }
 
+.MsoTableGrid table {
+	text-align:left;
+}
+
 /* =MEDIA-QUERIES */
 /* For all narrow devices and screens */
 
