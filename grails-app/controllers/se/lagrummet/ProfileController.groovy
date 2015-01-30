@@ -11,7 +11,7 @@ class ProfileController {
         def userInstance = User.get(springSecurityService.principal?.id)
 
         if (!userInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User')])
             redirect(action: "list")
         }
         else {
@@ -20,25 +20,36 @@ class ProfileController {
 	}
 	
 	def updateProfile = {
-        User userInstance = User.get(springSecurityService.principal?.id)
-
-		if (!userInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
-            redirect(action: "list")
-			return
-        }
-		userInstance.department = params.department
-		userInstance.email = params.email
-		userInstance.fullName = params.fullName
-		userInstance.save(flush: true)
-		redirect(action: "show")
+		
+		withForm {
+	        User userInstance = User.get(springSecurityService.principal?.id)
+	
+			if (!userInstance) {
+	            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User')])
+	            redirect(action: "list")
+				return
+	        }
+			userInstance.department = params.department
+			userInstance.email = params.email
+			userInstance.fullName = params.fullName
+			if(!userInstance.save(flush: true)) {
+				flash.message = message(code: 'error.persistence.form.write')
+				redirect(action: "credentials")
+				return;
+			}
+			redirect(action: "show")
+			
+		}.invalidToken {
+			response.status = 405
+		}
+		
 	}
 	
 	def show = {
         def userInstance = User.get(springSecurityService.principal?.id)
 		
 		if (!userInstance) {
-			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User')])
 			redirect(action: "list")
 		}
 		else {
@@ -50,34 +61,41 @@ class ProfileController {
 	}
 
 	def updateCredentials = {
-		String encryptedPassword = springSecurityService.encodePassword(params.currentpassword)
-		
-        def userInstance = User.get(springSecurityService.principal?.id)
-		if (!userInstance) {
-			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+		withForm {
+			String encryptedPassword = springSecurityService.encodePassword(params.currentpassword)
+			
+	        def userInstance = User.get(springSecurityService.principal?.id)
+			if (!userInstance) {
+				flash.message = message(code: 'default.not.found.message')
+				redirect(action: "show")
+				return
+			}
+	
+			if(encryptedPassword != userInstance.password) {
+				flash.message = message(code: 'user.password.wrong.label')
+				redirect(action: "credentials")
+				return
+			}
+			
+			if(params.newpassword != params.newrepeatedpassword) {
+				flash.message = message(code: 'user.password.wrongrepetition.label')
+				redirect(action: "credentials")
+				return
+			}
+	
+			userInstance.password = springSecurityService.encodePassword(params.newpassword)
+			
+			if(!userInstance.save(flush: true)) {
+				flash.message = message(code: 'error.persistence.form.write')
+				redirect(action: "credentials")
+				return;
+			}
 			redirect(action: "show")
-		}
-
-		if(encryptedPassword == userInstance.password) {
-		}
-		else {
-			flash.message = "${message(code: 'user.password.wrong.label', args: [message(code: 'user.label', default: 'User'), params.id])}"
-			redirect(action: "credentials")
-			return;
+			
+		}.invalidToken {
+			response.status = 405
 		}
 		
-		if(params.newpassword == params.newrepeatedpassword) {
-		}
-		else {
-			flash.message = "${message(code: 'user.password.wrongrepetition.label', args: [message(code: 'user.label', default: 'User'), params.id])}"
-			redirect(action: "credentials")
-			return;
-		}
-
-		userInstance.password = springSecurityService.encodePassword(params.newpassword)
-		
-		userInstance.save(flush: true)
-		redirect(action: "show")
 	}
 
 }
