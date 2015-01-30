@@ -1283,7 +1283,7 @@ body#tinymce.mceContentBody {
 	margin-left: 5px;
 }
 
-.MsoTableGrid table {
+div.Section1 > div > table.MsoTableGrid {
 	text-align:left;
 }
 
