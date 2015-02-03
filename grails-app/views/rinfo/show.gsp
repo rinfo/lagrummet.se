@@ -62,7 +62,14 @@
                                     </ul>
                             </td></tr>
                     </g:if>
-            </table>                    
+            </table>
+            <p class="disclaimer_sfs" >
+                <g:if test="${docInfo.type in ['Forordning','KonsolideradGrundforfattning','Lag']}">
+                <strong>
+                    Observera att det kan förekomma fel i författningstexterna. Bilagor till författningarna saknas. Kontrollera därför alltid texten mot den tryckta versionen.
+                </strong>
+                </g:if>
+            </p>
             <!--            
             ********************************************************************************
               Innehåll 
