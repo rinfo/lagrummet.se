@@ -6,12 +6,12 @@ lagrummet.local.rinfo.view = "${grails.serverURL}/rinfo/"
 // Route rinfo-service requests through varnish
 lagrummet.rdl.service.baseurl="http://127.0.0.1:8383/"
 
-//lagrummet.rdl.service.baseurl="http://service.test.lagrummet.se/"
+lagrummet.rdl.service.baseurl="http://service.test.lagrummet.se/"
 lagrummet.rdl.rinfo.baseurl="http://rinfo.test.lagrummet.se/"
 
-lagrummet.onlyLocalSearch = true
-lagrummet.mainLayoutName = "mainSimpleSearch"
-lagrummet.mainEnglishLayoutName = "mainSimpleSearch"
+lagrummet.onlyLocalSearch = false
+//lagrummet.mainLayoutName = "mainSimpleSearch"
+//lagrummet.mainEnglishLayoutName = "mainSimpleSearch"
 
 dataSource.url = "jdbc:mysql://127.0.0.1:3306/lagrummet"
 dataSource.username = "lagrummet2"
