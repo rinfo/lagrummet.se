@@ -1287,6 +1287,10 @@ div.Section1 > div > table.MsoTableGrid {
 	text-align:left;
 }
 
+table.MsoTableGrid {
+	text-align:left;
+}
+
 /* =MEDIA-QUERIES */
 /* For all narrow devices and screens */
 
