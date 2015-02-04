@@ -105,6 +105,12 @@ class UserController {
 
     def delete = {
         withForm {
+            //Do not allow deleting of users due to requirements.
+            flash.message = message(code: 'user.delete.deactivated')
+            redirect(action: "show", id: params.id)
+            return
+
+
             def userInstance = User.get(params.id)
             if (userInstance) {
                 try {
