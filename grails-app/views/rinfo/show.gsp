@@ -42,7 +42,7 @@
 
               
                     <tmpl:labelRow label="Ikraft" value="${docInfo.ikrafttradandedatum}" />
-                    <tmpl:labelRow label="Målnummer" value="${docInfo.referatAvDomstolsavgorande?.malnummer}" />			
+                    <tmpl:labelRow label="Målnummer" value="${docInfo.referatAvDomstolsavgorande?.malnummer}" />
                     <tmpl:labelRow label="Målnummer" value="${docInfo.malnummer}" />	
                     <tmpl:labelRow label="Avgörandedatum" value="${docInfo.referatAvDomstolsavgorande?.avgorandedatum}" />		
                     <tmpl:labelRow label="Avgörandedatum" value="${docInfo.avgorandedatum}" />		
@@ -164,9 +164,14 @@
                                 <ul>
                                 </g:else>
                                         <li class="label">Titel:</li>
-                                        <g:each in="${item.rev?.referatAvDomstolsavgorande}" var="referat">
+                                        <g:if test="${item.rev?.referatAvDomstolsavgorande}">
+                                            <g:each in="${item.rev?.referatAvDomstolsavgorande}" var="referat">
                                                 <li><a href="${referat.iri?.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${referat.identifier}</a></li>
-                                        </g:each>
+                                            </g:each>
+                                        </g:if>
+                                        <g:else>
+                                        <li><a href="${item.iri?.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
+                                        </g:else>
                                         <li class="label">Målnummer:</li>
                                         <li>${item.malnummer}</li>
                                         <li class="label">Avgörandedatum:</li>
