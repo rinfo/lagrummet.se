@@ -10,8 +10,15 @@
           Rubrik
         ********************************************************************************
         -->
+        <g:if test="${docInfo.title instanceof List}">
+            <h1>${docInfo.identifier}</h1>
+            <g:each in="${docInfo.title}" var="title">
+                <h3>${title}</h3>
+            </g:each>
+        </g:if>
+        <g:else>
         <h1>${docInfo.title}</h1>  
-        
+        </g:else>
         
 	<div id="leftCol">
           <!--
@@ -25,12 +32,12 @@
                             <td class="label">Lagtext:</td><td>
                                             <g:each in="${docEntry.link}" var="link">
                                                     <g:if test="${link.@type == 'application/pdf'}">
-                                                            <a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}">${docInfo.title} <img src="${resource() }/images/PDF.png" class="pdfIcon" /></a>
+                                                            <a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + link.@href}">${docInfo.title instanceof List?docInfo.identifier:docInfo.title} <img src="${resource() }/images/PDF.png" class="pdfIcon" /></a>
                                                     </g:if>
                                             </g:each>
                                             <g:each in="${docEntry.content}" var="content">
                                                     <g:if test="${content.@type == 'application/pdf'}">
-                                                            <a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + content.@src}">${docInfo.title} <img src="${resource() }/images/PDF.png" class="pdfIcon" /></a>
+                                                            <a href="${grailsApplication.config.lagrummet.rdl.rinfo.baseurl + content.@src}">${docInfo.title instanceof List?docInfo.identifier:docInfo.title} <img src="${resource() }/images/PDF.png" class="pdfIcon" /></a>
                                                     </g:if>
                                             </g:each>
                             </td></tr>
@@ -220,6 +227,39 @@
                 </g:if>
                 <!--
                 ********************************************************************************
+                  Införs i
+                ********************************************************************************
+                -->
+                <g:if test="${docInfo.inforsI}">
+                        <g:set var="toggleId" value="toggleInforsI" />
+                        <g:set var="isExpanded" value="${params[(toggleId)]}" />
+                        <h3>Införs i (${docInfo.inforsI.size()})</h3>
+                        <span>Lag som ändrar:</span><br/>
+                        <span class="subtitle">${docInfo.identifier}</span>
+                        <g:each in="${docInfo.inforsI.sort{ it.ikrafttradandedatum }}" var="item" status="i">
+                                <g:if test="${i >= 4}">
+                                <ul class="${toggleId} ${isExpanded ? '' : 'hidden' }">
+                                </g:if>
+                                <g:else>
+                                <ul>
+                                </g:else>
+                                        <li class="label">Titel:</li>
+                                        <li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
+                                        <li class="label">Beteckning:</li>
+                                        <li>${item.identifier}</li>
+                                        <li class="label">Ikraft:</li>
+                                        <li>${item.ikrafttradandedatum}</li>
+                                </ul>
+                        </g:each>
+                        <g:if test="${docInfo.inforsI.size() > 4}">
+                        <g:toggleLink toggleId="${toggleId}" mapping="rinfo">
+                                        <span class="${isExpanded ? 'hidden' : '' }">Visa alla ${docInfo.inforsI.size()} införs i &#x25BC;</span>
+                                        <span class="${!isExpanded ? 'hidden' : '' }">Dölj införs i &#x25b2;</span>
+                        </g:toggleLink>
+                        </g:if>
+                </g:if>
+                <!--
+                ********************************************************************************
                   Referat av domstolsavgörande
                 ********************************************************************************
                 -->
@@ -260,6 +300,36 @@
                             </ul>
                         </g:each>
                         <g:if test="${docInfo.konsolideringsunderlag.size() > 4}">
+                            <g:toggleLink toggleId="${toggleId}" mapping="rinfo">
+                                <span class="${isExpanded ? 'hidden' : '' }">Visa alla ${konsolideringsunderlag.size()} konsolideringsunderlag &#x25BC;</span>
+                                <span class="${!isExpanded ? 'hidden' : '' }">Dölj konsolideringsunderlag &#x25b2;</span>
+                            </g:toggleLink>
+                        </g:if>
+                    </section>
+                </g:if>
+                <g:if test="${docInfo.rev.konsolideringsunderlag.findAll { it.title }}">
+                    <section id="register_konsolideringsunderlag">
+                        <g:set var="toggleId" value="toggleRegister" />
+                        <g:set var="isExpanded" value="${params[(toggleId)]}" />
+                        <g:set var="konsolideringsunderlag" value="${docInfo.rev.konsolideringsunderlag.findAll { it.title }}" />
+                        <h3>Konsolideringsunderlag</h3>
+                        <g:each in="${konsolideringsunderlag?.sort{ it.ikrafttradandedatum }}" var="item" status="i">
+                            <g:if test="${i >= 4}">
+                                <ul class="${toggleId} ${isExpanded ? '' : 'hidden' }">
+                            </g:if>
+                            <g:else>
+                                <ul>
+                            </g:else>
+                            <li class="label">Titel:</li>
+                            <li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
+                            <li class="label">SFS-nummer:</li>
+                            <li>${item.identifier}</li>
+                            <%-- omfattning saknas! --%>
+                            <li class="label">Utgiven:</li>
+                            <li>${item.issued}</li>
+                            </ul>
+                        </g:each>
+                        <g:if test="${docInfo.rev.konsolideringsunderlag.size() > 4}">
                             <g:toggleLink toggleId="${toggleId}" mapping="rinfo">
                                 <span class="${isExpanded ? 'hidden' : '' }">Visa alla ${konsolideringsunderlag.size()} konsolideringsunderlag &#x25BC;</span>
                                 <span class="${!isExpanded ? 'hidden' : '' }">Dölj konsolideringsunderlag &#x25b2;</span>
