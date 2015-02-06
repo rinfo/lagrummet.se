@@ -1262,6 +1262,10 @@ fieldset .inputGroup p {
 	padding: 0.5em 0 0 0;
 }
 
+.disclaimer_sfs {
+    font-style: italic;
+}
+
 
 /* =Log in special */
 #remember_me_holder label {
