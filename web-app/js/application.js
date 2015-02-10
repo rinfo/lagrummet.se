@@ -44,6 +44,8 @@ function instantSearch() {
 	var form = $("#search");
     var url = form.attr("action")+"?ajax=true";
     query = $("#query").attr("value").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if (ltrim(query) === "")
+        return;
 
     showRollingImageWaitForSearchResult();
 
@@ -120,6 +122,12 @@ jQuery(document).ready(function($) {
 			}
 		}
 	});
+
+    $('#search').submit(function() {
+        if (ltrim($("#query").val()) === "") {
+            return false;
+        }
+    });
 
     $("header #search #query").keypress(function(e) {
 		if (e.which == 13 && query == $(this).attr("value")) {
@@ -299,6 +307,12 @@ function sendGaPageView(url) {
         return;
     }
     ga('send', 'pageview', url);
+}
+
+function ltrim(str){
+    if(typeof(str) === 'undefined')
+        return str;
+    return str.replace(/^\s+/, "");
 }
 
 $(document).on("click",".searchLink", function() {
