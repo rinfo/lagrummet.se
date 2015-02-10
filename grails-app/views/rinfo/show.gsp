@@ -63,7 +63,7 @@
                             </td></tr>
                     </g:if>
             </table>
-            <g:if test="${docInfo.type in ['Forordning','KonsolideradGrundforfattning','Lag']}">
+            <g:if test="${docInfo.type in ['KonsolideradGrundforfattning']}">
             <p class="disclaimer_sfs" >
                 Texten kan innehålla fel. En del bilagor saknas. Kontrollera vid behov mot den tryckta versionen av lagen/förordningen.
             </p>
