@@ -237,6 +237,11 @@ a.step, .currentStep {
 #siteHeader > p.extSearchLabel {
 	float: right;
 	margin-bottom: 1em;
+	height: 16px;
+}
+
+#siteHeader > p.extSearchLabel a {
+    display:none;
 }
 
 #logo {
@@ -868,7 +873,7 @@ article.legalSources section.Foreskrifter h2 {
 }
 
 #query {
-	width: 295px;
+	width: 622px;
 	padding-left: 15px;
 	height: 25px;
 	font-weight: normal;
@@ -897,6 +902,7 @@ article.legalSources section.Foreskrifter h2 {
 
 #searchQuery {
 	position: relative;
+	width: 640px;
 }
 
 #searchSuggestions {
@@ -1289,6 +1295,10 @@ body#tinymce.mceContentBody {
 
 div.Section1 > div > table.MsoTableGrid {
 	text-align:left;
+}
+
+#searchCategory {
+    display: none;
 }
 
 /* =MEDIA-QUERIES */
