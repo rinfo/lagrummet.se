@@ -1,30 +1,15 @@
     <article id="searchResults" class="searchResults">
     	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
-    	<p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult?.totalResults, offset: 0, alias: alias]) }">Visa alla ${searchResult?.totalResults} träffar</a></p>
-    	
-        
-        <!--
-    	<g:if test="${searchResult?.errorMessages?.size > 0}">
-    		<div class="message">
-    			<ul>
-    				<g:each in="${searchResult.errorMessages}" var="message">
-    					<li>${message}</li>
-    				</g:each>
-    			</ul>
-    		</div>
-    	</g:if>
-        -->
-        
-        
+        <p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult?.totalResults, offset: 0, alias: alias]) }">Visa alla ${searchResult?.totalResults} träffar</a></p>
+
             <!--
             ********************************************************************************
               Sökresultat per kategori
             ********************************************************************************
             -->
-        
 		<g:if test="${searchResult?.totalResults}">
 			<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
-			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.items[(cat)].size()} av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> i <strong><g:message code="category.${cat}"/></strong></p>
+			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.items[(cat)].size()} av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> <strong><g:message code="category.${cat}"/></strong></p>
 			<g:if test="${synonyms}">
 			<p>Din sökning gav även träff på följande: <g:each in="${synonyms}"><span class="query">${it}</span>, </g:each></p>
 			<p>För att se sökresultatet utan associerade träffar, <a href="${createLink(mapping:'search', params:[query:query, cat:cat, alias:'false']) }">klicka här</a></p>
@@ -61,6 +46,9 @@
 			</table>
 			<g:paginate total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat, alias: alias]}"/>
 		</g:if>
+		<g:else>
+            <header><h1>Hittade inga sökresultat för ${query.encodeAsHTML()}</h1></header>
+		</g:else>
 	</article>
 	<div id="searchHelpPuff">
 		<strong>Hittade du inte vad du sökte?</strong>
