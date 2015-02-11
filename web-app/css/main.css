@@ -1293,25 +1293,23 @@ body#tinymce.mceContentBody {
     height: 60px;
     margin-left: 1px;
     padding: 5px;
-    #border: 1px solid #ddd;
-    border: 1px solid #873960;
+    /*border: 1px solid #ddd;
+    border: 1px solid #873960;*/
     display: none;
-    float: left;
-    background-color: #eee;
+    /*float: left;*/
+    background-color: #efefef;
+/*
     background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
     background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
     background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
     background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
     background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
     background-image: 	      linear-gradient(top, #ddd, #f7f7f7, #fff);
-}
-
-#cookie-banner strong {
-    color: #bd9b44;
+*/
 }
 
 #cookie-banner a {
-    float: left;
+    /*float: left;*/
     cursor: pointer;
     color: #006383;
 }
@@ -1324,12 +1322,43 @@ body#tinymce.mceContentBody {
     color: #006383;
 }
 
+#cookie-banner a:active {
+    color: #006383;
+}
+
+#cookie-button {
+    border: solid 1px #cdcdcd;
+    border-color: #cdcdcd;
+    background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
+    background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+}
+
+#cookie-button:hover {
+  	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image: 		  linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+}
+
+#cookie-button:active {
+  	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image: 	      linear-gradient(top, #fff, #f7f7f7, #ddd);
+}
+
+
 #cookie-banner input {
+    margin-top: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     cursor: pointer;
-    float: right;
+    /*float: left;*/
     -moz-border-radius: 3px;
     border-radius: 3px;
-    border: solid 1px;
+    border: solid 1px #cdcdcd;
 }
 
 
