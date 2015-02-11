@@ -1270,6 +1270,10 @@ fieldset .inputGroup p {
 	padding: 0.5em 0 0 0;
 }
 
+.disclaimer_sfs {
+    font-style: italic;
+}
+
 
 /* =Log in special */
 #remember_me_holder label {
@@ -1365,6 +1369,10 @@ body#tinymce.mceContentBody {
 /*change the margin abit for middle column to sync with puffs */
 #siteFooter ul:nth-child(2) > li {
 	margin-left: 5px;
+}
+
+div.Section1 > div > table.MsoTableGrid {
+	text-align:left;
 }
 
 /* =MEDIA-QUERIES */

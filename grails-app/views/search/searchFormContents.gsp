@@ -51,7 +51,9 @@
 							<p>${item.matches} ...</p>
 						</g:if>
 				</g:each>
-				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Ovrigt', alias:alias]) }">Visa fler träffar</a></li>
+				<g:if test="${searchResult.totalResultsPerCategory['Ovrigt'] > searchResult.maxItemsPerCategory}">
+				  <li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Ovrigt', alias:alias]) }">Visa fler träffar</a></li>
+				</g:if>
 			</ul>
 			</g:if>
 			
@@ -81,7 +83,9 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }">Visa fler träffar</a></li>
+				<g:if test="${searchResult.totalResultsPerCategory['Propositioner'] > searchResult.maxItemsPerCategory}">
+				    <li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }">Visa fler träffar</a></li>
+				</g:if>
 			</ul>
 			</g:if>
 
@@ -115,7 +119,9 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Rattsfall', alias:alias]) }">Visa fler träffar</a></li>
+				<g:if test="${searchResult.totalResultsPerCategory['Rattsfall'] > searchResult.maxItemsPerCategory}">
+				    <li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Rattsfall', alias:alias]) }">Visa fler träffar</a></li>
+				</g:if>
 			</ul>
 			</g:if>
 			
@@ -156,7 +162,9 @@
 						</g:if>
 						</li>
 				</g:each>
-				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Lagar', alias:alias]) }">Visa fler träffar</a></li>
+				<g:if test="${(searchResult.totalResultsPerCategory['Lagar']> searchResult.maxItemsPerCategory)}">
+				    <li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Lagar', alias:alias]) }">Visa fler träffar</a></li>
+				</g:if>
 			</ul>
 			</g:if>
 			
@@ -196,7 +204,9 @@
 						</g:if>					
 					</li>
 				</g:each>
-				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }">Visa fler träffar</a></li>
+				<g:if test="${searchResult.totalResultsPerCategory['Foreskrifter'] > searchResult.maxItemsPerCategory}">
+				    <li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }">Visa fler träffar</a></li>
+				</g:if>
 			</ul>
 			</g:if>
 
@@ -227,7 +237,9 @@
 						</g:if>
 						<p class="type">${item.identifier}</p></li>
 				</g:each>
-				<li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Utredningar', alias:alias]) }">Visa fler träffar</a></li>
+				<g:if test="${searchResult.totalResultsPerCategory['Utredningar'] > searchResult.maxItemsPerCategory}">
+				    <li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Utredningar', alias:alias]) }">Visa fler träffar</a></li>
+				</g:if>
 			</ul>
 			</g:if>
 			
