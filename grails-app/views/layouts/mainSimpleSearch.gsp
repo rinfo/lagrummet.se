@@ -20,10 +20,10 @@
     </head>
     <body>
             <div id="cookie-banner">
-                På lagrummet.se använder cookies för att fungera på ett bra sätt. Genom att välja "Jag accepterar cookies" samtycker du till att cookies används. Vill du neka till cookies kan du själv stänga av funktionen via din webbläsares säkerhetsinställningar.
-                <a style="cursor: pointer;" href="om-webbplatsen/om-kakor" id="more-cookie-text">Mer information om cookies</a>
+                Lagrummet.se använder kakor (cookies) för statistik och sökfunktion.
+                <a style="cursor: pointer;" href="om-webbplatsen/om-kakor" id="more-cookie-text">Om kakor och hur vi använder dem</a>
                 <br>
-                <input type="button" class="cookie-button" id="cookie-button" value="Jag accepterar cookies" />
+                <input type="button" class="cookie-button" id="cookie-button" value="Jag accepterar kakor" />
             </div>
             <div id="logo">
                     <a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle ?: "lagrummet<span class='hlight'>.se</span>"}</a>

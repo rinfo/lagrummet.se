@@ -67,16 +67,21 @@ jQuery(document).ready(function($) {
 	// check user accept cookie
     if (navigator.cookieEnabled && getCookie("userAcceptCookie")=="") {
         var cookieBannerHeight = $('#cookie-banner').outerHeight() + 4;
-        $('#primaryNavigation').css('top', (cookieBannerHeight+60)+'px');
-        $('#siteHeader').css('top', cookieBannerHeight+'px');
-        $('#content').css('top', cookieBannerHeight+'px');
-        $('#logo').css('margin-top', cookieBannerHeight+'px');
+        $('body').css('margin-top', (cookieBannerHeight+10)+'px');
+
+//        $('#primaryNavigation').css('top', (cookieBannerHeight+60)+'px');
+//        $('#siteHeader').css('top', cookieBannerHeight+'px');
+//        $('#content').css('top', cookieBannerHeight+'px');
+//        $('#logo').css('margin-top', cookieBannerHeight+'px');
+
         $('#cookie-button').click(function() {
             $('#cookie-banner').hide();
-            $('#primaryNavigation').css('top', '60px');
-            $('#siteHeader').css('top', '0px');
-            $('#content').css('top', '0px');
-            $('#logo').css('margin-top', '0px');
+            $('body').css('margin-top', '0px');
+
+//            $('#primaryNavigation').css('top', '60px');
+//            $('#siteHeader').css('top', '0px');
+//            $('#content').css('top', '0px');
+//            $('#logo').css('margin-top', '0px');
             setCookie("userAcceptCookie", "true", 100);
             console.log("Cookies accepted by user.")
         })

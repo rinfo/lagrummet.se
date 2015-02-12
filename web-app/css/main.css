@@ -1291,16 +1291,15 @@ body#tinymce.mceContentBody {
 }
 
 #cookie-banner {
+    width: 969px;
+    top: -70px;
     position: absolute;
     z-index: 20;
     margin-top: 4px;
-    height: 60px;
+    height: 50px;
     margin-left: 1px;
     padding: 5px;
-    /*border: 1px solid #ddd;
-    border: 1px solid #873960;*/
     display: none;
-    /*float: left;*/
     background-color: #efefef;
 /*
     background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
@@ -1333,29 +1332,40 @@ body#tinymce.mceContentBody {
 #cookie-button {
     border: solid 1px #cdcdcd;
     border-color: #cdcdcd;
+    background-color: white;
+/*
     background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
     background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+*/
 }
 
 #cookie-button:hover {
+    border-color: #cdcdcd;
+    background-color: #dadada;
+/*
   	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
   	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
   	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
   	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
   	background-image: 		  linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+*/
 }
 
 #cookie-button:active {
+    border-color: grey;
+    background-color: white;
+/*
   	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
   	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
   	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
   	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
   	background-image: 	      linear-gradient(top, #fff, #f7f7f7, #ddd);
+*/
 }
 
 
 #cookie-banner input {
-    margin-top: 2px;
+    margin-top: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
     cursor: pointer;
@@ -1363,6 +1373,7 @@ body#tinymce.mceContentBody {
     -moz-border-radius: 3px;
     border-radius: 3px;
     border: solid 1px #cdcdcd;
+    background-color: white;
 }
 
 
