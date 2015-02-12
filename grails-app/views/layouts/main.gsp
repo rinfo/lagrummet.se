@@ -45,7 +45,7 @@
                                     </g:each> -->
                                     </select>
                             </div>
-                            <div class="input" id="searchQuery"><g:textField name="query" autocomplete="off"  maxlength="${grailsApplication.config.lagrummet.search.maxLength}" placeholder="Skriv ditt sökord här för att söka på lagrummet och bland anslutna rättskällor"/><ul id="searchSuggestions"></ul></div>
+                            <div class="input" id="searchQuery"><g:textField name="query" autocomplete="off"  maxlength="${grailsApplication.config.lagrummet.search.maxLength}" placeholder="Sök bland lagar & förordningar, domstolars rättspraxis och ur texter på lagrummet.se"/><ul id="searchSuggestions"></ul></div>
                             <g:submitButton name="searchSubmit" value="Sök"/>
                     </g:form>
                     <p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
