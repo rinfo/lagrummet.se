@@ -7,18 +7,16 @@
           Tekniskt felmeddelande        
         ********************************************************************************
         -->
-        <!--
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
-    				<g:each in="${searchResult.errorMessages}" var="error">
+    				<g:each in="${searchResult.errorMessages.unique()}" var="error">
     					<li><g:message code="${error}" /></li>
     				</g:each>
     			</ul>
     		</div>
     	</g:if>
-        -->
-        
+
         
     	<g:if test="${query}">
 		<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
