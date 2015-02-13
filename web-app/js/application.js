@@ -51,7 +51,7 @@ function instantSearch() {
 
 	$.post(url, form.serialize(), function(data) {
 	    if (data) {
-            searchSuggestions(data);
+            //searchSuggestions(data); ignore search results
             try {
                 $("#dynamicSearchResults").html(data.dynamicSearchResults);
             } catch (e) {
