@@ -310,6 +310,7 @@ a.print:visited {
 /* =CONTENT WRAPPER */
 #content {
 	position: relative;
+	top: 50px;
 	left: 220px;
 	margin-left: 40px;
 	width: 720px;
@@ -952,7 +953,7 @@ article.legalSources section.Foreskrifter h2 {
 
 .searchResults {
 	padding-top: 0;
-	border-top: 1px solid #eee;
+	/* border-top: 1px solid #eee; */
 	overflow: auto;
 }
 
