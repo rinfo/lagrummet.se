@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-    ServerName stage.lagrummet.se.se
+    ServerName stage.lagrummet.se
     ServerSignature On
 
     ProxyPassMatch ^/robots\.txt$ !

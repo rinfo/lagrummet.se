@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-    ServerName viktor.lagrummet.se.se
+    ServerName viktor.lagrummet.se
     ServerSignature On
 
     ProxyPassMatch ^/robots\.txt$ !

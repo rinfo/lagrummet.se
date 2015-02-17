@@ -1,6 +1,6 @@
 //package sysconf.test.etc.lagrummet.se
 
-grails.serverURL = "http://stage.lagrummet.se.se"
+grails.serverURL = "http://stage.lagrummet.se"
 lagrummet.local.rinfo.view = "${grails.serverURL}/rinfo/"
 
 // Route rinfo-service requests through varnish
@@ -10,7 +10,7 @@ lagrummet.mainLayoutName = "mainSimpleSearch"
 lagrummet.mainEnglishLayoutName = "mainSimpleSearch"
 
 //lagrummet.rdl.service.baseurl="http://service.test.lagrummet.se/"
-lagrummet.rdl.rinfo.baseurl="http://rinfo.stage.lagrummet.se.se/"
+lagrummet.rdl.rinfo.baseurl="http://rinfo.stage.lagrummet.se/"
 
 dataSource.url = "jdbc:mysql://127.0.0.1:3306/lagrummet"
 dataSource.username = "lagrummet2"
