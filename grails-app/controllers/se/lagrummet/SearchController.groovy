@@ -83,7 +83,7 @@ class SearchController {
 		} else if(query) {
 			searchResult = searchService.plainTextSearch(queries, Category.getFromString(params.cat), null, null)
 		}
-		
+
 		new Search(query: query, category: params.cat).save()
 
         def dynamicSearchResults = selectAndRenderContents(query, searchResult, offset, synonyms, params.ajax.asBoolean())

@@ -44,7 +44,7 @@
 					</tr>
 				</g:each>
 			</table>
-			<g:paginate total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat, alias: alias]}"/>
+			<g:paginate offset="${offset}" controller="search" total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat, alias: alias, offset: offset]}"/>
 		</g:if>
 		<g:else>
             <header><h1>Hittade inga sökresultat för ${query.encodeAsHTML()}</h1></header>
