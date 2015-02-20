@@ -914,6 +914,11 @@ article.legalSources section.Foreskrifter h2 {
 	width: 640px;
 }
 
+.match {
+    font-style: italic;
+    background-color: #FFFFCC;
+}
+
 #searchSuggestions {
 	position: absolute;
 	display: none;
