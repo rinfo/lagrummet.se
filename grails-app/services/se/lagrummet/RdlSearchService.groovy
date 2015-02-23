@@ -11,7 +11,7 @@ class RdlSearchService {
 
     static transactional = true
 	
-	def availableCategories = [Category.RATTSFALL, Category.MYNDIGHETERS_FORESKRIFTER, Category.PROPOSITIONER, Category.UTREDNINGAR]
+	def availableCategories = [Category.RATTSFALL, Category.MYNDIGHETERS_FORESKRIFTER, Category.PROPOSITIONER, Category.UTREDNINGAR, Category.LAGAR]
 	def latestConsolidatedCategories = [Category.LAGAR]
 	
     public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
@@ -35,7 +35,7 @@ class RdlSearchService {
             queryBuilder.setParam("_stats", "on")
 
             result = searchWithQuery(queryBuilder.getQueryParams())
-            result.resetCategory(Category.LAGAR)
+            //result.resetCategory(Category.LAGAR)
         }
         return result
 	}
