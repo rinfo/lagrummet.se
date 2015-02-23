@@ -128,22 +128,26 @@ class RdlSearchService {
 					}
 					if(json.statistics) {
 						searchResult.addStats(json.statistics.slices)
+
                         if(json.statistics.slices?.observations) {
-                            json.statistics.slices?.observations.items?.each { item ->
-                                def searchResultItem = new SearchResultItem(
-                                        title: item.title,
-                                        iri: item.iri,
-                                        issued: item.issued,
-                                        describedBy: item.describedby,
-                                        identifier: item.identifier,
-                                        matches: getBestMatch(item),
-                                        type: item.type,
-                                        ikrafttradandedatum: item.ikrafttradandedatum,
-                                        malnummer: item.malnummer
-                                )
-                                if("category".equals(resultListType)) {
-                                    searchResult.addItemByType(searchResultItem)
+                            json.statistics.slices?.observations[0].each { observation ->
+                                observation.items?.each { item ->
+                                    def searchResultItem = new SearchResultItem(
+                                            title: item.title,
+                                            iri: item.iri,
+                                            issued: item.issued,
+                                            describedBy: item.describedby,
+                                            identifier: item.identifier,
+                                            matches: getBestMatch(item),
+                                            type: item.type,
+                                            ikrafttradandedatum: item.ikrafttradandedatum,
+                                            malnummer: item.malnummer
+                                    )
+                                    if ("category".equals(resultListType)) {
+                                        searchResult.addItemByType(searchResultItem)
+                                    }
                                 }
+                                searchResult.totalResultsPerCategory[observation.term] = observation.count
                             }
                         }
 					}
