@@ -137,7 +137,7 @@
                 -->
                 <g:if test="${docInfo.rev?.upphaver}">
                         <h3>Upphävande författning</h3>
-                        <span>Författning som upphäver:</span><br/>
+                        <span>Författning som upphävs:</span><br/>
                         <span class="subtitle">${docInfo.title}</span>
                         <g:each in="${docInfo.rev.upphaver}" var="item" status="i">
                         <ul>
@@ -194,7 +194,7 @@
                         <g:set var="toggleId" value="toggleAndrar" />
                         <g:set var="isExpanded" value="${params[(toggleId)]}" />
                         <h3>Ändringsförfattningar (${docInfo.rev.andrar.size()})</h3>
-                        <span>Författning som ändrar:</span><br/>
+                        <span>Författning som ändras:</span><br/>
                         <span class="subtitle">${docInfo.title}</span>
                         <g:each in="${docInfo.rev.andrar.sort{ it.ikrafttradandedatum }}" var="item" status="i">
                                 <g:if test="${i >= 4}">
