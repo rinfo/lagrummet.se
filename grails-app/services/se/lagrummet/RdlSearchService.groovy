@@ -214,7 +214,7 @@ class RdlSearchService {
         def pickOrder = ['text','title','identifier']
 		def bestMatch = ""
         pickOrder.each {
-            if (item.matches?.containsKey(it)) {
+            if (item.matches instanceof Map && item.matches?.containsKey(it)) {
                 if(!bestMatch) {
                     bestMatch = item.matches[it].get(0)
                 }
