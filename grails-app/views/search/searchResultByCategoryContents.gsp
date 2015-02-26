@@ -18,6 +18,7 @@
 				<tr>
 					<th>Titel</th>
 					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
+					<g:elseif test="${cat = 'Rattsfall' }"><th>Referat/Dom</th></g:elseif>
 					<g:elseif test="${cat != 'Ovrigt' }"><th>Beteckning</th></g:elseif>
 				</tr>
 				<g:each in="${searchResult.items[(cat)]}" var="item">
