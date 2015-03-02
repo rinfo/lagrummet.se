@@ -7,18 +7,16 @@
           Tekniskt felmeddelande        
         ********************************************************************************
         -->
-        <!--
     	<g:if test="${searchResult?.errorMessages?.size > 0}">
     		<div class="message">
     			<ul>
-    				<g:each in="${searchResult.errorMessages}" var="error">
+    				<g:each in="${searchResult.errorMessages.unique()}" var="error">
     					<li><g:message code="${error}" /></li>
     				</g:each>
     			</ul>
     		</div>
     	</g:if>
-        -->
-        
+
         
     	<g:if test="${query}">
 		<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
@@ -61,12 +59,11 @@
                         ********************************************************************************
                             Propositioner och skrivelser                        
                         ********************************************************************************
-                        --> 		
+                        -->
+
+            <!-- Borttagen ur release
 			<p id="PropHead">
-				<!--
-                                  <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Propositioner', alias:alias]) }" class="catTitle">Propositioner och skrivelser</a> 
-                                 -->
-                                 <span class="catTitle">Propositioner och skrivelser</span>
+                <span class="catTitle">Propositioner och skrivelser</span>
 				<span class="count">(${searchResult.totalResultsPerCategory['Propositioner']})
 				<g:if test="${searchResult.items['Propositioner'].size() > 0 && searchResult.totalResultsPerCategory['Propositioner'] > searchResult.items['Propositioner'].size()}"> Visar de första ${searchResult.items['Propositioner'].size()}</g:if>				
 				</span>
@@ -88,7 +85,7 @@
 				</g:if>
 			</ul>
 			</g:if>
-
+            -->
                         
                        <!--
                         ********************************************************************************
@@ -217,11 +214,9 @@
                             Utredningar                     
                         ********************************************************************************
                         -->                         
+            <!-- Borttagen ur release
 			<p>
-                            <!--
-				<a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Utredningar', alias:alias]) }" class="catTitle">Utredningar</a>
-                             -->
-                             <span class="catTitle">Utredningar</span>
+                <span class="catTitle">Utredningar</span>
 				<span class="count">(${searchResult.totalResultsPerCategory['Utredningar']})
 				<g:if test="${searchResult.items['Utredningar'].size() > 0 && searchResult.totalResultsPerCategory['Utredningar'] > searchResult.items['Utredningar'].size()}"> Visar de första ${searchResult.items['Utredningar'].size()}</g:if>
 				</span>
@@ -242,6 +237,7 @@
 				</g:if>
 			</ul>
 			</g:if>
+			-->
 			
 		</div>
 		</g:if>

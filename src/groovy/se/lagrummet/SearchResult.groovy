@@ -5,12 +5,12 @@ class SearchResult {
 	Long totalResults = 0
 	def totalResultsPerCategory = [:]
 	Long maxItemsPerCategory = 4
-	def errorMessages = []
+    def errorMessages = []
 	def items = [:]
 	def itemsList = []
 	
 	def topHits = []
-	
+
 	public SearchResult() {
 		for(Category cat : Category.values()) {
 			items[(cat.toString())] = []
@@ -81,4 +81,5 @@ class SearchResult {
 	public void addTopHit(item) {
 		topHits.add(item)
 	}
+
 }

@@ -44,12 +44,14 @@ function instantSearch() {
 	var form = $("#search");
     var url = form.attr("action")+"?ajax=true";
     query = $("#query").attr("value").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if (ltrim(query) === "")
+        return;
 
     showRollingImageWaitForSearchResult();
 
 	$.post(url, form.serialize(), function(data) {
 	    if (data) {
-            searchSuggestions(data);
+            //searchSuggestions(data); ignore search results
             try {
                 $("#dynamicSearchResults").html(data.dynamicSearchResults);
             } catch (e) {
@@ -61,7 +63,32 @@ function instantSearch() {
 }
 
 jQuery(document).ready(function($) {
-	
+
+	// check user accept cookie
+    if (navigator.cookieEnabled && getCookie("userAcceptCookie")=="") {
+    //if (false) {
+        var cookieBannerHeight = $('#cookie-banner').outerHeight() + 4;
+        $('body').css('margin-top', (cookieBannerHeight+10)+'px');
+
+//        $('#primaryNavigation').css('top', (cookieBannerHeight+60)+'px');
+//        $('#siteHeader').css('top', cookieBannerHeight+'px');
+//        $('#content').css('top', cookieBannerHeight+'px');
+//        $('#logo').css('margin-top', cookieBannerHeight+'px');
+
+        $('#cookie-button').click(function() {
+            $('#cookie-banner').hide();
+            $('body').css('margin-top', '0px');
+
+//            $('#primaryNavigation').css('top', '60px');
+//            $('#siteHeader').css('top', '0px');
+//            $('#content').css('top', '0px');
+//            $('#logo').css('margin-top', '0px');
+            setCookie("userAcceptCookie", "true", 100);
+            console.log("Cookies accepted by user.")
+        })
+        $('#cookie-banner').show();
+    }
+
 	if($(".safeemail").length != 0) {
 		var coded = $(".safeemail").prop("href");
 		coded = coded.replace("mailto:", "");
@@ -120,6 +147,12 @@ jQuery(document).ready(function($) {
 			}
 		}
 	});
+
+    $('#search').submit(function() {
+        if (ltrim($("#query").val()) === "") {
+            return false;
+        }
+    });
 
     $("header #search #query").keypress(function(e) {
 		if (e.which == 13 && query == $(this).attr("value")) {
@@ -301,7 +334,34 @@ function sendGaPageView(url) {
     ga('send', 'pageview', url);
 }
 
+function ltrim(str){
+    if(typeof(str) === 'undefined')
+        return str;
+    return str.replace(/^\s+/, "");
+}
+
 $(document).on("click",".searchLink", function() {
     var url = $(location).attr('href');
     sendGaPageView(url);
 });
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "; expires="+d.toUTCString();
+    var maxAge = "; max-age="+(exdays*24*60*60);
+    var myCookie = cname + "=" + cvalue + maxAge + expires + "; path=/;";
+    console.log("Set cookie '"+myCookie+"'");
+    document.cookie = myCookie;
+}

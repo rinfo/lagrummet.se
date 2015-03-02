@@ -235,11 +235,18 @@ a.step, .currentStep {
 }
 
 #siteHeader > p.extSearchLabel {
+    margin-top: 20px;
 	float: right;
 	margin-bottom: 1em;
+	height: 16px;
+}
+
+#siteHeader > p.extSearchLabel a {
+    display:none;
 }
 
 #logo {
+    position: absolute;
     width: 220px;
     float: left;
     margin: 0;
@@ -265,7 +272,8 @@ a.step, .currentStep {
 }
 
 #sitelinks {
-    position: absolute;
+    position: relative;
+    float: right;
     top: 0px;
     right: 0px;
 }
@@ -288,9 +296,11 @@ a.step, .currentStep {
 
 #breadcrumbs {
 	width: auto;
-	top: 2em;
-	position: absolute;
+	top: 40px;
+	position: relative;
 	font: 1.2em 'Century Gothic', sans-serif;
+    float: left;
+    margin-bottom: 20px;
 }
 
 a.print:visited {
@@ -300,6 +310,7 @@ a.print:visited {
 /* =CONTENT WRAPPER */
 #content {
 	position: relative;
+	top: 50px;
 	left: 220px;
 	margin-left: 40px;
 	width: 720px;
@@ -740,6 +751,9 @@ article.legalSources section.Foreskrifter h2 {
 	color: #585858;
 	height: 40px;
 	clear: both;
+    position: relative;
+    float: left;
+    top: 25px;
 }
 
 #search > *{
@@ -868,7 +882,7 @@ article.legalSources section.Foreskrifter h2 {
 }
 
 #query {
-	width: 295px;
+	width: 622px;
 	padding-left: 15px;
 	height: 25px;
 	font-weight: normal;
@@ -897,6 +911,12 @@ article.legalSources section.Foreskrifter h2 {
 
 #searchQuery {
 	position: relative;
+	width: 640px;
+}
+
+.match {
+    font-style: italic;
+    background-color: #FFFFCC;
 }
 
 #searchSuggestions {
@@ -938,7 +958,7 @@ article.legalSources section.Foreskrifter h2 {
 
 .searchResults {
 	padding-top: 0;
-	border-top: 1px solid #eee;
+	/* border-top: 1px solid #eee; */
 	overflow: auto;
 }
 
@@ -1262,6 +1282,10 @@ fieldset .inputGroup p {
 	padding: 0.5em 0 0 0;
 }
 
+.disclaimer_sfs {
+    font-style: italic;
+}
+
 
 /* =Log in special */
 #remember_me_holder label {
@@ -1278,6 +1302,93 @@ body#tinymce.mceContentBody {
 	width: 100%;
 }
 
+#cookie-banner {
+    width: 969px;
+    top: -70px;
+    position: absolute;
+    z-index: 20;
+    margin-top: 4px;
+    height: 50px;
+    margin-left: 1px;
+    padding: 5px;
+    display: none;
+    background-color: #efefef;
+/*
+    background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
+    background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image: 	      linear-gradient(top, #ddd, #f7f7f7, #fff);
+*/
+}
+
+#cookie-banner a {
+    /*float: left;*/
+    cursor: pointer;
+    color: #006383;
+}
+
+#cookie-banner a:hover {
+    color: #006383;
+}
+
+#cookie-banner a:visited {
+    color: #006383;
+}
+
+#cookie-banner a:active {
+    color: #006383;
+}
+
+#cookie-button {
+    border: solid 1px #cdcdcd;
+    border-color: #cdcdcd;
+    background-color: white;
+/*
+    background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
+    background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+*/
+}
+
+#cookie-button:hover {
+    border-color: #cdcdcd;
+    background-color: #dadada;
+/*
+  	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image: 		  linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+*/
+}
+
+#cookie-button:active {
+    border-color: grey;
+    background-color: white;
+/*
+  	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image: 	      linear-gradient(top, #fff, #f7f7f7, #ddd);
+*/
+}
+
+
+#cookie-banner input {
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    /*float: left;*/
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 1px #cdcdcd;
+    background-color: white;
+}
+
+
 /*change the margin abit for middle column to sync with puffs */
 #siteFooter ul:nth-child(2) > li {
 	margin-left: 5px;
@@ -1285,6 +1396,10 @@ body#tinymce.mceContentBody {
 
 div.Section1 > div > table.MsoTableGrid {
 	text-align:left;
+}
+
+#searchCategory {
+    display: none;
 }
 
 /* =MEDIA-QUERIES */
