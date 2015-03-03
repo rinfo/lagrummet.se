@@ -1,6 +1,8 @@
     <article id="searchResults" class="searchResults">
     	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
+    	<g:if test="${offset!=0||searchResult.items[(cat)].size()!=searchResult.totalResults}">
         <p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult?.totalResults, offset: 0, alias: alias]) }">Visa alla ${searchResult?.totalResults} träffar</a></p>
+        </g:if>
 
             <!--
             ********************************************************************************
@@ -18,6 +20,7 @@
 				<tr>
 					<th>Titel</th>
 					<g:if test="${cat == 'Lagar' }"><th>SFS-nummer</th></g:if>
+					<g:elseif test="${cat = 'Rattsfall' }"><th>Referat/Dom</th></g:elseif>
 					<g:elseif test="${cat != 'Ovrigt' }"><th>Beteckning</th></g:elseif>
 				</tr>
 				<g:each in="${searchResult.items[(cat)]}" var="item">
@@ -44,7 +47,9 @@
 					</tr>
 				</g:each>
 			</table>
+			<g:if test="${offset!=0||searchResult.items[(cat)].size()!=searchResult.totalResults}">
 			<g:paginate offset="${offset}" controller="search" total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat, alias: alias, offset: offset]}"/>
+			</g:if>
 		</g:if>
 		<g:else>
             <header><h1>Hittade inga sökresultat för ${query.encodeAsHTML()}</h1></header>

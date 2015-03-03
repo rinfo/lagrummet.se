@@ -232,7 +232,7 @@ class RdlSearchService {
 	}
 	
 	public String getBestMatch(item) {
-        def pickOrder = ['text','title','identifier']
+        def pickOrder = ['title','referatrubrik', 'text', 'identifier']
 		def bestMatch = ""
         pickOrder.each {
             if (item.matches instanceof Map && item.matches?.containsKey(it)) {

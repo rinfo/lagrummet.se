@@ -1,6 +1,6 @@
-#search .input {height: 30px;width: 312px;padding: 5px 0 5px 0;border: 1px solid #ddd;display: block;float: left;background-color: #eee;}
+#search .input {height: 30px;width: 640px;padding: 5px 0 5px 0;border: 1px solid #ddd;display: block;float: left;background-color: #eee;}
 #query {
-	*padding-left: 1em; 
+	*padding-left: 1em;
 }
 #search {z-index: 12;
 	*top: 5em;
@@ -19,8 +19,8 @@
 #searchCurrentCategory {
 	left: 10px;
 }
-#search #query {padding: 0; margin: 2px 5px; width:290px;}
-#search #searchCategory {z-index: 11; position: relative; padding: 5px 5px 5px 10px;}
+#search #query {padding: 0; margin: 2px 5px; width: 622px;}
+#search #searchCategory {z-index: 11; position: relative; padding: 5px 5px 5px 10px;display: none;}
 #search div.input, #searchSubmit {
 	background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
 }
@@ -28,6 +28,10 @@
 #siteHeader > p.extSearchLabel {
 	*position: relative;
 	*top: 5em;
+	height: 16px;
+}
+#siteHeader > p.extSearchLabel a {
+    display:none;
 }
 #siteFooter ul {
 	*width: 30%;	
@@ -45,3 +49,8 @@ ul.dropdown ul li {
 	} 
 
 #pageTree > ul > li.metaPage li.metaPage ul li a {font-weight: normal;}
+
+#searchQuery {
+    width: 640px;
+}
+

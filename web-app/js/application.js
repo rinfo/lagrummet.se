@@ -66,6 +66,7 @@ jQuery(document).ready(function($) {
 
 	// check user accept cookie
     if (navigator.cookieEnabled && getCookie("userAcceptCookie")=="") {
+    //if (false) {
         var cookieBannerHeight = $('#cookie-banner').outerHeight() + 4;
         $('body').css('margin-top', (cookieBannerHeight+10)+'px');
 
@@ -359,6 +360,8 @@ function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "; expires="+d.toUTCString();
-    var maxAge = "; max-age="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + expires + maxAge + "; path=/;";
+    var maxAge = "; max-age="+(exdays*24*60*60);
+    var myCookie = cname + "=" + cvalue + maxAge + expires + "; path=/;";
+    console.log("Set cookie '"+myCookie+"'");
+    document.cookie = myCookie;
 }
