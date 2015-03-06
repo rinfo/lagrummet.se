@@ -281,7 +281,10 @@
                                 </ul>
                         </g:each>
                 </g:if>
+
+
                 <%-- Underlag/register för konsolidering --%>
+                <%-- I framtiden skall detta förhoppningsvis synas
                 <g:if test="${docInfo.konsolideringsunderlag.findAll { it.title }}">
                     <section id="register_konsolideringsunderlag">
                         <g:set var="toggleId" value="toggleRegister" />
@@ -342,6 +345,7 @@
                         </g:if>
                     </section>
                 </g:if>
+                --%>
         </aside>
   </article>
 
