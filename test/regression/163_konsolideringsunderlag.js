@@ -19,8 +19,8 @@ casper.test.begin('Test that when displaying a konsolidering the underlag should
 
     casper.then(function() {
         this.test.assertEval(function() {
-            return __utils__.findAll('#register_konsolideringsunderlag > ul').length >= 16;
-        }, 'There should be >= 16 underlag for 1999:175 2011-05-11');
+            return __utils__.findAll('#register_konsolideringsunderlag > ul').length === 0;
+        }, 'Konsolideringsunderlag should not be displayed');
     });
 
     casper.run(function() {test.done();});
