@@ -302,7 +302,7 @@
                             <li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
                             <li class="label">SFS-nummer:</li>
                             <li>${item.identifier}</li>
-                            <%-- omfattning saknas! --%>
+                            <!-- omfattning saknas! -->
                             <li class="label">Ikraft:</li>
                             <li>${item.ikrafttradandedatum}</li>
                             </ul>
@@ -332,7 +332,7 @@
                             <li><a href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title}</a></li>
                             <li class="label">SFS-nummer:</li>
                             <li>${item.identifier}</li>
-                            <%-- omfattning saknas! --%>
+                            <!-- omfattning saknas! -->
                             <li class="label">Utgiven:</li>
                             <li>${item.issued}</li>
                             </ul>
