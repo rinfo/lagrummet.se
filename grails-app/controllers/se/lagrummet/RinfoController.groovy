@@ -63,6 +63,14 @@ class RinfoController {
                                             content: docContent,
                                             docEntry: docEntry])
                 intermediate.log("Render")
+
+                log.info("***********************' docInfo ***************************")
+                log.info(docInfo.toString(2))
+                log.info("***********************' docContent ***************************")
+                log.info(docContent)
+                log.info("***********************' docEntry ***************************")
+                log.info(docEntry)
+
             } catch (HttpResponseException e) {
                 log.error("Failed to open "+docPath, e)
                 forward(controller: "page", action: "error", params: [errorId: "404"])
