@@ -49,7 +49,7 @@ class SearchResult {
             try {
 			    totalResultsPerCategory[(category)] += otherCount
             } catch (Exception e) {
-                log.error "Failed do concatinate results", e
+                log.error "Failed do concatenate results", e
                 errorMessages.add "Något gick fel. Det är inte säkert att sökresultatet är komplett."
             }
 		}
