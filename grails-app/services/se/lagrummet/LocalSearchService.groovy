@@ -4,6 +4,9 @@ import org.compass.core.CompassQuery;
 
 class LocalSearchService {
 
+    public static final String regex = "([+\\-|&!\\(\\){}\\[\\]\\/^~*?:\\\\]|[&\\|]{2})";
+    public static final String replacement = "\\\\\$1";
+
     static transactional = true
 	
     public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
@@ -39,7 +42,7 @@ class LocalSearchService {
                     def result = Page.search (  {
                             must{
                                 query.each { qs ->
-                                    queryString(qs)
+                                    queryString(qs.replaceAll(regex, replacement))
                                 }
                             }
                             must(term("status", "published"))
