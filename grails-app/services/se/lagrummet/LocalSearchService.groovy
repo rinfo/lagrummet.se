@@ -70,7 +70,8 @@ class LocalSearchService {
                 }
                 catch(e) {
                     if (e in org.compass.core.engine.SearchEngineQueryParseException) {
-                        searchResult.errorMessages.add("error.ParseException")
+                        log.error "Parse exeeption", e
+                        searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
                     } else {
                         log.error("DB search failed", e)
                         searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")

@@ -46,7 +46,12 @@ class SearchResult {
 		}
 		
 		other.totalResultsPerCategory.each { category, otherCount ->
-			totalResultsPerCategory[(category)] += otherCount
+            try {
+			    totalResultsPerCategory[(category)] += otherCount
+            } catch (Exception e) {
+                log.error "Failed do concatinate results", e
+                errorMessages.add "Något gick fel. Det är inte säkert att sökresultatet är komplett."
+            }
 		}
 		
 		errorMessages.addAll(other.errorMessages)
