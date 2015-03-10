@@ -70,6 +70,7 @@ class LocalSearchService {
                             searchResult.addTopHit(searchResultItem)
                         }
                     }
+                    searchResult.itemsList = searchResult.items['Ovrigt'] // Lapptäcke...
                 }
                 catch(e) {
                     if (e in org.compass.core.engine.SearchEngineQueryParseException) {

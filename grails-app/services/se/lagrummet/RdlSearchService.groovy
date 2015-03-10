@@ -34,7 +34,7 @@ class RdlSearchService {
             queryBuilder.setIkraftIfExists("")
             queryBuilder.setParam("_stats", "on")
 
-            result = searchWithQuery(queryBuilder.getQueryParams())
+            result = searchWithQuery(queryBuilder.getQueryParams(), cat ? 'list' : 'category')
             //result.resetCategory(Category.LAGAR)
         }
         return result
@@ -89,6 +89,7 @@ class RdlSearchService {
 	
 	
 	public SearchResult searchWithQuery(Map queryParams, String resultListType = 'category') {
+        println "se.lagrummet.RdlSearchService.searchWithQuery resultListType=${resultListType}"
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
 		def http = new HTTPBuilder()
@@ -103,29 +104,34 @@ class RdlSearchService {
 				
 				response.success = {resp, json ->
 					searchResult.totalResults = json.totalResults
-					
-					json.items.eachWithIndex { item, i ->
+                    println "se.lagrummet.RdlSearchService.searchWithQuery *************************************************************************************************"
+					//json.items.eachWithIndex { item, i ->
+                    json.items.each { item ->
 						def searchResultItem = new SearchResultItem(
-														title: item.title,
+                                                        title: prefereMatchBeforeOriginal(item,'title'),
 														iri: item.iri,
 														issued: item.issued,
 														describedBy: item.describedby,
-														identifier: item.identifier,
-														matches: getBestMatch(item),
+                                                        identifier: prefereMatchBeforeOriginal(item,'identifier'),
+														matches: prefereMatchBeforeOriginal(item,'text','referatrubrik'), //getBestMatch(item),
 														type: item.type,
 														ikrafttradandedatum: item.ikrafttradandedatum,
-														malnummer: item.malnummer
+														malnummer: item.malnummer,
+                                                        text: prefereMatchBeforeOriginal(item,'text','referatrubrik'),
 														)
-						if("category".equals(resultListType)) {
+						/*if("category".equals(resultListType)) {
 							searchResult.addItemByType(searchResultItem)
-						} else if("list".equals(resultListType)) {
+						} else*/
+                        if ("list".equals(resultListType)) {
 							searchResult.addItem(searchResultItem)
-						}
+						} else
+                            println "se.lagrummet.RdlSearchService.searchWithQuery IGNORED ${item.identifier}"
 						/*
 						if(i < 5) {
 							searchResult.addTopHit(searchResultItem)
 						}*/
 					}
+                    println "se.lagrummet.RdlSearchService.searchWithQuery ************************************* STATISTICS **************************************************"
 					if(json.statistics) {
 						searchResult.addStats(json.statistics.slices)
 
@@ -133,15 +139,16 @@ class RdlSearchService {
                             json.statistics.slices?.observations[0].each { observation ->
                                 observation.items?.each { item ->
                                     def searchResultItem = new SearchResultItem(
-                                            title: item.title,
+                                            title: prefereMatchBeforeOriginal(item,'title'),
                                             iri: item.iri,
                                             issued: item.issued,
                                             describedBy: item.describedby,
-                                            identifier: item.identifier,
+                                            identifier: prefereMatchBeforeOriginal(item,'identifier'),
                                             matches: getBestMatch(item),
                                             type: item.type,
                                             ikrafttradandedatum: item.ikrafttradandedatum,
-                                            malnummer: item.malnummer
+                                            malnummer: item.malnummer,
+                                            text: prefereMatchBeforeOriginal(item,'text','referatrubrik'),
                                     )
                                     if ("category".equals(resultListType)) {
                                         searchResult.addItemByType(searchResultItem)
@@ -151,6 +158,7 @@ class RdlSearchService {
                             }
                         }
 					}
+                    println "se.lagrummet.RdlSearchService.searchWithQuery ****************************************** END ***************************************************"
 	
 				}
 				
@@ -243,5 +251,27 @@ class RdlSearchService {
         }
 		return bestMatch
 	}
-	
+
+    public String prefereMatchBeforeOriginal(def item, String name) {
+        return item.matches instanceof Map && item.matches?.containsKey(name)?item.matches[name].get(0):item[name];
+    }
+
+    public String prefereMatchBeforeOriginal(def item, String name, String alternate) {
+        println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal ${name} ${alternate}"
+        println item
+        if (item.matches instanceof Map && item.matches?.containsKey(name)) {
+            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal matches ${item.matches[name]}"
+            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal *********************"
+            println item.matches[name].get(0)
+            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal *********************"
+            return item.matches[name].get(0)
+        }
+        if (item.matches instanceof Map && item.matches?.containsKey(alternate)) {
+            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal alternate ${item.matches[alternate].get(0)}"
+            return item.matches[alternate].get(0)
+        }
+        if (item.containsKey(name))
+            return item[name]
+        return item[alternate]
+    }
 }

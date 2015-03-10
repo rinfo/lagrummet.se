@@ -150,9 +150,12 @@
 				<g:each in="${searchResult.items['Lagar']}" var="item">
 					<li>
 						<p><a ${searchLink} href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
-						<g:if test="${item.matches}">
+						<%-- <g:if test="${item.matches}">
 							<p>${item.matches} ...</p>
-						</g:if>
+						</g:if> --%>
+						<g:if test="${item.text}">
+        				    <p>${item.text} ...</p>
+        				</g:if>
 						<p class="type">${item.identifier}</p>
 						<g:if test="${item.ikrafttradandedatum}">
 							<p class="type">Ikraft: ${item.ikrafttradandedatum}</p>

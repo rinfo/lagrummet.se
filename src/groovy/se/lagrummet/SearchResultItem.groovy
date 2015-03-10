@@ -12,4 +12,6 @@ class SearchResultItem {
 	String ikrafttradandedatum
 	String malnummer
 
+    String text
+
 }

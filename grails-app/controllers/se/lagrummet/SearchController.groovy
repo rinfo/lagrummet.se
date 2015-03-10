@@ -12,6 +12,7 @@ class SearchController {
     static int STANDARD_QUERY_LIMIT_INPUT_LENGTH = 1000
 
 	def searchService
+    def localSearchService
 	def rdlSearchService
 	def synonymService
 	def springSecurityService
@@ -74,8 +75,11 @@ class SearchController {
 				queries.addAll(synonyms)
 				params.alias = null
 		}
-		
-		if(query && params.cat && params.cat != "Alla")  {
+		if (query && params.cat && params.cat == "Ovrigt") {
+            offset = parseInt(params.offset, 0)
+            def itemsPerPage = parseInt(params.max, 20)
+            searchResult = localSearchService.plainTextSearch(queries, Category.OVRIGT, offset, itemsPerPage)
+        } else if(query && params.cat && params.cat != "Alla")  {
 			offset = parseInt(params.offset, 0)
 			def itemsPerPage = parseInt(params.max, 20)
 			searchResult = searchService.plainTextSearch(queries, Category.getFromString(params.cat), offset, itemsPerPage)
@@ -86,6 +90,7 @@ class SearchController {
 
 		new Search(query: query, category: params.cat).save()
 
+        println "se.lagrummet.SearchController.index items.size=${searchResult.itemsList.size()}"
         def dynamicSearchResults = selectAndRenderContents(query, searchResult, offset, synonyms, params.ajax.asBoolean())
 
 		if (params.ajax) {

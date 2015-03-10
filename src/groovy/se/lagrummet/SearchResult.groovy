@@ -19,17 +19,21 @@ class SearchResult {
 	}
 	
 	public void addItemByType(SearchResultItem item) {
+        println "se.lagrummet.SearchResult.addItemByType ${item.identifier} ${item.type}"
 		def type = item.type
 		def category = Category.getCategoryForType(type)
-		
-		if(items[(category)].size() < maxItemsPerCategory) {
-			items[(category)].add(item)
-		}
-		
-		totalResultsPerCategory[(category)] += 1
+
+        if (category==Category.OVRIGT) {
+            if(items[(category)].size() < maxItemsPerCategory) {
+                items[(category)].add(item)
+ 		    }
+            totalResultsPerCategory[(category)] += 1
+        } else
+            items[(category)].add(item)
 	}
 	
 	public void addItem(SearchResultItem item) {
+        println "se.lagrummet.SearchResult.addItem ${item.identifier}"
 		itemsList.add(item)
 	}
 	
@@ -44,6 +48,8 @@ class SearchResult {
 		other.items.each { category, otherItems ->
 			items[(category)].addAll(otherItems)
 		}
+
+        this.itemsList += other.itemsList
 		
 		other.totalResultsPerCategory.each { category, otherCount ->
             try {

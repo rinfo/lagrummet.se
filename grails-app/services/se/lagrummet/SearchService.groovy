@@ -19,12 +19,14 @@ class SearchService {
         def result = new SearchResult()
         Benchmark.section("Total search time", log) {
             def remoteResult = rdlSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
+            println "se.lagrummet.SearchService.plainTextSearch remoteResult.size=${remoteResult.itemsList.size()}"
             def remoteLatestConsolidatedResult = new SearchResult() //rdlSearchService.plainTextLatestConsolidated(query, cat, offset, itemsPerPage)
             def localResult = localSearchService.plainTextSearch(query, cat, offset, itemsPerPage)
 
             def topHits = selectTopHitsDependingOnCategory(cat, remoteLatestConsolidatedResult, localResult, remoteResult)
 
             result = remoteLatestConsolidatedResult.mergeWith(remoteResult).mergeWith(localResult)
+            println "se.lagrummet.SearchService.plainTextSearch result.size=${result.itemsList.size()}"
 
             result.topHits = topHits;
         }
