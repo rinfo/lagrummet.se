@@ -71,7 +71,7 @@ class LocalSearchService {
     def translateSearchResultTimeFromQueryResult = { item ->
         new SearchResultItem(
                 title: item.title,
-                iri: item.url(),
+                iri: item.url()?.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view),
                 issued: item.lastUpdated,
         )
     }

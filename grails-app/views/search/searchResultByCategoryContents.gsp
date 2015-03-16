@@ -28,7 +28,7 @@
 					<tr>
 						<td>
 							<p>
-                                <a ${searchLink} href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">
+                                <a ${searchLink} href="${item.iri}">
                                   <g:if test="${cat == 'Lagar' || item.type == 'Myndighetsforeskrift'}">
                                         ${item.title}                                 
                                   </g:if>                                  
@@ -48,7 +48,7 @@
 					</tr>
 				</g:each>
 			</table>
-			<g:if test="${offset!=0||searchResult.itemsCount()!=searchResult.totalResults}">
+			<g:if test="${offset!=0||searchResult.hasMoreResults()}">
 			<g:paginate offset="${offset}" controller="search" total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat, alias: alias, offset: offset]}"/>
 			</g:if>
 		</g:if>

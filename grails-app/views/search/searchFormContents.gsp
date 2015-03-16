@@ -45,7 +45,7 @@
                 <ul id="LagrummetList">
                     <g:each in="${searchResult.items}" var="item">
                         <li>
-                            <p><a ${searchLink} href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+                            <p><a ${searchLink} href="${item.iri}">${item.title ?: item.identifier}</a></p>
                             <g:if test="${item.matches}">
                                 <p>${item.matches} ...</p>
                             </g:if>
@@ -79,7 +79,7 @@
                 <ul id="RattsfallList">
                     <g:each in="${searchResultByCategory.items('Rattsfall')}" var="item">
                         <li>
-                            <p><a ${searchLink} href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.identifier ?: item.malnummer}</a></p>
+                            <p><a ${searchLink} href="${item.iri}">${item.identifier ?: item.malnummer}</a></p>
                             <g:if test="${item.matches}">
                                 <p>${item.matches} ...</p>
                             </g:if>
@@ -118,7 +118,7 @@
                 <ul id="LagarList">
                     <g:each in="${searchResultByCategory.items('Lagar')}" var="item">
                         <li>
-                            <p><a ${searchLink} href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+                            <p><a ${searchLink} href="${item.iri}">${item.title ?: item.identifier}</a></p>
                             <g:if test="${item.text}">
                                 <p>${item.text} ...</p>
                             </g:if>
@@ -159,7 +159,7 @@
                     <g:each in="${searchResultByCategory.items('Foreskrifter')}" var="item">
                         <li>
                                                   <!-- title or identifier -->
-                            <p><a ${searchLink} href="${item.iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)}">${item.title ?: item.identifier}</a></p>
+                            <p><a ${searchLink} href="${item.iri}">${item.title ?: item.identifier}</a></p>
                             <g:if test="${item.matches}">
                                 <p>${item.matches} ...</p>
                             </g:if>

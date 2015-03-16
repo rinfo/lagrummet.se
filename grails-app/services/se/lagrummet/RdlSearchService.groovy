@@ -50,7 +50,6 @@ class RdlSearchService {
 
             def queryResult = searchWithQuery(queryBuilder.getQueryParams())
             result.totalResults = queryResult.totalResults
-            println "se.lagrummet.RdlSearchService.categorizedSearch result.totalResults=${result.totalResults}"
             if(queryResult.statistics) {
                 result.addStats(queryResult.statistics.slices)
                 if(queryResult.statistics.slices?.observations) {
@@ -61,7 +60,6 @@ class RdlSearchService {
                     res.each result.addEach
                 }
             }
-            println "se.lagrummet.RdlSearchService.categorizedSearch calculateTotalResults=${result.calculateTotalResults()}"
         }
         return result
     }
@@ -69,7 +67,7 @@ class RdlSearchService {
     def createResultItemsFromResult = { item ->
         new SearchResultItem(
                 title: prefereMatchBeforeOriginal(item,'title'),
-                iri: item.iri,
+                iri: item.iri?.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view),
                 issued: item.issued,
                 describedBy: item.describedby,
                 identifier: prefereMatchBeforeOriginal(item,'identifier'),
@@ -110,126 +108,6 @@ class RdlSearchService {
         return result
     }
 
-    // ***************************************************** -->
-
-    public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
-        def result
-        Benchmark.section("RDL plain text search time", log) {
-            def queryBuilder = new QueryBuilder()
-
-            queryBuilder.setQueries(query)
-
-            if(cat && availableCategories.contains(cat)){
-                queryBuilder.setType(cat.getTypes())
-            } else if (cat) {
-                return new SearchResult()
-            }
-
-            if(offset != null && itemsPerPage) {
-                queryBuilder.setPageAndPageSize((int)(offset / itemsPerPage), itemsPerPage)
-            }
-            //force the ikraftdatum to be returned in the search result if the document has one
-            queryBuilder.setIkraftIfExists("")
-            queryBuilder.setParam("_stats", "on")
-
-            result = searchWithQuery(queryBuilder.getQueryParams(), cat ? 'list' : 'category')
-            //result.resetCategory(Category.LAGAR)
-        }
-        return result
-	}
-
-	public SearchResult searchWithQuery2(Map queryParams, String resultListType = 'category') {
-        println "se.lagrummet.RdlSearchService.searchWithQuery resultListType=${resultListType}"
-		def searchResult = new SearchResult()
-		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
-		def http = new HTTPBuilder()
-        http.getClient().getParams().setParameter("http.connection.timeout", new Integer(100000))
-        http.getClient().getParams().setParameter("http.socket.timeout", new Integer(100000))
-		try {
-			http.request(grailsApplication.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
-				uri.path = "/-/publ"
-				uri.query = queryParams
-				req.getParams().setParameter("http.connection.timeout", new Integer(100000));
-				req.getParams().setParameter("http.socket.timeout", new Integer(100000));
-				
-				response.success = {resp, json ->
-					searchResult.totalResults = json.totalResults
-                    println "se.lagrummet.RdlSearchService.searchWithQuery *************************************************************************************************"
-					//json.items.eachWithIndex { item, i ->
-                    json.items.each { item ->
-						def searchResultItem = new SearchResultItem(
-                                                        title: prefereMatchBeforeOriginal(item,'title'),
-														iri: item.iri,
-														issued: item.issued,
-														describedBy: item.describedby,
-                                                        identifier: prefereMatchBeforeOriginal(item,'identifier'),
-														matches: prefereMatchBeforeOriginal(item,'text','referatrubrik'), //getBestMatch(item),
-														type: item.type,
-														ikrafttradandedatum: item.ikrafttradandedatum,
-														malnummer: item.malnummer,
-                                                        text: prefereMatchBeforeOriginal(item,'text','referatrubrik'),
-														)
-						/*if("category".equals(resultListType)) {
-							searchResult.addItemByType(searchResultItem)
-						} else*/
-                        if ("list".equals(resultListType)) {
-							searchResult.addItem(searchResultItem)
-						} else
-                            println "se.lagrummet.RdlSearchService.searchWithQuery IGNORED ${item.identifier}"
-						/*
-						if(i < 5) {
-							searchResult.addTopHit(searchResultItem)
-						}*/
-					}
-                    println "se.lagrummet.RdlSearchService.searchWithQuery ************************************* STATISTICS **************************************************"
-					if(json.statistics) {
-						searchResult.addStats(json.statistics.slices)
-
-                        if(json.statistics.slices?.observations) {
-                            json.statistics.slices?.observations[0].each { observation ->
-                                observation.items?.each { item ->
-                                    def searchResultItem = new SearchResultItem(
-                                            title: prefereMatchBeforeOriginal(item,'title'),
-                                            iri: item.iri,
-                                            issued: item.issued,
-                                            describedBy: item.describedby,
-                                            identifier: prefereMatchBeforeOriginal(item,'identifier'),
-                                            matches: getBestMatch(item),
-                                            type: item.type,
-                                            ikrafttradandedatum: item.ikrafttradandedatum,
-                                            malnummer: item.malnummer,
-                                            text: prefereMatchBeforeOriginal(item,'text','referatrubrik'),
-                                    )
-                                    if ("category".equals(resultListType)) {
-                                        searchResult.addItemByType(searchResultItem)
-                                    }
-                                }
-                                searchResult.totalResultsPerCategory[observation.term] = observation.count
-                            }
-                        }
-					}
-                    println "se.lagrummet.RdlSearchService.searchWithQuery ****************************************** END ***************************************************"
-	
-				}
-				
-				response.failure = { resp ->
-					log.error(resp.statusLine)
-					searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
-				}
-			}
-		} catch (SocketTimeoutException ex) {
-			log.error(ex)
-            log.error("Failed to communicate with *"+grailsApplication.config.lagrummet.rdl.service.baseurl+"'");
-			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
-		} catch (UnknownHostException ex) {
-			log.error(ex)
-			searchResult.errorMessages.add("Något gick fel. Det är inte säkert att sökresultatet är komplett.")
-		} 
-		return searchResult
-	}
-
-    // ************************************************************* <---
-	
 	public List<String> getAvailablePublishers() {
 		
 		def publishers = []
