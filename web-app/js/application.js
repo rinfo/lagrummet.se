@@ -1,21 +1,6 @@
 var serverUrl = $('meta[name=serverURL]').attr("content") + "/";
 var originalUrl, t, query = "";
 
-// Instant search
-function searchSuggestions(data) {
-	var form = $("#search");
-	var cat = $("#cat").attr("value") || "Ovrigt";
-	if (data) {
-        $("#searchSuggestions").empty().show();
-		$.each(data.searchResult.topHits, function(i, item) {
-			var title = (item.title) ? item.title : item.identifier;
-			var href = serverUrl + item.iri.replace(/http:\/\/.*?\//,"rinfo/");
-			
-			$("#searchSuggestions").append('<li><a href="'+href+'" class="searchLink">' + title + "</a></li>");
-		});
-	}
-}
-
 function encodedMailAddress(coded) {
 	  key = "4xqdRiHltKJmFYoTuNMfyLQswUbICaAD9pnrcG13E0V6BP7O2jXze8hkgW5vZS"
 		  shift=coded.length
@@ -51,7 +36,6 @@ function instantSearch() {
 
 	$.post(url, form.serialize(), function(data) {
 	    if (data) {
-            //searchSuggestions(data); ignore search results
             try {
                 $("#dynamicSearchResults").html(data.dynamicSearchResults);
             } catch (e) {

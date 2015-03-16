@@ -1,6 +1,6 @@
     <article id="searchResults" class="searchResults">
     	<p class="printLabel"><a href="javascript:if(window.print)window.print()">Skriv ut</a></p>
-    	<g:if test="${offset!=0||searchResult.items[(cat)].size()!=searchResult.totalResults}">
+    	<g:if test="${offset!=0||searchResult.itemsCount()!=searchResult.totalResults}">
         <p class="showAllLabel"><a href="${createLink(mapping:'search', params:[query:query, cat: cat, max: searchResult?.totalResults, offset: 0, alias: alias]) }">Visa alla ${searchResult?.totalResults} träffar</a></p>
         </g:if>
 
@@ -11,7 +11,7 @@
             -->
 		<g:if test="${searchResult?.totalResults}">
 			<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
-			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsList.size()} av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> <strong><g:message code="category.${cat}"/></strong></p>
+			<p>Visar ${1+(offset ?: 0)  }-${(offset ?: 0)+searchResult.itemsCount()} av ${searchResult.totalResults} träffar för <span class="query">"${query.encodeAsHTML()}"</span> <strong><g:message code="category.${cat}"/></strong></p>
 			<g:if test="${synonyms}">
 			<p>Din sökning gav även träff på följande: <g:each in="${synonyms}"><span class="query">${it}</span>, </g:each></p>
 			<p>För att se sökresultatet utan associerade träffar, <a href="${createLink(mapping:'search', params:[query:query, cat:cat, alias:'false']) }">klicka här</a></p>
@@ -23,8 +23,7 @@
 					<g:elseif test="${cat == 'Rattsfall' }"><th>Referat/Dom</th></g:elseif>
 					<g:elseif test="${cat != 'Ovrigt' }"><th>Beteckning</th></g:elseif>
 				</tr>
-				<%-- <g:each in="${searchResult.items[(cat)]}" var="item"> --%>
-				<g:each in="${searchResult.itemsList}" var="item">
+				<g:each in="${searchResult.items}" var="item">
 
 					<tr>
 						<td>
@@ -49,7 +48,7 @@
 					</tr>
 				</g:each>
 			</table>
-			<g:if test="${offset!=0||searchResult.itemsList.size()!=searchResult.totalResults}">
+			<g:if test="${offset!=0||searchResult.itemsCount()!=searchResult.totalResults}">
 			<g:paginate offset="${offset}" controller="search" total="${searchResult.totalResults}" max="20" params="${[query: query, cat: cat, alias: alias, offset: offset]}"/>
 			</g:if>
 		</g:if>

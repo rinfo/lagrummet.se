@@ -12,10 +12,108 @@ class RdlSearchService {
     static transactional = true
 	
 	def availableCategories = [Category.RATTSFALL, Category.MYNDIGHETERS_FORESKRIFTER, Category.PROPOSITIONER, Category.UTREDNINGAR, Category.LAGAR]
-	def latestConsolidatedCategories = [Category.LAGAR]
-	
+
+    public SearchResult textSearch(List<String> query, Category category, Integer offset = null, Integer itemsPerPage = null) {
+        if (!category in availableCategories)
+            throw new Exception("Selected category ${category} not within allowed categories ${availableCategories}")
+        def result = new SearchResult(category)
+        Benchmark.section("RDL text search time", log) {
+            def queryBuilder = new QueryBuilder()
+
+            queryBuilder.setQueries(query)
+            if(offset != null && itemsPerPage) {
+                queryBuilder.setPageAndPageSize((int)(offset / itemsPerPage), itemsPerPage)
+            }
+
+            queryBuilder.setType(category.getTypes())
+            queryBuilder.setIkraftIfExists("")
+            queryBuilder.setParam("_stats", "on")
+
+            def queryResult = searchWithQuery(queryBuilder.getQueryParams())
+            result.totalResults = queryResult.totalResults
+            def res = queryResult.items.collect createResultItemsFromResult
+            res.each result.addEach
+        }
+        return result
+    }
+
+    public SearchResultByCategory categorizedSearch(List<String> query, int limitItems = 4) {
+        def result = new SearchResultByCategory()
+        Benchmark.section("RDL categorized search time", log) {
+            def queryBuilder = new QueryBuilder()
+
+            queryBuilder.setQueries(query)
+            queryBuilder.setPageAndPageSize(0, limitItems)
+
+            queryBuilder.setIkraftIfExists("")
+            queryBuilder.setParam("_stats", "on")
+
+            def queryResult = searchWithQuery(queryBuilder.getQueryParams())
+            result.totalResults = queryResult.totalResults
+            println "se.lagrummet.RdlSearchService.categorizedSearch result.totalResults=${result.totalResults}"
+            if(queryResult.statistics) {
+                result.addStats(queryResult.statistics.slices)
+                if(queryResult.statistics.slices?.observations) {
+                    def res = []
+                    queryResult.statistics.slices?.observations[0].each { observation ->
+                        res += observation.items?.collect createResultItemsFromResult
+                    }
+                    res.each result.addEach
+                }
+            }
+            println "se.lagrummet.RdlSearchService.categorizedSearch calculateTotalResults=${result.calculateTotalResults()}"
+        }
+        return result
+    }
+
+    def createResultItemsFromResult = { item ->
+        new SearchResultItem(
+                title: prefereMatchBeforeOriginal(item,'title'),
+                iri: item.iri,
+                issued: item.issued,
+                describedBy: item.describedby,
+                identifier: prefereMatchBeforeOriginal(item,'identifier'),
+                matches: prefereMatchBeforeOriginal(item,'text','referatrubrik'), //getBestMatch(item),
+                type: item.type,
+                ikrafttradandedatum: item.ikrafttradandedatum,
+                malnummer: item.malnummer,
+                text: prefereMatchBeforeOriginal(item,'text','referatrubrik'),
+        )
+    }
+
+    public def searchWithQuery(Map queryParams) {
+        def result = [:]
+        def http = createHttpBuilder()
+        try {
+            http.request(grailsApplication.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
+                uri.path = "/-/publ"
+                uri.query = queryParams
+                req.getParams().setParameter("http.connection.timeout", new Integer(100000));
+                req.getParams().setParameter("http.socket.timeout", new Integer(100000));
+
+                response.success = {resp, json ->
+                    result = json
+                }
+                response.failure = { resp ->
+                    log.error(resp.statusLine)
+                    result.errorMessage = "Något gick fel. Det är inte säkert att sökresultatet är komplett."
+                }
+            }
+        } catch (SocketTimeoutException ex) {
+            log.error(ex)
+            log.error("Failed to communicate with *"+grailsApplication.config.lagrummet.rdl.service.baseurl+"'");
+            result.errorMessage = "Något gick fel. Det är inte säkert att sökresultatet är komplett."
+        } catch (UnknownHostException ex) {
+            log.error(ex)
+            result.errorMessage = "Något gick fel. Det är inte säkert att sökresultatet är komplett."
+        }
+        return result
+    }
+
+    // ***************************************************** -->
+
     public SearchResult plainTextSearch(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
-        def result = new SearchResult()
+        def result
         Benchmark.section("RDL plain text search time", log) {
             def queryBuilder = new QueryBuilder()
 
@@ -39,56 +137,8 @@ class RdlSearchService {
         }
         return result
 	}
-	
-	/**
-	 * Find the best representation of a current or consolidated law
-	 * @param query
-	 * @param cat
-	 * @param offset
-	 * @param itemsPerPage
-	 * @return
-	 */
-	public SearchResult plainTextLatestConsolidated(List<String> query, Category cat, Integer offset, Integer itemsPerPage) {
-        def searchResult = new SearchResult()
-        Benchmark.section("RDL latest consolidated search time", log) {
-            if(cat && !latestConsolidatedCategories.contains(cat)) {
 
-                return searchResult
-            }
-
-            def today = new Date().format("yyyy-MM-dd")
-            def queryBuilder = new QueryBuilder()
-
-            queryBuilder.setQueries(query)
-
-            queryBuilder.setType(Category.LAGAR.getTypes())
-            queryBuilder.setParam('exists-rev.omtryckAv.iri', 'false')
-            queryBuilder.setParam('exists-rev.konsoliderar.iri', 'false')
-            queryBuilder.setParam('exists-rev.ersatter.iri', 'false')
-            queryBuilder.setParam('exists-upphaver.iri', 'false')
-            queryBuilder.setParam('or-exists-andrar.iri', 'false')
-            queryBuilder.setParam('or-exists-omtryckAv.iri', 'true')
-            queryBuilder.setParam('exists-isReplacedBy.iri', 'false')
-            queryBuilder.setParam('ifExists-max-ikrafttradandedatum', today)
-            queryBuilder.setParam('ifExists-minEx-rev.upphaver.ikrafttradandedatum', today)
-            queryBuilder.setParam('ifExists-max-omtryckAv.ikrafttradandedatum', today)
-            queryBuilder.setParam('ifExists-minEx-omtryckAv.rev.upphaver.ikrafttradandedatum', today)
-            queryBuilder.setParam('ifExists-max-konsoliderar.ikrafttradandedatum', today)
-            queryBuilder.setParam('ifExists-minEx-konsoliderar.rev.upphaver.ikrafttradandedatum', today)
-
-            if(offset != null && itemsPerPage) {
-                queryBuilder.setPageAndPageSize((int)(offset / itemsPerPage), itemsPerPage)
-            }
-
-            queryBuilder.setParam("_stats", "on")
-
-            searchResult = searchWithQuery(queryBuilder.getQueryParams())
-        }
-        return searchResult
-	}
-	
-	
-	public SearchResult searchWithQuery(Map queryParams, String resultListType = 'category') {
+	public SearchResult searchWithQuery2(Map queryParams, String resultListType = 'category') {
         println "se.lagrummet.RdlSearchService.searchWithQuery resultListType=${resultListType}"
 		def searchResult = new SearchResult()
 		searchResult.maxItemsPerCategory = queryParams._pageSize ?: searchResult.maxItemsPerCategory
@@ -177,6 +227,8 @@ class RdlSearchService {
 		} 
 		return searchResult
 	}
+
+    // ************************************************************* <---
 	
 	public List<String> getAvailablePublishers() {
 		
@@ -257,21 +309,28 @@ class RdlSearchService {
     }
 
     public String prefereMatchBeforeOriginal(def item, String name, String alternate) {
-        println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal ${name} ${alternate}"
-        println item
+        //println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal ${name} ${alternate}"
+        //println item
         if (item.matches instanceof Map && item.matches?.containsKey(name)) {
-            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal matches ${item.matches[name]}"
-            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal *********************"
-            println item.matches[name].get(0)
-            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal *********************"
+//            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal matches ${item.matches[name]}"
+//            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal *********************"
+//            println item.matches[name].get(0)
+//            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal *********************"
             return item.matches[name].get(0)
         }
         if (item.matches instanceof Map && item.matches?.containsKey(alternate)) {
-            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal alternate ${item.matches[alternate].get(0)}"
+//            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal alternate ${item.matches[alternate].get(0)}"
             return item.matches[alternate].get(0)
         }
         if (item.containsKey(name))
             return item[name]
         return item[alternate]
+    }
+
+    def createHttpBuilder() {
+        def http = new HTTPBuilder()
+        http.getClient().getParams().setParameter("http.connection.timeout", new Integer(100000))
+        http.getClient().getParams().setParameter("http.socket.timeout", new Integer(100000))
+        return http
     }
 }

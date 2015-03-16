@@ -59,42 +59,47 @@ class SearchController {
 	}
 
     def index = {
-		def searchResult = null
-		def offset
-		if (params.cat) session.cat = params.cat //todo this could end up in very suspicious behaviour when using multiple tabs/windows in the browser
-		
 		def synonyms = []
 		def queries = []
         String query = params.query?.take(grailsApplication.config.lagrummet.search.maxLength) ?: ""
-        if (query)
-            log.info("Search for '${query}'");
 
-		queries.add(query)
-		if(!params.alias || params.alias != "false"){
-				synonyms = synonymService.lookupSynonyms(query)
-				queries.addAll(synonyms)
-				params.alias = null
-		}
-		if (query && params.cat && params.cat == "Ovrigt") {
-            offset = parseInt(params.offset, 0)
-            def itemsPerPage = parseInt(params.max, 20)
-            searchResult = localSearchService.plainTextSearch(queries, Category.OVRIGT, offset, itemsPerPage)
-        } else if(query && params.cat && params.cat != "Alla")  {
-			offset = parseInt(params.offset, 0)
-			def itemsPerPage = parseInt(params.max, 20)
-			searchResult = searchService.plainTextSearch(queries, Category.getFromString(params.cat), offset, itemsPerPage)
-			
-		} else if(query) {
-			searchResult = searchService.plainTextSearch(queries, Category.getFromString(params.cat), null, null)
-		}
+        Category category = Category.getFromString(params.cat)
 
-		new Search(query: query, category: params.cat).save()
+        def dynamicSearchResults
+        if (query) {
+            log.info("Search for '${query}' ajax=${params.ajax}");
+            def searchResult = null
+            def searchResultByCategory = null
 
-        println "se.lagrummet.SearchController.index items.size=${searchResult.itemsList.size()}"
-        def dynamicSearchResults = selectAndRenderContents(query, searchResult, offset, synonyms, params.ajax.asBoolean())
+            queries.add(query)
+            if(!params.alias || params.alias != "false"){
+                    synonyms = synonymService.lookupSynonyms(query)
+                    queries.addAll(synonyms)
+                    params.alias = null
+            }
+
+            def offset = parseInt(params.offset, 0)
+            if (category) {
+                def itemsPerPage = parseInt(params.max, 20)
+                if (category==Category.OVRIGT) {
+                    searchResult = localSearchService.textSearch(queries, offset, itemsPerPage)
+                } else
+                    searchResult = rdlSearchService.textSearch(queries, category, offset, itemsPerPage)
+            } else {
+                searchResult = localSearchService.categorizedSearch(queries)
+                searchResultByCategory = rdlSearchService.categorizedSearch(queries)
+            }
+
+            new Search(query: query, category: params.cat).save()
+
+            dynamicSearchResults = selectAndRenderContents(query, searchResult, searchResultByCategory, offset, synonyms, params.ajax.asBoolean())
+        } else {
+            log.info("Empty search");
+            dynamicSearchResults = selectAndRenderContents("", new SearchResult(category), null, 0, [], params.ajax.asBoolean())
+        }
 
 		if (params.ajax) {
-            def response = [query: query, searchResult: searchResult, synonyms: synonyms, dynamicSearchResults: dynamicSearchResults]
+            def response = [query: query, synonyms: synonyms, dynamicSearchResults: dynamicSearchResults]
             render response as GSON
 		} else if(params.cat && params.cat != "Alla" || grailsApplication.config.lagrummet.onlyLocalSearch) {
 			render(view: 'searchResultByCategory', model: [query: query, contents: dynamicSearchResults])
@@ -104,13 +109,13 @@ class SearchController {
 		
 	}
 
-    private def selectAndRenderContents(String query, def searchResult, def offset, def synonyms, boolean searchFromAjax) {
+    private def selectAndRenderContents(String query, def searchResult, def searchResultByCategory, def offset, def synonyms, boolean searchFromAjax) {
         String searchLink = searchFromAjax?"class=\"searchLink\"":""
         if (grailsApplication.config.lagrummet.onlyLocalSearch)
             return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, searchLink: searchLink, cat: 'Ovrigt', searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
         if (params.cat && params.cat != "Alla")
             return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, searchLink: searchLink, cat: params.cat, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
-        return groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchLink: searchLink, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), synonyms: synonyms, alias: params.alias])
+        return groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchLink: searchLink, searchResult: searchResult, searchResultByCategory: searchResultByCategory, maxItemsPerCategory: 4, page: new Page(metaPage: false, title: message(code: "searchResult.label")), synonyms: synonyms, alias: params.alias])
     }
 
     def ext = { ExtendedSearchCommand esc ->

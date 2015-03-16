@@ -13,6 +13,8 @@ public enum Category {
 	}
 	
 	public static Category getFromString(String cat) {
+        if (!cat)
+            return null
 		for(c in Category.values()) {
 			if(c.toString().equals(cat)) {
 				return c

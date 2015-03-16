@@ -34,7 +34,11 @@ class BootStrap {
             def fourDaysAgo = now - 4
 
             // start: Page specifics
-            def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första försöket", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
+            def home = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home', h1: 'Välkommen till lagrummet.se', content: "Första  försöket", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
+            def home1 = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home1', h1: 'Välkommen1 till lagrummet.se', content: "Första  försöket1", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
+            def home2 = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home2', h1: 'Välkommen2 till lagrummet.se', content: "Första  försöket2", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
+            def home3 = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home3', h1: 'Välkommen3 till lagrummet.se', content: "Första  försöket3", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
+            def home4 = new Page(title: 'Lagrummet', author: user, template: "frontpage", pageOrder: 0, permalink: 'home4', h1: 'Välkommen4 till lagrummet.se', content: "Första  försöket4", status: "published", publishStart: fourDaysAgo, dateCreated: now, lastUpdated: now, metaPage: false).save()
 
             home.addToPuffs(new Puff(title: "Kalle", description: "Läs allt om Kalle och hans otroliga äventyr. Han går till höger, vänster och ibland till och med bakåt!", link: "kalle", parent: home))
                     .addToPuffs(new Puff(title: "Kalle 2", description: "Läs allt om Kalles andra otroliga äventyr.", link: "kalle-undersida", parent: home))
