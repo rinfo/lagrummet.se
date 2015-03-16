@@ -7,6 +7,8 @@ import net.sf.json.JSONObject
 
 class RdlSearchService {
 
+    final static String STANDARD_ERROR_MSG = "Något gick fel. Det är inte säkert att sökresultatet är komplett."
+
     def grailsApplication
 
     static transactional = true
@@ -81,6 +83,7 @@ class RdlSearchService {
 
     public def searchWithQuery(Map queryParams) {
         def result = [:]
+        def transferHttpResponseJsonToResult = {resp, json -> result = json }
         def http = createHttpBuilder()
         try {
             http.request(grailsApplication.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
@@ -89,23 +92,20 @@ class RdlSearchService {
                 req.getParams().setParameter("http.connection.timeout", new Integer(100000));
                 req.getParams().setParameter("http.socket.timeout", new Integer(100000));
 
-                response.success = {resp, json ->
-                    result = json
-                }
-                response.failure = { resp ->
-                    log.error(resp.statusLine)
-                    result.errorMessage = "Något gick fel. Det är inte säkert att sökresultatet är komplett."
-                }
+                response.success = transferHttpResponseJsonToResult
+                response.failure = logStatusLineAndAddtoErrorMessage
             }
-        } catch (SocketTimeoutException ex) {
+        } catch (IOException ex) {
             log.error(ex)
             log.error("Failed to communicate with *"+grailsApplication.config.lagrummet.rdl.service.baseurl+"'");
-            result.errorMessage = "Något gick fel. Det är inte säkert att sökresultatet är komplett."
-        } catch (UnknownHostException ex) {
-            log.error(ex)
-            result.errorMessage = "Något gick fel. Det är inte säkert att sökresultatet är komplett."
+            result.errorMessage = STANDARD_ERROR_MSG
         }
         return result
+    }
+
+    def logStatusLineAndAddtoErrorMessage = { resp ->
+        log.error(resp.statusLine)
+        result.errorMessage = STANDARD_ERROR_MSG
     }
 
 	public List<String> getAvailablePublishers() {
@@ -121,17 +121,14 @@ class RdlSearchService {
 				response.success = { resp, json ->
 					json.topic.each { topic ->
 						if (topic.type == "Organization") {
-//							def tokens = topic.iri.ref.tokenize('/')
-//							def iri = tokens.get(tokens.size() -1)
-//							publishers.add(["iri" : iri, "name" : topic.name])
 							publishers.add(topic.name)
 						}
 					}
 				}
 				
 			}
-		} catch(SocketTimeoutException) {
-		
+		} catch(SocketTimeoutException e) {
+            log.error(e)
 		}
 		return publishers
 	}
@@ -163,13 +160,13 @@ class RdlSearchService {
 				}
 				
 			}
-		} catch(SocketTimeoutException) {
-		
+		} catch(SocketTimeoutException e) {
+		    log.error(e)
 		}
 		return publishers
 	}
 	
-	public String getBestMatch(item) {
+	public static String getBestMatch(item) {
         def pickOrder = ['title','referatrubrik', 'text', 'identifier']
 		def bestMatch = ""
         pickOrder.each {
@@ -182,22 +179,15 @@ class RdlSearchService {
 		return bestMatch
 	}
 
-    public String prefereMatchBeforeOriginal(def item, String name) {
+    public static String prefereMatchBeforeOriginal(def item, String name) {
         return item.matches instanceof Map && item.matches?.containsKey(name)?item.matches[name].get(0):item[name];
     }
 
-    public String prefereMatchBeforeOriginal(def item, String name, String alternate) {
-        //println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal ${name} ${alternate}"
-        //println item
+    public static String prefereMatchBeforeOriginal(def item, String name, String alternate) {
         if (item.matches instanceof Map && item.matches?.containsKey(name)) {
-//            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal matches ${item.matches[name]}"
-//            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal *********************"
-//            println item.matches[name].get(0)
-//            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal *********************"
             return item.matches[name].get(0)
         }
         if (item.matches instanceof Map && item.matches?.containsKey(alternate)) {
-//            println "se.lagrummet.RdlSearchService.prefereMatchBeforeOriginal alternate ${item.matches[alternate].get(0)}"
             return item.matches[alternate].get(0)
         }
         if (item.containsKey(name))
@@ -205,7 +195,7 @@ class RdlSearchService {
         return item[alternate]
     }
 
-    def createHttpBuilder() {
+    def static createHttpBuilder() {
         def http = new HTTPBuilder()
         http.getClient().getParams().setParameter("http.connection.timeout", new Integer(100000))
         http.getClient().getParams().setParameter("http.socket.timeout", new Integer(100000))

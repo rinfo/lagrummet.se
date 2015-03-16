@@ -48,8 +48,6 @@ class LocalSearchService {
                     }, options )
 
                     searchResult.totalResults = result.total
-                    println "se.lagrummet.LocalSearchService.commonSearch count=${result.total}"
-                    //searchResult.items += result.results.take(limitItems).collect translateSearchResultTimeFromQueryResult
                     searchResult.items += result.results.collect translateSearchResultTimeFromQueryResult
                     searchResult.items.eachWithIndex { item, index -> item.matches = result.highlights[index].content } // update Highlights
                 }
