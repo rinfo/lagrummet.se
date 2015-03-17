@@ -5,7 +5,7 @@
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
         <title><g:layoutTitle default="Grails" /></title>        
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
-        <link href='http://fonts.googleapis.com/css?family=Fira+Sans' rel='stylesheet' type='text/css'>
+        <link href='//code.cdn.mozilla.net/fonts/fira.css' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="${resource(dir:'css',file:'mainSimpleSearch.css')}" />
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}" />
