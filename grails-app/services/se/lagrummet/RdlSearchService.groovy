@@ -51,12 +51,12 @@ class RdlSearchService {
             queryBuilder.setParam("_stats", "on")
 
             def queryResult = searchWithQuery(queryBuilder.getQueryParams())
-            result.totalResults = queryResult.totalResults
+            result.totalResults = queryResult?.totalResults
             if(queryResult.statistics) {
                 result.addStats(queryResult.statistics.slices)
                 if(queryResult.statistics.slices?.observations) {
                     def res = []
-                    queryResult.statistics.slices?.observations[0].each { observation ->
+                    queryResult.statistics.slices.find{it.dimension=="byType"}?.observations.each { observation ->
                         res += observation.items?.collect createResultItemsFromResult
                     }
                     res.each result.addEach
