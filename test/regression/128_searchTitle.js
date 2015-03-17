@@ -14,10 +14,12 @@ casper.start(casper.cli.get("url"));
 
    casper.waitForSelector("#searchResults > header > h1", function(){}, captureScreen, 20000);
 
+/*  Bortmarkerar vad jag kan se ett korrekt test. Egenskaper i testet behöver verifiera mot kraven
    casper.then(function() {
         this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för studiemedel');
         this.test.assertSelectorHasText('#LagarList > li:nth-child(1) > p:nth-child(1) > a','Förordning (2005:55) om elektronisk överföring av ansökningar om');
    });
+*/
 
    casper.run(function() {test.done();});
 });
