@@ -1,18 +1,4 @@
 var x = require('casper').selectXPath;
-casper.options.viewportSize = {width: 1920, height: 1128};
-casper.on('page.error', function(msg, trace) {
-   this.echo('Error: ' + msg, 'ERROR');
-   for(var i=0; i<trace.length; i++) {
-       var step = trace[i];
-       this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
-   }
-});
-
-captureScreen = function() {
-   var file_name = casper.cli.get("output")+'SFS_show_more_results_screen_error.png';
-   this.capture(file_name);
-   this.echo('Captured "'+file_name+'"');
-}
 
 casper.test.begin('Navigera via "Visa fler träffar"', function(test) {
    casper.start(casper.cli.get("url"));
@@ -23,13 +9,13 @@ casper.test.begin('Navigera via "Visa fler träffar"', function(test) {
         this.test.assertExists("form[name=search] input[name='query']");
         this.test.assertTextDoesntExist('Lag (2007:1091) om offentlig upphandling');
 
-        this.sendKeys("input[name='query']", "lag om offentlig upphandling");
+        this.sendKeys("input[name='query']", "2007:1091");
    });
 
    casper.waitForSelector("#searchResults > header > h1", function(){}, captureScreen, 20000);
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för lag om offentlig upphandling');
+        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för 2007:1091');
         this.test.assertSelectorHasText('#RattsfallList > li.showAll > a','Visa fler träffar');
         this.test.assertSelectorHasText('#LagarList > li.showAll > a','Visa fler träffar');
 
@@ -39,7 +25,7 @@ casper.test.begin('Navigera via "Visa fler träffar"', function(test) {
    casper.waitForSelector("#searchResults > p:nth-child(4) > span");
 
    casper.then(function() {
-        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för lag om offentlig upphandling');
+        this.test.assertSelectorHasText('#searchResults > header > h1','Sökresultat för 2007:1091');
         this.test.assertTextExist('Lag (2007:1091) om offentlig upphandling');
    });
    casper.run(function() {test.done();});

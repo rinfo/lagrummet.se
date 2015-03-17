@@ -19,6 +19,10 @@ var captureScreen = function() {
    capture_screen_counter++;
 }
 
+casper.test.on("fail", function(failure){
+    captureScreen();
+});
+
 var login = function() {
         this.fill('form#loginForm', {
             'j_username':    casper.cli.get("username"),

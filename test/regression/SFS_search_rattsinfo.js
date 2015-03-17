@@ -1,19 +1,5 @@
 var x = require('casper').selectXPath;
 
-casper.on('page.error', function(msg, trace) {
-   this.echo('Error: ' + msg, 'ERROR');
-   for(var i=0; i<trace.length; i++) {
-       var step = trace[i];
-       this.echo('   ' + step.file + ' (line ' + step.line + ')', 'ERROR');
-   }
-});
-
-captureScreen = function() {
-   var file_name = casper.cli.get("output")+'SFS_search_rattsinfo_screen_error.png';
-   this.capture(file_name);
-   this.echo('Captured "'+file_name+'"');
-}
-
 casper.test.begin('Sök rättsinformationsförordning', function(test) {
    casper.start(casper.cli.get("url"));
 
