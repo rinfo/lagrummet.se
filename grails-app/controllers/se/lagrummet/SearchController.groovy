@@ -58,6 +58,10 @@ class SearchController {
 		render(contentType:'text/csv',text:result,encoding:"UTF-8")
 	}
 
+    /* Denna sektion tar hand om 2 olika sökningar. Både sökning för samtliga kategorier och sökning för en kategori.
+       Avgörande valet för om det är sökning på flera kategorier eller en kategori kommer från 'params.cat' och hanteras
+       av variabeln category. Om category är 'null' så antas sökningen generera ett svar med flera kategorier.
+    * */
     def index = {
 		def synonyms = []
 		def queries = []
@@ -79,7 +83,7 @@ class SearchController {
             }
 
             def offset = parseInt(params.offset, 0)
-            if (category) {
+            if (category) { // Här är valet som anger om sökningen blir för flera kategorier eller inte
                 def itemsPerPage = parseInt(params.max, 20)
                 if (category==Category.OVRIGT) {
                     searchResult = localSearchService.textSearch(queries, offset, itemsPerPage)
