@@ -4,7 +4,9 @@ import org.compass.core.CompassQuery;
 
 class LocalSearchService {
 
-    public static final String regex = "([+\\-|&!\\(\\){}\\[\\]\\/^~*?:\\\\]|[&\\|]{2})";
+    def grailsApplication
+
+    public static final String regex = "([+\\-|&!\\(\\){}\\[\\]\\/^~\"*?:\\\\]|[&\\|]{2})";
     public static final String replacement = "\\\\\$1";
 
     static transactional = true

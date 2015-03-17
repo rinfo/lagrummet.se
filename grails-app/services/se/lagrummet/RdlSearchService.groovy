@@ -84,6 +84,7 @@ class RdlSearchService {
     public def searchWithQuery(Map queryParams) {
         def result = [:]
         def transferHttpResponseJsonToResult = {resp, json -> result = json }
+        def logStatusLineAndAddtoErrorMessage = { resp -> log.error(resp.statusLine); result.errorMessage = STANDARD_ERROR_MSG }
         def http = createHttpBuilder()
         try {
             http.request(grailsApplication.config.lagrummet.rdl.service.baseurl, Method.GET, ContentType.JSON) { req ->
@@ -103,10 +104,6 @@ class RdlSearchService {
         return result
     }
 
-    def logStatusLineAndAddtoErrorMessage = { resp ->
-        log.error(resp.statusLine)
-        result.errorMessage = STANDARD_ERROR_MSG
-    }
 
 	public List<String> getAvailablePublishers() {
 		
