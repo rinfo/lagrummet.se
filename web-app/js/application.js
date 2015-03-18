@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
 	// check user accept cookie
     if (navigator.cookieEnabled && getCookie("userAcceptCookie")=="") {
     //if (false) {
-        var cookieBannerHeight = $('#cookie-banner').outerHeight() + 4;
+        var cookieBannerHeight = $('#cookie-banner').outerHeight() + 66;
         $('body').css('margin-top', (cookieBannerHeight+10)+'px');
 
 //        $('#primaryNavigation').css('top', (cookieBannerHeight+60)+'px');
@@ -61,7 +61,7 @@ jQuery(document).ready(function($) {
 
         $('#cookie-button').click(function() {
             $('#cookie-banner').hide();
-            $('body').css('margin-top', '0px');
+            $('body').css('margin-top', '70px');
 
 //            $('#primaryNavigation').css('top', '60px');
 //            $('#siteHeader').css('top', '0px');
