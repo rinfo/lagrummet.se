@@ -202,6 +202,7 @@ def regression():
     env.grails_build_env = "prod"
     env.roledefs = {
         'rinfo': ['regression.lagrummet.se'],
+        'apache': ['regression.lagrummet.se'],
     }
     _initialize_password()
 
