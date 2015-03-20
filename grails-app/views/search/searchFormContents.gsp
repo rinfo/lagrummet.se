@@ -135,48 +135,6 @@
                 </g:if>
 
 
-                       <!--
-                        ********************************************************************************
-                            Myndigheters föreskrifter
-                        ********************************************************************************
-                        -->
-                <p id="ForeskrifterHead">
-                    <g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
-                      <span class="catTitle">Myndigheters föreskrifter</span>
-                    </g:if>
-                    <g:else>
-                    <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }" class="catTitle">Myndigheters föreskrifter</a>
-                    </g:else>
-                    <span class="count">(${searchResultByCategory.totalResultsPerCategory('Foreskrifter')})
-                    <g:if test="${searchResultByCategory.hasMoreResults('Foreskrifter')}"> Visar de första ${searchResultByCategory.itemsCount('Foreskrifter')}</g:if>
-                    </span>
-                    <g:if test="${grailsApplication.config.lagrummet.onlyLocalSearch}">
-                      <br />Dessa dokument är inte sökbara i denna version av lagrummet.se.
-                    </g:if>
-                </p>
-                <g:if test="${searchResultByCategory.items('Foreskrifter')}">
-                <ul id="ForeskrifterList">
-                    <g:each in="${searchResultByCategory.items('Foreskrifter')}" var="item">
-                        <li>
-                                                  <!-- title or identifier -->
-                            <p><a ${searchLink} href="${item.iri}">${item.title ?: item.identifier}</a></p>
-                            <g:if test="${item.matches}">
-                                <p>${item.matches} ...</p>
-                            </g:if>
-                            <p class="type">${item.identifier}</p>
-                            <g:if test="${item.ikrafttradandedatum}">
-                                <p class="type">Ikraft: ${item.ikrafttradandedatum}</p>
-                            </g:if>
-                        </li>
-                    </g:each>
-                    <g:if test="${searchResultByCategory.hasMoreResults('Foreskrifter')}">
-                        <li class="showAll"><a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Foreskrifter', alias:alias]) }">Visa fler träffar</a></li>
-                    </g:if>
-                </ul>
-                </g:if>
-
-
-
     		</div> <!-- class="column" -->
 		</g:if>
 	</article>
