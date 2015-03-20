@@ -18,8 +18,8 @@
     </head>
     <body>
             <div id="beta-banner">
-                <strong>Beta!</strong>Du är nu i betaversionen av lagrummet.se. Här kan du direkt på sajten söka SFS och domstolars rättspraxis. Sökfunktionaliteten är under test och utveckling vilket innebär att fel förekommer.
-                <a style="cursor: pointer;" href="http://wwww.lagrummet.se">Gå till lagrummet.se</a>
+                <strong>BETA!</strong>Du är nu i betaversionen av lagrummet.se. Här kan du direkt på sajten söka SFS och domstolars rättspraxis. Sökfunktionaliteten är under test och utveckling vilket innebär att fel förekommer.
+                <a style="cursor: pointer;" href="http://www.lagrummet.se">Gå tillbaka till lagrummet.se</a>
             </div>
 
             <div id="cookie-banner">
