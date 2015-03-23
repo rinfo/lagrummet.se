@@ -78,6 +78,7 @@ class SearchController {
             queries.add(query)
             if(!params.alias || params.alias != "false"){
                     synonyms = synonymService.lookupSynonyms(query)
+                    synonyms << synonymService.correctIdentifierSpelling(query)
                     queries.addAll(synonyms)
                     params.alias = null
             }
