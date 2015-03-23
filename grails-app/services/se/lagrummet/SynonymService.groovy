@@ -9,24 +9,37 @@ class SynonymService {
     }
 
     def correctIdentifierSpelling(searchTerm) {
-        def correctedIds = []
+        def correctedIds = false
         correcters.each { correcter ->
             def corrected = correcter(searchTerm.trim())
-            if(corrected)
-                correctedIds << corrected
+            if(corrected) {
+				searchTerm = corrected
+				correctedIds = corrected
+            }
         }
+		return correctedIds
     }
+	
     //SFS 1999:175
     def correctSFS = { query ->
-        if(!query =~ /(?ix)SFS \d{4}:\d+/)
-            query.replaceAll(/(?ix)(SFS)\D*(\d{4})\D+(\d{1,})/, '$1 $2:$3')
+        if(!(query ==~ /(?i)SFS \d{4}:\d+/)) {
+            def corrected = query.replaceAll(/(?ix)SFS\D*(\d{4})\D+(\d{1,})/, 'SFS $1:$2')
+			if(query == corrected)
+				return false
+			corrected
+        }
         else
             false
     }
+	
     //NJA 1981 s. 350
     def correctNJA = { query ->
-        if(!query =~ /(?ix)NJA \d{4}] s. \d+/)
-            query.replaceAll(/(?ix)(NJA)\D*\d{4}\s*s\.?\s*\d+/, '$1 $2 s. $3')
+        if(!(query ==~ /(?i)NJA \d{4} s. \d+/)) {
+            def corrected = query.replaceAll(/(?ix)NJA\D*(\d{4})\s*s\.?\s*(\d+)/, 'NJA $1 s. $2')
+			if(query == corrected)
+				return false
+			corrected
+        }
         else
             false
     }
