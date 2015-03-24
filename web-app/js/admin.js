@@ -40,7 +40,7 @@ jQuery(function($) {
 		},
 		relative_urls : false,
 		image_list: serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
-		content_css: "../../css/main.css",
+		content_css: "../../css/common.css",
 		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | removeformat visualchars | bullist numlist outdent indent | link anchor image | forecolor backcolor | code fullscreen",
 		extended_valid_elements : "nav[class]",
 		entity_encoding : "raw",
