@@ -1,7 +1,7 @@
 
     <article id="searchResults" class="searchResults">
-    	<p class="showAllLabel">Totalt ${searchResult?.totalResults+searchResultByCategory?.totalResults} träffar</p>
-                
+    	<p class="showAllLabel">Totalt ${totalResults} träffar</p>
+
         <!--
         ********************************************************************************
           Tekniskt felmeddelande        
