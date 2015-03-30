@@ -1,8 +1,10 @@
 package se.lagrummet
 
 class SearchResultItem {
-	
-	String describedBy
+
+    def grailsApplication
+
+    String describedBy
 	String identifier
 	String iri
 	String issued
@@ -12,4 +14,9 @@ class SearchResultItem {
 	String ikrafttradandedatum
 	String malnummer
 
+    String text
+
+    String iriWashed() {
+        iri.replaceFirst('http://.*?/', grailsApplication.config.lagrummet.local.rinfo.view)
+    }
 }

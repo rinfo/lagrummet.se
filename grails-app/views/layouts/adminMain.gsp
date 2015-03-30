@@ -13,7 +13,7 @@
 	<link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
 	<g:javascript library="jquery" plugin="jquery" />
 	<g:javascript library="jquery.jstree" />
-	<tinyMce:resources jquery="true" />
+	<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 	<g:layoutHead />
 	<g:javascript library="admin" />
 </head>

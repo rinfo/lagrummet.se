@@ -1,10 +1,18 @@
 
 .slogan {
+    position: relative;
     float: left;
     text-align: center;
     width: 720px;
     margin-bottom: 25px;
 }
+
+#search {
+    position: relative;
+    float: none!important;
+    top: 0px!important;
+}
+
 
 .searchForm#search {
     margin-left: auto;
@@ -151,4 +159,9 @@ article.frontpage div.puffs h3 {
 
 .searchResults > table {
     width: 100%!important;
+}
+
+#breadcrumbs {
+    margin-top: 40px;
+    top: 0px;
 }

@@ -46,7 +46,7 @@
                                               </g:each>
                                             </ul>
 
-                                            <g:if test="${subCategory.value.size() >= 10}">
+                                            <g:if test="${subCategory.value.size() > 10}">
                                               <g:toggleLink toggleId="${toggleId}" mapping='page'>
                                                 <span class="${isExpanded ? 'hidden' : '' }">Visa alla ${subCategory.value.size()} rättskällor &#x25BC;</span>
                                                 <span class="${!isExpanded ? 'hidden' : '' }">Dölj rättskällor &#x25b2;</span>

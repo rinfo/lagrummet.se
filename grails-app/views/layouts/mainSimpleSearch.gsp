@@ -5,7 +5,7 @@
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
         <title><g:layoutTitle default="Grails" /></title>        
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
-        <link href='http://fonts.googleapis.com/css?family=Fira+Sans' rel='stylesheet' type='text/css'>
+        <link href='//code.cdn.mozilla.net/fonts/fira.css' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="${resource(dir:'css',file:'mainSimpleSearch.css')}" />
         <link rel="stylesheet" type="text/css" media="print" href="${resource(dir:'css',file:'print.css')}" />
         <META name="serverURL" content="${resource()}" />
@@ -19,6 +19,12 @@
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
+            <div id="cookie-banner">
+                Lagrummet.se använder kakor (cookies) för statistik och sökfunktion.
+                <a style="cursor: pointer;" href="om-webbplatsen/om-kakor" id="more-cookie-text">Om kakor och hur vi använder dem</a>
+                <br>
+                <input type="button" class="cookie-button" id="cookie-button" value="Jag accepterar kakor" />
+            </div>
             <div id="logo">
                     <a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle ?: "lagrummet<span class='hlight'>.se</span>"}</a>
             </div>
@@ -35,7 +41,7 @@
                             </g:menu>			
                     </nav>
                     <nav id="breadcrumbs">
-                            <g:breadcrumbs page="${page}" />
+                            <g:breadcrumbs page="${page}" />&nbsp;
                     </nav>
                     <div class="slogan">
                         <p>
@@ -65,6 +71,7 @@
 			<g:menu root="huvudmeny" activePage="${page}" />
 	    </nav>
 
+		<script src="http://f1.eu.readspeaker.com/script/5329/rs_embhl_v2_sv_se.js" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	    <g:javascript library="application" />		
 	

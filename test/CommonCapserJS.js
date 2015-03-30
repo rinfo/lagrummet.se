@@ -14,10 +14,14 @@ var capture_screen_counter = 0;
 
 var captureScreen = function() {
    var file_name = casper.cli.get("output")+casper.cli.args[0]+'.screen_capture'+capture_screen_counter+".png";
-   this.capture(file_name);
-   this.echo('Captured "'+file_name+'"');
+   casper.capture(file_name);
+   casper.echo('Captured "'+file_name+'"');
    capture_screen_counter++;
 }
+
+casper.test.on("fail", function(failure){
+    captureScreen();
+});
 
 var login = function() {
         this.fill('form#loginForm', {

@@ -18,7 +18,7 @@ grails.project.dependency.resolution = {
         grailsCentral()
 
         mavenRepo "http://repo.grails.org/grails/core"
-        mavenRepo "http://repository.codehaus.org"
+        mavenRepo "http://dl.bintray.com/groovy/maven"
         mavenRepo "http://download.java.net/maven/2/"
 
         mavenCentral()
@@ -49,7 +49,6 @@ grails.project.dependency.resolution = {
     }
     plugins {
         compile ":hibernate:3.6.10.17"
-        compile ":tiny-mce:3.4.9"
         compile ":searchable:0.6.9"
         compile ":quartz2:2.1.6.2"
         compile ":jquery:1.11.1"

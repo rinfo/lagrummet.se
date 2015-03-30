@@ -1,7 +1,5 @@
 package se.lagrummet
 
-import groovy.time.TimeCategory
-
 import static groovyx.net.http.ContentType.JSON
 import groovyx.net.http.*
 
@@ -22,60 +20,68 @@ class RinfoController {
             def page = [:]
 		page.parent = null
 
-        Date timeStart = new Date();
-
 		def docPath = "/" + params.docPath
-		try {
+        Benchmark.sectionByIntermediate("Show page ${docPath}", log) { intermediate ->
+            try {
 
-			def docInfo = rinfoService.getDocumentMetaData(docPath); Date timeDocInfo = new Date();
+                def docInfo = rinfoService.getDocumentMetaData(docPath);
+                intermediate.log("Get document metadata")
 
-			def docEntry = rinfoService.getAtomEntry(docPath); Date timeDocEntry = new Date();
+                def docEntry = rinfoService.getAtomEntry(docPath);
+                intermediate.log("Get atom entry")
 
-            def docContent = null
+                def docContent = null
 
-			docEntry.link.each{ link ->
-                println "docEntry.link.each "+link
-				if(link?.@type=="text/html") {
-					docContent = rinfoService.getHtmlContent(docPath)
-				}
-                if(link?.@type=="application/xhtml+xml") {
-                    docContent = rinfoService.getXHtmlContent(docPath)
+                docEntry.link.each{ link ->
+                    if(link?.@type=="text/html") {
+                        docContent = rinfoService.getHtmlContent(docPath)
+                    }
+                    if(link?.@type=="application/xhtml+xml") {
+                        docContent = rinfoService.getXHtmlContent(docPath)
+                    }
                 }
-			}
+                intermediate.log("Get html content")
 
-            Date timeLinks = new Date();
-			docEntry.content?.each { content ->
-				if(content?.@type=="text/html") {
-					docContent = rinfoService.getHtmlContent(docPath)
-				}
-                if(content?.@type=="application/xhtml+xml") {
-                    //docContent = rinfoService.getXHtmlContent(docPath)
-                    docContent = rinfoService.getXHtmlContent(content.@src.text())
+                docEntry.content?.each { content ->
+                    if(content?.@type=="text/html") {
+                        docContent = rinfoService.getHtmlContent(docPath)
+                    }
+                    if(content?.@type=="application/xhtml+xml") {
+                        //docContent = rinfoService.getXHtmlContent(docPath)
+                        docContent = rinfoService.getXHtmlContent(content.@src.text())
+                    }
                 }
-			}
+                intermediate.log("Get html content - doc path")
 
-            Date timeContents = new Date();
-			if(docContent != null) {
-				docContent = htmlSanitizerService.cleanHtml(docContent)
-			}
-            Date timeSanitizer = new Date();
+                if(docContent != null) {
+                    docContent = htmlSanitizerService.cleanHtml(docContent)
+                }
+                intermediate.log("Run html sanitizer")
 
-			render(view:'show', model: [page: page,
-										docInfo: docInfo, 
-										content: docContent, 
-										docEntry: docEntry])
-            Date timeRender = new Date();
+                render(view:'show', model: [page: page,
+                                            docInfo: docInfo,
+                                            content: docContent,
+                                            docEntry: docEntry])
+                intermediate.log("Render")
 
-            println "------------ Preformance eval of "+docPath+" ------------------------"
-            println "rinfoService.getDocumentMetaData(docPath): "+TimeCategory.minus(timeDocInfo, timeStart)
-            println "rinfoService.getAtomEntry(docPath): "+TimeCategory.minus(timeDocEntry, timeStart)
-            println "rinfoService.getHtmlContent(docPath): "+TimeCategory.minus(timeLinks, timeStart)
-            println "rinfoService.rinfoService.getHtmlContent(docPath): "+TimeCategory.minus(timeContents, timeStart)
-            println "rinfoService.rinfoService.getHtmlContent(Sanitizer): "+TimeCategory.minus(timeSanitizer, timeStart)
-            println "render: "+TimeCategory.minus(timeRender, timeStart)
-            println "------------ Completed ------------------------------------------"
-		} catch (HttpResponseException e) {
-			forward(controller: "page", action: "error", params: [errorId: "404"])
-		}
+                log.info("***********************' docInfo ***************************")
+                log.info(docInfo.toString(2))
+                log.info("***********************' docContent ***************************")
+                log.info(docContent)
+                log.info("***********************' docEntry ***************************")
+                log.info(docEntry)
+
+            } catch (HttpResponseException e) {
+                log.error("Failed to open "+docPath, e)
+                forward(controller: "page", action: "error", params: [errorId: "404"])
+            } catch (SocketTimeoutException e) {
+                log.error("Failed to open "+docPath, e)
+                forward(controller: "page", action: "error", params: [errorId: "500"])
+            } catch (UnknownHostException e) {
+                log.error("Failed to open "+docPath, e)
+                forward(controller: "page", action: "error", params: [errorId: "500"])
+            }
+        }
 	}
 }
+

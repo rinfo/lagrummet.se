@@ -17,6 +17,18 @@
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
+            <div id="beta-banner">
+                <strong>BETA!</strong>Du är nu i betaversionen av lagrummet.se. Här kan du direkt på sajten söka SFS och domstolars rättspraxis. Sökfunktionaliteten är under test och utveckling vilket innebär att fel förekommer.
+                <a style="cursor: pointer;" href="http://www.lagrummet.se">Gå tillbaka till lagrummet.se</a>
+            </div>
+
+            <div id="cookie-banner">
+                Lagrummet.se använder kakor (cookies) för statistik och sökfunktion.
+                <a style="cursor: pointer;" href="om-webbplatsen/kakor" id="more-cookie-text">Om kakor och hur vi använder dem</a>
+                <br>
+                <input type="button" class="cookie-button" id="cookie-button" value="Jag accepterar kakor" />
+            </div>
+
             <div id="logo">
                     <a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle ?: "lagrummet<span class='hlight'>.se</span>"}</a>
             </div>
@@ -33,7 +45,8 @@
                     <g:form mapping="search" method="GET" name="search">
                             <div class="input" id="searchCategory">
                                     <label for="cat">Avgränsa din sökning</label>
-                                    <select id="cat" name="cat">
+                                    <input type="hidden" name="cat" value="Alla">
+                                    <!-- <select id="cat" name="cat" value="Alla">
                                     <g:each in="${siteProps?.searchCats}">
                                             <g:if test="${session?.cat == it}">
                                                     <option value="${it}" selected="selected" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
@@ -41,10 +54,10 @@
                                             <g:else>
                                                     <option value="${it}" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
                                             </g:else>
-                                    </g:each>
+                                    </g:each> -->
                                     </select>
                             </div>
-                            <div class="input" id="searchQuery"><g:textField name="query" autocomplete="off"  maxlength="${grailsApplication.config.lagrummet.search.maxLength}"/><ul id="searchSuggestions"></ul></div>
+                            <div class="input" id="searchQuery"><g:textField name="query" autocomplete="off"  maxlength="${grailsApplication.config.lagrummet.search.maxLength}" placeholder="Sök bland lagar & förordningar, domstolars rättspraxis och ur texter på lagrummet.se"/><ul id="searchSuggestions"></ul></div>
                             <g:submitButton name="searchSubmit" value="Sök"/>
                     </g:form>
                     <p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
@@ -63,6 +76,7 @@
 			<g:menu root="huvudmeny" activePage="${page}" />
 	    </nav>
 
+		<script src="http://f1.eu.readspeaker.com/script/5329/rs_embhl_v2_sv_se.js" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	    <g:javascript library="application" />		
 	

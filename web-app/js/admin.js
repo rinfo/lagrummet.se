@@ -12,27 +12,42 @@ jQuery(function($) {
 
 	// The relative "../../" on content_css makes it vulnerable. Must be loaded from a secnd level down .gsp.
 	var pageId = ($("#parentId")) ? $("#parentId").attr("value") : "";
-	tinyMCE.init({
-		theme : "advanced",
-		mode : "exact",
-		elements : "content",
-		content_css : "../../css/main.css",
-		theme_advanced_toolbar_location : "top",
-		theme_advanced_blockformats : "p,h1,h2,h3,h4,",
+
+	tinymce.init({
+		selector: "div.mceEditor > textarea[name='content']",
+		theme: "modern",
+		forced_root_block : "",
 		force_p_newlines : true,
+		menubar : false,
+		plugins: [
+			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+			"save table contextmenu directionality emoticons template paste textcolor"
+		],
+		external_plugins: {
+			"codemirror": serverUrl+"js/tinyPlugins/codemirror/plugin.min.js"
+		},
+		codemirror: {
+			indentOnInit: true, // Whether or not to indent code on init.
+			path: serverUrl+'js/tinyPlugins/codemirror/codemirror-4.8', // Path to CodeMirror distribution
+			config: {           // CodeMirror config object
+				mode: 'htmlmixed',
+				lineNumbers: true
+			},
+			jsFiles: [          // Additional JS files to load
+				'mode/htmlmixed/htmlmixed.js'
+			]
+		},
 		relative_urls : false,
-		external_image_list_url : serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
-		theme_advanced_resizing : true,
-		theme_advanced_resizing_min_height : 480,
-		plugins : "advimage, paste",
-		paste_auto_cleanup_on_paste : true,
+		image_list: serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
+		content_css: "../../css/common.css",
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | removeformat visualchars | bullist numlist outdent indent | link anchor image | forecolor backcolor | code fullscreen",
 		extended_valid_elements : "nav[class]",
 		entity_encoding : "raw",
 		formats : {
-            p : {selector : 'p', classes : '', styles: ''}
+			p : {selector : 'p', classes : '', styles: ''}
 		}
 	});
-	
 	
 	function jsTreeContextMenu(node) {
 	    // The default set of all items
@@ -55,7 +70,7 @@ jQuery(function($) {
 	var initiallyOpen = new Array();
 	$("#pageTree > ul > li, #pageTree ul li.metaPage").each(function(n) {
 		initiallyOpen.push($(this).attr("id"));
-	});	
+	});
 	
 	$("#pageTree li.currentPage").parents("#pageTree li").each(function(n) {
 		initiallyOpen.push($(this).attr("id"));
@@ -120,9 +135,13 @@ jQuery(function($) {
     });
 	
 	// Dynamic behaviour for creating and editing pages
-	$("#h1").focus().blur(function(e) {
+	$("#h1").blur(function(e) {
+		if (!$(this).val()) {
+			$(this).css('border-color', 'red');
+			return
+		}
+		$(this).css('border-color', '');
 		if (!$("#bodyContent form .content .permalink input").val()) {
-			firstH1Blur = false;
 			$("#title").val($(this).val());
 			$("label[for=title] a").html($(this).val());
 			var value = $(this).val().replace(/ /g, "-").toLowerCase();
@@ -131,9 +150,6 @@ jQuery(function($) {
 			value = value.replace(/[^a-zA-Z 0-9-_]+/g,'');
 			$("#bodyContent form .content .permalink input").val(value).parent().show();
 		}
-		
-		if (!$(this).val()) $(this).val("Lägg till rubrik här");
-		
 		$(this).hide();
 		$("#bodyContent form .content .title").show();
 		$("#bodyContent form .content h1 a").html($(this).val()).parent().show();
@@ -149,7 +165,6 @@ jQuery(function($) {
 	
 	$("#bodyContent form .content h1 a").click(function(e) {
 		e.preventDefault();
-		if ($("#h1").val() == "Lägg till rubrik här") $("#h1").val("");
 		$("#h1").show().focus();
 		$(this).parent().hide();
 	});
@@ -197,7 +212,7 @@ jQuery(function($) {
 	}
 	
 	var delete_eventhandler = function(e){
-		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+		if(confirm('Är du säker på att du vill ta bort denna synonym?')) {
 			var id = $(this).parent().siblings('input[type=hidden]').val()
 			var serverName = $('meta[name=serverURL]').attr('content');
 			window.location.replace(serverName+'/admin/synonym/delete?id='+id)
@@ -207,7 +222,7 @@ jQuery(function($) {
 	}
 	
 	var deleteUnsavedSynonym = function(e) {
-		if(confirm('Är du säker på att du vill ta bort denna synonymen?')) {
+		if(confirm('Är du säker på att du vill ta bort denna synonym?')) {
 			$(this).parents("tr").remove();
 			return true;
 		}
@@ -237,9 +252,6 @@ jQuery(function($) {
 			$("#pageEditForm").attr("target", "");
 		}
 	});
-	
-	
-	
 });
 
 function markPuffAsDeleted(puffIndex) {

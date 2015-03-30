@@ -332,7 +332,7 @@
                                     </tr>
                             </g:each>
                     </table>
-                    <g:paginate total="${searchResult.totalResults}" max="20" params="${params}"/>
+                    <g:paginate controller="search" offset="${offset}" total="${searchResult.totalResults}" max="20" params="${params}"/>
                     <div id="searchHelpPuff">
                             <strong>Hittade du inte vad du sökte?</strong>
                             <p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>

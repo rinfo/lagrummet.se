@@ -42,4 +42,47 @@ class PageTests extends GrailsUnitTestCase {
 		assertTrue(page3.compareTo(page2) == 0)
 		
 	}
+
+    void testThatPageStatusDraftIsNotConsideredPublished() {
+        def page = new Page()
+        page.status = 'draft'
+        page.publishStart = new Date()
+        page.publishStart.minus(1)
+
+        assertEquals(false, page.isCurrentlyPublished())
+    }
+
+
+    void testThatPageStatusPublishedIsConsideredPublished() {
+        def page = new Page()
+        page.status = 'published'
+        page.publishStart = new Date()
+        page.publishStart.minus(1)
+        sleep(10) //fails otherwise sometimes. wierd.
+        assertEquals(true, page.isCurrentlyPublished())
+    }
+
+    void testThatPageHasBeenPublishedEarlier() {
+        def page = new Page()
+
+        def previouslyPublishedPage = new Page()
+        previouslyPublishedPage.status = 'published'
+        previouslyPublishedPage.publishStart = new Date().minus(1)
+
+        def previouslyNotPublishedPage = new Page()
+
+        page.autoSaves = [previouslyNotPublishedPage, previouslyPublishedPage]
+
+        assertEquals(true, page.hasBeenPublishedEarlier())
+    }
+
+    void testThatPageHasNotBeenPublishedEarlier() {
+        def page = new Page()
+
+        def previouslyNotPublishedPage = new Page()
+
+        page.autoSaves = [previouslyNotPublishedPage]
+
+        assertEquals(false, page.hasBeenPublishedEarlier())
+    }
 }
