@@ -132,8 +132,12 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-    $('#search').submit(function() {
-        if (ltrim($("#query").val()) === "") {
+    form.submit(function() {
+        var q = $("#query").val();
+        var placeholder = $("#query").attr('placeholder');
+        if (q==placeholder)
+            q = "";
+        if (ltrim(q) === "") {
             return false;
         }
     });

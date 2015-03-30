@@ -115,11 +115,15 @@ class SearchController {
 
     private def selectAndRenderContents(String query, def searchResult, def searchResultByCategory, def offset, def synonyms, boolean searchFromAjax) {
         String searchLink = searchFromAjax?"class=\"searchLink\"":""
+        Long uno = searchResult?.totalResults
+        Long due = searchResultByCategory?.totalResults
+        Long totalResults = due?uno.plus(due):uno
+        //def totalResults = searchResult?.totalResults + searchResultByCategory?.totalResults
         if (grailsApplication.config.lagrummet.onlyLocalSearch)
             return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, searchLink: searchLink, cat: 'Ovrigt', searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
         if (params.cat && params.cat != "Alla")
             return groovyPageRenderer.render(view: '/grails-app/views/search/searchResultByCategoryContents', model: [query: query, searchLink: searchLink, cat: params.cat, searchResult: searchResult, page: new Page(metaPage: false, title: message(code: "searchResult.label")), offset: offset, synonyms: synonyms, alias: params.alias])
-        return groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchLink: searchLink, searchResult: searchResult, searchResultByCategory: searchResultByCategory, maxItemsPerCategory: 4, page: new Page(metaPage: false, title: message(code: "searchResult.label")), synonyms: synonyms, alias: params.alias])
+        return groovyPageRenderer.render(view: '/grails-app/views/search/searchFormContents', model: [query: query, searchLink: searchLink, searchResult: searchResult, searchResultByCategory: searchResultByCategory, totalResults: totalResults, maxItemsPerCategory: 4, page: new Page(metaPage: false, title: message(code: "searchResult.label")), synonyms: synonyms, alias: params.alias])
     }
 
     def ext = { ExtendedSearchCommand esc ->

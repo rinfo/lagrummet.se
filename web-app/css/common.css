@@ -1,0 +1,183 @@
+/* CSS Reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td {
+  border:0pt none;
+  font-family:inherit;
+  font-size:100%;
+  font-style:inherit;
+  font-weight:inherit;
+  margin:0pt;
+  padding:0pt;
+  vertical-align:baseline;
+}
+
+/* HTML5 tags */
+header, section, footer, aside, nav, article, figure, legend {
+    display: block;
+}
+
+/* lagrummet.se */
+html {
+	background-color: #fff;
+	margin: 0;
+	height: 101%;
+}
+
+body {
+    position: relative;
+    width: 980px;
+    margin: 0 auto 0 auto;
+    padding: 5px 0 0 0;
+    position: relative;
+    font: 12px verdana, arial, helvetica, sans-serif;
+    line-height: 140%;
+	color: #111;
+}
+
+a {
+    text-decoration: none;
+    color: #006383;
+}
+
+a:visited {
+    color: #195062;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #006383;
+}
+
+a.external, a[href^="http"] {
+    padding-right: 12px;
+    background: url(../images/external_link.gif) top right no-repeat;
+}
+
+a[href*="lagrummet.se"], a.image {
+    padding-right: 0;
+    background: none;
+}
+
+a.toggleLink {
+	cursor: pointer;
+	font-size: 0.9em;
+}
+
+h1, h2, h3, h4,h1 a, h2 a, h3 a, h4 a {
+    margin: 0.75em 0 0.25em 0;
+    color: #873960;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    clear: both;
+    text-decoration: none;
+    line-height: 110%;
+}
+
+h1 a, h2 a, h3 a, h4 a, h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited {
+    color: #006383;
+}
+
+h1 {
+	margin: 0 0 1em 0;
+    font-size: 1.6em;
+}
+
+h2 {
+    font-size: 1.4em;
+    color: #222;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+h4 {
+    font-size: 1.2em;
+    font-style: italic;
+    color: #222;
+}
+
+h5 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+p {
+	margin-bottom: 1.1em;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+.target {
+	cursor: pointer;
+}
+
+.hidden {
+	display: none;
+}
+
+.break {
+	clear: both;
+}
+
+ul {
+    margin-left: 0;
+    list-style-type: none;
+}
+
+ul li {
+    padding: 2px 0;
+}
+
+.message {
+	border: 1px solid #F0C000;
+	padding: 1em;
+	background-color: #FFFFCE;
+	margin-bottom: 1em;
+}
+
+.message ul, .message ul li {
+	border-top: none;
+	margin: 0;
+	margin-bottom: 0;
+	background-color: none;
+}
+
+table {
+	width: auto;
+	margin-bottom: 2em;
+	background-color: #fff;
+	border-spacing: 0;
+}
+
+tr {
+    border: 0;
+}
+
+tr:nth-child(even) {
+	background-color: #fafafa;
+	border-top: 1px solid #eee;
+}
+
+td, th {
+	padding: 5px;
+}
+
+td {
+    border-top: 1px solid #eee;
+}
+
+tr:first-child td {
+    border-top: none;
+}
+
+th {
+    font-weight: bold;
+    text-align: left;
+}
