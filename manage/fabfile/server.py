@@ -103,8 +103,7 @@ def ftp_push(filename, ftp_address, username, password):
 def ftp_fetch(filename, ftp_address, target_path, username, password):
     with cd(target_path):
         with hide('output','running'):
-            run('curl %s/%s --user %s:%s --ftp-create-dirs -o %s' % (ftp_address, filename, username, password,
-                                                                     filename))
+            run('curl %s/%s --user %s:%s -o %s' % (ftp_address, filename, username, password, filename))
 
 def pack(filename, path):
     source_file_and_path = "%s/%s" % (path,filename)
@@ -128,15 +127,19 @@ def download_from_ftp_and_unpack(snapshot_name, name, path, username, password):
     unpack(name, path)
 
 
-def clean_path(tar_target_path, use_sudo=False):
-    if use_sudo:
+def clean_path(tar_target_path, use_sudo=False, use_local=False):
+    if use_local:
+        local("rm -rf %s*" % tar_target_path)
+    elif use_sudo:
         sudo("rm -rf %s*" % tar_target_path)
     else:
         run("rm -rf %s*" % tar_target_path)
 
 
-def create_path(tar_target_path, use_sudo=False):
-    if use_sudo:
+def create_path(tar_target_path, use_sudo=False, use_local=False):
+    if use_local:
+        local("mkdir -p %s" % tar_target_path)
+    elif use_sudo:
         sudo("mkdir -p %s" % tar_target_path)
     else:
         run("mkdir -p %s" % tar_target_path)

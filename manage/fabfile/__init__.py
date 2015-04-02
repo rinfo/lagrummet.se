@@ -46,4 +46,5 @@ import target
 import server
 import sysconf
 import lagrummet
+import docker
 
