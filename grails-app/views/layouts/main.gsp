@@ -24,7 +24,7 @@
 
             <div id="cookie-banner">
                 Lagrummet.se använder kakor (cookies) för statistik och sökfunktion.
-                <a style="cursor: pointer;" href="om-webbplatsen/kakor" id="more-cookie-text">Om kakor och hur vi använder dem</a>
+                <a style="cursor: pointer;" href="/om-webbplatsen/kakor" id="more-cookie-text">Om kakor och hur vi använder dem</a>
                 <br>
                 <input type="button" class="cookie-button" id="cookie-button" value="Jag accepterar kakor" />
             </div>
