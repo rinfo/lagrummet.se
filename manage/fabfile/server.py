@@ -136,7 +136,9 @@ def clean_path(tar_target_path, use_sudo=False, use_local=False):
         run("rm -rf %s*" % tar_target_path)
 
 
-def create_path(tar_target_path, use_sudo=False, use_local=False):
+def create_path(tar_target_path, use_sudo=False, use_local=False, clean=False):
+    if clean:
+        clean_path(tar_target_path, use_sudo=use_sudo, use_local=use_local)
     if use_local:
         local("mkdir -p %s" % tar_target_path)
     elif use_sudo:

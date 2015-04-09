@@ -4,21 +4,25 @@ import time
 import sys
 from fabfile.lagrummet import build_war
 from fabfile.server import clean_path, create_path
+from fabfile.sysconf import get_value_from_password_store, PASSWORD_FILE_DB_USERNAME_PARAM_NAME, \
+    PASSWORD_FILE_DB_PASSWORD_PARAM_NAME
 
 
 @task()
 def install():
-    local_or_remote_cmd('sudo apt-get install docker.io -y')
+    # Not working properly
+    local_or_remote_cmd('apt-get update')
+    local_or_remote_cmd('apt-get install docker.io -y')
 
 
 @task()
-def build_lagrummet(name='lagrummet-www', tag=None):
-    build_war()
+def build_lagrummet(name='lagrummet-www', tag=None, rebuild_war=True, push_to_target=True):
+    if rebuild_war:
+        build_war()
 
     work_dir = '/tmp/docker_work/'
     dockerfile_path = 'manage/docker/lagrummet-www/*'
-    clean_path(work_dir, use_local=True)
-    create_path(work_dir, use_local=True)
+    create_path(work_dir, use_local=True, clean=True)
 
     with lcd(env.projectroot):
         local('cp %s %s.' % (env.localwar, work_dir))
@@ -26,12 +30,41 @@ def build_lagrummet(name='lagrummet-www', tag=None):
         local('cp manage/sysconf/local/etc/lagrummet.se/lagrummet.se-config.groovy %s.' % (work_dir))
 
     with lcd(work_dir):
-        docker_build(name, tag)
+        docker_build(name, tag, is_local=True)
+        if push_to_target:
+            tmp_file = '%s.tar' % name
+            docker_save(name, tmp_file, is_local=True)
+            put(tmp_file)
+            docker_load(tmp_file)
+
+
+@task()
+def build_mysql(name='lagrummet-mysql', tag=None, push_to_target=True):
+
+    work_dir = '/tmp/docker_work/'
+    dockerfile_path = 'manage/docker/lagrummet-mysql/*'
+    create_path(work_dir, use_local=True, clean=True)
+
+    with lcd(env.projectroot):
+        local('cp %s %s.' % (dockerfile_path, work_dir))
+
+    with lcd(work_dir):
+        docker_build(name, tag, is_local=True)
+        if push_to_target:
+            tmp_file = '%s.tar' % name
+            docker_save(name, tmp_file, is_local=True)
+            put(tmp_file)
+            docker_load(tmp_file)
 
 
 @task()
 def run_lagrummet(name='lagrummet-www', volume='/etc/lagrummet.se/:/etc/lagrummet.se/'):
-    docker_run(name, port=8080, volume=volume , daemon=True)
+    docker_run(name, name=name, port=8080, volume=volume , daemon=True)
+
+
+@task()
+def run_mysql(name='lagrummet-mysql'):
+    docker_run(name, name=name, port=3306, params='MYSQL_ROOT_PASSWORD=changeme', daemon=True)
 
 
 @task()
@@ -40,7 +73,7 @@ def run_lagrummet_old(name='lagrummet-www'):
 
     try:
         docker_inspect(name)
-        if not isRunning(name):
+        if not is_running(name):
             docker_start(name)
     except DockerException as e:
         print "Tomcat7 docker not found. Will preform docker run."
@@ -63,16 +96,18 @@ def run_lagrummet_old(name='lagrummet-www'):
 
 @task()
 def run_mysql_with_test_database(name='lagrummet-mysql', local_database_dump_file_name_and_path=None):
-    db_pwd = 'changeme'
+    db_root_pwd = 'changeme'
+    db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, default_value='root')
+    db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, default_value='changeme')
 
     setup_mysql = False
     try:
         docker_inspect(name)
-        if not isRunning(name):
+        if not is_running(name):
             docker_start(name)
     except DockerException as e:
         print "Mysql docker not found. Will preform docker run."
-        docker_run('mysql:5.5', name, port=3306, params='MYSQL_ROOT_PASSWORD=%s' % db_pwd, daemon=True)
+        docker_run('mysql:5.5', name, port=3306, params='MYSQL_ROOT_PASSWORD=%s' % db_root_pwd, daemon=True)
         setup_mysql = True
 
     wait_for_container_to_start(name)
@@ -88,19 +123,25 @@ def run_mysql_with_test_database(name='lagrummet-mysql', local_database_dump_fil
             local_path = 'manage/sysconf/%s/mysql/' % env.target
         time.sleep(5)
         if setup_mysql:
-            put_and_local_or_remote_cmd('mysql -u root --password=%s -h %s' % (db_pwd, get_docker_ip_address()) + ' < %s', 'setup-mysql.sql', local_path)
-        put_and_local_or_remote_cmd('mysql -u root --password=%s -h %s' % (db_pwd, get_docker_ip_address()) + ' lagrummet < %s', filename, local_path)
+            put_and_local_or_remote_cmd('mysql -u root --password=%s -h %s' % (db_root_pwd, get_docker_ip_address()) + ' < %s', 'setup-mysql.sql', local_path)
+        put_and_local_or_remote_cmd('mysql -u root --password=%s -h %s' % (db_root_pwd, get_docker_ip_address()) + ' lagrummet < %s', filename, local_path)
 
 
 @task()
-def isRunning(name):
-    reply = docker_inspect(name, '.State.Running')
-    if reply=='true':
-        return True
-    if reply=='false':
-        return False
-    return None
-
+def is_running(name):
+    try:
+        reply = docker_inspect(name, '.State.Running')
+        if reply=='true':
+            return True
+        if reply=='false':
+            return False
+        return None
+    except DockerException as e:
+        print "Received DockerException %s! Ignoring!" % e.message
+        return None
+    except:
+        print "Received unknown error %s! Ignoring!" % sys.exc_info()[0]
+        return None
 
 @task()
 def delete_all_images(force=False):
@@ -122,16 +163,24 @@ def delete_all_untagged_containers(force=False):
 
 def docker_inspect(name, json_path=None):
     json_path_cmd = '-f \'{{ json %s }}\'' % json_path if json_path else ''
-    return local_or_remote_cmd('docker inspect %s %s' % (json_path_cmd, name) )
+    return local_or_remote_cmd('docker inspect %s %s' % (json_path_cmd, name))
 
 
 def docker_start(name):
     return local_or_remote_cmd('docker start %s' % name )
 
 
-def docker_build(name, tag=None):
+def docker_save(name, filename, is_local=None):
+    return local_or_remote_cmd('docker save %s > %s' % (name, filename), is_local=is_local)
+
+
+def docker_load(filename):
+    return local_or_remote_cmd('docker load < %s' % filename )
+
+
+def docker_build(name, tag=None, is_local=None):
     tag_param = ':%s' % tag if tag else ''
-    local_or_remote_cmd('docker build --rm=true -t %s%s .' % (name,tag_param) )
+    local_or_remote_cmd('docker build --rm=true -t %s%s .' % (name,tag_param), capture=False, is_local=is_local)
 
 
 def docker_run(target, name=None, port=None, params=None, volume=None, daemon=False):
@@ -140,7 +189,6 @@ def docker_run(target, name=None, port=None, params=None, volume=None, daemon=Fa
     daemon_cmd = ' -d' if daemon else ''
     volume_cmd = ' -v %s' % volume if volume else ''
     params_cmd = ' -e %s' % params if params else ''
-    params_cmd = ''
     if params:
         try:
             for k,v in params.iteritems():
@@ -148,8 +196,8 @@ def docker_run(target, name=None, port=None, params=None, volume=None, daemon=Fa
         except:
             params_cmd = ' -e %s' % params
 
-    cmd = 'docker run %s%s%s%s %s' % (name_cmd, port_cmd, params_cmd, daemon_cmd, target)
-    return local_or_remote_cmd(cmd)
+    cmd = 'docker run %s%s%s%s%s %s' % (name_cmd, port_cmd, volume_cmd, params_cmd, daemon_cmd, target)
+    return local_or_remote_cmd(cmd, capture=False)
 
 
 def docker_pull(name):
@@ -158,7 +206,7 @@ def docker_pull(name):
 
 def wait_for_container_to_start(name):
     count = 20
-    while not isRunning(name):
+    while not is_running(name):
         time.sleep(1)
         count -= 1
         if count==0:
@@ -170,30 +218,43 @@ def get_docker_ip_address():
 
 
 def put_and_local_or_remote_cmd(cmd, filename, local_path):
+    print cmd
     try:
         if env.target == 'local':
             reply = local(cmd % (local_path+filename), capture=True)
         else:
+            print ""
             put("%s%s" % (local_path,filename), "/tmp")
-            reply = sudo(cmd % filename, capture=True)
+            reply = sudo(cmd % ('/tmp/%s' % filename))
         return reply
     except SystemExit as e:
         raise DockerException(e.message)
     except:
+        print sys.exc_info()[0]
         raise DockerException(sys.exc_info()[0])
 
 
-def local_or_remote_cmd(cmd):
-    try:
-        if env.target == 'local':
-            reply = local(cmd, capture=True)
+def local_or_remote_cmd(cmd, capture=True, is_local=None):
+    print cmd
+    if is_local is None:
+        is_local = env.target == 'local'
+    if capture:
+        try:
+            if is_local:
+                reply = local(cmd, capture=True)
+            else:
+                reply = sudo(cmd)
+            return reply
+        except SystemExit as e:
+            raise DockerException(e.message)
+        except:
+            print sys.exc_info()[0]
+            raise DockerException(sys.exc_info()[0])
+    else:
+        if is_local:
+            local(cmd)
         else:
-            reply = sudo(cmd, capture=True)
-        return reply
-    except SystemExit as e:
-        raise DockerException(e.message)
-    except:
-        raise DockerException(sys.exc_info()[0])
+            sudo(cmd)
 
 
 class DockerException(Exception):
