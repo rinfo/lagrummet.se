@@ -16,8 +16,22 @@ def install():
 
 
 @task()
+def build_all(name='lagrummet-www', tag=None, rebuild_war=True, push_to_target=True):
+    build_db(tag=tag, push_to_target=push_to_target)
+    build_config(tag=tag, push_to_target=push_to_target)
+    build_lagrummet(tag=tag, rebuild_war=rebuild_war, push_to_target=push_to_target)
+
+
+@task()
+def run_all():
+    run_db()
+    run_config()
+    run_lagrummet()
+
+
+@task()
 def build_lagrummet(name='lagrummet-www', tag=None, rebuild_war=True, push_to_target=True):
-    if rebuild_war:
+    if rebuild_war==True:
         build_war()
 
     work_dir = '/tmp/docker_work/'
@@ -27,7 +41,7 @@ def build_lagrummet(name='lagrummet-www', tag=None, rebuild_war=True, push_to_ta
     with lcd(env.projectroot):
         local('cp %s %s.' % (env.localwar, work_dir))
         local('cp %s %s.' % (dockerfile_path, work_dir))
-        local('cp manage/sysconf/local/etc/lagrummet.se/lagrummet.se-config.groovy %s.' % (work_dir))
+        local('cp manage/sysconf/%s/etc/lagrummet.se/lagrummet.se-config.groovy %s.' % (env.target, work_dir))
 
     with lcd(work_dir):
         docker_build(name, tag, is_local=True)
@@ -37,12 +51,14 @@ def build_lagrummet(name='lagrummet-www', tag=None, rebuild_war=True, push_to_ta
             put(tmp_file)
             docker_load(tmp_file)
 
+    clean_path(work_dir, use_local=True)
+
 
 @task()
-def build_mysql(name='lagrummet-mysql', tag=None, push_to_target=True):
+def build_db(name='lagrummet-db', tag=None, push_to_target=True):
 
     work_dir = '/tmp/docker_work/'
-    dockerfile_path = 'manage/docker/lagrummet-mysql/*'
+    dockerfile_path = 'manage/docker/lagrummet-db/*'
     create_path(work_dir, use_local=True, clean=True)
 
     with lcd(env.projectroot):
@@ -56,15 +72,44 @@ def build_mysql(name='lagrummet-mysql', tag=None, push_to_target=True):
             put(tmp_file)
             docker_load(tmp_file)
 
-
-@task()
-def run_lagrummet(name='lagrummet-www', volume='/etc/lagrummet.se/:/etc/lagrummet.se/'):
-    docker_run(name, name=name, port=8080, volume=volume , daemon=True)
+    clean_path(work_dir, use_local=True)
 
 
 @task()
-def run_mysql(name='lagrummet-mysql'):
+def build_config(name='lagrummet-config', tag=None, push_to_target=True):
+
+    work_dir = '/tmp/docker_work/'
+    dockerfile_path = 'manage/docker/lagrummet-config/*'
+    create_path(work_dir, use_local=True, clean=True)
+
+    with lcd(env.projectroot):
+        local('cp %s %s.' % (dockerfile_path, work_dir))
+
+    with lcd(work_dir):
+        docker_build(name, tag, is_local=True)
+        if push_to_target:
+            tmp_file = '%s.tar' % name
+            docker_save(name, tmp_file, is_local=True)
+            put(tmp_file)
+            docker_load(tmp_file)
+
+    clean_path(work_dir, use_local=True)
+
+
+@task()
+def run_lagrummet(name='lagrummet-www'):
+    docker_run(name, name=name, port=8080, link="lagrummet-db:lagrummet-db", daemon=True)
+
+
+@task()
+def run_db(name='lagrummet-db'):
     docker_run(name, name=name, port=3306, params='MYSQL_ROOT_PASSWORD=changeme', daemon=True)
+
+
+@task()
+def run_config(name='lagrummet-config', volume=None):
+    #docker_run(name, name=name, params='MYSQL_ROOT_PASSWORD=changeme', link="lagrummet-db:lagrummet-db", volume='/etc/lagrummet.se/:/etc/lagrummet.se/')
+    docker_run(name, name=name, params='MYSQL_ROOT_PASSWORD=changeme', link="lagrummet-db:lagrummet-db", volume=volume)
 
 
 @task()
@@ -95,7 +140,7 @@ def run_lagrummet_old(name='lagrummet-www'):
 
 
 @task()
-def run_mysql_with_test_database(name='lagrummet-mysql', local_database_dump_file_name_and_path=None):
+def run_mysql_with_test_database(name='lagrummet-db', local_database_dump_file_name_and_path=None):
     db_root_pwd = 'changeme'
     db_username = get_value_from_password_store(PASSWORD_FILE_DB_USERNAME_PARAM_NAME, default_value='root')
     db_password = get_value_from_password_store(PASSWORD_FILE_DB_PASSWORD_PARAM_NAME, default_value='changeme')
@@ -183,11 +228,12 @@ def docker_build(name, tag=None, is_local=None):
     local_or_remote_cmd('docker build --rm=true -t %s%s .' % (name,tag_param), capture=False, is_local=is_local)
 
 
-def docker_run(target, name=None, port=None, params=None, volume=None, daemon=False):
+def docker_run(target, name=None, port=None, params=None, volume=None, link=None, daemon=False):
     name_cmd = ' --name=%s' % name if name else ''
     port_cmd = ' -p %s:%s' % (str(port), str(port)) if port else ''
     daemon_cmd = ' -d' if daemon else ''
     volume_cmd = ' -v %s' % volume if volume else ''
+    link_cmd = ' --link %s' % link if link else ''
     params_cmd = ' -e %s' % params if params else ''
     if params:
         try:
@@ -196,7 +242,7 @@ def docker_run(target, name=None, port=None, params=None, volume=None, daemon=Fa
         except:
             params_cmd = ' -e %s' % params
 
-    cmd = 'docker run %s%s%s%s%s %s' % (name_cmd, port_cmd, volume_cmd, params_cmd, daemon_cmd, target)
+    cmd = 'docker run %s%s%s%s%s%s %s' % (name_cmd, port_cmd, volume_cmd, params_cmd, link_cmd, daemon_cmd, target)
     return local_or_remote_cmd(cmd, capture=False)
 
 

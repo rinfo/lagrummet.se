@@ -7,7 +7,7 @@ lagrummet.rdl.service.baseurl="http://127.0.0.1:8383/"
 //lagrummet.rdl.service.baseurl="http://localhost:8383/"
 lagrummet.rdl.rinfo.baseurl="http://localhost:8180/"
 
-dataSource.url = "jdbc:mysql://127.0.0.1:3306/lagrummet"
+dataSource.url = "jdbc:mysql://lagrummet-db:3306/lagrummet"
 dataSource.username = "lagrummet2"
 dataSource.password = "changeme"
 

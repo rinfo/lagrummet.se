@@ -1,5 +1,5 @@
 FROM debian:wheezy
-MAINTAINER Domstolsverket RINFO <rinfo@dom.se>
+MAINTAINER Domstolsverket RINFO <rinfo@lagrummet.se>
 
 RUN apt-get update
 
