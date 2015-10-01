@@ -9,4 +9,3 @@ dataSource.username = "lagrummet2"
 dataSource.password = "changeme"
 
 lagrummet.googleAnalytics.webPropertyId = "UA-49599039-1"
-
