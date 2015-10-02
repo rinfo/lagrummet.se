@@ -17,11 +17,6 @@
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
-            <div id="beta-banner">
-                <strong>BETA!</strong>Du är nu i betaversionen av lagrummet.se. Här kan du direkt på sajten söka SFS och domstolars rättspraxis. Sökfunktionaliteten är under test och utveckling vilket innebär att fel förekommer.
-                <a style="cursor: pointer;" href="http://www.lagrummet.se">Gå tillbaka till lagrummet.se</a>
-            </div>
-
             <div id="cookie-banner">
                 Lagrummet.se använder kakor (cookies) för statistik och sökfunktion.
                 <a style="cursor: pointer;" href="/om-webbplatsen/kakor" id="more-cookie-text">Om kakor och hur vi använder dem</a>
