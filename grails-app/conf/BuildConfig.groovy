@@ -39,7 +39,7 @@ grails.project.dependency.resolution = {
         //runtime 'org.springframework:spring-test:3.2.5.RELEASE'
         //test 'org.springframework:spring-test:3.2.5.RELEASE'
 
-
+        test 'org.seleniumhq.selenium:selenium-java:2.47.2'
 
         build("org.tmatesoft.svnkit:svnkit:1.3.5") {
             excludes "jna", "trilead-ssh2", "sqljet"
