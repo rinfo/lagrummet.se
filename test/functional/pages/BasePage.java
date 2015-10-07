@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public abstract class BasePage {
 
-    protected final String BASE_URL = "https://www.beta.lagrummet.se";
+    protected final String BASE_URL = "http://stage.lagrummet.se";
     private final WebDriver driver;
 
     public BasePage(WebDriver driver) {
