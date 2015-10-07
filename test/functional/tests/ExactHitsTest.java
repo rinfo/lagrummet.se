@@ -122,6 +122,20 @@ public class ExactHitsTest {
     }
 
     @Test
+    public void searchForMOD_2() {
+        //when
+        searchResultPage.searchFor("MÖD 2000:30");
+
+        //then
+        assertEquals(3, searchResultPage.getTotalHits());
+        assertEquals(2, searchResultPage.getNumberOfCourtCasesHits());
+        assertEquals(1, searchResultPage.getNumberOfLawsAndRegulationsHits());
+
+        assertEquals("MÖD 2000:30", searchResultPage.getCourtCaseHits().get(0));
+        assertEquals("RH 2000:30", searchResultPage.getCourtCaseHits().get(1));
+    }
+
+    @Test
     public void searchForAD() {
         //when
         searchResultPage.searchFor("AD 2010 nr 73");
