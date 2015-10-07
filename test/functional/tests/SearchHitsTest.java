@@ -27,6 +27,8 @@ public class SearchHitsTest {
         assertEquals("räksmörgåsar", searchResultPage.getMatchTerms().get(0));
         assertEquals(1, searchResultPage.getNumberOfCourtCasesHits());
         assertEquals("AD 2005 nr 4", searchResultPage.getCourtCaseHits().get(0));
+
+        assertEquals(1, searchResultPage.getTotalHits());
     }
 
     @Test
@@ -53,6 +55,8 @@ public class SearchHitsTest {
         assertEquals("Artskyddsförordning (1998:179)", lawsAndRegulationsHits.get(1));
         assertEquals("Förordning (2006:1017) om ändring i artskyddsförordningen (1998:179)", lawsAndRegulationsHits.get(2));
         assertEquals("Förordning (2001:447) om ändring i artskyddsförordningen (1998:179)", lawsAndRegulationsHits.get(3));
+
+        assertEquals(5, searchResultPage.getTotalHits());
     }
 
     @AfterClass

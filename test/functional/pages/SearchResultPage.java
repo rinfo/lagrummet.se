@@ -25,7 +25,7 @@ public class SearchResultPage extends BasePage {
         return null;
     }
 
-    public void searchFor(String query){
+    public void searchFor(String query) {
         getDriver().get("https://beta.lagrummet.se/search?cat=Alla&query=" + query);
     }
 
@@ -46,6 +46,11 @@ public class SearchResultPage extends BasePage {
     public int getNumberOfLawsAndRegulationsHits() {
         String text = getDriver().findElement(By.cssSelector("#LagarHead > .count")).getText();
         return Integer.parseInt(getNumberInsideParenthesis(text));
+    }
+
+    public int getTotalHits() {
+        String total = getDriver().findElement(By.cssSelector(".showAllLabel")).getText();
+        return Integer.parseInt(total.replaceAll("[\\D]", ""));
     }
 
     public List<String> getCourtCaseHits() {
@@ -71,6 +76,6 @@ public class SearchResultPage extends BasePage {
     }
 
     public static String getNumberInsideParenthesis(String string) {
-        return  string.substring(string.indexOf("(") + 1, string.indexOf(")"));
+        return string.substring(string.indexOf("(") + 1, string.indexOf(")"));
     }
 }
