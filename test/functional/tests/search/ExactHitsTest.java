@@ -1,4 +1,4 @@
-package tests;
+package tests.search;
 
 import org.junit.AfterClass;
 import org.junit.Test;
@@ -12,7 +12,11 @@ import static setup.SeleniumDriver.getDriver;
 
 public class ExactHitsTest {
 
-    private SearchResultPage searchResultPage = PageFactory.initElements(getDriver(), SearchResultPage.class);
+    private SearchResultPage searchResultPage;
+
+    public ExactHitsTest() {
+        searchResultPage = PageFactory.initElements(getDriver(), SearchResultPage.class);
+    }
 
     @Test
     public void searchForSFS() {
@@ -159,10 +163,4 @@ public class ExactHitsTest {
 
         assertEquals("MD 2011:23", searchResultPage.getCourtCaseHits().get(0));
     }
-
-    @AfterClass
-    public static void tearDown() throws MalformedURLException {
-        getDriver().quit();
-    }
-
 }

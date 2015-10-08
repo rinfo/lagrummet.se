@@ -99,6 +99,48 @@ public class SearchResultPage extends BasePage {
         return courtCases;
     }
 
+    public int searchHitsByCategoryAndTitle(String category, String title) {
+        List<WebElement> elements = getDriver().findElements(By.xpath(String.format("//ul[@id='%s']/li/p/a[contains(text(), '%s')]", category, title)));
+        for (WebElement element : elements) {
+            if(!element.isDisplayed()) {
+                return 0;
+            }
+        }
+        return elements.size();
+    }
+
+    public List<String> getMatchTermsBySearchHit(String category, String title) {
+        List<String> terms = new ArrayList();
+        List<WebElement> matchTerms = getDriver().findElements(By.xpath(
+                String.format("//ul[@id='%s']/li/p/a[contains(text(), '%s')]/../../p/span[@class='match']", category, title)
+        ));
+
+        //hack för att ta ut match-strängar från "information från lagrummet.se"
+        //kommer som <em> istället för <span>
+        if(matchTerms.isEmpty()) {
+            matchTerms = getDriver().findElements(By.xpath(
+                    String.format("//ul[@id='%s']/li/p/a[contains(text(), '%s')]/../../p/em[@class='match']", category, title)
+            ));
+        }
+
+        for (WebElement matchTerm : matchTerms) {
+            terms.add(matchTerm.getText());
+        }
+        return terms;
+    }
+
+    public List<String> getMatchTermsInTitleBySearchHit(String category, String title) {
+        List<String> terms = new ArrayList();
+        List<WebElement> matchTerms = getDriver().findElements(By.xpath(
+                String.format("//ul[@id='%s']/li/p/a[contains(text(), '%s')]/../../p/a/span[@class='match']", category, title)
+        ));
+
+        for (WebElement matchTerm : matchTerms) {
+            terms.add(matchTerm.getText());
+        }
+        return terms;
+    }
+
     public static String getNumberInsideParenthesis(String string) {
         return string.substring(string.indexOf("(") + 1, string.indexOf(")"));
     }

@@ -1,6 +1,7 @@
 package setup;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -27,7 +28,7 @@ public class SeleniumDriver {
                 caps.setCapability("browser_version", "40.0");
                 caps.setCapability("os", "OS X");
                 caps.setCapability("os_version", "Yosemite");
-                caps.setCapability("resolution", "1280x960");
+                caps.setCapability("resolution", "1920x1080");
                 caps.setCapability("browserstack.debug", "true");
                 driver = new RemoteWebDriver(new URL(REMOTE_URL), caps);
             } catch (MalformedURLException e) {
