@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import setup.SeleniumDriver;
 
 import static setup.SeleniumDriver.getDriver;
 
@@ -8,7 +9,7 @@ public class CookiesPage extends BasePage<CookiesPage>{
 
     @Override
     public boolean isAt() {
-        return isDisplayed(getDriver().findElement(By.xpath("//div[@id='content']/article/header/h1[contains(text(), 'Kakor (cookies)')]")));
+        return  SeleniumDriver.isDisplayed(getDriver().findElement(By.xpath("//div[@id='content']/article/header/h1[contains(text(), 'Kakor (cookies)')]")));
     }
 
     @Override

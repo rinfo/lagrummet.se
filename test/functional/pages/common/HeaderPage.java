@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.SiteMapPage;
+import setup.SeleniumDriver;
 
 public class HeaderPage extends BasePage<HeaderPage> {
 
@@ -17,15 +18,15 @@ public class HeaderPage extends BasePage<HeaderPage> {
     WebElement listenLink;
 
     public boolean listenLinkPresent() {
-        return isDisplayed(listenLink);
+        return  SeleniumDriver.isDisplayed(listenLink);
     }
 
     public boolean englishLinkPresent() {
-        return isDisplayed(englishLink);
+        return  SeleniumDriver.isDisplayed(englishLink);
     }
 
     public boolean siteMapLinkPresent() {
-        return isDisplayed(siteMapLink);
+        return  SeleniumDriver.isDisplayed(siteMapLink);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class HeaderPage extends BasePage<HeaderPage> {
     }
 
     public SiteMapPage clickOnSiteMapLink() {
-        clickOn(siteMapLink);
+        SeleniumDriver.clickOn(siteMapLink);
         return new SiteMapPage();
     }
 }

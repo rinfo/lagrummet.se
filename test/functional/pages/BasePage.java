@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import static setup.SeleniumDriver.getDriver;
@@ -18,11 +17,4 @@ public abstract class BasePage<T> {
 
     public abstract String getUrl();
 
-    protected boolean isDisplayed(WebElement webElement) {
-        return webElement.isDisplayed();
-    }
-
-    protected void clickOn(WebElement webElement) {
-        webElement.click();
-    }
 }

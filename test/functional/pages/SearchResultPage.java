@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import setup.SeleniumDriver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +98,7 @@ public class SearchResultPage extends BasePage <SearchResultPage>{
     public int searchHitsByCategoryAndTitle(String category, String title) {
         List<WebElement> elements = getDriver().findElements(By.xpath(String.format("//ul[@id='%s']/li/p/a[contains(text(), '%s')]", category, title)));
         for (WebElement element : elements) {
-            if(!isDisplayed(element)) {
+            if(! SeleniumDriver.isDisplayed(element)) {
                 return 0;
             }
         }

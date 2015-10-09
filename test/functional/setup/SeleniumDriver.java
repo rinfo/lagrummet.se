@@ -1,6 +1,7 @@
 package setup;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -38,4 +39,11 @@ public class SeleniumDriver {
         return driver;
     }
 
+    public static boolean isDisplayed(WebElement webElement) {
+        return webElement.isDisplayed();
+    }
+
+    public static void clickOn(WebElement webElement) {
+        webElement.click();
+    }
 }
