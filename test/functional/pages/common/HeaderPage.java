@@ -6,7 +6,7 @@ import pages.BasePage;
 import pages.SiteMapPage;
 import setup.SeleniumDriver;
 
-public class HeaderPage extends BasePage<HeaderPage> {
+public class HeaderPage {
 
     @FindBy(linkText = "English")
     WebElement englishLink;
@@ -27,16 +27,6 @@ public class HeaderPage extends BasePage<HeaderPage> {
 
     public boolean siteMapLinkPresent() {
         return  SeleniumDriver.isDisplayed(siteMapLink);
-    }
-
-    @Override
-    public boolean isAt() {
-        return false;
-    }
-
-    @Override
-    public String getUrl() {
-        return null;
     }
 
     public SiteMapPage clickOnSiteMapLink() {

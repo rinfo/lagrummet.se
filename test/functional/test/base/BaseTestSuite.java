@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
 import static setup.SeleniumDriver.getDriver;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({FooterTest.class, TopMenuTest.class, SiteMapTest.class})
+@Suite.SuiteClasses({FooterTest.class, TopMenuTest.class, SiteMapTest.class, MenuTest.class, ErrorPageTest.class})
 public class BaseTestSuite {
 
     @BeforeClass
