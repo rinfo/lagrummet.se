@@ -1,19 +1,28 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
-public abstract class BasePage {
+import static setup.SeleniumDriver.getDriver;
+
+public abstract class BasePage<T> {
 
     protected final String BASE_URL = "http://stage.lagrummet.se";
-    private final WebDriver driver;
 
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
-        driver.get(BASE_URL);
+    public T openPage(Class<T> clazz) {
+        T page = PageFactory.initElements(getDriver(), clazz);
+        getDriver().get(BASE_URL + getUrl());
+        return page;
     }
-
     public abstract boolean isAt();
 
     public abstract String getUrl();
 
+    protected boolean isDisplayed(WebElement webElement) {
+        return webElement.isDisplayed();
+    }
+
+    protected void clickOn(WebElement webElement) {
+        webElement.click();
+    }
 }

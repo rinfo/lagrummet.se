@@ -1,4 +1,4 @@
-package tests.search;
+package test.base;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -8,8 +8,8 @@ import org.junit.runners.Suite;
 import static setup.SeleniumDriver.getDriver;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ExactHitsTest.class, SearchHitsTest.class})
-public class SearchTestSuite {
+@Suite.SuiteClasses({FooterTest.class, TopMenuTest.class, SiteMapTest.class})
+public class BaseTestSuite {
 
     @BeforeClass
     public static void setUp() {

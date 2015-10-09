@@ -1,4 +1,4 @@
-package tests.search;
+package test.search;
 
 import org.junit.AfterClass;
 import org.junit.Test;

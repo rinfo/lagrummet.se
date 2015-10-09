@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -9,11 +8,7 @@ import java.util.List;
 
 import static setup.SeleniumDriver.getDriver;
 
-public class SearchResultPage extends BasePage {
-
-    public SearchResultPage(WebDriver driver) {
-        super(driver);
-    }
+public class SearchResultPage extends BasePage <SearchResultPage>{
 
     @Override
     public boolean isAt() {
@@ -102,7 +97,7 @@ public class SearchResultPage extends BasePage {
     public int searchHitsByCategoryAndTitle(String category, String title) {
         List<WebElement> elements = getDriver().findElements(By.xpath(String.format("//ul[@id='%s']/li/p/a[contains(text(), '%s')]", category, title)));
         for (WebElement element : elements) {
-            if(!element.isDisplayed()) {
+            if(!isDisplayed(element)) {
                 return 0;
             }
         }
