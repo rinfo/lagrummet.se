@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import setup.SeleniumDriver;
 
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ import java.util.List;
 import static setup.SeleniumDriver.getDriver;
 
 public class SearchResultPage extends BasePage <SearchResultPage>{
+
+    @FindBy(linkText = "Sökhjälp")
+    WebElement searchHelpLink;
 
     @Override
     public boolean isAt() {
@@ -139,5 +143,10 @@ public class SearchResultPage extends BasePage <SearchResultPage>{
 
     public static String getNumberInsideParenthesis(String string) {
         return string.substring(string.indexOf("(") + 1, string.indexOf(")"));
+    }
+
+    public SearchHelpPage clickOnSearchHelpLink() {
+        SeleniumDriver.clickOn(searchHelpLink);
+        return new SearchHelpPage();
     }
 }
