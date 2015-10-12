@@ -1,11 +1,8 @@
 package test.search;
 
-import org.junit.AfterClass;
 import org.junit.Test;
 import org.openqa.selenium.support.PageFactory;
 import pages.SearchResultPage;
-
-import java.net.MalformedURLException;
 
 import static junit.framework.TestCase.assertEquals;
 import static setup.SeleniumDriver.getDriver;

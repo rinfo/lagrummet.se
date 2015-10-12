@@ -21,7 +21,7 @@ public class MenuTest {
         assertEquals(true,startPage.getMenuPage().caseLawLinksPresent());
         assertEquals(true,startPage.getMenuPage().internationalMaterialLinkPresent());
         assertEquals(true,startPage.getMenuPage().allLegalSourcesLinkPresent());
-        assertEquals(true,startPage.getMenuPage().responsibilitesLinkPresent());
+        assertEquals(true,startPage.getMenuPage().responsibilitiesLinkPresent());
         assertEquals(true,startPage.getMenuPage().wordListLinkPresent());
         assertEquals(true,startPage.getMenuPage().rightProcessLinkPresent());
         assertEquals(true,startPage.getMenuPage().faqLinkPresent());

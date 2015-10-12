@@ -40,6 +40,9 @@ public class FooterPage {
     @FindBy(xpath = "//footer[@id='siteFooter']/ul/li[contains(text(), 'Kontakta oss')]")
     WebElement contactUsLabel;
 
+    @FindBy(xpath = "//footer[@class='reviewed'][contains(text(), 'Senast granskad')]")
+    WebElement latestReviewedLabel;
+
     public boolean aboutPageLabelPresent() {
         return SeleniumDriver.isDisplayed(aboutPageLabel);
     }
@@ -50,6 +53,10 @@ public class FooterPage {
 
     public boolean contactUsLabelPresent() {
         return SeleniumDriver.isDisplayed(contactUsLabel);
+    }
+
+    public boolean latestReviewsLabelPresent() {
+        return SeleniumDriver.isDisplayed(latestReviewedLabel);
     }
 
     public CookiesPage clickOnCookiesPage() {

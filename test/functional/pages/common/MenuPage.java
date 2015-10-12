@@ -31,7 +31,7 @@ public class MenuPage {
     WebElement wordListLink;
 
     @FindBy(linkText = "Rättsprocessens olika steg")
-    WebElement rightProcessLink;
+    WebElement rightsProcessLink;
 
     @FindBy(linkText = "Vanliga frågor")
     WebElement faqLink;
@@ -60,7 +60,7 @@ public class MenuPage {
         return SeleniumDriver.isDisplayed(allLegalSourcesLink);
     }
 
-    public boolean responsibilitesLinkPresent() {
+    public boolean responsibilitiesLinkPresent() {
         return SeleniumDriver.isDisplayed(responsibilitesLink);
     }
 
@@ -69,7 +69,7 @@ public class MenuPage {
     }
 
     public boolean rightProcessLinkPresent() {
-        return SeleniumDriver.isDisplayed(rightProcessLink);
+        return SeleniumDriver.isDisplayed(rightsProcessLink);
     }
 
     public boolean faqLinkPresent() {
