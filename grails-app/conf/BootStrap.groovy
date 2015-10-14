@@ -23,6 +23,7 @@ class BootStrap {
         if (Environment.current == Environment.DEVELOPMENT) {
 
             // start: Login to admin portal
+            /*  TODO: Logic to enable this for admin-tests
             def user = new User(fullName: 'Test Testsson', username: 'testadmin', password: 'testadmin', enabled: true, department: "Domstolsverket").save(failOnError: true)
             def roleAdmin = new SecRole(authority: 'ROLE_ADMIN', name: 'Admin').save(failOnError: true)
             def roleEditor = new SecRole(authority: 'ROLE_EDITOR', name: 'Editor').save(failOnError: true)
@@ -165,7 +166,7 @@ class BootStrap {
 				<li class="heading">L&auml;r dig mer</li>
 				<li><a href="">Om r&auml;ttsinformation</a></li>
 			</ul>''', searchCats: ["Alla", "Lagar", "Rattsfall", "Propositioner", "Utredningar", "Foreskrifter", "Ovrigt"]).save()
-
+*/
             // end
 
 

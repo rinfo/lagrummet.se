@@ -13,8 +13,21 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop','update'
-            url = "jdbc:hsqldb:mem:devDB"
+            //TODO: Logic to enable this for admin-tests
+//            dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+//            url = "jdbc:hsqldb:mem:devDB"
+            pooled = true
+            dbCreate = "update"
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://localhost:3306/lagrummet"
+            username = "root"    //override in external config file
+            password = ""    //override in external config file
+            properties {
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = false
+                validationQuery = "SELECT 1"
+            }
         }
     }
     test {
