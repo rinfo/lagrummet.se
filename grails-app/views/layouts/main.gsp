@@ -37,7 +37,12 @@
                     <nav id="breadcrumbs">
                             <g:breadcrumbs page="${page}" />
                     </nav>
-                    <g:form mapping="search" method="GET" name="search">
+
+        <g:if test="${page?.id == 1}">
+            <h1 class="frontpage-heading">TESTA BETASÖKET PÅ LAGRUMMET.SE</h1>
+        </g:if>
+
+        <g:form mapping="search" method="GET" name="search">
                             <div class="input" id="searchCategory">
                                     <label for="cat">Avgränsa din sökning</label>
                                     <input type="hidden" name="cat" value="Alla">
@@ -52,13 +57,16 @@
                                     </g:each> -->
                                     </select>
                             </div>
-                            <div class="input" id="searchQuery"><g:textField name="query" autocomplete="off"  maxlength="${grailsApplication.config.lagrummet.search.maxLength}" placeholder="Sök bland lagar & förordningar, domstolars rättspraxis och ur texter på lagrummet.se"/><ul id="searchSuggestions"></ul></div>
-                            <g:submitButton name="searchSubmit" value="Sök"/>
+                            <div class="input" id="searchQuery">
+                                <g:textField name="query" autocomplete="off"  maxlength="${grailsApplication.config.lagrummet.search.maxLength}" />
+                                <ul id="searchSuggestions"></ul>
+                            </div>
+                            <g:submitButton name="searchSubmit" value=""/>
                     </g:form>
                     <p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
             <div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>
             </header>
-		
+
             <div id="content">
                 <g:layoutBody />
                 <footer id="siteFooter">

@@ -404,6 +404,21 @@ article.frontpage {
     width: 720px;
 }
 
+.frontpage.content {
+	width: 518px;
+	margin: 0 auto;
+}
+
+.frontpage-heading {
+	font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 28px;
+	padding-top: 58px;
+	margin: 0;
+	width: 100%;
+	text-align: center;
+}
+
 article.editorial ul, article.editorial ol {
     margin: 0 0 1em 1em;
 }
@@ -748,7 +763,7 @@ article.legalSources section.Foreskrifter h2 {
 	margin: 1em 0;
 	padding: 0;
 	font-weight: bold;
-	color: #585858;
+	color: #252525;
 	height: 40px;
 	clear: both;
     position: relative;
@@ -757,30 +772,54 @@ article.legalSources section.Foreskrifter h2 {
 }
 
 #search > *{
-	height: 30px;
 	width: 314px;
-	margin-left: 1px;
+	margin-left: 0;
 	padding: 5px;
-	border: 1px solid #ddd;
 	display: block;
 	float: left;
-	background-color: #eee;
-	background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
-	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image: 	      linear-gradient(top, #ddd, #f7f7f7, #fff);
-	-moz-border-radius: 5px;
-	border-radius: 5px;
 }
 
 #search .input {
 	clear: none;
 	margin-top: 0;
 	position: relative;
+	border: 1px solid #CCCCCC;
+	padding: 0;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-moz-border-top-right-radius: 0;
+	-moz-border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: 0;
 }
 
+#searchSubmit {
+	width: 64px;
+	height: 39px;
+	font-weight: bold;
+	padding: 0;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-moz-border-top-left-radius: 0;
+	-moz-border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border: 1px solid #873960;
+
+	background: #873960 url("../images/magnifyglass-lagrummet.png") center no-repeat;
+}
+
+#searchSubmit:active,#searchSubmit:hover {
+	background: mediumvioletred url("../images/magnifyglass-lagrummet.png") center no-repeat;
+	border-color: mediumvioletred;
+}
+
+
+#searchQuery {
+	position: relative;
+	width: 640px;
+}
 /*#search .input label {
 	font-size: 0.9em;
 	font-weight: normal;
@@ -807,22 +846,6 @@ article.legalSources section.Foreskrifter h2 {
 #searchCategory {
 	cursor: pointer;
 	margin-left: 0;
-}
-
-#searchCategory:hover, #searchSubmit:hover, #extendedSearchSubmit:hover {
-	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-	background-image: 		  linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-}
-
-#searchCategory:active, #searchSubmit:active, #extendedSearchSubmit:active {
-	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image: 	      linear-gradient(top, #fff, #f7f7f7, #ddd);
 }
 
 #searchCurrentCategory {
@@ -884,34 +907,15 @@ article.legalSources section.Foreskrifter h2 {
 #query {
 	width: 622px;
 	padding-left: 15px;
-	height: 25px;
+	/*height: 25px;*/
 	font-weight: normal;
-	color: #888;
-	border: 1px solid #ddd;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-}
-
-#searchSubmit {
-	width: 65px;
-	height: 42px;
-	font-weight: bold;
-	color: #585858;
-	background-color: #eee;
-	padding: 0;
-}
-
-#searchSubmit:active {
-	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
-}
-
-
-#searchQuery {
-	position: relative;
-	width: 640px;
+	color: #252525;
+	border: 0 none;
+	font-size: 14px;
+	line-height: 2.5;
+	background: transparent;
+	/*-moz-border-radius: 15px;*/
+	/*border-radius: 15px;*/
 }
 
 .match {
