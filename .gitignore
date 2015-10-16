@@ -1,19 +1,22 @@
-#Ignore .class files
-target/classes/
-classes/
-*.class
-target/stacktrace.log
-target/
-web-app/WEB-INF/classes/
-web-app/uploads/images/
-web-app/uploads/files/
-stacktrace.log
-target-eclipse/classes/
+# Developer tools support
+**/target-eclipse
+**/.project
+**/.settings/
+**/.classpath
 .idea
-*.pyc
-*.iml
-*.ipr
-*.iws
+
+# Added at runtime
+**/target/
+web-app/WEB-INF/classes/
+web-app/uploads/
 logs/
 out/
+null/
 **/casperjs.log
+stacktrace.log
+
+# Build artefacts
+*.pyc
+*.iml
+*.ipr	
+*.iws
