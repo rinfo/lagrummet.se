@@ -796,7 +796,7 @@ article.legalSources section.Foreskrifter h2 {
 
 #searchSubmit {
 	width: 64px;
-	height: 39px;
+	height: 41px;
 	font-weight: bold;
 	padding: 0;
 	-moz-border-radius: 5px;
@@ -907,15 +907,12 @@ article.legalSources section.Foreskrifter h2 {
 #query {
 	width: 622px;
 	padding-left: 15px;
-	/*height: 25px;*/
 	font-weight: normal;
 	color: #252525;
-	border: 0 none;
+	border: 1px solid #ddd;
 	font-size: 14px;
 	line-height: 2.5;
 	background: transparent;
-	/*-moz-border-radius: 15px;*/
-	/*border-radius: 15px;*/
 }
 
 .match {
