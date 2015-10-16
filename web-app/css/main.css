@@ -800,11 +800,9 @@ article.legalSources section.Foreskrifter h2 {
 	font-weight: bold;
 	padding: 0;
 	-moz-border-radius: 5px;
-	border-radius: 5px;
 	-moz-border-top-left-radius: 0;
 	-moz-border-bottom-left-radius: 0;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+	border-radius: 0 5px 5px 0;
 	border: 1px solid #873960;
 
 	background: #873960 url("../images/magnifyglass-lagrummet.png") center no-repeat;
