@@ -29,11 +29,6 @@
 				<g:breadcrumbs page="${page}" />
 			</nav>
 
-		%{--TODO: English text--}%
-		<g:if test="${page?.id == 22}">
-			<h1 class="frontpage-heading">TESTA BETASÖKET PÅ LAGRUMMET.SE</h1>
-		</g:if>
-
 			<g:form mapping="search" method="GET" name="search">
 				<div class="input" id="searchCategory">
 					<label for="cat">Avgränsa din sökning</label>
