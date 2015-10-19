@@ -20,6 +20,34 @@
     width: 75%;
 }
 
+.frontpage-banner {
+    width: 518px;
+    height: 88px;
+    background-color: #CCE0E6;
+    margin-top: 88px;
+    margin-bottom: 60px;
+    margin-left: 90px;
+    float:left;
+}
+
+.frontpage-banner p {
+    text-align: center;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size:22px;
+    color: #006383;
+    line-height: 33.02px;
+    float: left;
+    width: 360px;
+    margin-top: 10px;
+}
+
+.frontpage-banner img {
+    float: right;
+    margin-top: 15px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
 .searchButton#searchSubmit {
     background: 0;
     background-color: #873960;
