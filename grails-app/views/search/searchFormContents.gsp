@@ -17,7 +17,6 @@
     		</div>
     	</g:if>
 
-        
     	<g:if test="${query}">
 		<header><h1>Sökresultat för ${query.encodeAsHTML()}</h1></header>
 	    </g:if>
@@ -34,7 +33,7 @@
                         ********************************************************************************
                             Information från lagrummet.se                        
                         ********************************************************************************
-                        -->                  
+                        -->
                 <p id="LagrummetHead">
                     <a href="${createLinkParams(mapping:'search', params:[query:query, cat:'Ovrigt', alias:alias]) }" class="catTitle">Information från lagrummet.se</a>
                     <span class="count">(${searchResult.totalResults})
@@ -55,7 +54,7 @@
                     </g:if>
                 </ul>
                 </g:if>
-			
+
                        <!--
                         ********************************************************************************
                             Rättsfall
@@ -133,11 +132,19 @@
                     </g:if>
                 </ul>
                 </g:if>
-
-
     		</div> <!-- class="column" -->
 		</g:if>
 	</article>
+    <div class="search-box">
+        <img src="${resource()}/images/fragetecken.png"/>
+        <div class="search-box-text">
+            <strong>Vad du tycker om vår nya söktjänst?</strong>
+            <p>
+                Kontakta gärna oss med synpunkter och frågor angående söktjänsten på <a href="mailto:feedback@lagrummet.se">feedback@lagrummet.se</a>. Kolla även på vår hjälpa med söktips.
+                <a href="${resource()}/lar-dig-mer/vanliga-fragor">Till hjälpsidan</a> <a href="${resource()}/lar-dig-mer/vanliga-fragor"><img src="${resource()}/images/litenlankpil.png"/></a>
+            </p>
+        </div>
+    </div>
 	<div id="searchHelpPuff">
 		<strong>Hittade du inte vad du sökte?</strong>
 		<p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>
