@@ -43,6 +43,9 @@
                     <nav id="breadcrumbs">
                             <g:breadcrumbs page="${page}" />&nbsp;
                     </nav>
+
+        %{--frontpage--}%
+        <g:if test="${page.id == 1}">
             <a href="https://beta.lagrummet.se/">
                 <div class="frontpage-banner">
                     <p>
@@ -50,7 +53,8 @@
                     </p>
                     <img src="${resource()}/images/blue_pil.png"/>
                 </div>
-             </a>
+            </a>
+        </g:if>
 
             <div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>
             </header>
