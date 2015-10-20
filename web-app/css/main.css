@@ -805,11 +805,11 @@ article.legalSources section.Foreskrifter h2 {
 	border-radius: 0 5px 5px 0;
 	border: 1px solid #873960;
 
-	background: #873960 url("../images/magnifyglass-lagrummet.png") center no-repeat;
+	background: #873960 url("../images/magnifyglass-lagrummet_white.png") center no-repeat;
 }
 
 #searchSubmit:active,#searchSubmit:hover {
-	background: mediumvioletred url("../images/magnifyglass-lagrummet.png") center no-repeat;
+	background: mediumvioletred url("../images/magnifyglass-lagrummet_white.png") center no-repeat;
 	border-color: mediumvioletred;
 }
 
