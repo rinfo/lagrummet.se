@@ -258,6 +258,18 @@ a.step, .currentStep {
     /*padding: 55px 10px 45px 10px;*/
 }
 
+#betalogo {
+	width: 210px;
+	height: 60px;
+	float: left;
+	color: #222;
+	background-color: #fcfcfc;
+}
+
+#betalogo img{
+	margin-left: 10px;
+}
+
 #logo a, #logo a:visited {
 	color: #873960;
 	margin-left: 10px;
