@@ -145,7 +145,3 @@
             </p>
         </div>
     </div>
-	<div id="searchHelpPuff">
-		<strong>Hittade du inte vad du sökte?</strong>
-		<p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>
-	</div>
