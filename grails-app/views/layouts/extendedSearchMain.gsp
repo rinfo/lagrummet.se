@@ -16,7 +16,8 @@
 		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
-    	<div id="logo">
+	<g:googleTagManager id="${grailsApplication.config.lagrummet.googleTagManager.webPropertyId}" />
+	<div id="logo">
 			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle}</a>
 		</div>
 		<!-- <a href="#primaryNavigation" id="mobileNavLink">Navigering</a>  -->

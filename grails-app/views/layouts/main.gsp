@@ -14,10 +14,10 @@
 			<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
 			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
-            <div id="beta-banner">
+    <g:googleTagManager id="${grailsApplication.config.lagrummet.googleTagManager.webPropertyId}" />
+    <div id="beta-banner">
                 <strong>BETA!</strong>Du är nu i betaversionen av lagrummet.se. Här kan du direkt på sajten söka SFS och domstolars rättspraxis. Sökfunktionaliteten är under test och utveckling vilket innebär att fel förekommer.
                 <a style="cursor: pointer;" href="http://www.lagrummet.se">Gå tillbaka till lagrummet.se</a>
             </div>
