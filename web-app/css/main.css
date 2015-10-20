@@ -1616,3 +1616,42 @@ div.Section1 > div > table.MsoTableGrid {
 	}
 }
 */
+.search-box {
+	width: 720px;
+	height: 103px;
+	background-color: #CCE0E6;
+}
+
+.search-box img {
+	margin-top:25px;
+	margin-left:30px;
+	margin-right:20px;
+	float: left;
+}
+
+.search-box-text {
+	width: 645px;
+	height: 103px;
+	float:left;
+}
+
+.search-box-text p {
+	font-family: Verdana;
+	font-size: 14px;
+	float:left;
+	margin-top: 10px;
+}
+
+.search-box-text strong {
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-size: 16px;
+	float: left;
+	margin-top: 15px;
+}
+
+.search-box-text img {
+	margin-top:0px;
+	margin-left:0px;
+	margin-right:0px;
+	float: none;
+}
