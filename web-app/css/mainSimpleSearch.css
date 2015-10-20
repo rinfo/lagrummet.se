@@ -116,19 +116,13 @@ div#searchCurrentCategory {
     /*margin-bottom: 2em;*/
 /*}*/
 .frontpage p, .frontpage h1, .frontpage h2, .frontpage h3, .frontpage h4 {
-    font-family: verdana, arial, helvetica, sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: 14px;
     line-height: 120%;
     text-align: center;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
-    text-align:left;
-}
-
-.frontpage-small-header {
-    color: #BD9B44;
-    margin-bottom: 0px;
 }
 
 .frontpage h2 {
@@ -197,8 +191,4 @@ article.frontpage div.puffs h3 {
 #breadcrumbs {
     margin-top: 40px;
     top: 0px;
-}
-
-.frontpage-content p a img {
-    margin: 0em;
 }
