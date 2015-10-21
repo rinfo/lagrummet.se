@@ -45,7 +45,7 @@
                     </nav>
 
         %{--frontpage--}%
-        <g:if test="${page.id == 1}">
+        <g:if test="${page?.id == 1}">
             <a href="https://beta.lagrummet.se/">
                 <div class="frontpage-banner">
                     <p>
