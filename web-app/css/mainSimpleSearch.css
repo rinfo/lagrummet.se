@@ -20,6 +20,33 @@
     width: 75%;
 }
 
+.frontpage-banner {
+    width: 518px;
+    height: 88px;
+    background-color: #CCE0E6;
+    margin-top: 88px;
+    margin-left: 90px;
+    float:left;
+}
+
+.frontpage-banner p {
+    text-align: center;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size:22px;
+    color: #006383;
+    line-height: 33.02px;
+    float: left;
+    width: 360px;
+    margin-top: 10px;
+}
+
+.frontpage-banner img {
+    float: right;
+    margin-top: 15px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
 .searchButton#searchSubmit {
     background: 0;
     background-color: #873960;
@@ -82,20 +109,21 @@ div#searchCurrentCategory {
     display: none!important;
 }
 
-article.frontpage > header {
-    background: url(../images/illustrationer_lagrummet.png) no-repeat left top;
-    padding-top: 120px;
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
+/*article.frontpage > header {*/
+    /*background: url(../images/illustrationer_lagrummet.png) no-repeat left top;*/
+    /*padding-top: 120px;*/
+    /*margin-top: 2em;*/
+    /*margin-bottom: 2em;*/
+/*}*/
 .frontpage p, .frontpage h1, .frontpage h2, .frontpage h3, .frontpage h4 {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: verdana, arial, helvetica, sans-serif;
     font-size: 14px;
     line-height: 120%;
     text-align: center;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
+    text-align: left;
 }
 
 .frontpage h2 {
