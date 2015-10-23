@@ -10,8 +10,8 @@ lagrummet.local.rinfo.view = "${grails.serverURL}/rinfo/"
 //lagrummet.rdl.rinfo.baseurl="http://rinfo.stage.lagrummet.se/"
 
 // Uncomment these to display start page without search
-//lagrummet.mainLayoutName = "mainSimpleSearch"
-//lagrummet.mainEnglishLayoutName = "mainSimpleSearch"
+lagrummet.mainLayoutName = "mainSimpleSearch"
+lagrummet.mainEnglishLayoutName = "mainSimpleSearch"
 
 // Use local mysql database on target server
 dataSource.url = "jdbc:mysql://127.0.0.1:3306/lagrummet"
