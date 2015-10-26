@@ -234,16 +234,16 @@ a.step, .currentStep {
 	left: 220px;
 }
 
-#siteHeader > p.extSearchLabel {
-    margin-top: 20px;
-	float: right;
-	margin-bottom: 1em;
-	height: 16px;
-}
+/*#siteHeader > p.extSearchLabel {*/
+    /*margin-top: 20px;*/
+	/*float: right;*/
+	/*margin-bottom: 1em;*/
+	/*height: 16px;*/
+/*}*/
 
-#siteHeader > p.extSearchLabel a {
-    display:none;
-}
+/*#siteHeader > p.extSearchLabel a {*/
+    /*display:none;*/
+/*}*/
 
 #logo {
     position: absolute;
@@ -798,7 +798,7 @@ article.legalSources section.Foreskrifter h2 {
 	border: 1px solid #CCCCCC;
 	padding: 0;
 	-moz-border-radius: 5px;
-	border-radius: 5px;
+	/*border-radius: 5px;*/
 	-moz-border-top-right-radius: 0;
 	-moz-border-bottom-right-radius: 0;
 	border-top-right-radius: 0;
