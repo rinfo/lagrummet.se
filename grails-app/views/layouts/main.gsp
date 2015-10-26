@@ -45,27 +45,27 @@
         </g:if>
 
         <g:form mapping="search" method="GET" name="search">
-                            <div class="input" id="searchCategory">
-                                    <label for="cat">Avgränsa din sökning</label>
-                                    <input type="hidden" name="cat" value="Alla">
-                                    <!-- <select id="cat" name="cat" value="Alla">
-                                    <g:each in="${siteProps?.searchCats}">
-                                            <g:if test="${session?.cat == it}">
-                                                    <option value="${it}" selected="selected" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
-                                            </g:if>
-                                            <g:else>
-                                                    <option value="${it}" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>
-                                            </g:else>
-                                    </g:each> -->
-                                    </select>
-                            </div>
+                            %{--<div class="input" id="searchCategory">--}%
+                                    %{--<label for="cat">Avgränsa din sökning</label>--}%
+                                    %{--<input type="hidden" name="cat" value="Alla">--}%
+                                    %{--<!-- <select id="cat" name="cat" value="Alla">--}%
+                                    %{--<g:each in="${siteProps?.searchCats}">--}%
+                                            %{--<g:if test="${session?.cat == it}">--}%
+                                                    %{--<option value="${it}" selected="selected" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>--}%
+                                            %{--</g:if>--}%
+                                            %{--<g:else>--}%
+                                                    %{--<option value="${it}" data-rel="${message(code:"category.description.$it")}"><g:message code="category.${it}"/></option>--}%
+                                            %{--</g:else>--}%
+                                    %{--</g:each> -->--}%
+                                    %{--</select>--}%
+                            %{--</div>--}%
                             <div class="input" id="searchQuery">
                                 <g:textField name="query" autocomplete="off"  maxlength="${grailsApplication.config.lagrummet.search.maxLength}" />
                                 <ul id="searchSuggestions"></ul>
                             </div>
                             <g:submitButton name="searchSubmit" value=""/>
                     </g:form>
-                    <p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
+                    %{--<p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>--}%
             <div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>
             </header>
 
