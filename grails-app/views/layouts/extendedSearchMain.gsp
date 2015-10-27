@@ -43,6 +43,7 @@
 	    <nav id="primaryNavigation">
 			<g:menu root="huvudmeny" activePage="${page}" />
 		</nav>
+		<script src="/js/readspeaker/ReadSpeaker.js?pids=embhl" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	    <g:javascript library="jquery.ui.datepicker-sv" />
