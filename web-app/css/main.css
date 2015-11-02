@@ -1681,3 +1681,9 @@ button:hover
 	outline:0px !important;
 	-webkit-appearance:none;
 }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	/* Safari 5+ ONLY */
+	_::-webkit-:not(:root:root), #searchSubmit { height:43px; }
+
+}
