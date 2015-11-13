@@ -4,6 +4,7 @@
 **/.settings/
 **/.classpath
 .idea
+.slcache/
 
 # Added at runtime
 **/target/
