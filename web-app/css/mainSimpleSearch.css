@@ -116,7 +116,7 @@ div#searchCurrentCategory {
     /*margin-bottom: 2em;*/
 /*}*/
 .frontpage p, .frontpage h1, .frontpage h2, .frontpage h3, .frontpage h4 {
-    font-family: verdana, arial, helvetica, sans-serif;
+    font-family: "Trebuchet MS", verdana, arial, helvetica, sans-serif;
     font-size: 14px;
     line-height: 120%;
     text-align: center;
