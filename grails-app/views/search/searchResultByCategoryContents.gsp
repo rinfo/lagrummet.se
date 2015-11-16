@@ -56,7 +56,12 @@
             <header><h1>Hittade inga sökresultat för ${query.encodeAsHTML()}</h1></header>
 		</g:else>
 	</article>
-	<div id="searchHelpPuff">
-		<strong>Hittade du inte vad du sökte?</strong>
-		<p><a href="${resource()}/sokhjalp">Sökhjälp</a> - Hjälpsida som ger dig tips på hur du kan söka på bästa sätt</p>
+	<div class="search-box">
+		<img src="${resource()}/images/fragetecken.png"/>
+		<div class="search-box-text">
+			<strong>Vad tycker du om vår nya söktjänst?</strong>
+			<p>Mejla gärna dina synpunkter på söktjänsten till <a class="safeemail" href="mailto:zTphBTTCzhSM@9hfZ0ccTp.2T"><u><font color="#0066cc">hej robot</font></u></a>
+				<br />Hittade du inte vad du sökte? Gå till vår <a href="/lagrummet.se/sokhjalp">sökhjälp</a>.
+			</p>
+		</div>
 	</div>

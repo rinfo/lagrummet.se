@@ -138,10 +138,9 @@
     <div class="search-box">
         <img src="${resource()}/images/fragetecken.png"/>
         <div class="search-box-text">
-            <strong>Vad du tycker om vår nya söktjänst?</strong>
-            <p>
-                Kontakta gärna oss med synpunkter och frågor angående söktjänsten på <a href="mailto:feedback@lagrummet.se">feedback@lagrummet.se</a>. Kolla även på vår hjälpa med söktips.
-                <a href="${resource()}/lar-dig-mer/vanliga-fragor">Till hjälpsidan</a> <a href="${resource()}/lar-dig-mer/vanliga-fragor"><img src="${resource()}/images/litenlankpil.png"/></a>
+            <strong>Vad tycker du om vår nya söktjänst?</strong>
+            <p>Mejla gärna dina synpunkter på söktjänsten till <a class="safeemail" href="mailto:zTphBTTCzhSM@9hfZ0ccTp.2T"><u><font color="#0066cc">hej robot</font></u></a>
+            <br />Hittade du inte vad du sökte? Gå till vår <a href="/lagrummet.se/sokhjalp">sökhjälp</a>.
             </p>
         </div>
     </div>
