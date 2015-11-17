@@ -794,6 +794,7 @@ article.legalSources section.Foreskrifter h2 {
 #search .input {
 	clear: none;
 	margin-top: 0;
+	height: 39px;
 	position: relative;
 	border: 1px solid #CCCCCC;
 	padding: 0;
