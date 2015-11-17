@@ -8,10 +8,6 @@
         <link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
         <g:mobileDeviceWidth />
         <g:layoutHead />
-		<!--[if lt IE 9]>
-			<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
-			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
     </head>
     <body>
 	<g:googleTagManager id="${grailsApplication.config.lagrummet.googleTagManager.webPropertyId}" />
