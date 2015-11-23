@@ -6,7 +6,7 @@
 <body>
     <article class="frontpage editorial">
 		<div class="frontpage content">
-			<header><h3>${page.h1}</h3></header>
+			<header><h1>${page.h1}</h1></header>
 			${page.content}
 		</div>
 		<div class="puffs">
