@@ -109,50 +109,6 @@ div#searchCurrentCategory {
     display: none!important;
 }
 
-/*article.frontpage > header {*/
-    /*background: url(../images/illustrationer_lagrummet.png) no-repeat left top;*/
-    /*padding-top: 120px;*/
-    /*margin-top: 2em;*/
-    /*margin-bottom: 2em;*/
-/*}*/
-.frontpage p, .frontpage h1, .frontpage h2, .frontpage h3, .frontpage h4 {
-    font-family: "Trebuchet MS", verdana, arial, helvetica, sans-serif;
-    font-size: 14px;
-    line-height: 120%;
-    text-align: center;
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-}
-
-.frontpage h2 {
-    font-size: 1.4em;
-    color: #222;
-}
-
-.frontpage h3 {
-    font-size: 1.3em;
-}
-
-.frontpage h4 {
-    font-size: 1.2em;
-    font-style: italic;
-    color: #222;
-}
-
-.frontpage h5 {
-    font-size: 1em;
-    font-weight: bold;
-}
-
-article.frontpage h1 {
-    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-    font-size: 2.5em;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
-}
 
 .searchResults#dynamicSearchResults {
     border-top: 0;
