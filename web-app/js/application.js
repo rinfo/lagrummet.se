@@ -54,7 +54,7 @@ function instantSearch() {
             } catch (e) {
                 console.log("instantSearch() Failed to search because "+e.message);
             }
-            window.history.pushState(null, null, form.attr("action") + "?" + form.serialize());
+			window.history.pushState(null, null, form.attr("action") + "?" + form.serialize());
         }
     }, "json");
 }
