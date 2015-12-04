@@ -25,6 +25,17 @@ function showRollingImageWaitForSearchResult() {
     }
 }
 
+// Hide cleartext email link from spammers
+function encodeEmailLink(){
+	if($(".safeemail").length != 0) {
+		var coded = $(".safeemail").prop("href");
+		coded = coded.replace("mailto:", "");
+		var decoded = encodedMailAddress(coded);
+		$(".safeemail").prop("href", "mailto:" + decoded);
+		$(".safeemail").text(decoded);
+	}
+}
+
 function instantSearch() {
 	var form = $("#search");
     var url = form.attr("action")+"?ajax=true";
@@ -38,6 +49,8 @@ function instantSearch() {
 	    if (data) {
             try {
                 $("#dynamicSearchResults").html(data.dynamicSearchResults);
+				// Don't show cleartext email link after dynamic search!
+				encodeEmailLink();
             } catch (e) {
                 console.log("instantSearch() Failed to search because "+e.message);
             }
@@ -73,13 +86,8 @@ jQuery(document).ready(function($) {
         $('#cookie-banner').show();
     }
 
-	if($(".safeemail").length != 0) {
-		var coded = $(".safeemail").prop("href");
-		coded = coded.replace("mailto:", "");
-		var decoded = encodedMailAddress(coded);
-		$(".safeemail").prop("href", "mailto:"+decoded);
-		$(".safeemail").text(decoded);
-	}
+	// Don't show cleartext email link
+	encodeEmailLink();
 	
 	//Make the search category drop-down more dynamic
 	$("#cat").hide().after('<div id="searchCurrentCategory" /><ul id="searchCategoryList" />');
