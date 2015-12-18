@@ -13,10 +13,10 @@
 			<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
 			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
-    	<div id="logo">
+	<g:googleTagManager id="${grailsApplication.config.lagrummet.googleTagManager.webPropertyId}" />
+	<div id="logo">
 			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle}</a>
 		</div>
 		<!-- <a href="#primaryNavigation" id="mobileNavLink">Navigering</a>  -->
@@ -43,6 +43,7 @@
 	    <nav id="primaryNavigation">
 			<g:menu root="huvudmeny" activePage="${page}" />
 		</nav>
+		<script src="/js/readspeaker/ReadSpeaker.js?pids=embhl" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	    <g:javascript library="jquery.ui.datepicker-sv" />

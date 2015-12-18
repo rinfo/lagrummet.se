@@ -5,8 +5,10 @@
 </head>
 <body>
     <article class="frontpage editorial">
-		<header><h1>${page.h1}</h1></header>
-		${page.content}
+		<div class="frontpage content">
+			<header><h1>${page.h1}</h1></header>
+			${page.content}
+		</div>
 		<div class="puffs">
 		<g:render template="puff" collection="${page.puffs}" var="puff" />
 		</div>

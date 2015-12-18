@@ -27,7 +27,7 @@ html {
 body {
     position: relative;
     width: 980px;
-    margin: 70px auto 0 auto;
+    margin: 0 auto 0 auto;
     padding: 5px 0 0 0;
     position: relative;
     font: 12px verdana, arial, helvetica, sans-serif;
@@ -234,16 +234,16 @@ a.step, .currentStep {
 	left: 220px;
 }
 
-#siteHeader > p.extSearchLabel {
-    margin-top: 20px;
-	float: right;
-	margin-bottom: 1em;
-	height: 16px;
-}
+/*#siteHeader > p.extSearchLabel {*/
+    /*margin-top: 20px;*/
+	/*float: right;*/
+	/*margin-bottom: 1em;*/
+	/*height: 16px;*/
+/*}*/
 
-#siteHeader > p.extSearchLabel a {
-    display:none;
-}
+/*#siteHeader > p.extSearchLabel a {*/
+    /*display:none;*/
+/*}*/
 
 #logo {
     position: absolute;
@@ -256,6 +256,18 @@ a.step, .currentStep {
     font: 1.6em 'Trebuchet MS', Helvetica, sans-serif;
     background-color: #fcfcfc;
     /*padding: 55px 10px 45px 10px;*/
+}
+
+#betalogo {
+	width: 210px;
+	height: 60px;
+	float: left;
+	color: #222;
+	background-color: #fcfcfc;
+}
+
+#betalogo img{
+	margin-left: 10px;
 }
 
 #logo a, #logo a:visited {
@@ -402,6 +414,21 @@ article.editorial {
 
 article.frontpage {
     width: 720px;
+}
+
+.frontpage.content {
+	width: 518px;
+	margin: 0 auto;
+}
+
+.frontpage-heading {
+	font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 28px;
+	padding-top: 58px;
+	margin: 0;
+	width: 100%;
+	text-align: center;
 }
 
 article.editorial ul, article.editorial ol {
@@ -748,7 +775,7 @@ article.legalSources section.Foreskrifter h2 {
 	margin: 1em 0;
 	padding: 0;
 	font-weight: bold;
-	color: #585858;
+	color: #252525;
 	height: 40px;
 	clear: both;
     position: relative;
@@ -757,30 +784,53 @@ article.legalSources section.Foreskrifter h2 {
 }
 
 #search > *{
-	height: 30px;
 	width: 314px;
-	margin-left: 1px;
+	margin-left: 0;
 	padding: 5px;
-	border: 1px solid #ddd;
 	display: block;
 	float: left;
-	background-color: #eee;
-	background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
-	background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
-	background-image: 	      linear-gradient(top, #ddd, #f7f7f7, #fff);
-	-moz-border-radius: 5px;
-	border-radius: 5px;
 }
 
 #search .input {
 	clear: none;
 	margin-top: 0;
+	height: 39px;
 	position: relative;
+	border: 1px solid #CCCCCC;
+	padding: 0;
+	-moz-border-radius: 5px;
+	/*border-radius: 5px;*/
+	-moz-border-top-right-radius: 0;
+	-moz-border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: 0;
 }
 
+#searchSubmit {
+	width: 64px;
+	height: 41px;
+	font-weight: bold;
+	padding: 0;
+	-moz-border-radius: 5px;
+	-moz-border-top-left-radius: 0;
+	-moz-border-bottom-left-radius: 0;
+	border-radius: 0 5px 5px 0;
+	border: 1px solid #873960;
+
+	background: #873960 url("../images/magnifyglass-lagrummet_white.png") center no-repeat;
+}
+
+#searchSubmit:active,#searchSubmit:hover {
+	background: mediumvioletred url("../images/magnifyglass-lagrummet_white.png") center no-repeat;
+	border-color: mediumvioletred;
+}
+
+
+#searchQuery {
+	position: relative;
+	width: 640px;
+}
 /*#search .input label {
 	font-size: 0.9em;
 	font-weight: normal;
@@ -807,22 +857,6 @@ article.legalSources section.Foreskrifter h2 {
 #searchCategory {
 	cursor: pointer;
 	margin-left: 0;
-}
-
-#searchCategory:hover, #searchSubmit:hover, #extendedSearchSubmit:hover {
-	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-	background-image: 		  linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
-}
-
-#searchCategory:active, #searchSubmit:active, #extendedSearchSubmit:active {
-	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image: 	      linear-gradient(top, #fff, #f7f7f7, #ddd);
 }
 
 #searchCurrentCategory {
@@ -883,35 +917,14 @@ article.legalSources section.Foreskrifter h2 {
 
 #query {
 	width: 622px;
+	height: 35px;
 	padding-left: 15px;
-	height: 25px;
 	font-weight: normal;
-	color: #888;
+	color: #252525;
 	border: 1px solid #ddd;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-}
-
-#searchSubmit {
-	width: 65px;
-	height: 42px;
-	font-weight: bold;
-	color: #585858;
-	background-color: #eee;
-	padding: 0;
-}
-
-#searchSubmit:active {
-	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
-	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
-}
-
-
-#searchQuery {
-	position: relative;
-	width: 640px;
+	font-size: 14px;
+	line-height: 2.5;
+	background: transparent;
 }
 
 .match {
@@ -1309,13 +1322,22 @@ body#tinymce.mceContentBody {
     z-index: 20;
     margin-top: 4px;
     height: 50px;
-    margin-left: 0px;
+    margin-left: 1px;
     padding: 5px;
     display: none;
     background-color: #efefef;
+/*
+    background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
+    background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:    -moz-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:     -ms-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image:      -o-linear-gradient(top, #ddd, #f7f7f7, #fff);
+    background-image: 	      linear-gradient(top, #ddd, #f7f7f7, #fff);
+*/
 }
 
 #cookie-banner a {
+    /*float: left;*/
     cursor: pointer;
     color: #006383;
 }
@@ -1336,16 +1358,34 @@ body#tinymce.mceContentBody {
     border: solid 1px #cdcdcd;
     border-color: #cdcdcd;
     background-color: white;
+/*
+    background: url(../images/ddd-fff-gradient-40px.png) repeat-x;
+    background-image: -webkit-linear-gradient(top, #ddd, #f7f7f7, #fff);
+*/
 }
 
 #cookie-button:hover {
     border-color: #cdcdcd;
     background-color: #dadada;
+/*
+  	background-image: -webkit-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:    -moz-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:     -ms-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image:      -o-linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+  	background-image: 		  linear-gradient(top, #c7c7c7, #f7f7f7, #fff);
+*/
 }
 
 #cookie-button:active {
     border-color: grey;
     background-color: white;
+/*
+  	background-image: -webkit-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:    -moz-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:     -ms-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image:      -o-linear-gradient(top, #fff, #f7f7f7, #ddd);
+  	background-image: 	      linear-gradient(top, #fff, #f7f7f7, #ddd);
+*/
 }
 
 
@@ -1359,31 +1399,6 @@ body#tinymce.mceContentBody {
     border-radius: 3px;
     border: solid 1px #cdcdcd;
     background-color: white;
-}
-
-#beta-banner {
-    width: 969px;
-    top: 0px;
-    position: fixed;
-    z-index: 100;
-    /*margin-top: 4px;*/
-    border-top: 4px solid white;
-    height: 50px;
-    margin-left: 0px;
-    padding: 5px;
-    display: block;
-    background-color: #efefef;
-}
-
-#beta-banner strong {
-    margin-right: 10px;
-    color: #873960;
-}
-
-#beta-banner a {
-    margin-top: 20px;
-    float: right;
-    cursor: pointer;
 }
 
 /*change the margin abit for middle column to sync with puffs */
@@ -1615,3 +1630,62 @@ div.Section1 > div > table.MsoTableGrid {
 	}
 }
 */
+.search-box {
+	width: 720px;
+	height: 103px;
+	background-color: #CCE0E6;
+}
+
+.search-box img {
+	margin-top:25px;
+	margin-left:30px;
+	margin-right:20px;
+	float: left;
+}
+
+.search-box-text {
+	width: 645px;
+	height: 103px;
+	float:left;
+}
+
+.search-box-text p {
+	font-family: Verdana;
+	font-size: 14px;
+	float:left;
+	margin-top: 10px;
+}
+
+.search-box-text strong {
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-size: 16px;
+	float: left;
+	margin-top: 15px;
+}
+
+.search-box-text img {
+	margin-top:0px;
+	margin-left:0px;
+	margin-right:0px;
+	float: none;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover
+{
+	outline:0px !important;
+	-webkit-appearance:none;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	/* Safari 5+ ONLY */
+	_::-webkit-:not(:root:root), #searchSubmit { height:43px; }
+
+}

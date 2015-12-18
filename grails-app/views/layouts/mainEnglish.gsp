@@ -8,14 +8,10 @@
         <link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
         <g:mobileDeviceWidth />
         <g:layoutHead />
-		<!--[if lt IE 9]>
-			<link rel="stylesheet" href="${resource(dir:'css',file:'ie.css')}" />
-			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<g:googleAnalytics id="${grailsApplication.config.lagrummet.googleAnalytics.webPropertyId}" />
     </head>
     <body>
-		<div id="logo">
+	<g:googleTagManager id="${grailsApplication.config.lagrummet.googleTagManager.webPropertyId}" />
+	<div id="logo">
 			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle ?: "lagrummet<span class='hlight'>.se</span>"}</a>
 		</div>
 		<!-- <a href="#primaryNavigation" id="mobileNavLink">Navigering</a>  -->
@@ -28,6 +24,7 @@
 			<nav id="breadcrumbs">
 				<g:breadcrumbs page="${page}" />
 			</nav>
+
 			<g:form mapping="search" method="GET" name="search">
 				<div class="input" id="searchCategory">
 					<label for="cat">Avgränsa din sökning</label>
@@ -42,8 +39,10 @@
 					</g:each>
 					</select>
 				</div>
-				<div class="input" id="searchQuery"><g:textField name="query" autocomplete="off" maxlength="${grailsApplication.config.lagrummet.search.maxLength}"/><ul id="searchSuggestions"></ul></div>
-				<g:submitButton name="searchSubmit" value="Sök"/>
+				<div class="input" id="searchQuery">
+					<g:textField name="query" autocomplete="off" maxlength="${grailsApplication.config.lagrummet.search.maxLength}"/>
+					<ul id="searchSuggestions"></ul></div>
+				<g:submitButton name="searchSubmit" value=""/>
 			</g:form>
 			<p class="extSearchLabel"><g:link mapping="extendedSearch"><g:message code="extendedSearch.label" default="Utökad sökning" /></g:link></p>
 	    	<div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>
@@ -61,7 +60,7 @@
 			<g:menu root="huvudmeny" activePage="${page}" />
 	    </nav>
 
-		<script src="http://f1.eu.readspeaker.com/script/5329/rs_embhl_v2_sv_se.js" type="text/javascript"></script>
+		<script src="/js/readspeaker/ReadSpeaker.js?pids=embhl" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	    <g:javascript library="application" />
     </body>
