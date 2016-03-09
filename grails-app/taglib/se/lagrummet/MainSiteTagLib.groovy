@@ -38,7 +38,8 @@ class MainSiteTagLib {
 
 	def googleTagManager = { attrs, body ->
 		if(attrs.id != "") {
-			out << "<!-- Google Tag Manager -->\n" +
+			out << "\n" +
+					"<!-- Google Tag Manager -->\n" +
 					"<noscript><iframe src=\"//www.googletagmanager.com/ns.html?id=${attrs.id}\"\n" +
 					"height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe></noscript>\n" +
 					"<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n" +
@@ -46,7 +47,7 @@ class MainSiteTagLib {
 					"j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n" +
 					"'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n" +
 					"})(window,document,'script','dataLayer','${attrs.id}');</script>\n" +
-					"<!-- End Google Tag Manager -->"
+					"<!-- End Google Tag Manager -->\n"
 		}
 	}
 	
