@@ -5,6 +5,7 @@
 **/.classpath
 .idea
 .slcache/
+.java-version
 
 # Added at runtime
 **/target/
