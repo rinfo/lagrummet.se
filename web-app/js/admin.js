@@ -15,29 +15,15 @@ jQuery(function($) {
 
 	tinymce.init({
 		selector: "div.mceEditor > textarea[name='content']",
-		theme: "modern",
+		theme: "silver",
 		forced_root_block : "",
 		force_p_newlines : true,
 		menubar : false,
 		plugins: [
 			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
 			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-			"save table contextmenu directionality emoticons template paste textcolor"
+			"save table directionality emoticons template paste"
 		],
-		external_plugins: {
-			"codemirror": serverUrl+"js/tinyPlugins/codemirror/plugin.min.js"
-		},
-		codemirror: {
-			indentOnInit: true, // Whether or not to indent code on init.
-			path: serverUrl+'js/tinyPlugins/codemirror/codemirror-4.8', // Path to CodeMirror distribution
-			config: {           // CodeMirror config object
-				mode: 'htmlmixed',
-				lineNumbers: true
-			},
-			jsFiles: [          // Additional JS files to load
-				'mode/htmlmixed/htmlmixed.js'
-			]
-		},
 		relative_urls : false,
 		image_list: serverUrl + "admin/media/list?ajax=true&parentId=" + pageId,
 		content_css: "../../css/common.css",
