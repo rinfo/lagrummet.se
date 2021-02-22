@@ -41,17 +41,17 @@
                             <g:breadcrumbs page="${page}" />&nbsp;
                     </nav>
 
-        %{--frontpage--}%
-        <g:if test="${page?.id == 1}">
-            <a href="https://beta.lagrummet.se/">
-                <div class="frontpage-banner">
-                    <p>
-                        Sök bland lagar och förordningar och domstolars rättpraxis här.
-                    </p>
-                    <img src="${resource()}/images/blue_pil.png"/>
-                </div>
-            </a>
-        </g:if>
+%{--        --}%%{--frontpage--}%
+%{--        <g:if test="${page?.id == 1}">--}%
+%{--            <a href="https://beta.lagrummet.se/">--}%
+%{--                <div class="frontpage-banner">--}%
+%{--                    <p>--}%
+%{--                        Sök bland lagar och förordningar och domstolars rättpraxis här.--}%
+%{--                    </p>--}%
+%{--                    <img src="${resource()}/images/blue_pil.png"/>--}%
+%{--                </div>--}%
+%{--            </a>--}%
+%{--        </g:if>--}%
 
             <div id="readspeaker_button1" class="rs_skip"> </div> <div id='xp1'></div>
             </header>

@@ -9,7 +9,7 @@
 	<link href="${resource(dir:'images',file:'favicon.ico')}" rel="shortcut icon" /> 
 	<g:javascript library="jquery" plugin="jquery" />
 	<g:javascript library="jquery.jstree" />
-	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="https://cdn.tiny.cloud/1/15nupyobd8ep78zmc8y0dib9y9x8euqyrqemcwhf1pr58k1y/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 	<g:layoutHead />
 	<g:javascript library="admin" />
 </head>
