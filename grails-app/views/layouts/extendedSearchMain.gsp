@@ -15,7 +15,6 @@
 		<![endif]-->
     </head>
     <body>
-	<g:googleTagManager id="${grailsApplication.config.lagrummet.googleTagManager.webPropertyId}" />
 	<div id="logo">
 			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle}</a>
 		</div>

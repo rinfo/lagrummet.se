@@ -10,7 +10,6 @@
         <g:layoutHead />
     </head>
     <body>
-	<g:googleTagManager id="${grailsApplication.config.lagrummet.googleTagManager.webPropertyId}" />
 	<div id="logo">
 			<a href="${grailsApplication.config.grails.serverURL}">${siteProps?.siteTitle ?: "lagrummet<span class='hlight'>.se</span>"}</a>
 		</div>
